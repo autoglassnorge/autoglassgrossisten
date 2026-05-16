@@ -78,7 +78,7 @@ function initLangSwitcher() {
 }
 
 // --- VIN Search ---
-const API_BASE = 'https://autoglass-glass-sok.YOUR_SUBDOMAIN.workers.dev';
+const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
 
 async function searchGlass() {
   const input = document.getElementById('vin-input');
@@ -89,7 +89,6 @@ async function searchGlass() {
   resultsEl.innerHTML = `<p class="loading">${t('vin.loading')}</p>`;
 
   try {
-    // First try live API
     const res = await fetch(`${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}`, { headers: { 'Accept': 'application/json' } });
 
     if (res.ok) {
@@ -97,12 +96,14 @@ async function searchGlass() {
       renderResults(data, resultsEl);
       return;
     }
-  } catch (e) {
-    // Fallback to mock
-  }
 
-  // Mock fallback
-  mockSearch(query, resultsEl);
+    // API svarte, men med feilstatus
+    const err = await res.json().catch(() => ({ error: 'Kunne ikke søke. Prøv igjen.' }));
+    resultsEl.innerHTML = `<p class="no-result">${err.error || 'Kunne ikke søke. Prøv igjen.'}</p>`;
+  } catch (e) {
+    // Nettverksfeil — API utilgjengelig
+    resultsEl.innerHTML = `<p class="no-result">Nettverksfeil. Sjekk tilkoblingen og prøv igjen.</p>`;
+  }
 }
 
 function mockSearch(query, resultsEl) {

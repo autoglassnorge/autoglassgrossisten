@@ -172,18 +172,34 @@ function scoreCandidate(c: GlassRecord, flags: ReturnType<typeof detectFlagsFrom
   return score;
 }
 
-// Hjelpefunksjon: presis model-match
+// Hjelpefunksjon: presis model-match (toveis + token-overlap)
 function modelMatches(vehicleModel: string, recordModel: string | null): boolean {
   if (!recordModel || recordModel.trim() === "") return false;
-  const vm = vehicleModel.toLowerCase();
+  const vm = vehicleModel.toLowerCase().trim();
   const rm = recordModel.toLowerCase().trim();
-  // Direkte inkludering (f.eks. "3-SERIE" matcher "3-SERIE G20")
-  if (vm.includes(rm)) return true;
-  // Begge deler av modellnavnet må finnes (f.eks. "A3" + "SPORTBACK")
-  const parts = rm.split(/\s+/).filter(p => p.length >= 2);
-  if (parts.length >= 2) {
-    return parts.every(p => vm.includes(p));
+
+  // A: Direkte inkludering begge veier
+  // Biluppgifter: "3-SERIE G20"  vs  Katalog: "3-SERIE"  → rm inkludert i vm ✅
+  // Biluppgifter: "3-SERIE"      vs  Katalog: "3-SERIE G20" → vm inkludert i rm ✅
+  if (vm.includes(rm) || rm.includes(vm)) return true;
+
+  // B: Token-overlap (f.eks. "A3" + "SPORTBACK" matcher "A3 SPORTBACK")
+  // Håndterer også del-match der ett navn har mer kontekst enn det andre
+  const tokenize = (s: string) => s.split(/[^a-z0-9]+/).filter(t => t.length >= 2);
+  const vTokens = tokenize(vm);
+  const rTokens = tokenize(rm);
+
+  // Hvis begge har tokens, krev at minst 2 tokens overlapper, eller 1 langt token
+  const common = rTokens.filter(t => vTokens.includes(t));
+  if (common.length >= 2) return true;
+  if (common.length === 1 && common[0].length >= 4) return true;
+
+  // C: Enkelt-token match for veldig korte modellnavn (f.eks. "A3", "Q5")
+  // Men KREV at det ikke er for generisk (unngå "3" som matcher "3-SERIE")
+  if (rTokens.length === 1 && vTokens.includes(rTokens[0]) && rTokens[0].length >= 3) {
+    return true;
   }
+
   return false;
 }
 
