@@ -7,7 +7,7 @@ compatibility_date = "2024-01-01"
 # 2. Kopier ID fra output inn under:
 [[kv_namespaces]]
 binding = "GLASS_CATALOG"
-id = "15099e572e51423dafb723996c01c668"  # BYTT UT
+id = "15099e572e51423dafb723996c01c668"
 
 # 3. Sett secrets:
 #    wrangler secret put BILUPPGIFTER_API_KEY
