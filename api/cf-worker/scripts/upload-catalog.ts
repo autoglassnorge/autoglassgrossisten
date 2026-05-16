@@ -83,7 +83,11 @@ async function main() {
     await uploadToKV("prefix4_cache", cache);
   }
 
-  // 3. Chunk og last opp records
+  // 3. Last opp alle records som én stor cache (for rask lookup)
+  console.log("\n📤 Laster opp catalog_records...");
+  await uploadToKV("catalog_records", catalog.records);
+
+  // 4. Chunk og last opp records (backup/fallback)
   console.log("\n📤 Laster opp records i chunker...");
   const chunks: unknown[][] = [];
   for (let i = 0; i < catalog.records.length; i += CHUNK_SIZE) {
@@ -94,7 +98,7 @@ async function main() {
     await uploadToKV(`catalog_chunk_${i}`, chunks[i]);
   }
 
-  // 4. Lagre total chunk count
+  // 5. Lagre total chunk count
   await uploadToKV("catalog_chunks", { count: chunks.length });
 
   console.log(`\n✅ Ferdig! ${chunks.length} chunker lastet opp.`);
