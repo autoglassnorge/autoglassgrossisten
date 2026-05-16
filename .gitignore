@@ -27,3 +27,4 @@ build/
 
 # Cloudflare
 .wrangler/
+node_modules/
