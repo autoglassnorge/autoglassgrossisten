@@ -9,9 +9,17 @@ compatibility_date = "2024-01-01"
 binding = "GLASS_CATALOG"
 id = "15099e572e51423dafb723996c01c668"
 
-# 3. Sett secrets:
+# 3. Sett secrets (IKKE legg dem i denne filen — bruk wrangler secret put):
+#
+#    Primær kilde — SVV (Statens Vegvesen) via Maskinporten:
+#    wrangler secret put SVV_CLIENT_ID      # f.eks. a578e3c7-f27b-4b73-8938-af26edd89d68
+#    wrangler secret put SVV_CLIENT_SECRET  # fra Maskinporten/SVV portal
+#
+#    Fallback — Biluppgifter (Sverige):
 #    wrangler secret put BILUPPGIFTER_API_KEY
-#    wrangler secret put SUPABASE_JWT_SECRET   # (valgfritt, for auth)
+#
+#    Valgfritt:
+#    wrangler secret put SUPABASE_JWT_SECRET
 
 [vars]
 # Ingen hardkodede secrets her — bruk wrangler secret put

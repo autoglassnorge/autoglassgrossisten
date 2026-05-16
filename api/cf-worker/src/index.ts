@@ -6,11 +6,17 @@
  *   GET  /api/glass?prefix4=5351        → søk på prefix4
  *   GET  /api/glass?eurocode=5351AGNMV  → direkte oppslag
  *   GET  /api/health                    → statussjekk
+ *
+ * Kilder:
+ *   - SVV (Statens Vegvesen) via Maskinporten — primær kjøretøyoppslag
+ *   - Biluppgifter — fallback hvis SVV ikke er konfigurert
  */
 
 export interface Env {
   GLASS_CATALOG: KVNamespace;
   BILUPPGIFTER_API_KEY: string;
+  SVV_CLIENT_ID: string;
+  SVV_CLIENT_SECRET: string;
 }
 
 interface CatalogData {
@@ -85,7 +91,162 @@ function errorResponse(message: string, status = 400): Response {
 }
 
 // ============================================================================
-// BILUPPGIFTER API
+// MASKINPORTEN — JWT TOKEN
+// ============================================================================
+
+interface MaskinportenToken {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  scope: string;
+}
+
+// Enkel in-memory cache (gyldig innenfor én request — Workers er stateless)
+let cachedToken: { token: string; expiresAt: number } | null = null;
+
+async function fetchMaskinportenToken(env: Env): Promise<string | null> {
+  // Bruk cache hvis gyldig (buffer på 60 sekunder)
+  if (cachedToken && cachedToken.expiresAt > Date.now() + 60000) {
+    return cachedToken.token;
+  }
+
+  if (!env.SVV_CLIENT_ID || !env.SVV_CLIENT_SECRET) {
+    return null;
+  }
+
+  const body = new URLSearchParams({
+    grant_type: "client_credentials",
+    client_id: env.SVV_CLIENT_ID,
+    client_secret: env.SVV_CLIENT_SECRET,
+    scope: "svv:kjoretoy/kjoretoyopplysninger",
+  });
+
+  try {
+    const response = await fetch("https://maskinporten.no/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: body.toString(),
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("Maskinporten error:", response.status, text);
+      return null;
+    }
+
+    const data = (await response.json()) as MaskinportenToken;
+    cachedToken = {
+      token: data.access_token,
+      expiresAt: Date.now() + data.expires_in * 1000,
+    };
+    return data.access_token;
+  } catch (err) {
+    console.error("Maskinporten fetch error:", err);
+    return null;
+  }
+}
+
+// ============================================================================
+// SVV (STATENS VEGVESEN) API
+// ============================================================================
+
+interface SvvKjoretoy {
+  kjoretoyId?: {
+    kjennemerke?: string;
+    understellsnummer?: string;
+  };
+  godkjenning?: {
+    tekniskGodkjenning?: {
+      tekniskeData?: {
+        generelt?: {
+          merke?: Array<{ merke?: string }>;
+          handelsbetegnelse?: string[];
+          typebetegnelse?: string;
+        };
+      };
+    };
+  };
+  forstegangsregistrering?: {
+    registrertForstegangNorgeDato?: string;
+  };
+  periodiskKjoretoyKontroll?: {
+    kontrollfrist?: string;
+  };
+}
+
+interface SvvResponse {
+  kjennemerke: string;
+  kjoretoydata?: SvvKjoretoy[];
+}
+
+function parseSvvToTecdoc(svv: SvvResponse, regnr: string): TecdocVehicle | null {
+  const data = svv.kjoretoydata?.[0];
+  if (!data) return null;
+
+  const generelt = data.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt;
+  if (!generelt) return null;
+
+  const make = generelt.merke?.[0]?.merke || "Ukjent";
+  const model = generelt.handelsbetegnelse?.[0] || generelt.typebetegnelse || "";
+  const vin = data.kjoretoyId?.understellsnummer || "";
+
+  // Parse år fra førstegangsregistrering
+  let year = new Date().getFullYear();
+  const regDate = data.forstegangsregistrering?.registrertForstegangNorgeDato;
+  if (regDate) {
+    const parsed = new Date(regDate);
+    if (!isNaN(parsed.getTime())) year = parsed.getFullYear();
+  }
+
+  return {
+    regno: regnr.toUpperCase(),
+    vin,
+    make: make.trim(),
+    model: model.trim(),
+    year,
+    k_type: 0, // SVV har ikke kType — bruk 0 som placeholder
+  };
+}
+
+async function fetchSvvVehicle(regnr: string, env: Env): Promise<TecdocVehicle | null> {
+  const token = await fetchMaskinportenToken(env);
+  if (!token) return null;
+
+  const cleanRegnr = regnr.replace(/\s/g, "").toUpperCase();
+
+  try {
+    const response = await fetch(
+      "https://akfell-datautlevering.atlas.vegvesen.no/kjoretoyoppslag/bulk/kjennemerke",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify([{ kjennemerke: cleanRegnr }]),
+      }
+    );
+
+    if (!response.ok) {
+      const text = await response.text();
+      console.error("SVV error:", response.status, text);
+      return null;
+    }
+
+    const data = (await response.json()) as SvvResponse[];
+    if (!Array.isArray(data) || data.length === 0) return null;
+
+    return parseSvvToTecdoc(data[0], cleanRegnr);
+  } catch (err) {
+    console.error("SVV fetch error:", err);
+    return null;
+  }
+}
+
+// ============================================================================
+// BILUPPGIFTER API (fallback)
 // ============================================================================
 
 async function fetchTecdoc(regnr: string, apiKey: string): Promise<TecdocVehicle | null> {
@@ -179,23 +340,18 @@ function modelMatches(vehicleModel: string, recordModel: string | null): boolean
   const rm = recordModel.toLowerCase().trim();
 
   // A: Direkte inkludering begge veier
-  // Biluppgifter: "3-SERIE G20"  vs  Katalog: "3-SERIE"  → rm inkludert i vm ✅
-  // Biluppgifter: "3-SERIE"      vs  Katalog: "3-SERIE G20" → vm inkludert i rm ✅
   if (vm.includes(rm) || rm.includes(vm)) return true;
 
-  // B: Token-overlap (f.eks. "A3" + "SPORTBACK" matcher "A3 SPORTBACK")
-  // Håndterer også del-match der ett navn har mer kontekst enn det andre
+  // B: Token-overlap
   const tokenize = (s: string) => s.split(/[^a-z0-9]+/).filter(t => t.length >= 2);
   const vTokens = tokenize(vm);
   const rTokens = tokenize(rm);
 
-  // Hvis begge har tokens, krev at minst 2 tokens overlapper, eller 1 langt token
   const common = rTokens.filter(t => vTokens.includes(t));
   if (common.length >= 2) return true;
   if (common.length === 1 && common[0].length >= 4) return true;
 
-  // C: Enkelt-token match for veldig korte modellnavn (f.eks. "A3", "Q5")
-  // Men KREV at det ikke er for generisk (unngå "3" som matcher "3-SERIE")
+  // C: Enkelt-token match for veldig korte modellnavn
   if (rTokens.length === 1 && vTokens.includes(rTokens[0]) && rTokens[0].length >= 3) {
     return true;
   }
@@ -204,25 +360,39 @@ function modelMatches(vehicleModel: string, recordModel: string | null): boolean
 }
 
 async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
-  // 1. Hent kjøretøy
-  const vehicle = await fetchTecdoc(regnr, env.BILUPPGIFTER_API_KEY);
+  // 1. Prøv SVV først (primær kilde)
+  let vehicle: TecdocVehicle | null = await fetchSvvVehicle(regnr, env);
+  let source = "svv";
+
+  // 2. Fallback til Biluppgitter hvis SVV ikke er konfigurert eller feiler
+  if (!vehicle && env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
+    vehicle = await fetchTecdoc(regnr, env.BILUPPGIFTER_API_KEY);
+    source = "biluppgifter.tecdoc";
+  }
+
   if (!vehicle) {
     return { error: "Kunne ikke slå opp registreringsnummer", regnr };
   }
 
-  // 2. Hent flagg parallelt
-  const oemDescriptions = await fetchOemFlags(vehicle.vin, env.BILUPPGIFTER_API_KEY);
-  const flags = detectFlagsFromOem(oemDescriptions);
+  // 3. Hent flagg parallelt (kun Biluppgitter har OEM-utstyr — SVV har ikke dette endepunktet)
+  let oemDescriptions: string[] = [];
+  let flags = { adas: false, rainSensor: false, heated: false, acoustic: false, antenna: false, hud: false };
 
-  // 3. Last katalog
+  if (source === "biluppgifter.tecdoc" && vehicle.vin && env.BILUPPGIFTER_API_KEY) {
+    oemDescriptions = await fetchOemFlags(vehicle.vin, env.BILUPPGIFTER_API_KEY);
+    flags = detectFlagsFromOem(oemDescriptions);
+  }
+  // Merk: SVV gir ikke OEM-utstyrsdetaljer, så flagg forblir false ved SVV-oppslag
+  // Dette er en kjent begrensning — vi scorer kun på merke/modell/år når SVV brukes
+
+  // 4. Last katalog
   const catalog = await loadCatalog(env.GLASS_CATALOG);
 
-  // 4. Last prefix4-cache fra KV og finn match
+  // 5. Last prefix4-cache fra KV og finn match
   const prefix4Cache = await loadPrefix4Cache(env.GLASS_CATALOG);
   let prefix4: string | undefined;
   let prefix4Confidence = 0;
 
-  // Søk i cache: prøv merke:modell:år først, deretter merke:modell, deretter merke:år
   const cacheKeys = [
     `${vehicle.make.toUpperCase()}:${vehicle.model.toUpperCase()}:${vehicle.year}`,
     `${vehicle.make.toUpperCase()}:${vehicle.model.toUpperCase()}`,
@@ -253,7 +423,7 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
     }
   }
 
-  // 5. Finn kandidater
+  // 6. Finn kandidater
   let candidates: GlassRecord[] = [];
   let layer = 4;
   let confidence: string = "none";
@@ -296,12 +466,15 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
       }
     }
 
-    // Score etter flagg
+    // Score etter flagg (hvis vi har OEM-data fra Biluppgitter)
     candidates = candidates
       .map((c) => ({ c, score: scoreCandidate(c, flags) }))
       .sort((a, b) => b.score - a.score)
       .map((s) => s.c);
   }
+
+  const sources = [source];
+  if (oemDescriptions.length > 0) sources.push("biluppgifter.oem");
 
   return {
     vehicle: {
@@ -317,7 +490,7 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
     layer,
     prefix4,
     flags,
-    sources: ["biluppgifter.tecdoc", ...(oemDescriptions.length ? ["biluppgifter.oem"] : [])],
+    sources,
   };
 }
 
@@ -337,9 +510,14 @@ export default {
     // Health check
     if (path === "/api/health") {
       const catalog = await loadCatalog(env.GLASS_CATALOG);
+      const svvConfigured = !!(env.SVV_CLIENT_ID && env.SVV_CLIENT_SECRET);
+      const biluppgifterConfigured = !!(env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET");
+
       return jsonResponse({
         status: "ok",
         catalogSize: catalog.length,
+        svvConfigured,
+        biluppgifterConfigured,
         timestamp: new Date().toISOString(),
       });
     }
