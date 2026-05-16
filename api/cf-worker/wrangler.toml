@@ -11,15 +11,12 @@ id = "15099e572e51423dafb723996c01c668"
 
 # 3. Sett secrets (IKKE legg dem i denne filen — bruk wrangler secret put):
 #
-#    Primær kilde — SVV (Statens Vegvesen) via Maskinporten:
-#    wrangler secret put SVV_CLIENT_ID      # f.eks. a578e3c7-f27b-4b73-8938-af26edd89d68
-#    wrangler secret put SVV_CLIENT_SECRET  # fra Maskinporten/SVV portal
+#    Primær kilde — SVV Enkeltoppslag (åpent API):
+#    wrangler secret put SVV_API_KEY
+#    # API-nøkkel fra https://www.vegvesen.no/fag/teknologi/apne-data/et-utvalg-apne-data/api-for-tekniske-kjoretoyopplysninger/
 #
 #    Fallback — Biluppgifter (Sverige):
 #    wrangler secret put BILUPPGIFTER_API_KEY
-#
-#    Valgfritt:
-#    wrangler secret put SUPABASE_JWT_SECRET
 
 [vars]
 # Ingen hardkodede secrets her — bruk wrangler secret put
