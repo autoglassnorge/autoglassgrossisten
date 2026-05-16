@@ -10,8 +10,8 @@
  * Settes som miljøvariabler ved build, eller hardkodes (anon key er safe å eksponere).
  */
 
-const SUPABASE_URL = window.__AG_CONFIG__?.supabaseUrl || "https://YOUR_PROJECT.supabase.co";
-const SUPABASE_KEY = window.__AG_CONFIG__?.supabaseKey || "YOUR_ANON_KEY";
+const SUPABASE_URL = window.__AG_CONFIG__?.supabaseUrl || "";
+const SUPABASE_KEY = window.__AG_CONFIG__?.supabaseKey || "";
 
 // Lazy-load Supabase client (CDN)
 let supabase = null;
