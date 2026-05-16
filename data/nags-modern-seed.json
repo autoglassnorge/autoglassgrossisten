@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "source": "web-research-compilation",
+    "compiledAt": "2026-05-17T01:30:00Z",
+    "note": "NAGS codes gathered from web search, forums, and supplier PDFs. Focus: US vehicles in Norway."
+  },
+  "entries": [
+    {"nagsCode": "DW02950", "suffix": "GTY", "make": "TESLA", "model": "MODEL Y", "yearFrom": 2023, "yearTo": null, "glassType": "frontrute", "source": "mygrant-pdf"},
+    {"nagsCode": "DB13393", "suffix": "YPY", "make": "TESLA", "model": "MODEL Y", "yearFrom": 2020, "yearTo": 2023, "glassType": "bakrute", "source": "mygrant-pdf"},
+    {"nagsCode": "DB13179", "suffix": "GYY", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2017, "yearTo": 2023, "glassType": "bakrute", "source": "mygrant-pdf"},
+    {"nagsCode": "DB12445", "suffix": "GTY", "make": "TESLA", "model": "MODEL S", "yearFrom": 2013, "yearTo": null, "glassType": "bakrute", "source": "mygrant-pdf"},
+    {"nagsCode": "DR13394", "suffix": "YPY", "make": "TESLA", "model": "MODEL Y", "yearFrom": 2020, "yearTo": 2023, "glassType": "tak", "source": "mygrant-pdf"},
+    {"nagsCode": "DR13503", "suffix": "YPY", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2018, "yearTo": 2023, "glassType": "tak", "source": "mygrant-pdf"},
+    {"nagsCode": "DD13762", "suffix": "GTN", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2024, "yearTo": null, "glassType": "siderute", "source": "mygrant-pdf", "note": "F/R Door"},
+    {"nagsCode": "DD13763", "suffix": "GTN", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2024, "yearTo": null, "glassType": "siderute", "source": "mygrant-pdf", "note": "F/L Door"},
+    {"nagsCode": "DD13765", "suffix": "GTN", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2024, "yearTo": null, "glassType": "siderute", "source": "mygrant-pdf", "note": "R/L Door"},
+    {"nagsCode": "DQ13391", "suffix": "YPY", "make": "TESLA", "model": "MODEL Y", "yearFrom": 2020, "yearTo": 2023, "glassType": "siderute", "source": "mygrant-pdf", "note": "Quarter R"},
+    {"nagsCode": "DQ13392", "suffix": "YPY", "make": "TESLA", "model": "MODEL Y", "yearFrom": 2020, "yearTo": 2023, "glassType": "siderute", "source": "mygrant-pdf", "note": "Quarter L"},
+    {"nagsCode": "DQ13533", "suffix": "GTY", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2019, "yearTo": 2023, "glassType": "siderute", "source": "mygrant-pdf", "note": "Quarter P/R Black Moulding"},
+    {"nagsCode": "DQ13534", "suffix": "GTY", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2019, "yearTo": 2023, "glassType": "siderute", "source": "mygrant-pdf", "note": "Quarter R/L Black Moulding"},
+    {"nagsCode": "DQ13177", "suffix": "GTY", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2019, "yearTo": 2022, "glassType": "siderute", "source": "mygrant-pdf", "note": "Quarter P/R Chrome Moulding"},
+    {"nagsCode": "DQ13178", "suffix": "GTY", "make": "TESLA", "model": "MODEL 3", "yearFrom": 2019, "yearTo": 2022, "glassType": "siderute", "source": "mygrant-pdf", "note": "Quarter R/L Chrome Moulding"},
+    {"nagsCode": "DW01522", "suffix": "GTY", "make": "FORD", "model": "F-SERIES SUPER DUTY", "yearFrom": null, "yearTo": null, "glassType": "frontrute", "source": "ford-trucks-forum"},
+    {"nagsCode": "DW1346", "suffix": null, "make": "JEEP", "model": "GRAND CHEROKEE", "yearFrom": 1999, "yearTo": 2004, "glassType": "frontrute", "source": "importglasscorp-pdf"},
+    {"nagsCode": "DW1554", "suffix": null, "make": "JEEP", "model": "GRAND CHEROKEE", "yearFrom": 2004, "yearTo": null, "glassType": "frontrute", "source": "importglasscorp-pdf"},
+    {"nagsCode": "DW02697", "suffix": null, "make": "FORD", "model": "MUSTANG MACH-E", "yearFrom": null, "yearTo": null, "glassType": "frontrute", "source": "macheforum"}
+  ]
+}

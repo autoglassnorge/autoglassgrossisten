@@ -47,6 +47,7 @@ interface GlassRecord {
   warehouseLocation: string | null;
   oemNumbers: string[];
   crossReferences: string[];
+  nagsCodes: string[];
   weight: number | null;
   dimensions: { width: number | null; height: number | null; thickness: number | null };
   description: string;

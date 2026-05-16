@@ -174,6 +174,7 @@ function renderResults(data, container) {
         <div class="flags">
           ${flagTags.map(f => `<span class="flag on">${f}</span>`).join('')}
         </div>
+        ${c.nagsCodes && c.nagsCodes.length > 0 ? `<div style="margin-top:8px;font-size:11px;color:var(--color-text-muted);font-family:monospace">🇺🇸 NAGS: ${c.nagsCodes.join(', ')}</div>` : ''}
         <div style="display:flex;gap:12px;margin-top:16px">
           <button class="btn-primary" style="padding:10px 20px;font-size:13px">Be om pris</button>
           <button class="btn-secondary" style="padding:10px 20px;font-size:13px">Se detaljer</button>

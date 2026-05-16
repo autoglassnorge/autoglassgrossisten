@@ -1,7 +1,7 @@
 {
   "name": "autoglass-b2b-website",
   "version": "1.0.0",
-  "description": "Autoglass AS \u2014 B2B grossistnettside for bilglass. 7 sider, trespr\u00e5klig, VIN-s\u00f8k, kundeportal.",
+  "description": "Autoglass AS — B2B grossistnettside for bilglass. 7 sider, trespråklig, VIN-søk, kundeportal.",
   "private": true,
   "scripts": {
     "dev": "npx serve .",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "node-fetch": "^2.7.0",
-    "p-limit": "^7.3.0"
+    "p-limit": "^7.3.0",
+    "pdf-parse": "^2.4.5"
   }
 }
