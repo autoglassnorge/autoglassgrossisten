@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Produkter — Autoglass AS | Bilglass-grossist</title>
+<meta name="description" content="Komplett sortiment av frontruter, sideruter, bakruter og spesialglass. 130 000+ ruter på lager i Oslo.">
+<meta name="keywords" content="bilglass, frontrute, siderute, bakrute, spesialglass, grossist, Oslo">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://auto-glass.no/no/produkter">
+<link rel="alternate" hreflang="no" href="https://auto-glass.no/no/produkter">
+<link rel="alternate" hreflang="sv" href="https://auto-glass.no/sv/produkter">
+<link rel="alternate" hreflang="en" href="https://auto-glass.no/en/produkter">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Produkter — Autoglass AS">
+<meta property="og:description" content="130 000+ ruter på lager. OEM og ettermarkedskvalitet.">
+<meta property="og:url" content="https://auto-glass.no/no/produkter">
+<meta property="og:site_name" content="Autoglass AS">
+<meta property="og:image" content="https://auto-glass.no/images/og-products.jpg">
+<meta property="og:locale" content="nb_NO">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Produkter — Autoglass AS">
+<meta name="twitter:description" content="130 000+ ruter på lager.">
+<meta name="twitter:image" content="https://auto-glass.no/images/og-products.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Frontruter" },
+    { "@type": "ListItem", "position": 2, "name": "Sideruter" },
+    { "@type": "ListItem", "position": 3, "name": "Bakruter" },
+    { "@type": "ListItem", "position": 4, "name": "Baklukeruter" },
+    { "@type": "ListItem", "position": 5, "name": "Spesialglass" },
+    { "@type": "ListItem", "position": 6, "name": "Tilbehør" }
+  ]
+}
+</script>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+.filter-bar{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0;padding:20px;background:var(--color-surface-alt);border-radius:var(--radius-md)}
+.filter-bar select,.filter-bar input{padding:10px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-surface);font-size:14px}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Autoglass<span>.</span>AS</a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav.home">Hjem</a>
+      <a href="produkter.html" class="active" data-i18n="nav.products">Produkter</a>
+      <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+      <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+      <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+      <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+      <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switcher">
+        <button data-lang="no" class="active">NO</button>
+        <button data-lang="sv">SV</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      <a href="kundeportal.html" class="btn-login" data-i18n="nav.login">Logg inn</a>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <a href="index.html">Hjem</a><a href="produkter.html">Produkter</a><a href="vin-sok.html">VIN-søk</a>
+  <a href="bli-kunde.html">Bli kunde</a><a href="kundeportal.html">Kundeportal</a>
+  <a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a>
+</div>
+
+<section class="section" style="padding-top:100px">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Sortiment</span>
+      <h1 class="section-title">Alt glasset du trenger — på lager nå</h1>
+      <p class="section-subtitle">Fra frontruter til spesialglass. Alltid tilgjengelig. OEM- og ettermarkedskvalitet.</p>
+    </div>
+
+    <div class="filter-bar reveal">
+      <select id="filter-category"><option value="">Alle kategorier</option><option value="frontrute">Frontruter</option><option value="siderute">Sideruter</option><option value="bakrute">Bakruter</option><option value="bakluke">Baklukeruter</option><option value="spesialglass">Spesialglass</option><option value="tilbehør">Tilbehør</option></select>
+      <select id="filter-brand"><option value="">Alle merker</option><option>BMW</option><option>Volkswagen</option><option>Audi</option><option>Mercedes</option><option>Volvo</option><option>Toyota</option><option>Ford</option><option>Skoda</option><option>Seat</option><option>Kia</option><option>Hyundai</option><option>Nissan</option><option>Peugeot</option><option>Renault</option></select>
+      <input type="text" id="filter-search" placeholder="Søk etter eurokode, modell...">
+    </div>
+
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+</section>
+
+<script>
+let allProducts = [];
+async function loadProducts() {
+  try {
+    const res = await fetch('data/mock-katalog.json');
+    const data = await res.json();
+    allProducts = data.records;
+    renderProducts(allProducts);
+  } catch {
+    document.getElementById('product-grid').innerHTML = '<p>Kunne ikke laste produkter. <a href="kontakt.html">Kontakt oss</a> for manuell bestilling.</p>';
+  }
+}
+function renderProducts(products) {
+  const grid = document.getElementById('product-grid');
+  if (products.length === 0) { grid.innerHTML = '<p>Ingen produkter matcher filtrene.</p>'; return; }
+  grid.innerHTML = products.slice(0, 24).map(p => {
+    const flags = [p.adas&&'ADAS',p.rainSensor&&'Regnsensor',p.heated&&'Oppvarmet',p.acoustic&&'Akustisk',p.antenna&&'Antenne',p.hud&&'HUD'].filter(Boolean);
+    return `
+    <div class="glass-card reveal">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <span class="badge accent">${p.eurocode}</span>
+        <span class="badge">${p.stockStatus > 0 ? p.stockStatus + ' på lager' : 'Bestillingsvare'}</span>
+      </div>
+      <h3>${p.brand ? p.brand.charAt(0).toUpperCase()+p.brand.slice(1) : ''} ${p.model || ''}</h3>
+      <p style="font-size:13px;color:var(--color-text-muted)">${p.yearFrom || ''}${p.yearTo ? '-'+p.yearTo : ''}</p>
+      <p style="font-size:14px;margin:8px 0">${p.description}</p>
+      <div class="meta">${flags.map(f=>`<span class="badge">${f}</span>`).join('')}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
+        <span class="price">${p.price ? p.price.toLocaleString('no-NO')+' kr' : 'Pris på forespørsel'}</span>
+        <button class="btn-primary" style="padding:10px 18px;font-size:13px">Be om pris</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function filterProducts() {
+  const cat = document.getElementById('filter-category').value;
+  const brand = document.getElementById('filter-brand').value;
+  const q = document.getElementById('filter-search').value.toLowerCase();
+  const filtered = allProducts.filter(p => {
+    if (cat && p.category !== cat) return false;
+    if (brand && p.brand?.toLowerCase() !== brand.toLowerCase()) return false;
+    if (q && !p.eurocode.toLowerCase().includes(q) && !p.description.toLowerCase().includes(q) && !p.brand?.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  renderProducts(filtered);
+}
+document.getElementById('filter-category').addEventListener('change', filterProducts);
+document.getElementById('filter-brand').addEventListener('change', filterProducts);
+document.getElementById('filter-search').addEventListener('input', filterProducts);
+document.addEventListener('DOMContentLoaded', loadProducts);
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><h4>Autoglass AS</h4><p style="font-size:14px">Industriveien 1, 0661 Oslo</p><p style="font-size:14px">+47 22 12 34 56</p></div>
+    <div><h4>Snarveier</h4><a href="produkter.html">Produkter</a><a href="vin-sok.html">VIN-søk</a><a href="bli-kunde.html">Bli kunde</a></div>
+    <div><h4>Selskapet</h4><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a><a href="#">Personvern</a></div>
+    <div><h4>Markeder</h4><a href="#">Norge</a><a href="#">Sverige</a><a href="#">Danmark</a><a href="#">Europa</a></div>
+    <div class="bottom" style="grid-column:1/-1">© 2026 Autoglass AS. Alle rettigheter reservert.</div>
+  </div>
+</footer>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

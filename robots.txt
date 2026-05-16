@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://auto-glass.no/sitemap.xml
+
+# Disallow admin/patterns
+Disallow: /api/
+Disallow: /admin/
+Disallow: /kundeportal.html  # Login-only, no SEO value

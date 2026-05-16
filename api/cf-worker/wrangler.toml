@@ -1,0 +1,17 @@
+name = "autoglass-glass-sok"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# 1. Opprett KV namespace:
+#    wrangler kv:namespace create GLASS_CATALOG
+# 2. Kopier ID fra output inn under:
+[[kv_namespaces]]
+binding = "GLASS_CATALOG"
+id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"  # BYTT UT
+
+# 3. Sett secrets:
+#    wrangler secret put BILUPPGIFTER_API_KEY
+#    wrangler secret put SUPABASE_JWT_SECRET   # (valgfritt, for auth)
+
+[vars]
+# Ingen hardkodede secrets her — bruk wrangler secret put

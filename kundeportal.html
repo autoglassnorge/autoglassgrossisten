@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kundeportal — Autoglass AS | Innlogging</title>
+<meta name="description" content="Logg inn for å se dine priser, bestille glass og sjekke ordrehistorikk.">
+<meta name="keywords" content="kundeportal, login, bestilling, ordrehistorikk, bilglass">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://auto-glass.no/no/kundeportal">
+<link rel="alternate" hreflang="no" href="https://auto-glass.no/no/kundeportal">
+<link rel="alternate" hreflang="sv" href="https://auto-glass.no/sv/kundeportal">
+<link rel="alternate" hreflang="en" href="https://auto-glass.no/en/kundeportal">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kundeportal — Autoglass AS">
+<meta property="og:description" content="Logg inn for dine priser og bestilling.">
+<meta property="og:url" content="https://auto-glass.no/no/kundeportal">
+<meta property="og:site_name" content="Autoglass AS">
+<meta property="og:locale" content="nb_NO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kundeportal — Autoglass AS">
+<meta name="twitter:description" content="Logg inn for dine priser.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Autoglass Kundeportal",
+  "applicationCategory": "BusinessApplication"
+}
+</script>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Autoglass<span>.</span>AS</a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav.home">Hjem</a>
+      <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+      <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+      <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+      <a href="kundeportal.html" class="active" data-i18n="nav.portal">Kundeportal</a>
+      <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+      <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switcher">
+        <button data-lang="no" class="active">NO</button>
+        <button data-lang="sv">SV</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <a href="index.html">Hjem</a><a href="produkter.html">Produkter</a><a href="vin-sok.html">VIN-søk</a>
+  <a href="bli-kunde.html">Bli kunde</a><a href="kundeportal.html">Kundeportal</a>
+  <a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a>
+</div>
+
+<section class="section" style="padding-top:140px;min-height:70vh;display:flex;align-items:center">
+  <div class="container" style="max-width:480px">
+    <div class="reveal" style="text-align:center;margin-bottom:40px">
+      <h1 style="font-size:32px;margin-bottom:12px">Kundeportal</h1>
+      <p style="color:var(--color-text-secondary)">Logg inn for å se dine priser, bestille og sjekke ordrehistorikk.</p>
+    </div>
+
+    <div id="auth-section" class="reveal" style="padding:40px;background:var(--color-surface-alt);border-radius:var(--radius-lg);border:1px solid var(--color-border)">
+      <form id="login-form">
+        <div class="form-group">
+          <label>E-post</label>
+          <input type="email" id="login-email" placeholder="din@bedrift.no" required>
+        </div>
+        <div class="form-group">
+          <label>Passord</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;margin-top:8px">Logg inn</button>
+      </form>
+      <div style="text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--color-border)">
+        <p style="font-size:14px;color:var(--color-text-secondary);margin-bottom:12px">Eller bruk magic link (ingen passord)</p>
+        <form id="magic-link-form">
+          <div style="display:flex;gap:8px">
+            <input type="email" placeholder="din@bedrift.no" required style="flex:1;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px">
+            <button type="submit" class="btn-secondary" style="padding:12px 20px;font-size:13px">Send link</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="portal-section" class="reveal" style="display:none;padding:40px;background:var(--color-surface-alt);border-radius:var(--radius-lg);border:1px solid var(--color-border)">
+      <h2 style="font-size:24px;margin-bottom:8px">Velkommen tilbake</h2>
+      <p style="color:var(--color-text-secondary);margin-bottom:24px">Innlogget som <strong id="user-email"></strong></p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+        <a href="#" class="glass-card" style="text-align:center;padding:24px">
+          <div style="font-size:32px;margin-bottom:8px">📋</div>
+          <h3 style="font-size:16px">Mine priser</h3>
+        </a>
+        <a href="vin-sok.html" class="glass-card" style="text-align:center;padding:24px">
+          <div style="font-size:32px;margin-bottom:8px">🔍</div>
+          <h3 style="font-size:16px">Ny bestilling</h3>
+        </a>
+        <a href="#" class="glass-card" style="text-align:center;padding:24px">
+          <div style="font-size:32px;margin-bottom:8px">📦</div>
+          <h3 style="font-size:16px">Ordrehistorikk</h3>
+        </a>
+        <a href="#" class="glass-card" style="text-align:center;padding:24px">
+          <div style="font-size:32px;margin-bottom:8px">💳</div>
+          <h3 style="font-size:16px">Fakturaer</h3>
+        </a>
+      </div>
+
+      <button onclick="signOut()" class="btn-secondary" style="width:100%">Logg ut</button>
+    </div>
+
+    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--color-text-secondary)">
+      Ikke kunde ennå? <a href="bli-kunde.html" style="color:var(--color-accent);font-weight:600">Bli grossistkunde</a>
+    </p>
+  </div>
+</section>
+
+<script>
+function doLogin() {
+  const email = document.getElementById('login-email').value;
+  alert('Demo: Innlogging simulert for ' + email + '\n\nI produksjon: Kobles til Supabase Auth.');
+}
+function sendMagicLink() {
+  alert('Demo: Magic link sendt!\n\nI produksjon: Kobles til Resend/SendGrid + Supabase.');
+}
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><h4>Autoglass AS</h4><p style="font-size:14px">Industriveien 1, 0661 Oslo</p><p style="font-size:14px">+47 22 12 34 56</p></div>
+    <div><h4>Snarveier</h4><a href="produkter.html">Produkter</a><a href="vin-sok.html">VIN-søk</a><a href="bli-kunde.html">Bli kunde</a></div>
+    <div><h4>Selskapet</h4><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a><a href="#">Personvern</a></div>
+    <div><h4>Markeder</h4><a href="#">Norge</a><a href="#">Sverige</a><a href="#">Danmark</a><a href="#">Europa</a></div>
+    <div class="bottom" style="grid-column:1/-1">© 2026 Autoglass AS. Alle rettigheter reservert.</div>
+  </div>
+</footer>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+<script>
+// Supabase config (bytt ut med dine verdier fra supabase.com)
+window.__AG_CONFIG__ = {
+  supabaseUrl: "https://YOUR_PROJECT_ID.supabase.co",
+  supabaseKey: "YOUR_ANON_PUBLIC_KEY"
+};
+</script>
+</body>
+</html>

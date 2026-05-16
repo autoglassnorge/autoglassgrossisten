@@ -1,0 +1,34 @@
+# Cloudflare Pages Redirects
+# https://developers.cloudflare.com/pages/platform/redirects/
+
+# Language-based redirects (default = Norwegian)
+/               /no/                301
+/sv             /sv/                301
+/en             /en/                301
+
+# Canonical trailing slashes
+/no             /no/                301
+/sv             /sv/                301
+/en             /en/                301
+
+# Path redirects
+/no/produkter   /produkter.html     200
+/no/vin-sok     /vin-sok.html       200
+/no/bli-kunde   /bli-kunde.html     200
+/no/kundeportal /kundeportal.html   200
+/no/om-oss      /om-oss.html        200
+/no/kontakt     /kontakt.html       200
+
+/sv/produkter   /produkter.html     200
+/sv/vin-sok     /vin-sok.html       200
+/sv/bli-kunde   /bli-kunde.html     200
+/sv/kundeportal /kundeportal.html   200
+/sv/om-oss      /om-oss.html        200
+/sv/kontakt     /kontakt.html       200
+
+/en/produkter   /produkter.html     200
+/en/vin-sok     /vin-sok.html       200
+/en/bli-kunde   /bli-kunde.html     200
+/en/kundeportal /kundeportal.html   200
+/en/om-oss      /om-oss.html        200
+/en/kontakt     /kontakt.html       200

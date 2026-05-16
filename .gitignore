@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Data (scraped + generated)
+data/scrapers/*.ndjson
+data/scrapers/*.lock
+data/scrapers/pilkington-checkpoint.json.old
+
+# Secrets
+.env
+.env.local
+
+# Logs
+*.log
+/tmp/pilk-*.log
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Build outputs (if any)
+dist/
+build/
+
+# Cloudflare
+.wrangler/
