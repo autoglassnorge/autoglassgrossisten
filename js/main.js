@@ -80,6 +80,17 @@ function initLangSwitcher() {
 // --- VIN Search ---
 const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
 
+// --- Type selector ---
+function updateTypePill(radio) {
+  document.querySelectorAll('.type-pill').forEach(pill => pill.classList.remove('active'));
+  radio.closest('.type-pill').classList.add('active');
+}
+
+function getSelectedType() {
+  const checked = document.querySelector('input[name="glass-type"]:checked');
+  return checked ? checked.value : '';
+}
+
 async function searchGlass() {
   const input = document.getElementById('vin-input');
   const resultsEl = document.getElementById('vin-results');
@@ -88,8 +99,11 @@ async function searchGlass() {
 
   resultsEl.innerHTML = `<p class="loading">${t('vin.loading')}</p>`;
 
+  const type = getSelectedType();
+  const typeParam = type ? `&type=${encodeURIComponent(type)}` : '';
+
   try {
-    const res = await fetch(`${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}`, { headers: { 'Accept': 'application/json' } });
+    const res = await fetch(`${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}${typeParam}`, { headers: { 'Accept': 'application/json' } });
 
     if (res.ok) {
       const data = await res.json();
@@ -97,32 +111,11 @@ async function searchGlass() {
       return;
     }
 
-    // API svarte, men med feilstatus
     const err = await res.json().catch(() => ({ error: 'Kunne ikke søke. Prøv igjen.' }));
     resultsEl.innerHTML = `<p class="no-result">${err.error || 'Kunne ikke søke. Prøv igjen.'}</p>`;
   } catch (e) {
-    // Nettverksfeil — API utilgjengelig
     resultsEl.innerHTML = `<p class="no-result">Nettverksfeil. Sjekk tilkoblingen og prøv igjen.</p>`;
   }
-}
-
-function mockSearch(query, resultsEl) {
-  // Simulate delay
-  setTimeout(() => {
-    const mockData = {
-      vehicle: { regnr: query, make: 'BMW', model: '3-serie', year: 2021, kType: 12345 },
-      candidates: [
-        { eurocode: '5351AGNMVHAD', description: 'BMW 3-serie G20 frontrute m/ADAS+regnsensor+oppv.+akustisk+antenne+HUD+solstripe', brand: 'BMW', model: '3-serie', yearFrom: 2019, price: 5850, stockStatus: 3, adas: true, rainSensor: true, heated: true, acoustic: true, antenna: true, hud: true },
-        { eurocode: '5351AGNMVHA', description: 'BMW 3-serie G20 frontrute m/ADAS+regnsensor+oppv.+akustisk+antenne+solstripe', brand: 'BMW', model: '3-serie', yearFrom: 2019, price: 5450, stockStatus: 5, adas: true, rainSensor: true, heated: true, acoustic: true, antenna: true, hud: false },
-        { eurocode: '5351AGNMVH', description: 'BMW 3-serie G20 frontrute m/ADAS+regnsensor+oppv.+akustisk+solstripe', brand: 'BMW', model: '3-serie', yearFrom: 2019, price: 5200, stockStatus: 8, adas: true, rainSensor: true, heated: true, acoustic: true, antenna: false, hud: false },
-      ],
-      confidence: 'medium',
-      layer: 2,
-      flags: { adas: true, rainSensor: true, heated: true, acoustic: true, antenna: true, hud: false },
-      sources: ['biluppgifter.tecdoc', 'biluppgifter.oem']
-    };
-    renderResults(mockData, resultsEl);
-  }, 800);
 }
 
 function renderResults(data, container) {
@@ -131,38 +124,46 @@ function renderResults(data, container) {
     return;
   }
 
-  const v = data.vehicle;
+  const v = data.vehicle || {};
   const flags = data.flags || {};
+  const layerLabels = ['', 'Eksakt match', 'År + merke', 'Merke', 'Prefix4'];
+  const layerLabel = layerLabels[data.layer || 0] || 'Statistisk match';
 
+  // Vehicle info banner
   let html = `
-    <div class="result-vehicle" style="padding:20px;background:var(--color-surface-alt);border-radius:var(--radius-md);margin-bottom:20px">
-      <h3 style="font-family:var(--font-display);font-size:20px;margin-bottom:8px">${v.make} ${v.model} (${v.year})</h3>
-      <p style="font-size:14px;color:var(--color-text-secondary)">Reg.nr: ${v.regnr} · kType: ${v.kType}</p>
-      <div class="flags" style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-        ${flags.adas ? '<span class="flag on">ADAS</span>' : ''}
-        ${flags.rainSensor ? '<span class="flag on">Regnsensor</span>' : ''}
-        ${flags.heated ? '<span class="flag on">Oppvarmet</span>' : ''}
-        ${flags.acoustic ? '<span class="flag on">Akustisk</span>' : ''}
-        ${flags.antenna ? '<span class="flag on">Antenne</span>' : ''}
-        ${flags.hud ? '<span class="flag on">HUD</span>' : ''}
+    <div class="vehicle-banner">
+      <h3>🚗 ${v.make || '?'} ${v.model || '?'} ${v.year ? '(' + v.year + ')' : ''}</h3>
+      <p class="meta">Reg.nr: ${v.regnr || '-'} · VIN: ${(v.vin || '-').slice(0, 8)}…${(v.vin || '-').slice(-4)} · kType: ${v.kType || '-'}</p>
+      <div class="flags">
+        <span class="flag ${flags.adas ? 'on' : 'off'}">ADAS ${flags.adas ? '✓' : '✗'}</span>
+        <span class="flag ${flags.rainSensor ? 'on' : 'off'}">Regnsensor ${flags.rainSensor ? '✓' : '✗'}</span>
+        <span class="flag ${flags.heated ? 'on' : 'off'}">Oppvarmet ${flags.heated ? '✓' : '✗'}</span>
+        <span class="flag ${flags.acoustic ? 'on' : 'off'}">Akustisk ${flags.acoustic ? '✓' : '✗'}</span>
+        <span class="flag ${flags.antenna ? 'on' : 'off'}">Antenne ${flags.antenna ? '✓' : '✗'}</span>
+        <span class="flag ${flags.hud ? 'on' : 'off'}">HUD ${flags.hud ? '✓' : '✗'}</span>
       </div>
     </div>
     <div class="results-list">
   `;
 
-  for (const c of data.candidates) {
+  data.candidates.forEach((c, idx) => {
+    const isTop = idx === 0;
     const confClass = data.confidence || 'medium';
+    const confLabel = confClass === 'high' ? 'Høy konfidens' : confClass === 'medium' ? 'Middels konfidens' : 'Lav konfidens';
     const flagTags = [
       c.adas && 'ADAS', c.rainSensor && 'Regnsensor', c.heated && 'Oppvarmet',
-      c.acoustic && 'Akustisk', c.antenna && 'Antenne', c.hud && 'HUD'
+      c.acoustic && 'Akustisk', c.antenna && 'Antenne', c.hud && 'HUD',
+      c.shade && 'Solstripe', c.camera && 'Kamera', c.laneAssist && 'Filskifteass.'
     ].filter(Boolean);
 
     html += `
-      <div class="result-item">
+      <div class="result-item ${isTop ? 'top-match' : ''}">
+        ${isTop ? `<div class="top-badge">⭐ Mest sannsynlig riktig — ${confLabel}</div>` : ''}
         <div class="header">
           <div>
             <div class="eurocode">${c.eurocode}</div>
-            <p style="font-size:14px;color:var(--color-text-secondary);margin-top:4px">${c.description}</p>
+            <p style="font-size:14px;color:var(--color-text-secondary);margin-top:4px">${c.description || ''}</p>
+            <p style="font-size:12px;color:var(--color-text-muted);margin-top:2px">${c.brand || '?'} ${c.model || ''} ${c.yearFrom ? c.yearFrom + (c.yearTo ? '–' + c.yearTo : '–') : ''} · ${layerLabel}</p>
           </div>
           <span class="confidence ${confClass}">${confClass.toUpperCase()}</span>
         </div>
@@ -179,7 +180,7 @@ function renderResults(data, container) {
         </div>
       </div>
     `;
-  }
+  });
 
   html += '</div>';
   container.innerHTML = html;

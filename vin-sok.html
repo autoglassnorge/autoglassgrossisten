@@ -77,6 +77,13 @@
       <h1 style="font-size:clamp(32px,5vw,56px);max-width:700px;margin:0 auto 16px" data-i18n="vin.title">Finn riktig glass på sekunder</h1>
       <p style="color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto 40px;font-size:18px" data-i18n="vin.sub">Søk på registreringsnummer eller VIN — vi matcher deg med riktig rute</p>
     </div>
+    <div class="glass-type-selector reveal" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;max-width:640px;margin-left:auto;margin-right:auto">
+      <label class="type-pill active"><input type="radio" name="glass-type" value="frontrute" checked onchange="updateTypePill(this)"><span>Frontrute</span></label>
+      <label class="type-pill"><input type="radio" name="glass-type" value="siderute" onchange="updateTypePill(this)"><span>Siderute</span></label>
+      <label class="type-pill"><input type="radio" name="glass-type" value="bakrute" onchange="updateTypePill(this)"><span>Bakrute</span></label>
+      <label class="type-pill"><input type="radio" name="glass-type" value="tak" onchange="updateTypePill(this)"><span>Tak</span></label>
+      <label class="type-pill"><input type="radio" name="glass-type" value="" onchange="updateTypePill(this)"><span>Alle</span></label>
+    </div>
     <div class="search-box reveal" style="max-width:640px;margin:0 auto">
       <input type="text" id="vin-input" placeholder="Reg.nr. eller VIN" data-i18n-placeholder="vin.placeholder">
       <button onclick="searchGlass()" data-i18n="vin.button">Søk</button>
