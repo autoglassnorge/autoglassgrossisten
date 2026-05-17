@@ -1,0 +1,87 @@
+name: Nattlig katalog-scraping
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 02:00 UTC hver natt
+  workflow_dispatch:     # Manuell trigger
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  scrape-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm install
+
+      # ── 1. Pilkington scraping ────────────────────────────────
+      - name: Scrape Pilkington
+        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/pilkington-scraper.ts
+        timeout-minutes: 30
+        continue-on-error: true
+        id: pilkington
+
+      # ── 2. Glavista scraping ──────────────────────────────────
+      - name: Scrape Glavista
+        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/glavista-scraper.ts
+        timeout-minutes: 30
+        continue-on-error: true
+        id: glavista
+
+      # ── 3. Merge kataloger ────────────────────────────────────
+      - name: Merge catalogs
+        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/merge-catalogs.ts
+        id: merge
+
+      # ── 4. Bygg prefix4-cache ─────────────────────────────────
+      - name: Build prefix4 cache
+        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/build-prefix4-cache.ts
+        continue-on-error: true
+        id: prefix4
+
+      # ── 5. Upload til KV ──────────────────────────────────────
+      - name: Upload catalog to KV
+        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/cf-worker/scripts/upload-catalog.ts
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          KV_NAMESPACE_ID: ${{ secrets.GLASS_KV_NAMESPACE_ID }}
+        id: upload
+
+      # ── 6. Verifiser produksjon ───────────────────────────────
+      - name: Health check
+        run: |
+          sleep 30
+          curl -sf https://autoglass-glass-sok.autoglassnorge.workers.dev/api/health | jq -e '.status == "ok"' || exit 1
+          echo "✅ Health check OK"
+
+      # ── 7. Rapport ────────────────────────────────────────────
+      - name: Scraping report
+        if: always()
+        run: |
+          echo "📊 Nattlig scraping-rapport"
+          echo "==========================="
+          echo "Pilkington: ${{ steps.pilkington.outcome }}"
+          echo "Glavista:   ${{ steps.glavista.outcome }}"
+          echo "Merge:      ${{ steps.merge.outcome }}"
+          echo "Prefix4:    ${{ steps.prefix4.outcome }}"
+          echo "Upload:     ${{ steps.upload.outcome }}"
+
+      # ── 8. Commit oppdatert catalog (valgfritt) ───────────────
+      - name: Commit catalog-prod.json
+        if: steps.merge.outcome == 'success'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/catalog-prod.json data/ktype-prefix4-cache.json
+          git diff --cached --quiet || (git commit -m "chore: nightly catalog update [$(date -u +%Y-%m-%d)]" && git push)
+        continue-on-error: true

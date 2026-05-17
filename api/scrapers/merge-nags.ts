@@ -347,7 +347,7 @@ function main() {
   console.log("=================================\n");
 
   // Load catalog
-  const catalog: CatalogFile = JSON.parse(fs.readFileSync("data/master-catalog.json", "utf-8"));
+  const catalog: CatalogFile = JSON.parse(fs.readFileSync("data/catalog-prod.json", "utf-8"));
   console.log(`📦 Catalog: ${catalog.records.length} records`);
 
   // Initialize nagsCodes if missing
@@ -382,7 +382,7 @@ function main() {
   });
 
   // Save
-  const outputPath = path.join(process.cwd(), "data", "master-catalog-nags.json");
+  const outputPath = path.join(process.cwd(), "data", "catalog-prod.json");
   fs.writeFileSync(outputPath, JSON.stringify(catalog, null, 2));
   console.log(`\n💾 Saved to: ${outputPath}`);
 }

@@ -1,16 +1,17 @@
 {
   "meta": {
-    "count": 2274,
+    "count": 2343,
     "sources": [
       "importglasscorp-pdf",
       "web-research",
       "mygrant-pdfs",
       "dominionautoglass.ca",
       "glassknow.blogspot.com",
-      "importglasscorp-moldings-pdf"
+      "importglasscorp-moldings-pdf",
+      "mygrant-pdfs"
     ],
     "compiledAt": "2026-05-17T00:06:00.588Z",
-    "lastUpdated": "2026-05-17T00:40:18.675Z"
+    "lastUpdated": "2026-05-17T21:59:16.660Z"
   },
   "entries": [
     {
@@ -22148,6 +22149,1305 @@
       "yearTo": 1999,
       "glassType": "bakrute",
       "source": "importglasscorp-moldings-pdf"
+    },
+    {
+      "nagsCode": "FW05469",
+      "suffix": "GTY",
+      "make": "MASERATI",
+      "model": "Ghibli/2013-2022 Quattroporte-4D S",
+      "yearFrom": 2014,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Rn/Lght Snsr",
+        "TSR",
+        "FCA",
+        "LKA"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG-LamborghiniMaseratiAudiR8_Feb2024"
+    },
+    {
+      "nagsCode": "FW05466",
+      "suffix": "GGY",
+      "make": "MASERATI",
+      "model": "Ghibli/2013-2022 Quattroporte-4D S",
+      "yearFrom": 2014,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstic",
+        "R/L Sensor"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG-LamborghiniMaseratiAudiR8_Feb2024"
+    },
+    {
+      "nagsCode": "DW02847",
+      "suffix": "GTY",
+      "make": "BRIGHTDROP",
+      "model": "EV / ZEVO -Series Cargo Van",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Solar",
+        "Forward Coll. Alert W/Brake Assist",
+        "LDWS",
+        "Lane Keep Assist",
+        "Rain sensor"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-MultiStopVans_PartReleaseJune2023"
+    },
+    {
+      "nagsCode": "DW02517",
+      "suffix": "GTN",
+      "make": "FREIGHTLINER",
+      "model": "P800 Step Van *s/a 0981349-08850A*",
+      "yearFrom": 2015,
+      "yearTo": 2016,
+      "glassType": "frontrute",
+      "features": [],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-MultiStopVans_PartReleaseJune2023"
+    },
+    {
+      "nagsCode": "DL04579",
+      "suffix": "GTN",
+      "make": "GRUMMAN",
+      "model": "Olson-",
+      "yearFrom": 1970,
+      "yearTo": 1997,
+      "glassType": "ukjent",
+      "features": [
+        "93\""
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-MultiStopVans_PartReleaseJune2023"
+    },
+    {
+      "nagsCode": "FW05523",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "GLC-Class-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "features": [
+        "Ant",
+        "Slr",
+        "Acstc Intrlyr",
+        "LDWS",
+        "Rn/Lght Snsr",
+        "LKA",
+        "FCA w/Emergency Braking"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-NewPartsReleaseApr2023"
+    },
+    {
+      "nagsCode": "FW05726",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Atlas-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "features": [
+        "Solar",
+        "3rd Visor Frit"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-NewPartsReleaseApr2023"
+    },
+    {
+      "nagsCode": "FW05855",
+      "suffix": "GTY",
+      "make": "PART",
+      "model": "DESCRIPTION 2022-2023 Toyota RAV4 Prime-4D U",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "3rd VF",
+        "Acstc Intrlyr",
+        "LDWS",
+        "Road Sign Assist",
+        "Lane Tracing",
+        "Precoll w/Ped det",
+        "Dyn Rad. Cruise",
+        "HBA",
+        "Rn/Lght Snsr",
+        "HWP",
+        "Infr. Intrlyr LKA"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-NewPartsReleaseFeb2023"
+    },
+    {
+      "nagsCode": "DW02894",
+      "suffix": "GTY",
+      "make": "ALFA ROMEO",
+      "model": "Tonale- Dodge Hornet 4D Utility",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "LDWS",
+        "FCA",
+        "LKA",
+        "Rn Snsr",
+        "Emergency Braking w/Pedestrian Detection"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG-NewPartsReleaseOct2023"
+    },
+    {
+      "nagsCode": "FW06054",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "S-Class-4D Sedan",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "features": [
+        "Htd",
+        "Slr",
+        "LKA",
+        "Lance Change Assist",
+        "Acstc Intrlyr",
+        "Rain/Light Sensor",
+        "Active Steering Assist",
+        "Dash Cam",
+        "Proactive Scan",
+        "AR HUD",
+        "Active Brake QAssist",
+        "Adpative High Beam Assist",
+        "Active Cruise Control w/Stop & Go"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG-NewPartsReleaseOct2023"
+    },
+    {
+      "nagsCode": "FW06064",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender-2 & 4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Infrared Absorbing",
+        "Acstc Intrlyr",
+        "Adap. Speed Limiter",
+        "Traffic Sign Recog",
+        "LKA",
+        "Fine Wire Htd",
+        "Act Cruise Control w/Stop & Go"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG-NewPartsReleaseOct2023"
+    },
+    {
+      "nagsCode": "FW06318",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "S-Class & S-Class LWB 4D Sedan",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Slr Ctd",
+        "Infrared Reflecting",
+        "Acstc Intrlyr",
+        "HWP",
+        "Stereo Cam",
+        "Active Steering Asst",
+        "LKA",
+        "Ln Change Asst",
+        "Active Brake Asst",
+        "Active Cruise Ctrl w/Stop & Go",
+        "Adaptive Hi-Beam Asst",
+        "Dash Cam",
+        "Rain/Light Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Apr_2025"
+    },
+    {
+      "nagsCode": "FW06320",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "CLE-Class 2D Coupe",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Rain/Light Snsr",
+        "Adaptive HiBeam Asst",
+        "Ln Change Asst",
+        "LKA",
+        "Traffic Sign Recog",
+        "Active Speed Asst",
+        "Dash Cam",
+        "Active Steering Asst",
+        "Active Brake Asst"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Apr_2025"
+    },
+    {
+      "nagsCode": "FW06321",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "CLE-Class 2D Coupe",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Rain/Light Snsr",
+        "Adaptive HiBeam Asst",
+        "Ln Change Asst",
+        "LKA",
+        "Traffic Sign Recog",
+        "Active Speed Asst",
+        "Dash Cam",
+        "Active Steering Asst",
+        "Active Brake Asst",
+        "Adaptive Cruise Ctrl",
+        "Stereo Cam"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Apr_2025"
+    },
+    {
+      "nagsCode": "FW06097",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "Mercedes CLS Class 4D Coupe",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Full Htd Through Coating",
+        "Acstc Intrlyr",
+        "Rn/Light Snsr",
+        "Active Cruise Ctrl",
+        "LKA",
+        "Stereo Cam",
+        "Active Brake Asst",
+        "Infrared Reflecting",
+        "Coll Mitigation"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Apr_2025"
+    },
+    {
+      "nagsCode": "FW06286",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender-2D Utility",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "LKA",
+        "Traffic Sign Recog",
+        "Adaptive Cruise Ctrl",
+        "Emerg Braking w/Ped Detect",
+        "Rn/Light Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Feb_2025"
+    },
+    {
+      "nagsCode": "FW06234",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "E-Class 4D Sedan/Station Wagon",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Ln Change Asst",
+        "Acstc Intrlyr",
+        "w/Cross Traffic Alert",
+        "Active Cruise Ctrl",
+        "Traffic Sign Recog",
+        "LKA",
+        "Rn Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Feb_2025"
+    },
+    {
+      "nagsCode": "DW03006",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "Equinox 4D U",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Solar",
+        "LKA",
+        "Acstc Intrlyr",
+        "LDWS",
+        "w/Ped Detect",
+        "Auto Emerg Brk",
+        "FCA"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG_Jan_2025"
+    },
+    {
+      "nagsCode": "FW06284",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender-4D Utility",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Fine Wire Heated",
+        "LKA",
+        "Traffic Sign Recog",
+        "Adaptive Cruise Ctrl",
+        "Emerg Braking w/Ped Detect",
+        "Rn/Light Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Jan_2025"
+    },
+    {
+      "nagsCode": "FW06201",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Atlas-4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Slr",
+        "Emerg Asst",
+        "Acstc Intrlyr",
+        "LDWS",
+        "High Beam Asst",
+        "Adaptive Cruise Control",
+        "Traffic Sign Recog",
+        "LKA",
+        "Rn Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2024"
+    },
+    {
+      "nagsCode": "FW06200",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Atlas-4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Emerg Asst",
+        "Acstc Intrlyr",
+        "LDWS",
+        "High Beam Asst",
+        "Adaptive Cruise Control",
+        "Traffic Sign Recog",
+        "LKA",
+        "Rn Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2024"
+    },
+    {
+      "nagsCode": "FW05727",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Atlas-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "features": [
+        "Solar",
+        "Electrochromic Mirror",
+        "3rd Visor Frit",
+        "Rain Sensor"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2024"
+    },
+    {
+      "nagsCode": "FW05902",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Rn/Lght Snsr",
+        "Adptv Speed Limiter",
+        "Acstc Infrared Intrlyr",
+        "Traffic Sign Recog",
+        "LKA",
+        "Active Cruise Cntrl w/ Stop & Go"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2024"
+    },
+    {
+      "nagsCode": "FW06283",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender 2D/4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Slr",
+        "Acstc Intrlyr",
+        "Rn/Light Snsr",
+        "Adaptive Cruise Ctrl",
+        "Traffic Sign Recog",
+        "LKA",
+        "Emerg Braking w/Ped Detect",
+        "FWH"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06285",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender 2D/4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Slr",
+        "Acstc Intrlyr",
+        "Rn/Light Snsr",
+        "Adaptive Cruise Ctrl",
+        "Traffic Sign Recog",
+        "LKA",
+        "Emerg Braking w/Ped Detect"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06287",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Infrared Absorbing",
+        "Acstc Intrlyr",
+        "Fine Wire Htd",
+        "LKA",
+        "Traffic Sign Recog",
+        "Adaptive Cruise Ctrl",
+        "Emerg Braking w/Ped Detect",
+        "Rain/Light Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06289",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Infrared Absorbing",
+        "Acstc Intrlyr",
+        "Fine Wire Htd",
+        "LKA",
+        "Traffic Sign Recog",
+        "Adaptive Cruise Ctrl",
+        "Emerg Braking w/Ped Detect",
+        "Rain/Light Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06327",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Range Rover 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Traffic Sign Recog",
+        "w/Adaptive Speed Limiter",
+        "Emerg Braking",
+        "LKA",
+        "Rain/Light Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06328",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Range Rover 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Traffic Sign Recog w/Adaptive Speed Limiter",
+        "Emerg Braking",
+        "LKA",
+        "Fully Htd",
+        "Rain/Light Sensor"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06331",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Range Rover 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Infrared Absorbing",
+        "Traffic Sign Recog w/Adaptive Speed Limiter",
+        "Emerg Braking",
+        "LKA",
+        "Rain/Light Sensor"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06332",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Range Rover 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Infrared Absorbing",
+        "Traffic Sign Recog w/Adaptive Speed Limiter",
+        "Emerg Braking",
+        "LKA",
+        "Fully Htd",
+        "Rain/Light Sensor"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06357",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "GLS-Class 4D U",
+      "yearFrom": 2020,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Rn/Light Snsr",
+        "HWP",
+        "Active Cruise Ctrl",
+        "LKA",
+        "Coll Mitigation",
+        "Traffic Sign Recog",
+        "Proactive Rd Scan"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "FW06365",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Range Rover Sport 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Infrared Absorbing",
+        "Acstc Intrlyr",
+        "LKA",
+        "Emerg Braking",
+        "Traffic Sign Recog w/Adaptive Speed Limiter",
+        "Rn/Light Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_May_2025"
+    },
+    {
+      "nagsCode": "DW02895",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "Jeep Cherokee-4D U",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Aftrmrkt",
+        "HWP",
+        "Rn Snsr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Oct_2024"
+    },
+    {
+      "nagsCode": "DW02897",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "Colorado-2D Ext Cab & 4D Crew Cab",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Slr",
+        "Acstc Intrlyr",
+        "LDWS",
+        "HiBeam Asst",
+        "Adaptive Cruise Ctrl",
+        "LKA",
+        "FCA w/Emerg Braking"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Oct_2024"
+    },
+    {
+      "nagsCode": "DW02934",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "Blazer EV / 24- Honda Prologue - 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Solar",
+        "Acoustic Intrlyr",
+        "LDWS",
+        "Highbeam Asst",
+        "Auto Emerg Braking",
+        "LKA",
+        "Rn Snsr",
+        "FCA w/Ped Braking"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG_Oct_2024"
+    },
+    {
+      "nagsCode": "FW06009",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "VW Arteon 4D Coupe",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Heat Originated Through Coating",
+        "Acstc Intrlyr",
+        "LDWS",
+        "Rn/Light Snsr",
+        "Hi-Beam Asst",
+        "Infrared Reflecting"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Oct_2024"
+    },
+    {
+      "nagsCode": "FW06100",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "Mercedes CLS Class / 21-23 AMG GT43 4D Coupe",
+      "yearFrom": 2019,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Rn/Light Snsr",
+        "Active Cruise Ctrl",
+        "LKA",
+        "Stereo Cam",
+        "Active Brake Asst",
+        "Coll Mitigation",
+        "TV Ant"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Oct_2024"
+    },
+    {
+      "nagsCode": "FW06101",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "Mercedes CLS Class / 21-23 AMG GT43 4D Couple",
+      "yearFrom": 2019,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "HUD",
+        "Acstc Intrlyr",
+        "Rn/Light Snsr",
+        "Active Cruise Ctrl",
+        "LKA",
+        "Stereo Cam",
+        "Active Brake Asst",
+        "Coll Mitigation"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Oct_2024"
+    },
+    {
+      "nagsCode": "FW06174",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "Land Rover Range Rover & LWB 4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Traffic Sign Recog w/Adaptive Speed Limiter",
+        "Acstc Intrlyr",
+        "Rn/Lght Snsr",
+        "Emerg Braking",
+        "Slr Ctd",
+        "LKA"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Oct_2024"
+    },
+    {
+      "nagsCode": "FW06198",
+      "suffix": "GBY",
+      "make": "21",
+      "model": "Lexus GS350 4D S",
+      "yearFrom": 2017,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Solar",
+        "Acstc Intrlyr",
+        "LDWS",
+        "Rain/Light Sensor"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Sept_2024"
+    },
+    {
+      "nagsCode": "FW06166",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "Mazda MX-5 Miata 2D Convertible",
+      "yearFrom": 2019,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "3VF",
+        "Acstc Intrlyr",
+        "LDWS",
+        "Traffic Sign Recog"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Sept_2024"
+    },
+    {
+      "nagsCode": "FW06165",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "Mazda MX-5 Miata 2D Convertible",
+      "yearFrom": 2019,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "3VF",
+        "LDWS",
+        "Rn/Light Snsr",
+        "Traffic Sign Recog"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Sept_2024"
+    },
+    {
+      "nagsCode": "FW06164",
+      "suffix": "GTY",
+      "make": "23",
+      "model": "Mazda MX-5 Miata 2D Convertible",
+      "yearFrom": 2019,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "3rd VF",
+        "LDWS",
+        "Traffic Sign Recog"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Sept_2024"
+    },
+    {
+      "nagsCode": "DW02950",
+      "suffix": "GTY",
+      "make": "TESLA",
+      "model": "Y-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "HWP",
+        "Autopilot Advanced Driver Asst Sys",
+        "Infrared Absorbing",
+        "Acstc Intrlyr"
+      ],
+      "brandCode": "FYG",
+      "source": "mygrant-pdf-MG_Sept_2024"
+    },
+    {
+      "nagsCode": "FW05613",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Acstc Intrlyr",
+        "Rn/Lght Snsr",
+        "Traffic Sign Recogn",
+        "LKA"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-NewPartsReleaseNov2022"
+    },
+    {
+      "nagsCode": "FW05609",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "features": [
+        "Acstc Intrlyr",
+        "Rn/Lght Snsr",
+        "Solar Coated",
+        "Traffic Sign Recogn",
+        "LKA"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-NewPartsReleaseNov2022"
+    },
+    {
+      "nagsCode": "DW02949",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Business Class M2-4D Extended Conventional Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Encapsulated",
+        "Solar",
+        "Rain senso",
+        "LDWS",
+        "Coll. Mitigation"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW02874",
+      "suffix": "GTY",
+      "make": "NAVISTAR",
+      "model": "Lonestar 4100/4300/4400/7000 -4D Conventional Cab",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "features": [
+        "Encap",
+        "Heated",
+        "Solar"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW02930",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Cascadia",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "3rd VF",
+        "LDWS",
+        "LKA",
+        "Emergency Braking w/ Ped Det",
+        "Rain Sensor",
+        "Road Sign Rec",
+        "Adaptive Cruise",
+        "Driver Camera"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW02723",
+      "suffix": "GTN",
+      "make": "PETERBILT",
+      "model": "520 Cabover R-L",
+      "yearFrom": 2017,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Solar",
+        "Left and Right"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW02694",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VN Series-Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "features": [
+        "Htd",
+        "Slr",
+        "LDWS",
+        "Rain Sensor"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW02692",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VN Series Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "LDWS",
+        "Rain Sensor"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW02649",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Cascadia Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "features": [
+        "LDWS",
+        "Rain Sensor",
+        "Driver Camera"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW02640",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VN Series Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "Htd",
+        "LDWS"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW02565",
+      "suffix": "GTY",
+      "make": "MACK",
+      "model": "Anthem Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": 2021,
+      "glassType": "frontrute",
+      "features": [
+        "Forward Collision Mitigation",
+        "LDWS",
+        "Bendix Camera"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseFeb2024"
+    },
+    {
+      "nagsCode": "DW03067",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Business Class M2 Conventional/Extended/4D Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "3VF",
+        "LDWS",
+        "Coll Mitigation",
+        "Encap"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02701",
+      "suffix": "GTN",
+      "make": "22",
+      "model": "Autocar ACMD EXPORT-Cabover",
+      "yearFrom": 2012,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "FW06516",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VNL Series-Conventional Cab 2D Heavy-Duty",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "LDWS",
+        "Rn Snsr",
+        "HTD"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02971",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Business Class M2-4D Extended Conventional Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Non-Encapsulated",
+        "Solar",
+        "Rain senso",
+        "LDWS",
+        "Coll. Mitigation"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "FW05864",
+      "suffix": "GBN",
+      "make": "23",
+      "model": "Hino L, XL Series-Conventional Cab",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Solar",
+        "LDWS"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02751",
+      "suffix": "GTY",
+      "make": "22",
+      "model": "Freightliner 108SD / 114SD Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Encapsulated",
+        "Htd",
+        "Asymmetrical Strengthened"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02696",
+      "suffix": "GTY",
+      "make": "21",
+      "model": "Navistar-2D/4D Conventional Cab & Extended Cnvntl Cab/Pro Star-2D Cnvntl Cab",
+      "yearFrom": 2020,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Encp",
+        "Slr"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02693",
+      "suffix": "GTY",
+      "make": "22",
+      "model": "Volvo VN Series-Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Htd",
+        "Slr",
+        "Rain Sensor"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02691",
+      "suffix": "GTY",
+      "make": "22",
+      "model": "Freightliner Business Class M2",
+      "yearFrom": 2017,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Encapsulated",
+        "LDWS",
+        "Collision Mitigation"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02643",
+      "suffix": "GTY",
+      "make": "21",
+      "model": "Mack Anthem Conventional Cab-R",
+      "yearFrom": 2019,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Forward Collision Mitigation",
+        "LDWS"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02573",
+      "suffix": "GTY",
+      "make": "22",
+      "model": "Volvo VN Series Conventional Cab",
+      "yearFrom": 2017,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Slr",
+        "3rd VF",
+        "Rain Sensor"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02561",
+      "suffix": "GBY",
+      "make": "21",
+      "model": "Peterbilt 567/579 Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Encp",
+        "FC Mit.",
+        "LDWS",
+        "Bendix Cam."
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
+    },
+    {
+      "nagsCode": "DW02550",
+      "suffix": "GTY",
+      "make": "21",
+      "model": "International LT625 2D Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "features": [
+        "Encap",
+        "Slr"
+      ],
+      "brandCode": "UNKNOWN",
+      "source": "mygrant-pdf-MG-TruckPartReleaseOct2025"
     }
   ]
 }
