@@ -2,21 +2,27 @@ name = "autoglass-glass-sok"
 main = "src/index.ts"
 compatibility_date = "2024-01-01"
 
-# 1. Opprett KV namespace:
-#    wrangler kv:namespace create GLASS_CATALOG
-# 2. Kopier ID fra output inn under:
+# ── KV Namespace (katalog + cache) ────────────────────────────
 [[kv_namespaces]]
 binding = "GLASS_CATALOG"
 id = "15099e572e51423dafb723996c01c668"
 
-# 3. Sett secrets (IKKE legg dem i denne filen — bruk wrangler secret put):
+# ── D1 Database (glasskatalog SQL) ────────────────────────────
+# 1. Opprett database:
+#    wrangler d1 create glass-catalog-db
+# 2. Kopier ID fra output inn under:
+# [[d1_databases]]
+# binding = "GLASS_CATALOG_D1"
+# database_name = "glass-catalog-db"
+# database_id = "<D1_DATABASE_ID>"
+
+# ── Secrets (IKKE legg dem i denne filen — bruk wrangler secret put):
 #
 #    Primær kilde — SVV Enkeltoppslag (åpent API):
 #    wrangler secret put SVV_API_KEY
-#    # API-nøkkel fra https://www.vegvesen.no/fag/teknologi/apne-data/et-utvalg-apne-data/api-for-tekniske-kjoretoyopplysninger/
 #
 #    Fallback — Biluppgifter (Sverige):
 #    wrangler secret put BILUPPGIFTER_API_KEY
 
 [vars]
-# Ingen hardkodede secrets her — bruk wrangler secret put
+# Ingen hardkodede secrets her

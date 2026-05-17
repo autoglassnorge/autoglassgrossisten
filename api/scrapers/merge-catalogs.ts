@@ -1,8 +1,11 @@
 /**
- * Merge Multiple Catalog Sources
- * ==============================
- * Kombinerer Glavista + UNI Micro + mock-katalog til én master-katalog.
- * Prioriterer: UNI Micro > Glavista > mock
+ * Merge Multiple Catalog Sources → catalog-prod.json
+ * =====================================================
+ * Kombinerer Glavista + Pilkington + UNI Micro + mock-katalog til
+ * ÉN kanonisk produksjonsfil: data/catalog-prod.json
+ *
+ * Hver kjøring legger til "version" (ISO-timestamp) i meta,
+ * slik at upload-scriptet alltid vet hvilken fil som er gjeldende.
  *
  * Kjøring:
  *   npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/merge-catalogs.ts
@@ -43,6 +46,7 @@ interface GlassRecord {
   pdfUrl: string | null;
   source: string;
   lastUpdated: string;
+  nagsCodes?: string[];
 }
 
 interface CatalogFile {
@@ -50,14 +54,27 @@ interface CatalogFile {
   records: GlassRecord[];
 }
 
+interface MergedMeta {
+  version: string;          // ISO timestamp — unik per kjøring
+  mergedAt: string;
+  totalRecords: number;
+  sources: string[];
+  categories: Record<string, number>;
+}
+
+/* ── Konfigurasjon ─────────────────────────────────────────── */
+
 const SOURCES = [
-  { path: "data/unimicro-catalog.json", priority: 4 },    // Høyest - our actual stock
-  { path: "data/pilkington-products.json", priority: 3 }, // Pilkington IRL
-  { path: "data/glavista-catalog.json", priority: 2 },    // Glavista
-  { path: "data/mock-katalog.json", priority: 1 },        // Lavest - dev data
+  { path: "data/unimicro-catalog.json", priority: 4 },      // Høyest — faktisk lager
+  { path: "data/pilkington-products.json", priority: 3 },   // Pilkington IRL
+  { path: "data/glavista-catalog.json", priority: 2 },      // Glavista
+  { path: "data/mock-katalog.json", priority: 1 },          // Dev-data
 ];
 
-const OUTPUT = "data/master-catalog.json";
+const OUTPUT_DIR = path.join(__dirname, "../../data");
+const OUTPUT_FILE = path.join(OUTPUT_DIR, "catalog-prod.json");
+
+/* ── Hjelpefunksjoner ──────────────────────────────────────── */
 
 function loadCatalog(filePath: string): CatalogFile | null {
   try {
@@ -70,7 +87,7 @@ function loadCatalog(filePath: string): CatalogFile | null {
 
 function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): GlassRecord[] {
   const byEurocode = new Map<string, GlassRecord>();
-  const sourceStats: Record<string, number> = {};
+  const sourceStats: Record<string, { added: number; merged: number }> = {};
 
   // Sorter etter prioritet (høyest først)
   sources.sort((a, b) => b.priority - a.priority);
@@ -80,26 +97,26 @@ function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): Gl
     let merged = 0;
 
     for (const record of catalog.records) {
-      const code = record.eurocode.toUpperCase();
+      const code = record.eurocode.toUpperCase().trim();
+      if (!code) continue;
+
       const existing = byEurocode.get(code);
 
       if (!existing) {
-        // Ny record
-        byEurocode.set(code, record);
+        byEurocode.set(code, { ...record, nagsCodes: record.nagsCodes || [] });
         added++;
       } else if (priority > 1) {
-        // Høyere prioritet — overskriv med bedre data
+        // Høyere prioritet — slå sammen felter
         const mergedRecord: GlassRecord = {
           ...existing,
-          // Behold pris/lager fra høyest prioritet som har det
           price: record.price ?? existing.price,
           stockStatus: record.stockStatus || existing.stockStatus,
           warehouseLocation: record.warehouseLocation || existing.warehouseLocation,
-          // Kombiner OEM-numre
-          oemNumbers: [...new Set([...existing.oemNumbers, ...record.oemNumbers])],
-          // Behold rikest beskrivelse
-          description: record.description.length > existing.description.length
-            ? record.description : existing.description,
+          oemNumbers: Array.from(new Set([...existing.oemNumbers, ...record.oemNumbers])),
+          description:
+            (record.description || "").length > (existing.description || "").length
+              ? record.description
+              : existing.description,
           // Flag: true vinner
           adas: existing.adas || record.adas,
           rainSensor: existing.rainSensor || record.rainSensor,
@@ -110,8 +127,9 @@ function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): Gl
           shade: existing.shade || record.shade,
           camera: existing.camera || record.camera,
           laneAssist: existing.laneAssist || record.laneAssist,
-          // Track multiple sources
-          source: existing.source + "," + record.source,
+          // Kombiner NAGS-koder
+          nagsCodes: Array.from(new Set([...(existing.nagsCodes || []), ...(record.nagsCodes || [])])),
+          source: Array.from(new Set([...existing.source.split(","), record.source])).join(","),
           lastUpdated: new Date().toISOString(),
         };
         byEurocode.set(code, mergedRecord);
@@ -119,16 +137,18 @@ function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): Gl
       }
     }
 
-    sourceStats[catalog.meta.source] = added + merged;
+    sourceStats[catalog.meta.source] = { added, merged };
     console.log(`   ${catalog.meta.source}: ${added} nye, ${merged} oppdatert`);
   }
 
   return Array.from(byEurocode.values());
 }
 
+/* ── Main ──────────────────────────────────────────────────── */
+
 function main() {
-  console.log("🔀 Merge Catalog Sources");
-  console.log("========================\n");
+  console.log("🔀 Merge Catalog Sources → catalog-prod.json");
+  console.log("=============================================\n");
 
   const sources: { catalog: CatalogFile; priority: number }[] = [];
 
@@ -158,34 +178,32 @@ function main() {
 
   console.log(`\n📊 Resultat:`);
   console.log(`   Totalt unike eurokoder: ${merged.length}`);
-  for (const [cat, count] of Object.entries(catCounts)) {
+  for (const [cat, count] of Object.entries(catCounts).sort((a, b) => b[1] - a[1])) {
     console.log(`   ${cat}: ${count}`);
   }
 
-  // Lagre
-  const outputPath = path.join(__dirname, "../../", OUTPUT);
-  const outputDir = path.dirname(outputPath);
-  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+  // Sørg for at output-mappe finnes
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  }
 
-  fs.writeFileSync(
-    outputPath,
-    JSON.stringify(
-      {
-        meta: {
-          mergedAt: new Date().toISOString(),
-          totalRecords: merged.length,
-          sources: sources.map((s) => s.catalog.meta.source),
-          categories: catCounts,
-        },
-        records: merged,
-      },
-      null,
-      2
-    )
-  );
+  const now = new Date().toISOString();
+  const output = {
+    meta: {
+      version: now,              // Unik versjon per kjøring
+      mergedAt: now,
+      totalRecords: merged.length,
+      sources: sources.map((s) => s.catalog.meta.source),
+      categories: catCounts,
+    } as MergedMeta,
+    records: merged,
+  };
 
-  console.log(`\n💾 Master-katalog lagret til: ${OUTPUT}`);
-  console.log("   Klar for upload-catalog-to-kv.ts");
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
+
+  console.log(`\n💾 Produksjons-katalog lagret til: ${OUTPUT_FILE}`);
+  console.log(`   Version: ${now}`);
+  console.log(`   Neste steg: npm run worker:upload`);
 }
 
 main();

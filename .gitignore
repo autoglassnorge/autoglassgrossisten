@@ -30,3 +30,7 @@ build/
 node_modules/
 data/*.pdf
 data/parse-*.js
+
+# Legacy generated catalog files (replaced by single catalog-prod.json)
+data/master-catalog*.json
+data/master-catalog*.json.gz
