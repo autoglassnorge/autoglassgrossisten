@@ -1,0 +1,958 @@
+{
+  "meta": {
+    "count": 95,
+    "source": "mygrant-2023-6pdfs"
+  },
+  "entries": [
+    {
+      "nagsCode": "FW05935",
+      "suffix": "GTY",
+      "make": "MASERATI",
+      "model": "Levante-4D U",
+      "yearFrom": 2014,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05469",
+      "suffix": "GTY",
+      "make": "MASERATI",
+      "model": "Ghibli/2013-2022 Quattroporte-4D",
+      "yearFrom": 2014,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05468",
+      "suffix": "GGY",
+      "make": "MASERATI",
+      "model": "Ghibli-4D S",
+      "yearFrom": 2014,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05467",
+      "suffix": "GGY",
+      "make": "MASERATI",
+      "model": "Ghibli-4D S",
+      "yearFrom": 2014,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05466",
+      "suffix": "GGY",
+      "make": "MASERATI",
+      "model": "Ghibli/2013-2022 Quattroporte-4D",
+      "yearFrom": 2014,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05418",
+      "suffix": "GTY",
+      "make": "MASERATI",
+      "model": "Levante-4D U",
+      "yearFrom": 2016,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05417",
+      "suffix": "GTY",
+      "make": "MASERATI",
+      "model": "Levante-4D U",
+      "yearFrom": 2016,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05449",
+      "suffix": "GTY",
+      "make": "AUDI",
+      "model": "R8-2D Coupe",
+      "yearFrom": 2015,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05450",
+      "suffix": "GTY",
+      "make": "AUDI",
+      "model": "R8-2D Convertible",
+      "yearFrom": 2015,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02847",
+      "suffix": "GTY",
+      "make": "BRIGHTDROP",
+      "model": "EV / ZEVO -Series Cargo Van",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02517",
+      "suffix": "GTN",
+      "make": "FREIGHTLINER",
+      "model": "P800 Step Van",
+      "yearFrom": 2015,
+      "yearTo": 2016,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02064",
+      "suffix": "GTN",
+      "make": "ISUZU",
+      "model": "/ Utilimaster Reach-Step Van",
+      "yearFrom": 2013,
+      "yearTo": 2018,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01821",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 06-12 Workhorse Fast Track-Step Van - L",
+      "yearFrom": 2004,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01820",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 06-12 Workhorse Fast Track-Step Van - R",
+      "yearFrom": 2004,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01689",
+      "suffix": "GTN",
+      "make": "MORGAN",
+      "model": "Olson-USPS P1000-Step Van-R-L",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01689",
+      "suffix": "GBN",
+      "make": "MORGAN",
+      "model": "Olson-USPS P1000-Step Van-R-L",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01688",
+      "suffix": "GBN",
+      "make": "MORGAN",
+      "model": "Olson Route Star / Workhorse-Step Van-R-L",
+      "yearFrom": 2003,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01687",
+      "suffix": "GBN",
+      "make": "MORGAN",
+      "model": "Olson Route Star / Workhorse-Step Van-R-L",
+      "yearFrom": 2003,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01677",
+      "suffix": "GBN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 2006-2007 Workhorse Fast Track-StepVans",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01676",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster-R-L / 2006-2012 Workhorse Fast Track-Step Vans",
+      "yearFrom": 2000,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01676",
+      "suffix": "GBN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster-R-L / 2006-2012 Workhorse Fast Track-Step Vans",
+      "yearFrom": 2000,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01650",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 2006-2007 Workhorse-Step Van-L",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01649",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 2006-2007 Workhorse Step Van-R",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01648",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster Workhorse Step Van - R & L",
+      "yearFrom": 2000,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01648",
+      "suffix": "GBN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster Workhorse Step Van - R & L",
+      "yearFrom": 2000,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01483",
+      "suffix": "GTN",
+      "make": "UTILITIMASTER",
+      "model": "FFV Postal Van - Step Van",
+      "yearFrom": 1999,
+      "yearTo": 1002,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW01113",
+      "suffix": "GTY",
+      "make": "GRUMMAN",
+      "model": "Postal LLV",
+      "yearFrom": 1987,
+      "yearTo": 1995,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05841",
+      "suffix": "GTY",
+      "make": "POLESTAR",
+      "model": "2-4D HB",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05486",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Altima-4D S",
+      "yearFrom": 2019,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05488",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Tacoma Pickup-2D Ext. Cab/4D Crew Cab",
+      "yearFrom": 2019,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05489",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "RAV4-4D U",
+      "yearFrom": 2019,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05523",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "GLC-Class-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05524",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "GLC-Class-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05544",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "4 Series-2D Coupe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05545",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "4-Series-2D Coupe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05563",
+      "suffix": "GBY",
+      "make": "TOYOTA",
+      "model": "Venza-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05565",
+      "suffix": "GBY",
+      "make": "TOYOTA",
+      "model": "Venza-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05567",
+      "suffix": "GTY",
+      "make": "KIA",
+      "model": "Sorento-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05568",
+      "suffix": "GTY",
+      "make": "KIA",
+      "model": "Sorento-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05709",
+      "suffix": "GBY",
+      "make": "2022",
+      "model": "Toyota Avalon Hybrid-4D S",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05710",
+      "suffix": "GBY",
+      "make": "2022",
+      "model": "Toyota Avalon Hybrid-4D S",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05726",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Atlas-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05788",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Discovery-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02779",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "MACH-E-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02780",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "MACH-E-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02848",
+      "suffix": "GTY",
+      "make": "BUICK",
+      "model": "Enclave-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05828",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Tundra-4D Crew Cab",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05825",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Tundra-4D Crew Cab",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05607",
+      "suffix": "GTY",
+      "make": "ACURA",
+      "model": "MDX-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05606",
+      "suffix": "GTY",
+      "make": "ACURA",
+      "model": "MDX-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05605",
+      "suffix": "GTY",
+      "make": "ACURA",
+      "model": "MDX-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02844",
+      "suffix": "GTY",
+      "make": "LINCOLN",
+      "model": "Navigator-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02843",
+      "suffix": "GTY",
+      "make": "LINCOLN",
+      "model": "Navigator-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02771",
+      "suffix": "GTY",
+      "make": "JEEP",
+      "model": "Wagoneer-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02770",
+      "suffix": "GTY",
+      "make": "JEEP",
+      "model": "Wagoneer-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05631",
+      "suffix": "GTY",
+      "make": "MITSUBISHI",
+      "model": "Mirage-4D HB",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05592",
+      "suffix": "GTY",
+      "make": "AUDI",
+      "model": "Q3-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05579",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Sienna-Mini-Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05578",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Sienna-Mini-Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05574",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Sienna-Mini-Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05573",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Sienna-Mini-Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05572",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Sienna-Mini-Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05571",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Sienna-Mini-Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05570",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Sienna-Mini-Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05569",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Sienna-Mini-Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05566",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Rogue-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05516",
+      "suffix": "GTY",
+      "make": "SUBARU",
+      "model": "Crosstrek-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05515",
+      "suffix": "GTY",
+      "make": "SUBARU",
+      "model": "Crosstrek-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05514",
+      "suffix": "GTY",
+      "make": "SUBARU",
+      "model": "Crosstrek-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05501",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Odyssey-Mini Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05500",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Odyssey Mini Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05499",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Odyssey-Mini Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05497",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Odyssey-Mini Van",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02769",
+      "suffix": "GTY",
+      "make": "BUICK",
+      "model": "Envision-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02768",
+      "suffix": "GTY",
+      "make": "BUICK",
+      "model": "Envision-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "DW02894",
+      "suffix": "GTY",
+      "make": "ALFA",
+      "model": "Romeo Tonale- Dodge Hornet 4D Utility",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05898",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X4-4D HB",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05899",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X4-4D HB",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05900",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X4-4D HB",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05901",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X4-4D HB",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW05999",
+      "suffix": "GBY",
+      "make": "HYUNDAI",
+      "model": "Kona EV-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06000",
+      "suffix": "GBY",
+      "make": "HYUNDAI",
+      "model": "Kona EV-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06001",
+      "suffix": "GTN",
+      "make": "KIA",
+      "model": "Seltos-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06002",
+      "suffix": "GBY",
+      "make": "GENESIS",
+      "model": "GV60-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06046",
+      "suffix": "GTY",
+      "make": "KIA",
+      "model": "Niro-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06047",
+      "suffix": "GTY",
+      "make": "KIA",
+      "model": "Niro-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06048",
+      "suffix": "GTY",
+      "make": "KIA",
+      "model": "Niro-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06054",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "S-Class-4D Sedan",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06059",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Ioniq 6-4D S",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06064",
+      "suffix": "GTY",
+      "make": "2022",
+      "model": "Land Rover Defender-2 & 4D U",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06065",
+      "suffix": "GBY",
+      "make": "GENESIS",
+      "model": "GV70--4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06066",
+      "suffix": "GBY",
+      "make": "GENESIS",
+      "model": "GV70-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06074",
+      "suffix": "GTY",
+      "make": "SUBARU",
+      "model": "Ascent-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06075",
+      "suffix": "GTY",
+      "make": "SUBARU",
+      "model": "Ascent-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    },
+    {
+      "nagsCode": "FW06076",
+      "suffix": "GTY",
+      "make": "SUBARU",
+      "model": "Ascent-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-2023-pdfs"
+    }
+  ]
+}
