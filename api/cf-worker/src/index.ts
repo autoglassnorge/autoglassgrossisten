@@ -133,7 +133,7 @@ function errorResponse(message: string, status = 400): Response {
 // ============================================================================
 
 interface SvvKjoretoyData {
-  kjoretoydata?: Array<{
+  kjoretoydataListe?: Array<{
     forstegangsregistrering?: {
       registrertForstegangNorgeDato?: string;
     };
@@ -156,7 +156,7 @@ interface SvvKjoretoyData {
 }
 
 function parseSvvEnkeltoppslag(data: SvvKjoretoyData, regnr: string): TecdocVehicle | null {
-  const vehicle = data.kjoretoydata?.[0];
+  const vehicle = data.kjoretoydataListe?.[0];
   if (!vehicle) return null;
 
   const generelt = vehicle.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt;
