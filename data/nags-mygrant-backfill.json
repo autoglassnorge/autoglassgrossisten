@@ -1,0 +1,1108 @@
+{
+  "meta": {
+    "count": 110,
+    "source": "mygrant-backfill-7pdfs"
+  },
+  "entries": [
+    {
+      "nagsCode": "DW03039",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "F150 4D Crew Cab",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW03038",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "F150 4D Crew Cab",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02974",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "F150 2D Standard/4D Crew Cab/4D Super Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06326",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X3 4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06277",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "7-Series 4D Sedan",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06280",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "7-Series 4D Sedan",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06219",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "TX 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06318",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "S-Class & S-Class LWB 4D Sedan",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06320",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "CLE-Class 2D Coupe",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06321",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "CLE-Class 2D Coupe",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06097",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "CLS Class 4D Coupe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02995",
+      "suffix": "GTY",
+      "make": "LUCID",
+      "model": "Air 4D Sedan",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02998",
+      "suffix": "GTY",
+      "make": "CHEVROLET",
+      "model": "Corvette-2D Coupe/Convertible",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02999",
+      "suffix": "GTY",
+      "make": "CHEVROLET",
+      "model": "Corvette-2D Coupe/Convertible",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06349",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Camry 4D Sedan",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06296",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "5-Series-4D Sedan",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06294",
+      "suffix": "GTY",
+      "make": "MAZDA",
+      "model": "CX-30 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06286",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender-2D Utility",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06275",
+      "suffix": "GBY",
+      "make": "GENESIS",
+      "model": "G90-4D Sedan",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06271",
+      "suffix": "GTY",
+      "make": "MAZDA",
+      "model": "3 4D Hatchback/Sedan",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06235",
+      "suffix": "GBY",
+      "make": "LEXUS",
+      "model": "LX 4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06234",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "E-Class 4D Sedan/Station Wagon",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02964",
+      "suffix": "GTY",
+      "make": "JEEP",
+      "model": "Wrangler 2D/4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02977",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "F-Series F550-4D Crew Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02981",
+      "suffix": "GYY",
+      "make": "LINCOLN",
+      "model": "Aviator-4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02984",
+      "suffix": "GTY",
+      "make": "BUICK",
+      "model": "Envista-4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02985",
+      "suffix": "GTY",
+      "make": "BUICK",
+      "model": "Envista-4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW03006",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "Equinox 4D U",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW03007",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "Equinox 4D U",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06206",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "RZ-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06207",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "RZ-4D Utility",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06208",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "RZ 4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06209",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "RZ 4D Utility",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06226",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "C40 4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06284",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender-4D Utility",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06291",
+      "suffix": "GTY",
+      "make": "KIA",
+      "model": "EV9-4D Utility",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06210",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Versa 4D S",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06201",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Atlas-4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06200",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Atlas-4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05727",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Atlas-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06194",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X1-4D U",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06158",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Prius 4D HB",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06157",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Prius-4D HB",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06156",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Prius-4D HB",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06132",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Crown-4D S",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06131",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Crown-4D S",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06087",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Pilot-4D U",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05930",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Palisade-4D U",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05929",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Palisade-4D U",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05902",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05791",
+      "suffix": "GTN",
+      "make": "SUBARU",
+      "model": "BRZ 2D C",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05769",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "NX-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05768",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "NX-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05655",
+      "suffix": "GTY",
+      "make": "MITSUBISHI",
+      "model": "Outlander-4D U",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05626",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Ridgeline",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW03052",
+      "suffix": "GTY",
+      "make": "BUICK",
+      "model": "Envision 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW03051",
+      "suffix": "GTY",
+      "make": "BUICK",
+      "model": "Envision 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW03040",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "F150 4D Crew Cab",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW03019",
+      "suffix": "GTY",
+      "make": "GMC",
+      "model": "Acadia 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06283",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender 2D/4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06285",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender 2D/4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06287",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06289",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06308",
+      "suffix": "GTY",
+      "make": "MAZDA",
+      "model": "MX-5 Miata 2D Convertible",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06327",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Range Rover 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06328",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Range Rover 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06331",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Range Rover 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06332",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Range Rover 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06335",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X6 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06336",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X6 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06337",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X6 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06338",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "X6 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06351",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Camry 4D Sedan",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06357",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "GLS-Class 4D U",
+      "yearFrom": 2020,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06365",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Range Rover Sport 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02724",
+      "suffix": "GBY",
+      "make": "CADILLAC",
+      "model": "CT5-4D Sdn",
+      "yearFrom": 2020,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02725",
+      "suffix": "GBY",
+      "make": "CADILLAC",
+      "model": "CT5-4D S",
+      "yearFrom": 2020,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02895",
+      "suffix": "GTY",
+      "make": "JEEP",
+      "model": "Cherokee-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02897",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "Colorado-2D Ext Cab & 4D Crew Cab",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02934",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "Blazer EV / 24- Honda Prologue - 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02935",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "Blazer EV / 24- Honda Prologue- 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02952",
+      "suffix": "GTY",
+      "make": "CADILLAC",
+      "model": "Lyriq / 24- Acura ZDX- 4D Utility",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW05774",
+      "suffix": "GTY",
+      "make": "MAZDA",
+      "model": "CX-50-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06009",
+      "suffix": "GTY",
+      "make": "VW",
+      "model": "Arteon 4D Coupe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06037",
+      "suffix": "GTY",
+      "make": "JAGUAR",
+      "model": "XF-4D S",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06038",
+      "suffix": "GTY",
+      "make": "JAGUAR",
+      "model": "XF-4D S",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06039",
+      "suffix": "GTY",
+      "make": "JAGUAR",
+      "model": "XF-4D S",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06040",
+      "suffix": "GTY",
+      "make": "JAGUAR",
+      "model": "XF-4D S",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06041",
+      "suffix": "GTY",
+      "make": "JAGUAR",
+      "model": "XF-4D Sedan",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06042",
+      "suffix": "GTY",
+      "make": "JAGUAR",
+      "model": "XF-4D S",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06100",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "CLS Class / 21-23 AMG GT43 4D Coupe",
+      "yearFrom": 2019,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06101",
+      "suffix": "GTY",
+      "make": "MERCEDES",
+      "model": "CLS Class / 21-23 AMG GT43 4D Couple",
+      "yearFrom": 2019,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06114",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Pathfinder-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06162",
+      "suffix": "GTY",
+      "make": "MAZDA",
+      "model": "CX-90 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06174",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Range Rover & LWB 4D U",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06223",
+      "suffix": "GTY",
+      "make": "AUDI",
+      "model": "A6/S6 4D Sedan",
+      "yearFrom": 2021,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06250",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "Tacoma 4D Crew Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06247",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "XM 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06246",
+      "suffix": "GTY",
+      "make": "BMW",
+      "model": "XM 4D U",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06236",
+      "suffix": "GBY",
+      "make": "LEXUS",
+      "model": "LX 4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06198",
+      "suffix": "GBY",
+      "make": "LEXUS",
+      "model": "GS350 4D S",
+      "yearFrom": 2017,
+      "yearTo": 2021,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06166",
+      "suffix": "GTY",
+      "make": "MAZDA",
+      "model": "MX-5 Miata 2D Convertible",
+      "yearFrom": 2019,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06165",
+      "suffix": "GTY",
+      "make": "MAZDA",
+      "model": "MX-5 Miata 2D Convertible",
+      "yearFrom": 2019,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06164",
+      "suffix": "GTY",
+      "make": "MAZDA",
+      "model": "MX-5 Miata 2D Convertible",
+      "yearFrom": 2019,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06142",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "BZ4X/Subaru Solterra-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06137",
+      "suffix": "GTY",
+      "make": "KIA",
+      "model": "Seltos-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06109",
+      "suffix": "GTY",
+      "make": "TOYOTA",
+      "model": "BZ4X/Subaru Solterra-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "FW06062",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Z- 2D Coupe",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02950",
+      "suffix": "GTY",
+      "make": "TESLA",
+      "model": "Y-4D U",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    },
+    {
+      "nagsCode": "DW02931",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "F-Series F-250-4D Crew Cab",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-backfill-pdfs"
+    }
+  ]
+}
