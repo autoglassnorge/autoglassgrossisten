@@ -10,15 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Install Wrangler
-        run: npm install -g wrangler
-
+      - run: npm install -g wrangler
       - name: Deploy Worker
         working-directory: api/cf-worker
         run: wrangler deploy
@@ -31,15 +26,10 @@ jobs:
     needs: deploy-worker
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-
+      - run: npm install
       - name: Upload catalog to KV
         run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/cf-worker/scripts/upload-catalog.ts
         env:
@@ -54,12 +44,9 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v4
-
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: autoglass-frontend
-          directory: .
-          branch: main
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy . --project-name=autoglass-frontend --branch=main

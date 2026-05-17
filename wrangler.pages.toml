@@ -1,5 +1,0 @@
-name = "autoglass-frontend"
-compatibility_date = "2024-01-01"
-
-# This is a Cloudflare Pages project — static site only
-# The API is served from a separate Worker: autoglass-glass-sok
