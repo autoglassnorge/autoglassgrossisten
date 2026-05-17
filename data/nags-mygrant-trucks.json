@@ -1,0 +1,295 @@
+{
+  "meta": {
+    "count": 26,
+    "source": "mygrant-truck-pdfs",
+    "scrapedAt": "2026-05-17T00:16:47.620Z"
+  },
+  "entries": [
+    {
+      "nagsCode": "DW02949",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Business Class M2-4D Extended Conventional Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "yearRange": "2024-",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02971",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Business Class M2-4D Extended Conventional Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "yearRange": "2024-",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02874",
+      "suffix": "GTY",
+      "make": "NAVISTAR",
+      "model": "Lonestar 4100/4300/4400/7000 -4D Conventional Cab",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "yearRange": "2020-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "FW05864",
+      "suffix": "GBN",
+      "make": "HINO",
+      "model": "L, XL Series-Conventional Cab",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02930",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Cascadia",
+      "yearFrom": 2023,
+      "yearTo": null,
+      "yearRange": "2023-",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02751",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "108SD / 114SD Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": 2022,
+      "yearRange": "2019-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02723",
+      "suffix": "GTN",
+      "make": "PETERBILT",
+      "model": "520 Cabover R-L",
+      "yearFrom": 2017,
+      "yearTo": null,
+      "yearRange": "2017-",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02696",
+      "suffix": "GTY",
+      "make": "NAVISTAR-2D/4D",
+      "model": "Conventional Cab & Extended Cnvntl Cab/Pro Star-2D Cnvntl Cab",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "yearRange": "2020-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02694",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VN Series-Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "yearRange": "2018-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02693",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VN Series-Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "yearRange": "2018-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02692",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VN Series Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "yearRange": "2018-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02691",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Business Class M2",
+      "yearFrom": 2017,
+      "yearTo": 2022,
+      "yearRange": "2017-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02649",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Cascadia Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": 2022,
+      "yearRange": "2019-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02643",
+      "suffix": "GTY",
+      "make": "MACK",
+      "model": "Anthem Conventional Cab-R",
+      "yearFrom": 2019,
+      "yearTo": 2021,
+      "yearRange": "2019-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02640",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VN Series Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "yearRange": "2018-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02573",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VN Series Conventional Cab",
+      "yearFrom": 2017,
+      "yearTo": 2022,
+      "yearRange": "2017-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02565",
+      "suffix": "GTY",
+      "make": "MACK",
+      "model": "Anthem Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": 2021,
+      "yearRange": "2019-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02561",
+      "suffix": "GBY",
+      "make": "PETERBILT",
+      "model": "567/579 Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2021,
+      "yearRange": "2018-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02559",
+      "suffix": "GBY",
+      "make": "KENWORTH",
+      "model": "T680 / T880 Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2021,
+      "yearRange": "2018-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02550",
+      "suffix": "GTY",
+      "make": "INTERNATIONAL",
+      "model": "LT625 2D Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": 2021,
+      "yearRange": "2019-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "FW05517",
+      "suffix": "GTN",
+      "make": "ISUZU",
+      "model": "Forward FTR",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "yearRange": "2018-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW03067",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Business Class M2 Conventional/Extended/4D Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "yearRange": "2024-",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW03065",
+      "suffix": "GTY",
+      "make": "FREIGHTLINER",
+      "model": "Business Class M2 Conventional/Extended/4D Cab",
+      "yearFrom": 2024,
+      "yearTo": null,
+      "yearRange": "2024-",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02701",
+      "suffix": "GTN",
+      "make": "AUTOCAR",
+      "model": "ACMD EXPORT-Cabover",
+      "yearFrom": 2012,
+      "yearTo": 2022,
+      "yearRange": "2012-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02560",
+      "suffix": "GBY",
+      "make": "KENWORTH",
+      "model": "680/880 Cnvntl Cb",
+      "yearFrom": 2018,
+      "yearTo": 2021,
+      "yearRange": "2018-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "FW06516",
+      "suffix": "GTY",
+      "make": "VOLVO",
+      "model": "VNL Series-Conventional Cab 2D Heavy-Duty",
+      "yearFrom": 2025,
+      "yearTo": null,
+      "yearRange": "2025-",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    }
+  ]
+}

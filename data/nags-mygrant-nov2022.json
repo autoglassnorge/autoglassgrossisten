@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "count": 18,
+    "source": "mygrant-nov2022",
+    "scrapedAt": "2026-05-17T00:17:42.584Z"
+  },
+  "entries": [
+    {
+      "nagsCode": "FW05696",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Pathfinder-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05695",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Pathfinder-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05682",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Civic-4D S",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05681",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Civic-4D S",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05680",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Civic-4D S",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05668",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05667",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05661",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05660",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05659",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05637",
+      "suffix": "GTY",
+      "make": "AUDI",
+      "model": "E-Tron-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "yearRange": "2021-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05636",
+      "suffix": "GTY",
+      "make": "AUDI",
+      "model": "E-Tron-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "yearRange": "2021-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05613",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05611",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05609",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05608",
+      "suffix": "GTY",
+      "make": "LAND",
+      "model": "Rover Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05598",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "NX 300-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "yearRange": "2020-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05597",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "NX 300-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "yearRange": "2020-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    }
+  ]
+}

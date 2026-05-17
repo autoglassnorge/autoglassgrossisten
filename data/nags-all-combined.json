@@ -1,6 +1,6 @@
 {
   "meta": {
-    "count": 1082,
+    "count": 1127,
     "sources": [
       "importglasscorp-pdf",
       "web-research",
@@ -11161,6 +11161,476 @@
       "yearTo": null,
       "glassType": "frontrute",
       "source": "f150forum.com"
+    },
+    {
+      "nagsCode": "FW00714",
+      "suffix": "GGNP",
+      "make": "BMW",
+      "model": "3 SERIES E36 COUPE",
+      "yearFrom": 1990,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "source": "bimmerforums.com"
+    },
+    {
+      "nagsCode": "FW00714",
+      "suffix": "GBN",
+      "make": "BMW",
+      "model": "3 SERIES E36 COUPE",
+      "yearFrom": 1990,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "source": "bimmerforums.com"
+    },
+    {
+      "nagsCode": "FW00686",
+      "suffix": "GBN",
+      "make": "BMW",
+      "model": "3 SERIES E36 SEDAN",
+      "yearFrom": 1990,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "source": "bimmerforums.com"
+    },
+    {
+      "nagsCode": "FW00384",
+      "suffix": "GGN",
+      "make": "BMW",
+      "model": "7 SERIES E23",
+      "yearFrom": 1977,
+      "yearTo": 1986,
+      "glassType": "frontrute",
+      "source": "bimmerforums.com"
+    },
+    {
+      "nagsCode": "FW00829",
+      "suffix": null,
+      "make": "BMW",
+      "model": "UNKNOWN",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "bimmerforums.com"
+    },
+    {
+      "nagsCode": "DW02479",
+      "suffix": "GTNMOP",
+      "make": "JEEP",
+      "model": "WRANGLER",
+      "yearFrom": 2018,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "wranglerforum.com"
+    },
+    {
+      "nagsCode": "DW01430",
+      "suffix": "GBN",
+      "make": "CHEVROLET",
+      "model": "CORVETTE C5 Z06 FRC",
+      "yearFrom": 1999,
+      "yearTo": 2004,
+      "glassType": "frontrute",
+      "source": "corvetteforum.com"
+    },
+    {
+      "nagsCode": "DW02559",
+      "suffix": "GBY",
+      "make": "KENWORTH",
+      "model": "T680 / T880 Conventional Cab",
+      "yearFrom": 2018,
+      "yearTo": 2021,
+      "yearRange": "2018-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "DW02550",
+      "suffix": "GTY",
+      "make": "INTERNATIONAL",
+      "model": "LT625 2D Conventional Cab",
+      "yearFrom": 2019,
+      "yearTo": 2021,
+      "yearRange": "2019-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-truck-pdfs"
+    },
+    {
+      "nagsCode": "FW05696",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Pathfinder-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05695",
+      "suffix": "GTY",
+      "make": "NISSAN",
+      "model": "Pathfinder-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05682",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Civic-4D S",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05681",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Civic-4D S",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05680",
+      "suffix": "GTY",
+      "make": "HONDA",
+      "model": "Civic-4D S",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05668",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05667",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05661",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05660",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05659",
+      "suffix": "GTY",
+      "make": "HYUNDAI",
+      "model": "Tucson-4D U",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "yearRange": "2022-",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05637",
+      "suffix": "GTY",
+      "make": "AUDI",
+      "model": "E-Tron-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "yearRange": "2021-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05636",
+      "suffix": "GTY",
+      "make": "AUDI",
+      "model": "E-Tron-4D U",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "yearRange": "2021-2022",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05613",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Rover Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05611",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Rover Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05609",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Rover Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05608",
+      "suffix": "GTY",
+      "make": "LAND ROVER",
+      "model": "Rover Defender-2/4D U",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "yearRange": "2021-2023",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05598",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "NX 300-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "yearRange": "2020-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "FW05597",
+      "suffix": "GTY",
+      "make": "LEXUS",
+      "model": "NX 300-4D U",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "yearRange": "2020-2021",
+      "glassType": "frontrute",
+      "source": "mygrant-nov2022-pdf"
+    },
+    {
+      "nagsCode": "DW02847",
+      "suffix": "GTY",
+      "make": "CHEVY",
+      "model": "BrightDrop EV / ZEVO -Series Cargo Van",
+      "yearFrom": 2022,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW02517",
+      "suffix": "GTN",
+      "make": "FREIGHTLINER",
+      "model": "P800 Step Van",
+      "yearFrom": 2015,
+      "yearTo": 2016,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW02064",
+      "suffix": "GTN",
+      "make": "ISUZU",
+      "model": "/ Utilimaster Reach-Step Van",
+      "yearFrom": 2013,
+      "yearTo": 2018,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01821",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 06-12 Workhorse Fast Track-Step Van - L",
+      "yearFrom": 2004,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01820",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 06-12 Workhorse Fast Track-Step Van - R",
+      "yearFrom": 2004,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01689",
+      "suffix": "GTN",
+      "make": "MORGAN",
+      "model": "Olson-USPS P1000-Step Van-R-L",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01689",
+      "suffix": "GBN",
+      "make": "MORGAN",
+      "model": "Olson-USPS P1000-Step Van-R-L",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01688",
+      "suffix": "GBN",
+      "make": "MORGAN",
+      "model": "Olson Route Star / Workhorse-Step Van-R-L",
+      "yearFrom": 2003,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01687",
+      "suffix": "GBN",
+      "make": "MORGAN",
+      "model": "Olson Route Star / Workhorse-Step Van-R-L",
+      "yearFrom": 2003,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01677",
+      "suffix": "GBN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 2006-2007 Workhorse Fast Track-StepVans",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01676",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster-R-L / 2006-2012 Workhorse Fast Track-Step Vans",
+      "yearFrom": 2000,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01676",
+      "suffix": "GBN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster-R-L / 2006-2012 Workhorse Fast Track-Step Vans",
+      "yearFrom": 2000,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01650",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 2006-2007 Workhorse-Step Van-L",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01649",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster / 2006-2007 Workhorse Step Van-R",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01648",
+      "suffix": "GTN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster Workhorse Step Van - R & L",
+      "yearFrom": 2000,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01648",
+      "suffix": "GBN",
+      "make": "UTILIMASTER",
+      "model": "Aeromaster Workhorse Step Van - R & L",
+      "yearFrom": 2000,
+      "yearTo": 2012,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01483",
+      "suffix": "GTN",
+      "make": "UTILITIMASTER",
+      "model": "FFV Postal Van - Step Van",
+      "yearFrom": 1999,
+      "yearTo": 1002,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
+    },
+    {
+      "nagsCode": "DW01113",
+      "suffix": "GTY",
+      "make": "GRUMMAN",
+      "model": "Postal LLV",
+      "yearFrom": 1987,
+      "yearTo": 1995,
+      "glassType": "frontrute",
+      "source": "mygrant-vans-nov2024"
     }
   ]
 }
