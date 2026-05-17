@@ -37,16 +37,33 @@ jobs:
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           KV_NAMESPACE_ID: ${{ secrets.GLASS_KV_NAMESPACE_ID }}
 
-  deploy-pages:
+  upload-static:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
+    needs: deploy-worker
     steps:
       - uses: actions/checkout@v4
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+      - uses: actions/setup-node@v4
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy . --project-name=autoglass-frontend --branch=main
+          node-version: '20'
+      - run: npm install -g wrangler
+      - name: Upload static site files to KV
+        working-directory: api/cf-worker
+        run: |
+          for f in ../../index.html ../../vin-sok.html ../../produkter.html ../../bli-kunde.html ../../kontakt.html ../../om-oss.html ../../kundeportal.html; do
+            key="_site_$(basename $f | sed 's/\./_/g')"
+            echo "Uploading $f → $key"
+            wrangler kv:key put "$key" --path="$f" --namespace-id="${{ secrets.GLASS_KV_NAMESPACE_ID }}" --local=false || true
+          done
+          for f in ../../css/tokens.css ../../css/base.css ../../css/components.css; do
+            key="_site_css_$(basename $f | sed 's/\./_/g')"
+            echo "Uploading $f → $key"
+            wrangler kv:key put "$key" --path="$f" --namespace-id="${{ secrets.GLASS_KV_NAMESPACE_ID }}" --local=false || true
+          done
+          for f in ../../js/i18n.js ../../js/main.js ../../js/search-glass.js ../../js/auth.js; do
+            key="_site_js_$(basename $f | sed 's/\./_/g')"
+            echo "Uploading $f → $key"
+            wrangler kv:key put "$key" --path="$f" --namespace-id="${{ secrets.GLASS_KV_NAMESPACE_ID }}" --local=false || true
+          done
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

@@ -68,6 +68,44 @@ interface TecdocVehicle {
 }
 
 // ============================================================================
+// STATIC FILE SERVING (from KV — uploaded by CI)
+// ============================================================================
+
+const STATIC_CONTENT_TYPES: Record<string, string> = {
+  html: "text/html; charset=utf-8",
+  css: "text/css; charset=utf-8",
+  js: "application/javascript; charset=utf-8",
+  json: "application/json",
+  png: "image/png",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  svg: "image/svg+xml",
+};
+
+async function serveStaticFile(path: string, kv: KVNamespace): Promise<Response | null> {
+  // Normalize: / → index.html, /vin-sok → vin-sok.html, /css/tokens.css stays
+  let filePath = path;
+  if (filePath === "/") filePath = "/index.html";
+  if (!filePath.includes(".") && !filePath.endsWith("/")) filePath += ".html";
+
+  // KV key: _site_index_html, _site_css_tokens_css, _site_js_main_js
+  const kvKey = "_site_" + filePath.replace(/^\//, "").replace(/\//g, "_").replace(/\./g, "_");
+
+  const content = await kv.get(kvKey, "text");
+  if (!content) return null;
+
+  const ext = filePath.split(".").pop()?.toLowerCase() || "";
+  const ct = STATIC_CONTENT_TYPES[ext] || "text/plain";
+
+  return new Response(content, {
+    headers: {
+      "Content-Type": ct,
+      "Cache-Control": ext === "html" ? "no-cache" : "public, max-age=3600",
+    },
+  });
+}
+
+// ============================================================================
 // CORS HEADERS
 // ============================================================================
 
@@ -427,6 +465,12 @@ export default {
 
     const url = new URL(request.url);
     const path = url.pathname;
+
+    // Serve static site files from KV
+    const staticResponse = await serveStaticFile(path, env.GLASS_CATALOG);
+    if (staticResponse) {
+      return staticResponse;
+    }
 
     // Health check
     if (path === "/api/health") {
