@@ -158,7 +158,22 @@ function modelMatches(searchModel: string, recordModel: string | null): boolean 
   const common = sTokens.filter(t => rTokens.includes(t));
 
   if (common.length >= 2) return true;
-  if (common.length === 1 && common[0].length >= 4) return true;
+  if (common.length === 1 && common[0].length >= 3) return true;
+
+  // Special case: short model names like "LS", "CT", "XT"
+  const shortModels = ["LS", "CTS", "CT4", "CT5", "CT6", "XT4", "XT5", "XT6", "SRX", "XTS", "ATS", "G6", "G8", "H1", "H2", "H3", "PT"];
+  for (const m of shortModels) {
+    if (sTokens.includes(m) && rTokens.includes(m)) return true;
+  }
+
+  // Substring match within tokens (e.g., "F150" contains "150")
+  for (const st of sTokens) {
+    for (const rt of rTokens) {
+      if (st.length >= 3 && rt.length >= 3) {
+        if (st.includes(rt) || rt.includes(st)) return true;
+      }
+    }
+  }
 
   return false;
 }
@@ -189,6 +204,18 @@ function parseVintageVehicle(vehicle: string): { make: string; model: string } {
 
 function loadNagsData(): NagsEntry[] {
   const entries: NagsEntry[] = [];
+
+  // Combined master file (includes all sources: MyGrant, Dominion, GlassKnow, forums, etc.)
+  try {
+    const combined = JSON.parse(fs.readFileSync("data/nags-all-combined.json", "utf-8"));
+    for (const e of combined.entries) {
+      entries.push(e);
+    }
+    console.log(`✅ Combined master: ${combined.entries.length} entries`);
+    return entries; // All data is already combined, no need to load individual files
+  } catch (e) {
+    console.log("⚠️  No combined master, falling back to individual files");
+  }
 
   // Modern seed data
   try {
@@ -233,6 +260,7 @@ function loadNagsData(): NagsEntry[] {
 function mergeNagsIntoCatalog(catalog: CatalogFile, nagsEntries: NagsEntry[]): { updated: number; stats: Record<string, number> } {
   let updated = 0;
   const stats: Record<string, number> = {};
+  const MAX_NAGS_PER_RECORD = 15;
 
   for (const nags of nagsEntries) {
     const nagsMake = normalizeMake(nags.make);
@@ -240,6 +268,10 @@ function mergeNagsIntoCatalog(catalog: CatalogFile, nagsEntries: NagsEntry[]): {
     const nagsType = nags.glassType || inferGlassType(nags.nagsCode);
 
     if (!nagsMake) continue;
+
+    // Parse NAGS model into individual model names (for multi-model entries like "F150, F250, EXPEDITION")
+    const nagsModelNames = nagsModel.split(/[,\/\&]+/).map(m => m.trim()).filter(m => m.length >= 2);
+    const isMultiModel = nagsModelNames.length > 1;
 
     // Find matching records
     const matches = catalog.records.filter((r) => {
@@ -260,7 +292,28 @@ function mergeNagsIntoCatalog(catalog: CatalogFile, nagsEntries: NagsEntry[]): {
 
       // Model match (fuzzy)
       if (nagsModel && r.model) {
-        return modelMatches(nagsModel, r.model);
+        const rModelNorm = normalizeModel(r.model);
+        
+        // For multi-model NAGS entries, require catalog model to match at least 2 models
+        // OR match the primary model with high confidence
+        if (isMultiModel && nagsModelNames.length >= 2) {
+          let matchCount = 0;
+          for (const nm of nagsModelNames) {
+            if (modelMatches(nm, r.model) || rModelNorm.includes(nm) || nm.includes(rModelNorm)) {
+              matchCount++;
+            }
+          }
+          // Require at least 2 model matches, or a very specific single match
+          if (matchCount < 2) {
+            // Exception: if catalog model is very specific and matches one model exactly
+            const rTokens = rModelNorm.split(/\s+/).filter(t => t.length >= 3);
+            const exactMatch = nagsModelNames.some(nm => rTokens.some(t => t === nm));
+            if (!exactMatch) return false;
+          }
+        } else {
+          if (!modelMatches(nagsModel, r.model)) return false;
+        }
+        return true;
       }
 
       return true;
@@ -271,6 +324,7 @@ function mergeNagsIntoCatalog(catalog: CatalogFile, nagsEntries: NagsEntry[]): {
       const fullNags = nags.suffix ? `${nags.nagsCode} ${nags.suffix}` : nags.nagsCode;
       for (const match of matches) {
         if (!match.nagsCodes) match.nagsCodes = [];
+        if (match.nagsCodes.length >= MAX_NAGS_PER_RECORD) continue;
         if (!match.nagsCodes.includes(fullNags)) {
           match.nagsCodes.push(fullNags);
           updated++;

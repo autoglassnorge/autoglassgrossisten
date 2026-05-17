@@ -14,7 +14,7 @@ const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID || "";
 const CF_API_TOKEN = process.env.CF_API_TOKEN || "";
 const KV_NAMESPACE_ID = process.env.KV_NAMESPACE_ID || "";
 
-const CATALOG_PATH = path.join(process.cwd(), "data", "master-catalog.json");
+const CATALOG_PATH = path.join(process.cwd(), "data", "master-catalog-nags.json");
 const CHUNK_SIZE = 500; // KV har 25MB limit per verdi, men vi chunker for sikkerhet
 
 interface CatalogFile {

@@ -28,3 +28,5 @@ build/
 # Cloudflare
 .wrangler/
 node_modules/
+data/*.pdf
+data/parse-*.js
