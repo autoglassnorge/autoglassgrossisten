@@ -249,8 +249,9 @@ class GlassSearch {
 }
 
 // Auto-init any data-glass-search elements
-document.addEventListener('DOMContentLoaded', () => {
+function initGlassSearch() {
   document.querySelectorAll('[data-glass-search]').forEach(el => {
+    if (el._glassSearch) return; // Already initialized
     const options = {
       container: el,
       inputSelector: el.dataset.input || '.glass-search-input',
@@ -263,4 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     el._glassSearch = new GlassSearch(options);
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGlassSearch);
+} else {
+  initGlassSearch();
+}
