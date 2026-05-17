@@ -2,623 +2,155 @@
 <html lang="no">
 <head>
 <meta charset="UTF-8">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjE1IiBmaWxsPSIjMEQxQjJBIi8+PHRleHQgeD0iNTAiIHk9IjY4IiBmb250LXNpemU9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRjVDNTE4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkFHPC90ZXh0Pjwvc3ZnPgo=">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VIN-søk — Autoglass AS | Finn riktig glass på sekunder</title>
-<style>
-:root {
-  --color-primary-900: #070f17;
-  --color-primary-800: #0D1B2A;
-  --color-primary-700: #16293d;
-  --color-primary-600: #1f3850;
-  --color-primary-500: #2a4866;
-  --color-accent: #F5C518;
-  --color-accent-hover: #e0b315;
-  --color-accent-dark: #c9a010;
-  --color-surface: #FFFFFF;
-  --color-surface-alt: #F5F7FA;
-  --color-surface-dark: #0a121c;
-  --color-text-primary: #0D1B2A;
-  --color-text-secondary: #5a6878;
-  --color-text-muted: #8a95a5;
-  --color-text-on-dark: #FFFFFF;
-  --color-border: #e2e6ec;
-  --color-border-dark: #1a2d40;
-  --color-success: #16a34a;
-  --color-error: #dc2626;
-  --color-warning: #d97706;
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --max-width: 1440px;
-  --section-padding-y: 120px;
-  --section-padding-y-mobile: 80px;
-  --container-padding-x: clamp(24px, 6vw, 80px);
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 400ms ease;
-  --shadow-sm: 0 1px 2px rgba(13,27,42,0.05);
-  --shadow-md: 0 4px 12px rgba(13,27,42,0.08);
-  --shadow-lg: 0 12px 40px rgba(13,27,42,0.12);
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-}
-[data-theme="dark"] {
-  --color-surface: #0D1B2A;
-  --color-surface-alt: #0a121c;
-  --color-surface-dark: #070f17;
-  --color-text-primary: #f0f2f5;
-  --color-text-secondary: #a0aec0;
-  --color-text-muted: #6b7a8f;
-  --color-border: #1a2d40;
-  --color-border-dark: #2a4866;
-}
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
-
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-body);font-size:16px;line-height:1.7;color:var(--color-text-primary);background:var(--color-surface);-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:700;line-height:1.15;color:var(--color-text-primary)}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-button{font-family:inherit;cursor:pointer;border:none;background:none}
-ul,ol{list-style:none}
-.container{max-width:var(--max-width);margin:0 auto;padding:0 var(--container-padding-x)}
-.section{padding:var(--section-padding-y) 0}
-@media(max-width:768px){.section{padding:var(--section-padding-y-mobile) 0}}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-/* ============================================================
-   Autoglass AS — Component Library
-   ============================================================ */
-
-/* --- Header --- */
-.site-header{position:sticky;top:0;z-index:100;background:var(--color-surface);border-bottom:1px solid var(--color-border);backdrop-filter:blur(12px)}
-.site-header .container{display:flex;align-items:center;justify-content:space-between;height:72px}
-.logo{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--color-text-primary);letter-spacing:-0.02em}
-.logo span{color:var(--color-accent)}
-.nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{font-size:14px;font-weight:500;color:var(--color-text-secondary);transition:color var(--transition-fast)}
-.nav-links a:hover{color:var(--color-text-primary)}
-.nav-links a.active{color:var(--color-accent);font-weight:600}
-.header-actions{display:flex;gap:16px;align-items:center}
-.lang-switcher{display:flex;gap:4px;background:var(--color-surface-alt);padding:4px;border-radius:var(--radius-sm)}
-.lang-switcher button{padding:6px 12px;font-size:12px;font-weight:600;border-radius:4px;color:var(--color-text-muted);transition:all var(--transition-fast)}
-.lang-switcher button.active{background:var(--color-surface);color:var(--color-text-primary);box-shadow:var(--shadow-sm)}
-.theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);background:var(--color-surface-alt);color:var(--color-text-secondary);transition:all var(--transition-fast)}
-.theme-toggle:hover{background:var(--color-border)}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--color-accent);color:var(--color-primary-900);font-size:14px;font-weight:600;border-radius:var(--radius-md);transition:all var(--transition-base);box-shadow:0 4px 14px rgba(245,197,24,0.25)}
-.btn-primary:hover{background:var(--color-accent-hover);transform:translateY(-1px);box-shadow:0 6px 20px rgba(245,197,24,0.35)}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:var(--color-text-primary);font-size:14px;font-weight:600;border-radius:var(--radius-md);border:1.5px solid var(--color-border);transition:all var(--transition-base)}
-.btn-secondary:hover{border-color:var(--color-text-primary)}
-.btn-login{padding:10px 20px;background:var(--color-primary-800);color:#fff;font-size:13px;font-weight:600;border-radius:var(--radius-sm);transition:background var(--transition-fast)}
-.btn-login:hover{background:var(--color-primary-700)}
-.mobile-menu-btn{display:none;flex-direction:column;gap:5px;padding:8px}
-.mobile-menu-btn span{display:block;width:24px;height:2px;background:var(--color-text-primary);transition:all var(--transition-fast)}
-@media(max-width:900px){.nav-links{display:none}.mobile-menu-btn{display:flex}}
-
-/* --- Hero --- */
-.hero{position:relative;background:var(--color-primary-900);color:var(--color-text-on-dark);overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(245,197,24,0.08) 0%,transparent 60%)}
-.hero .container{position:relative;z-index:2;padding-top:140px;padding-bottom:140px}
-.hero h1{font-size:clamp(40px,6vw,72px);font-weight:700;max-width:800px;margin-bottom:24px}
-.hero h1 .accent{color:var(--color-accent)}
-.hero p{font-size:clamp(18px,2vw,22px);color:rgba(255,255,255,0.75);max-width:560px;margin-bottom:40px;line-height:1.6}
-.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
-.hero-stats{display:flex;gap:48px;margin-top:80px;flex-wrap:wrap}
-.stat-item{text-align:center}
-.stat-number{font-family:var(--font-display);font-size:clamp(32px,4vw,56px);font-weight:700;color:var(--color-accent);line-height:1}
-.stat-label{font-size:13px;color:rgba(255,255,255,0.6);margin-top:8px;text-transform:uppercase;letter-spacing:0.08em}
-
-/* --- Section headers --- */
-.section-label{display:inline-block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-accent);margin-bottom:16px}
-.section-title{font-size:clamp(28px,3.5vw,48px);font-weight:600;margin-bottom:20px;max-width:600px}
-.section-subtitle{font-size:17px;color:var(--color-text-secondary);max-width:560px;line-height:1.6}
-
-/* --- Cards --- */
-.glass-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:28px;transition:all var(--transition-base);cursor:pointer}
-.glass-card:hover{border-color:var(--color-accent);box-shadow:var(--shadow-lg);transform:translateY(-4px)}
-.glass-card h3{font-size:20px;font-weight:600;margin-bottom:8px}
-.glass-card p{font-size:14px;color:var(--color-text-secondary);margin-bottom:16px}
-.glass-card .meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-.glass-card .badge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--color-surface-alt);color:var(--color-text-secondary)}
-.glass-card .badge.accent{background:rgba(245,197,24,0.12);color:var(--color-accent-dark)}
-.glass-card .price{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--color-text-primary)}
-.glass-card .stock{font-size:13px;color:var(--color-success);font-weight:500}
-.glass-card .stock.out{color:var(--color-error)}
-
-/* --- Trust badges --- */
-.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:64px}
-.trust-item{text-align:center;padding:32px;background:var(--color-surface-alt);border-radius:var(--radius-lg)}
-.trust-item .number{font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--color-accent)}
-.trust-item .label{font-size:13px;color:var(--color-text-secondary);margin-top:8px}
-@media(max-width:768px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
-
-/* --- Search --- */
-.search-box{position:relative;max-width:720px;margin:0 auto}
-.search-box input{width:100%;padding:20px 60px 20px 24px;font-size:16px;border:2px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);color:var(--color-text-primary);transition:border-color var(--transition-fast)}
-.search-box input:focus{outline:none;border-color:var(--color-accent)}
-.search-box button{position:absolute;right:8px;top:50%;transform:translateY(-50%);padding:12px 24px;background:var(--color-accent);color:var(--color-primary-900);font-weight:600;border-radius:var(--radius-md)}
-
-/* --- Forms --- */
-.form-group{margin-bottom:20px}
-.form-group label{display:block;font-size:13px;font-weight:500;margin-bottom:6px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:14px 16px;font-size:15px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface);color:var(--color-text-primary);transition:border-color var(--transition-fast)}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--color-accent)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:600px){.form-row{grid-template-columns:1fr}}
-
-/* --- Segment cards --- */
-.segment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-.segment-card{padding:40px 32px;background:var(--color-surface-alt);border-radius:var(--radius-lg);border:1.5px solid transparent;transition:all var(--transition-base)}
-.segment-card:hover{border-color:var(--color-accent);transform:translateY(-4px)}
-.segment-card h3{font-size:22px;margin-bottom:12px}
-.segment-card p{font-size:15px;color:var(--color-text-secondary);margin-bottom:24px}
-@media(max-width:900px){.segment-grid{grid-template-columns:1fr}}
-
-/* --- Process steps --- */
-.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:48px;position:relative}
-.process-grid::before{content:'';position:absolute;top:32px;left:20%;right:20%;height:2px;background:var(--color-border);z-index:0}
-.process-step{position:relative;z-index:1;text-align:center}
-.process-step .num{width:64px;height:64px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:var(--color-accent);color:var(--color-primary-900);font-family:var(--font-display);font-size:24px;font-weight:700;border-radius:50%}
-.process-step h3{font-size:20px;margin-bottom:10px}
-.process-step p{font-size:15px;color:var(--color-text-secondary)}
-@media(max-width:768px){.process-grid{grid-template-columns:1fr}.process-grid::before{display:none}}
-
-/* --- Footer --- */
-.site-footer{background:var(--color-primary-900);color:rgba(255,255,255,0.6);padding:80px 0 40px}
-.site-footer .container{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
-.site-footer h4{font-family:var(--font-display);font-size:16px;color:#fff;margin-bottom:20px}
-.site-footer a{display:block;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;transition:color var(--transition-fast)}
-.site-footer a:hover{color:var(--color-accent)}
-.site-footer .bottom{border-top:1px solid rgba(255,255,255,0.1);margin-top:48px;padding-top:24px;font-size:13px;color:rgba(255,255,255,0.4)}
-@media(max-width:768px){.site-footer .container{grid-template-columns:1fr 1fr}}
-
-/* --- Scroll reveal --- */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-/* --- Results --- */
-.results-list{display:flex;flex-direction:column;gap:16px;margin-top:32px}
-.result-item{padding:24px;background:var(--color-surface-alt);border-radius:var(--radius-md);border-left:4px solid var(--color-accent)}
-.result-item .header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:12px}
-.result-item .eurocode{font-family:var(--font-display);font-size:20px;font-weight:700}
-.result-item .confidence{font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px}
-.result-item .confidence.high{background:rgba(22,163,74,0.12);color:var(--color-success)}
-.result-item .confidence.medium{background:rgba(217,119,6,0.12);color:var(--color-warning)}
-.result-item .confidence.low{background:rgba(220,38,38,0.12);color:var(--color-error)}
-.result-item .flags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.result-item .flag{font-size:11px;padding:3px 10px;border-radius:12px;background:var(--color-surface);border:1px solid var(--color-border)}
-.result-item .flag.on{background:rgba(245,197,24,0.12);border-color:rgba(245,197,24,0.3);color:var(--color-accent-dark)}
-
-/* --- Glass type selector --- */
-.glass-type-selector{}
-.type-pill{cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:24px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);font-size:13px;font-weight:500;transition:all var(--transition-fast);border:1.5px solid transparent}
-.type-pill input{display:none}
-.type-pill:hover{background:rgba(255,255,255,0.18);color:#fff}
-.type-pill.active{background:rgba(245,197,24,0.2);border-color:var(--color-accent);color:var(--color-accent)}
-
-/* --- Vehicle info banner --- */
-.vehicle-banner{padding:20px;background:var(--color-surface);border-radius:var(--radius-md);border:1px solid var(--color-border);margin-bottom:20px}
-.vehicle-banner h3{font-family:var(--font-display);font-size:20px;margin-bottom:8px}
-.vehicle-banner .meta{font-size:14px;color:var(--color-text-secondary)}
-.vehicle-banner .flags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.vehicle-banner .flag{font-size:12px;padding:4px 10px;border-radius:12px;background:var(--color-surface-alt);border:1px solid var(--color-border)}
-.vehicle-banner .flag.on{background:rgba(22,163,74,0.12);border-color:rgba(22,163,74,0.3);color:var(--color-success)}
-.vehicle-banner .flag.off{background:rgba(220,38,38,0.08);border-color:rgba(220,38,38,0.2);color:var(--color-error)}
-
-/* --- Top candidate highlight --- */
-.result-item.top-match{border-left-color:var(--color-success);background:rgba(22,163,74,0.04)}
-.result-item.top-match .top-badge{font-size:11px;font-weight:600;color:var(--color-success);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-
-/* --- Mobile nav --- */
-.mobile-nav{position:fixed;inset:0;z-index:200;background:var(--color-surface);padding:100px 32px 32px;transform:translateX(100%);transition:transform .3s ease}
-.mobile-nav.open{transform:translateX(0)}
-.mobile-nav a{display:block;font-size:22px;font-weight:600;padding:16px 0;border-bottom:1px solid var(--color-border);color:var(--color-text-primary)}
-.mobile-nav .close{position:absolute;top:20px;right:24px;font-size:32px;color:var(--color-text-primary)}
-
-/* ============================================================
-   Inline Search (Hero) + Catalog Grid
-   ============================================================ */
-
-/* --- Hero Inline Search --- */
-.hero-search-wrap{max-width:640px;margin:32px auto 0;position:relative;z-index:2}
-.hero-search-wrap .search-box{display:flex;gap:8px;align-items:center;background:var(--color-surface);padding:6px;border-radius:var(--radius-lg);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-.hero-search-wrap .search-box input{flex:1;border:none;padding:14px 16px;font-size:16px;background:transparent;color:var(--color-text-primary)}
-.hero-search-wrap .search-box input:focus{outline:none}
-.hero-search-wrap .search-box button{position:static;transform:none;padding:12px 24px;border-radius:var(--radius-md)}
-.hero-search-wrap .glass-type-selector{margin-top:12px;justify-content:center}
-
-/* --- Compact result card --- */
-.result-item .result-row{display:flex;gap:16px;align-items:flex-start}
-.result-item .result-image{width:80px;height:80px;object-fit:contain;border-radius:var(--radius-sm);background:var(--color-surface);flex-shrink:0}
-.result-item .result-body{flex:1;min-width:0}
-.result-item .result-body .eurocode{font-size:18px}
-.result-item .result-body .desc{font-size:13px;color:var(--color-text-secondary);margin-top:2px}
-.result-item .result-body .meta{font-size:12px;color:var(--color-text-muted);margin-top:2px}
-.result-item .result-actions{text-align:right;flex-shrink:0;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
-.result-item .result-actions .price{font-family:var(--font-display);font-size:20px;font-weight:700}
-.result-item .result-actions .stock{font-size:12px}
-.result-item .result-actions .btn-sm{padding:8px 16px;font-size:12px}
-.result-item .nags-badge{font-size:11px;color:var(--color-text-muted);font-family:monospace;background:var(--color-surface);padding:4px 10px;border-radius:var(--radius-sm);display:inline-block;margin-top:6px}
-
-/* --- Catalog Grid --- */
-.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:32px}
-.catalog-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden;transition:all var(--transition-base);cursor:pointer}
-.catalog-card:hover{border-color:var(--color-accent);box-shadow:var(--shadow-lg);transform:translateY(-4px)}
-.catalog-card .card-image{height:160px;background:var(--color-surface-alt);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.catalog-card .card-image img{width:100%;height:100%;object-fit:cover}
-.catalog-card .card-image .placeholder{font-size:48px;opacity:0.3}
-.catalog-card .card-body{padding:20px}
-.catalog-card .card-body .eurocode{font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:4px}
-.catalog-card .card-body .desc{font-size:13px;color:var(--color-text-secondary);margin-bottom:8px}
-.catalog-card .card-body .meta{font-size:12px;color:var(--color-text-muted);margin-bottom:12px}
-.catalog-card .card-body .nags{font-size:11px;color:var(--color-text-muted);font-family:monospace;background:var(--color-surface-alt);padding:4px 8px;border-radius:var(--radius-sm);display:inline-block;margin-bottom:12px}
-.catalog-card .card-body .card-footer{display:flex;justify-content:space-between;align-items:center}
-.catalog-card .card-body .card-footer .price{font-family:var(--font-display);font-size:20px;font-weight:700}
-.catalog-card .card-body .card-footer .stock{font-size:12px}
-.catalog-card .card-body .flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.catalog-card .card-body .flags .flag{font-size:10px;padding:2px 8px}
-
-/* --- Search section on product page --- */
-.product-search-section{background:var(--color-primary-900);color:#fff;padding:80px 0 48px}
-.product-search-section .section-title{color:#fff}
-
-/* --- Filter bar --- */
-.filter-bar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:24px;padding:16px;background:var(--color-surface-alt);border-radius:var(--radius-md)}
-.filter-bar select,.filter-bar input{padding:10px 14px;font-size:14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-surface);color:var(--color-text-primary)}
-.filter-bar select:focus,.filter-bar input:focus{outline:none;border-color:var(--color-accent)}
-</style>
+<meta name="description" content="Søk på registreringsnummer eller VIN. Vi matcher deg med riktig frontrute, siderute eller bakrute fra 130 000+ ruter på lager.">
+<meta name="keywords" content="VIN-søk, bilglass søk, regnr oppslag, frontrute, siderute, bakrute">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://auto-glass.no/no/vin-sok">
+<link rel="alternate" hreflang="no" href="https://auto-glass.no/no/vin-sok">
+<link rel="alternate" hreflang="sv" href="https://auto-glass.no/sv/vin-sok">
+<link rel="alternate" hreflang="en" href="https://auto-glass.no/en/vin-sok">
+<meta property="og:type" content="website">
+<meta property="og:title" content="VIN-søk — Autoglass AS">
+<meta property="og:description" content="Finn riktig bilglass på sekunder. Søk på regnr eller VIN.">
+<meta property="og:url" content="https://auto-glass.no/no/vin-sok">
+<meta property="og:site_name" content="Autoglass AS">
+<meta property="og:locale" content="nb_NO">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="logo">Autoglass<span>.</span>AS</a>
+    <a href="index.html" class="logo">Autoglass<span>.</span>AS</a>
     <nav class="nav-links">
-      <a href="/">Hjem</a>
-      <a href="/produkter.html">Produkter</a>
-      <a href="/vin-sok.html" class="active">VIN-søk</a>
-      <a href="/bli-kunde.html">Bli kunde</a>
-      <a href="/kundeportal.html">Kundeportal</a>
-      <a href="/om-oss.html">Om oss</a>
-      <a href="/kontakt.html">Kontakt</a>
+      <a href="index.html" data-i18n="nav.home">Hjem</a>
+      <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+      <a href="vin-sok.html" class="active" data-i18n="nav.vin">VIN-søk</a>
+      <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+      <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+      <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+      <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
     </nav>
     <div class="header-actions">
-      <a href="/kundeportal.html" class="btn-login">Logg inn</a>
-      <button class="mobile-menu-btn" onclick="document.querySelector('.mobile-nav').classList.toggle('open')">☰</button>
+      <div class="lang-switcher">
+        <button data-lang="no" class="active">NO</button>
+        <button data-lang="sv">SV</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Bytt tema">🌓</button>
+      <a href="kundeportal.html" class="btn-login" data-i18n="nav.login">Logg inn</a>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Meny">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
 
-<div class="mobile-nav" style="position:fixed;inset:0;z-index:200;background:var(--color-surface);padding:100px 32px 32px;transform:translateX(100%);transition:transform .3s">
-  <button onclick="document.querySelector('.mobile-nav').classList.remove('open')" style="position:absolute;top:20px;right:24px;font-size:32px">×</button>
-  <a href="/">Hjem</a><a href="/produkter.html">Produkter</a><a href="/vin-sok.html">VIN-søk</a>
-  <a href="/bli-kunde.html">Bli kunde</a><a href="/kundeportal.html">Kundeportal</a>
-  <a href="/om-oss.html">Om oss</a><a href="/kontakt.html">Kontakt</a>
+<div class="mobile-nav">
+  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <a href="index.html" data-i18n="nav.home">Hjem</a>
+  <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+  <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+  <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+  <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+  <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+  <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
 </div>
 
-<section class="section" style="padding-top:120px;background:var(--color-primary-900);color:#fff">
-  <div class="container" style="text-align:center">
-    <span style="display:inline-block;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:var(--color-accent);margin-bottom:16px">VIN-søk</span>
-    <h1 style="font-size:clamp(32px,5vw,56px);max-width:700px;margin:0 auto 16px">Finn riktig glass på sekunder</h1>
+<!-- HERO SEARCH -->
+<section class="hero" style="padding-top:80px">
+  <div class="container" style="text-align:center;padding-top:80px;padding-bottom:80px">
+    <span class="section-label">VIN-søk</span>
+    <h1 style="font-size:clamp(32px,5vw,56px);max-width:700px;margin:16px auto 16px">Finn riktig glass på sekunder</h1>
     <p style="color:rgba(255,255,255,0.7);max-width:560px;margin:0 auto 40px;font-size:18px">Søk på registreringsnummer eller VIN — vi matcher deg med riktig rute</p>
 
-    <div id="search-app" style="max-width:800px;margin:0 auto">
-      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px">
-        <label class="type-pill active" onclick="setType(this,'frontrute')"><input type="radio" name="glass-type" value="frontrute" checked style="display:none">Frontrute</label>
-        <label class="type-pill" onclick="setType(this,'siderute')"><input type="radio" name="glass-type" value="siderute" style="display:none">Siderute</label>
-        <label class="type-pill" onclick="setType(this,'bakrute')"><input type="radio" name="glass-type" value="bakrute" style="display:none">Bakrute</label>
-        <label class="type-pill" onclick="setType(this,'tak')"><input type="radio" name="glass-type" value="tak" style="display:none">Tak</label>
-        <label class="type-pill" onclick="setType(this,'')"><input type="radio" name="glass-type" value="" style="display:none">Alle</label>
+    <div data-glass-search data-mode="full" data-images="true" data-nags="true" data-price="true" data-limit="10" style="max-width:800px;margin:0 auto">
+      <div class="glass-type-selector" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px">
+        <label class="type-pill active"><input type="radio" name="glass-type" value="frontrute" checked><span>Frontrute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="siderute"><span>Siderute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="bakrute"><span>Bakrute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="tak"><span>Tak</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value=""><span>Alle</span></label>
       </div>
-      <div style="position:relative;max-width:640px;margin:0 auto;background:var(--color-surface);padding:6px;border-radius:16px;display:flex;gap:8px;align-items:center">
-        <input type="text" id="search-input" placeholder="Reg.nr. eller VIN" style="flex:1;border:none;padding:14px 16px;font-size:16px;background:transparent;color:var(--color-text-primary);outline:none">
-        <button onclick="doSearch()" id="search-btn" style="padding:12px 24px;background:var(--color-accent);color:var(--color-primary-900);font-weight:600;border-radius:12px;border:none;cursor:pointer">Søk</button>
+      <div class="search-box" style="background:var(--color-surface);padding:6px;border-radius:var(--radius-lg);display:flex;gap:8px;align-items:center">
+        <input type="text" class="glass-search-input" placeholder="Reg.nr. eller VIN" style="flex:1;border:none;padding:14px 16px;font-size:16px;background:transparent;color:var(--color-text-primary)">
+        <button class="search-btn" onclick="this.closest('[data-glass-search]')._glassSearch.search()" style="position:static;transform:none;padding:12px 24px;background:var(--color-accent);color:var(--color-primary-900);font-weight:600;border-radius:var(--radius-md)">Søk</button>
       </div>
-      <div id="search-results" style="margin-top:20px;text-align:left"></div>
+      <div class="glass-search-results" style="margin-top:20px;text-align:left"></div>
     </div>
 
     <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:16px">Tips: Norske regnr: AB12345. Svenske: ABC123. VIN: 17 tegn.</p>
   </div>
 </section>
 
+<!-- POPULÆRE SØK -->
 <section class="section">
   <div class="container">
     <h2 class="section-title">Populære søk</h2>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+      <button onclick="quickSearch('SU18018')" class="btn-secondary" style="font-size:13px;padding:10px 18px">VW Transporter T5</button>
       <button onclick="quickSearch('AB12345')" class="btn-secondary" style="font-size:13px;padding:10px 18px">BMW 3-serie G20</button>
       <button onclick="quickSearch('CD67890')" class="btn-secondary" style="font-size:13px;padding:10px 18px">VW Golf VIII</button>
       <button onclick="quickSearch('EF11111')" class="btn-secondary" style="font-size:13px;padding:10px 18px">Mercedes C W206</button>
       <button onclick="quickSearch('GH22222')" class="btn-secondary" style="font-size:13px;padding:10px 18px">Volvo XC60 II</button>
-      <button onclick="quickSearch('IJ33333')" class="btn-secondary" style="font-size:13px;padding:10px 18px">Audi A4 B9</button>
     </div>
   </div>
 </section>
 
-<script>
-/* ============================================================
-   Autoglass AS — Glass Search Component (reusable)
-   ============================================================ */
-
-const API_BASE = '';  // Same domain — Worker serves both static files and API
-
-class GlassSearch {
-  constructor(options = {}) {
-    this.container = typeof options.container === 'string'
-      ? document.querySelector(options.container)
-      : options.container;
-    this.inputSelector = options.inputSelector || '.glass-search-input';
-    this.resultsSelector = options.resultsSelector || '.glass-search-results';
-    this.typeSelector = options.typeSelector || 'input[name="glass-type"]';
-    this.onResult = options.onResult || null;
-    this.mode = options.mode || 'full'; // 'full' | 'compact' | 'inline'
-    this.showImages = options.showImages !== false;
-    this.showNags = options.showNags !== false;
-    this.showPrice = options.showPrice !== false;
-    this.limit = options.limit || 10;
-
-    this.inputEl = this.container.querySelector(this.inputSelector);
-    this.resultsEl = this.container.querySelector(this.resultsSelector);
-
-    this.init();
-  }
-
-  init() {
-    if (!this.inputEl) return;
-
-    // Enter key
-    this.inputEl.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') this.search();
-    });
-
-    // Optional: debounced live search
-    if (this.mode === 'inline') {
-      let debounce;
-      this.inputEl.addEventListener('input', () => {
-        clearTimeout(debounce);
-        debounce = setTimeout(() => this.search(), 400);
-      });
-    }
-
-    // Type pills
-    this.container.querySelectorAll('.type-pill input').forEach(radio => {
-      radio.addEventListener('change', () => {
-        this.container.querySelectorAll('.type-pill').forEach(p => p.classList.remove('active'));
-        radio.closest('.type-pill').classList.add('active');
-      });
-    });
-  }
-
-  getSelectedType() {
-    const checked = this.container.querySelector(`${this.typeSelector}:checked`);
-    return checked ? checked.value : '';
-  }
-
-  async search(queryOverride) {
-    const query = (queryOverride || this.inputEl.value).trim().toUpperCase();
-    if (!query) return;
-
-    this.setLoading(true);
-
-    const type = this.getSelectedType();
-    const typeParam = type ? `&type=${encodeURIComponent(type)}` : '';
-
-    try {
-      const res = await fetch(
-        `${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}${typeParam}`,
-        { headers: { 'Accept': 'application/json' } }
-      );
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: 'Kunne ikke søke. Prøv igjen.' }));
-        this.renderError(err.error || 'Kunne ikke søke. Prøv igjen.');
-        return;
-      }
-
-      const data = await res.json();
-      this.render(data);
-      if (this.onResult) this.onResult(data);
-    } catch (e) {
-      this.renderError('Nettverksfeil. Sjekk tilkoblingen og prøv igjen.');
-    } finally {
-      this.setLoading(false);
-    }
-  }
-
-  setLoading(isLoading) {
-    const btn = this.container.querySelector('.search-btn');
-    if (btn) {
-      btn.disabled = isLoading;
-      btn.textContent = isLoading ? 'Søker…' : 'Søk';
-    }
-    if (isLoading && this.resultsEl) {
-      this.resultsEl.innerHTML = `<p class="loading">Søker…</p>`;
-    }
-  }
-
-  renderError(msg) {
-    if (!this.resultsEl) return;
-    this.resultsEl.innerHTML = `<p class="no-result">${msg}</p>`;
-  }
-
-  render(data) {
-    if (!this.resultsEl) return;
-
-    if (data.error || !data.candidates || data.candidates.length === 0) {
-      this.resultsEl.innerHTML = `<p class="no-result">Ingen treff. Prøv et annet registreringsnummer.</p>`;
-      return;
-    }
-
-    const v = data.vehicle || {};
-    const flags = data.flags || {};
-    const layerLabels = ['', 'Eksakt match', 'År + merke', 'Merke', 'Prefix4'];
-    const layerLabel = layerLabels[data.layer || 0] || 'Statistisk match';
-
-    let html = '';
-
-    // Vehicle banner (only in full mode)
-    if (this.mode === 'full') {
-      html += this.renderVehicleBanner(v, flags);
-    }
-
-    html += `<div class="results-list">`;
-
-    const candidates = data.candidates.slice(0, this.limit);
-    candidates.forEach((c, idx) => {
-      html += this.renderCard(c, idx, data.confidence, layerLabel);
-    });
-
-    html += '</div>';
-    this.resultsEl.innerHTML = html;
-  }
-
-  renderVehicleBanner(v, flags) {
-    const flagHtml = [
-      { key: 'adas', label: 'ADAS' },
-      { key: 'rainSensor', label: 'Regnsensor' },
-      { key: 'heated', label: 'Oppvarmet' },
-      { key: 'acoustic', label: 'Akustisk' },
-      { key: 'antenna', label: 'Antenne' },
-      { key: 'hud', label: 'HUD' },
-    ].map(f => `<span class="flag ${flags[f.key] ? 'on' : 'off'}">${f.label} ${flags[f.key] ? '✓' : '✗'}</span>`).join('');
-
-    return `
-      <div class="vehicle-banner">
-        <h3>🚗 ${v.make || '?'} ${v.model || '?'} ${v.year ? '(' + v.year + ')' : ''}</h3>
-        <p class="meta">Reg.nr: ${v.regnr || '-'} · VIN: ${(v.vin || '-').slice(0, 8)}…${(v.vin || '-').slice(-4)} · kType: ${v.kType || '-'}</p>
-        <div class="flags">${flagHtml}</div>
-      </div>
-    `;
-  }
-
-  renderCard(c, idx, confidence, layerLabel) {
-    const isTop = idx === 0;
-    const confClass = confidence || 'medium';
-    const confLabel = confClass === 'high' ? 'Høy konfidens' : confClass === 'medium' ? 'Middels konfidens' : 'Lav konfidens';
-
-    const flagTags = [
-      c.adas && 'ADAS',
-      c.rainSensor && 'Regnsensor',
-      c.heated && 'Oppvarmet',
-      c.acoustic && 'Akustisk',
-      c.antenna && 'Antenne',
-      c.hud && 'HUD',
-      c.shade && 'Solstripe',
-      c.camera && 'Kamera',
-      c.laneAssist && 'Filskifteass.',
-    ].filter(Boolean);
-
-    const imageHtml = this.showImages && c.imageUrl
-      ? `<img src="${c.imageUrl}" alt="${c.eurocode}" class="result-image" loading="lazy" onerror="this.style.display='none'">`
-      : '';
-
-    const nagsHtml = this.showNags && c.nagsCodes && c.nagsCodes.length > 0
-      ? `<div class="nags-badge">🇺🇸 NAGS: ${c.nagsCodes.slice(0, 5).join(', ')}${c.nagsCodes.length > 5 ? ' +' + (c.nagsCodes.length - 5) + ' flere' : ''}</div>`
-      : '';
-
-    const priceHtml = this.showPrice
-      ? `<span class="price">${c.price ? c.price.toLocaleString('no-NO') + ' kr' : 'Pris på forespørsel'}</span>`
-      : '';
-
-    const stockHtml = `<span class="stock ${c.stockStatus > 0 ? '' : 'out'}">${c.stockStatus > 0 ? c.stockStatus + ' på lager' : 'Bestillingsvare'}</span>`;
-
-    const compact = this.mode === 'compact' || this.mode === 'inline';
-
-    if (compact) {
-      return `
-        <div class="result-item ${isTop ? 'top-match' : ''}">
-          <div class="result-row">
-            ${imageHtml}
-            <div class="result-body">
-              <div class="eurocode">${c.eurocode}</div>
-              <p class="desc">${c.description || ''}</p>
-              <p class="meta">${c.brand || '?'} ${c.model || ''} ${c.yearFrom ? c.yearFrom + (c.yearTo ? '–' + c.yearTo : '–') : ''}</p>
-              ${nagsHtml}
-            </div>
-            <div class="result-actions">
-              ${priceHtml}
-              ${stockHtml}
-              <button class="btn-primary btn-sm">Be om pris</button>
-            </div>
-          </div>
-          ${flagTags.length > 0 ? `<div class="flags">${flagTags.map(f => `<span class="flag on">${f}</span>`).join('')}</div>` : ''}
-        </div>
-      `;
-    }
-
-    // Full mode
-    return `
-      <div class="result-item ${isTop ? 'top-match' : ''}">
-        ${isTop ? `<div class="top-badge">⭐ Mest sannsynlig riktig — ${confLabel}</div>` : ''}
-        <div class="header">
-          <div>
-            <div class="eurocode">${c.eurocode}</div>
-            <p style="font-size:14px;color:var(--color-text-secondary);margin-top:4px">${c.description || ''}</p>
-            <p style="font-size:12px;color:var(--color-text-muted);margin-top:2px">${c.brand || '?'} ${c.model || ''} ${c.yearFrom ? c.yearFrom + (c.yearTo ? '–' + c.yearTo : '–') : ''} · ${layerLabel}</p>
-          </div>
-          <span class="confidence ${confClass}">${confClass.toUpperCase()}</span>
-        </div>
-        ${imageHtml}
-        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:12px">
-          ${priceHtml}
-          ${stockHtml}
-        </div>
-        <div class="flags">
-          ${flagTags.map(f => `<span class="flag on">${f}</span>`).join('')}
-        </div>
-        ${nagsHtml}
-        <div style="display:flex;gap:12px;margin-top:16px">
-          <button class="btn-primary" style="padding:10px 20px;font-size:13px">Be om pris</button>
-          <button class="btn-secondary" style="padding:10px 20px;font-size:13px">Se detaljer</button>
-        </div>
-      </div>
-    `;
-  }
-
-  // Static helper: quick search
-  static quickSearch(regnr, containerSelector) {
-    const container = document.querySelector(containerSelector);
-    if (!container) return;
-    const input = container.querySelector('.glass-search-input');
-    if (input) input.value = regnr;
-    const instance = container._glassSearch;
-    if (instance) instance.search(regnr);
-  }
-}
-
-// Auto-init any data-glass-search elements
-function initGlassSearch() {
-  document.querySelectorAll('[data-glass-search]').forEach(el => {
-    if (el._glassSearch) return; // Already initialized
-    const options = {
-      container: el,
-      inputSelector: el.dataset.input || '.glass-search-input',
-      resultsSelector: el.dataset.results || '.glass-search-results',
-      mode: el.dataset.mode || 'full',
-      showImages: el.dataset.images !== 'false',
-      showNags: el.dataset.nags !== 'false',
-      showPrice: el.dataset.price !== 'false',
-      limit: parseInt(el.dataset.limit, 10) || 10,
-    };
-    el._glassSearch = new GlassSearch(options);
-  });
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initGlassSearch);
-} else {
-  initGlassSearch();
-}
-</script>
-
+<!-- FOOTER -->
 <footer class="site-footer">
   <div class="container">
-    <div><h4>Autoglass AS</h4><p style="font-size:14px">Industriveien 1, 0661 Oslo</p><p style="font-size:14px">+47 22 12 34 56</p></div>
-    <div><h4>Snarveier</h4><a href="/produkter.html">Produkter</a><a href="/vin-sok.html">VIN-søk</a><a href="/bli-kunde.html">Bli kunde</a></div>
-    <div><h4>Selskapet</h4><a href="/om-oss.html">Om oss</a><a href="/kontakt.html">Kontakt</a></div>
-    <div><h4>Markeder</h4><a href="#">Norge</a><a href="#">Sverige</a></div>
-    <div class="bottom" style="grid-column:1/-1">© 2026 Autoglass AS</div>
+    <div>
+      <h4>Autoglass AS</h4>
+      <p style="font-size:14px;margin-bottom:8px">Industriveien 1, 0661 Oslo</p>
+      <p style="font-size:14px;margin-bottom:8px">+47 22 12 34 56</p>
+      <p style="font-size:14px">post@auto-glass.no</p>
+    </div>
+    <div>
+      <h4>Snarveier</h4>
+      <a href="produkter.html">Produkter</a>
+      <a href="vin-sok.html">VIN-søk</a>
+      <a href="bli-kunde.html">Bli kunde</a>
+      <a href="kundeportal.html">Kundeportal</a>
+    </div>
+    <div>
+      <h4>Selskapet</h4>
+      <a href="om-oss.html">Om oss</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="#">Salgsvilkår</a>
+      <a href="#">Personvern</a>
+    </div>
+    <div>
+      <h4>Markeder</h4>
+      <a href="#">Norge</a>
+      <a href="#">Sverige</a>
+      <a href="#">Danmark</a>
+      <a href="#">Europa</a>
+    </div>
+    <div class="bottom" style="grid-column:1/-1">
+      © 2026 Autoglass AS. Alle rettigheter reservert.
+    </div>
   </div>
 </footer>
 
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/search-glass.js"></script>
+<script>
+// Quick search helper for popular searches
+function quickSearch(regnr) {
+  const container = document.querySelector('[data-glass-search]');
+  if (!container) return;
+  const input = container.querySelector('.glass-search-input');
+  if (input) input.value = regnr;
+  const instance = container._glassSearch;
+  if (instance) instance.search(regnr);
+}
+</script>
 </body>
 </html>
