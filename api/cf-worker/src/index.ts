@@ -88,8 +88,8 @@ async function serveStaticFile(path: string, kv: KVNamespace): Promise<Response 
   if (filePath === "/") filePath = "/index.html";
   if (!filePath.includes(".") && !filePath.endsWith("/")) filePath += ".html";
 
-  // KV key: _site_index_html, _site_css_tokens_css, _site_js_main_js
-  const kvKey = "_site_" + filePath.replace(/^\//, "").replace(/\//g, "_").replace(/\./g, "_");
+  // KV key: _site_index_html, _site_css_tokens_css, _site_js_search_glass_js
+  const kvKey = "_site_" + filePath.replace(/^\//, "").replace(/[\/\.\-]/g, "_");
 
   const content = await kv.get(kvKey, "text");
   if (!content) return null;
