@@ -1,0 +1,4033 @@
+{
+  "products": [
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-af-magnum-1989-lemson/",
+      "name": "Лобовое стекло Renault Af Magnum, 1989-, LEMSON",
+      "eurocode": "7233AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7233AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-6520-evro-steklo-tselnoe-panorama-2002-steklolux-1/",
+      "name": "Лобовое стекло КАМАЗ Евро К3 6520/53205 (стекло Цельное Панорама), 2002-, STEKLOLUX",
+      "eurocode": "4597ACLBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "STEKLOLUX",
+      "features": {
+        "Eurocode": "4597ACLBL",
+        "Производитель": "AGR"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/maz/lobovoe-steklo-maz-6430-evro-6430-5440-5340-5309-6312-5550-6501-6516-4371-6310-19-1997-agr/",
+      "name": "Лобовое стекло Маз 6430 (евро) 6430/5440/5340/5309/6312/5550/6501/6516/4371/6310-19, 1997-, AGR",
+      "eurocode": "4590ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGR",
+      "features": {
+        "Eurocode": "4590ACL",
+        "Производитель": "STEKLOLUX"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-xf105-2006-agc-1/",
+      "name": "Лобовое стекло DAF Xf105, 2013-, AGC",
+      "eurocode": "4635AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "4635AGS",
+        "Производитель": "PILKINGTON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-5490-2013-agc-3/",
+      "name": "Лобовое стекло КАМАЗ Neo 5490 / Mb Atego / Axor, 2013-, AGC",
+      "eurocode": "5430ACL1A",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "5430ACL1A",
+        "Производитель": "PILKINGTON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-5490-2013-kmk/",
+      "name": "Лобовое стекло КАМАЗ Neo 5490 / Mb Atego / Axor, 2013-, KMK",
+      "eurocode": "5430AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "5430AGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-5490-2013-agc-4/",
+      "name": "Лобовое стекло КАМАЗ Neo 5490 / Mb Atego / Axor, 2013-, AGC",
+      "eurocode": "5430AGNGN1A",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "5430AGNGN1A",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f90-l12-maz-man-uzkaya-kabina-1986-2000-lemson-2/",
+      "name": "Лобовое стекло Man F90/l12/маз-man (узкая Кабина), 1986-2000, LEMSON",
+      "eurocode": "4908AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1986,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4908AGSBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-cf-fat-75-85-95-1992-lemson-2/",
+      "name": "Лобовое стекло DAF Cf Fat 65/75/85, 1992-, KMK",
+      "eurocode": "4625AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4625AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-l2000-m2000-le-series-me-series-sinotruck-hoko-zz3253-25-tn-mans-zz3251-25-tn-20-4/",
+      "name": "Лобовое стекло Man L2000/m2000/le-series/me-series/sinotruck Hoko Zz3253 25-тн/mans Zz3251 25-тн (20",
+      "eurocode": "4909AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "4909AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-midlum-1999-lemson-2/",
+      "name": "Лобовое стекло Renault Midlum, 1999-, LEMSON",
+      "eurocode": "7253AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7253AGS",
+        "Производитель": "NORDGLASS"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh12-16-fm-1998-howo-a7-2012-1993-kmk/",
+      "name": "Лобовое стекло Volvo Fh12-16 / Fm (1998-) / Howo A7 (2012-), 1993-, KMK",
+      "eurocode": "8823AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8823AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/nyeman/lobovoe-steklo-nyeman-4202-avtobus-2014-kuvo/",
+      "name": "Лобовое стекло НЕМАН 4202 (автобус), 2014-, KUVO",
+      "eurocode": "NEMNAGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KUVO",
+      "features": {
+        "Eurocode": "NEMNAGN",
+        "Производитель": "KMK",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurocargo-ii-magirus-eurocargo-ii-2003-lemson-2/",
+      "name": "Лобовое стекло Iveco Eurocargo II / Magirus Eurocargo II, 2003-, LEMSON",
+      "eurocode": "3744AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "3744AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-xl-shirokaya-kabina-sitrak-c7h-2014-2000-lemson/",
+      "name": "Лобовое стекло Man Tga (xl) Широкая Кабина/sitrak C7h 2014-, 2000-, LEMSON",
+      "eurocode": "4912AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4912AGS",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurotech-stralis-ad-at-2002-trakker-1993-agr/",
+      "name": "Лобовое стекло Iveco Eurotech / Stralis Ad/at 2002- / Trakker, 1993-, AGR",
+      "eurocode": "3734AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGR",
+      "features": {
+        "Eurocode": "3734AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-3-series-t82-1995-2000-lemson-1/",
+      "name": "Лобовое стекло Scania 3 Series (93/113/143 Кабины), 1979-2005, LEMSON",
+      "eurocode": "7505AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1979,
+      "yearTo": 2005,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7505AGS",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-ii-kamaz-yevro-k5-54901-shirokaya-kabina-2019-2012-lemson/",
+      "name": "Лобовое стекло Mercedes Actros II / Камаз Евро K5 54901 Широкая Кабина (2019-), 2012-, LEMSON",
+      "eurocode": "5444AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "5444AGSBL",
+        "Производитель": "STEKLOLUX"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-ii-kamaz-yevro-k5-54901-shirokaya-kabina-2019-2012-lemson-1/",
+      "name": "Лобовое стекло Mercedes Actros II / Камаз Евро K5 54901 Широкая Кабина (2019-), 2012-, LEMSON",
+      "eurocode": "5444AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "5444AGS",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurotech-stralis-ad-at-2002-trakker-1993-lemson-1/",
+      "name": "Лобовое стекло Iveco Eurotech / Stralis Ad/at 2002- / Trakker, 1993-, LEMSON",
+      "eurocode": "3734AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "3734AGN",
+        "Производитель": "NORDGLASS",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-xl-shirokaya-kabina-sitrak-c7h-2014-2000-fyg/",
+      "name": "Лобовое стекло Man Tga (xl) Широкая Кабина/sitrak C7h 2014-, 2000-, FYG",
+      "eurocode": "4912AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "4912AGNGN",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/tata/lobovoe-steklo-tata-613ex-2011-lemson/",
+      "name": "Лобовое стекло TATA 613ex, 2011-, LEMSON",
+      "eurocode": "TATAAGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "TATAAGSBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/ford/lobovoe-steklo-ford-cargo-2006-kmk/",
+      "name": "Лобовое стекло Ford Cargo, 2006-, KMK",
+      "eurocode": "3598AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "3598AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-atego-1998-axor-2001-kamaz-5490-neo-2016-1997-pilkington-2/",
+      "name": "Лобовое стекло Mercedes Atego 1998- / Axor 2001- / Камаз 5490/neo 2016-, 1997-, PILKINGTON",
+      "eurocode": "5430AGS1A",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "5430AGS1A",
+        "Производитель": "FYG",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-300-euro3-shirokaya-kabina-2000-kmk/",
+      "name": "Лобовое стекло Hino 300 Euro3 (широкая Кабина), 2000-, KMK",
+      "eurocode": "8344AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8344AGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-century-coronado-c112-c120-columbia-flc-ii-1997-2004-kmk/",
+      "name": "Лобовое стекло Freightliner Century/coronado/c112/c120/columbia/flc II, 1997-2004, KMK",
+      "eurocode": "FLCWAGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "FLCWAGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-600l-dutro-2000-toyota-dyna-yu61-2000-uzkaya-kabina-2000-kmk/",
+      "name": "Лобовое стекло Hino 300 Euro4 (узкая Кабина) 2014- / Dutro Yu61 2000-/toyota Dyna 2000-, 2000-, KMK",
+      "eurocode": "8345AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8345AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-500-y70-ranger-cabover-standart-body-truck-uzkiy-2001-kmk/",
+      "name": "Лобовое стекло Hino 500 Y70 / Ranger Cabover Standart Body Truck (узкий), 2001-, KMK",
+      "eurocode": "HIN7AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "HIN7AGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-700-euro4-2017-kmk/",
+      "name": "Лобовое стекло Hino 700 Euro4, 2017-, KMK",
+      "eurocode": "HIN8AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "HIN8AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/vetrovoe/international/lobovoe-steklo-international-9800-2005-kmk/",
+      "name": "Лобовое стекло INTERNATIONAL 9800, 2005-, KMK",
+      "eurocode": "INT5AGNL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "INT5AGNL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/vetrovoe/international/lobovoe-steklo-international-9800-2005-kmk-1/",
+      "name": "Лобовое стекло INTERNATIONAL 9800, 2005-, KMK",
+      "eurocode": "INT6AGNR",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "INT6AGNR",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurotech-stralis-ad-at-2002-trakker-1993-kmk/",
+      "name": "Лобовое стекло Iveco Eurotech / Stralis Ad/at 2002- / Trakker, 1993-, KMK",
+      "eurocode": "3734AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "3734AGNGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f90-l12-maz-man-uzkaya-kabina-1986-2000-kmk-1/",
+      "name": "Лобовое стекло Man F90/l12/маз-man (узкая Кабина), 1986-2000, KMK",
+      "eurocode": "4908AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1986,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4908AGNGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurostar-stralis-as-1993-kmk/",
+      "name": "Лобовое стекло Iveco Eurostar / Eurocargo (91-02) / Stralis As (2002-) / Hongyan Genlyon (2009-), 19",
+      "eurocode": "3733AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "19",
+      "features": {
+        "Eurocode": "3733AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-tgs-erf-uzkaya-kabina-l-2000-kmk/",
+      "name": "Лобовое стекло Man Tga/tgs/erf Узкая Кабина (l), 2000-, KMK",
+      "eurocode": "4911AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4911AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/baw/lobovoe-steklo-baw-fenix-33460-1065-3-5-tonn-2007-kmk/",
+      "name": "Лобовое стекло BAW Fenix 33460 / 1065 3,5-тонн, 2007-, KMK",
+      "eurocode": "BAW2AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "BAW2AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-sleeper-xxl-vysokaya-kabina-2002-kmk/",
+      "name": "Лобовое стекло Man Tga Sleeper (xxl) Высокая Кабина, 2002-, KMK",
+      "eurocode": "4913AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4913AGSBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-t-series-2014-kmk/",
+      "name": "Лобовое стекло Renault T-series, 2014-, KMK",
+      "eurocode": "7294AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "7294AGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-8-series-r-p-g-t-series-truck-2016-kmk/",
+      "name": "Лобовое стекло Scania 6 Series / 8 Series (p/g/r/s-кабины), 2016-, KMK",
+      "eurocode": "7508AGNM",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "7508AGNM",
+        "Датчик дождя": "Да",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-f10-12-16-1984-1993-kmk/",
+      "name": "Лобовое стекло Volvo F10-12-16, 1984-1993, KMK",
+      "eurocode": "8813AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1984,
+      "yearTo": 1993,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8813AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-4-series-84-94-114-144-1995-2007-kmk/",
+      "name": "Лобовое стекло Scania 4 Series 84/94/114/144, 1995-2007, KMK",
+      "eurocode": "7506AGNGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1995,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "7506AGNGY",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-300-euro4-shirokaya-kabina-2011-kmk/",
+      "name": "Лобовое стекло Hino 300 Euro4 (широкая Кабина), 2011-, KMK",
+      "eurocode": "HIN3AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "HIN3AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh-new-2018-kmk/",
+      "name": "Лобовое стекло Volvo Fh New, 2018-, KMK",
+      "eurocode": "8844AGNCIZ2L",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8844AGNCIZ2L",
+        "Камера": "Да",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-xl-shirokaya-kabina-sitrak-c7h-2014-2000-kmk/",
+      "name": "Лобовое стекло Man Tga (xl) Широкая Кабина/sitrak C7h 2014-, 2000-, KMK",
+      "eurocode": "4912AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4912AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-5-series-r-2004-fyg/",
+      "name": "Лобовое стекло Scania 5 Series (p/g/r-кабины), 2004-, FYG",
+      "eurocode": "7507AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "7507AGN",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/baw/lobovoe-steklo-baw-1044-1-5-tonn-2005-kmk/",
+      "name": "Лобовое стекло BAW 1044 1,5-тонн, 2005-, KMK",
+      "eurocode": "RB52AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "RB52AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh-new-2013-xyg/",
+      "name": "Лобовое стекло Volvo Fh New, 2013-, XYG",
+      "eurocode": "8844AGNBLI",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "8844AGNBLI",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh12-16-fm-1998-howo-a7-2012-1993-kmk-1/",
+      "name": "Лобовое стекло Volvo Fh12-16 / Fm (1998-) / Howo A7 (2012-), 1993-, KMK",
+      "eurocode": "8823AGNBLM",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8823AGNBLM",
+        "Датчик дождя": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-vnl-fnl-kapotnik-usa-1993-kmk/",
+      "name": "Лобовое стекло Volvo Vnl / Fnl (капотник Usa), 1993-, KMK",
+      "eurocode": "1309AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "1309AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-af-magnum-1989-lemson-1/",
+      "name": "Лобовое стекло Renault Af Magnum, 1989-, LEMSON",
+      "eurocode": "7233AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7233AGN",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-daily-iii-1999-2014-1999-2014-splintex-1/",
+      "name": "Лобовое стекло Iveco Daily III (1999-2014), 1999-2014, SPLINTEX",
+      "eurocode": "3741AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1999,
+      "yearTo": 2014,
+      "glassType": "frontrute",
+      "brand": "SPLINTEX",
+      "features": {
+        "Eurocode": "3741AGS",
+        "Производитель": "SPLINTEX",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-ii-kamaz-yevro-k5-54901-shirokaya-kabina-2019-2012-xyg/",
+      "name": "Лобовое стекло Mercedes Actros II / Камаз Евро K5 54901 Широкая Кабина (2019-), 2012-, XYG",
+      "eurocode": "5444AGNGNCM1L",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "5444AGNGNCM1L",
+        "Датчик дождя": "Да",
+        "Камера": "Да",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-daily-iii-1999-2014-1999-2014-splintex-3/",
+      "name": "Лобовое стекло Iveco Daily III (1999-2014), 1999-2014, SPLINTEX",
+      "eurocode": "3741AGSZ",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1999,
+      "yearTo": 2014,
+      "glassType": "frontrute",
+      "brand": "SPLINTEX",
+      "features": {
+        "Eurocode": "3741AGSZ",
+        "Производитель": "SPLINTEX",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-ln1-673-674-608-809-1114-1320-1983-1997-xyg-1/",
+      "name": "Лобовое стекло Mercedes Ln1 (673/674/608/809/1114/1320), 1983-1997, XYG",
+      "eurocode": "5422AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1983,
+      "yearTo": 1997,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "5422AGSBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-daily-iii-1999-2014-1999-2014-splintex-2/",
+      "name": "Лобовое стекло Iveco Daily III (1999-2014), 1999-2014, SPLINTEX",
+      "eurocode": "3741AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1999,
+      "yearTo": 2014,
+      "glassType": "frontrute",
+      "brand": "SPLINTEX",
+      "features": {
+        "Eurocode": "3741AGSBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f90-l28-f2000-maz-man-shaanxi-shacman-f2000-f3000-x3000-shirokaya-kabina-1986-20-2/",
+      "name": "Лобовое стекло Man F90/l28/f2000/маз-man/shaanxi/shacman F2000/f3000/x3000 (широкая Кабина), 1986-20",
+      "eurocode": "4907AGNBLA",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "1986-20",
+      "features": {
+        "Eurocode": "4907AGNBLA",
+        "Антенна": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-lorry-l381-1974-1995-elvex/",
+      "name": "Лобовое стекло Mercedes Lorry L381, 1974-1995, ELVEX",
+      "eurocode": "5416AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1974,
+      "yearTo": 1995,
+      "glassType": "frontrute",
+      "brand": "ELVEX",
+      "features": {
+        "Eurocode": "5416AGSBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurocargo-i-1991-2003-kmk/",
+      "name": "Лобовое стекло Iveco Eurocargo I, 1991-2003, KMK",
+      "eurocode": "3732AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1991,
+      "yearTo": 2003,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "3732AGSBL",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-ranger-y633-shirokaya-kabina-kuzova-fd-fg-gk-ff-1989-1998-kmk/",
+      "name": "Лобовое стекло Hino Ranger (y633) Широкая Кабина (кузова:fd/fg/gk/ff), 1989-1998, KMK",
+      "eurocode": "9326AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1989,
+      "yearTo": 1998,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "9326AGSBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-sleeper-xxl-vysokaya-kabina-2002-lemson-1/",
+      "name": "Лобовое стекло Man Tga Sleeper (xxl) Высокая Кабина, 2002-, LEMSON",
+      "eurocode": "4913AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4913AGS",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/maz/lobovoe-steklo-maz-6430-evro-6430-5440-5340-5309-6312-5550-6501-6516-4371-6310-19-1997-agc/",
+      "name": "Лобовое стекло Маз 6430 (евро) 6430/5440/5340/5309/6312/5550/6501/6516/4371/6310-19, 1997-, AGC",
+      "eurocode": "4590AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "4590AGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh-new-2018-agc-1/",
+      "name": "Лобовое стекло Volvo Fh New, 2018-, AGC",
+      "eurocode": "8844AGNCIMZ2L",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "8844AGNCIMZ2L",
+        "Датчик дождя": "Да",
+        "Камера": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/maz/lobovoe-steklo-maz-6430-evro-6430-5440-5340-5309-6312-5550-6501-6516-4371-6310-19-1997-kmk-1/",
+      "name": "Лобовое стекло Маз 6430 (евро) 6430/5440/5340/5309/6312/5550/6501/6516/4371/6310-19, 1997-, KMK",
+      "eurocode": "4590AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4590AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-4-series-84-94-114-144-1995-2007-kmk-1/",
+      "name": "Лобовое стекло Scania 4 Series (84/94/114/144 Кабины), 1995-2007, KMK",
+      "eurocode": "7506AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1995,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "7506AGSBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-5320-1970-2006-lemson/",
+      "name": "Лобовое стекло КАМАЗ 5320 (половинки), 1970-2006, LEMSON",
+      "eurocode": "4524ACLBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1970,
+      "yearTo": 2006,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4524ACLBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/paz/lobovoe-steklo-paz-320405-04-vector-next-2016-bor-1/",
+      "name": "Лобовое стекло ПАЗ 320405-04 Vector Next, 2016-, БОР",
+      "eurocode": "4586AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "БОР",
+      "features": {
+        "Eurocode": "4586AGN",
+        "Производитель": "БОР",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/maz/lobovoe-steklo-maz-5336-super-maz-6422-5551-5337-5434-6306-6317-5516-6517-1988-kmk/",
+      "name": "Лобовое стекло Маз 5336 (супер-маз)/6422/5551/5337/5434/6306/6317/5516/6517, 1988-, KMK",
+      "eurocode": "4577ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4577ACL",
+        "Производитель": "БОР",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-5-series-r-2004-kmk/",
+      "name": "Лобовое стекло Scania 5 Series (p/g/r-кабины), 2004-, KMK",
+      "eurocode": "7507AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "7507AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/maz/lobovoe-steklo-maz-3650-281-jac-sunray-sollers-atlant-2010-kmk/",
+      "name": "Лобовое стекло Маз 3650/281/jac Sunray/sollers Atlant, 2010-, KMK",
+      "eurocode": "MAZTAGNA",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "MAZTAGNA",
+        "Антенна": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-century-coronado-c112-c120-columbia-flc-ii-1997-2004-kmk-1/",
+      "name": "Лобовое стекло Freightliner Century/coronado/c112/c120/columbia/flc II, 1997-2004, KMK",
+      "eurocode": "FLCWAGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "FLCWAGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-6520-evro-steklo-tselnoe-panorama-2002-kmk/",
+      "name": "Лобовое стекло КАМАЗ Евро К3 6520/53205 (стекло Цельное Панорама), 2002-, KMK",
+      "eurocode": "4597ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4597ACL",
+        "Производитель": "ALABATEK",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh-new-2013-kmk/",
+      "name": "Лобовое стекло Volvo Fh New, 2013-, KMK",
+      "eurocode": "8844AGNIZ",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8844AGNIZ",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-i-foton-auman-est-a-2017-1996-kmk/",
+      "name": "Лобовое стекло Mercedes Actros I / Foton Auman Est A (2017-), 1996-, KMK",
+      "eurocode": "5429AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "5429AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-500-y77-shirokaya-kabina-ranger-fd1-7tonn-2001-lemson/",
+      "name": "Лобовое стекло Hino 500 Y77 (широкая Кабина) Ranger Fd1 (7тонн), 2001-, LEMSON",
+      "eurocode": "Y077AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "Y077AGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurostar-stralis-as-1993-fyg/",
+      "name": "Лобовое стекло Iveco Eurostar / Eurocargo (91-02) / Stralis As (2002-) / Hongyan Genlyon (2009-), 19",
+      "eurocode": "3733AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "19",
+      "features": {
+        "Eurocode": "3733AGS",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-ii-kamaz-yevro-k5-54901-shirokaya-kabina-2019-2018-kmk/",
+      "name": "Лобовое стекло Mercedes Actros II / Камаз Евро K5 54901 Широкая Кабина (2019-), 2018-, KMK",
+      "eurocode": "5444AGNC",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "5444AGNC",
+        "Камера": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-ii-kamaz-yevro-k5-54901-shirokaya-kabina-2019-2012-kmk/",
+      "name": "Лобовое стекло Mercedes Actros II / Камаз Евро K5 54901 Широкая Кабина (2019-), 2012-, KMK",
+      "eurocode": "5444AGNCM2L",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "5444AGNCM2L",
+        "Датчик дождя": "Да",
+        "Камера": "Да",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-t-series-2014-kmk-1/",
+      "name": "Лобовое стекло Renault T-series, 2014-, KMK",
+      "eurocode": "7294AGNCM",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "7294AGNCM",
+        "Датчик дождя": "Да",
+        "Камера": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-8-series-r-p-g-t-series-truck-2016-kmk-1/",
+      "name": "Лобовое стекло Scania 6 Series / 8 Series (p/g/r/s-кабины), 2016-, KMK",
+      "eurocode": "7508AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "7508AGN",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-midlum-1999-kmk/",
+      "name": "Лобовое стекло Renault Midlum, 1999-, KMK",
+      "eurocode": "7253AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "7253AGSBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-compas-43082-43086-43089-2022-agc/",
+      "name": "Лобовое стекло КАМАЗ Compas 9/12 Широкая Кабина (43082/43086/43089), 2022-, AGC",
+      "eurocode": "6321AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "6321AGN",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-compas-43082-43086-43089-2022-lemson-1/",
+      "name": "Лобовое стекло КАМАЗ Compas 9/12 Широкая Кабина (43082/43086/43089), 2022-, LEMSON",
+      "eurocode": "6321AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "6321AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh-new-2013-2018-kmk/",
+      "name": "Лобовое стекло Volvo Fh New, 2013-2018, KMK",
+      "eurocode": "8844AGNCIMZ1L",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 2013,
+      "yearTo": 2018,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8844AGNCIMZ1L",
+        "Датчик дождя": "Да",
+        "Камера": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-i-foton-auman-est-a-2017-1996-agc/",
+      "name": "Лобовое стекло Mercedes Actros I / Foton Auman Est A (2017-), 1996-, AGC",
+      "eurocode": "5429AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "5429AGNGN",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/paz/lobovoe-steklo-paz-320405-04-vector-next-2016-bor-2/",
+      "name": "Лобовое стекло ПАЗ 320405-04 Vector Next, 2016-, БОР",
+      "eurocode": "4586AGN95",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "БОР",
+      "features": {
+        "Eurocode": "4586AGN95",
+        "Производитель": "БОР"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-tgs-erf-uzkaya-kabina-l-2000-agc-5/",
+      "name": "Лобовое стекло Man Tga/tgs/erf Узкая Кабина (l), 2000-, AGC",
+      "eurocode": "4911ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "4911ACL",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/bokovye/volvo/bokovoe-steklo-volvo-fh12-16-fm-1998-howo-a7-2012-1992-xyg/",
+      "name": "Боковое стекло Volvo Fh12-16 / Fm (1998-) / Howo A7 (2012-), 1992-, XYG",
+      "eurocode": "8823LGNL2FD",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "8823LGNL2FD",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/vetrovoe/shacman/lobovoe-steklo-shacman-l3000-2020-kmk/",
+      "name": "Лобовое стекло Shacman L3000, 2020-, KMK",
+      "eurocode": "SHL3AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "SHL3AGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/vetrovoe/shacman/lobovoe-steklo-shacman-x6000-2020-kmk/",
+      "name": "Лобовое стекло Shacman X6000, 2020-, KMK",
+      "eurocode": "SHX6AGNCM",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "SHX6AGNCM",
+        "Датчик дождя": "Да",
+        "Камера": "Да",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-lf-45-2006-2013-agc/",
+      "name": "Лобовое стекло DAF Lf 45, 2006-2013, AGC",
+      "eurocode": "4633AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "4633AGS",
+        "Производитель": "BGW"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-lf-45-2006-2013-kmk/",
+      "name": "Лобовое стекло DAF Lf 45, 2006-2013, KMK",
+      "eurocode": "4633AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4633AGSBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-century-coronado-c112-c120-columbia-flc-ii-1997-2004-lemson/",
+      "name": "Лобовое стекло Freightliner Century/coronado/c112/c120/columbia/flc II, 1997-2004, LEMSON",
+      "eurocode": "FLCLAGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "FLCLAGN",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f90-l12-maz-man-uzkaya-kabina-1986-2000-lemson-1/",
+      "name": "Лобовое стекло Man F90/l12/маз-man (узкая Кабина), 1986-2000, LEMSON",
+      "eurocode": "4908AGNGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1986,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4908AGNGY",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-premium-kerax-1996-lemson-1/",
+      "name": "Лобовое стекло Renault Premium / Kerax, 1996-, LEMSON",
+      "eurocode": "7242AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7242AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-3-series-t82-1995-2000-lemson/",
+      "name": "Лобовое стекло Scania 3 Series T82, 1995-2000, LEMSON",
+      "eurocode": "7505AGNGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1995,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7505AGNGY",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/bokovye/man/bokovoe-steklo-man-tga-m-2000-sekurit-1/",
+      "name": "Боковое стекло Man Tga M, 2000-, SEKURIT",
+      "eurocode": "4911LGNL2FD",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SEKURIT",
+      "features": {
+        "Eurocode": "4911LGNL2FD",
+        "Производитель": "SEKURIT"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh-new-2013-agc-1/",
+      "name": "Лобовое стекло Volvo Fh New, 2013-, AGC",
+      "eurocode": "8844ACLIZ",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "8844ACLIZ",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/baw/lobovoe-steklo-baw-fenix-33462-ulyanovsk-2011-uzkaya-kabina-2011-kmk/",
+      "name": "Лобовое стекло BAW Fenix 33462 (ульяновск) 2011- (узкая Кабина), 2011-, KMK",
+      "eurocode": "BAW4AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "BAW4AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-4-series-84-94-114-144-1995-2007-lemson/",
+      "name": "Лобовое стекло Scania 4 Series 84/94/114/144, 1995-2007, LEMSON",
+      "eurocode": "7506AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1995,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7506AGS",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-premium-kerax-1996-lemson/",
+      "name": "Лобовое стекло Renault Premium / Kerax, 1996-, LEMSON",
+      "eurocode": "7242AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7242AGN",
+        "Производитель": "NORDGLASS"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-century-coronado-c112-c120-columbia-flc-ii-1997-2004-lemson-1/",
+      "name": "Лобовое стекло Freightliner Century/coronado/c112/c120/columbia/flc II, 1997-2004, LEMSON",
+      "eurocode": "FLCRAGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "FLCRAGN",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh-new-2013-lemson/",
+      "name": "Лобовое стекло Volvo Fh New, 2013-, AGC",
+      "eurocode": "8844AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "8844AGN",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-xf105-2013-agc/",
+      "name": "Лобовое стекло DAF Xf105, 2013-, AGC",
+      "eurocode": "4635AGN1B",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "4635AGN1B",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/nyefaz/bokovoe-steklo-nyefaz-5299-iii-trete-pokolenie-2014-panorama-tselnoe-steklo-2014-steklolux/",
+      "name": "Боковое стекло НЕФАЗ 5299 III (третье Поколение) 2014- Панорама Цельное Стекло, 2014-, STEKLOLUX",
+      "eurocode": "5299RGYM4RD",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "STEKLOLUX",
+      "features": {
+        "Eurocode": "5299RGYM4RD",
+        "Производитель": "STEKLOLUX",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/bokovye/mercedes/bokovoe-steklo-mercedes-atego-1998-axor-2001-kamaz-5490-neo-2016-sekurit/",
+      "name": "Боковое стекло Mercedes Atego 1998- / Axor 2001- / Камаз 5490/neo 2016-, -, SEKURIT",
+      "eurocode": "5430LGNL2FD",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SEKURIT",
+      "features": {
+        "Eurocode": "5430LGNL2FD",
+        "Производитель": "SEKURIT",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-premium-kerax-1996-agc-2/",
+      "name": "Лобовое стекло Renault Premium / Kerax, 1996-, AGC",
+      "eurocode": "7242AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "7242AGNGN",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-f10-12-16-1984-1993-agc/",
+      "name": "Лобовое стекло Volvo F10-12-16, 1984-1993, AGC",
+      "eurocode": "8813ACL1A",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1984,
+      "yearTo": 1993,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "8813ACL1A",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/bokovoe-steklo-scania-4-series-84-94-114-144-1995-sekurit/",
+      "name": "Боковое стекло Scania 4 Series (84/94/114/144 Кабины), 1995-, SEKURIT",
+      "eurocode": "7506LGNDFW",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SEKURIT",
+      "features": {
+        "Eurocode": "7506LGNDFW",
+        "Производитель": "SEKURIT"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-tgs-erf-uzkaya-kabina-l-2000-agc-3/",
+      "name": "Лобовое стекло Man Tga/tgs/erf Узкая Кабина (l), 2000-, AGC",
+      "eurocode": "4911AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "4911AGNGN",
+        "Производитель": "SAT"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fl-2007-agc/",
+      "name": "Лобовое стекло Volvo Fl, 2007-, AGC",
+      "eurocode": "7253AGNW",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "7253AGNW",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fl4-fl6-fs10-1985-2005-agc-1/",
+      "name": "Лобовое стекло Volvo Fl4/fl6/fs10, 1985-2005, AGC",
+      "eurocode": "8816ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1985,
+      "yearTo": 2005,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "8816ACL",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-tgs-erf-uzkaya-kabina-l-2000-agc-4/",
+      "name": "Лобовое стекло Man Tga/tgs/erf Узкая Кабина (l), 2000-, AGC",
+      "eurocode": "4911AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "4911AGS",
+        "Производитель": "SEKURIT",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh12-16-fm-1998-howo-a7-2012-1993-agc-1/",
+      "name": "Лобовое стекло Volvo Fh12-16 / Fm (1998-) / Howo A7 (2012-), 1993-, AGC",
+      "eurocode": "8823ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "8823ACL",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-f-95-1995-xf-95-2002-2006-te-47-pegaso-troner-1986-2001-1986-2007-3/",
+      "name": "Лобовое стекло DAF F 95 (1995-) / Xf 95 (2002-2006) / Te 47 / Pegaso Troner (1986-2001), 1986-2007,",
+      "eurocode": "4624AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 2002,
+      "yearTo": 2006,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "4624AGS",
+        "Производитель": "PILKINGTON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/yutong/lobovoe-steklo-yutong-zk6938-bus-2008/",
+      "name": "Лобовое стекло Yutong Zk6938 Bus, 2008-,",
+      "eurocode": "YT38A",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "YT38A",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-midlum-1999-soliver/",
+      "name": "Лобовое стекло Renault Midlum, 1999-, SOLIVER",
+      "eurocode": "7253AGSH",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "SOLIVER",
+      "features": {
+        "Eurocode": "7253AGSH",
+        "Обогрев стекла": "Да",
+        "Производитель": "SOLIVER"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fh12-16-fm-1998-howo-a7-2012-1993-lemson/",
+      "name": "Лобовое стекло Volvo Fh12-16 / Fm (1998-) / Howo A7 (2012-), 1993-, LEMSON",
+      "eurocode": "8823AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "8823AGS",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-f-95-1995-xf-95-2002-2006-te-47-pegaso-troner-1986-2001-1986-2007-2/",
+      "name": "Лобовое стекло DAF F 95 (1995-) / Xf 95 (2002-2006) / Te 47 / Pegaso Troner (1986-2001), 1986-2007,",
+      "eurocode": "4624AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 2002,
+      "yearTo": 2006,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "4624AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-cf-fat-75-85-95-1992-lemson/",
+      "name": "Лобовое стекло DAF Cf Fat 75/85/95, 1992-, LEMSON",
+      "eurocode": "4625AGNGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4625AGNGY",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurocargo-i-1991-2003-lemson/",
+      "name": "Лобовое стекло Iveco Eurocargo I, 1991-2003, LEMSON",
+      "eurocode": "3732AGNGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1991,
+      "yearTo": 2003,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "3732AGNGY",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurocargo-ii-magirus-eurocargo-ii-2003-lemson/",
+      "name": "Лобовое стекло Iveco Eurocargo II / Magirus Eurocargo II, 2003-, LEMSON",
+      "eurocode": "3744AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "3744AGS",
+        "Производитель": "SEKURIT",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-l2000-m2000-le-series-me-series-sinotruck-hoko-zz3253-25-tn-mans-zz3251-25-tn-20-2/",
+      "name": "Лобовое стекло Man L2000/m2000/le-series/me-series/sinotruck Hoko Zz3253 25-тн/mans Zz3251 25-тн (20",
+      "eurocode": "4909AGSGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "4909AGSGY",
+        "Производитель": "OEM"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-f-95-1995-xf-95-2002-2006-te-47-pegaso-troner-1986-2001-1986-2007-4/",
+      "name": "Лобовое стекло DAF F 95 (1995-) / Xf 95 (2002-2006) / Te 47 / Pegaso Troner (1986-2001), 1986-2007,",
+      "eurocode": "4624ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 2002,
+      "yearTo": 2006,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "4624ACL",
+        "Производитель": "NORDGLASS"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-l2000-m2000-le-series-me-series-sinotruck-hoko-zz3253-25-tn-mans-zz3251-25-tn-20-3/",
+      "name": "Лобовое стекло Man L2000/m2000/le-series/me-series/sinotruck Hoko Zz3253 25-тн/mans Zz3251 25-тн (20",
+      "eurocode": "4909AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "4909AGS",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/iveco/lobovoe-steklo-iveco-eurocargo-ii-magirus-eurocargo-ii-2003-lemson-1/",
+      "name": "Лобовое стекло Iveco Eurocargo II / Magirus Eurocargo II, 2003-, LEMSON",
+      "eurocode": "3744AGNGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "3744AGNGY",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-xf105-2006-lemson/",
+      "name": "Лобовое стекло DAF Xf105, 2013-, KMK",
+      "eurocode": "4635AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4635AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/bokovye/volvo/bokovoe-steklo-volvo-fh12-16-fm-1998-howo-a7-2012-sekurit/",
+      "name": "Боковое стекло Volvo Fh12-16 / Fm (1998-) / Howo A7 (2012-), 1992-, SEKURIT",
+      "eurocode": "8823RGNL2FDW",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SEKURIT",
+      "features": {
+        "Eurocode": "8823RGNL2FDW",
+        "Производитель": "SEKURIT"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/bokovye/mercedes/bokovoe-steklo-mercedes-actros-i-foton-auman-est-a-2017-1996-sekurit-1/",
+      "name": "Боковое стекло Mercedes Actros I / Foton Auman Est A (2017-), 1996-, SEKURIT",
+      "eurocode": "5429RGNL2FD",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SEKURIT",
+      "features": {
+        "Eurocode": "5429RGNL2FD",
+        "Производитель": "SEKURIT"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-midlum-1999-lemson-1/",
+      "name": "Лобовое стекло Renault Midlum, 1999-, LEMSON",
+      "eurocode": "7253AGSGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7253AGSGY",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/king-long/lobovoe-steklo-king-long-xmq6129y-6130y-2010-fyg/",
+      "name": "Лобовое стекло King-long Xmq6129y / 6130y, 2010-, FYG",
+      "eurocode": "CKL3AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "CKL3AGNGN",
+        "Производитель": "FYG",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/neoplan/lobovoe-steklo-neoplan-tourliner-avtobus-51-mestnyy-2003-pilkington/",
+      "name": "Лобовое стекло Neoplan Tourliner Автобус 51-местный, 2003-, PILKINGTON",
+      "eurocode": "NPTLAGSH",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "NPTLAGSH",
+        "Обогрев стекла": "Да",
+        "Производитель": "PILKINGTON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-i-foton-auman-est-a-2017-1996-pilkington-1/",
+      "name": "Лобовое стекло Mercedes Actros I / Foton Auman Est A (2017-), 1996-, PILKINGTON",
+      "eurocode": "5429AGNGNH",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "5429AGNGNH",
+        "Обогрев стекла": "Да",
+        "Производитель": "PILKINGTON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-premium-kerax-1996-agc-1/",
+      "name": "Лобовое стекло Renault Premium / Kerax, 1996-, AGC",
+      "eurocode": "7242AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "7242AGS",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-century-coronado-c112-c120-columbia-flc-ii-1997-2004-xyg-2/",
+      "name": "Лобовое стекло Freightliner Century/coronado/c112/c120/columbia/flc II, 1997-2004, XYG",
+      "eurocode": "FLCLAGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "FLCLAGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-lorry-l381-1974-1995-benson/",
+      "name": "Лобовое стекло Mercedes Lorry L381, 1974-1995, BENSON",
+      "eurocode": "5416ACLGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1974,
+      "yearTo": 1995,
+      "glassType": "frontrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "5416ACLGN",
+        "Производитель": "PILKINGTON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-flb-fll-pravoe-levoe-1989-xyg/",
+      "name": "Лобовое стекло Freightliner Flb/fll (правое=левое) Кабина Без Носа, 1989-, XYG",
+      "eurocode": "FLB1AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "FLB1AGNGN",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-ln1-673-674-608-809-1114-1320-1983-1997-benson/",
+      "name": "Лобовое стекло Mercedes Ln1 (673/674/608/809/1114/1320), 1983-1997, BENSON",
+      "eurocode": "5422AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1983,
+      "yearTo": 1997,
+      "glassType": "frontrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "5422AGS",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hyundai/lobovoe-steklo-hyundai-county-1998-2004-xyg/",
+      "name": "Лобовое стекло Hyundai County, 1998-2004, XYG",
+      "eurocode": "COUNY1AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1998,
+      "yearTo": 2004,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "COUNY1AGNBL",
+        "Антенна": "Да",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f90-l28-f2000-maz-man-shaanxi-shacman-f2000-f3000-x3000-shirokaya-kabina-1986-20-1/",
+      "name": "Лобовое стекло Man F90/l28/f2000/маз-man/shaanxi/shacman F2000/f3000/x3000 (широкая Кабина), 1986-20",
+      "eurocode": "4907AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "1986-20",
+      "features": {
+        "Eurocode": "4907AGS",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hyundai-bogdan/lobovoe-steklo-hyundai-isuzu-bogdan-2005-ksb/",
+      "name": "Лобовое стекло Hyundai Isuzu-bogdan, 2005-, KSB",
+      "eurocode": "BOGDAGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KSB",
+      "features": {
+        "Eurocode": "BOGDAGN",
+        "Производитель": "KSB",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f90-l12-maz-man-uzkaya-kabina-1986-2000-lemson/",
+      "name": "Лобовое стекло Man F90/l12/маз-man (узкая Кабина), 1986-2000, LEMSON",
+      "eurocode": "4908AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1986,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4908AGS",
+        "Производитель": "NORDGLASS"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-compas-3-5-6-43085-uzkaya-kabina-2018-kmk/",
+      "name": "Лобовое стекло КАМАЗ Compas 3/5/6 (43085) Узкая Кабина, 2023-, KMK",
+      "eurocode": "4563AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4563AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-i-foton-auman-est-a-2017-1996-lemson/",
+      "name": "Лобовое стекло Mercedes Actros I / Foton Auman Est A (2017-), 1996-, LEMSON",
+      "eurocode": "5429AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "5429AGS",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-atego-1998-axor-2001-kamaz-5490-neo-2016-1997-lemson/",
+      "name": "Лобовое стекло Mercedes Atego 1998- / Axor 2001- / Камаз 5490/neo 2016-, 1997-, LEMSON",
+      "eurocode": "5430AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "5430AGS",
+        "Производитель": "PILKINGTON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hyundai/lobovoe-steklo-hyundai-aero-city-avtobus-pravaya-polovina-1999-hanglass/",
+      "name": "Лобовое стекло Hyundai Aero City Автобус Правая Половина, 1999-, HANGLASS",
+      "eurocode": "XXXXAGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "HANGLASS",
+      "features": {
+        "Eurocode": "XXXXAGS",
+        "Производитель": "HANGLASS",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/howo/lobovoe-steklo-howo-expo-2006-qysafeti/",
+      "name": "Лобовое стекло Howo Expo, 2006-, QYSafeti",
+      "eurocode": "1123AGSA",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "QYSafeti",
+      "features": {
+        "Eurocode": "1123AGSA",
+        "Антенна": "Да",
+        "Производитель": "QYSafeti",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-mercedes-antos-arocs-actros-ii-uzkaya-kabina-2012-agc-1/",
+      "name": "Лобовое стекло Mercedes Antos/arocs/actros II Узкая Кабина, 2012-, AGC",
+      "eurocode": "5443AGNGNZ",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "5443AGNGNZ",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-antos-arocs-actros-ii-uzkaya-kabina-2012-agc/",
+      "name": "Лобовое стекло Mercedes Antos/arocs/actros II Узкая Кабина, 2012-, AGC",
+      "eurocode": "5443AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "5443AGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-compas-3-5-6-43085-uzkaya-kabina-2018-lemson/",
+      "name": "Лобовое стекло КАМАЗ Compas 3/5/6 (43085) Узкая Кабина, 2018-, LEMSON",
+      "eurocode": "6320AGNGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "6320AGNGY",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-compas-3-5-6-43085-uzkaya-kabina-2018-xyg/",
+      "name": "Лобовое стекло КАМАЗ Compas 3/5/6 (43085) Узкая Кабина, 2018-, XYG",
+      "eurocode": "6320AGSGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "6320AGSGN",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-compas-3-5-6-43085-uzkaya-kabina-2018-agc/",
+      "name": "Лобовое стекло КАМАЗ Compas 3/5/6 (43085) Узкая Кабина, 2018-, AGC",
+      "eurocode": "6320AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "6320AGN",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-compas-3-5-6-43085-uzkaya-kabina-2018-lemson-1/",
+      "name": "Лобовое стекло КАМАЗ Compas 3/5/6 (43085) Узкая Кабина, 2018-, LEMSON",
+      "eurocode": "6320AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "6320AGNBL",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-cf-fat-75-85-95-1992-pilkington/",
+      "name": "Лобовое стекло DAF Cf Fat 75/85/95, 1992-, PILKINGTON",
+      "eurocode": "4625ACL1A",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "4625ACL1A",
+        "Производитель": "PILKINGTON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-xf105-2006-fyg/",
+      "name": "Лобовое стекло DAF Xf105, 2013-, FYG",
+      "eurocode": "4635AGSGY",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "4635AGSGY",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-argosy-1999-2009-xyg/",
+      "name": "Лобовое стекло Freightliner Argosy, 1999-2009, XYG",
+      "eurocode": "ARGLAGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1999,
+      "yearTo": 2009,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "ARGLAGNGN",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-argosy-1999-2009-xyg-1/",
+      "name": "Лобовое стекло Freightliner Argosy, 1999-2009, XYG",
+      "eurocode": "ARGRAGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1999,
+      "yearTo": 2009,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "ARGRAGNGN",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-cascadia-2007-xyg-1/",
+      "name": "Лобовое стекло Freightliner Cascadia, 2007-, XYG",
+      "eurocode": "CASRAGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "CASRAGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-cascadia-2007-xyg/",
+      "name": "Лобовое стекло Freightliner Cascadia, 2007-, XYG",
+      "eurocode": "CASLAGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "CASLAGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-flc120-fld112-pravoe-levoe-1989-xyg/",
+      "name": "Лобовое стекло Freightliner Flc120/fld112 (правое=левое), 1987-, XYG",
+      "eurocode": "FLD1AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "FLD1AGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hyundai/lobovoe-steklo-hyundai-county-2006-xyg/",
+      "name": "Лобовое стекло Hyundai County, 2006-, XYG",
+      "eurocode": "COUNY2AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "COUNY2AGNBL",
+        "Антенна": "Да",
+        "Производитель": "XYG",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-i-foton-auman-est-a-2017-1996-pilkington/",
+      "name": "Лобовое стекло Mercedes Actros I / Foton Auman Est A (2017-), 1996-, PILKINGTON",
+      "eurocode": "5429ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "5429ACL",
+        "Производитель": "PILKINGTON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/freightliner/lobovoe-steklo-freightliner-century-coronado-c112-c120-columbia-flc-ii-1997-2004-xyg-1/",
+      "name": "Лобовое стекло Freightliner Century/coronado/c112/c120/columbia/flc II, 1997-2004, XYG",
+      "eurocode": "FLCRAGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "FLCRAGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-benz-turismo-2008-pilkington/",
+      "name": "Лобовое стекло Mercedes Benz Turismo, 2008-, PILKINGTON",
+      "eurocode": "TURIMO",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "TURIMO",
+        "Датчик дождя": "Да",
+        "Датчик запотевания": "Да",
+        "Производитель": "SEKURIT",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-mb100-w631-1987-1996-benson/",
+      "name": "Лобовое стекло Mercedes Mb100 (w631), 1987-1996, BENSON",
+      "eurocode": "5423ACLBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1987,
+      "yearTo": 1996,
+      "glassType": "frontrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "5423ACLBL",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-major-305-370-1975-1996-benson/",
+      "name": "Лобовое стекло Renault Major 305-370, 1975-1996, BENSON",
+      "eurocode": "3721ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1975,
+      "yearTo": 1996,
+      "glassType": "frontrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "3721ACL",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-midlum-1999-agc/",
+      "name": "Лобовое стекло Renault Midlum, 1999-, AGC",
+      "eurocode": "7253AGSW",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "7253AGSW",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-tgs-erf-uzkaya-kabina-l-2000-sekurit/",
+      "name": "Лобовое стекло Man Tga/tgs/erf Узкая Кабина (l), 2000-, SEKURIT",
+      "eurocode": "4911AGSGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "SEKURIT",
+      "features": {
+        "Eurocode": "4911AGSGN",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/kamaz/lobovoe-steklo-kamaz-5320-1970-2006-bor/",
+      "name": "Лобовое стекло КАМАЗ 5320 (половинки), 1970-2006, БОР",
+      "eurocode": "4524ACL6Y",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1970,
+      "yearTo": 2006,
+      "glassType": "frontrute",
+      "brand": "БОР",
+      "features": {
+        "Eurocode": "4524ACL6Y",
+        "Производитель": "БОР",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/maz/lobovoe-steklo-maz-206-226-avtobus-2007-ksb/",
+      "name": "Лобовое стекло Маз 206-226 (автобус), 2007-, KSB",
+      "eurocode": "M206AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KSB",
+      "features": {
+        "Eurocode": "M206AGS",
+        "Производитель": "KSB",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/maz/lobovoe-steklo-maz-206-226-avtobus-2007-dag/",
+      "name": "Лобовое стекло Маз 206-226 (автобус), 2007-, DAG",
+      "eurocode": "M206AGS1B",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "DAG",
+      "features": {
+        "Eurocode": "M206AGS1B",
+        "Производитель": "DAG",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fl7-fl10-1987-1992-benson/",
+      "name": "Лобовое стекло Volvo Fl7/fl10, 1987-1992, BENSON",
+      "eurocode": "8814AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1987,
+      "yearTo": 1992,
+      "glassType": "frontrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "8814AGS",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-cf-fat-75-85-95-1992-benson/",
+      "name": "Лобовое стекло DAF Cf Fat 75/85/95, 1992-, BENSON",
+      "eurocode": "4625AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "4625AGS",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fl7-fl10-1987-1992-fyg/",
+      "name": "Лобовое стекло Volvo Fl7/fl10, 1987-1992, FYG",
+      "eurocode": "8814ACLFST",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1987,
+      "yearTo": 1992,
+      "glassType": "frontrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "8814ACLFST",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/zadnee/maz/zadnee-steklo-maz-206-2007-dag/",
+      "name": "Заднее стекло Маз 206, 2007-, DAG",
+      "eurocode": "M206BGS1B",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "bakrute",
+      "brand": "DAG",
+      "features": {
+        "Eurocode": "M206BGS1B",
+        "Производитель": "DAG",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/maz/lobovoe-steklo-maz-5336-super-maz-6422-5551-5337-5434-6306-6317-5516-6517-1988-bor/",
+      "name": "Лобовое стекло Маз 5336 (супер-маз)/6422/5551/5337/5434/6306/6317/5516/6517, 1988-, БОР",
+      "eurocode": "4577ACLBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "БОР",
+      "features": {
+        "Eurocode": "4577ACLBL",
+        "Производитель": "БОР",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-2800-1973-bgw/",
+      "name": "Лобовое стекло DAF 2800/3300/3600, 1973-1991, PILKINGTON",
+      "eurocode": "4613ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1973,
+      "yearTo": 1991,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "4613ACL",
+        "Производитель": "PILKINGTON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-400-1986-2000-bgw/",
+      "name": "Лобовое стекло DAF 400, 1986-2000, BGW",
+      "eurocode": "4620ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1986,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "brand": "BGW",
+      "features": {
+        "Eurocode": "4620ACL",
+        "Производитель": "BGW"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-600-1984-2005-bgw/",
+      "name": "Лобовое стекло DAF 600, 1984-2005, BGW",
+      "eurocode": "4621ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1984,
+      "yearTo": 2005,
+      "glassType": "frontrute",
+      "brand": "BGW",
+      "features": {
+        "Eurocode": "4621ACL",
+        "Производитель": "BGW"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/volvo/lobovoe-steklo-volvo-fl4-fl6-fs10-1985-2005-agc/",
+      "name": "Лобовое стекло Volvo Fl4/fl6/fs10, 1985-2005, AGC",
+      "eurocode": "8816AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1985,
+      "yearTo": 2005,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "8816AGN",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-l-389-1638-1980-bgw/",
+      "name": "Лобовое стекло Mercedes L 389 1638, 1980-, BGW",
+      "eurocode": "5425AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "BGW",
+      "features": {
+        "Eurocode": "5425AGSBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-tn-t1-van-207-208-210-307-308-310-408-409-410-1975-benson/",
+      "name": "Лобовое стекло Mercedes Tn/t1 Van (207/208/210/307/308/310/408/409/410), 1975-, BENSON",
+      "eurocode": "5419AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "5419AGSBL",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-atego-1998-axor-2001-kamaz-5490-neo-2016-1997-agc/",
+      "name": "Лобовое стекло Mercedes Atego 1998- / Axor 2001- / Камаз 5490/neo 2016-, 1997-, AGC",
+      "eurocode": "5430AGSGN1A",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "5430AGSGN1A",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f90-l28-f2000-maz-man-shaanxi-shacman-f2000-f3000-x3000-shirokaya-kabina-1986-20/",
+      "name": "Лобовое стекло Man F90/l28/f2000/маз-man/shaanxi/shacman F2000/f3000/x3000 (широкая Кабина), 1986-20",
+      "eurocode": "4907AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "1986-20",
+      "features": {
+        "Eurocode": "4907AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/scania/lobovoe-steklo-scania-4-series-84-94-114-144-1995-2007-agc/",
+      "name": "Лобовое стекло Scania 4 Series 84/94/114/144, 1995-2007, AGC",
+      "eurocode": "7506AGSGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1995,
+      "yearTo": 2007,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "7506AGSGN",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/tata/lobovoe-steklo-tata-613ex-2011-laminated-gf/",
+      "name": "Лобовое стекло TATA 613ex, 2011-, LAMINATED GF",
+      "eurocode": "TATAA",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "LAMINATED GF",
+      "features": {
+        "Eurocode": "TATAA",
+        "Производитель": "LAMINATED GF",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/daf/lobovoe-steklo-daf-400-ldv-convoy-1996-2006-kmk/",
+      "name": "Лобовое стекло DAF 400 Leyland / Ldv Convoy, 1996-2006, KMK",
+      "eurocode": "4628AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1996,
+      "yearTo": 2006,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4628AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-af-magnum-2008-fyg/",
+      "name": "Лобовое стекло Renault Af Magnum, 2008-, FYG",
+      "eurocode": "7233AGSGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "7233AGSGN",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man_1/lobovoe-steklo-m-a-n-lions-coach-r07-2003-pilkington/",
+      "name": "Лобовое стекло M.a.n. Lions Coach R07, 2003-, PILKINGTON",
+      "eurocode": "0256AGNAH",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "0256AGNAH",
+        "Обогрев стекла": "Да",
+        "Антенна": "Да",
+        "Производитель": "PILKINGTON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f7-f8-1971-1986-olimpia/",
+      "name": "Лобовое стекло Man F7 / F8, 1971-1986, Olimpia",
+      "eurocode": "4904ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1971,
+      "yearTo": 1986,
+      "glassType": "frontrute",
+      "brand": "Olimpia",
+      "features": {
+        "Eurocode": "4904ACL",
+        "Производитель": "Olimpia"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-f90-l12-maz-man-uzkaya-kabina-1986-2000-agc/",
+      "name": "Лобовое стекло Man F90/l12/маз-man (узкая Кабина), 1986-2000, AGC",
+      "eurocode": "4908ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1986,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "4908ACL",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/baw/lobovoe-steklo-baw-1044-1-5-tonn-2005-2017-kdm/",
+      "name": "Лобовое стекло BAW 1044 1,5-тонн, 2005-2017, KMK",
+      "eurocode": "RB52AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 2005,
+      "yearTo": 2017,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "RB52AGN",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/renault/lobovoe-steklo-renault-premium-kerax-2007-soliver/",
+      "name": "Лобовое стекло Renault Premium / Kerax, 2007-, SOLIVER",
+      "eurocode": "7242AGSH",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "SOLIVER",
+      "features": {
+        "Eurocode": "7242AGSH",
+        "Обогрев стекла": "Да",
+        "Производитель": "SOLIVER",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-actros-i-foton-auman-est-a-2017-1996-pilkington-2/",
+      "name": "Лобовое стекло Mercedes Actros I / Foton Auman Est A (2017-), 1996-, PILKINGTON",
+      "eurocode": "5429ACLGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "PILKINGTON",
+      "features": {
+        "Eurocode": "5429ACLGN",
+        "Производитель": "PILKINGTON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/bokovye/man/bokovoe-steklo-man-tga-m-2000-sekurit/",
+      "name": "Боковое стекло Man Tga M, 2000-, SEKURIT",
+      "eurocode": "4911RGSL2FD",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SEKURIT",
+      "features": {
+        "Eurocode": "4911RGSL2FD",
+        "Производитель": "SEKURIT"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/yutong/lobovoe-steklo-yutong-zk6119-bus-2008-ksb/",
+      "name": "Лобовое стекло Yutong Zk6119 Bus, 2008-, KSB",
+      "eurocode": "YT19AGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KSB",
+      "features": {
+        "Eurocode": "YT19AGN",
+        "Производитель": "KSB"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man_1/lobovoe-steklo-m-a-n-lions-coach-r07-2003-olimpia/",
+      "name": "Лобовое стекло M.a.n. Lions Coach R07, 2003-, Olimpia",
+      "eurocode": "0256AGNH",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "Olimpia",
+      "features": {
+        "Eurocode": "0256AGNH",
+        "Обогрев стекла": "Да",
+        "Производитель": "Olimpia"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/zoomlion/lobovoe-steklo-zoomlion-2012/",
+      "name": "Лобовое стекло Zoomlion, 2012-,",
+      "eurocode": "ZLJACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "ZLJACL"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/bokovye/mercedes/bokovoe-steklo-mercedes-actros-i-foton-auman-est-a-2017-1996-sekurit/",
+      "name": "Боковое стекло Mercedes Actros I / Foton Auman Est A (2017-), 1996-, SEKURIT",
+      "eurocode": "5429LCLL2FD",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SEKURIT",
+      "features": {
+        "Eurocode": "5429LCLL2FD",
+        "Производитель": "SEKURIT"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hyundai/lobovoe-steklo-hyundai-universe-noble-bus-2013-hanglass-1/",
+      "name": "Лобовое стекло Hyundai Universe Noble Bus, 2013-, HANGLASS",
+      "eurocode": "UNBRAGNBLZ",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "HANGLASS",
+      "features": {
+        "Eurocode": "UNBRAGNBLZ",
+        "Производитель": "HANGLASS",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-l2000-m2000-le-series-me-series-sinotruck-hoko-zz3253-25-tn-mans-zz3251-25-tn-20-1/",
+      "name": "Лобовое стекло Man L2000/m2000/le-series/me-series/sinotruck Hoko Zz3253 25-тн/mans Zz3251 25-тн (20",
+      "eurocode": "4909ACL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "",
+      "features": {
+        "Eurocode": "4909ACL",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-dutro-2000-2000-xyg/",
+      "name": "Лобовое стекло Hino Dutro 2000-, 2000-, XYG",
+      "eurocode": "8343AGNGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "8343AGNGN",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-ranger-y633-shirokaya-kabina-kuzova-fd-fg-gk-ff-1989-1998-xyg/",
+      "name": "Лобовое стекло Hino Ranger (y633) Широкая Кабина (кузова:fd/fg/gk/ff), 1989-1998, XYG",
+      "eurocode": "9326AGSGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1989,
+      "yearTo": 1998,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "9326AGSGN",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-300-gruzovoy-furgon-2007-agc/",
+      "name": "Лобовое стекло Hino 300 Грузовой Фургон, 2007-, AGC",
+      "eurocode": "H300AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "AGC",
+      "features": {
+        "Eurocode": "H300AGS",
+        "Производитель": "AGC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-500-y77-shirokaya-kabina-ranger-fd1-7tonn-2001-xyg/",
+      "name": "Лобовое стекло Hino 500 Y77 (широкая Кабина) Ranger Fd1 (7тонн), 2001-, XYG",
+      "eurocode": "Y077AGSGN",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "Y077AGSGN",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/higer/lobovoe-steklo-higer-klq-6119-2010-fyg-1/",
+      "name": "Лобовое стекло Higer Klq 6119, 2010-, FYG",
+      "eurocode": "HIGER",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "HIGER",
+        "Производитель": "FYG",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-dutro-2000-2000-xyg-1/",
+      "name": "Лобовое стекло Hino Dutro 2000-, 2000-, XYG",
+      "eurocode": "8343AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "8343AGNBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-ranger-standart-body-rhd-5-tn-2d-truck-1989-1998-kmk/",
+      "name": "Лобовое стекло Hino Ranger Standart Body Rhd 5-тн 2d Truck, 1989-1998, KMK",
+      "eurocode": "9327AGSBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1989,
+      "yearTo": 1998,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "9327AGSBL",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-rising-ranger-y740-1995-kmk/",
+      "name": "Лобовое стекло Hino Rising Ranger Y740, 1995-, KMK",
+      "eurocode": "H740AGNBL",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "H740AGNBL",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/mercedes/lobovoe-steklo-mercedes-antos-arocs-actros-ii-uzkaya-kabina-2012-kmk-1/",
+      "name": "Лобовое стекло Mercedes Antos/arocs/actros II Узкая Кабина, 2012-, KMK",
+      "eurocode": "5443AGNCM",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "5443AGNCM",
+        "Датчик дождя": "Да",
+        "Камера": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/man/lobovoe-steklo-man-tga-xl-shirokaya-kabina-sitrak-c7h-2014-2000-kmk-1/",
+      "name": "Лобовое стекло Man Tga (xl) Широкая Кабина/sitrak C7h 2014-, 2000-, KMK",
+      "eurocode": "4912AGNBLM",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4912AGNBLM",
+        "Датчик дождя": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/gruzovyye-i-avtobusy/hino/lobovoe-steklo-hino-super-dolphin-profia-y680-fr2-2240-880-1992-xyg/",
+      "name": "Лобовое стекло Hino Super Dolphin Profia\" (680) Fr2 / Kia Granto (2000-), 1992-2000, XYG",
+      "eurocode": "0886AGS",
+      "make": "GRUZOVYYE-I-AVTOBUSY",
+      "model": "GRUZOVYYE I AVTOBUSY",
+      "yearFrom": 1992,
+      "yearTo": 2000,
+      "glassType": "frontrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "0886AGS",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/fiat/bokovoe-steklo-fiat-doblo-ii-2010-tamcam/",
+      "name": "Боковое стекло Fiat Doblo II, 2010-, TAMCAM",
+      "eurocode": "3369RGSV2FD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "TAMCAM",
+      "features": {
+        "Eurocode": "3369RGSV2FD",
+        "Производитель": "TAMCAM",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/fiat/bokovoe-steklo-fiat-doblo-i-panorama-1999-2005-tezcam/",
+      "name": "Боковое стекло Fiat Doblo I (panorama), 1999-2005, TEZCAM",
+      "eurocode": "3354LGSV2FD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "glassType": "sideglass",
+      "brand": "TEZCAM",
+      "features": {
+        "Eurocode": "3354LGSV2FD",
+        "Производитель": "LEMSON",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/opel/bokovoe-steklo-opel-astra-iv-j-5d-hb-5d-wag-4d-sed-2009-steklolux/",
+      "name": "Боковое стекло Opel Astra IV (j) 5d Hb/5d Wag/4d Sed, 2009-, STEKLOLUX",
+      "eurocode": "6324RGNH5FD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "STEKLOLUX",
+      "features": {
+        "Eurocode": "6324RGNH5FD",
+        "Производитель": "STEKLOLUX"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/toyota/zadnee-steklo-toyota-rav-4-iii-2006-2012-lemson-1/",
+      "name": "Заднее стекло Toyota Rav-4 III, 2006-2012, LEMSON",
+      "eurocode": "8372BCLR",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2006,
+      "yearTo": 2012,
+      "glassType": "bakrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "8372BCLR",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/vaz/zadnee-steklo-lada-vesta-2017-bor/",
+      "name": "Заднее стекло Lada Vesta, 2017-, БОР",
+      "eurocode": "4592BGSE",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "bakrute",
+      "brand": "БОР",
+      "features": {
+        "Eurocode": "4592BGSE",
+        "Производитель": "БОР"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/hyundai/zadnee-steklo-hyundai-solaris-i-rb-2010-lemson/",
+      "name": "Заднее стекло Hyundai Solaris I (rb), 2010-, LEMSON",
+      "eurocode": "4150BGNS",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "bakrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4150BGNS",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/skoda/zadnee-steklo-skoda-octavia-iii-1z-a5-2004-2013-lemson-3/",
+      "name": "Заднее стекло Skoda Octavia III 1z (a5), 2004-2013, LEMSON",
+      "eurocode": "7810BCLH",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2004,
+      "yearTo": 2013,
+      "glassType": "bakrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "7810BCLH",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/nissan/bokovoe-steklo-nissan-note-i-2006-2013-xyg/",
+      "name": "Боковое стекло Nissan Note I, 2006-2013, XYG",
+      "eurocode": "6041RGSH5RD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "glassType": "sideglass",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "6041RGSH5RD",
+        "Производитель": "SEKURIT"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/kia/bokovoe-steklo-kia-spectra-shuma-ii-sephia-ii-mentor-2001-lemson-1/",
+      "name": "Боковое стекло Kia Spectra/shuma Ii/sephia Ii/mentor, 2001-, LEMSON",
+      "eurocode": "4409RGNS4FD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4409RGNS4FD",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/nissan/bokovoe-steklo-nissan-patrol-y62-2010-2019-xyg/",
+      "name": "Боковое стекло Nissan Patrol (y62), 2010-2019, XYG",
+      "eurocode": "60A2RGNR5FD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2010,
+      "yearTo": 2019,
+      "glassType": "sideglass",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "60A2RGNR5FD",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/honda/zadnee-steklo-honda-hr-v-1998-2006-kmk/",
+      "name": "Заднее стекло Honda Hr-v, 1998-2006, KMK",
+      "eurocode": "3967BGNR",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 1998,
+      "yearTo": 2006,
+      "glassType": "bakrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "3967BGNR",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/honda/zadnee-steklo-honda-freed-i-freed-spike-2008-2016-kmk/",
+      "name": "Заднее стекло Honda Freed I / Freed Spike, 2008-2016, KMK",
+      "eurocode": "39C2BGPV",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2008,
+      "yearTo": 2016,
+      "glassType": "bakrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "39C2BGPV",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/volkswagen/zadnee-steklo-vw-tiguan-i-2007-2016-lemson-2/",
+      "name": "Заднее стекло Vw Tiguan I, 2007-2016, LEMSON",
+      "eurocode": "8595BCLRA",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2007,
+      "yearTo": 2016,
+      "glassType": "bakrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "8595BCLRA",
+        "Антенна": "Да",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/lobovoe/tesla/lobovoe-steklo-tesla-model-3-2017-2023-kmk/",
+      "name": "Лобовое стекло Tesla Model 3, 2017-2023, KMK",
+      "eurocode": "9789AGNCMV",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2017,
+      "yearTo": 2023,
+      "glassType": "frontrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "9789AGNCMV",
+        "Датчик дождя": "Да",
+        "Камера": "Да",
+        "VIN на стекле": "Да",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/porsche/zadnee-steklo-porsche-macan-2013-2019-fyg/",
+      "name": "Заднее стекло Porsche Macan, 2013-2019, FYG",
+      "eurocode": "6736BGNRAIJZ",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2013,
+      "yearTo": 2019,
+      "glassType": "bakrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "6736BGNRAIJZ",
+        "Антенна": "Да",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/skoda/bokovoe-steklo-skoda-kodiaq-i-2017-sisecam/",
+      "name": "Боковое стекло Skoda Kodiaq I, 2017-, SISECAM",
+      "eurocode": "7820RGPR5RD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SISECAM",
+      "features": {
+        "Eurocode": "7820RGPR5RD",
+        "Производитель": "AGC"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/ssangyong/zadnee-steklo-ssangyong-actyon-ii-korando-iii-suv-2010-2019-kmk/",
+      "name": "Заднее стекло Ssangyong Actyon II / Korando III Suv, 2010-2019, KMK",
+      "eurocode": "3029BGNR5W",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2010,
+      "yearTo": 2019,
+      "glassType": "bakrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "3029BGNR5W",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/mercedes/zadnee-steklo-mercedes-s-class-iv-w220-1999-2006-benson/",
+      "name": "Заднее стекло Mercedes S-class IV (w220), 1999-2006, BENSON",
+      "eurocode": "5344BGNSABGK",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 1999,
+      "yearTo": 2006,
+      "glassType": "bakrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "5344BGNSABGK",
+        "Антенна": "Да",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/toyota/bokovoe-steklo-toyota-landcruiser-200-kuzov-2008-2021-kmk/",
+      "name": "Боковое стекло Toyota Landcruiser (200 Кузов), 2008-2021, KMK",
+      "eurocode": "8378LGNR5FD1J",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2008,
+      "yearTo": 2021,
+      "glassType": "sideglass",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8378LGNR5FD1J",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/kia/zadnee-steklo-kia-proceed-ii-2013-2018-benson/",
+      "name": "Заднее стекло Kia Proceed II, 2013-2018, BENSON",
+      "eurocode": "4444BGNHI",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2013,
+      "yearTo": 2018,
+      "glassType": "bakrute",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "4444BGNHI",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/toyota/bokovoe-steklo-toyota-landcruiser-200-kuzov-2007-2021-kmk/",
+      "name": "Боковое стекло Toyota Landcruiser (200 Кузов), 2007-2021, KMK",
+      "eurocode": "8378RGNR5FD1J",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2007,
+      "yearTo": 2021,
+      "glassType": "sideglass",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "8378RGNR5FD1J",
+        "Производитель": "XYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/gaz/bokovoe-steklo-gazel-next-gazon-next-nn-ural-next-sadko-next-2013-kmk-1/",
+      "name": "Боковое стекло ГАЗель Next/газон Next/nn/ural Next/садко Next, 2013-, KMK",
+      "eurocode": "4584RGNV2RQ",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4584RGNV2RQ",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/bmw/bokovoe-steklo-bmw-x7-g07-2018-fyg/",
+      "name": "Боковое стекло BMW X7 (g07), 2018-, FYG",
+      "eurocode": "2493RGRR5FDKW",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "2493RGRR5FDKW",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/volkswagen/zadnee-steklo-vw-golf-iv-a4-bora-1997-2003-lemson/",
+      "name": "Заднее стекло Vw Golf IV (a4) / Bora, 1997-2003, LEMSON",
+      "eurocode": "8558BCLHB",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 1997,
+      "yearTo": 2003,
+      "glassType": "bakrute",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "8558BCLHB",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/chevrolet/zadnee-steklo-chevrolet-captiva-2006-2013-fyg/",
+      "name": "Заднее стекло Chevrolet Captiva, 2006-2013, FYG",
+      "eurocode": "3024BGNRO1H",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "glassType": "bakrute",
+      "brand": "FYG",
+      "features": {
+        "Eurocode": "3024BGNRO1H",
+        "Датчик запотевания": "Да",
+        "Производитель": "FYG"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/hyundai/bokovoe-steklo-hyundai-staria-2021-benson/",
+      "name": "Боковое стекло Hyundai Staria, 2021-, BENSON",
+      "eurocode": "4188LYPM5RQO1Z",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "4188LYPM5RQO1Z",
+        "Датчик запотевания": "Да",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/nissan/bokovoe-steklo-nissan-almera-v-g11-g15-ru-special-evolute-i-pro-2022-2011-steklolux/",
+      "name": "Боковое стекло Nissan Almera V (g11/g15) Ru Special / Evolute I-pro (2022-), 2011-, STEKLOLUX",
+      "eurocode": "6090LCLS4FD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "STEKLOLUX",
+      "features": {
+        "Eurocode": "6090LCLS4FD",
+        "Производитель": "STEKLOLUX"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/toyota/bokovoe-steklo-toyota-landcruiser-300-kuzov-2021-benson/",
+      "name": "Боковое стекло Toyota Landcruiser (300 Кузов), 2021-, BENSON",
+      "eurocode": "8444RGRR5FDKW",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "8444RGRR5FDKW",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/vaz/bokovoe-steklo-lada-vesta-2015-sisecam-2/",
+      "name": "Боковое стекло Lada Vesta, 2015-, SISECAM",
+      "eurocode": "4592LGNS4RD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "SISECAM",
+      "features": {
+        "Eurocode": "4592LGNS4RD",
+        "Производитель": "БОР"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/kia/zadnee-steklo-kia-optima-iii-2010-2015-kmk/",
+      "name": "Заднее стекло Kia Optima III, 2010-2015, KMK",
+      "eurocode": "4441BGNS",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2010,
+      "yearTo": 2015,
+      "glassType": "bakrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "4441BGNS",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/vaz/bokovoe-steklo-lada-granta-kalina-ii-bor/",
+      "name": "Боковое стекло Lada Granta / Kalina II, -, БОР",
+      "eurocode": "4599LGSH5RD2J",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "БОР",
+      "features": {
+        "Eurocode": "4599LGSH5RD2J",
+        "Производитель": "БОР"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/mercedes/zadnee-steklo-mercedes-s-class-iii-w140-1991-1998-kmk/",
+      "name": "Заднее стекло Mercedes S-class III (w140), 1991-1998, KMK",
+      "eurocode": "5333BGPS",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "glassType": "bakrute",
+      "brand": "KMK",
+      "features": {
+        "Eurocode": "5333BGPS",
+        "Производитель": "KMK"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/zadnee/kia/zadnee-steklo-kia-soul-i-2008-2012-xyg/",
+      "name": "Заднее стекло Kia Soul I, 2008-2012, XYG",
+      "eurocode": "4434BGSHB",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": 2008,
+      "yearTo": 2012,
+      "glassType": "bakrute",
+      "brand": "XYG",
+      "features": {
+        "Eurocode": "4434BGSHB",
+        "Производитель": "KAC",
+        "Оригинал": "Да"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/hyundai/bokovoe-steklo-hyundai-getz-2002-lemson/",
+      "name": "Боковое стекло Hyundai Getz, 2002-, LEMSON",
+      "eurocode": "4128RGNH5FD",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "LEMSON",
+      "features": {
+        "Eurocode": "4128RGNH5FD",
+        "Производитель": "LEMSON"
+      },
+      "image": null
+    },
+    {
+      "url": "https://euroglass.ru/avtostekla-dlya-legkovykh/bokovoe/hyundai/bokovoe-steklo-hyundai-tucson-iii-tl-2016-benson/",
+      "name": "Боковое стекло Hyundai Tucson III (tl), 2016-, BENSON",
+      "eurocode": "4159LGSR5RDW",
+      "make": "AVTOSTEKLA-DLYA-LEGKOVYKH",
+      "model": "AVTOSTEKLA DLYA LEGKOVYKH",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "sideglass",
+      "brand": "BENSON",
+      "features": {
+        "Eurocode": "4159LGSR5RDW",
+        "Производитель": "BENSON"
+      },
+      "image": null
+    }
+  ],
+  "meta": {
+    "total": 246,
+    "source": "euroglass.ru",
+    "filteredAt": "2026-05-18"
+  }
+}

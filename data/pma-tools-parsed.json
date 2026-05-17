@@ -1,0 +1,7438 @@
+{
+  "entries": [
+    {
+      "make": "ALFA",
+      "model": "ROMEO 145",
+      "yearFrom": 1994,
+      "yearTo": 2000,
+      "description": "WS-Cover moulding soft",
+      "eurocode": "2031ASMH",
+      "oeNumber": "0060619145",
+      "characteristic": null
+    },
+    {
+      "make": "ALFA",
+      "model": "ROMEO 147",
+      "yearFrom": 2000,
+      "yearTo": 2004,
+      "description": "WS-Cover moulding",
+      "eurocode": "2037ASMH",
+      "oeNumber": "46795551",
+      "characteristic": null
+    },
+    {
+      "make": "ALFA",
+      "model": "ROMEO 147",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "2037ASMH1H",
+      "oeNumber": "50501423",
+      "characteristic": null
+    },
+    {
+      "make": "ALFA",
+      "model": "ROMEO 156",
+      "yearFrom": 1997,
+      "yearTo": 2005,
+      "description": "WS-Cover moulding",
+      "eurocode": "2034ASMS",
+      "oeNumber": "60620898",
+      "characteristic": null
+    },
+    {
+      "make": "ALFA",
+      "model": "ROMEO 159",
+      "yearFrom": 2005,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "2039ASMS",
+      "oeNumber": "50516496",
+      "characteristic": null
+    },
+    {
+      "make": "ALFA",
+      "model": "ROMEO GTV",
+      "yearFrom": 1995,
+      "yearTo": 2005,
+      "description": "WS-Cover moulding",
+      "eurocode": "2032ASMC",
+      "oeNumber": "60606918",
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "100/A6",
+      "yearFrom": 1991,
+      "yearTo": 1997,
+      "description": "WS-Cover moulding",
+      "eurocode": "8540ASMS",
+      "oeNumber": "4A0845121C",
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "80 II Cpé.",
+      "yearFrom": 1980,
+      "yearTo": 1988,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8528ASRC",
+      "oeNumber": "855845121B",
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "80 III/IV Sedan",
+      "yearFrom": 1978,
+      "yearTo": 1986,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8526ASRS",
+      "oeNumber": "811845121C",
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "80 V Sedan 4dr",
+      "yearFrom": 1987,
+      "yearTo": 1994,
+      "description": "BL-Cover moulding",
+      "eurocode": "8534BSMS",
+      "oeNumber": "8A5845521B",
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "80 V Sedan/Estate",
+      "yearFrom": 1987,
+      "yearTo": 1994,
+      "description": "WS-Cover moulding incl. sleeve, 2 pieces",
+      "eurocode": "8534AKMS",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "80 V Sedan/Estate",
+      "yearFrom": 1987,
+      "yearTo": 1994,
+      "description": "WS-Cover moulding incl. sleeve, 6 pieces",
+      "eurocode": "8534AR",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "A3",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Cover trim soft, top",
+      "eurocode": "8554ASMHT",
+      "oeNumber": "8L0845131C",
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "A3",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "8554ASMHB",
+      "oeNumber": "8L0853306",
+      "characteristic": null
+    },
+    {
+      "make": "AUDI",
+      "model": "A4",
+      "yearFrom": 1994,
+      "yearTo": 2000,
+      "description": "WS-Cover trim soft, top",
+      "eurocode": "8547ASMST",
+      "oeNumber": "8D0845131C",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "1 Series E81/E82/E87/E88",
+      "yearFrom": 2004,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "2448ASMH",
+      "oeNumber": "51317058224",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "1 Series E81/E82/E87/E88",
+      "yearFrom": 2004,
+      "yearTo": 2011,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "2448ASMHB",
+      "oeNumber": "51317133291",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E30",
+      "yearFrom": 1983,
+      "yearTo": 1987,
+      "description": "WS-Rubber solid with insert gap",
+      "eurocode": "2425ASRS",
+      "oeNumber": "51311913887",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E36 Cpé./Conv.",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Cover moulding",
+      "eurocode": "2432ASMC",
+      "oeNumber": "51311977607",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E36 Sedan/Estate/Conv.",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "2431ASMST",
+      "oeNumber": "51311977275",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E46 Compact",
+      "yearFrom": 2001,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "2442ASMH",
+      "oeNumber": "51318252386",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E46 Cpé.",
+      "yearFrom": 1999,
+      "yearTo": 2006,
+      "description": "BL-Moulding",
+      "eurocode": "2437BSMC",
+      "oeNumber": "51318208471",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E46 Cpé./Conv.",
+      "yearFrom": 1999,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "2437ASMC",
+      "oeNumber": "51318208468",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E46 Sedan",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "BL-Cover moulding",
+      "eurocode": "2436BSMS",
+      "oeNumber": "51318196166",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E46 Sedan/Estate",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "2436ASMS",
+      "oeNumber": "51318196162",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E90/E91 Sedan/Estate",
+      "yearFrom": 2005,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "2447ASMST",
+      "oeNumber": "51317061967",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E90/E91 Sedan/Estate",
+      "yearFrom": 2005,
+      "yearTo": 2012,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "2447ASMSB",
+      "oeNumber": "51137133292",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E92 Cpé.",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "2454ASMC",
+      "oeNumber": "51317119711",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E92 Cpé.",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "2454ASMCB",
+      "oeNumber": "51137133292",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E93 Conv.",
+      "yearFrom": 2007,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "2450ASMT",
+      "oeNumber": "51317150646",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "3 Series E93 Conv.",
+      "yearFrom": 2007,
+      "yearTo": 2013,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "2450ASMTB",
+      "oeNumber": "51137133292",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "5 Series E34",
+      "yearFrom": 1988,
+      "yearTo": 1995,
+      "description": "WS-Trim set, metal, 2 pieces",
+      "eurocode": "2426AKMS",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "5 Series E39 Sedan",
+      "yearFrom": 1995,
+      "yearTo": 2004,
+      "description": "BL-Moulding",
+      "eurocode": "2434BSMS",
+      "oeNumber": "51318159785",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "5 Series E39 Sedan",
+      "yearFrom": 1995,
+      "yearTo": 2004,
+      "description": "BL-Trim, bottom",
+      "eurocode": "2434BSMSB",
+      "oeNumber": "51318159786",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "5 Series E39",
+      "yearFrom": 1995,
+      "yearTo": 2004,
+      "description": "Expanding foam rubber self-adhesive, 1,50 m, 20 mm",
+      "eurocode": "2434ASDSB",
+      "oeNumber": "51488224782",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "BMW",
+      "model": "5 Series E39",
+      "yearFrom": 1995,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "2434ASMS",
+      "oeNumber": "51318159784",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "5 Series E60 Sedan",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "BL-Moulding",
+      "eurocode": "2445BSMS",
+      "oeNumber": "51317027916",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "5 Series E60/E61",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "2445ASMST",
+      "oeNumber": "51317166841",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "6 Series E63/E64",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "2446ASMC",
+      "oeNumber": "51317008911",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "7 Series E38",
+      "yearFrom": 1994,
+      "yearTo": 2001,
+      "description": "WS-Trim, top",
+      "eurocode": "2433ASMST",
+      "oeNumber": "51318125887",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "7 Series E65",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "Expanding foam rubber self-adhesive, 1,50 m, 20 mm",
+      "eurocode": "2443ASDSB",
+      "oeNumber": "51487067242",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "BMW",
+      "model": "7 Series E65",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Trim, top",
+      "eurocode": "2443ASMST",
+      "oeNumber": "51317172022",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "X3 E83",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "2449ASMRT",
+      "oeNumber": "51313415508",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "X5 E53",
+      "yearFrom": 1999,
+      "yearTo": 2007,
+      "description": "WS-Trim, top",
+      "eurocode": "2439ASMRT",
+      "oeNumber": "51317182004",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "X5 E70 HUD",
+      "yearFrom": 2007,
+      "yearTo": 2013,
+      "description": "WS-Trim, top",
+      "eurocode": "2452ASMRT1H",
+      "oeNumber": "51317178232",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "X5 E70",
+      "yearFrom": 2007,
+      "yearTo": 2013,
+      "description": "WS-Trim, top",
+      "eurocode": "2452ASMRT",
+      "oeNumber": "51317157681",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "X5 F15",
+      "yearFrom": 2013,
+      "yearTo": 2015,
+      "description": "WS-Profile self-adhesive, top",
+      "eurocode": "2473ASGRT",
+      "oeNumber": "51317292394",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "BMW",
+      "model": "X6 E71/E72 HUD",
+      "yearFrom": 2008,
+      "yearTo": 2014,
+      "description": "WS-Trim, top",
+      "eurocode": "2456ASMRT1H",
+      "oeNumber": "51317179738",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "X6 E71/E72",
+      "yearFrom": 2008,
+      "yearTo": 2014,
+      "description": "WS-Trim, top",
+      "eurocode": "2456ASMRT",
+      "oeNumber": "51317179737",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "Z3 E36/7 Roadster",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "2435ASMT",
+      "oeNumber": "51318397613",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "Z4 E85 Roadster",
+      "yearFrom": 2003,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "2444ASMT",
+      "oeNumber": "51317017021",
+      "characteristic": null
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Aveo",
+      "yearFrom": 2006,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "3022ASMS",
+      "oeNumber": "96648415",
+      "characteristic": null
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Epica",
+      "yearFrom": 2006,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "3023ASMS",
+      "oeNumber": "96632646",
+      "characteristic": null
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Express Van",
+      "yearFrom": 1996,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "AC40ASMV",
+      "oeNumber": "15120891",
+      "characteristic": null
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "GMC G-Serie Van",
+      "yearFrom": 1975,
+      "yearTo": 1980,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "AC03ASRV",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Matiz II",
+      "yearFrom": 2005,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "3017ASMH",
+      "oeNumber": "96599359",
+      "characteristic": null
+    },
+    {
+      "make": "CHRYSLER",
+      "model": "300C",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "A234ASMT",
+      "oeNumber": "04805887AC",
+      "characteristic": null
+    },
+    {
+      "make": "CHRYSLER",
+      "model": "Neon I",
+      "yearFrom": 1995,
+      "yearTo": 1999,
+      "description": "WS-Moulding",
+      "eurocode": "A220ASMS",
+      "oeNumber": "5288535",
+      "characteristic": null
+    },
+    {
+      "make": "CHRYSLER",
+      "model": "Voyager III",
+      "yearFrom": 1996,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "A223ASMV",
+      "oeNumber": "4716936",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "AX",
+      "yearFrom": 1987,
+      "yearTo": 1997,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "2717AKMH1G",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Berlingo I",
+      "yearFrom": 1997,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "2724ASMV",
+      "oeNumber": "8120A6",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Berlingo I",
+      "yearFrom": 1997,
+      "yearTo": 2008,
+      "description": "WS-Moulding incl. spacer, 4 pieces",
+      "eurocode": "2724AKMV",
+      "oeNumber": "8120A6, 96060797",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C-Crosser",
+      "yearFrom": 2007,
+      "yearTo": 2013,
+      "description": "WS-Trim, top",
+      "eurocode": "2738ASMRT",
+      "oeNumber": "8120V9",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C2",
+      "yearFrom": 2002,
+      "yearTo": 2010,
+      "description": "WS-Trim set incl. spacer, 6 pieces",
+      "eurocode": "2731AKKH2F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C2",
+      "yearFrom": 2002,
+      "yearTo": 2010,
+      "description": "WS-Trim set, 2 pieces",
+      "eurocode": "2731AKMH1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C2",
+      "yearFrom": 2002,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "2731ASMHT",
+      "oeNumber": "8120L9",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C2",
+      "yearFrom": 2002,
+      "yearTo": 2010,
+      "description": "WS-Waterpanel moulding solid",
+      "eurocode": "2731ASMHB",
+      "oeNumber": "8251R4",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "CITROEN",
+      "model": "C25",
+      "yearFrom": 1982,
+      "yearTo": 1994,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "2716ASRV",
+      "oeNumber": "812073",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C3",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "2726ASMH",
+      "oeNumber": "8120N6",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C3",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Moulding set, 2 pieces",
+      "eurocode": "2726AKMH1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C3",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Waterpanel moulding solid",
+      "eurocode": "2726ASMHB",
+      "oeNumber": "8251N0",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "WS-Trim, left",
+      "eurocode": "2732ASMHL",
+      "oeNumber": "8120Q2",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "WS-Trim, right",
+      "eurocode": "2732ASMHR",
+      "oeNumber": "8120Q3",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "2727ASMH",
+      "oeNumber": "8120H9",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Moulding set incl. spacer, 8 pieces",
+      "eurocode": "2727AKKH1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Moulding set, 2 pieces",
+      "eurocode": "2727AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Waterpanel moulding solid",
+      "eurocode": "2727ASMHB",
+      "oeNumber": "8251H8",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "CITROEN",
+      "model": "C8",
+      "yearFrom": 2002,
+      "yearTo": 2014,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "2728ASMVB",
+      "oeNumber": "8251K9",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Evasion Jumpy",
+      "yearFrom": 1994,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "2721ASMV",
+      "oeNumber": "812083",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Jumper",
+      "yearFrom": 1994,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "2722ASMV1H",
+      "oeNumber": "8120H7",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Saxo",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "BL-Moulding",
+      "eurocode": "2723BSMH",
+      "oeNumber": "874557",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Saxo",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "2723ASMH",
+      "oeNumber": "812069",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Visa/C15",
+      "yearFrom": 1980,
+      "yearTo": 1989,
+      "description": "WS-Rubber solid",
+      "eurocode": "2714ASRH",
+      "oeNumber": "95532904",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Xantia",
+      "yearFrom": 1993,
+      "yearTo": 2001,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "2720AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Xsara Picasso",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "2729ASMV",
+      "oeNumber": "8120L1",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Xsara Picasso",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "2729AKKV",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Xsara",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "description": "WS-Trim incl. spacer, top, 3 pieces",
+      "eurocode": "2725AKKHT1",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "Xsara",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "description": "WS-Trim, top",
+      "eurocode": "2725ASMHT",
+      "oeNumber": "8120000000",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "ZX",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "2719AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "DACIA",
+      "model": "Logan",
+      "yearFrom": 2004,
+      "yearTo": 2012,
+      "description": "WS-Trim, bottom",
+      "eurocode": "7264ASMSB",
+      "oeNumber": "6001547001",
+      "characteristic": null
+    },
+    {
+      "make": "DACIA",
+      "model": "Logan",
+      "yearFrom": 2004,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "7264ASMST",
+      "oeNumber": "6001547000",
+      "characteristic": null
+    },
+    {
+      "make": "DACIA",
+      "model": "Sandero",
+      "yearFrom": 2008,
+      "yearTo": 2012,
+      "description": "WS-Trim, bottom",
+      "eurocode": "7276ASMHB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "DACIA",
+      "model": "Sandero",
+      "yearFrom": 2008,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "7276ASMHT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Espero",
+      "yearFrom": 1991,
+      "yearTo": 1999,
+      "description": "WS-Moulding",
+      "eurocode": "3001ASMS",
+      "oeNumber": "96119372",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Evanda",
+      "yearFrom": 2003,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "3012ASMS",
+      "oeNumber": "96470052",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Kalos",
+      "yearFrom": 2002,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "3014ASMH",
+      "oeNumber": "96395388",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Lacetti",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "3016ASMH",
+      "oeNumber": "96543951",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Leganza",
+      "yearFrom": 1997,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "3005ASMS",
+      "oeNumber": "96329830",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Matiz I",
+      "yearFrom": 1998,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "3006ASMH",
+      "oeNumber": "96314513",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Nexia",
+      "yearFrom": 1995,
+      "yearTo": 1997,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "3000ASMH",
+      "oeNumber": "96189875",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Nubira I",
+      "yearFrom": 1997,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "3004ASMH",
+      "oeNumber": "96302348",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Nubira II",
+      "yearFrom": 2003,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "3016ASMS",
+      "oeNumber": "96543951",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Tacuma/Rezzo",
+      "yearFrom": 2000,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "3011ASMV",
+      "oeNumber": "96261542",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Tico",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Trim, inside",
+      "eurocode": "3002SDHI",
+      "oeNumber": "84614A70B01",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Tico",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Trim, left",
+      "eurocode": "3002ASMHL",
+      "oeNumber": "P84613A78B02",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Tico",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Trim, right",
+      "eurocode": "3002ASMHR",
+      "oeNumber": "P84612A78B02",
+      "characteristic": null
+    },
+    {
+      "make": "DAEWOO",
+      "model": "Tico",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Trim, top",
+      "eurocode": "3002ASMHT",
+      "oeNumber": "8461178B00",
+      "characteristic": null
+    },
+    {
+      "make": "DAF",
+      "model": "95-TE47/Pegaso",
+      "yearFrom": 1987,
+      "yearTo": 1995,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "4624ASRL",
+      "oeNumber": "1210468",
+      "characteristic": null
+    },
+    {
+      "make": "DAF",
+      "model": "95-TE47/Pegaso",
+      "yearFrom": 1996,
+      "yearTo": 1998,
+      "description": "WS-Rubber solid with rain channel",
+      "eurocode": "4624ASRL1",
+      "oeNumber": "1210468",
+      "characteristic": null
+    },
+    {
+      "make": "DAF",
+      "model": "F75/F85",
+      "yearFrom": 1993,
+      "yearTo": 2001,
+      "description": "WS-Moulding bonded",
+      "eurocode": "4625ASML",
+      "oeNumber": "1961440 (EX1818077)",
+      "characteristic": null
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "Cuore V",
+      "yearFrom": 1999,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "2924ASMH",
+      "oeNumber": "7553397202",
+      "characteristic": null
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "Cuore VI",
+      "yearFrom": 2003,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "2927ASMH",
+      "oeNumber": "75533B2020",
+      "characteristic": null
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "Gran Move",
+      "yearFrom": 1997,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "2921ASMV",
+      "oeNumber": "7553387705",
+      "characteristic": null
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "Move",
+      "yearFrom": 1997,
+      "yearTo": 1999,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "2920ASRV",
+      "oeNumber": "5612187219",
+      "characteristic": null
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "Sirion I",
+      "yearFrom": 1998,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "2923ASMH",
+      "oeNumber": "7553397203",
+      "characteristic": null
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "Sirion II",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "2930ASMH",
+      "oeNumber": "75533B1010",
+      "characteristic": null
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "Terios I",
+      "yearFrom": 1997,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "2922ASMR",
+      "oeNumber": "7553387402",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Barchetta",
+      "yearFrom": 1994,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "3347ASMT",
+      "oeNumber": "46735149",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Brava 5dr",
+      "yearFrom": 1995,
+      "yearTo": 2001,
+      "description": "WS-Moulding soft",
+      "eurocode": "3348ASMH",
+      "oeNumber": "7780950",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Brava",
+      "yearFrom": 1995,
+      "yearTo": 2001,
+      "description": "WS-Moulding solid",
+      "eurocode": "3348ASMH6C",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Doblo",
+      "yearFrom": 2001,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "3354ASMVT",
+      "oeNumber": "46747414",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Ducato I",
+      "yearFrom": 1982,
+      "yearTo": 1994,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "3727ASRV",
+      "oeNumber": "7647931",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Ducato II",
+      "yearFrom": 1994,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "3735ASMV1H",
+      "oeNumber": "1327095080",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Panda I",
+      "yearFrom": 1981,
+      "yearTo": 1996,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "3333ASRH",
+      "oeNumber": "4403813",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Panda II",
+      "yearFrom": 2003,
+      "yearTo": 2012,
+      "description": "WS-Moulding",
+      "eurocode": "3359ASMH",
+      "oeNumber": "46804344",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Panda II",
+      "yearFrom": 2003,
+      "yearTo": 2012,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "3359AKKH",
+      "oeNumber": "46804344, 46541864 x 2",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Punto Conv.",
+      "yearFrom": 1994,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "3346ASMT",
+      "oeNumber": "46720205",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Punto I",
+      "yearFrom": 1993,
+      "yearTo": 1999,
+      "description": "WS-Moulding",
+      "eurocode": "3341ASMH",
+      "oeNumber": "7770724",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Punto II",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Trim, top",
+      "eurocode": "3351ASMHT",
+      "oeNumber": "46524769",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Seicento",
+      "yearFrom": 1998,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "3350ASMH",
+      "oeNumber": "46764801",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Ulysse II",
+      "yearFrom": 2002,
+      "yearTo": 2014,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "3357ASMVB",
+      "oeNumber": "9464237589",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Ulysse/Scudo",
+      "yearFrom": 1994,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "3345ASMV",
+      "oeNumber": "9408120839",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Escort IV Sedan/Estate",
+      "yearFrom": 1990,
+      "yearTo": 1998,
+      "description": "WS-Moulding soft",
+      "eurocode": "3545ASMH",
+      "oeNumber": "6807564",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Fiesta III",
+      "yearFrom": 1989,
+      "yearTo": 1996,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "3544ASRH",
+      "oeNumber": "6170243",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Fiesta IV & V",
+      "yearFrom": 1995,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "3552ASMH",
+      "oeNumber": "1049419",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Fiesta VI",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "3562ASMH",
+      "oeNumber": "1347440",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Fiesta VI",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "3562ASMHB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Focus I",
+      "yearFrom": 1998,
+      "yearTo": 2004,
+      "description": "WS-Moulding solid",
+      "eurocode": "3556ASMH",
+      "oeNumber": "1116792",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "FORD",
+      "model": "Fusion",
+      "yearFrom": 2002,
+      "yearTo": 2012,
+      "description": "WS-Moulding",
+      "eurocode": "3563ASMV",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Fusion",
+      "yearFrom": 2002,
+      "yearTo": 2012,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "3563ASMVB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Galaxy I facelift",
+      "yearFrom": 2003,
+      "yearTo": 2006,
+      "description": "WS-Waterpanel moulding set, 3 pieces",
+      "eurocode": "3550AKMVB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Galaxy I",
+      "yearFrom": 1995,
+      "yearTo": 2003,
+      "description": "WS-Trim, top",
+      "eurocode": "3550ASMVT",
+      "oeNumber": "7385528",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Ka I",
+      "yearFrom": 1996,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "3554ASMH",
+      "oeNumber": "1029915",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Kuga",
+      "yearFrom": 2008,
+      "yearTo": 2012,
+      "description": "WS-Cover trim, left",
+      "eurocode": "3574ASMRL",
+      "oeNumber": "1711019",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Kuga",
+      "yearFrom": 2008,
+      "yearTo": 2012,
+      "description": "WS-Cover trim, right",
+      "eurocode": "3574ASMRR",
+      "oeNumber": "1711018",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Kuga",
+      "yearFrom": 2008,
+      "yearTo": 2012,
+      "description": "WS-Trim self-adhesive, left",
+      "eurocode": "3574ASGRL",
+      "oeNumber": "1744560",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "FORD",
+      "model": "Kuga",
+      "yearFrom": 2008,
+      "yearTo": 2012,
+      "description": "WS-Trim self-adhesive, right",
+      "eurocode": "3574ASGRR",
+      "oeNumber": "1744553",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "FORD",
+      "model": "Maverick I",
+      "yearFrom": 1994,
+      "yearTo": 2001,
+      "description": "WS-Trim, top",
+      "eurocode": "3547ASMRT",
+      "oeNumber": "1955002",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Maverick II",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Moulding solid",
+      "eurocode": "3558ASMR",
+      "oeNumber": "4793432",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo I",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "WS-Trim set incl. spacer, 5 pieces",
+      "eurocode": "3546AKMH1",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo I",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "WS-Trim, left",
+      "eurocode": "3546ASMHL",
+      "oeNumber": "1036445",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo I",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "WS-Trim, right",
+      "eurocode": "3546ASMHR",
+      "oeNumber": "1036444",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo I",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "WS-Trim, top",
+      "eurocode": "3546ASMHT",
+      "oeNumber": "6874674",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo II & III",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Cover trim, left outside",
+      "eurocode": "3559ASMHL",
+      "oeNumber": "1305443",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo II & III",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Cover trim, right outside",
+      "eurocode": "3559ASMHR",
+      "oeNumber": "1305444",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo II & III",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim self-adhesive, left inside",
+      "eurocode": "3559ASGHL",
+      "oeNumber": "1305441",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo II & III",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim self-adhesive, right inside",
+      "eurocode": "3559ASGHR",
+      "oeNumber": "1305442",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo II & III",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim set, 4 pieces",
+      "eurocode": "3559AKMHS1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo II & III",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Trim set, left/right inside, 2 pieces",
+      "eurocode": "3569AKGHS1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo II & III",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Trim set, left/right inside/outside, 4 pieces",
+      "eurocode": "3569AKMHS2F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo IV",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Trim set, left/right outside, 2 pieces",
+      "eurocode": "3569AKMHS1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo IV",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Trim, left inside",
+      "eurocode": "3569ASGHL",
+      "oeNumber": "1518678",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo IV",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Trim, left outside",
+      "eurocode": "3569ASMHL",
+      "oeNumber": "1506265",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo IV",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Trim, right inside",
+      "eurocode": "3569ASGHR",
+      "oeNumber": "1519841",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo IV",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Trim, right outside",
+      "eurocode": "3569ASMHR",
+      "oeNumber": "1506264",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Probe II",
+      "yearFrom": 1993,
+      "yearTo": 1998,
+      "description": "WS-Moulding",
+      "eurocode": "3553ASMC",
+      "oeNumber": "3396103",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "S-Max",
+      "yearFrom": 2006,
+      "yearTo": 2015,
+      "description": "WS-Cover trim set, left/right, 2 pieces",
+      "eurocode": "3568AKGMS1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "S-Max",
+      "yearFrom": 2006,
+      "yearTo": 2015,
+      "description": "WS-Cover trim, left",
+      "eurocode": "3568ASMML",
+      "oeNumber": "1676181",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "S-Max",
+      "yearFrom": 2006,
+      "yearTo": 2015,
+      "description": "WS-Cover trim, right",
+      "eurocode": "3568ASMMR",
+      "oeNumber": "1676180",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "S-Max",
+      "yearFrom": 2006,
+      "yearTo": 2015,
+      "description": "WS-Trim self-adhesive, left",
+      "eurocode": "3568ASGML",
+      "oeNumber": "1755124",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "FORD",
+      "model": "S-Max",
+      "yearFrom": 2006,
+      "yearTo": 2015,
+      "description": "WS-Trim self-adhesive, right",
+      "eurocode": "3568ASGMR",
+      "oeNumber": "1755123",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "FORD",
+      "model": "Scorpio I & II",
+      "yearFrom": 1985,
+      "yearTo": 1998,
+      "description": "WS-Trim, top, metal",
+      "eurocode": "3541ASMHT",
+      "oeNumber": "6126069",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit Connect",
+      "yearFrom": 2003,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "3743ASMV",
+      "oeNumber": "4417444",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit IV",
+      "yearFrom": 1986,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "3731ASMV2H",
+      "oeNumber": "1027056",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit V",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim set, 3 pieces",
+      "eurocode": "3739AKMV",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit V",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, left, bright",
+      "eurocode": "3739ASMVL",
+      "oeNumber": "4376362",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit V",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, left, matt",
+      "eurocode": "3739ASMVL1C",
+      "oeNumber": "4621065",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit V",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, right, bright",
+      "eurocode": "3739ASMVR",
+      "oeNumber": "4376361",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit V",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, right, matt",
+      "eurocode": "3739ASMVR1C",
+      "oeNumber": "4621064",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit V",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "3739ASMVT6C",
+      "oeNumber": "40431361",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit VI",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Trim, left",
+      "eurocode": "3739ASMVL2C",
+      "oeNumber": "1745593",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit VI",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Trim, right",
+      "eurocode": "3739ASMVR2C",
+      "oeNumber": "1755017",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Accord Sedan",
+      "yearFrom": 1998,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "3960ASMS",
+      "oeNumber": "73150S1AE01",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Accord Sedan/Estate",
+      "yearFrom": 2003,
+      "yearTo": 2008,
+      "description": "WS-Trim, top",
+      "eurocode": "3986ASMST",
+      "oeNumber": "73150SEA013",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic CRX II",
+      "yearFrom": 1987,
+      "yearTo": 1992,
+      "description": "WS-Moulding soft",
+      "eurocode": "3932ASMC1D",
+      "oeNumber": "75150SH2024",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic CRX III",
+      "yearFrom": 1992,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "3948ASMCT",
+      "oeNumber": "73151SR2003",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic Hybrid",
+      "yearFrom": 2006,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "3999ASMST",
+      "oeNumber": "73150SN4003",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic IV 3dr",
+      "yearFrom": 1987,
+      "yearTo": 1991,
+      "description": "WS-Moulding soft",
+      "eurocode": "3930ASMH1D",
+      "oeNumber": "73150SH3024",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic V 3dr",
+      "yearFrom": 1991,
+      "yearTo": 1995,
+      "description": "WS-Trim, top",
+      "eurocode": "3941ASMHT",
+      "oeNumber": "73151SR3013",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic V 4dr",
+      "yearFrom": 1991,
+      "yearTo": 1995,
+      "description": "WS-Trim, top",
+      "eurocode": "3940ASMST",
+      "oeNumber": "73151SR3013",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic VI 3dr",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "3956ASMH",
+      "oeNumber": "73150S03013",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic VI 4dr",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "3957ASMS",
+      "oeNumber": "73150S04013",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic VI 5dr",
+      "yearFrom": 1995,
+      "yearTo": 2001,
+      "description": "WS-Trim, top",
+      "eurocode": "3954ASMHT",
+      "oeNumber": "73151ST3E01",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic VII 3dr",
+      "yearFrom": 2001,
+      "yearTo": 2005,
+      "description": "WS-Trim, top",
+      "eurocode": "3976ASMHT",
+      "oeNumber": "73150S5SE01",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic VII 4dr",
+      "yearFrom": 2001,
+      "yearTo": 2005,
+      "description": "WS-Trim, top",
+      "eurocode": "3980ASMST",
+      "oeNumber": "73150S5A003",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic VII 5dr",
+      "yearFrom": 2001,
+      "yearTo": 2005,
+      "description": "WS-Trim, top",
+      "eurocode": "3974ASMHT",
+      "oeNumber": "73150S6DE01",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic VII Cpé.",
+      "yearFrom": 2001,
+      "yearTo": 2005,
+      "description": "WS-Trim, top",
+      "eurocode": "3964ASMCT",
+      "oeNumber": "73150S5PA01",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Civic VIII 5dr",
+      "yearFrom": 2006,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "3998ASMHT",
+      "oeNumber": "73150SMGE01",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Concerto SJ4",
+      "yearFrom": 1991,
+      "yearTo": 1995,
+      "description": "WS-Trim, top",
+      "eurocode": "3943ASMHT",
+      "oeNumber": "73151SK3000",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "CR-V I",
+      "yearFrom": 1997,
+      "yearTo": 2002,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "3962ASMR",
+      "oeNumber": "73150S10023",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "CR-V II",
+      "yearFrom": 2002,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "3983ASMRT",
+      "oeNumber": "73150SCAE00",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "CR-V III",
+      "yearFrom": 2006,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "4000ASMRT",
+      "oeNumber": "73150SWA003",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "FR-V",
+      "yearFrom": 2005,
+      "yearTo": 2009,
+      "description": "WS-Trim, top",
+      "eurocode": "3992ASMVT",
+      "oeNumber": "73150DJD003",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "HR-V",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "3967ASMR",
+      "oeNumber": "73150S2H003",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Jazz",
+      "yearFrom": 2002,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "3979ASMH",
+      "oeNumber": "73150SAA013",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Prelude IV",
+      "yearFrom": 1992,
+      "yearTo": 1997,
+      "description": "WS-Moulding",
+      "eurocode": "3942ASMC",
+      "oeNumber": "73150SS0010",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Prelude V",
+      "yearFrom": 1997,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "3961ASMC",
+      "oeNumber": "73150S30003",
+      "characteristic": null
+    },
+    {
+      "make": "HONDA",
+      "model": "Shuttle III",
+      "yearFrom": 1995,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "3955ASMVT",
+      "oeNumber": "73151SX0003",
+      "characteristic": null
+    },
+    {
+      "make": "HUMMER",
+      "model": "H3",
+      "yearFrom": 2005,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "AG13ASMRT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "HYMER",
+      "model": "Motorhome B-Class 540-750 S-KL",
+      "yearFrom": 1995,
+      "yearTo": 1997,
+      "description": "WS-Rubber solid, 5830 mm",
+      "eurocode": "9312ASRV",
+      "oeNumber": "0318014",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Accent I",
+      "yearFrom": 1994,
+      "yearTo": 1999,
+      "description": "WS-Moulding",
+      "eurocode": "4109ASMH",
+      "oeNumber": "8613022000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Accent II",
+      "yearFrom": 1999,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "4118ASMH",
+      "oeNumber": "8613125000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Accent III",
+      "yearFrom": 2005,
+      "yearTo": 2011,
+      "description": "WS-Trim self-adhesive, top",
+      "eurocode": "4134ASMHT",
+      "oeNumber": "861311E000",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Atos Prime",
+      "yearFrom": 2000,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "4121ASMV",
+      "oeNumber": "8613105000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Atos",
+      "yearFrom": 1998,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "4115ASMH",
+      "oeNumber": "8613102000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Coupé I",
+      "yearFrom": 1996,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "4113ASMC",
+      "oeNumber": "8613127000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Coupé II",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "4127ASMC",
+      "oeNumber": "861312C000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Elantra",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "4122ASMHT",
+      "oeNumber": "861352D000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Galloper",
+      "yearFrom": 1991,
+      "yearTo": 2003,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "4114ASRR",
+      "oeNumber": "HR530120",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Getz",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "4128ASMH",
+      "oeNumber": "861311C000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "H-1/Starex",
+      "yearFrom": 1997,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "4116ASMV",
+      "oeNumber": "861304A000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "H-100",
+      "yearFrom": 1994,
+      "yearTo": 1998,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "4107ASRV",
+      "oeNumber": "8612043000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "i10",
+      "yearFrom": 2008,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "4137ASMH",
+      "oeNumber": "861310X000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "i20",
+      "yearFrom": 2008,
+      "yearTo": 2014,
+      "description": "WS-Moulding",
+      "eurocode": "4139ASMH",
+      "oeNumber": "861311J000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "i30",
+      "yearFrom": 2007,
+      "yearTo": 2011,
+      "description": "WS-Trim, left",
+      "eurocode": "4135ASMHL",
+      "oeNumber": "861312L000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "i30",
+      "yearFrom": 2007,
+      "yearTo": 2011,
+      "description": "WS-Trim, right",
+      "eurocode": "4135ASMHR",
+      "oeNumber": "861322L000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "i30",
+      "yearFrom": 2007,
+      "yearTo": 2011,
+      "description": "WS-Trim, top",
+      "eurocode": "4135ASMHT",
+      "oeNumber": "861352L000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "ix35",
+      "yearFrom": 2010,
+      "yearTo": 2015,
+      "description": "WS-Moulding",
+      "eurocode": "4141ASMR",
+      "oeNumber": "861302S000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "ix55",
+      "yearFrom": 2007,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "4140ASMR",
+      "oeNumber": "861313J010",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Matrix I",
+      "yearFrom": 2001,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "4125ASMH",
+      "oeNumber": "8613117000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Santa Fe I",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "4123ASMR",
+      "oeNumber": "8613126000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Santa Fe II",
+      "yearFrom": 2006,
+      "yearTo": 2012,
+      "description": "WS-Moulding",
+      "eurocode": "4133ASMR",
+      "oeNumber": "861312B000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Santamo",
+      "yearFrom": 1999,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "4126ASMV",
+      "oeNumber": "86150M2000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Sonata III",
+      "yearFrom": 1999,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "4117ASMS",
+      "oeNumber": "8613738000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Sonata IV",
+      "yearFrom": 2005,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "4130ASMST",
+      "oeNumber": "861303K000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Terracan",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "4124ASMR",
+      "oeNumber": "86130H1010",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Trajet",
+      "yearFrom": 2000,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "4120ASMV",
+      "oeNumber": "861313A000",
+      "characteristic": null
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "Tucson",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "4129ASMR",
+      "oeNumber": "861312E000",
+      "characteristic": null
+    },
+    {
+      "make": "INFINITI",
+      "model": "FX35/FX45",
+      "yearFrom": 2003,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "6033ASMR",
+      "oeNumber": "72750CG000",
+      "characteristic": null
+    },
+    {
+      "make": "IVECO",
+      "model": "Daily I High",
+      "yearFrom": 1990,
+      "yearTo": 1998,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "3725ASRV1A",
+      "oeNumber": "93926149",
+      "characteristic": null
+    },
+    {
+      "make": "IVECO",
+      "model": "Daily II",
+      "yearFrom": 1999,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "3741ASMV",
+      "oeNumber": "97169308",
+      "characteristic": null
+    },
+    {
+      "make": "IVECO",
+      "model": "EuroCargo II",
+      "yearFrom": 2003,
+      "yearTo": 2008,
+      "description": "WS-Trim, top",
+      "eurocode": "3744ASMLT",
+      "oeNumber": "504058103",
+      "characteristic": null
+    },
+    {
+      "make": "IVECO",
+      "model": "EuroCargo",
+      "yearFrom": 1991,
+      "yearTo": 2003,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "3732ASRL",
+      "oeNumber": "08143851",
+      "characteristic": null
+    },
+    {
+      "make": "IVECO",
+      "model": "EuroTech",
+      "yearFrom": 1992,
+      "yearTo": 2002,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "3734ASRL",
+      "oeNumber": "08143852",
+      "characteristic": null
+    },
+    {
+      "make": "JEEP",
+      "model": "Cherokee KJ",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Trim, top",
+      "eurocode": "AJ09ASMRT",
+      "oeNumber": "55235917AC",
+      "characteristic": null
+    },
+    {
+      "make": "JEEP",
+      "model": "Cherokee XJ",
+      "yearFrom": 1992,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "AJ03ASMR",
+      "oeNumber": "55235391AB",
+      "characteristic": null
+    },
+    {
+      "make": "JEEP",
+      "model": "Commander",
+      "yearFrom": 2006,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "AJ11ASMRT",
+      "oeNumber": "55369035AC",
+      "characteristic": null
+    },
+    {
+      "make": "JEEP",
+      "model": "Grand Cherokee I",
+      "yearFrom": 1993,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "AJ05ASMRT",
+      "oeNumber": "55134847",
+      "characteristic": null
+    },
+    {
+      "make": "JEEP",
+      "model": "Grand Cherokee II",
+      "yearFrom": 1999,
+      "yearTo": 2004,
+      "description": "WS-Trim, top",
+      "eurocode": "AJ07ASMRT",
+      "oeNumber": "55135592AC",
+      "characteristic": null
+    },
+    {
+      "make": "JEEP",
+      "model": "Grand Cherokee III",
+      "yearFrom": 2005,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "AJ10ASMRT",
+      "oeNumber": "55394511AA",
+      "characteristic": null
+    },
+    {
+      "make": "JEEP",
+      "model": "Wrangler",
+      "yearFrom": 1987,
+      "yearTo": 1996,
+      "description": "WS-Moulding set, 3 pieces",
+      "eurocode": "AJ04AKMR",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "JEEP",
+      "model": "Wrangler",
+      "yearFrom": 1997,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "AJ06ASMR",
+      "oeNumber": "55176567AB",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Carens",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "4430ASMM",
+      "oeNumber": "861311D000",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Carens",
+      "yearFrom": 1999,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "4410/4419ASMV",
+      "oeNumber": "OK2C350600",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Carnival",
+      "yearFrom": 1999,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "4408ASMV",
+      "oeNumber": "OK55263401",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Cee’d",
+      "yearFrom": 2007,
+      "yearTo": 2012,
+      "description": "WS-Moulding",
+      "eurocode": "4431ASMH",
+      "oeNumber": "861301H000",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Cerato",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "4421ASMS",
+      "oeNumber": "861312F000",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Magentis I",
+      "yearFrom": 2000,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "4414ASMS",
+      "oeNumber": "861373C000",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Opirus",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "WS-Profile self-adhesive, top",
+      "eurocode": "4420ASMST",
+      "oeNumber": "861303F000",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "KIA",
+      "model": "Optima",
+      "yearFrom": 2012,
+      "yearTo": 2015,
+      "description": "WS-Moulding self-adhesive",
+      "eurocode": "4441ASMS",
+      "oeNumber": "861302T000",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "KIA",
+      "model": "Picanto",
+      "yearFrom": 2004,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "4422ASMH",
+      "oeNumber": "8613107000",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Pregio",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "4404ASMV",
+      "oeNumber": "OK72B63401B",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Pro Cee‘d",
+      "yearFrom": 2008,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "4433ASMH",
+      "oeNumber": "861301H200",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Rio II",
+      "yearFrom": 2005,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "4426ASMH",
+      "oeNumber": "861311G000",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Rio",
+      "yearFrom": 2000,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "4411ASMH",
+      "oeNumber": "OK30A50600C",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Sorento",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "4418ASMR",
+      "oeNumber": "861373E000",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Sportage I",
+      "yearFrom": 1994,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "4402ASMR",
+      "oeNumber": "OK01850601H",
+      "characteristic": null
+    },
+    {
+      "make": "KIA",
+      "model": "Sportage II",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "4424ASMR",
+      "oeNumber": "861311F000",
+      "characteristic": null
+    },
+    {
+      "make": "LANCIA",
+      "model": "Phedra",
+      "yearFrom": 2002,
+      "yearTo": 2010,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "4738ASMVB",
+      "oeNumber": "9464237589",
+      "characteristic": null
+    },
+    {
+      "make": "LANCIA",
+      "model": "Ypsilon",
+      "yearFrom": 2003,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "4737ASMH",
+      "oeNumber": "51704098",
+      "characteristic": null
+    },
+    {
+      "make": "LANCIA",
+      "model": "Zeta",
+      "yearFrom": 1994,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "4730ASMV",
+      "oeNumber": "812083",
+      "characteristic": null
+    },
+    {
+      "make": "LAND",
+      "model": "ROVER Discovery I",
+      "yearFrom": 1994,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "7022ASMRT",
+      "oeNumber": "AWR2025",
+      "characteristic": null
+    },
+    {
+      "make": "LAND",
+      "model": "ROVER Freelander I",
+      "yearFrom": 1997,
+      "yearTo": 2006,
+      "description": "WS-Moulding soft with butyl",
+      "eurocode": "7028ASMR6C",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "LAND",
+      "model": "ROVER Range Rover II LP",
+      "yearFrom": 1994,
+      "yearTo": 2002,
+      "description": "WS-Trim, top",
+      "eurocode": "7024ASMRT",
+      "oeNumber": "DCB101380",
+      "characteristic": null
+    },
+    {
+      "make": "LAND",
+      "model": "ROVER Range Rover III LM",
+      "yearFrom": 2002,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "7033ASMRT",
+      "oeNumber": "DCB500210PMD",
+      "characteristic": null
+    },
+    {
+      "make": "LAND",
+      "model": "ROVER Range Rover Sport",
+      "yearFrom": 2005,
+      "yearTo": 2013,
+      "description": "WS-Trim, top",
+      "eurocode": "7036ASMRT",
+      "oeNumber": "ECB50081PMD",
+      "characteristic": null
+    },
+    {
+      "make": "LEXUS",
+      "model": "GS 300/450",
+      "yearFrom": 2005,
+      "yearTo": 2011,
+      "description": "WS-Profile self-adhesive, top, 1164 mm",
+      "eurocode": "8362ASMST",
+      "oeNumber": "7553130370",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "LEXUS",
+      "model": "IS 200/300",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "8309ASMS",
+      "oeNumber": "7553353020",
+      "characteristic": null
+    },
+    {
+      "make": "LEXUS",
+      "model": "IS 250/350",
+      "yearFrom": 2005,
+      "yearTo": 2013,
+      "description": "WS-Trim self-adhesive, top",
+      "eurocode": "8371ASMST",
+      "oeNumber": "7553353040",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "LEXUS",
+      "model": "RX 300/400",
+      "yearFrom": 2003,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "8354ASMR",
+      "oeNumber": "7553348090",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "F2000 narrow",
+      "yearFrom": 1996,
+      "yearTo": 2000,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "4908ASRL1H",
+      "oeNumber": "81961210087",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA L/M narrow with sun visor",
+      "yearFrom": 2000,
+      "yearTo": 2005,
+      "description": "WS-Trim set, top, 18,4 mm, 2 pieces",
+      "eurocode": "4911AKML1",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA L/M narrow with sun visor",
+      "yearFrom": 2000,
+      "yearTo": 2005,
+      "description": "WS-Trim, top, 18,4 mm",
+      "eurocode": "4911ASMLT1",
+      "oeNumber": "81629100167",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA L/M narrow",
+      "yearFrom": 2000,
+      "yearTo": 2005,
+      "description": "WS-Cover trim, top outside, 39 mm",
+      "eurocode": "4911ASMLT",
+      "oeNumber": "81629100196",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA L/M narrow",
+      "yearFrom": 2000,
+      "yearTo": 2005,
+      "description": "WS-Trim set, top, 39 mm, 2 pieces",
+      "eurocode": "4911AKMLT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA XL wide with sun visor",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim set, 18,4 mm, 2 pieces",
+      "eurocode": "4912/13AKML1",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA XL wide with sun visor",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim, top, 18,4 mm",
+      "eurocode": "4912/4913ASMLT1",
+      "oeNumber": "81629100166",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA XL wide",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Cover trim, 39 mm",
+      "eurocode": "4912ASMLT",
+      "oeNumber": "81629100195",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA XL wide",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Push on channel for cover trim, top, 2202 mm",
+      "eurocode": "4912ASGLT",
+      "oeNumber": "81629100299",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA XL wide",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim set, 39 mm, 2 pieces",
+      "eurocode": "4912AKMLT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA XXL wide",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Cover trim, 39 mm",
+      "eurocode": "4913ASMLT",
+      "oeNumber": "81629100256",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA XXL wide",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Push on channel for cover trim, top, 2202 mm",
+      "eurocode": "4913ASGLT",
+      "oeNumber": "81629100172",
+      "characteristic": null
+    },
+    {
+      "make": "MAN",
+      "model": "TGA XXL wide",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim set, 39 mm",
+      "eurocode": "4913AKMLT",
+      "oeNumber": "8629100172, 8629100256",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "121 III",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "5151ASMH",
+      "oeNumber": "1E0063902",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "2",
+      "yearFrom": 2003,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "5165ASMV",
+      "oeNumber": "DD10506019E",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "2",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Moulding",
+      "eurocode": "5173ASMH",
+      "oeNumber": "D65150601",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "3",
+      "yearFrom": 2003,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "5166ASMH",
+      "oeNumber": "BP4P50601A",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "3",
+      "yearFrom": 2009,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "5175ASMH",
+      "oeNumber": "BBM450601",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "323 IV 5dr",
+      "yearFrom": 1989,
+      "yearTo": 1994,
+      "description": "WS-Trim, top",
+      "eurocode": "5136ASMHT",
+      "oeNumber": "BW5F50601A",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "323 V 3/4dr",
+      "yearFrom": 1994,
+      "yearTo": 1998,
+      "description": "WS-Moulding",
+      "eurocode": "5150ASMH",
+      "oeNumber": "BC1M506AXB",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "323 V 5dr",
+      "yearFrom": 1994,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "5149ASMHT",
+      "oeNumber": "B01A50601B",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "323 VI 4/5dr",
+      "yearFrom": 1998,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "5155ASMH",
+      "oeNumber": "B25D50601B",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "5",
+      "yearFrom": 2005,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "5168ASMV",
+      "oeNumber": "C23550601",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "6",
+      "yearFrom": 2002,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "5164ASMS",
+      "oeNumber": "GJ6A50601C",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "6",
+      "yearFrom": 2008,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "5174ASMH",
+      "oeNumber": "GS1D50601A",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 III Sedan/Estate",
+      "yearFrom": 1988,
+      "yearTo": 1991,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "5129ASMSG",
+      "oeNumber": "GRY150601AB",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 IV 5dr",
+      "yearFrom": 1992,
+      "yearTo": 1998,
+      "description": "WS-Moulding",
+      "eurocode": "5142ASMH",
+      "oeNumber": "GTOA506AXB",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 IV Sedan 4dr",
+      "yearFrom": 1992,
+      "yearTo": 1997,
+      "description": "WS-Moulding",
+      "eurocode": "5141ASMS",
+      "oeNumber": "GTOH506AXB",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 V Estate",
+      "yearFrom": 1998,
+      "yearTo": 1999,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "5156ASME",
+      "oeNumber": "G14S50601B",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 V Estate",
+      "yearFrom": 1999,
+      "yearTo": 2002,
+      "description": "WS-Moulding w/o rain channel",
+      "eurocode": "5156ASME1H",
+      "oeNumber": "G18K50601A",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 V Sedan 4/5dr",
+      "yearFrom": 1997,
+      "yearTo": 1999,
+      "description": "WS-Moulding set, 3 pieces",
+      "eurocode": "5153AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 V Sedan 4/5dr",
+      "yearFrom": 1997,
+      "yearTo": 1999,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "5153ASMH",
+      "oeNumber": "GE4T50601E",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 V Sedan 4/5dr",
+      "yearFrom": 1999,
+      "yearTo": 2002,
+      "description": "WS-Moulding w/o rain channel",
+      "eurocode": "5153ASMH1H",
+      "oeNumber": "GG2M50601A",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "CX-7",
+      "yearFrom": 2006,
+      "yearTo": 2012,
+      "description": "WS-Moulding w/o rain channel",
+      "eurocode": "5171ASMR",
+      "oeNumber": "EG2150601B",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "Demio",
+      "yearFrom": 1998,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "5157ASMV",
+      "oeNumber": "D20150601",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "MX-5 II",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "5138ASMTT1H",
+      "oeNumber": "NA0150601A",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "MX-5 III",
+      "yearFrom": 2005,
+      "yearTo": 2015,
+      "description": "WS-Moulding",
+      "eurocode": "5170ASMT",
+      "oeNumber": "NE5150601A",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "Premacy",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "5159ASMV",
+      "oeNumber": "C10050601B",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "RX-8",
+      "yearFrom": 2003,
+      "yearTo": 2012,
+      "description": "WS-Moulding",
+      "eurocode": "5167ASMC",
+      "oeNumber": "FE1550601",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "Tribute",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Moulding solid",
+      "eurocode": "5162ASMR",
+      "oeNumber": "EC0150601A",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "MAZDA",
+      "model": "Xedos 6",
+      "yearFrom": 1992,
+      "yearTo": 1999,
+      "description": "WS-Moulding",
+      "eurocode": "5144ASMS",
+      "oeNumber": "C001506AXC",
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "Xedos 9",
+      "yearFrom": 1993,
+      "yearTo": 1998,
+      "description": "WS-Moulding",
+      "eurocode": "5148ASMS",
+      "oeNumber": "TA04506A0A",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "381 II",
+      "yearFrom": 1989,
+      "yearTo": 1997,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "5416ASRL1H",
+      "oeNumber": "3816710039",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "673",
+      "yearFrom": 1983,
+      "yearTo": 1993,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "5422ASRL",
+      "oeNumber": "6736710020",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "A-Class W168",
+      "yearFrom": 1997,
+      "yearTo": 2004,
+      "description": "WS-Trim, top",
+      "eurocode": "5342ASMHT",
+      "oeNumber": "1686710136",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "Actros",
+      "yearFrom": 1996,
+      "yearTo": 2011,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "5429ASRL",
+      "oeNumber": "9416710120",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "Atego/Axor I",
+      "yearFrom": 1997,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "5430AKML",
+      "oeNumber": "9736700039T",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "C-Class W202 Sedan/Estate",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "WS-Trim plastic/aluminium, top",
+      "eurocode": "5334ASMST",
+      "oeNumber": "2026710730",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "C-Class W202 Sedan/Estate",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "WS-Trim, top, metal",
+      "eurocode": "5334ASMST1C",
+      "oeNumber": "2026700022",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "C-Class W203 Cpé.",
+      "yearFrom": 2001,
+      "yearTo": 2008,
+      "description": "WS-Trim, top",
+      "eurocode": "5352ASMCT",
+      "oeNumber": "2036700639",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "C-Class W203 Sedan/Estate",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim, top",
+      "eurocode": "5351ASMST",
+      "oeNumber": "2036700539",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "E-Class W123 Sedan/Estate",
+      "yearFrom": 1976,
+      "yearTo": 1982,
+      "description": "WS-Rubber solid with insert gap",
+      "eurocode": "5320ASRS",
+      "oeNumber": "1236700039",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "E-Class W124 Estate",
+      "yearFrom": 1985,
+      "yearTo": 1994,
+      "description": "BL-Rubber solid with insert gap",
+      "eurocode": "5328BSRE",
+      "oeNumber": "1247400056",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "E-Class W124 Sedan/Cpé.",
+      "yearFrom": 1985,
+      "yearTo": 1994,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "5328ASGSB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "E-Class W210",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "WS-Trim, top, metal",
+      "eurocode": "5337ASMST",
+      "oeNumber": "2106700922",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "G-Class W460",
+      "yearFrom": 1980,
+      "yearTo": 1997,
+      "description": "WS-Rubber solid",
+      "eurocode": "5327ASRR",
+      "oeNumber": "4606710320",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "G-Class W463",
+      "yearFrom": 1997,
+      "yearTo": 2006,
+      "description": "WS-Rubber solid",
+      "eurocode": "5327ASRR1A",
+      "oeNumber": "4636710220",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "GLK X204",
+      "yearFrom": 2008,
+      "yearTo": 2015,
+      "description": "WS-Trim coated, top",
+      "eurocode": "5369ASMRT",
+      "oeNumber": "2046710420",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "O 405 1/1",
+      "yearFrom": 1982,
+      "yearTo": 2001,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "VOV023ARZ",
+      "oeNumber": "3576711020",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "O 407 1/1",
+      "yearFrom": 1987,
+      "yearTo": 2001,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "MER277ARZ",
+      "oeNumber": "3576710720",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "SLK-Class R170",
+      "yearFrom": 1996,
+      "yearTo": 2004,
+      "description": "WS-Trim, top, chrome",
+      "eurocode": "5339ASMTT",
+      "oeNumber": "1706710330",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "Sprinter I High",
+      "yearFrom": 1995,
+      "yearTo": 2006,
+      "description": "WS-Moulding coated",
+      "eurocode": "5427ASMV",
+      "oeNumber": "9016710220",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "Sprinter I Low",
+      "yearFrom": 1995,
+      "yearTo": 2006,
+      "description": "WS-Moulding coated",
+      "eurocode": "5426ASMV",
+      "oeNumber": "9016710320",
+      "characteristic": null
+    },
+    {
+      "make": "MERCEDES",
+      "model": "Vito I/V-Class W638",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Trim, top",
+      "eurocode": "5428ASMVT",
+      "oeNumber": "A6386710021",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "850 L",
+      "yearFrom": 1959,
+      "yearTo": 2000,
+      "description": "WS-Rubber solid with insert, 2 pieces",
+      "eurocode": "7002ASRS",
+      "oeNumber": "JRC2671",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "BL-Trim, bottom, chrome",
+      "eurocode": "2440BSMHBC",
+      "oeNumber": "51317113198",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Dam inlay, left",
+      "eurocode": "2440ASDHL",
+      "oeNumber": "51337119717",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Dam inlay, right",
+      "eurocode": "2440ASDHR",
+      "oeNumber": "51337119718",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Trim set, 5 pieces",
+      "eurocode": "2440AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Trim, bottom left, chrome",
+      "eurocode": "2440ASMHBLC",
+      "oeNumber": "51317051527",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Trim, bottom right, chrome",
+      "eurocode": "2440ASMHBRC",
+      "oeNumber": "51317051528",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Trim, left",
+      "eurocode": "2440ASMHL",
+      "oeNumber": "51137128157",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Trim, right",
+      "eurocode": "2440ASMHR",
+      "oeNumber": "51137128158",
+      "characteristic": null
+    },
+    {
+      "make": "MINI",
+      "model": "R50/R53",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "2440ASMHT1H",
+      "oeNumber": "51317155304",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Carisma",
+      "yearFrom": 1995,
+      "yearTo": 2004,
+      "description": "WS-Trim soft, top",
+      "eurocode": "5646ASMHT",
+      "oeNumber": "MB944691",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Colt 3dr",
+      "yearFrom": 2007,
+      "yearTo": 2012,
+      "description": "WS-Waterpanel moulding self-adhesive",
+      "eurocode": "5676ASMHB",
+      "oeNumber": "6102A404",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Colt 5dr",
+      "yearFrom": 2007,
+      "yearTo": 2012,
+      "description": "WS-Waterpanel moulding self-adhesive",
+      "eurocode": "5672ASMHB",
+      "oeNumber": "6102A404",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Colt IV CC",
+      "yearFrom": 1992,
+      "yearTo": 1995,
+      "description": "WS-Trim, top",
+      "eurocode": "5641ASMHT",
+      "oeNumber": "MB696789",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Colt V",
+      "yearFrom": 1996,
+      "yearTo": 2004,
+      "description": "WS-Trim, top",
+      "eurocode": "5647ASMHT",
+      "oeNumber": "MB191589",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Colt VI 3dr",
+      "yearFrom": 2005,
+      "yearTo": 2007,
+      "description": "WS-Trim, top",
+      "eurocode": "5676ASMHT",
+      "oeNumber": "MR957106",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Colt VI 5dr",
+      "yearFrom": 2004,
+      "yearTo": 2007,
+      "description": "WS-Trim, top",
+      "eurocode": "5672ASMHT",
+      "oeNumber": "MR957106",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Galant EA0",
+      "yearFrom": 1997,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "5649ASMST",
+      "oeNumber": "MR192674",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Grandis",
+      "yearFrom": 2004,
+      "yearTo": 2011,
+      "description": "WS-Trim, top",
+      "eurocode": "5673ASMVT",
+      "oeNumber": "MR957625",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "L200 Pick up",
+      "yearFrom": 1996,
+      "yearTo": 2005,
+      "description": "WS-Moulding, chrome",
+      "eurocode": "5650ASMPC",
+      "oeNumber": "MR401337",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Lancer CJ0 Sedan/Estate",
+      "yearFrom": 1993,
+      "yearTo": 1996,
+      "description": "WS-Trim, top",
+      "eurocode": "5642ASMHT",
+      "oeNumber": "MB696789",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Lancer Sedan/Estate",
+      "yearFrom": 2003,
+      "yearTo": 2008,
+      "description": "WS-Trim, top",
+      "eurocode": "5670ASMST",
+      "oeNumber": "MR520285",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Outlander",
+      "yearFrom": 2003,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "5668ASMRT",
+      "oeNumber": "MR573809",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Outlander",
+      "yearFrom": 2007,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "5680ASMRT",
+      "oeNumber": "6107A019",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Pajero I",
+      "yearFrom": 1982,
+      "yearTo": 1990,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "5621ASRR",
+      "oeNumber": "MB198775",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Pajero II",
+      "yearFrom": 1991,
+      "yearTo": 2000,
+      "description": "WS-Trim, bottom",
+      "eurocode": "5637ASMRB",
+      "oeNumber": "MB683750",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Pajero II",
+      "yearFrom": 1991,
+      "yearTo": 2000,
+      "description": "WS-Trim, top, metal",
+      "eurocode": "5637ASMRT",
+      "oeNumber": "MB645728",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Pajero IV",
+      "yearFrom": 2007,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "5661ASMR1H",
+      "oeNumber": "MR557477",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Space Gear/L400",
+      "yearFrom": 1994,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "5645ASMV",
+      "oeNumber": "MR192210",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Space Runner",
+      "yearFrom": 1992,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "5638ASMV",
+      "oeNumber": "MB667211",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Space Star",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Trim, top",
+      "eurocode": "5655ASMVT",
+      "oeNumber": "MB944691",
+      "characteristic": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "Space Wagon II",
+      "yearFrom": 1992,
+      "yearTo": 1998,
+      "description": "WS-Moulding",
+      "eurocode": "5639ASMV",
+      "oeNumber": "MB667210",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "100 NX B13 Cpé.",
+      "yearFrom": 1991,
+      "yearTo": 1994,
+      "description": "WS-Trim, top",
+      "eurocode": "5985ASMCT",
+      "oeNumber": "7275261Y00",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "350Z",
+      "yearFrom": 2003,
+      "yearTo": 2009,
+      "description": "WS-Trim set self-adhesive, top, 2 pieces",
+      "eurocode": "6027AKMCT",
+      "oeNumber": null,
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "NISSAN",
+      "model": "Almera N15",
+      "yearFrom": 1995,
+      "yearTo": 2000,
+      "description": "WS-Trim self-adhesive, top",
+      "eurocode": "6001ASGHT",
+      "oeNumber": "727250N000",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "NISSAN",
+      "model": "Almera N15",
+      "yearFrom": 1995,
+      "yearTo": 2000,
+      "description": "WS-Trim set, 2 pieces",
+      "eurocode": "6001AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Almera N15",
+      "yearFrom": 1995,
+      "yearTo": 2000,
+      "description": "WS-Trim, top",
+      "eurocode": "6001ASMHT",
+      "oeNumber": "727520N000",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Almera N16 3/5dr",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "6007ASMHT",
+      "oeNumber": "72752BM400",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Almera Tino",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "6014ASMVT",
+      "oeNumber": "72751BU400",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Micra K11",
+      "yearFrom": 1992,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "5988ASMH6A",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Micra K12",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "WS-Moulding with butyl",
+      "eurocode": "6011ASMH",
+      "oeNumber": "72750AX600",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Murano",
+      "yearFrom": 2005,
+      "yearTo": 2008,
+      "description": "WS-Trim self-adhesive, top",
+      "eurocode": "6032ASMRT",
+      "oeNumber": "72752CA000",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "NISSAN",
+      "model": "Note",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "6041ASMH",
+      "oeNumber": "727509U000",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Pathfinder II",
+      "yearFrom": 2004,
+      "yearTo": 2013,
+      "description": "WS-Profile self-adhesive, 2800 mm",
+      "eurocode": "6037ASMR",
+      "oeNumber": null,
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "NISSAN",
+      "model": "Patrol 160/160/Y60",
+      "yearFrom": 1979,
+      "yearTo": 1997,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "5957ASRR",
+      "oeNumber": "7271006J00",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Primera P10 Sedan",
+      "yearFrom": 1990,
+      "yearTo": 1996,
+      "description": "WS-Trim set, top, 2 pieces",
+      "eurocode": "5981AKMHT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Primera P10 Sedan",
+      "yearFrom": 1990,
+      "yearTo": 1996,
+      "description": "WS-Trim, top",
+      "eurocode": "5981ASMHT",
+      "oeNumber": "7275290J00",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Primera P11",
+      "yearFrom": 1996,
+      "yearTo": 2002,
+      "description": "WS-Trim incl. clips, top, metal, 6 pieces",
+      "eurocode": "6002ASMHT",
+      "oeNumber": "727512F000",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Primera P12",
+      "yearFrom": 2002,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "6020ASMS",
+      "oeNumber": "72750AV600",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Qashqai w/o glass roof",
+      "yearFrom": 2006,
+      "yearTo": 2014,
+      "description": "WS-Moulding",
+      "eurocode": "6044ASMR",
+      "oeNumber": "72752JD000",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Qashqai with glass roof",
+      "yearFrom": 2006,
+      "yearTo": 2014,
+      "description": "WS-Moulding",
+      "eurocode": "6044ASMR1D",
+      "oeNumber": "72752JD010",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Sunny N13 Sedan",
+      "yearFrom": 1986,
+      "yearTo": 1990,
+      "description": "WS-Trim set, 2 pieces",
+      "eurocode": "5967AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Terrano I WD21",
+      "yearFrom": 1986,
+      "yearTo": 1993,
+      "description": "WS-Trim, top",
+      "eurocode": "5966ASMPT",
+      "oeNumber": "7275201G00",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "NISSAN",
+      "model": "Terrano II R20",
+      "yearFrom": 1994,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "5990ASMRT",
+      "oeNumber": "727520F000",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "Tiida",
+      "yearFrom": 2004,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "6046ASMH",
+      "oeNumber": "72750ED000",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "X-Trail",
+      "yearFrom": 2001,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "6018ASMR",
+      "oeNumber": "727528H300",
+      "characteristic": null
+    },
+    {
+      "make": "NISSAN",
+      "model": "X-Trail",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Moulding",
+      "eurocode": "6047ASMR",
+      "oeNumber": "72752JG000",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Agila A",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "6291ASMV",
+      "oeNumber": "4700434",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Antara",
+      "yearFrom": 2006,
+      "yearTo": 2014,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "6314ASMR",
+      "oeNumber": "04808063",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Astra F Conv.",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "6260ASMT",
+      "oeNumber": "110285",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Astra F Estate",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "BL-Moulding",
+      "eurocode": "6257BSME",
+      "oeNumber": "170742",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Astra F",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Moulding",
+      "eurocode": "6257ASMH",
+      "oeNumber": "110281",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Astra G Estate",
+      "yearFrom": 1998,
+      "yearTo": 2004,
+      "description": "BL-Moulding",
+      "eurocode": "6284BSME",
+      "oeNumber": "170658",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Astra G",
+      "yearFrom": 1998,
+      "yearTo": 2004,
+      "description": "WS-Trim set, top/bottom, 2 pieces",
+      "eurocode": "6284AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Astra G",
+      "yearFrom": 1998,
+      "yearTo": 2004,
+      "description": "WS-Trim soft, top",
+      "eurocode": "6284ASMHT",
+      "oeNumber": "163876",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Astra G",
+      "yearFrom": 1998,
+      "yearTo": 2004,
+      "description": "WS-Trim solid, bottom",
+      "eurocode": "6284ASMHB",
+      "oeNumber": "163860",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "OPEL",
+      "model": "Astra H",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "description": "Expanding foam rubber self-adhesive, 4 m, 10 mm",
+      "eurocode": "6302ASDH",
+      "oeNumber": "161983",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "OPEL",
+      "model": "Calibra",
+      "yearFrom": 1990,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "6256ASMC",
+      "oeNumber": "110276",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Combo C",
+      "yearFrom": 2001,
+      "yearTo": 2010,
+      "description": "WS-Trim, bottom",
+      "eurocode": "6292ASMVB",
+      "oeNumber": "110205",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Combo C",
+      "yearFrom": 2001,
+      "yearTo": 2010,
+      "description": "WS-Trim, left",
+      "eurocode": "6292ASMVL",
+      "oeNumber": "163871",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Combo C",
+      "yearFrom": 2001,
+      "yearTo": 2010,
+      "description": "WS-Trim, right",
+      "eurocode": "6292ASMVR",
+      "oeNumber": "163872",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Combo C",
+      "yearFrom": 2001,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "6292ASMVT",
+      "oeNumber": "110206",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa B 3dr",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "BL-Moulding",
+      "eurocode": "6259BSMH",
+      "oeNumber": "170745",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa B",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "6259ASMH",
+      "oeNumber": "110282",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa C",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim set, 4 pieces",
+      "eurocode": "6290AKMH1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa C",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim set, top/bottom, 2 pieces",
+      "eurocode": "6290AKMH2F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa C",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, bottom",
+      "eurocode": "6290ASGHB",
+      "oeNumber": "110203",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa C",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, left",
+      "eurocode": "6290ASMHL",
+      "oeNumber": "163873",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa C",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, right",
+      "eurocode": "6290ASMHR",
+      "oeNumber": "163874",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa C",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "6290ASMHT",
+      "oeNumber": "110202",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Corsa D",
+      "yearFrom": 2006,
+      "yearTo": 2014,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "6312ASMHB",
+      "oeNumber": "110221",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Frontera A",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Trim set, left/right/top, 3 pieces",
+      "eurocode": "6258AKMR",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Frontera A",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "6258ASMRT1H",
+      "oeNumber": "110284",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Frontera B",
+      "yearFrom": 1999,
+      "yearTo": 2004,
+      "description": "WS-Trim, top",
+      "eurocode": "6287ASMR",
+      "oeNumber": "110296",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Kadett E",
+      "yearFrom": 1984,
+      "yearTo": 1992,
+      "description": "WS-Rubber solid",
+      "eurocode": "6247ASMH",
+      "oeNumber": "110274",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Meriva A",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "6288ASMVT",
+      "oeNumber": "110217",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Movano",
+      "yearFrom": 1999,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "6296ASMV",
+      "oeNumber": "4404164",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Omega A",
+      "yearFrom": 1986,
+      "yearTo": 1993,
+      "description": "WS-Moulding",
+      "eurocode": "6252ASMS",
+      "oeNumber": "110270",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Omega B",
+      "yearFrom": 1994,
+      "yearTo": 2003,
+      "description": "WS-Cover moulding",
+      "eurocode": "6261ASMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Omega B",
+      "yearFrom": 1994,
+      "yearTo": 2003,
+      "description": "WS-Cover moulding set, 2 pieces",
+      "eurocode": "6261AKMH6A",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Omega B",
+      "yearFrom": 1994,
+      "yearTo": 2003,
+      "description": "WS-Cover trim, bottom",
+      "eurocode": "6261ASMHB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Sintra",
+      "yearFrom": 1996,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "6281ASMV",
+      "oeNumber": "110207",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Tigra Twin Top",
+      "yearFrom": 2004,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "6303ASMT",
+      "oeNumber": "108801",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Tigra Twin Top",
+      "yearFrom": 2004,
+      "yearTo": 2009,
+      "description": "WS-Trim, bottom",
+      "eurocode": "6303ASGTB",
+      "oeNumber": "110203",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Tigra",
+      "yearFrom": 1994,
+      "yearTo": 2000,
+      "description": "WS-Trim set, 4 pieces",
+      "eurocode": "6263AKMC",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vectra A",
+      "yearFrom": 1988,
+      "yearTo": 1995,
+      "description": "WS-Moulding",
+      "eurocode": "6253ASMH",
+      "oeNumber": "110275",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vectra B Estate",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "BL-Moulding",
+      "eurocode": "6277BSME",
+      "oeNumber": "170660",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vectra B",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "WS-Moulding set, 5 pieces",
+      "eurocode": "6277AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vectra B",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "WS-Trim set, left/right, 2 pieces",
+      "eurocode": "6277AKMHS",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vectra B",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "WS-Trim set, top/bottom inside, 2 pieces",
+      "eurocode": "6277AKMH2F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vectra B",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "WS-Trim, bottom inside",
+      "eurocode": "6277ASGHB",
+      "oeNumber": "163907",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vectra B",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "WS-Trim, bottom outside",
+      "eurocode": "6277ASMHB",
+      "oeNumber": "163853",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vectra B",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "WS-Trim, top",
+      "eurocode": "6277ASMHT",
+      "oeNumber": "163856",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Vivaro A",
+      "yearFrom": 2001,
+      "yearTo": 2014,
+      "description": "WS-Trim, top",
+      "eurocode": "6300ASMVT",
+      "oeNumber": "4409104",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Zafira A",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "BL-Rubber solid",
+      "eurocode": "6283BSMV",
+      "oeNumber": "170746",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Zafira A",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Trim set, top/bottom, 2 pieces",
+      "eurocode": "6283AKMV",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Zafira A",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Trim, bottom",
+      "eurocode": "6283ASMVB",
+      "oeNumber": "163862",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Zafira A",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Trim, top",
+      "eurocode": "6283ASMVT",
+      "oeNumber": "163861",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Zafira B",
+      "yearFrom": 2005,
+      "yearTo": 2011,
+      "description": "WS-Moulding",
+      "eurocode": "6307ASMV",
+      "oeNumber": "110220",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "1007",
+      "yearFrom": 2005,
+      "yearTo": 2009,
+      "description": "WS-Trim, top",
+      "eurocode": "6547ASMHT",
+      "oeNumber": "8120P7",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "1007",
+      "yearFrom": 2005,
+      "yearTo": 2009,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "6547ASMHB",
+      "oeNumber": "8251T7",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "106",
+      "yearFrom": 1991,
+      "yearTo": 2005,
+      "description": "BL-Moulding",
+      "eurocode": "6520BSMH",
+      "oeNumber": "874558",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "106",
+      "yearFrom": 1991,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "6520ASMH",
+      "oeNumber": "812069",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "106",
+      "yearFrom": 1991,
+      "yearTo": 2005,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "6520AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "205 I & II w/o glass roof",
+      "yearFrom": 1983,
+      "yearTo": 1997,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "6514ASRH1",
+      "oeNumber": "812064",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "206 CC",
+      "yearFrom": 2002,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "6545ASMT",
+      "oeNumber": "8120G8",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "206/206+",
+      "yearFrom": 1998,
+      "yearTo": 2012,
+      "description": "WS-Trim incl. spacer, top, 4 pieces",
+      "eurocode": "6539AKKH1F",
+      "oeNumber": "8120F2, 812358 x 3",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "206/206+",
+      "yearFrom": 1998,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "6539ASMHT",
+      "oeNumber": "8120F2",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "306 Conv.",
+      "yearFrom": 1993,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "6524ASMT",
+      "oeNumber": "812075",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "306 Sedan/Estate",
+      "yearFrom": 1993,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "6521ASMH",
+      "oeNumber": "812091",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "306 Sedan/Estate",
+      "yearFrom": 1993,
+      "yearTo": 2001,
+      "description": "WS-Moulding set incl. spacer, 4 pieces",
+      "eurocode": "6521AKMH1",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "306 Sedan/Estate",
+      "yearFrom": 1993,
+      "yearTo": 2001,
+      "description": "WS-Moulding set, 2 pieces",
+      "eurocode": "6521AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "306 Sedan/Estate",
+      "yearFrom": 1993,
+      "yearTo": 2001,
+      "description": "WS-Trim, top",
+      "eurocode": "6521ASGHT",
+      "oeNumber": "812070",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "309",
+      "yearFrom": 1985,
+      "yearTo": 1993,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "6516ASRH",
+      "oeNumber": "812061",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "405",
+      "yearFrom": 1987,
+      "yearTo": 1996,
+      "description": "WS-Moulding",
+      "eurocode": "6518ASMS",
+      "oeNumber": "812067",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "406 Sedan/Estate",
+      "yearFrom": 1996,
+      "yearTo": 2004,
+      "description": "WS-Trim incl. clips, top, 8 pieces",
+      "eurocode": "6525AKMST",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "406 Sedan/Estate",
+      "yearFrom": 1996,
+      "yearTo": 2004,
+      "description": "WS-Trim, top",
+      "eurocode": "6525ASMST",
+      "oeNumber": "812098",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "806",
+      "yearFrom": 1994,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "6522ASMV",
+      "oeNumber": "812083",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "Boxer I",
+      "yearFrom": 1994,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "6523ASMV1H",
+      "oeNumber": "812088",
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "Partner",
+      "yearFrom": 1996,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "6537ASMV",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "Partner",
+      "yearFrom": 1996,
+      "yearTo": 2008,
+      "description": "WS-Moulding incl. spacer, 4 pieces",
+      "eurocode": "6537AKMV",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "PONTIAC",
+      "model": "Trans Sport II/Montana",
+      "yearFrom": 1996,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "AP37ASMV",
+      "oeNumber": "110207",
+      "characteristic": null
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 (996)",
+      "yearFrom": 1997,
+      "yearTo": 2006,
+      "description": "WS-Cover profile",
+      "eurocode": "6721ASMT",
+      "oeNumber": "99654154102",
+      "characteristic": null
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 (996)",
+      "yearFrom": 1997,
+      "yearTo": 2006,
+      "description": "WS-Moulding solid, inside",
+      "eurocode": "6721ASGT",
+      "oeNumber": "99654153101",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 (997)",
+      "yearFrom": 2004,
+      "yearTo": 2012,
+      "description": "WS-Profile self-adhesive",
+      "eurocode": "6723ASMC1H",
+      "oeNumber": "99754190109",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911/912 Cpé.",
+      "yearFrom": 1964,
+      "yearTo": 1988,
+      "description": "WS-Rubber solid",
+      "eurocode": "6709ASRC",
+      "oeNumber": "91154122503",
+      "characteristic": null
+    },
+    {
+      "make": "PORSCHE",
+      "model": "964 Cpé.",
+      "yearFrom": 1988,
+      "yearTo": 1993,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "6716ASRC",
+      "oeNumber": "96454122500",
+      "characteristic": null
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Boxster",
+      "yearFrom": 2002,
+      "yearTo": 2005,
+      "description": "WS-Cover profile",
+      "eurocode": "6720ASMT1",
+      "oeNumber": "996541531011",
+      "characteristic": null
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Boxster",
+      "yearFrom": 2002,
+      "yearTo": 2005,
+      "description": "WS-Moulding solid, inside",
+      "eurocode": "6720ASGT",
+      "oeNumber": "98654152101",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Boxster/Cayman (987)",
+      "yearFrom": 2004,
+      "yearTo": 2013,
+      "description": "WS-Profile self-adhesive",
+      "eurocode": "6724ASMT",
+      "oeNumber": "99754190109",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "RENAULT",
+      "model": "19",
+      "yearFrom": 1988,
+      "yearTo": 1996,
+      "description": "WS-Moulding set incl. spacer, 4 pieces",
+      "eurocode": "7231AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "19",
+      "yearFrom": 1988,
+      "yearTo": 1996,
+      "description": "WS-Moulding, inside",
+      "eurocode": "7231ASGH",
+      "oeNumber": "7700785513",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "19",
+      "yearFrom": 1988,
+      "yearTo": 1996,
+      "description": "WS-Moulding, outside",
+      "eurocode": "7231ASMH",
+      "oeNumber": "7700785520",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "5 C40/B40 Super 5",
+      "yearFrom": 1984,
+      "yearTo": 1996,
+      "description": "WS-Edge trim",
+      "eurocode": "7227ASMHI",
+      "oeNumber": "7700776102",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "5 C40/B40 Super 5",
+      "yearFrom": 1984,
+      "yearTo": 1996,
+      "description": "WS-Moulding set incl. sleeve, 4 pieces",
+      "eurocode": "7227AKKH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "5 C40/B40 Super 5",
+      "yearFrom": 1984,
+      "yearTo": 1996,
+      "description": "WS-Moulding set, 3 pieces",
+      "eurocode": "7227AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "5 C40/B40 Super 5",
+      "yearFrom": 1984,
+      "yearTo": 1996,
+      "description": "WS-Moulding soft",
+      "eurocode": "7227ASMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "5 C40/B40 Super 5",
+      "yearFrom": 1984,
+      "yearTo": 1996,
+      "description": "WS-Moulding, inside",
+      "eurocode": "7227ASGH",
+      "oeNumber": "7700778786",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "5 C40/B40 Super 5",
+      "yearFrom": 1984,
+      "yearTo": 1996,
+      "description": "WS-Moulding, outside",
+      "eurocode": "7227ASMHO",
+      "oeNumber": "7700778789",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "9 & 11",
+      "yearFrom": 1982,
+      "yearTo": 1989,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "7224ASRH",
+      "oeNumber": "7700776161",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio I",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Moulding set incl. spacer, 4 pieces",
+      "eurocode": "7232AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio I",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Moulding soft incl. spacer, 3 pieces",
+      "eurocode": "7232AKMH1",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio I",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Moulding, inside",
+      "eurocode": "7232ASGH",
+      "oeNumber": "7700827503",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio I",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Moulding, outside",
+      "eurocode": "7232ASMH",
+      "oeNumber": "7700797664",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio II",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding set incl. spacer, 5 pieces",
+      "eurocode": "7248AKMH5",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio II",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding set incl. spacer, 6 pieces",
+      "eurocode": "7248AKKH",
+      "oeNumber": "7701205825",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio II",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding set w/o spacer, 3 pieces",
+      "eurocode": "7248AKMH3",
+      "oeNumber": "7701205825",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio II",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding set w/o spacer, 4 pieces",
+      "eurocode": "7248AKMH",
+      "oeNumber": "7701205825",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio III/Grandtour",
+      "yearFrom": 2005,
+      "yearTo": 2013,
+      "description": "WS-Trim, top",
+      "eurocode": "7262ASMHT",
+      "oeNumber": "8200299634",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 2001,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "7246ASMV1H",
+      "oeNumber": "8200105499",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 2001,
+      "yearTo": 2009,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "7246AKMV31H",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 2001,
+      "yearTo": 2009,
+      "description": "WS-Moulding set incl. spacer, 4 pieces",
+      "eurocode": "7246AKMV1H",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 1997,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "7246ASMV",
+      "oeNumber": "7700400204",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 1997,
+      "yearTo": 2001,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "7246AKMV3",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 1997,
+      "yearTo": 2001,
+      "description": "WS-Moulding set incl. spacer, 4 pieces",
+      "eurocode": "7246AKMV1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 1997,
+      "yearTo": 2001,
+      "description": "WS-Moulding set incl. spacer, 5 pieces",
+      "eurocode": "7246AKMV5",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 1997,
+      "yearTo": 2009,
+      "description": "WS-Cover trim, bottom",
+      "eurocode": "7246ASMVB",
+      "oeNumber": "7700303429",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 1997,
+      "yearTo": 2009,
+      "description": "WS-Edge trim, inside",
+      "eurocode": "7246ASGV",
+      "oeNumber": "7700303096",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Laguna I",
+      "yearFrom": 1994,
+      "yearTo": 2000,
+      "description": "WS-Trim incl. spacer, top, 3 pieces",
+      "eurocode": "7237AKMHT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Laguna I",
+      "yearFrom": 1994,
+      "yearTo": 2000,
+      "description": "WS-Trim, top",
+      "eurocode": "7237ASMHT",
+      "oeNumber": "7700823043",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Laguna II",
+      "yearFrom": 2001,
+      "yearTo": 2007,
+      "description": "WS-Trim incl. spacer, 3 pieces",
+      "eurocode": "7249AKMHT",
+      "oeNumber": "7700838570",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Laguna II",
+      "yearFrom": 2001,
+      "yearTo": 2007,
+      "description": "WS-Trim set incl. spacer, 5 pieces",
+      "eurocode": "7249AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Laguna II",
+      "yearFrom": 2001,
+      "yearTo": 2007,
+      "description": "WS-Trim, left",
+      "eurocode": "7249ASMHL",
+      "oeNumber": "8200000799",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Laguna II",
+      "yearFrom": 2001,
+      "yearTo": 2007,
+      "description": "WS-Trim, right",
+      "eurocode": "7249ASMHR",
+      "oeNumber": "8200000798",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Laguna II",
+      "yearFrom": 2001,
+      "yearTo": 2007,
+      "description": "WS-Trim, top",
+      "eurocode": "7249ASMHT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Magnum",
+      "yearFrom": 1990,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "7233ASML",
+      "oeNumber": "5001853757",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Master I",
+      "yearFrom": 1981,
+      "yearTo": 1997,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "7223ASRV",
+      "oeNumber": "7700351012",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Master II",
+      "yearFrom": 1997,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "7247ASMV",
+      "oeNumber": "7700351250",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Master II",
+      "yearFrom": 1997,
+      "yearTo": 2010,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "7247AKKV1F",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Midlum",
+      "yearFrom": 1999,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "7253ASML",
+      "oeNumber": "5010220975",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Modus",
+      "yearFrom": 2004,
+      "yearTo": 2012,
+      "description": "WS-Trim, top",
+      "eurocode": "7263ASMVT",
+      "oeNumber": "8200220737",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane I Coach",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "7240ASMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane I Coach",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "7240AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane I Coach",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding new vers.",
+      "eurocode": "7240ASMH1H",
+      "oeNumber": "8200059204",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane I Coach",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding new vers. incl. spacer, 3 pieces",
+      "eurocode": "7240AKMH1H",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane I Sedan/Estate",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "7239ASMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane I Sedan/Estate",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "7239AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane I Sedan/Estate",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding new vers.",
+      "eurocode": "7239ASMH1H",
+      "oeNumber": "8200059204",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane II",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "7260ASMH",
+      "oeNumber": "8200220440",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane II",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Moulding incl. spacer, 5 pieces",
+      "eurocode": "7260AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane Scénic I",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "7245ASMV1H",
+      "oeNumber": "8200059204",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane Scénic I",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "7245AKMV",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Mégane Scénic I",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Moulding new vers. incl. spacer, 3 pieces",
+      "eurocode": "7245AKMV1H",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Premium",
+      "yearFrom": 1996,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "7242ASML",
+      "oeNumber": "5010220413",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Safrane",
+      "yearFrom": 1992,
+      "yearTo": 2002,
+      "description": "WS-Trim incl. spacer, top, 3 pieces",
+      "eurocode": "7235AKMHT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Scénic II",
+      "yearFrom": 2003,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "7257ASMV",
+      "oeNumber": "8200097498",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Trafic I",
+      "yearFrom": 1982,
+      "yearTo": 2000,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "7222ASRV",
+      "oeNumber": "7700765629B",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Twingo I",
+      "yearFrom": 1993,
+      "yearTo": 2007,
+      "description": "WS-Edge trim, inside",
+      "eurocode": "7236ASGH",
+      "oeNumber": "7700844402",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Twingo I",
+      "yearFrom": 1993,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "7236ASMH",
+      "oeNumber": "7700821901",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Twingo I",
+      "yearFrom": 1993,
+      "yearTo": 2007,
+      "description": "WS-Moulding incl. spacer, 3 pieces",
+      "eurocode": "7236AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Twingo I",
+      "yearFrom": 1993,
+      "yearTo": 2007,
+      "description": "WS-Moulding set incl. spacer, 4 pieces",
+      "eurocode": "7236AKMH1",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Twingo II",
+      "yearFrom": 2007,
+      "yearTo": 2014,
+      "description": "WS-Moulding",
+      "eurocode": "7268ASMH",
+      "oeNumber": "8200386035",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "ROVER",
+      "model": "200",
+      "yearFrom": 1990,
+      "yearTo": 1995,
+      "description": "WS-Trim, top",
+      "eurocode": "7016ASMHT",
+      "oeNumber": "DCB10011",
+      "characteristic": null
+    },
+    {
+      "make": "ROVER",
+      "model": "200/25/MG ZR",
+      "yearFrom": 1995,
+      "yearTo": 2005,
+      "description": "WS-Moulding soft with butyl",
+      "eurocode": "7027ASMH6C",
+      "oeNumber": "DCB10074",
+      "characteristic": null
+    },
+    {
+      "make": "ROVER",
+      "model": "400/45/MG ZS",
+      "yearFrom": 1995,
+      "yearTo": 2005,
+      "description": "WS-Trim, top",
+      "eurocode": "7025ASMHT",
+      "oeNumber": "DCB100960",
+      "characteristic": null
+    },
+    {
+      "make": "ROVER",
+      "model": "MGF Roadster",
+      "yearFrom": 1995,
+      "yearTo": 2005,
+      "description": "WS-Moulding soft with butyl",
+      "eurocode": "7026ASMT6C",
+      "oeNumber": "DCB100970PMH",
+      "characteristic": null
+    },
+    {
+      "make": "SAAB",
+      "model": "9-5",
+      "yearFrom": 1997,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "7410ASMST",
+      "oeNumber": "4552360",
+      "characteristic": null
+    },
+    {
+      "make": "SAAB",
+      "model": "900 Conv.",
+      "yearFrom": 1986,
+      "yearTo": 1994,
+      "description": "WS-Moulding set, 7 pieces",
+      "eurocode": "7407AKMT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "SAAB",
+      "model": "900/9-3 3/5dr",
+      "yearFrom": 1993,
+      "yearTo": 2003,
+      "description": "WS-Trim, top",
+      "eurocode": "7408ASMHT",
+      "oeNumber": "4329991",
+      "characteristic": null
+    },
+    {
+      "make": "SAAB",
+      "model": "900/9-3 Conv.",
+      "yearFrom": 1993,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "7409ASMT",
+      "oeNumber": "4370557",
+      "characteristic": null
+    },
+    {
+      "make": "SAAB",
+      "model": "9000",
+      "yearFrom": 1985,
+      "yearTo": 1998,
+      "description": "WS-Moulding set incl. sleeve, 5 pieces",
+      "eurocode": "7406AKMH",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "SAAB",
+      "model": "9000",
+      "yearFrom": 1985,
+      "yearTo": 1998,
+      "description": "WS-Moulding, left inside",
+      "eurocode": "7406ASGHL",
+      "oeNumber": "9278318",
+      "characteristic": null
+    },
+    {
+      "make": "SAAB",
+      "model": "9000",
+      "yearFrom": 1985,
+      "yearTo": 1998,
+      "description": "WS-Moulding, outside",
+      "eurocode": "7406ASMH",
+      "oeNumber": "4250320",
+      "characteristic": null
+    },
+    {
+      "make": "SAAB",
+      "model": "9000",
+      "yearFrom": 1985,
+      "yearTo": 1998,
+      "description": "WS-Moulding, right inside",
+      "eurocode": "7406ASGHR",
+      "oeNumber": "9278300",
+      "characteristic": null
+    },
+    {
+      "make": "SCANIA",
+      "model": "4er Serie 94/114/144 C/D/G",
+      "yearFrom": 1996,
+      "yearTo": 2004,
+      "description": "WS-Rubber solid",
+      "eurocode": "7506ASRL",
+      "oeNumber": "1366851",
+      "characteristic": null
+    },
+    {
+      "make": "SEAT",
+      "model": "Alhambra",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "WS-Waterpanel moulding set, 3 pieces",
+      "eurocode": "7606AKMVB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "SEAT",
+      "model": "Alhambra",
+      "yearFrom": 1996,
+      "yearTo": 2000,
+      "description": "WS-Trim, top",
+      "eurocode": "7606ASMVT",
+      "oeNumber": "7MO853306A",
+      "characteristic": null
+    },
+    {
+      "make": "SEAT",
+      "model": "Ibiza II 6K",
+      "yearFrom": 1993,
+      "yearTo": 2001,
+      "description": "WS-Trim, top",
+      "eurocode": "7604ASMHT",
+      "oeNumber": "1LO845121",
+      "characteristic": null
+    },
+    {
+      "make": "SEAT",
+      "model": "Marbella/Terra",
+      "yearFrom": 1987,
+      "yearTo": 2003,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "7600ASRH",
+      "oeNumber": "4403813",
+      "characteristic": null
+    },
+    {
+      "make": "SEAT",
+      "model": "Toledo I",
+      "yearFrom": 1991,
+      "yearTo": 1999,
+      "description": "WS-Trim set self-adhesive, left/right, 2 pieces",
+      "eurocode": "7603AKDHS",
+      "oeNumber": null,
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "SEAT",
+      "model": "Toledo I",
+      "yearFrom": 1991,
+      "yearTo": 1999,
+      "description": "WS-Trim set, top",
+      "eurocode": "7603ASMHT",
+      "oeNumber": "1LO845121",
+      "characteristic": null
+    },
+    {
+      "make": "SKODA",
+      "model": "Octavia I",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Trim, top",
+      "eurocode": "7807ASMHT",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "SKODA",
+      "model": "Octavia I",
+      "yearFrom": 1996,
+      "yearTo": 2003,
+      "description": "WS-Waterpanel moulding set, 3 pieces",
+      "eurocode": "7807ASMHB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "SMART",
+      "model": "ForFour",
+      "yearFrom": 2004,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "5359ASMH",
+      "oeNumber": "4546700022",
+      "characteristic": null
+    },
+    {
+      "make": "SMART",
+      "model": "ForFour",
+      "yearFrom": 2004,
+      "yearTo": 2006,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "5359ASGHB",
+      "oeNumber": "CA4548360080",
+      "characteristic": null
+    },
+    {
+      "make": "SMART",
+      "model": "ForTwo",
+      "yearFrom": 1997,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "5350ASMH",
+      "oeNumber": "C0000680V010",
+      "characteristic": null
+    },
+    {
+      "make": "SMART",
+      "model": "Roadster",
+      "yearFrom": 2003,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "5355ASMT",
+      "oeNumber": "C0009406V003000",
+      "characteristic": null
+    },
+    {
+      "make": "SSANGYONG",
+      "model": "Musso",
+      "yearFrom": 1993,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "3007ASMRT",
+      "oeNumber": "7912205000",
+      "characteristic": null
+    },
+    {
+      "make": "SSANGYONG",
+      "model": "Rodius",
+      "yearFrom": 2004,
+      "yearTo": 2013,
+      "description": "WS-Moulding",
+      "eurocode": "3019ASMV",
+      "oeNumber": "7912021000",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Forester I",
+      "yearFrom": 1997,
+      "yearTo": 2002,
+      "description": "WS-Trim, top",
+      "eurocode": "7923ASMRT",
+      "oeNumber": "65023FC010",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Forester II",
+      "yearFrom": 2002,
+      "yearTo": 2008,
+      "description": "WS-Moulding",
+      "eurocode": "7928ASMR",
+      "oeNumber": "65058SA000",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Forester III",
+      "yearFrom": 2008,
+      "yearTo": 2012,
+      "description": "WS-Moulding",
+      "eurocode": "7934ASMR",
+      "oeNumber": "65058SC000",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Impreza II Estate",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "7927ASMH",
+      "oeNumber": "65058FE00",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Impreza II Sedan",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "7926ASMS",
+      "oeNumber": "65058FE010",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Impreza III",
+      "yearFrom": 2007,
+      "yearTo": 2012,
+      "description": "WS-Moulding",
+      "eurocode": "7932ASMH",
+      "oeNumber": "65058FG000",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Justy II 3dr",
+      "yearFrom": 1995,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "7921ASMH",
+      "oeNumber": "8461160B01",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Justy II 5dr",
+      "yearFrom": 1995,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "7922ASMH",
+      "oeNumber": "8461162B01",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Legacy I",
+      "yearFrom": 1989,
+      "yearTo": 1994,
+      "description": "WS-Trim incl. clips, top, 9 pieces",
+      "eurocode": "7912AKKST",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Legacy II",
+      "yearFrom": 1994,
+      "yearTo": 1999,
+      "description": "WS-Trim, top",
+      "eurocode": "7919ASMST",
+      "oeNumber": "65023AC000",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Legacy III",
+      "yearFrom": 1998,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "7925ASMS",
+      "oeNumber": "65058AE000",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Legacy IV",
+      "yearFrom": 2003,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "7929ASMS",
+      "oeNumber": "65058AG000",
+      "characteristic": null
+    },
+    {
+      "make": "SUBARU",
+      "model": "Tribeca",
+      "yearFrom": 2005,
+      "yearTo": 2010,
+      "description": "WS-Moulding",
+      "eurocode": "7931ASMR",
+      "oeNumber": "65058XA00A",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Alto Sedan 3/5dr",
+      "yearFrom": 1995,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "8013ASMH",
+      "oeNumber": "8461170F005PK",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Baleno",
+      "yearFrom": 1995,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "8016ASMH",
+      "oeNumber": "8461160G00",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Grand Vitara I",
+      "yearFrom": 1998,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "8020ASMR",
+      "oeNumber": "8461165D00",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Liana",
+      "yearFrom": 2001,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "8028ASMV",
+      "oeNumber": "8451254G000",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Samurai SJ 410/413",
+      "yearFrom": 1982,
+      "yearTo": 1989,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8005ASRR",
+      "oeNumber": "8461170A00",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift II 3dr",
+      "yearFrom": 1989,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "8011ASMH",
+      "oeNumber": "8461160B01",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift II 4/5dr",
+      "yearFrom": 1989,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "8012ASMH",
+      "oeNumber": "8461162B01",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift III",
+      "yearFrom": 2005,
+      "yearTo": 2010,
+      "description": "WS-Trim, top",
+      "eurocode": "8031ASMHT",
+      "oeNumber": "8451263J00000",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4",
+      "yearFrom": 2006,
+      "yearTo": 2012,
+      "description": "WS-Moulding",
+      "eurocode": "8033ASMR",
+      "oeNumber": "8452179J00",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Vitara facelift",
+      "yearFrom": 1993,
+      "yearTo": 1998,
+      "description": "WS-Moulding",
+      "eurocode": "8010ASMR",
+      "oeNumber": "8461156B005PK",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Wagon R",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "8026ASMV",
+      "oeNumber": "8461183E01000",
+      "characteristic": null
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Wagon R",
+      "yearFrom": 1997,
+      "yearTo": 2000,
+      "description": "WS-Moulding",
+      "eurocode": "8019ASMV",
+      "oeNumber": "8461175F00000",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "4 Runner",
+      "yearFrom": 1989,
+      "yearTo": 1996,
+      "description": "WS-Trim, top, chrome",
+      "eurocode": "8271ASMRTC",
+      "oeNumber": "7553189106",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Auris",
+      "yearFrom": 2007,
+      "yearTo": 2012,
+      "description": "WS-Moulding self-adhesive",
+      "eurocode": "8374ASMH",
+      "oeNumber": "7553312630",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Avensis I",
+      "yearFrom": 1998,
+      "yearTo": 2003,
+      "description": "WS-Dam profile self-adhesive, 4240 mm",
+      "eurocode": "8305ASD",
+      "oeNumber": "5611747010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Avensis I",
+      "yearFrom": 1998,
+      "yearTo": 2003,
+      "description": "WS-Moulding",
+      "eurocode": "8305ASMH",
+      "oeNumber": "7553305020",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Avensis II",
+      "yearFrom": 2003,
+      "yearTo": 2008,
+      "description": "WS-Dam profile self-adhesive, 3530 mm",
+      "eurocode": "8346ASD",
+      "oeNumber": "5611704010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Avensis II",
+      "yearFrom": 2003,
+      "yearTo": 2008,
+      "description": "WS-Moulding w/o rain channel",
+      "eurocode": "8346ASMH1H",
+      "oeNumber": "7553105030",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Avensis II",
+      "yearFrom": 2003,
+      "yearTo": 2008,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "8346ASMH",
+      "oeNumber": "7553105040",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Avensis Verso",
+      "yearFrom": 2001,
+      "yearTo": 2009,
+      "description": "WS-Dam profile self-adhesive, 3530 mm",
+      "eurocode": "8333ASD",
+      "oeNumber": "5611764010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Avensis Verso",
+      "yearFrom": 2001,
+      "yearTo": 2009,
+      "description": "WS-Trim, top",
+      "eurocode": "8333ASMVT",
+      "oeNumber": "7553344040",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Camry III",
+      "yearFrom": 1991,
+      "yearTo": 1996,
+      "description": "WS-Dam profile self-adhesive, 3530 mm",
+      "eurocode": "8278ASD",
+      "oeNumber": "5611764010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Camry IV",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Dam profile self-adhesive, 4240 mm",
+      "eurocode": "8302ASD",
+      "oeNumber": "5611747010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Camry IV",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Trim, top",
+      "eurocode": "8302ASMST",
+      "oeNumber": "7553133040",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Camry V",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Dam profile self-adhesive, 3530 mm",
+      "eurocode": "8339ASDS",
+      "oeNumber": "5611764010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Camry V",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Dam profile self-adhesive, 800 mm",
+      "eurocode": "8339ASD",
+      "oeNumber": "5611752040",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Camry V",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "description": "WS-Moulding",
+      "eurocode": "8339ASMS",
+      "oeNumber": "7553133050",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Carina E",
+      "yearFrom": 1992,
+      "yearTo": 1997,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8282ASD",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Carina E",
+      "yearFrom": 1992,
+      "yearTo": 1997,
+      "description": "WS-Moulding",
+      "eurocode": "8282ASMH",
+      "oeNumber": "7553320320",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Celica V ST182",
+      "yearFrom": 1990,
+      "yearTo": 1993,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8269ASD",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Celica VI ST202",
+      "yearFrom": 1994,
+      "yearTo": 1999,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8286ASD",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Celica VII T23",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Dam profile self-adhesive, 4240 mm",
+      "eurocode": "8316ASD",
+      "oeNumber": "5611747010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Celica VII T23",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "8316ASMC",
+      "oeNumber": "7553120370",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E100",
+      "yearFrom": 1991,
+      "yearTo": 1997,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8280ASD",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E100",
+      "yearFrom": 1991,
+      "yearTo": 1997,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8281ASD",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E100",
+      "yearFrom": 1991,
+      "yearTo": 1997,
+      "description": "WS-Moulding",
+      "eurocode": "8280ASMH",
+      "oeNumber": "7550312090",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E100",
+      "yearFrom": 1991,
+      "yearTo": 1997,
+      "description": "WS-Trim, top",
+      "eurocode": "8281ASMHT",
+      "oeNumber": "7553112490",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E11",
+      "yearFrom": 1997,
+      "yearTo": 2002,
+      "description": "WS-Dam profile self-adhesive, 4240 mm",
+      "eurocode": "8304ASD",
+      "oeNumber": "5611747010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E11",
+      "yearFrom": 1997,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "8304ASMH",
+      "oeNumber": "7553112640",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E12 3/5dr",
+      "yearFrom": 2002,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "8340ASMH",
+      "oeNumber": "7553102060",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E12 Verso I",
+      "yearFrom": 2001,
+      "yearTo": 2003,
+      "description": "WS-Dam profile self-adhesive, 4240 mm",
+      "eurocode": "8342ASD",
+      "oeNumber": "5611747010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E12 Verso I",
+      "yearFrom": 2001,
+      "yearTo": 2003,
+      "description": "WS-Moulding w/o rain channel",
+      "eurocode": "8342ASMV",
+      "oeNumber": "7553313040",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E12",
+      "yearFrom": 2002,
+      "yearTo": 2007,
+      "description": "WS-Dam profile self-adhesive, 4240 mm",
+      "eurocode": "8340ASDH",
+      "oeNumber": "5611747010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E90 Sedan/Compact",
+      "yearFrom": 1987,
+      "yearTo": 1992,
+      "description": "WS-Trim, top",
+      "eurocode": "8259ASMHT",
+      "oeNumber": "7553112990",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E90 Sedan/Compact",
+      "yearFrom": 1987,
+      "yearTo": 1992,
+      "description": "WS-Trim, top, chrome",
+      "eurocode": "8259ASMHTC",
+      "oeNumber": "7553112300",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E92",
+      "yearFrom": 1987,
+      "yearTo": 1992,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8260ASDH",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla E92",
+      "yearFrom": 1987,
+      "yearTo": 1992,
+      "description": "WS-Trim, top",
+      "eurocode": "8260ASMHT",
+      "oeNumber": "7553112310",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla Estate 4dr",
+      "yearFrom": 2002,
+      "yearTo": 2007,
+      "description": "WS-Moulding",
+      "eurocode": "8340ASMS",
+      "oeNumber": "7553312480",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla R1 Verso II",
+      "yearFrom": 2004,
+      "yearTo": 2009,
+      "description": "WS-Dam profile self-adhesive, 3530 mm",
+      "eurocode": "8356ASDV",
+      "oeNumber": "5611764010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla R1 Verso II",
+      "yearFrom": 2004,
+      "yearTo": 2009,
+      "description": "WS-Dam profile self-adhesive, 800 mm",
+      "eurocode": "8356ASD",
+      "oeNumber": "5611752040",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Corolla R1 Verso II",
+      "yearFrom": 2004,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "8356ASMV",
+      "oeNumber": "755330F010",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Hiace LH10",
+      "yearFrom": 1989,
+      "yearTo": 1995,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8268ASRV",
+      "oeNumber": "5612195J04",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Hiace LH102",
+      "yearFrom": 1995,
+      "yearTo": 2012,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "8295ASMVTG",
+      "oeNumber": "7553126021",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Hilux JN145/165",
+      "yearFrom": 1989,
+      "yearTo": 1997,
+      "description": "WS-Rubber solid",
+      "eurocode": "8266ASRV",
+      "oeNumber": "5612189120",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Hilux LN145/165",
+      "yearFrom": 1997,
+      "yearTo": 2005,
+      "description": "WS-Dam profile self-adhesive, 4240 mm",
+      "eurocode": "8308",
+      "oeNumber": "5611747010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Hilux LN145/165",
+      "yearFrom": 1997,
+      "yearTo": 2005,
+      "description": "WS-Dam profile self-adhesive, 800 mm",
+      "eurocode": "8308ASD",
+      "oeNumber": "5611752040",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Hilux LN145/165",
+      "yearFrom": 1997,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "8308ASMP1H",
+      "oeNumber": "7553135170",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Hilux LN145/165",
+      "yearFrom": 1997,
+      "yearTo": 2005,
+      "description": "WS-Moulding, chrome",
+      "eurocode": "8308ASMPC",
+      "oeNumber": "7553135120",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Land Cruiser HDJ100",
+      "yearFrom": 1998,
+      "yearTo": 2007,
+      "description": "WS-Dam profile self-adhesive, 1380 mm",
+      "eurocode": "8306ASD",
+      "oeNumber": "6481352010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Land Cruiser HDJ100",
+      "yearFrom": 1998,
+      "yearTo": 2007,
+      "description": "WS-Trim, top",
+      "eurocode": "8306ASMRT",
+      "oeNumber": "7553160020",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Land Cruiser HDJ80",
+      "yearFrom": 1990,
+      "yearTo": 1997,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8274ASRR",
+      "oeNumber": "5612160080",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Land Cruiser HDJ90",
+      "yearFrom": 1996,
+      "yearTo": 2002,
+      "description": "WS-Moulding",
+      "eurocode": "8301ASMR",
+      "oeNumber": "7553160010",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Land Cruiser J12",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Dam profile self-adhesive, 3530 mm",
+      "eurocode": "8341ASD",
+      "oeNumber": "5611764010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Land Cruiser J12",
+      "yearFrom": 2002,
+      "yearTo": 2009,
+      "description": "WS-Trim, top",
+      "eurocode": "8341ASMRT",
+      "oeNumber": "7553160040",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "MR2 III Cpé.",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8313ASD",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Paseo Cpé.",
+      "yearFrom": 1996,
+      "yearTo": 1998,
+      "description": "WS-Dam profile self-adhesive, 800 mm",
+      "eurocode": "8297ASD",
+      "oeNumber": "5611752040",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Paseo Cpé.",
+      "yearFrom": 1996,
+      "yearTo": 1998,
+      "description": "WS-Moulding",
+      "eurocode": "8297ASMC",
+      "oeNumber": "7553316210",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Picnic",
+      "yearFrom": 1996,
+      "yearTo": 2001,
+      "description": "WS-Moulding",
+      "eurocode": "8303ASMV",
+      "oeNumber": "7553344010",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Previa II",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Dam profile self-adhesive, 1380 mm",
+      "eurocode": "8312ASD",
+      "oeNumber": "6481352010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Previa II",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "8312ASMVT",
+      "oeNumber": "7553328020",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Prius I",
+      "yearFrom": 2001,
+      "yearTo": 2003,
+      "description": "WS-Dam profile self-adhesive, 4240 mm",
+      "eurocode": "8324ASD",
+      "oeNumber": "5611747010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Prius II",
+      "yearFrom": 2003,
+      "yearTo": 2009,
+      "description": "WS-Dam profile self-adhesive, 1380 mm",
+      "eurocode": "8355ASD",
+      "oeNumber": "6481352010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Prius II",
+      "yearFrom": 2003,
+      "yearTo": 2009,
+      "description": "WS-Moulding",
+      "eurocode": "8355ASMH",
+      "oeNumber": "7553347030",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Prius III",
+      "yearFrom": 2009,
+      "yearTo": 2016,
+      "description": "WS-Dam profile self-adhesive, 2020 mm",
+      "eurocode": "8385ASD",
+      "oeNumber": "5611750140",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Prius III",
+      "yearFrom": 2009,
+      "yearTo": 2016,
+      "description": "WS-Moulding self-adhesive",
+      "eurocode": "8385ASMH",
+      "oeNumber": "7553347050",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 I",
+      "yearFrom": 1994,
+      "yearTo": 1997,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8287ASD",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 II",
+      "yearFrom": 1998,
+      "yearTo": 2000,
+      "description": "WS-Moulding with rain channel",
+      "eurocode": "8287ASMR1H",
+      "oeNumber": "7553342030",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 III 3/5dr",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, left inside",
+      "eurocode": "8323ASGRL",
+      "oeNumber": "7554942011",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 III 3/5dr",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, right inside",
+      "eurocode": "8323ASGRR",
+      "oeNumber": "7554842011",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 III 3dr",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, left",
+      "eurocode": "8323ASMRL",
+      "oeNumber": "7553442021",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 III 3dr",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, right",
+      "eurocode": "8323ASMRR",
+      "oeNumber": "7553342051",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 III 5dr",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, left",
+      "eurocode": "8323ASMRL1A",
+      "oeNumber": "7553442011",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 III 5dr",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, right",
+      "eurocode": "8323ASMRR1A",
+      "oeNumber": "7553342041",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 III",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Dam profile self-adhesive, 3530 mm",
+      "eurocode": "8323ASD",
+      "oeNumber": "5611764010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 III",
+      "yearFrom": 2000,
+      "yearTo": 2006,
+      "description": "WS-Trim, top",
+      "eurocode": "8323ASMRT",
+      "oeNumber": "7553142010",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 IV",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Dam profile self-adhesive, 2900 mm",
+      "eurocode": "8372ASDR",
+      "oeNumber": "5611742050",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 IV",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Profile self-adhesive, top, 1185 mm",
+      "eurocode": "8372ASMRT",
+      "oeNumber": "5615342010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 IV",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Trim, left",
+      "eurocode": "8372ASMRL",
+      "oeNumber": "7554442010",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 IV",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Trim, left inside",
+      "eurocode": "8372ASGRL",
+      "oeNumber": "7554942040",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 IV",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Trim, right",
+      "eurocode": "8372ASMRR",
+      "oeNumber": "7554342010",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 IV",
+      "yearFrom": 2006,
+      "yearTo": 2013,
+      "description": "WS-Trim, right inside",
+      "eurocode": "8372ASGRR",
+      "oeNumber": "7554842021",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4 V",
+      "yearFrom": 1994,
+      "yearTo": 1997,
+      "description": "WS-Moulding",
+      "eurocode": "8287ASMR",
+      "oeNumber": "7553342010",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Starlet EP81",
+      "yearFrom": 1990,
+      "yearTo": 1996,
+      "description": "WS-Moulding",
+      "eurocode": "8273ASMH",
+      "oeNumber": "7553310060",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Starlet EP91",
+      "yearFrom": 1996,
+      "yearTo": 1999,
+      "description": "WS-Dam profile self-adhesive, 4330 mm",
+      "eurocode": "8298ASDH",
+      "oeNumber": "0456212010",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Yaris I",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Dam profile self-adhesive, 800 mm",
+      "eurocode": "8310ASD",
+      "oeNumber": "5611752040",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Yaris I",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "8310ASMH",
+      "oeNumber": "7553352010",
+      "characteristic": null
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Yaris II",
+      "yearFrom": 2006,
+      "yearTo": 2011,
+      "description": "WS-Moulding self-adhesive",
+      "eurocode": "8370ASMH",
+      "oeNumber": "7553352160",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Yaris Verso",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Dam profile self-adhesive, 800 mm",
+      "eurocode": "8317ASD",
+      "oeNumber": "5611752040",
+      "characteristic": "self-adhesive"
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Yaris Verso",
+      "yearFrom": 1999,
+      "yearTo": 2005,
+      "description": "WS-Moulding",
+      "eurocode": "8317ASMV",
+      "oeNumber": "7553352020",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "440",
+      "yearFrom": 1988,
+      "yearTo": 1996,
+      "description": "WS-Trim, top",
+      "eurocode": "8820ASMHT",
+      "oeNumber": "3460130",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "850",
+      "yearFrom": 1992,
+      "yearTo": 1996,
+      "description": "WS-Trim set, top, 2 pieces",
+      "eurocode": "8822AKMST",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "850",
+      "yearFrom": 1992,
+      "yearTo": 1996,
+      "description": "WS-Trim soft, top",
+      "eurocode": "8822ASMST1H",
+      "oeNumber": "1372731",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "FH 12-16",
+      "yearFrom": 1993,
+      "yearTo": 2001,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8823ASRL",
+      "oeNumber": "1619254",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S40/V40",
+      "yearFrom": 1996,
+      "yearTo": 2004,
+      "description": "WS-Trim soft, top",
+      "eurocode": "8824ASMST",
+      "oeNumber": "30652115",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S60/V70/XC70",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Trim soft, top",
+      "eurocode": "8829ASMET",
+      "oeNumber": "8620457",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S60/V70/XC70",
+      "yearFrom": 2000,
+      "yearTo": 2007,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "8829ASMEB",
+      "oeNumber": "30674707",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S70/V70",
+      "yearFrom": 1997,
+      "yearTo": 2000,
+      "description": "WS-Trim soft, top",
+      "eurocode": "8827ASMST1H",
+      "oeNumber": "8620553",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S70/V70",
+      "yearFrom": 1997,
+      "yearTo": 2000,
+      "description": "WS-Trim, top",
+      "eurocode": "8827ASMST",
+      "oeNumber": "8620553",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S70/V70",
+      "yearFrom": 1997,
+      "yearTo": 2000,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "8827ASMSB",
+      "oeNumber": "9151479",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S80",
+      "yearFrom": 1998,
+      "yearTo": 2006,
+      "description": "WS-Trim soft, top",
+      "eurocode": "8828ASMST1H",
+      "oeNumber": "8620350",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S80",
+      "yearFrom": 1998,
+      "yearTo": 2006,
+      "description": "WS-Waterpanel moulding",
+      "eurocode": "8828ASMSB",
+      "oeNumber": "30674704",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Corrado",
+      "yearFrom": 1988,
+      "yearTo": 1996,
+      "description": "WS-Moulding set, 4 pieces",
+      "eurocode": "8538AKMC",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf Conv.",
+      "yearFrom": 1993,
+      "yearTo": 2002,
+      "description": "WS-Cover trim, top",
+      "eurocode": "8543ASMTT",
+      "oeNumber": "1E0853306",
+      "characteristic": "reinforced"
+    },
+    {
+      "make": "VW",
+      "model": "Golf Conv.",
+      "yearFrom": 1993,
+      "yearTo": 2002,
+      "description": "WS-Trim set, left/right, 2 pieces",
+      "eurocode": "8543AKMTS",
+      "oeNumber": "1E0853705, 1E0853706",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf Conv.",
+      "yearFrom": 1993,
+      "yearTo": 2002,
+      "description": "WS-Trim, left",
+      "eurocode": "8543ASMTL",
+      "oeNumber": "1E0853705",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf Conv.",
+      "yearFrom": 1993,
+      "yearTo": 2002,
+      "description": "WS-Trim, right",
+      "eurocode": "8543ASMTR",
+      "oeNumber": "1E0853706",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf I/Jetta",
+      "yearFrom": 1974,
+      "yearTo": 1982,
+      "description": "BL-Rubber solid w/o insert gap",
+      "eurocode": "8519BSRH",
+      "oeNumber": "171845521",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf I/Jetta",
+      "yearFrom": 1974,
+      "yearTo": 1982,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8519ASRH1H",
+      "oeNumber": "171845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf I/Jetta",
+      "yearFrom": 1974,
+      "yearTo": 1982,
+      "description": "WS-Rubber solid with insert gap",
+      "eurocode": "8519ASRH",
+      "oeNumber": "171845121A",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf II/Jetta",
+      "yearFrom": 1983,
+      "yearTo": 1991,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8533ASRH1H",
+      "oeNumber": "191845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf II/Jetta",
+      "yearFrom": 1983,
+      "yearTo": 1991,
+      "description": "WS-Rubber solid with insert gap",
+      "eurocode": "8533ASRH",
+      "oeNumber": "191845121A",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Golf III",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "WS-Trim, top",
+      "eurocode": "8541ASMHT",
+      "oeNumber": "1HO853705B",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "LT 28-35 I",
+      "yearFrom": 1975,
+      "yearTo": 1996,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8522ASRV",
+      "oeNumber": "281845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "LT 28-35 II High",
+      "yearFrom": 1996,
+      "yearTo": 2006,
+      "description": "WS-Moulding coated",
+      "eurocode": "8552ASMV",
+      "oeNumber": "2D1845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "LT 28-35 II Low",
+      "yearFrom": 1996,
+      "yearTo": 2006,
+      "description": "WS-Moulding coated",
+      "eurocode": "8553ASMV",
+      "oeNumber": "2D3845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Passat B3/B4",
+      "yearFrom": 1988,
+      "yearTo": 1996,
+      "description": "WS-Moulding",
+      "eurocode": "8535ASMH",
+      "oeNumber": "357853299",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Polo II/Derby II",
+      "yearFrom": 1981,
+      "yearTo": 1994,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8530ASRH",
+      "oeNumber": "867845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Scirocco II",
+      "yearFrom": 1981,
+      "yearTo": 1992,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8531ASRC",
+      "oeNumber": "533845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Sharan",
+      "yearFrom": 2003,
+      "yearTo": 2010,
+      "description": "WS-Waterpanel moulding set, 3 pieces",
+      "eurocode": "8548AKMVB",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Sharan",
+      "yearFrom": 1995,
+      "yearTo": 2003,
+      "description": "WS-Trim, top",
+      "eurocode": "8548ASMVT",
+      "oeNumber": "7M0853306B",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Taro Pickup/Toyota Hilux",
+      "yearFrom": 1989,
+      "yearTo": 1998,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8536ASRP",
+      "oeNumber": "J5612189120",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Transporter T2",
+      "yearFrom": 1967,
+      "yearTo": 1979,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8510ASRV",
+      "oeNumber": "211845121D",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Transporter T3",
+      "yearFrom": 1979,
+      "yearTo": 1992,
+      "description": "BL-Rubber solid w/o insert gap, tailgate",
+      "eurocode": "8527BSRV",
+      "oeNumber": "255845521",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Transporter T3",
+      "yearFrom": 1981,
+      "yearTo": 1990,
+      "description": "WS-Rubber solid w/o insert gap",
+      "eurocode": "8527ASRV",
+      "oeNumber": "251845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Transporter T4",
+      "yearFrom": 1990,
+      "yearTo": 2003,
+      "description": "BL-Moulding, tailgate",
+      "eurocode": "8537BSMV",
+      "oeNumber": "701845121A",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Transporter T4",
+      "yearFrom": 1990,
+      "yearTo": 2003,
+      "description": "SL-Sealing gasket",
+      "eurocode": "8537LSMVRQ",
+      "oeNumber": "723845121",
+      "characteristic": null
+    },
+    {
+      "make": "VW",
+      "model": "Transporter T4",
+      "yearFrom": 1991,
+      "yearTo": 2004,
+      "description": "WS-Moulding",
+      "eurocode": "8537ASMV",
+      "oeNumber": "701845121J",
+      "characteristic": null
+    },
+    {
+      "make": "BMW",
+      "model": "5 Series E34",
+      "yearFrom": 1988,
+      "yearTo": 1995,
+      "description": "WS-Clip, grey",
+      "eurocode": "2426ASCS1",
+      "oeNumber": "52311938494",
+      "characteristic": null
+    },
+    {
+      "make": "CITROEN",
+      "model": "AX",
+      "yearFrom": 1987,
+      "yearTo": 1997,
+      "description": "Spacer, black",
+      "eurocode": "2717ASCH",
+      "oeNumber": "9549922780",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Ducato II",
+      "yearFrom": 1994,
+      "yearTo": 2006,
+      "description": "Spacer set, 4 pcs.",
+      "eurocode": "3735AKSV",
+      "oeNumber": "1314167080, 60545262",
+      "characteristic": null
+    },
+    {
+      "make": "FIAT",
+      "model": "Panda II",
+      "yearFrom": 2003,
+      "yearTo": 2012,
+      "description": "Spacer, black",
+      "eurocode": "3359ASCH",
+      "oeNumber": "46541864",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Escort IV",
+      "yearFrom": 1990,
+      "yearTo": 2001,
+      "description": "Spacer, white",
+      "eurocode": "3545ASCHB",
+      "oeNumber": "1045676",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Ka I",
+      "yearFrom": 1996,
+      "yearTo": 2008,
+      "description": "WS-Blind rivet",
+      "eurocode": "3554ASSH",
+      "oeNumber": "7M3853585",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Mondeo I",
+      "yearFrom": 1993,
+      "yearTo": 2000,
+      "description": "Spacer, white",
+      "eurocode": "3546ASCHB",
+      "oeNumber": "1064022",
+      "characteristic": null
+    },
+    {
+      "make": "FORD",
+      "model": "Transit IV",
+      "yearFrom": 1986,
+      "yearTo": 2000,
+      "description": "Spacer, black",
+      "eurocode": "3731ASCV",
+      "oeNumber": "6158238",
+      "characteristic": null
+    },
+    {
+      "make": "IVECO",
+      "model": "Daily II",
+      "yearFrom": 1999,
+      "yearTo": 2006,
+      "description": "Spacer, black",
+      "eurocode": "3741",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "MAZDA",
+      "model": "323 V 5dr",
+      "yearFrom": 1994,
+      "yearTo": 1998,
+      "description": "WS-Clip, blue",
+      "eurocode": "5149ASCHB",
+      "oeNumber": "B01A509H4B",
+      "characteristic": null
+    },
+    {
+      "make": "OPEL",
+      "model": "Movano",
+      "yearFrom": 1999,
+      "yearTo": 2003,
+      "description": "Spacer, black",
+      "eurocode": "6296",
+      "oeNumber": null,
+      "characteristic": null
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "607",
+      "yearFrom": 2000,
+      "yearTo": 2010,
+      "description": "Spacer, black",
+      "eurocode": "6540",
+      "oeNumber": "812364",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "19 Sedan",
+      "yearFrom": 1988,
+      "yearTo": 1996,
+      "description": "Spacer, black",
+      "eurocode": "7231ASDH",
+      "oeNumber": "7700789274",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Clio I",
+      "yearFrom": 1991,
+      "yearTo": 1998,
+      "description": "Spacer, black",
+      "eurocode": "7232ASDH",
+      "oeNumber": "7700789274",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Kangoo I",
+      "yearFrom": 1998,
+      "yearTo": 2001,
+      "description": "Spacer, black",
+      "eurocode": "7246ASCV",
+      "oeNumber": "7700838570",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Laguna I",
+      "yearFrom": 1994,
+      "yearTo": 2000,
+      "description": "Spacer, black",
+      "eurocode": "7237ASCHBL",
+      "oeNumber": "7700827631",
+      "characteristic": null
+    },
+    {
+      "make": "RENAULT",
+      "model": "Safrane",
+      "yearFrom": 1992,
+      "yearTo": 2002,
+      "description": "Spacer, black",
+      "eurocode": "7235ASCHB",
+      "oeNumber": "7705099039",
+      "characteristic": null
+    },
+    {
+      "make": "ROVER",
+      "model": "200",
+      "yearFrom": 1990,
+      "yearTo": 1995,
+      "description": "Fastener set, 8 pcs.",
+      "eurocode": "7016AKCH",
+      "oeNumber": "91517SJ4003",
+      "characteristic": null
+    },
+    {
+      "make": "SEAT",
+      "model": "Toledo I",
+      "yearFrom": 1991,
+      "yearTo": 1999,
+      "description": "WS-Clip set, 8 pcs.",
+      "eurocode": "7603AKCH",
+      "oeNumber": "191853733A",
+      "characteristic": null
+    },
+    {
+      "make": "VOLVO",
+      "model": "S40/V40",
+      "yearFrom": 1996,
+      "yearTo": 2004,
+      "description": "Spacer, yellow",
+      "eurocode": "8824ASSS",
+      "oeNumber": "30874958",
+      "characteristic": null
+    }
+  ],
+  "meta": {
+    "total": 743,
+    "extractedAt": "2026-05-17T22:12:57.653Z"
+  }
+}
