@@ -68,39 +68,64 @@ interface TecdocVehicle {
 }
 
 // ============================================================================
-// CORS HEADERS
+// STATIC FILE SERVING (from KV — uploaded by CI)
 // ============================================================================
 
-const ALLOWED_ORIGINS = [
-  'https://autoglass-frontend.pages.dev',
-  'https://auto-glass.no',
-  'https://www.auto-glass.no',
-  'http://localhost:8788',
-  'http://localhost:3000',
-  'http://localhost:8080',
-];
+const STATIC_CONTENT_TYPES: Record<string, string> = {
+  html: "text/html; charset=utf-8",
+  css: "text/css; charset=utf-8",
+  js: "application/javascript; charset=utf-8",
+  json: "application/json",
+  png: "image/png",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  svg: "image/svg+xml",
+};
 
-function getCorsHeaders(request: Request): Record<string, string> {
-  const origin = request.headers.get('Origin') || '';
-  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : '*';
-  return {
-    'Access-Control-Allow-Origin': allowed,
-    'Access-Control-Allow-Methods': 'GET, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    'Access-Control-Max-Age': '86400',
-    'Content-Type': 'application/json',
-  };
-}
+async function serveStaticFile(path: string, kv: KVNamespace): Promise<Response | null> {
+  // Normalize: / → index.html, /vin-sok → vin-sok.html, /css/tokens.css stays
+  let filePath = path;
+  if (filePath === "/") filePath = "/index.html";
+  if (!filePath.includes(".") && !filePath.endsWith("/")) filePath += ".html";
 
-function jsonResponse(data: unknown, status = 200, corsHeaders: Record<string, string>): Response {
-  return new Response(JSON.stringify(data, null, 2), {
-    status,
-    headers: corsHeaders,
+  // KV key: _site_index_html, _site_css_tokens_css, _site_js_search_glass_js
+  const kvKey = "_site_" + filePath.replace(/^\//, "").replace(/[\/\.\-]/g, "_");
+
+  const content = await kv.get(kvKey, "text");
+  if (!content) return null;
+
+  const ext = filePath.split(".").pop()?.toLowerCase() || "";
+  const ct = STATIC_CONTENT_TYPES[ext] || "text/plain";
+
+  return new Response(content, {
+    headers: {
+      "Content-Type": ct,
+      "Cache-Control": "no-store, must-revalidate",
+    },
   });
 }
 
-function errorResponse(message: string, status = 400, corsHeaders: Record<string, string>): Response {
-  return jsonResponse({ error: message }, status, corsHeaders);
+// ============================================================================
+// CORS HEADERS
+// ============================================================================
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  "Access-Control-Max-Age": "86400",
+  "Content-Type": "application/json",
+};
+
+function jsonResponse(data: unknown, status = 200): Response {
+  return new Response(JSON.stringify(data, null, 2), {
+    status,
+    headers: CORS_HEADERS,
+  });
+}
+
+function errorResponse(message: string, status = 400): Response {
+  return jsonResponse({ error: message }, status);
 }
 
 // ============================================================================
@@ -434,14 +459,18 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const corsHeaders = getCorsHeaders(request);
-
     if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: corsHeaders });
+      return new Response(null, { status: 204, headers: CORS_HEADERS });
     }
 
     const url = new URL(request.url);
     const path = url.pathname;
+
+    // Serve static site files from KV
+    const staticResponse = await serveStaticFile(path, env.GLASS_CATALOG);
+    if (staticResponse) {
+      return staticResponse;
+    }
 
     // Health check
     if (path === "/api/health") {
@@ -455,7 +484,7 @@ export default {
         svvConfigured,
         biluppgifterConfigured,
         timestamp: new Date().toISOString(),
-      }, 200, corsHeaders);
+      });
     }
 
     // Glass søk
@@ -474,7 +503,7 @@ export default {
             r.description?.toLowerCase().includes(typeLower)
           );
         }
-        return jsonResponse(result, 200, corsHeaders);
+        return jsonResponse(result);
       }
 
       if (prefix4 || eurocode) {
@@ -493,12 +522,12 @@ export default {
           query: { prefix4, eurocode },
           count: results.length,
           results: results.slice(0, 50),
-        }, 200, corsHeaders);
+        });
       }
 
-      return errorResponse("Mangler parameter: regnr, prefix4 eller eurocode", 400, corsHeaders);
+      return errorResponse("Mangler parameter: regnr, prefix4 eller eurocode");
     }
 
-    return errorResponse("Ukjent endepunkt", 404, corsHeaders);
+    return errorResponse("Ukjent endepunkt", 404);
   },
 };

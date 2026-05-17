@@ -2,12 +2,7 @@
    Autoglass AS — Glass Search Component (reusable)
    ============================================================ */
 
-const API_BASE = (() => {
-  // Same domain when served by Worker directly
-  if (location.hostname.includes('workers.dev')) return '';
-  // Production: Pages → Worker cross-origin
-  return 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
-})();
+const API_BASE = '';  // Same domain — Worker serves both static files and API
 
 class GlassSearch {
   constructor(options = {}) {

@@ -29,7 +29,63 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-  # ── 2. Upload catalog to KV ───────────────────────────────────
+  # ── 2. Upload static files to KV ──────────────────────────────
+  upload-static:
+    runs-on: ubuntu-latest
+    needs: deploy-worker
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload static files to KV via API
+        run: |
+          set -e
+          TOKEN="${{ secrets.CLOUDFLARE_API_TOKEN }}"
+          ACCT="${{ secrets.CLOUDFLARE_ACCOUNT_ID }}"
+          NS="${{ secrets.GLASS_KV_NAMESPACE_ID }}"
+          
+          if [ -z "$NS" ]; then
+            echo "⚠️ GLASS_KV_NAMESPACE_ID not set — skipping static upload"
+            exit 0
+          fi
+          
+          upload_file() {
+            local file="$1"
+            local key="$2"
+            echo "Uploading $file → $key"
+            resp=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/accounts/$ACCT/storage/kv/namespaces/$NS/values/$key" \
+              -H "Authorization: Bearer $TOKEN" \
+              -H "Content-Type: text/plain" \
+              --data-binary "@$file")
+            if echo "$resp" | python3 -c "import sys,json; d=json.load(sys.stdin); sys.exit(0 if d.get('success') else 1)" 2>/dev/null; then
+              echo "  ✅ OK"
+            else
+              echo "  ❌ FAILED: $resp"
+              exit 1
+            fi
+          }
+          
+          upload_file "index.html" "_site_index_html"
+          upload_file "vin-sok.html" "_site_vin_sok_html"
+          upload_file "produkter.html" "_site_produkter_html"
+          upload_file "bli-kunde.html" "_site_bli_kunde_html"
+          upload_file "kontakt.html" "_site_kontakt_html"
+          upload_file "om-oss.html" "_site_om_oss_html"
+          upload_file "kundeportal.html" "_site_kundeportal_html"
+          upload_file "css/tokens.css" "_site_css_tokens_css"
+          upload_file "css/base.css" "_site_css_base_css"
+          upload_file "css/components.css" "_site_css_components_css"
+          upload_file "js/i18n.js" "_site_js_i18n_js"
+          upload_file "js/main.js" "_site_js_main_js"
+          upload_file "js/search-glass.js" "_site_js_search_glass_js"
+          upload_file "js/auth.js" "_site_js_auth_js"
+          upload_file "robots.txt" "_site_robots_txt"
+          upload_file "sitemap.xml" "_site_sitemap_xml"
+          
+          echo "✅ All static files uploaded"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  # ── 3. Upload catalog to KV ───────────────────────────────────
   upload-kv:
     runs-on: ubuntu-latest
     needs: deploy-worker
@@ -45,40 +101,3 @@ jobs:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           KV_NAMESPACE_ID: ${{ secrets.GLASS_KV_NAMESPACE_ID }}
-
-  # ── 3. Deploy frontend to Cloudflare Pages ────────────────────
-  deploy-pages:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm install -g wrangler
-      - name: Build Pages bundle
-        run: |
-          mkdir -p _site
-          # Copy files (handle missing dirs gracefully)
-          cp -r *.html css/ js/ robots.txt sitemap.xml _redirects _site/ 2>/dev/null || true
-          mkdir -p _site/images
-          cp -r images/* _site/images/ 2>/dev/null || true
-          echo "Bundle contents:"
-          ls -la _site/
-          echo "Bundle size:"
-          du -sh _site/
-      - name: Create Pages project (if missing)
-        run: |
-          wrangler pages project create autoglass-frontend --production-branch=main || true
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-      - name: Deploy to Pages
-        run: |
-          wrangler pages deploy _site \
-            --project-name=autoglass-frontend \
-            --branch=main \
-            --commit-hash=${{ github.sha }} \
-            --yes
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
