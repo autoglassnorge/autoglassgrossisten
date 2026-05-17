@@ -220,3 +220,4 @@ Utstyrsflagg parses fra navn + beskrivelse + custom felter:
 ---
 
 © 2026 Autoglass AS. Bygget for [auto-glass.no](https://auto-glass.no).
+# Autoglass AS
