@@ -1,6 +1,6 @@
 {
   "meta": {
-    "count": 1078,
+    "count": 1082,
     "sources": [
       "importglasscorp-pdf",
       "web-research",
@@ -11121,6 +11121,46 @@
       "glassType": "bakrute",
       "position": null,
       "source": "glassknow.blogspot.com"
+    },
+    {
+      "nagsCode": "DW01587",
+      "suffix": "GBY",
+      "make": "CHEVROLET",
+      "model": "CORVETTE",
+      "yearFrom": 2005,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "corvetteforum.com"
+    },
+    {
+      "nagsCode": "DW01588",
+      "suffix": "GBY",
+      "make": "CHEVROLET",
+      "model": "CORVETTE",
+      "yearFrom": 2005,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "corvetteforum.com"
+    },
+    {
+      "nagsCode": "DW01589",
+      "suffix": "GBY",
+      "make": "CHEVROLET",
+      "model": "CORVETTE",
+      "yearFrom": 2005,
+      "yearTo": 2013,
+      "glassType": "frontrute",
+      "source": "corvetteforum.com"
+    },
+    {
+      "nagsCode": "DW02355",
+      "suffix": "GTY",
+      "make": "FORD",
+      "model": "F-150",
+      "yearFrom": null,
+      "yearTo": null,
+      "glassType": "frontrute",
+      "source": "f150forum.com"
     }
   ]
 }
