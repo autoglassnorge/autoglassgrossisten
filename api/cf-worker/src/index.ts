@@ -100,7 +100,7 @@ async function serveStaticFile(path: string, kv: KVNamespace): Promise<Response 
   return new Response(content, {
     headers: {
       "Content-Type": ct,
-      "Cache-Control": ext === "html" ? "no-cache" : "public, max-age=3600",
+      "Cache-Control": "no-store, must-revalidate",
     },
   });
 }
