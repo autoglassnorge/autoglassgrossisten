@@ -136,6 +136,22 @@
       <a href="bli-kunde.html" class="btn-primary" data-i18n="hero.cta1">Bli grossistkunde</a>
       <a href="kundeportal.html" class="btn-secondary" data-i18n="hero.cta2">Logg inn</a>
     </div>
+
+    <!-- INLINE GLASS SEARCH -->
+    <div class="hero-search-wrap reveal" data-glass-search data-mode="compact" data-images="true" data-nags="true" data-price="true" data-limit="5">
+      <div class="glass-type-selector" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">
+        <label class="type-pill active"><input type="radio" name="glass-type" value="frontrute" checked><span>Frontrute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="siderute"><span>Siderute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="bakrute"><span>Bakrute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="tak"><span>Tak</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value=""><span>Alle</span></label>
+      </div>
+      <div class="search-box">
+        <input type="text" class="glass-search-input" placeholder="Reg.nr. eller VIN" data-i18n-placeholder="vin.placeholder">
+        <button class="search-btn" onclick="this.closest('[data-glass-search]')._glassSearch.search()">Søk</button>
+      </div>
+      <div class="glass-search-results" style="margin-top:20px"></div>
+    </div>
     <div class="hero-stats">
       <div class="stat-item">
         <div class="stat-number" data-target="130000" data-suffix="+">0</div>
@@ -324,5 +340,6 @@
 
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
+<script src="js/search-glass.js"></script>
 </body>
 </html>
