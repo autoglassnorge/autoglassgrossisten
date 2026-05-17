@@ -58,7 +58,12 @@ jobs:
       - name: Build Pages bundle
         run: |
           mkdir -p _site
-          cp -r *.html css/ js/ images/ robots.txt sitemap.xml _redirects _site/
+          # Copy files (handle missing dirs gracefully)
+          cp -r *.html css/ js/ robots.txt sitemap.xml _redirects _site/ 2>/dev/null || true
+          mkdir -p _site/images
+          cp -r images/* _site/images/ 2>/dev/null || true
+          echo "Bundle contents:"
+          ls -la _site/
           echo "Bundle size:"
           du -sh _site/
       - name: Deploy to Pages
