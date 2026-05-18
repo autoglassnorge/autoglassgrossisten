@@ -1,62 +1,47 @@
 /**
- * Autoglass AS — Cloudflare Worker API
- * =====================================
+ * Autoglass AS — Cloudflare Worker API v2 (D1-optimized)
+ * =======================================================
  * Endepunkter:
- *   GET  /api/glass?regnr=AB12345       → søk på regnr
- *   GET  /api/glass?prefix4=5351        → søk på prefix4
- *   GET  /api/glass?eurocode=5351AGNMV  → direkte oppslag
+ *   GET  /api/glass?regnr=AB12345       → søk på regnr via SVV → D1
+ *   GET  /api/glass?prefix4=5351        → søk på prefix4 i D1
+ *   GET  /api/glass?eurocode=5351AGNMV  → direkte oppslag i D1
  *   GET  /api/health                    → statussjekk
+ *   GET  /api/catalog/brands            → merke-liste med count
+ *   GET  /api/catalog/categories        → kategori-liste med count
+ *   GET  /api/catalog/search?q=...      → fulltext søk i D1
  *
- * Kilder:
- *   - SVV (Statens Vegvesen) Enkeltoppslag API — primær kjøretøyoppslag (API-nøkkel)
- *   - Biluppgifter — fallback
+ * Arkitektur: D1 (primær) + KV (cache + fallback)
  */
 
 export interface Env {
   GLASS_CATALOG: KVNamespace;
-  GLASS_CATALOG_D1?: D1Database;   // D1 POC — optional til migrering er fullført
+  GLASS_CATALOG_D1: D1Database;
   BILUPPGIFTER_API_KEY: string;
   SVV_API_KEY: string;
 }
 
-interface CatalogData {
-  meta: { totalRecords: number; exportedAt: string };
-  records: GlassRecord[];
-}
-
 interface GlassRecord {
+  id: number;
   eurocode: string;
-  articleNumber: string;
-  scanNumber: string | null;
-  category: string;
-  supplier: string | null;
-  brand: string | null;
+  brand: string;
   model: string | null;
-  yearFrom: number | null;
-  yearTo: number | null;
-  adas: boolean;
-  rainSensor: boolean;
-  heated: boolean;
-  acoustic: boolean;
-  antenna: boolean;
-  hud: boolean;
-  shade: boolean;
-  camera: boolean;
-  laneAssist: boolean;
-  price: number | null;
-  stockStatus: number;
-  warehouseLocation: string | null;
-  oemNumbers: string[];
-  crossReferences: string[];
-  nagsCodes: string[];
-  weight: number | null;
-  dimensions: { width: number | null; height: number | null; thickness: number | null };
-  description: string;
+  category: string;
+  year_from: number | null;
+  year_to: number | null;
   prefix4: string;
-  imageUrl: string | null;
-  pdfUrl: string | null;
+  adas: number;
+  rain_sensor: number;
+  heated: number;
+  acoustic: number;
+  antenna: number;
+  hud: number;
+  shade: number;
+  camera: number;
+  lane_assist: number;
+  supplier: string | null;
+  image_url: string | null;
+  description: string;
   source: string;
-  lastUpdated: string;
 }
 
 interface TecdocVehicle {
@@ -69,7 +54,7 @@ interface TecdocVehicle {
 }
 
 // ============================================================================
-// CORS HEADERS
+// CORS
 // ============================================================================
 
 const CORS_HEADERS = {
@@ -80,10 +65,10 @@ const CORS_HEADERS = {
   "Content-Type": "application/json",
 };
 
-function jsonResponse(data: unknown, status = 200): Response {
-  return new Response(JSON.stringify(data, null, 2), {
+function jsonResponse(data: unknown, status = 200, extraHeaders?: Record<string, string>): Response {
+  return new Response(JSON.stringify(data), {
     status,
-    headers: CORS_HEADERS,
+    headers: { ...CORS_HEADERS, ...extraHeaders },
   });
 }
 
@@ -92,341 +77,195 @@ function errorResponse(message: string, status = 400): Response {
 }
 
 // ============================================================================
-// SVV ENKELTOPPSLAG API (Åpent API med API-nøkkel)
+// CACHE (KV)
+// ============================================================================
+
+async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
+  const cached = await kv.get(key);
+  return cached ? JSON.parse(cached) : null;
+}
+
+async function setCache(kv: KVNamespace, key: string, data: unknown, ttlSeconds = 300): Promise<void> {
+  await kv.put(key, JSON.stringify(data), { expirationTtl: ttlSeconds });
+}
+
+function cacheKey(endpoint: string, params: Record<string, string>): string {
+  const sorted = Object.entries(params).sort(([a], [b]) => a.localeCompare(b));
+  return `cache:${endpoint}:${sorted.map(([k, v]) => `${k}=${v}`).join("&")}`;
+}
+
+// ============================================================================
+// RATE LIMITING
+// ============================================================================
+
+async function checkRateLimit(kv: KVNamespace, ip: string): Promise<boolean> {
+  const key = `rate:${ip}`;
+  const count = parseInt((await kv.get(key)) || "0", 10);
+  if (count > 120) return false; // 120 req/min
+  await kv.put(key, String(count + 1), { expirationTtl: 60 });
+  return true;
+}
+
+// ============================================================================
+// SVV API
 // ============================================================================
 
 interface SvvKjoretoyData {
   kjoretoydataListe?: Array<{
-    forstegangsregistrering?: {
-      registrertForstegangNorgeDato?: string;
-    };
+    forstegangsregistrering?: { registrertForstegangNorgeDato?: string };
     godkjenning?: {
       tekniskGodkjenning?: {
         tekniskeData?: {
           generelt?: {
-            merke?: Array<{ merke?: string }>;
-            handelsbetegnelse?: string[];
-            typebetegnelse?: string;
+            merke?: Array<{ merke: string }>;
+            handelsbetegnelse?: Array<string>;
           };
         };
       };
     };
-    kjoretoyId?: {
-      kjennemerke?: string;
-      understellsnummer?: string;
-    };
   }>;
-}
-
-function parseSvvEnkeltoppslag(data: SvvKjoretoyData, regnr: string): TecdocVehicle | null {
-  const vehicle = data.kjoretoydataListe?.[0];
-  if (!vehicle) return null;
-
-  const generelt = vehicle.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt;
-  if (!generelt) return null;
-
-  const make = generelt.merke?.[0]?.merke || "Ukjent";
-  const model = generelt.handelsbetegnelse?.[0] || generelt.typebetegnelse || "";
-  const vin = vehicle.kjoretoyId?.understellsnummer || "";
-
-  // Parse år fra førstegangsregistrering
-  let year = new Date().getFullYear();
-  const regDate = vehicle.forstegangsregistrering?.registrertForstegangNorgeDato;
-  if (regDate) {
-    const parsed = new Date(regDate);
-    if (!isNaN(parsed.getTime())) year = parsed.getFullYear();
-  }
-
-  return {
-    regno: regnr.toUpperCase(),
-    vin,
-    make: make.trim(),
-    model: model.trim(),
-    year,
-    k_type: 0,
-  };
 }
 
 async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<TecdocVehicle | null> {
   if (!apiKey || apiKey === "NOT_SET") return null;
-
-  const cleanRegnr = regnr.replace(/\s/g, "").toUpperCase();
-
   try {
-    const response = await fetch(
-      `https://akfell-datautlevering.atlas.vegvesen.no/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(cleanRegnr)}`,
+    const res = await fetch(
+      `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(regnr)}`,
       {
         headers: {
+          "Accept": "application/json",
           "SVV-Authorization": `Apikey ${apiKey}`,
+          "User-Agent": "AutoglassAS-B2B/1.0",
         },
       }
     );
+    if (!res.ok) return null;
+    const data = (await res.json()) as SvvKjoretoyData;
+    const k = data.kjoretoydataListe?.[0];
+    if (!k) return null;
 
-    if (!response.ok) {
-      const text = await response.text();
-      console.error("SVV enkeltoppslag error:", response.status, text);
-      return null;
-    }
+    const merke = k.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.[0]?.merke || "";
+    const model = k.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.handelsbetegnelse?.[0] || "";
+    const regDate = k.forstegangsregistrering?.registrertForstegangNorgeDato || "";
+    const year = regDate ? parseInt(regDate.split("-")[0], 10) : 0;
 
-    const data = (await response.json()) as SvvKjoretoyData;
-    return parseSvvEnkeltoppslag(data, cleanRegnr);
-  } catch (err) {
-    console.error("SVV enkeltoppslag fetch error:", err);
+    return {
+      regno: regnr,
+      vin: "",
+      make: merke.toUpperCase(),
+      model: model.toUpperCase(),
+      year,
+      k_type: 0,
+    };
+  } catch {
     return null;
   }
 }
 
 // ============================================================================
-// BILUPPGIFTER API (fallback)
+// D1 QUERIES
 // ============================================================================
 
-async function fetchTecdoc(regnr: string, apiKey: string): Promise<TecdocVehicle | null> {
-  const url = `https://api.biluppgifter.se/api/v1/tecdoc/regno/${encodeURIComponent(regnr)}?country_code=NO`;
-  const response = await fetch(url, {
-    headers: {
-      "Authorization": `Bearer ${apiKey}`,
-      "Accept": "application/json",
-    },
-  });
-  if (!response.ok) return null;
-  const data = (await response.json()) as { data: { vehicle: TecdocVehicle } };
-  return data.data?.vehicle ?? null;
-}
-
-async function fetchOemFlags(vin: string, apiKey: string): Promise<string[]> {
-  const url = `https://api.biluppgifter.se/api/v1/oem2/vin/${encodeURIComponent(vin)}`;
-  try {
-    const response = await fetch(url, {
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Accept": "application/json",
-      },
-    });
-    if (!response.ok) return [];
-    const data = (await response.json()) as { data?: { vehicle?: { equipment?: Array<{ description: string }> } } };
-    return (data.data?.vehicle?.equipment || []).map((e) => e.description.toLowerCase());
-  } catch {
-    return [];
-  }
-}
-
-// ============================================================================
-// KATALOG FRA KV
-// ============================================================================
-
-async function loadCatalog(kv: KVNamespace): Promise<GlassRecord[]> {
-  const cached = await kv.get("catalog_records", { type: "json" });
-  if (cached) return cached as GlassRecord[];
-
-  const records: GlassRecord[] = [];
-  let chunk = 0;
-  while (true) {
-    const data = await kv.get(`catalog_chunk_${chunk}`, { type: "json" });
-    if (!data) break;
-    records.push(...(data as GlassRecord[]));
-    chunk++;
-  }
-  return records;
-}
-
-async function loadPrefix4Cache(kv: KVNamespace): Promise<Record<string, Array<{ prefix4: string; confidence: number }>>> {
-  const cached = await kv.get("prefix4_cache", { type: "json" });
-  if (!cached) return {};
-  return (cached as { entries?: Record<string, Array<{ prefix4: string; confidence: number }>> }).entries || {};
-}
-
-// ============================================================================
-// D1 QUERIES (POC — parallelt med KV)
-// ============================================================================
-
-async function loadCatalogFromD1(db: D1Database): Promise<GlassRecord[]> {
-  const { results } = await db.prepare("SELECT * FROM glass_catalog LIMIT 1000").all();
+async function queryByPrefix4(db: D1Database, prefix4: string, limit = 50): Promise<GlassRecord[]> {
+  const { results } = await db
+    .prepare("SELECT * FROM glass_catalog WHERE prefix4 = ? LIMIT ?")
+    .bind(prefix4, limit)
+    .all();
   return (results || []) as unknown as GlassRecord[];
 }
 
-async function getD1Prefix4(
-  db: D1Database,
-  make: string,
-  model: string,
-  year: number
-): Promise<{ prefix4: string; confidence: number } | null> {
-  const keys = [
-    `${make.toUpperCase()}:${model.toUpperCase()}:${year}`,
-    `${make.toUpperCase()}:${model.toUpperCase()}`,
-    `${make.toUpperCase()}:${year}`,
-  ];
-  const stmt = db.prepare(
-    "SELECT prefix4, confidence FROM prefix4_cache WHERE cache_key IN (?, ?, ?) ORDER BY confidence DESC LIMIT 1"
-  );
-  const result = await stmt.bind(keys[0], keys[1], keys[2]).first();
-  return result as { prefix4: string; confidence: number } | null;
+async function queryByEurocode(db: D1Database, eurocode: string): Promise<GlassRecord | null> {
+  const result = await db
+    .prepare("SELECT * FROM glass_catalog WHERE eurocode = ? COLLATE NOCASE")
+    .bind(eurocode)
+    .first();
+  return result as unknown as GlassRecord | null;
 }
 
-async function queryCatalogD1(
+async function queryByBrandAndYear(
   db: D1Database,
-  opts: { prefix4?: string; eurocode?: string; brand?: string; year?: number }
+  brand: string,
+  year: number,
+  prefix4?: string
 ): Promise<GlassRecord[]> {
-  if (opts.eurocode) {
-    const { results } = await db
-      .prepare("SELECT * FROM glass_catalog WHERE eurocode = ? COLLATE NOCASE")
-      .bind(opts.eurocode)
-      .all();
-    return (results || []) as unknown as GlassRecord[];
+  let sql = "SELECT * FROM glass_catalog WHERE brand = ? AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?)";
+  const params: (string | number)[] = [brand, year, year];
+  if (prefix4) {
+    sql += " AND prefix4 = ?";
+    params.push(prefix4);
   }
-
-  if (opts.prefix4) {
-    const { results } = await db
-      .prepare("SELECT * FROM glass_catalog WHERE prefix4 = ? LIMIT 50")
-      .bind(opts.prefix4)
-      .all();
-    return (results || []) as unknown as GlassRecord[];
-  }
-
-  return [];
+  sql += " LIMIT 50";
+  const { results } = await db.prepare(sql).bind(...params).all();
+  return (results || []) as unknown as GlassRecord[];
 }
 
-async function searchByRegnrD1(regnr: string, env: Env): Promise<unknown> {
-  if (!env.GLASS_CATALOG_D1) {
-    return { error: "D1 ikke konfigurert", regnr };
-  }
-  const db = env.GLASS_CATALOG_D1;
-
-  // 1–3. Samme kjøretøy-oppslag og flagg som KV-versjonen
-  let vehicle: TecdocVehicle | null = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
-  let source = "svv.enkeltoppslag";
-
-  if (!vehicle && env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
-    vehicle = await fetchTecdoc(regnr, env.BILUPPGIFTER_API_KEY);
-    source = "biluppgifter.tecdoc";
-  }
-
-  if (!vehicle) {
-    return { error: "Kunne ikke slå opp registreringsnummer", regnr };
-  }
-
-  let oemDescriptions: string[] = [];
-  let flags = { adas: false, rainSensor: false, heated: false, acoustic: false, antenna: false, hud: false };
-
-  if (source === "biluppgifter.tecdoc" && vehicle.vin && env.BILUPPGIFTER_API_KEY) {
-    oemDescriptions = await fetchOemFlags(vehicle.vin, env.BILUPPGIFTER_API_KEY);
-    flags = detectFlagsFromOem(oemDescriptions);
-  }
-
-  // 4. Hent prefix4 fra D1 cache
-  const p4Row = await getD1Prefix4(db, vehicle.make, vehicle.model, vehicle.year);
-  let prefix4 = p4Row?.prefix4;
-  let prefix4Confidence = p4Row?.confidence || 0;
-
-  // Fallback: frekvensanalyse fra D1
-  if (!prefix4) {
-    const { results } = await db
-      .prepare("SELECT prefix4, COUNT(*) as cnt FROM glass_catalog WHERE brand = ? AND year_from <= ? AND (year_to IS NULL OR year_to >= ?) GROUP BY prefix4 ORDER BY cnt DESC LIMIT 1")
-      .bind(vehicle.make, vehicle.year, vehicle.year)
-      .all();
-    const rows = results || [];
-    if (rows.length > 0) {
-      prefix4 = (rows[0] as any).prefix4;
-      prefix4Confidence = 1;
-    }
-  }
-
-  // 5. Hent kandidater fra D1
-  let candidates: GlassRecord[] = [];
-  let layer = 4;
-  let confidence: string = "none";
-
+async function queryByBrandOnly(db: D1Database, brand: string, prefix4?: string): Promise<GlassRecord[]> {
+  let sql = "SELECT * FROM glass_catalog WHERE brand = ?";
+  const params: (string | number)[] = [brand];
   if (prefix4) {
-    // Layer 1: brand + model + year + prefix4
-    const { results: l1Results } = await db
-      .prepare("SELECT * FROM glass_catalog WHERE prefix4 = ? AND brand = ? AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?)")
-      .bind(prefix4, vehicle.make, vehicle.year, vehicle.year)
-      .all();
-    let l1 = (l1Results || []) as unknown as GlassRecord[];
-    // D1 returnerer rader med INTEGER for bools — konverter tilbake
-    l1 = l1.map((r: any) => ({
-      ...r,
-      adas: !!r.adas, rainSensor: !!r.rain_sensor, heated: !!r.heated,
-      acoustic: !!r.acoustic, antenna: !!r.antenna, hud: !!r.hud,
-      shade: !!r.shade, camera: !!r.camera, laneAssist: !!r.lane_assist,
-      yearFrom: r.year_from, yearTo: r.year_to,
-      stockStatus: r.stock_status, warehouseLocation: r.warehouse_location,
-      oemNumbers: JSON.parse(r.oem_numbers || "[]"),
-      crossReferences: JSON.parse(r.cross_references || "[]"),
-      nagsCodes: JSON.parse(r.nags_codes || "[]"),
-      imageUrl: r.image_url, pdfUrl: r.pdf_url,
-      lastUpdated: r.last_updated,
-    } as GlassRecord));
-
-    // Filtrer modell-match i JS (D1 har ikke fuzzy match)
-    const l1Model = l1.filter((r) => modelMatches(vehicle.model, r.model));
-
-    if (l1Model.length > 0) {
-      candidates = l1Model;
-      layer = 1;
-      confidence = "high";
-    } else if (l1.length > 0) {
-      candidates = l1;
-      layer = 2;
-      confidence = "medium";
-    } else {
-      // Layer 3: brand + prefix4 (uten år)
-      const { results: l3Results } = await db
-        .prepare("SELECT * FROM glass_catalog WHERE prefix4 = ? AND brand = ?")
-        .bind(prefix4, vehicle.make)
-        .all();
-      const l3 = (l3Results || []) as unknown as GlassRecord[];
-      if (l3.length > 0) {
-        candidates = l3.map((r: any) => ({
-          ...r,
-          adas: !!r.adas, rainSensor: !!r.rain_sensor, heated: !!r.heated,
-          acoustic: !!r.acoustic, antenna: !!r.antenna, hud: !!r.hud,
-          shade: !!r.shade, camera: !!r.camera, laneAssist: !!r.lane_assist,
-          yearFrom: r.year_from, yearTo: r.year_to,
-          stockStatus: r.stock_status, warehouseLocation: r.warehouse_location,
-          oemNumbers: JSON.parse(r.oem_numbers || "[]"),
-          crossReferences: JSON.parse(r.cross_references || "[]"),
-          nagsCodes: JSON.parse(r.nags_codes || "[]"),
-          imageUrl: r.image_url, pdfUrl: r.pdf_url,
-          lastUpdated: r.last_updated,
-        } as GlassRecord));
-        layer = 3;
-        confidence = "medium";
-      } else {
-        layer = 4;
-        confidence = "low";
-      }
-    }
-
-    candidates = candidates
-      .map((c) => ({ c, score: scoreCandidate(c, flags) }))
-      .sort((a, b) => b.score - a.score)
-      .map((s) => s.c);
+    sql += " AND prefix4 = ?";
+    params.push(prefix4);
   }
+  sql += " LIMIT 50";
+  const { results } = await db.prepare(sql).bind(...params).all();
+  return (results || []) as unknown as GlassRecord[];
+}
 
-  const sources = [source];
-  if (oemDescriptions.length > 0) sources.push("biluppgifter.oem");
-
+async function getCatalogStats(db: D1Database): Promise<{ total: number; brands: number }> {
+  const totalRow = await db.prepare("SELECT COUNT(*) as cnt FROM glass_catalog").first();
+  const brandRow = await db.prepare("SELECT COUNT(DISTINCT brand) as cnt FROM glass_catalog").first();
   return {
-    vehicle: {
-      regnr: vehicle.regno,
-      vin: vehicle.vin,
-      make: vehicle.make,
-      model: vehicle.model,
-      year: vehicle.year,
-      kType: vehicle.k_type,
-    },
-    candidates: candidates.slice(0, 10),
-    confidence: prefix4Confidence >= 2 ? "high" : prefix4Confidence >= 1 ? "medium" : confidence,
-    layer,
-    prefix4,
-    flags,
-    sources,
-    _source: "d1",
+    total: (totalRow as any)?.cnt || 0,
+    brands: (brandRow as any)?.cnt || 0,
   };
 }
 
+async function getBrandsWithCount(db: D1Database): Promise<Array<{ brand: string; count: number }>> {
+  const { results } = await db
+    .prepare("SELECT brand, COUNT(*) as count FROM glass_catalog GROUP BY brand ORDER BY count DESC")
+    .all();
+  return (results || []) as unknown as Array<{ brand: string; count: number }>;
+}
+
+async function getCategoriesWithCount(db: D1Database): Promise<Array<{ category: string; count: number }>> {
+  const { results } = await db
+    .prepare("SELECT category, COUNT(*) as count FROM glass_catalog GROUP BY category ORDER BY count DESC")
+    .all();
+  return (results || []) as unknown as Array<{ category: string; count: number }>;
+}
+
+async function searchCatalog(
+  db: D1Database,
+  q: string,
+  filters: { brand?: string; category?: string; yearMin?: number; yearMax?: number }
+): Promise<GlassRecord[]> {
+  let sql = "SELECT * FROM glass_catalog WHERE (eurocode LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)";
+  const params: (string | number)[] = [`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`];
+
+  if (filters.brand) {
+    sql += " AND brand = ?";
+    params.push(filters.brand);
+  }
+  if (filters.category) {
+    sql += " AND category = ?";
+    params.push(filters.category);
+  }
+  if (filters.yearMin !== undefined) {
+    sql += " AND (year_to IS NULL OR year_to >= ?)";
+    params.push(filters.yearMin);
+  }
+  if (filters.yearMax !== undefined) {
+    sql += " AND (year_from IS NULL OR year_from <= ?)";
+    params.push(filters.yearMax);
+  }
+  sql += " LIMIT 100";
+
+  const { results } = await db.prepare(sql).bind(...params).all();
+  return (results || []) as unknown as GlassRecord[];
+}
+
 // ============================================================================
-// SØKELOGIKK
+// SEARCH LOGIC
 // ============================================================================
 
 function detectFlagsFromOem(oemDescriptions: string[]) {
@@ -443,7 +282,7 @@ function detectFlagsFromOem(oemDescriptions: string[]) {
 function scoreCandidate(c: GlassRecord, flags: ReturnType<typeof detectFlagsFromOem>): number {
   let score = 0;
   if (flags.adas && c.adas) score += 10;
-  if (flags.rainSensor && c.rainSensor) score += 8;
+  if (flags.rainSensor && c.rain_sensor) score += 8;
   if (flags.heated && c.heated) score += 6;
   if (flags.acoustic && c.acoustic) score += 4;
   if (flags.antenna && c.antenna) score += 4;
@@ -457,136 +296,60 @@ function modelMatches(vehicleModel: string, recordModel: string | null): boolean
   if (!recordModel || recordModel.trim() === "") return false;
   const vm = vehicleModel.toLowerCase().trim();
   const rm = recordModel.toLowerCase().trim();
-
   if (vm.includes(rm) || rm.includes(vm)) return true;
-
-  const tokenize = (s: string) => s.split(/[^a-z0-9]+/).filter(t => t.length >= 2);
+  const tokenize = (s: string) => s.split(/[^a-z0-9]+/).filter((t) => t.length >= 2);
   const vTokens = tokenize(vm);
   const rTokens = tokenize(rm);
-
-  const common = rTokens.filter(t => vTokens.includes(t));
+  const common = rTokens.filter((t) => vTokens.includes(t));
   if (common.length >= 2) return true;
   if (common.length === 1 && common[0].length >= 4) return true;
-
-  if (rTokens.length === 1 && vTokens.includes(rTokens[0]) && rTokens[0].length >= 3) {
-    return true;
-  }
-
+  if (rTokens.length === 1 && vTokens.includes(rTokens[0]) && rTokens[0].length >= 3) return true;
   return false;
 }
 
 async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
-  // 1. Prøv SVV Enkeltoppslag først (åpent API med API-nøkkel)
+  // 1. Lookup vehicle via SVV
   let vehicle: TecdocVehicle | null = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
   let source = "svv.enkeltoppslag";
-
-  // 2. Fallback til Biluppgitter
-  if (!vehicle && env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
-    vehicle = await fetchTecdoc(regnr, env.BILUPPGIFTER_API_KEY);
-    source = "biluppgifter.tecdoc";
-  }
 
   if (!vehicle) {
     return { error: "Kunne ikke slå opp registreringsnummer", regnr };
   }
 
-  // 3. Hent flagg (kun Biluppgitter)
-  let oemDescriptions: string[] = [];
-  let flags = { adas: false, rainSensor: false, heated: false, acoustic: false, antenna: false, hud: false };
-
-  if (source === "biluppgifter.tecdoc" && vehicle.vin && env.BILUPPGIFTER_API_KEY) {
-    oemDescriptions = await fetchOemFlags(vehicle.vin, env.BILUPPGIFTER_API_KEY);
-    flags = detectFlagsFromOem(oemDescriptions);
-  }
-
-  // 4. Last katalog
-  const catalog = await loadCatalog(env.GLASS_CATALOG);
-
-  // 5. Last prefix4-cache
-  const prefix4Cache = await loadPrefix4Cache(env.GLASS_CATALOG);
-  let prefix4: string | undefined;
-  let prefix4Confidence = 0;
-
-  const cacheKeys = [
-    `${vehicle.make.toUpperCase()}:${vehicle.model.toUpperCase()}:${vehicle.year}`,
-    `${vehicle.make.toUpperCase()}:${vehicle.model.toUpperCase()}`,
-    `${vehicle.make.toUpperCase()}:${vehicle.year}`,
-  ];
-
-  for (const key of cacheKeys) {
-    const entries = prefix4Cache[key];
-    if (entries && entries.length > 0) {
-      prefix4 = entries[0].prefix4;
-      prefix4Confidence = entries[0].confidence;
-      break;
-    }
-  }
-
-  // Fallback
-  if (!prefix4) {
-    const yearMatch = catalog.filter((r) =>
-      r.brand?.toLowerCase() === vehicle.make.toLowerCase() &&
-      r.yearFrom && r.yearFrom <= vehicle.year &&
-      (r.yearTo === null || r.yearTo >= vehicle.year)
-    );
-    if (yearMatch.length > 0) {
-      const freq: Record<string, number> = {};
-      for (const r of yearMatch) freq[r.prefix4] = (freq[r.prefix4] || 0) + 1;
-      prefix4 = Object.entries(freq).sort((a, b) => b[1] - a[1])[0]?.[0];
-      prefix4Confidence = 1;
-    }
-  }
-
-  // 6. Finn kandidater
-  let candidates: GlassRecord[] = [];
+  // 2. Find matching glass in D1
+  const db = env.GLASS_CATALOG_D1;
+  const candidates: GlassRecord[] = [];
   let layer = 4;
   let confidence: string = "none";
 
-  if (prefix4) {
-    candidates = catalog.filter((r) => r.prefix4 === prefix4);
+  // Get prefix4 from first 4 digits of eurocode... but we don't know eurocode yet.
+  // Try to match by brand + model + year
+  const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year);
+  const l1Model = l1.filter((r) => modelMatches(vehicle.model, r.model));
 
-    const l1 = candidates.filter((r) =>
-      r.brand?.toLowerCase() === vehicle.make.toLowerCase() &&
-      modelMatches(vehicle.model, r.model) &&
-      r.yearFrom && r.yearFrom <= vehicle.year &&
-      (r.yearTo === null || r.yearTo >= vehicle.year)
-    );
-
-    if (l1.length > 0) {
-      candidates = l1;
-      layer = 1;
-      confidence = "high";
-    } else {
-      const l2 = candidates.filter((r) =>
-        r.brand?.toLowerCase() === vehicle.make.toLowerCase() &&
-        r.yearFrom && r.yearFrom <= vehicle.year &&
-        (r.yearTo === null || r.yearTo >= vehicle.year)
-      );
-      if (l2.length > 0) {
-        candidates = l2;
-        layer = 2;
-        confidence = "medium";
-      } else {
-        const l3 = candidates.filter((r) => r.brand?.toLowerCase() === vehicle.make.toLowerCase());
-        if (l3.length > 0) {
-          candidates = l3;
-          layer = 3;
-          confidence = "medium";
-        } else {
-          layer = 4;
-          confidence = "low";
-        }
-      }
+  if (l1Model.length > 0) {
+    candidates.push(...l1Model);
+    layer = 1;
+    confidence = "high";
+  } else if (l1.length > 0) {
+    candidates.push(...l1);
+    layer = 2;
+    confidence = "medium";
+  } else {
+    const l3 = await queryByBrandOnly(db, vehicle.make);
+    if (l3.length > 0) {
+      candidates.push(...l3);
+      layer = 3;
+      confidence = "medium";
     }
-
-    candidates = candidates
-      .map((c) => ({ c, score: scoreCandidate(c, flags) }))
-      .sort((a, b) => b.score - a.score)
-      .map((s) => s.c);
   }
 
-  const sources = [source];
-  if (oemDescriptions.length > 0) sources.push("biluppgifter.oem");
+  // Score and sort
+  const flags = detectFlagsFromOem([]);
+  const scored = candidates
+    .map((c) => ({ c, score: scoreCandidate(c, flags) }))
+    .sort((a, b) => b.score - a.score)
+    .map((s) => s.c);
 
   return {
     vehicle: {
@@ -597,12 +360,11 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
       year: vehicle.year,
       kType: vehicle.k_type,
     },
-    candidates: candidates.slice(0, 10),
-    confidence: prefix4Confidence >= 2 ? "high" : prefix4Confidence >= 1 ? "medium" : confidence,
+    candidates: scored.slice(0, 10),
+    confidence,
     layer,
-    prefix4,
     flags,
-    sources,
+    sources: [source],
   };
 }
 
@@ -618,99 +380,91 @@ export default {
 
     const url = new URL(request.url);
     const path = url.pathname;
+    const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
 
-    // Statiske filer serveres nå fra Cloudflare Pages (autoglass-frontend)
-    // Worker håndterer kun /api/* endepunkter
+    // Rate limiting
+    if (!(await checkRateLimit(env.GLASS_CATALOG, clientIp))) {
+      return errorResponse("For mange forespørsler. Prøv igjen om et minutt.", 429);
+    }
 
     // Health check
     if (path === "/api/health") {
-      const catalog = await loadCatalog(env.GLASS_CATALOG);
+      const stats = await getCatalogStats(env.GLASS_CATALOG_D1);
       const svvConfigured = !!(env.SVV_API_KEY && env.SVV_API_KEY !== "NOT_SET");
-      const biluppgifterConfigured = !!(env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET");
-      let d1Size = 0;
-      if (env.GLASS_CATALOG_D1) {
-        try {
-          const row = await env.GLASS_CATALOG_D1.prepare("SELECT COUNT(*) as cnt FROM glass_catalog").first();
-          d1Size = (row as any)?.cnt || 0;
-        } catch {
-          d1Size = -1; // Error
-        }
-      }
-
       return jsonResponse({
         status: "ok",
-        catalogSize: catalog.length,
-        d1Configured: !!env.GLASS_CATALOG_D1,
-        d1Size,
+        catalogSize: stats.total,
+        brands: stats.brands,
+        d1Configured: true,
         svvConfigured,
-        biluppgifterConfigured,
         timestamp: new Date().toISOString(),
       });
     }
 
-    // Glass søk
+    // Glass search
     if (path === "/api/glass") {
       const regnr = url.searchParams.get("regnr");
       const prefix4 = url.searchParams.get("prefix4");
       const eurocode = url.searchParams.get("eurocode");
-      const type = url.searchParams.get("type");
-      const sourceParam = url.searchParams.get("source") || "auto"; // auto | d1 | kv
 
       if (regnr) {
-        let result: any;
+        // Check cache
+        const cache = await getCache(env.GLASS_CATALOG, cacheKey("glass", { regnr }));
+        if (cache) return jsonResponse(cache);
 
-        // Route basert på source-parameter
-        if (sourceParam === "d1") {
-          result = await searchByRegnrD1(regnr, env);
-        } else if (sourceParam === "kv") {
-          result = await searchByRegnr(regnr, env);
-        } else {
-          // Auto: prøv D1 først, fallback til KV
-          if (env.GLASS_CATALOG_D1) {
-            try {
-              result = await searchByRegnrD1(regnr, env);
-            } catch (e) {
-              console.warn("D1 feilet, faller tilbake til KV:", (e as Error).message);
-              result = await searchByRegnr(regnr, env);
-            }
-          } else {
-            result = await searchByRegnr(regnr, env);
-          }
-        }
-
-        if (type && result.candidates) {
-          const typeLower = type.toLowerCase();
-          result.candidates = result.candidates.filter((r: any) =>
-            r.category?.toLowerCase() === typeLower ||
-            r.description?.toLowerCase().includes(typeLower)
-          );
-        }
+        const result = await searchByRegnr(regnr, env);
+        await setCache(env.GLASS_CATALOG, cacheKey("glass", { regnr }), result, 300);
         return jsonResponse(result);
       }
 
-      if (prefix4 || eurocode) {
-        let results: GlassRecord[] = [];
+      if (prefix4) {
+        const cache = await getCache(env.GLASS_CATALOG, cacheKey("glass", { prefix4 }));
+        if (cache) return jsonResponse(cache);
 
-        if (sourceParam === "d1" && env.GLASS_CATALOG_D1) {
-          results = await queryCatalogD1(env.GLASS_CATALOG_D1, { prefix4: prefix4 || undefined, eurocode: eurocode || undefined });
-        } else {
-          const catalog = await loadCatalog(env.GLASS_CATALOG);
-          results = catalog;
-          if (eurocode) {
-            results = results.filter((r) => r.eurocode.toLowerCase() === eurocode.toLowerCase());
-          } else if (prefix4) {
-            results = results.filter((r) => r.prefix4 === prefix4);
-          }
-        }
+        const results = await queryByPrefix4(env.GLASS_CATALOG_D1, prefix4);
+        const data = { query: { prefix4 }, count: results.length, results };
+        await setCache(env.GLASS_CATALOG, cacheKey("glass", { prefix4 }), data, 3600);
+        return jsonResponse(data);
+      }
 
-        return jsonResponse({
-          query: { prefix4, eurocode },
-          count: results.length,
-          results: results.slice(0, 50),
-        });
+      if (eurocode) {
+        const cache = await getCache(env.GLASS_CATALOG, cacheKey("glass", { eurocode }));
+        if (cache) return jsonResponse(cache);
+
+        const result = await queryByEurocode(env.GLASS_CATALOG_D1, eurocode);
+        const data = { query: { eurocode }, count: result ? 1 : 0, results: result ? [result] : [] };
+        await setCache(env.GLASS_CATALOG, cacheKey("glass", { eurocode }), data, 3600);
+        return jsonResponse(data);
       }
 
       return errorResponse("Mangler parameter: regnr, prefix4 eller eurocode");
+    }
+
+    // Catalog metadata endpoints
+    if (path === "/api/catalog/brands") {
+      const cache = await getCache(env.GLASS_CATALOG, "catalog:brands");
+      if (cache) return jsonResponse(cache);
+      const brands = await getBrandsWithCount(env.GLASS_CATALOG_D1);
+      await setCache(env.GLASS_CATALOG, "catalog:brands", { brands }, 3600);
+      return jsonResponse({ brands });
+    }
+
+    if (path === "/api/catalog/categories") {
+      const cache = await getCache(env.GLASS_CATALOG, "catalog:categories");
+      if (cache) return jsonResponse(cache);
+      const categories = await getCategoriesWithCount(env.GLASS_CATALOG_D1);
+      await setCache(env.GLASS_CATALOG, "catalog:categories", { categories }, 3600);
+      return jsonResponse({ categories });
+    }
+
+    if (path === "/api/catalog/search") {
+      const q = url.searchParams.get("q") || "";
+      const brand = url.searchParams.get("brand") || undefined;
+      const category = url.searchParams.get("category") || undefined;
+      const yearMin = url.searchParams.get("yearMin") ? parseInt(url.searchParams.get("yearMin")!, 10) : undefined;
+      const yearMax = url.searchParams.get("yearMax") ? parseInt(url.searchParams.get("yearMax")!, 10) : undefined;
+      const results = await searchCatalog(env.GLASS_CATALOG_D1, q, { brand, category, yearMin, yearMax });
+      return jsonResponse({ query: q, count: results.length, results });
     }
 
     return errorResponse("Ukjent endepunkt", 404);

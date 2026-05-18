@@ -1,0 +1,5 @@
+version: 1
+agent:
+  extend: default
+  name: autoglass-worker
+  system_prompt_path: ./autoglass-worker-agent.md

@@ -31,6 +31,7 @@
       <a href="index.html" data-i18n="nav.home">Hjem</a>
       <a href="produkter.html" data-i18n="nav.products">Produkter</a>
       <a href="vin-sok.html" class="active" data-i18n="nav.vin">VIN-søk</a>
+      <a href="katalog.html">📋 Katalog</a>
       <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
       <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
       <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
@@ -71,11 +72,11 @@
 
     <div data-glass-search data-mode="full" data-images="true" data-nags="true" data-price="true" data-limit="10" style="max-width:800px;margin:0 auto">
       <div class="glass-type-selector" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px">
-        <label class="type-pill active"><input type="radio" name="glass-type" value="frontrute" checked><span>Frontrute</span></label>
+        <label class="type-pill active"><input type="radio" name="glass-type" value="" checked><span>Alle</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="frontrute"><span>Frontrute</span></label>
         <label class="type-pill"><input type="radio" name="glass-type" value="siderute"><span>Siderute</span></label>
         <label class="type-pill"><input type="radio" name="glass-type" value="bakrute"><span>Bakrute</span></label>
         <label class="type-pill"><input type="radio" name="glass-type" value="tak"><span>Tak</span></label>
-        <label class="type-pill"><input type="radio" name="glass-type" value=""><span>Alle</span></label>
       </div>
       <div class="search-box" style="background:var(--color-surface);padding:6px;border-radius:var(--radius-lg);display:flex;gap:8px;align-items:center">
         <input type="text" class="glass-search-input" placeholder="Reg.nr. eller VIN" style="flex:1;border:none;padding:14px 16px;font-size:16px;background:transparent;color:var(--color-text-primary)">
@@ -140,7 +141,7 @@
 
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
-<script src="js/search-glass.js"></script>
+<script src="js/search-glass.js?v=2"></script>
 <script>
 // Quick search helper for popular searches
 function quickSearch(regnr) {

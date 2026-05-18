@@ -1,15 +1,12 @@
--- Autoglass AS — D1 Schema for glasskatalog
--- ==========================================
--- Kjør: wrangler d1 execute glass-catalog-db --file=schema.sql
+-- D1 Schema for Autoglass Catalog
+-- ================================
 
-DROP TABLE IF EXISTS glass_catalog;
-DROP TABLE IF EXISTS prefix4_cache;
-
-CREATE TABLE glass_catalog (
-  eurocode TEXT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS glass_catalog (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  eurocode TEXT NOT NULL UNIQUE,
   article_number TEXT,
   scan_number TEXT,
-  category TEXT NOT NULL,
+  category TEXT,
   supplier TEXT,
   brand TEXT,
   model TEXT,
@@ -27,31 +24,32 @@ CREATE TABLE glass_catalog (
   price REAL,
   stock_status INTEGER DEFAULT 0,
   warehouse_location TEXT,
-  oem_numbers TEXT,        -- JSON array
-  cross_references TEXT,   -- JSON array
-  nags_codes TEXT,         -- JSON array
+  oem_numbers TEXT,        -- JSON array as string
+  cross_references TEXT,   -- JSON array as string
   weight REAL,
-  width REAL,
-  height REAL,
-  thickness REAL,
+  dimensions TEXT,         -- JSON object as string
   description TEXT,
   prefix4 TEXT,
   image_url TEXT,
   pdf_url TEXT,
   source TEXT,
-  last_updated TEXT
+  nags_codes TEXT,         -- JSON array as string
+  brand_original TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE INDEX idx_brand_model ON glass_catalog(brand, model);
-CREATE INDEX idx_year ON glass_catalog(year_from, year_to);
-CREATE INDEX idx_prefix4 ON glass_catalog(prefix4);
-CREATE INDEX idx_category ON glass_catalog(category);
-CREATE INDEX idx_eurocode ON glass_catalog(eurocode);
+-- Indexes for fast queries
+CREATE INDEX IF NOT EXISTS idx_brand ON glass_catalog(brand);
+CREATE INDEX IF NOT EXISTS idx_category ON glass_catalog(category);
+CREATE INDEX IF NOT EXISTS idx_prefix4 ON glass_catalog(prefix4);
+CREATE INDEX IF NOT EXISTS idx_year_from ON glass_catalog(year_from);
+CREATE INDEX IF NOT EXISTS idx_year_to ON glass_catalog(year_to);
+CREATE INDEX IF NOT EXISTS idx_supplier ON glass_catalog(supplier);
+CREATE INDEX IF NOT EXISTS idx_eurocode ON glass_catalog(eurocode);
 
-CREATE TABLE prefix4_cache (
-  cache_key TEXT PRIMARY KEY,
-  prefix4 TEXT NOT NULL,
-  confidence REAL DEFAULT 1.0
+-- Metadata table for tracking
+CREATE TABLE IF NOT EXISTS catalog_meta (
+  key TEXT PRIMARY KEY,
+  value TEXT,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE INDEX idx_prefix4_key ON prefix4_cache(cache_key);

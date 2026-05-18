@@ -1,0 +1,67 @@
+name: Uptime Check
+
+# Kjører hver time
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk Worker health
+        run: |
+          STATUS=$(curl -sf -w "%{http_code}" -o /dev/null https://autoglass-glass-sok.autoglassnorge.workers.dev/api/health)
+          if [ "$STATUS" != "200" ]; then
+            echo "❌ Worker health feilet: HTTP $STATUS"
+            exit 1
+          fi
+          echo "✅ Worker health OK"
+
+      - name: Sjekk Pages frontend
+        run: |
+          STATUS=$(curl -sf -w "%{http_code}" -o /dev/null https://autoglass-frontend.pages.dev/)
+          if [ "$STATUS" != "200" ]; then
+            echo "❌ Pages frontend feilet: HTTP $STATUS"
+            exit 1
+          fi
+          echo "✅ Pages frontend OK"
+
+      - name: Sjekk statiske filer
+        run: |
+          STATUS=$(curl -sf -w "%{http_code}" -o /dev/null https://autoglass-frontend.pages.dev/css/tokens.css)
+          if [ "$STATUS" != "200" ]; then
+            echo "❌ Statiske filer feilet: HTTP $STATUS"
+            exit 1
+          fi
+          echo "✅ Statiske filer OK"
+
+      - name: Sjekk API oppslag
+        run: |
+          curl -sf "https://autoglass-glass-sok.autoglassnorge.workers.dev/api/glass?regnr=SU18018" | jq -e '.vehicle.regnr' || exit 1
+          echo "✅ API oppslag OK"
+
+      - name: Opprett Issue ved 2+ feil på rad
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `🚨 Uptime check feilet — ${new Date().toISOString()}`;
+            const body = `## Uptime check feilet
+
+            - **Tid:** ${new Date().toISOString()}
+            - **Sjekk:** Worker health, Pages frontend, statiske filer, API oppslag
+
+            ### Neste steg
+            1. Sjekk [Cloudflare status](https://www.cloudflarestatus.com/)
+            2. Sjekk Worker-logger: \`wrangler tail\`
+            3. Verifiser at SVV_API_KEY er gyldig
+            `;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ['bug', 'uptime', 'automated']
+            });

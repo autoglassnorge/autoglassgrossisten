@@ -2,7 +2,7 @@
    Autoglass AS — Glass Search Component (reusable)
    ============================================================ */
 
-const API_BASE = '';  // Same domain — Worker serves both static files and API
+const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';  // Cloudflare Worker API
 
 class GlassSearch {
   constructor(options = {}) {
@@ -64,24 +64,31 @@ class GlassSearch {
 
     const type = this.getSelectedType();
     const typeParam = type ? `&type=${encodeURIComponent(type)}` : '';
+    const url = `${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}${typeParam}`;
+    console.log('[GlassSearch] Fetching:', url);
 
     try {
-      const res = await fetch(
-        `${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}${typeParam}`,
-        { headers: { 'Accept': 'application/json' } }
-      );
+      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      console.log('[GlassSearch] Response status:', res.status);
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({ error: 'Kunne ikke søke. Prøv igjen.' }));
+        console.error('[GlassSearch] API error:', err);
         this.renderError(err.error || 'Kunne ikke søke. Prøv igjen.');
         return;
       }
 
       const data = await res.json();
+      console.log('[GlassSearch] Response data:', { error: data.error, candidates: data.candidates?.length, vehicle: data.vehicle?.regnr });
       this.render(data);
       if (this.onResult) this.onResult(data);
     } catch (e) {
-      this.renderError('Nettverksfeil. Sjekk tilkoblingen og prøv igjen.');
+      console.error('[GlassSearch] Fetch error:', e);
+      const isBlocked = e.message?.includes('blocked') || e.message?.includes('Failed to fetch');
+      const msg = isBlocked
+        ? '🔒 Forespørselen ble blokkert. Sannsynlig årsak:<br>• Ad-blocker (uBlock, AdGuard)<br>• Brave Shields / Firefox Strict<br>• Bedriftsnettverk/VPN<br><br><strong>Løsning:</strong> Slå av ad-blocker for denne siden, eller prøv i inkognito-vindu.'
+        : 'Nettverksfeil. Sjekk tilkoblingen og prøv igjen.';
+      this.renderError(msg);
     } finally {
       this.setLoading(false);
     }

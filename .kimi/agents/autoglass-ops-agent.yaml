@@ -1,0 +1,5 @@
+version: 1
+agent:
+  extend: default
+  name: autoglass-ops
+  system_prompt_path: ./autoglass-ops-agent.md

@@ -1,0 +1,29 @@
+{
+  "commands": [
+    {
+      "alias": "glass-data",
+      "command": "kimi --agent-file .kimi/agents/autoglass-data-agent.yaml",
+      "description": "Data pipeline agent — scraper, merge, kvalitet"
+    },
+    {
+      "alias": "glass-worker",
+      "command": "kimi --agent-file .kimi/agents/autoglass-worker-agent.yaml",
+      "description": "Worker agent — API, KV, Cloudflare"
+    },
+    {
+      "alias": "glass-web",
+      "command": "kimi --agent-file .kimi/agents/autoglass-web-agent.yaml",
+      "description": "Web agent — frontend, SEO, i18n"
+    },
+    {
+      "alias": "glass-ops",
+      "command": "kimi --agent-file .kimi/agents/autoglass-ops-agent.yaml",
+      "description": "Ops agent — deploy, CI/CD, monitor"
+    },
+    {
+      "alias": "glass-arch",
+      "command": "kimi --agent-file .kimi/agents/autoglass-architect-agent.yaml",
+      "description": "Architect agent — ADR, refaktorering, plan"
+    }
+  ]
+}

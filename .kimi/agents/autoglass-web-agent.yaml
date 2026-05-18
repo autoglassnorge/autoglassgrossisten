@@ -1,0 +1,5 @@
+version: 1
+agent:
+  extend: default
+  name: autoglass-web
+  system_prompt_path: ./autoglass-web-agent.md

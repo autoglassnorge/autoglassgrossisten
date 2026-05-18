@@ -1,0 +1,132 @@
+name: Daily Scraper + Data Pipeline
+
+# Kjører daglig kl 06:00 CET (04:00 UTC)
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch: # Manuell trigger
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  # ── 1. Scrape + Merge ─────────────────────────────────────────
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Installer avhengigheter
+        run: npm install
+
+      - name: Kjør scrapere + merge + kvalitets-gate
+        run: node scripts/run-scrapers.mjs
+
+      - name: Generer data-kvalitetsrapport
+        run: node scripts/data-quality-report.mjs --output=data-quality-report.md
+
+      - name: Last opp rapport som artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: data-quality-report
+          path: data-quality-report.md
+
+  # ── 2. KV-upload (kun hvis scrape OK) ─────────────────────────
+  upload-kv:
+    needs: scrape
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Installer avhengigheter
+        run: |
+          npm install
+          npm install --save-dev @types/node
+
+      - name: Last opp katalog til KV
+        run: |
+          npx ts-node --compiler-options '{"module":"CommonJS","types":["node"]}' api/cf-worker/scripts/upload-catalog.ts
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          KV_NAMESPACE_ID: ${{ secrets.GLASS_KV_NAMESPACE_ID }}
+
+  # ── 3. Post-upload smoke-test ─────────────────────────────────
+  verify:
+    needs: upload-kv
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vent på KV-propagation
+        run: sleep 30
+
+      - name: Health check
+        run: |
+          curl -sf https://autoglass-glass-sok.autoglassnorge.workers.dev/api/health | jq -e '.status == "ok"' || exit 1
+          echo "✅ Health OK"
+
+      - name: API smoke-test (regnr)
+        run: |
+          curl -sf "https://autoglass-glass-sok.autoglassnorge.workers.dev/api/glass?regnr=SU18018" | jq -e '.vehicle.regnr' || exit 1
+          echo "✅ Regnr-oppslag OK"
+
+      - name: API smoke-test (prefix4)
+        run: |
+          COUNT=$(curl -sf "https://autoglass-glass-sok.autoglassnorge.workers.dev/api/glass?prefix4=5351" | jq '.count')
+          if [ "$COUNT" -eq "0" ]; then exit 1; fi
+          echo "✅ Prefix4-oppslag OK ($COUNT treff)"
+
+      - name: API smoke-test (eurocode)
+        run: |
+          COUNT=$(curl -sf "https://autoglass-glass-sok.autoglassnorge.workers.dev/api/glass?eurocode=5351AGNMV" | jq '.count')
+          if [ "$COUNT" -eq "0" ]; then exit 1; fi
+          echo "✅ Eurocode-oppslag OK ($COUNT treff)"
+
+      - name: Oppdater catalog-størrelse
+        run: |
+          echo '{"size":'$(node -e "console.log(JSON.parse(require('fs').readFileSync('data/catalog-prod.json')).records.length)")',"date":"'$(date -Iseconds)'"}' > data/.catalog-prev-size.json
+
+  # ── 4. Opprett GitHub Issue ved feil ──────────────────────────
+  notify-on-failure:
+    needs: [scrape, upload-kv, verify]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Opprett Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `🚨 Daglig scraper feilet — ${new Date().toISOString().split('T')[0]}`;
+            const body = `## Daglig scraper-pipeline feilet
+
+            - **Dato:** ${new Date().toISOString()}
+            - **Workflow:** ${context.workflow}
+            - **Run:** ${context.runId}
+
+            ### Mulige årsaker
+            1. Scraper feilet (rate-limit, timeout)
+            2. Kvalitets-gate blokker
+            3. KV-upload feilet
+            4. Smoke-test feilet
+
+            ### Neste steg
+            - Sjekk workflow-loggene
+            - Verifiser at kilder er oppe
+            - Kjør manuelt med \`workflow_dispatch\` ved behov
+            `;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ['bug', 'data-pipeline', 'automated']
+            });

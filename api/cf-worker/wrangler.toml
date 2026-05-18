@@ -10,11 +10,10 @@ id = "15099e572e51423dafb723996c01c668"
 # ── D1 Database (glasskatalog SQL) ────────────────────────────
 # 1. Opprett database:
 #    wrangler d1 create glass-catalog-db
-# 2. Kopier ID fra output inn under:
-# [[d1_databases]]
-# binding = "GLASS_CATALOG_D1"
-# database_name = "glass-catalog-db"
-# database_id = "<D1_DATABASE_ID>"
+[[d1_databases]]
+binding = "GLASS_CATALOG_D1"
+database_name = "glass-catalog-db"
+database_id = "f79095b3-da80-43fe-8064-ff480e8a1b4b"
 
 # ── Secrets (IKKE legg dem i denne filen — bruk wrangler secret put):
 #
