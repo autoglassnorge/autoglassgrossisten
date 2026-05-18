@@ -186,27 +186,36 @@ async function queryByBrandAndYear(
   db: D1Database,
   brand: string,
   year: number,
+  modelHint?: string,
   prefix4?: string
 ): Promise<GlassRecord[]> {
   let sql = "SELECT * FROM glass_catalog WHERE brand = ? AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?)";
   const params: (string | number)[] = [brand, year, year];
+  if (modelHint) {
+    sql += " AND (model LIKE ? OR description LIKE ?)";
+    params.push(`%${modelHint}%`, `%${modelHint}%`);
+  }
   if (prefix4) {
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " LIMIT 50";
+  sql += " LIMIT 200";
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
 }
 
-async function queryByBrandOnly(db: D1Database, brand: string, prefix4?: string): Promise<GlassRecord[]> {
+async function queryByBrandOnly(db: D1Database, brand: string, modelHint?: string, prefix4?: string): Promise<GlassRecord[]> {
   let sql = "SELECT * FROM glass_catalog WHERE brand = ?";
   const params: (string | number)[] = [brand];
+  if (modelHint) {
+    sql += " AND (model LIKE ? OR description LIKE ?)";
+    params.push(`%${modelHint}%`, `%${modelHint}%`);
+  }
   if (prefix4) {
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " LIMIT 50";
+  sql += " LIMIT 200";
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
 }
@@ -279,7 +288,7 @@ function detectFlagsFromOem(oemDescriptions: string[]) {
   };
 }
 
-function scoreCandidate(c: GlassRecord, flags: ReturnType<typeof detectFlagsFromOem>): number {
+function scoreCandidate(c: GlassRecord, flags: ReturnType<typeof detectFlagsFromOem>, vehicleYear: number): number {
   let score = 0;
   if (flags.adas && c.adas) score += 10;
   if (flags.rainSensor && c.rain_sensor) score += 8;
@@ -289,7 +298,69 @@ function scoreCandidate(c: GlassRecord, flags: ReturnType<typeof detectFlagsFrom
   if (flags.hud && c.hud) score += 6;
   if (!flags.adas && c.adas) score -= 3;
   if (!flags.hud && c.hud) score -= 2;
+
+  // Year compatibility scoring
+  const yr = parseYearRangeFromDescription(c.description);
+  if (yr.from && yr.to) {
+    if (vehicleYear >= yr.from && vehicleYear <= yr.to) {
+      score += 20; // Exact year match
+    } else if (vehicleYear >= yr.from - 2 && vehicleYear <= yr.to + 2) {
+      score += 5; // Close year match
+    } else if (vehicleYear < yr.from - 5 || vehicleYear > yr.to + 5) {
+      score -= 30; // Wrong generation entirely
+    }
+  } else if (yr.from && !yr.to) {
+    if (vehicleYear >= yr.from - 2) {
+      score += 10;
+    } else if (vehicleYear < yr.from - 10) {
+      score -= 30;
+    }
+  }
+
   return score;
+}
+
+function parseYearRangeFromDescription(desc: string | null): { from: number | null; to: number | null } {
+  if (!desc) return { from: null, to: null };
+  // Match patterns like "T3 79-91", "2015", "2009-", "90-03-"
+  // Use (^|\s) to ensure we start at a word boundary, not after a dash
+  const m = desc.match(/(?:^|\s)(\d{2,4})\s*[-–]\s*(\d{2,4})?\s*(?:[-–])?\s*[;\)]/);
+  if (m) {
+    let from = parseInt(m[1], 10);
+    let to = m[2] ? parseInt(m[2], 10) : null;
+    // Handle 2-digit years
+    if (from < 50) from += 2000;
+    else if (from < 100) from += 1900;
+    if (to !== null) {
+      if (to < 50) to += 2000;
+      else if (to < 100) to += 1900;
+    }
+    return { from, to };
+  }
+  // Single year like "2015;" or " 2016 "
+  const m2 = desc.match(/(?:^|\s)(19\d{2}|20\d{2})(?:\s*[;\)])/);
+  if (m2) {
+    return { from: parseInt(m2[1], 10), to: null };
+  }
+  return { from: null, to: null };
+}
+
+function parseGenerationFromDescription(desc: string | null): string | null {
+  if (!desc) return null;
+  const m = desc.match(/\b(T[1-6]|MK\s*[IVX]+|SERIES\s+[A-Z]\d*|GENERATION\s+\d+)\b/i);
+  return m ? m[1].toUpperCase() : null;
+}
+
+function expectedGeneration(brand: string, model: string, year: number): string | null {
+  const key = `${brand} ${model}`.toLowerCase();
+  // VW Transporter generations
+  if (key.includes("volkswagen") && key.includes("transporter")) {
+    if (year <= 1991) return "T3";
+    if (year <= 2003) return "T4";
+    if (year <= 2015) return "T5";
+    return "T6";
+  }
+  return null;
 }
 
 function modelMatches(vehicleModel: string, recordModel: string | null): boolean {
@@ -307,6 +378,65 @@ function modelMatches(vehicleModel: string, recordModel: string | null): boolean
   return false;
 }
 
+function yearCompatible(record: GlassRecord, vehicleYear: number, vehicleMake: string, vehicleModel: string): boolean {
+  // Generation check first (most reliable)
+  const expectedGen = expectedGeneration(vehicleMake, vehicleModel, vehicleYear);
+  const recordGen = parseGenerationFromDescription(record.description) || parseGenerationFromDescription(record.model);
+  if (expectedGen && recordGen) {
+    return expectedGen === recordGen;
+  }
+
+  // If we know expected generation but record has no generation info,
+  // try to infer from year range in description
+  if (expectedGen && !recordGen) {
+    const yr = parseYearRangeFromDescription(record.description);
+    if (yr.from && yr.to) {
+      // If the year range clearly belongs to a different generation, reject
+      const inferredGen = inferGenerationFromYearRange(vehicleMake, vehicleModel, yr.from, yr.to);
+      if (inferredGen && inferredGen !== expectedGen) {
+        return false;
+      }
+      return vehicleYear >= yr.from && vehicleYear <= yr.to;
+    }
+    if (yr.from && !yr.to) {
+      const inferredGen = inferGenerationFromYearRange(vehicleMake, vehicleModel, yr.from, yr.from + 10);
+      if (inferredGen && inferredGen !== expectedGen) {
+        return false;
+      }
+      return vehicleYear >= yr.from;
+    }
+  }
+
+  // If DB has explicit year range, use strict bounds
+  if (record.year_from !== null && record.year_to !== null) {
+    return vehicleYear >= record.year_from && vehicleYear <= record.year_to;
+  }
+
+  // Parse from description with strict bounds
+  const yr = parseYearRangeFromDescription(record.description);
+  if (yr.from && yr.to) {
+    return vehicleYear >= yr.from && vehicleYear <= yr.to;
+  }
+  if (yr.from && !yr.to) {
+    return vehicleYear >= yr.from;
+  }
+
+  // No year info = allow it (can't reject)
+  return true;
+}
+
+function inferGenerationFromYearRange(brand: string, model: string, from: number, to: number): string | null {
+  const key = `${brand} ${model}`.toLowerCase();
+  if (key.includes("volkswagen") && key.includes("transporter")) {
+    // Check if range overlaps more with one generation
+    if (to <= 1991) return "T3";
+    if (from >= 1990 && to <= 2003) return "T4";
+    if (from >= 2003 && to <= 2015) return "T5";
+    if (from >= 2015) return "T6";
+  }
+  return null;
+}
+
 async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
   // 1. Lookup vehicle via SVV
   let vehicle: TecdocVehicle | null = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
@@ -322,23 +452,27 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
   let layer = 4;
   let confidence: string = "none";
 
-  // Get prefix4 from first 4 digits of eurocode... but we don't know eurocode yet.
-  // Try to match by brand + model + year
-  const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year);
-  const l1Model = l1.filter((r) => modelMatches(vehicle.model, r.model));
+  // Try to match by brand + model + year (with year/generation compatibility filter)
+  // First: narrow by model name in SQL to avoid huge result sets
+  const modelHint = vehicle.model.length >= 3 ? vehicle.model.toLowerCase() : undefined;
+  const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year, modelHint);
+  const l1Compatible = l1.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
+  const l1Model = l1Compatible.filter((r) => modelMatches(vehicle.model, r.model));
 
   if (l1Model.length > 0) {
     candidates.push(...l1Model);
     layer = 1;
     confidence = "high";
-  } else if (l1.length > 0) {
-    candidates.push(...l1);
+  } else if (l1Compatible.length > 0) {
+    candidates.push(...l1Compatible);
     layer = 2;
     confidence = "medium";
   } else {
-    const l3 = await queryByBrandOnly(db, vehicle.make);
-    if (l3.length > 0) {
-      candidates.push(...l3);
+    // Fallback: broader search without model hint
+    const l3 = await queryByBrandOnly(db, vehicle.make, modelHint);
+    const l3Compatible = l3.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
+    if (l3Compatible.length > 0) {
+      candidates.push(...l3Compatible);
       layer = 3;
       confidence = "medium";
     }
@@ -347,7 +481,7 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
   // Score and sort
   const flags = detectFlagsFromOem([]);
   const scored = candidates
-    .map((c) => ({ c, score: scoreCandidate(c, flags) }))
+    .map((c) => ({ c, score: scoreCandidate(c, flags, vehicle.year) }))
     .sort((a, b) => b.score - a.score)
     .map((s) => s.c);
 
