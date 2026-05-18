@@ -50,15 +50,7 @@ jobs:
       - name: Deploy til Cloudflare Pages
         run: |
           npx wrangler pages deploy . \
-            --project-name=autoglass-frontend \
-            --exclude=api \
-            --exclude=data \
-            --exclude=node_modules \
-            --exclude=.git \
-            --exclude=.github \
-            --exclude=docs \
-            --exclude="*.log" \
-            --exclude="*.md"
+            --project-name=autoglass-frontend
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -73,8 +65,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install
+      - run: npm install --save-dev @types/node
       - name: Upload catalog to KV
-        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/cf-worker/scripts/upload-catalog.ts
+        run: npx ts-node --compiler-options '{"module":"CommonJS","types":["node"]}' api/cf-worker/scripts/upload-catalog.ts
         env:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
