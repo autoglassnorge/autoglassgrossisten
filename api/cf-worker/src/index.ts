@@ -51,6 +51,12 @@ interface TecdocVehicle {
   model: string;
   year: number;
   k_type: number;
+  typeCode?: string;
+  length?: number;
+  fuelCode?: string;
+  engineCode?: string;
+  seats?: number;
+  gvwr?: number;
 }
 
 // ============================================================================
@@ -91,7 +97,7 @@ async function setCache(kv: KVNamespace, key: string, data: unknown, ttlSeconds 
 
 function cacheKey(endpoint: string, params: Record<string, string>): string {
   const sorted = Object.entries(params).sort(([a], [b]) => a.localeCompare(b));
-  return `cache:${endpoint}:${sorted.map(([k, v]) => `${k}=${v}`).join("&")}`;
+  return `cache:v2:${endpoint}:${sorted.map(([k, v]) => `${k}=${v}`).join("&")}`;
 }
 
 // ============================================================================
@@ -112,6 +118,7 @@ async function checkRateLimit(kv: KVNamespace, ip: string): Promise<boolean> {
 
 interface SvvKjoretoyData {
   kjoretoydataListe?: Array<{
+    kjoretoyId?: { understellsnummer?: string };
     forstegangsregistrering?: { registrertForstegangNorgeDato?: string };
     godkjenning?: {
       tekniskGodkjenning?: {
@@ -119,7 +126,17 @@ interface SvvKjoretoyData {
           generelt?: {
             merke?: Array<{ merke: string }>;
             handelsbetegnelse?: Array<string>;
+            typebetegnelse?: string;
           };
+          dimensjoner?: { lengde?: number; bredde?: number };
+          motorOgDrivverk?: {
+            motor?: Array<{
+              drivstoff?: Array<{ drivstoffKode?: { kodeVerdi?: string } }>;
+              motorKode?: string;
+            }>;
+          };
+          persontall?: { sitteplasserTotalt?: number };
+          vekter?: { tillattTotalvekt?: number };
         };
       };
     };
@@ -144,18 +161,33 @@ async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<Tec
     const k = data.kjoretoydataListe?.[0];
     if (!k) return null;
 
-    const merke = k.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.[0]?.merke || "";
-    const model = k.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.handelsbetegnelse?.[0] || "";
+    const td = k.godkjenning?.tekniskGodkjenning?.tekniskeData;
+    const generelt = td?.generelt;
+    const merke = generelt?.merke?.[0]?.merke || "";
+    const model = generelt?.handelsbetegnelse?.[0] || "";
+    const typeCode = generelt?.typebetegnelse || "";
     const regDate = k.forstegangsregistrering?.registrertForstegangNorgeDato || "";
     const year = regDate ? parseInt(regDate.split("-")[0], 10) : 0;
+    const vin = k.kjoretoyId?.understellsnummer || "";
+    const length = td?.dimensjoner?.lengde || 0;
+    const fuelCode = td?.motorOgDrivverk?.motor?.[0]?.drivstoff?.[0]?.drivstoffKode?.kodeVerdi || "";
+    const engineCode = td?.motorOgDrivverk?.motor?.[0]?.motorKode || "";
+    const seats = td?.persontall?.sitteplasserTotalt || 0;
+    const gvwr = td?.vekter?.tillattTotalvekt || 0;
 
     return {
       regno: regnr,
-      vin: "",
+      vin,
       make: merke.toUpperCase(),
       model: model.toUpperCase(),
       year,
       k_type: 0,
+      typeCode,
+      length,
+      fuelCode,
+      engineCode,
+      seats,
+      gvwr,
     };
   } catch {
     return null;
@@ -363,6 +395,30 @@ function expectedGeneration(brand: string, model: string, year: number): string 
   return null;
 }
 
+function decodeVwTransporterBody(vin: string): { generation: string; body: string; wheelbase: string } | null {
+  if (!vin || vin.length < 8) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  if (wmi !== "WV1" && wmi !== "WV2") return null;
+  // VW T5/T6 VIN: WV1ZZZ7H... where 7H/7J/7E/7F/7L is body code
+  // VDS positions 4-9: ZZZ7H (position 7=7, position 8=H/J/E/F/L)
+  const bodyCode = vin[7].toUpperCase();
+  const bodyMap: Record<string, { body: string; wheelbase: string }> = {
+    "E": { body: "double_cab", wheelbase: "swb" },
+    "F": { body: "caravelle", wheelbase: "swb" },
+    "H": { body: "van", wheelbase: "swb" },
+    "J": { body: "van", wheelbase: "lwb" },
+    "L": { body: "california", wheelbase: "swb" },
+  };
+  const info = bodyMap[bodyCode];
+  if (!info) return null;
+  // Determine generation from position 10 (model year character)
+  const yearChar = vin.length >= 10 ? vin[9].toUpperCase() : "";
+  let generation = "T5";
+  if (yearChar >= "G" && yearChar <= "L") generation = "T5"; // 2005-2015
+  if (yearChar >= "M") generation = "T6"; // 2015+
+  return { generation, body: info.body, wheelbase: info.wheelbase };
+}
+
 function modelMatches(vehicleModel: string, recordModel: string | null): boolean {
   if (!recordModel || recordModel.trim() === "") return false;
   const vm = vehicleModel.toLowerCase().trim();
@@ -485,6 +541,9 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
     .sort((a, b) => b.score - a.score)
     .map((s) => s.c);
 
+  // Decode VIN for extra matching info
+  const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin) : null;
+
   return {
     vehicle: {
       regnr: vehicle.regno,
@@ -493,6 +552,13 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
       model: vehicle.model,
       year: vehicle.year,
       kType: vehicle.k_type,
+      typeCode: vehicle.typeCode,
+      length: vehicle.length,
+      fuelCode: vehicle.fuelCode,
+      engineCode: vehicle.engineCode,
+      seats: vehicle.seats,
+      gvwr: vehicle.gvwr,
+      vinDecode: vinInfo,
     },
     candidates: scored.slice(0, 10),
     confidence,
