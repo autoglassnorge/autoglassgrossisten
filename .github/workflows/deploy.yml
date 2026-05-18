@@ -47,9 +47,18 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install -g wrangler
 
+      - name: Bygg Pages-dist
+        run: |
+          mkdir -p dist
+          cp *.html dist/ 2>/dev/null || true
+          cp -r css dist/ 2>/dev/null || true
+          cp -r js dist/ 2>/dev/null || true
+          cp -r assets dist/ 2>/dev/null || true
+          cp -r images dist/ 2>/dev/null || true
+
       - name: Deploy til Cloudflare Pages
         run: |
-          npx wrangler pages deploy . \
+          npx wrangler pages deploy dist \
             --project-name=autoglass-frontend
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
