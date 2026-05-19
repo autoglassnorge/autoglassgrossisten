@@ -114,6 +114,7 @@
 .result-item .header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;flex-wrap:wrap;gap:12px}
 .result-item .eurocode{font-family:var(--font-display);font-size:20px;font-weight:700}
 .result-item .confidence{font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px}
+.result-item .confidence.exact{background:rgba(22,163,74,0.2);color:var(--color-success);border:1px solid var(--color-success)}
 .result-item .confidence.high{background:rgba(22,163,74,0.12);color:var(--color-success)}
 .result-item .confidence.medium{background:rgba(217,119,6,0.12);color:var(--color-warning)}
 .result-item .confidence.low{background:rgba(220,38,38,0.12);color:var(--color-error)}

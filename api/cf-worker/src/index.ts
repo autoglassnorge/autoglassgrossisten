@@ -17,6 +17,8 @@ export interface Env {
   GLASS_CATALOG: KVNamespace;
   GLASS_CATALOG_D1: D1Database;
   BILUPPGIFTER_API_KEY: string;
+  BOVSOFT_CLIENT_ID: string;
+  BOVSOFT_SECCODE: string;
   SVV_API_KEY: string;
 }
 
@@ -195,10 +197,11 @@ async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<Tec
 }
 
 // ============================================================================
-// BILUPPGIFTER EQUIPMENT LOOKUP (Stub — ready for integration after API call)
+// ============================================================================
+// FACTORY EQUIPMENT LOOKUP (Bovsoft REGNUM + Biluppgitter fallback)
 // ============================================================================
 
-interface BiluppgifterEquipment {
+interface FactoryEquipment {
   rainSensor: boolean;
   heated: boolean;
   acoustic: boolean;
@@ -206,22 +209,84 @@ interface BiluppgifterEquipment {
   camera: boolean;
   adas: boolean;
   hud: boolean;
+  source: "bovsoft" | "biluppgifter" | "none";
 }
 
 /**
- * Fetch factory equipment data from Biluppgifter API.
- * Called AFTER the user gets a working API key from Biluppgifter tomorrow.
+ * Fetch factory equipment from Bovsoft REGNUM API.
+ * Primary source: pays per successful request, no monthly subscription.
  *
- * Endpoint: GET /api/v1/vehicle-configurator/regno/{regno}?country_code=NO
- * Returns factory options like "Automatiska vindrutetorkare" (rain sensor),
- * "Akustikglas" (acoustic glass), etc.
- *
- * Alternative: /api/v1/oem2/vin/{vin} returns eq_code + description pairs.
+ * Endpoint: GET /bovsoft.regnum.clientapi?client=ID&seccode=SECRET&regnum=REG&country=NO
+ */
+async function fetchBovsoftEquipment(
+  regno: string,
+  clientId: string,
+  secCode: string
+): Promise<FactoryEquipment | null> {
+  if (!clientId || !secCode || clientId === "NOT_SET") return null;
+
+  try {
+    const url = `http://webservice.bovsoft.com:150/bovsoft.regnum.clientapi?client=${encodeURIComponent(clientId)}&seccode=${encodeURIComponent(secCode)}&regnum=${encodeURIComponent(regno)}&country=NO`;
+    const res = await fetch(url, { method: "GET" });
+
+    if (!res.ok) return null;
+
+    const text = await res.text();
+    let data: Record<string, unknown> = {};
+
+    // Bovsoft returns JSON by default, but might return XML
+    try {
+      data = JSON.parse(text) as Record<string, unknown>;
+    } catch {
+      // If XML, we can't parse easily — fallback to Biluppgifter
+      return null;
+    }
+
+    // Bovsoft response structure is unknown until we test.
+    // Attempt common field names for equipment/options.
+    const opts = extractOptionsFromBovsoft(data);
+
+    return {
+      rainSensor: opts.some((o) => /rain|regn|vindrutetorkare|wipe|torkar/i.test(o)),
+      heated: opts.some((o) => /heat|varme|uppvarm|defrost/i.test(o)),
+      acoustic: opts.some((o) => /acoustic|akustik|akustisk|quiet|støydemp/i.test(o)),
+      antenna: opts.some((o) => /antenna|antenn|radio|fm|dab/i.test(o)),
+      camera: opts.some((o) => /camera|kamera|sensor/i.test(o)),
+      adas: opts.some((o) => /adas|lane|filskifte|autonomous|assist/i.test(o)),
+      hud: opts.some((o) => /hud|head.up|projeksjon/i.test(o)),
+      source: "bovsoft",
+    };
+  } catch {
+    return null;
+  }
+}
+
+/** Extract options array from Bovsoft response (heuristic until we know structure) */
+function extractOptionsFromBovsoft(data: Record<string, unknown>): string[] {
+  const results: string[] = [];
+
+  function walk(obj: unknown) {
+    if (typeof obj === "string") {
+      results.push(obj.toLowerCase());
+    } else if (Array.isArray(obj)) {
+      obj.forEach(walk);
+    } else if (obj && typeof obj === "object") {
+      Object.values(obj).forEach(walk);
+    }
+  }
+
+  walk(data);
+  return results;
+}
+
+/**
+ * Fetch factory equipment from Biluppgitter API (fallback).
+ * Already implemented, kept as secondary source.
  */
 async function fetchBiluppgifterEquipment(
   regno: string,
   apiKey: string
-): Promise<BiluppgifterEquipment | null> {
+): Promise<FactoryEquipment | null> {
   if (!apiKey || apiKey === "NOT_SET") return null;
 
   try {
@@ -236,10 +301,7 @@ async function fetchBiluppgifterEquipment(
       }
     );
 
-    if (!res.ok) {
-      // Try OEM2 VIN endpoint as fallback
-      return null;
-    }
+    if (!res.ok) return null;
 
     const data = await res.json() as {
       data?: {
@@ -259,6 +321,7 @@ async function fetchBiluppgifterEquipment(
       camera: options.some((o) => /camera|kamera|sensor/i.test(o)),
       adas: options.some((o) => /adas|lane|filskifte|autonomous/i.test(o)),
       hud: options.some((o) => /hud|head.up/i.test(o)),
+      source: "biluppgifter",
     };
   } catch {
     return null;
@@ -832,22 +895,27 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
   const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
   const svvBody = inferBodyFromSvvData(vehicle);
 
-  // Try Biluppgifter for factory equipment data (if key works)
-  let biluppgifterEquipment: BiluppgifterEquipment | null = null;
-  if (env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
-    biluppgifterEquipment = await fetchBiluppgifterEquipment(regnr, env.BILUPPGIFTER_API_KEY);
+  // Try Bovsoft REGNUM first, then Biluppgitter as fallback
+  let factoryEquipment: FactoryEquipment | null = null;
+
+  if (env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
+    factoryEquipment = await fetchBovsoftEquipment(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
   }
 
-  // Equipment flags from vehicle — Biluppgifter first, then neutral (no penalty)
-  const vehicleFlags: ReturnType<typeof detectFlagsFromOem> = biluppgifterEquipment
+  if (!factoryEquipment && env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
+    factoryEquipment = await fetchBiluppgifterEquipment(regnr, env.BILUPPGIFTER_API_KEY);
+  }
+
+  // Equipment flags from vehicle — factory data first, then neutral (no penalty)
+  const vehicleFlags: ReturnType<typeof detectFlagsFromOem> = factoryEquipment
     ? {
-        adas: biluppgifterEquipment.adas,
-        rainSensor: biluppgifterEquipment.rainSensor,
-        heated: biluppgifterEquipment.heated,
-        acoustic: biluppgifterEquipment.acoustic,
-        antenna: biluppgifterEquipment.antenna,
-        camera: biluppgifterEquipment.camera,
-        hud: biluppgifterEquipment.hud,
+        adas: factoryEquipment.adas,
+        rainSensor: factoryEquipment.rainSensor,
+        heated: factoryEquipment.heated,
+        acoustic: factoryEquipment.acoustic,
+        antenna: factoryEquipment.antenna,
+        camera: factoryEquipment.camera,
+        hud: factoryEquipment.hud,
       }
     : {
         adas: false,
@@ -871,6 +939,24 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
     _equipment: inferRecordEquipment(c),
   }));
 
+  // Determine confidence level
+  // "exact" = factory data available + all equipment flags match top candidate
+  const topCandidate = candidatesWithEquipment[0];
+  if (factoryEquipment && topCandidate) {
+    const topEq = inferRecordEquipment(topCandidate);
+    const allMatch =
+      factoryEquipment.adas === topEq.adas &&
+      factoryEquipment.rainSensor === topEq.rainSensor &&
+      factoryEquipment.heated === topEq.heated &&
+      factoryEquipment.acoustic === topEq.acoustic &&
+      factoryEquipment.antenna === topEq.antenna &&
+      factoryEquipment.camera === topEq.camera &&
+      factoryEquipment.hud === topEq.hud;
+    if (allMatch && confidence === "high") {
+      confidence = "exact";
+    }
+  }
+
   return {
     vehicle: {
       regnr: vehicle.regno,
@@ -887,11 +973,23 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
       gvwr: vehicle.gvwr,
       vinDecode: vinInfo,
       svvBody,
+      factoryEquipment: factoryEquipment
+        ? {
+            rainSensor: factoryEquipment.rainSensor,
+            heated: factoryEquipment.heated,
+            acoustic: factoryEquipment.acoustic,
+            adas: factoryEquipment.adas,
+            camera: factoryEquipment.camera,
+            antenna: factoryEquipment.antenna,
+            hud: factoryEquipment.hud,
+            source: factoryEquipment.source,
+          }
+        : null,
     },
     candidates: candidatesWithEquipment,
     confidence,
     layer,
-    sources: [source],
+    sources: [source, factoryEquipment?.source || "none"],
   };
 }
 
@@ -918,12 +1016,16 @@ export default {
     if (path === "/api/health") {
       const stats = await getCatalogStats(env.GLASS_CATALOG_D1);
       const svvConfigured = !!(env.SVV_API_KEY && env.SVV_API_KEY !== "NOT_SET");
+      const bovsoftConfigured = !!(env.BOVSOFT_CLIENT_ID && env.BOVSOFT_CLIENT_ID !== "NOT_SET");
+      const biluppgifterConfigured = !!(env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET");
       return jsonResponse({
         status: "ok",
         catalogSize: stats.total,
         brands: stats.brands,
         d1Configured: true,
         svvConfigured,
+        bovsoftConfigured,
+        biluppgifterConfigured,
         timestamp: new Date().toISOString(),
       });
     }

@@ -130,6 +130,7 @@ class GlassSearch {
         make: v.make,
         model: v.model,
         year: v.year,
+        factoryEquipment: v.factoryEquipment || null,
       };
     }
 
@@ -173,7 +174,7 @@ class GlassSearch {
   renderCard(c, idx, confidence, layerLabel) {
     const isTop = idx === 0;
     const confClass = confidence || 'medium';
-    const confLabel = confClass === 'high' ? 'Høy konfidens' : confClass === 'medium' ? 'Middels konfidens' : 'Lav konfidens';
+    const confLabel = confClass === 'exact' ? 'Bekreftet originalrute' : confClass === 'high' ? 'Høy konfidens' : confClass === 'medium' ? 'Middels konfidens' : 'Lav konfidens';
 
     const flagTags = [
       c.adas && 'ADAS',
@@ -247,7 +248,7 @@ class GlassSearch {
         </div>
         ${nagsHtml}
         <div style="display:flex;gap:12px;margin-top:16px">
-          <button class="btn-primary" style="padding:10px 20px;font-size:13px" onclick="openQuoteModal('${c.eurocode}', '${(c.brand || '').replace(/'/g, "\\'")}', '${(c.model || '').replace(/'/g, "\\'")}')">Be om pris</button>
+          <button class="btn-primary" style="padding:10px 20px;font-size:13px" onclick="openQuoteModal('${c.eurocode}', '${(c.brand || '').replace(/'/g, "\\'")}', '${(c.model || '').replace(/'/g, "\\'")}', ${JSON.stringify((window.__lastSearchVehicle || {}).factoryEquipment || {}).replace(/"/g, '&quot;')})">Be om pris</button>
           <button class="btn-secondary" style="padding:10px 20px;font-size:13px" onclick="saveVehicleFromSearch('${c.eurocode}', '${(c.brand || '').replace(/'/g, "\\'")}', '${(c.model || '').replace(/'/g, "\\'")}')">Lagre kjøretøy</button>
         </div>
       </div>
@@ -269,9 +270,39 @@ class GlassSearch {
 // QUOTE MODAL
 // ============================================================================
 
-function openQuoteModal(eurocode, brand, model) {
+function openQuoteModal(eurocode, brand, model, vehicleEquipment) {
   const existing = document.getElementById('quote-modal');
   if (existing) existing.remove();
+
+  // Equipment checklist
+  const eq = vehicleEquipment || {};
+  const checklistHtml = eq.source && eq.source !== 'none' ? `
+    <div style="margin-bottom:16px;padding:14px;background:var(--color-surface-alt);border-radius:var(--radius-sm);border:1px solid var(--color-border)">
+      <p style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary)">✅ Bekreft utstyr (fra fabrikkdata)</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Regnsensor: ${eq.rainSensor ? 'Ja' : 'Nei'}</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Varme: ${eq.heated ? 'Ja' : 'Nei'}</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Akustisk: ${eq.acoustic ? 'Ja' : 'Nei'}</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> ADAS: ${eq.adas ? 'Ja' : 'Nei'}</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Kamera: ${eq.camera ? 'Ja' : 'Nei'}</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Antenne: ${eq.antenna ? 'Ja' : 'Nei'}</label>
+      </div>
+      <p style="font-size:11px;color:var(--color-text-muted);margin-top:6px">Kilde: ${eq.source === 'bovsoft' ? 'Bovsoft REGNUM' : eq.source === 'biluppgifter' ? 'Biluppgifter' : 'Ukjent'}</p>
+    </div>
+  ` : `
+    <div style="margin-bottom:16px;padding:14px;background:rgba(217,119,6,0.08);border-radius:var(--radius-sm);border:1px solid var(--color-warning)">
+      <p style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--color-warning)">⚠️ Sjekk utstyr manuelt</p>
+      <p style="font-size:12px;color:var(--color-text-secondary)">Vi har ikke fabrikkdata for dette kjøretøyet. Bekreft at følgende stemmer:</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px;margin-top:8px">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-rain"> Regnsensor</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-heat"> Varme</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-acoustic"> Akustisk</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-adas"> ADAS</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-camera"> Kamera</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-antenna"> Antenne</label>
+      </div>
+    </div>
+  `;
 
   const modal = document.createElement('div');
   modal.id = 'quote-modal';
@@ -280,6 +311,7 @@ function openQuoteModal(eurocode, brand, model) {
     <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:32px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
       <h3 style="font-size:20px;margin-bottom:4px">Be om pris</h3>
       <p style="color:var(--color-text-secondary);font-size:14px;margin-bottom:20px">${eurocode}${brand ? ' — ' + brand + ' ' + model : ''}</p>
+      ${checklistHtml}
       <form id="quote-form">
         <div class="form-group" style="margin-bottom:14px">
           <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">E-post *</label>
