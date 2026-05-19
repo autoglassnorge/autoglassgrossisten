@@ -163,6 +163,9 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 | 2026-05-18 | KV over D1 for katalog-lagring | Godkjent |
 | 2026-05-18 | Daglig scraper med kvalitets-gate | Godkjent |
 | 2026-05-18 | 5 KIMI CLI-agenter for domener | Godkjent |
+| 2026-05-19 | Cloudflare Access over Supabase Auth | Godkjent |
+| 2026-05-19 | D1 `quote_requests` over e-post | Godkjent |
+| 2026-05-19 | localStorage for lagrede kjøretøy (MVP) | Godkjent |
 
 ---
 
