@@ -1,0 +1,39 @@
+name: Deploy WP Mirror
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  deploy-mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm install -g wrangler
+
+      - name: Scrape WP + bygg mirror
+        run: |
+          node scripts/scrape-wp.mjs
+          node scripts/download-wp-media.mjs
+          node scripts/build-wp-mirror.mjs
+
+      - name: Deploy mirror til Cloudflare Pages
+        run: |
+          npx wrangler pages deploy dist-mirror \
+            --project-name=autoglass-mirror
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verifiser mirror
+        run: |
+          sleep 10
+          curl -sfI https://autoglass-mirror.pages.dev/ | grep -q "200" || exit 1
+          echo "✅ Mirror deploy OK"
