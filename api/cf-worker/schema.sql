@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS glass_catalog (
   source TEXT,
   nags_codes TEXT,         -- JSON array as string
   brand_original TEXT,
+  ktype INTEGER,              -- TecDoc type ID (for exact matching)
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -46,6 +47,7 @@ CREATE INDEX IF NOT EXISTS idx_year_from ON glass_catalog(year_from);
 CREATE INDEX IF NOT EXISTS idx_year_to ON glass_catalog(year_to);
 CREATE INDEX IF NOT EXISTS idx_supplier ON glass_catalog(supplier);
 CREATE INDEX IF NOT EXISTS idx_eurocode ON glass_catalog(eurocode);
+CREATE INDEX IF NOT EXISTS idx_ktype ON glass_catalog(ktype);
 
 -- Metadata table for tracking
 CREATE TABLE IF NOT EXISTS catalog_meta (
@@ -53,3 +55,20 @@ CREATE TABLE IF NOT EXISTS catalog_meta (
   value TEXT,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Statistical learning: (ktype, eurocode) frequency aggregation
+-- ----------------------------------------------------------------------
+-- GDPR-safe: NO regnr stored. Each successful match increments hit_count.
+-- Layer 0 in the matching algorithm only trusts mappings with hit_count >= 3
+-- (see KTYPE_CONFIDENCE_THRESHOLD in src/index.ts) to prevent cache poisoning.
+CREATE TABLE IF NOT EXISTS ktype_matches (
+  ktype       INTEGER  NOT NULL,
+  eurocode    TEXT     NOT NULL,
+  hit_count   INTEGER  NOT NULL DEFAULT 1,
+  first_seen  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  last_seen   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ktype, eurocode)
+);
+
+CREATE INDEX IF NOT EXISTS idx_ktype_matches_eurocode ON ktype_matches(eurocode);
+CREATE INDEX IF NOT EXISTS idx_ktype_matches_last_seen ON ktype_matches(last_seen DESC);
