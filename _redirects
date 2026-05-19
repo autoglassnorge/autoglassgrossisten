@@ -1,14 +1,15 @@
 # WordPress → Ny Cloudflare Pages (permanent redirects)
-# Cloudflare Pages strips trailing slashes BEFORE _redirects, so source paths must NOT have trailing slashes
-/bli-kunde            /bli-kunde              301
+# NB: Cloudflare Pages strips trailing slashes BEFORE _redirects are evaluated.
+#     Also, pretty URLs auto-serve .html files, so paths with matching files
+#     don't need redirects (bli-kunde, personvern, om-oss serve directly).
+
+# Pages that DON'T have matching .html files — must redirect
+/vilkar-betingelser   /vilkar                 301
 /kundeservice         /kontakt                301
 /min-konto            /kundeportal            301
-/om-oss               /om-oss                 301
-/personvern           /personvern             301
-/vilkar-betingelser   /vilkar                 301
 /kontakt-oss          /kontakt                301
 
-# WooCommerce redirects (shop pages → produkter/frontruter)
+# WooCommerce redirects (shop pages → produkter)
 /shop                 /produkter              301
 /produkt/*            /produkter              301
 /kategori/*           /produkter              301
