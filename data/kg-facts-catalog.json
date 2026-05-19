@@ -1,0 +1,72 @@
+[
+  {
+    "subject": "generation-BL",
+    "predicate": "typically-has",
+    "object": "equipment-shade(51%)"
+  },
+  {
+    "subject": "generation-B6",
+    "predicate": "typically-has",
+    "object": "equipment-shade(90%)"
+  },
+  {
+    "subject": "brand-year-FORD:2010",
+    "predicate": "typically-has",
+    "object": "equipment-shade(66%)"
+  },
+  {
+    "subject": "brand-year-TOYOTA:2005",
+    "predicate": "typically-has",
+    "object": "equipment-shade(61%)"
+  },
+  {
+    "subject": "brand-year-VW:2005",
+    "predicate": "typically-has",
+    "object": "equipment-shade(93%)"
+  },
+  {
+    "subject": "brand-year-FORD:2000",
+    "predicate": "typically-has",
+    "object": "equipment-shade(64%)"
+  },
+  {
+    "subject": "brand-year-RENAULT:2005",
+    "predicate": "typically-has",
+    "object": "equipment-shade(74%)"
+  },
+  {
+    "subject": "brand-year-AUDI:2015",
+    "predicate": "typically-has",
+    "object": "equipment-shade(64%)"
+  },
+  {
+    "subject": "brand-year-FORD:2005",
+    "predicate": "typically-has",
+    "object": "equipment-shade(73%)"
+  },
+  {
+    "subject": "brand-year-VW:2010",
+    "predicate": "typically-has",
+    "object": "equipment-shade(81%)"
+  },
+  {
+    "subject": "brand-year-AUDI:2005",
+    "predicate": "typically-has",
+    "object": "equipment-shade(69%)"
+  },
+  {
+    "subject": "brand-year-VW:2015",
+    "predicate": "typically-has",
+    "object": "equipment-shade(71%)"
+  },
+  {
+    "subject": "brand-year-BMW:2005",
+    "predicate": "typically-has",
+    "object": "equipment-shade(72%)"
+  },
+  {
+    "subject": "brand-year-CITROEN:2010",
+    "predicate": "typically-has",
+    "object": "equipment-shade(73%)"
+  }
+]

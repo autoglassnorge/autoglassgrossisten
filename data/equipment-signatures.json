@@ -1,0 +1,7672 @@
+{
+  "meta": {
+    "builtAt": "2026-05-19T21:59:52.467Z",
+    "totalRecords": 37581,
+    "recordsWithEquipment": 11158
+  },
+  "brandModelYear": {
+    "ALFA ROMEO:GIULIA:2015": {
+      "count": 4,
+      "adas": 0.25,
+      "acoustic": 0.25,
+      "antenna": 0.25,
+      "shade": 0.5,
+      "camera": 0.25
+    },
+    "BMW:5 SERIES F10:2010": {
+      "count": 9,
+      "rainSensor": 0.11,
+      "hud": 0.44,
+      "shade": 1
+    },
+    "BMW:X5 (F15) 5D SUV:2010": {
+      "count": 15,
+      "adas": 0.07,
+      "rainSensor": 0.07,
+      "acoustic": 0.33,
+      "hud": 0.07,
+      "shade": 0.73,
+      "camera": 0.07
+    },
+    "NEW:MINI F56 3D HBK:2010": {
+      "count": 4,
+      "adas": 0.5,
+      "antenna": 0.25,
+      "shade": 0.5,
+      "camera": 0.5
+    },
+    "BMW:X2 (XCITE) F39:2015": {
+      "count": 5,
+      "adas": 0.4,
+      "rainSensor": 0.4,
+      "acoustic": 0.4,
+      "antenna": 0.2,
+      "shade": 0.2,
+      "camera": 0.4
+    },
+    "BMW:X1 SUV:2015": {
+      "count": 9,
+      "adas": 0.22,
+      "antenna": 0.11,
+      "shade": 0.89,
+      "camera": 0.22
+    },
+    "NEW:MINI CLUBMAN F54:2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "NEW:MINI COUNTRYMAN F60:2015": {
+      "count": 12,
+      "shade": 1
+    },
+    "BMW:6 SERIES GT G32:2015": {
+      "count": 5,
+      "adas": 0.4,
+      "acoustic": 0.4,
+      "antenna": 0.2,
+      "shade": 0.2,
+      "camera": 0.4
+    },
+    "BMW:Z4 G29 2D CAB:2015": {
+      "count": 6,
+      "adas": 0.33,
+      "shade": 1,
+      "camera": 0.33
+    },
+    "BMW:X5 5D SUV G05:2015": {
+      "count": 6,
+      "adas": 0.67,
+      "rainSensor": 0.33,
+      "acoustic": 0.33,
+      "camera": 0.67
+    },
+    "BMW:1 SERIES 5D HBK F40:2015": {
+      "count": 3,
+      "acoustic": 1
+    },
+    "CITROEN:BERLINGO 2008-:2005": {
+      "count": 14,
+      "rainSensor": 0.07,
+      "shade": 1
+    },
+    "CITROEN:C3 (B618) 5D HBK:2015": {
+      "count": 8,
+      "shade": 1
+    },
+    "FORD:KUGA:2010": {
+      "count": 31,
+      "adas": 0.06,
+      "rainSensor": 0.1,
+      "heated": 0.06,
+      "acoustic": 0.13,
+      "antenna": 0.03,
+      "shade": 0.87,
+      "camera": 0.06
+    },
+    "FORD:FOCUS 5D HBK:2015": {
+      "count": 6,
+      "adas": 0.33,
+      "rainSensor": 0.33,
+      "heated": 0.17,
+      "acoustic": 0.33,
+      "antenna": 0.17,
+      "shade": 0.33,
+      "camera": 0.33
+    },
+    "JAGUAR:XE (X760) 4D SAL:2010": {
+      "count": 16,
+      "acoustic": 0.06,
+      "shade": 0.94
+    },
+    "JAGUAR:E PACE 5D SUV:2015": {
+      "count": 17,
+      "adas": 0.24,
+      "acoustic": 0.47,
+      "shade": 0.29,
+      "camera": 0.71
+    },
+    "KIA:SPORTAGE RHD:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "MAZDA:6 4D SAL/5D EST RHD:2010": {
+      "count": 4,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "MAZDA:3 HBK SAL:2010": {
+      "count": 15,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "MAZDA:MX5/MX 5 RF RHD:2015": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "acoustic": 0.67
+    },
+    "MAZDA:CX 5 RHD:2015": {
+      "count": 3,
+      "adas": 1,
+      "camera": 1
+    },
+    "MERCEDES:M CLASS W166:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "MERCEDES:GLC X253 5D SUV:2015": {
+      "count": 4,
+      "acoustic": 0.25,
+      "shade": 0.75
+    },
+    "MERCEDES:C CLASS 2D CAB:2015": {
+      "count": 7,
+      "shade": 1
+    },
+    "MERCEDES:E CLASS CPE C238:2015": {
+      "count": 8,
+      "acoustic": 0.25,
+      "shade": 0.75
+    },
+    "MITSUBISHI:OUTLANDER RHD:2010": {
+      "count": 3,
+      "acoustic": 1
+    },
+    "NISSAN:MICRA (B02E) RHD:2015": {
+      "count": 7,
+      "acoustic": 0.71,
+      "shade": 0.29
+    },
+    "PORSCHE:MACAN 5D SUV:2010": {
+      "count": 9,
+      "acoustic": 0.22,
+      "shade": 0.78
+    },
+    "RANGE:ROVER L405 R5:2010": {
+      "count": 24,
+      "adas": 0.08,
+      "heated": 0.04,
+      "acoustic": 0.21,
+      "shade": 0.79,
+      "camera": 0.08
+    },
+    "RANGE:ROVER L405 R5:2015": {
+      "count": 15,
+      "adas": 0.07,
+      "heated": 0.07,
+      "acoustic": 0.8,
+      "shade": 0.47,
+      "camera": 0.07
+    },
+    "LAND ROVER:DISCOVERY 5D:2015": {
+      "count": 8,
+      "adas": 0.38,
+      "shade": 0.63,
+      "camera": 0.38
+    },
+    "RANGE:ROVER EVOQUE 5D SUV:2015": {
+      "count": 4,
+      "acoustic": 1
+    },
+    "RENAULT:KADJAR 5D SUV:2015": {
+      "count": 14,
+      "rainSensor": 0.07,
+      "acoustic": 0.29,
+      "shade": 0.71
+    },
+    "SEAT:LEON 5D HBK:2010": {
+      "count": 13,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "SKODA:KODIAQ 5D SUV:2015": {
+      "count": 9,
+      "adas": 0.11,
+      "rainSensor": 0.11,
+      "acoustic": 0.22,
+      "shade": 0.67,
+      "camera": 0.11
+    },
+    "SKODA:KAROQ 5D SUV:2015": {
+      "count": 6,
+      "adas": 0.33,
+      "rainSensor": 0.17,
+      "acoustic": 0.33,
+      "antenna": 0.17,
+      "shade": 0.33,
+      "camera": 0.33
+    },
+    "SKODA:SCALA 5D HBK:2015": {
+      "count": 10,
+      "adas": 0.3,
+      "heated": 0.1,
+      "acoustic": 0.2,
+      "antenna": 0.2,
+      "shade": 0.5,
+      "camera": 0.5
+    },
+    "SKODA:KAMIQ 5D SUV:2015": {
+      "count": 5,
+      "adas": 0.6,
+      "antenna": 0.2,
+      "shade": 0.4,
+      "camera": 0.6
+    },
+    "LEXUS:IS 4D SAL RHD:2010": {
+      "count": 4,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "TOYOTA:SUPRA 2D CPE:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "AUDI:Q7 2006-:2005": {
+      "count": 15,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "VW:TIGUAN:2015": {
+      "count": 10,
+      "adas": 0.2,
+      "acoustic": 0.1,
+      "antenna": 0.1,
+      "shade": 0.8,
+      "camera": 0.2
+    },
+    "VW:PASSAT CC:2010": {
+      "count": 3,
+      "adas": 0.33,
+      "rainSensor": 0.67,
+      "heated": 0.33,
+      "acoustic": 0.67,
+      "camera": 0.33
+    },
+    "VW:SHARAN II MPV:2015": {
+      "count": 5,
+      "adas": 0.2,
+      "rainSensor": 0.2,
+      "heated": 0.2,
+      "acoustic": 0.8,
+      "shade": 0.4,
+      "camera": 0.2
+    },
+    "VW:TOUAREG 2010-:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "AUDI:A7  5D HBK 2010-:2010": {
+      "count": 7,
+      "acoustic": 0.29,
+      "shade": 1,
+      "camera": 0.29
+    },
+    "AUDI:A7 5D HBK:2010": {
+      "count": 7,
+      "acoustic": 0.29,
+      "antenna": 0.14,
+      "shade": 1,
+      "camera": 0.29
+    },
+    "VW:UP 3D/5D HBK:2010": {
+      "count": 8,
+      "adas": 0.5,
+      "antenna": 0.13,
+      "shade": 1,
+      "camera": 0.5
+    },
+    "AUDI:Q3 SUV:2010": {
+      "count": 11,
+      "antenna": 0.09,
+      "shade": 1
+    },
+    "AUDI:A3 LIMOUSINE 4D SAL:2010": {
+      "count": 9,
+      "acoustic": 0.22,
+      "shade": 0.78
+    },
+    "AUDI:A3 CAB:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:Q7 5D JEEP:2010": {
+      "count": 7,
+      "adas": 0.29,
+      "acoustic": 0.29,
+      "shade": 0.71,
+      "camera": 0.57
+    },
+    "AUDI:TT CPE:2010": {
+      "count": 3,
+      "adas": 0.33,
+      "shade": 1,
+      "camera": 0.33
+    },
+    "AUDI:TT CAB:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:TOURAN MPV:2015": {
+      "count": 15,
+      "adas": 0.13,
+      "rainSensor": 0.07,
+      "acoustic": 0.07,
+      "antenna": 0.27,
+      "shade": 0.73,
+      "camera": 0.13
+    },
+    "AUDI:Q2 5D SUV:2015": {
+      "count": 12,
+      "adas": 0.08,
+      "antenna": 0.08,
+      "shade": 1,
+      "camera": 0.08
+    },
+    "AUDI:Q5 5D SUV:2015": {
+      "count": 11,
+      "adas": 0.18,
+      "rainSensor": 0.09,
+      "acoustic": 0.18,
+      "antenna": 0.09,
+      "shade": 0.64,
+      "camera": 0.18
+    },
+    "VW:CRAFTER:2015": {
+      "count": 13,
+      "adas": 0.31,
+      "shade": 1,
+      "camera": 0.31
+    },
+    "VW:PASSAT ARTEON 4D CPE:2015": {
+      "count": 13,
+      "acoustic": 0.15,
+      "shade": 0.85
+    },
+    "AUDI:A5 2D CAB:2015": {
+      "count": 4,
+      "adas": 0.5,
+      "shade": 0.5,
+      "camera": 0.5
+    },
+    "VW:T ROC 5D SUV:2015": {
+      "count": 5,
+      "adas": 0.4,
+      "shade": 0.6,
+      "camera": 0.4
+    },
+    "VW:TOUAREG 5D SUV:2015": {
+      "count": 4,
+      "adas": 0.5,
+      "antenna": 0.25,
+      "shade": 0.5,
+      "camera": 0.5
+    },
+    "AUDI:A1 5D HBK:2015": {
+      "count": 4,
+      "adas": 0.75,
+      "shade": 1,
+      "camera": 0.75
+    },
+    "AUDI:Q3 5D SUV:2015": {
+      "count": 4,
+      "adas": 0.25,
+      "antenna": 0.25,
+      "shade": 0.75,
+      "camera": 0.25
+    },
+    "VOLVO:FH:2010": {
+      "count": 4,
+      "adas": 1,
+      "camera": 1
+    },
+    "VOLVO:XC60 5D SUV:2015": {
+      "count": 24,
+      "acoustic": 0.42,
+      "shade": 0.58
+    },
+    "VOLVO:XC40 5D SUV:2015": {
+      "count": 6,
+      "adas": 0.33,
+      "antenna": 0.33,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "FORD:FIESTA 2002-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "FIAT:PANDA 2003-:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "CITROEN:C5 2000-:2000": {
+      "count": 7,
+      "rainSensor": 0.14,
+      "shade": 1
+    },
+    "MERCEDES:A CLASS 2001-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "MERCEDES:C CLASS (W203) 2003-:2000": {
+      "count": 6,
+      "shade": 1
+    },
+    "MERCEDES:C CLASS W203:2000": {
+      "count": 7,
+      "shade": 1
+    },
+    "VAUXHALL:MERIVA:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:ESPACE 2002-:2000": {
+      "count": 4,
+      "rainSensor": 0.25,
+      "acoustic": 0.5,
+      "shade": 1
+    },
+    "VW:TOURAN MPV 2003-:2000": {
+      "count": 7,
+      "shade": 1
+    },
+    "VOLVO:XC90:2000": {
+      "count": 10,
+      "rainSensor": 0.1,
+      "shade": 1
+    },
+    "VOLVO:XC90 2002-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "SSANGYONG:REXTON:2000": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "BMW:5 SERIES SAL+EST:2000": {
+      "count": 6,
+      "rainSensor": 0.33,
+      "shade": 0.83
+    },
+    "PEUGEOT:407 SAL+EST 2004-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "PEUGEOT:307 2001-:2000": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "acoustic": 0.33,
+      "shade": 1
+    },
+    "FIAT:GRANDE PUNTO 3D+5D:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "SEAT:LEON 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "FIAT:CROMA:2005": {
+      "count": 4,
+      "rainSensor": 0.25,
+      "acoustic": 0.75,
+      "shade": 0.25
+    },
+    "VW:GOLF PLUS MONOSPACE 2005-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:FOCUS C MAX:2000": {
+      "count": 13,
+      "heated": 0.08,
+      "shade": 1
+    },
+    "VW:MULTIVAN:2000": {
+      "count": 13,
+      "shade": 1
+    },
+    "FORD:TOURNEO CONNECT:2000": {
+      "count": 12,
+      "heated": 0.5,
+      "shade": 0.5
+    },
+    "PEUGEOT:207 3D+5D 2006-:2005": {
+      "count": 8,
+      "rainSensor": 0.13,
+      "shade": 1
+    },
+    "ALFA ROMEO:SPIDER CAB 2006-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:VIVARO 2001-:2000": {
+      "count": 8,
+      "shade": 1
+    },
+    "HYUNDAI:SANTA FE LHD 2006-:2005": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "heated": 0.4,
+      "shade": 0.4
+    },
+    "NISSAN:PATHFINDER 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "BMW:X5 (E70) 2006-:2005": {
+      "count": 20,
+      "rainSensor": 0.1,
+      "antenna": 0.15,
+      "hud": 0.05,
+      "shade": 0.95
+    },
+    "BMW:Z4 CPE:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "BMW:3 SERIES CPE (E92) 2006-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "SSANGYONG:REXTON 2002-:2000": {
+      "count": 8,
+      "shade": 1
+    },
+    "KIA:CEE&#039:2005": {
+      "count": 13,
+      "rainSensor": 0.08,
+      "shade": 0.92
+    },
+    "MERCEDES:R CLASS 2006-:2005": {
+      "count": 14,
+      "rainSensor": 0.07,
+      "antenna": 0.07,
+      "shade": 0.93
+    },
+    "CHEVROLET:CAPTIVA SUV:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:POLO 3D+5D HBK 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:EOS CPE/CABRIO 2005-:2005": {
+      "count": 4,
+      "rainSensor": 0.25,
+      "shade": 1
+    },
+    "FORD:GALAXY 2006-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "BMW:5 SERIES SAL + EST:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "JAGUAR:XF 4D SAL 2008-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:TOUAREG:2000": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "PEUGEOT:308 3D/5D HBK 2007-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "MERCEDES:CLS W219:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "SUBARU:B9 TRIBECA SUV 2006-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "TOYOTA:RAV 4 2006-:2005": {
+      "count": 14,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "VW:GOLF A5 3D/5D 2003-:2000": {
+      "count": 4,
+      "rainSensor": 0.25,
+      "shade": 1
+    },
+    "NEW:MINI 2000-:2000": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "MITSUBISHI:OUTLANDER 2007-:2005": {
+      "count": 6,
+      "rainSensor": 0.33,
+      "heated": 0.17,
+      "shade": 0.67
+    },
+    "CITROEN:C5 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "CITROEN:NEMO 2008-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "MERCEDES:C CLASS (W203) 2000-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "MERCEDES:CLK CAB W209:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "FORD:KUGA 2008-:2005": {
+      "count": 14,
+      "rainSensor": 0.14,
+      "heated": 0.21,
+      "shade": 0.86
+    },
+    "PEUGEOT:207CC 2007-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:PASSAT B6:2005": {
+      "count": 3,
+      "adas": 0.33,
+      "rainSensor": 0.33,
+      "acoustic": 0.33,
+      "shade": 1,
+      "camera": 0.33
+    },
+    "VW:POLO 3D+5D HBK 2001-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A4 CABRIO 2002-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:CADDY:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "NISSAN:MURANO Z50 5D SUV 2004-:2000": {
+      "count": 6,
+      "shade": 1
+    },
+    "FIAT:DUCATO III:2005": {
+      "count": 8,
+      "adas": 0.13,
+      "shade": 0.88,
+      "camera": 0.13
+    },
+    "RENAULT:KOLEOS 5D SUV 2008-:2005": {
+      "count": 10,
+      "shade": 1
+    },
+    "SKODA:SUPERB 5D HBK 2008-:2005": {
+      "count": 8,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "SUBARU:FORESTER 2008-:2005": {
+      "count": 7,
+      "heated": 0.29,
+      "shade": 0.71
+    },
+    "TOYOTA:AVENSIS SAL+EST LHD 2009-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:SCIROCCO 2008-:2005": {
+      "count": 8,
+      "rainSensor": 0.13,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "VW:PASSAT CC 2008-:2005": {
+      "count": 16,
+      "rainSensor": 0.13,
+      "acoustic": 0.06,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "AUDI:A3  CABRIO 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "FORD:KA 3D HBK 2008-:2005": {
+      "count": 10,
+      "shade": 1
+    },
+    "RENAULT:KOLEOS RHD 5D SUV 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "BMW:3 SERIES CAB (E93) 2006-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "CITROEN:C2 2003-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "SUZUKI:SX4 SUV 2006-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "KIA:SORENTO 5D 2002-:2000": {
+      "count": 8,
+      "antenna": 0.25,
+      "shade": 0.75
+    },
+    "MERCEDES:SPRINTER SWB 2006-:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "RENAULT:LAGUNA 2D CPE 2008-:2005": {
+      "count": 3,
+      "rainSensor": 0.67,
+      "shade": 0.33
+    },
+    "VW:PASSAT B6 2005-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:PASSAT B6 2006-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "JEEP:CHEROKEE 2001-:2000": {
+      "count": 14,
+      "shade": 1
+    },
+    "CITROEN:C3 PICASSO M5 2009-:2005": {
+      "count": 15,
+      "shade": 1
+    },
+    "ALFA ROMEO:MITO 2008-:2005": {
+      "count": 17,
+      "antenna": 0.06,
+      "shade": 1
+    },
+    "BMW:3 SERIES COMPACT:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "FIAT:DUCATO III 2006-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "HYUNDAI:I20 5D HBK 2009-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "NISSAN:MURANO LHD:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "RENAULT:MEGANE 5D HBK/EST 2008-:2005": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "shade": 0.67
+    },
+    "TOYOTA:IQ 3D HBK 2009-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VOLVO:XC 60:2005": {
+      "count": 17,
+      "rainSensor": 0.06,
+      "antenna": 0.06,
+      "shade": 0.94,
+      "camera": 0.06
+    },
+    "VOLVO:XC 60  2008-:2005": {
+      "count": 12,
+      "rainSensor": 0.25,
+      "acoustic": 0.08,
+      "shade": 0.92
+    },
+    "AUDI:Q5 2008-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "FORD:GALAXY:2005": {
+      "count": 6,
+      "rainSensor": 0.5,
+      "heated": 0.17,
+      "acoustic": 0.5,
+      "shade": 0.67
+    },
+    "RENAULT:MEGANE SCENIC 2009-:2005": {
+      "count": 7,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "JAGUAR:XK150 CPE+CAB 2006-:2005": {
+      "count": 3,
+      "rainSensor": 0.67,
+      "heated": 0.33,
+      "shade": 0.33
+    },
+    "FIAT:500 CABRIO 2009-:2005": {
+      "count": 4,
+      "antenna": 0.5,
+      "shade": 0.5
+    },
+    "RENAULT:MASTER 2009-:2005": {
+      "count": 10,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:ASTRA 5D HBK 2009-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "DACIA:SANDERO 5D HBK 2008-:2005": {
+      "count": 9,
+      "shade": 1
+    },
+    "CHEVROLET:CRUZE 4D SAL:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:POLO 2009-:2005": {
+      "count": 15,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "CITROEN:C3 2010-:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "VOLVO:S80+V70+ XC70 FROM 2009-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "CITROEN:DS3 3D HBK 2010-:2010": {
+      "count": 12,
+      "shade": 1
+    },
+    "AUDI:A3 2003-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "BMW:5 SERIES GT:2005": {
+      "count": 5,
+      "adas": 0.2,
+      "rainSensor": 0.6,
+      "shade": 0.4,
+      "camera": 0.2
+    },
+    "BMW:X1 SUV 2010-:2010": {
+      "count": 9,
+      "antenna": 0.11,
+      "shade": 1
+    },
+    "MAZDA:3 HBK-SAL RHD 2009-:2005": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "heated": 0.67
+    },
+    "MAZDA:3 HBK SAL LHD:2005": {
+      "count": 5,
+      "rainSensor": 0.8,
+      "heated": 0.4,
+      "shade": 0.2
+    },
+    "RANGE:ROVER L320 5D SUV:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "HYUNDAI:IX55 5D SUV:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "HONDA:CIVIC 5D HBK 2005-:2005": {
+      "count": 9,
+      "shade": 1
+    },
+    "SKODA:YETI SUV 2009-:2005": {
+      "count": 10,
+      "shade": 1
+    },
+    "TOYOTA:VERSO LHD 2009-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "PEUGEOT:3008/5008 2009-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "TOYOTA:PRIUS LHD:2005": {
+      "count": 3,
+      "hud": 0.33,
+      "shade": 1
+    },
+    "KIA:SOUL 2009-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "KIA:SORENTO 2010-:2010": {
+      "count": 10,
+      "rainSensor": 0.2,
+      "heated": 0.2,
+      "shade": 0.7
+    },
+    "KIA:CEE&#039:2010": {
+      "count": 4,
+      "heated": 0.25,
+      "shade": 0.75
+    },
+    "BMW:5 SERIES GT 2009-:2005": {
+      "count": 7,
+      "rainSensor": 0.43,
+      "antenna": 0.29,
+      "hud": 0.29,
+      "shade": 0.71
+    },
+    "FIAT:DOBLO 2010-:2010": {
+      "count": 9,
+      "shade": 1
+    },
+    "KIA:VENGA MVP 2009-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:508 4D SAL+5D EST 2011-:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "HYUNDAI:IX35 5D SUV LHD:2005": {
+      "count": 5,
+      "heated": 0.2,
+      "shade": 0.8
+    },
+    "HYUNDAI:IX35 5D SUV RHD:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "JAGUAR:XF 4D SAL:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "RENAULT:KANGOO II 2007-:2005": {
+      "count": 12,
+      "shade": 1
+    },
+    "RENAULT:MEGANE 3 CC 2010-:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:TOURAN MPV:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "KIA:SORENTO LHD 2010-:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "BMW:6 SERIES F12 CAB 2010-:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "KIA:SPORTAGE LHD:2010": {
+      "count": 5,
+      "rainSensor": 0.4,
+      "heated": 0.2,
+      "shade": 0.6
+    },
+    "KIA:SPORTAGE RHD:2010": {
+      "count": 4,
+      "heated": 0.25,
+      "shade": 0.75
+    },
+    "RENAULT:FLUENCE 4D SAL:2010": {
+      "count": 10,
+      "rainSensor": 0.1,
+      "shade": 0.9
+    },
+    "VW:SHARAN II MPV 2009-:2005": {
+      "count": 16,
+      "shade": 1
+    },
+    "VW:SHARAN II MPV:2005": {
+      "count": 5,
+      "adas": 0.2,
+      "acoustic": 0.4,
+      "shade": 0.8,
+      "camera": 0.2
+    },
+    "CITROEN:C4 5D HBK 2010-:2010": {
+      "count": 13,
+      "shade": 1
+    },
+    "FORD:C-MAX/GRAND C-MAX MPV 2010-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "KIA:SORENTO RHD:2010": {
+      "count": 3,
+      "rainSensor": 0.67,
+      "heated": 1
+    },
+    "VW:PASSAT B7:2010": {
+      "count": 6,
+      "adas": 0.17,
+      "rainSensor": 0.17,
+      "acoustic": 0.17,
+      "shade": 0.83,
+      "camera": 0.17
+    },
+    "AUDI:A5 CPE:2005": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "AUDI:Q5:2005": {
+      "count": 8,
+      "adas": 0.13,
+      "antenna": 0.13,
+      "shade": 0.88,
+      "camera": 0.13
+    },
+    "BMW:X3 SUV:2010": {
+      "count": 13,
+      "adas": 0.08,
+      "rainSensor": 0.62,
+      "hud": 0.15,
+      "shade": 0.38,
+      "camera": 0.08
+    },
+    "BMW:X3 SUV (F25):2010": {
+      "count": 3,
+      "adas": 0.33,
+      "hud": 0.67,
+      "camera": 0.33
+    },
+    "FIAT:500 3D 2007-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:C-MAX MPV 2010-:2010": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 1
+    },
+    "SKODA:ROOMSTER 2006-:2005": {
+      "count": 9,
+      "shade": 1
+    },
+    "LEXUS:CT200H 5D HBK RHD:2010": {
+      "count": 4,
+      "acoustic": 0.25,
+      "shade": 0.75
+    },
+    "LEXUS:CT200H 5D HBK LHD:2010": {
+      "count": 10,
+      "acoustic": 0.1,
+      "shade": 0.9
+    },
+    "AUDI:A6/C7 4D SAL:2010": {
+      "count": 9,
+      "adas": 0.11,
+      "acoustic": 0.22,
+      "antenna": 0.11,
+      "shade": 0.89,
+      "camera": 0.11
+    },
+    "VW:JETTA 4D SAL 2011-:2010": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:ZAFIRA MPV:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "HONDA:CIVIC 5D HBK RHD:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "TOYOTA:YARIS 3D/5D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:GOLF VI CAB:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "LANCIA:YPSILON 5D HBK 2011-:2010": {
+      "count": 14,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "FIAT:PANDA 5D HBK/5D VAN:2010": {
+      "count": 7,
+      "acoustic": 0.29,
+      "shade": 0.71
+    },
+    "HYUNDAI:I40 5D SAL/EST LHD:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "MAZDA:5 MPV LHD:2010": {
+      "count": 5,
+      "rainSensor": 0.4,
+      "shade": 0.6
+    },
+    "MAZDA:5 MPV RHD:2010": {
+      "count": 4,
+      "rainSensor": 0.5,
+      "shade": 0.5
+    },
+    "NISSAN:NV200 2009-:2005": {
+      "count": 9,
+      "rainSensor": 0.11,
+      "heated": 0.11,
+      "shade": 0.89
+    },
+    "VW:UP 3D HBK 2011-:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "VOLVO:XC 60:2010": {
+      "count": 3,
+      "adas": 0.33,
+      "rainSensor": 0.67,
+      "camera": 0.33
+    },
+    "JEEP:GRAND CHEROKEE:2010": {
+      "count": 10,
+      "adas": 0.1,
+      "shade": 0.9,
+      "camera": 0.1
+    },
+    "BMW:3 SERIES 4D SAL:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "BMW:3 SERIES 4D SAL/5D EST:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:BEETLE 3D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A4 SAL 4D+EST 5D:2010": {
+      "count": 4,
+      "rainSensor": 0.25,
+      "shade": 0.75
+    },
+    "VW:GOLF VII 3D/5D HBK:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "RANGE:ROVER L320 5D SUV:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "MAZDA:CX 5 LHD:2010": {
+      "count": 8,
+      "adas": 0.13,
+      "acoustic": 0.13,
+      "shade": 0.75,
+      "camera": 0.25
+    },
+    "FORD:FIESTA 3D 5D HBK:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "BMW:5 SERIES GT:2010": {
+      "count": 6,
+      "adas": 0.17,
+      "rainSensor": 0.17,
+      "hud": 0.67,
+      "shade": 0.33,
+      "camera": 0.17
+    },
+    "RANGE:ROVER EVOQUE R3:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "RANGE:ROVER EVOQUE R5:2010": {
+      "count": 10,
+      "shade": 1
+    },
+    "HONDA:CRV 5D SUV RHD:2010": {
+      "count": 4,
+      "acoustic": 0.25,
+      "shade": 0.75
+    },
+    "HONDA:CRV 5D SUV LHD:2010": {
+      "count": 5,
+      "acoustic": 0.6,
+      "shade": 0.4
+    },
+    "CITROEN:DS5 5D HBK:2010": {
+      "count": 13,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "HYUNDAI:I40 5D SAL/EST RHD:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "FIAT:500 CABRIO:2005": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "NISSAN:LEAF 5D HBK RHD:2010": {
+      "count": 3,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "SKODA:RAPID 5D HBK:2010": {
+      "count": 9,
+      "acoustic": 0.11,
+      "antenna": 0.11,
+      "shade": 0.89
+    },
+    "PORSCHE:911 (991) CPE:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "PORSCHE:911 (991) CAB:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "PORSCHE:981 BOXSTER CAB:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "VOLVO:XC90:2010": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "shade": 1
+    },
+    "NEW:MINI CLUBMAN:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:B MAX MINI MPV:2010": {
+      "count": 30,
+      "antenna": 0.03,
+      "shade": 1
+    },
+    "VOLVO:S60 4D SAL/V60 5D EST:2010": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "heated": 0.33,
+      "camera": 0.33
+    },
+    "JAGUAR:XE ROADSTER 2D CAB:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "VAUXHALL:MOKKA 5D SUV:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "OPEL/VAUXHALL:MOKKA 5D SUV:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:TRANSIT CUSTOM:2010": {
+      "count": 21,
+      "shade": 1
+    },
+    "CAPTUR:5D SUV 2013-:2010": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "acoustic": 1
+    },
+    "MITSUBISHI:OUTLANDER LHD:2010": {
+      "count": 4,
+      "rainSensor": 0.25,
+      "heated": 0.25,
+      "acoustic": 0.25,
+      "shade": 0.25
+    },
+    "OPEL/VAUXHALL:ADAM 3D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "RENAULT:ZOE 5D HBK:2010": {
+      "count": 7,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "HYUNDAI:SANTA FE RHD:2010": {
+      "count": 4,
+      "acoustic": 0.25,
+      "shade": 0.75
+    },
+    "HYUNDAI:SANTA FE LHD:2010": {
+      "count": 5,
+      "acoustic": 0.6,
+      "shade": 0.4
+    },
+    "MITSUBISHI:OUTLANDER:2010": {
+      "count": 6,
+      "heated": 0.17,
+      "acoustic": 0.33,
+      "shade": 0.5
+    },
+    "KIA:CARENS 2013-:2010": {
+      "count": 4,
+      "rainSensor": 0.75,
+      "heated": 0.75
+    },
+    "KIA:CARENS LHD:2010": {
+      "count": 3,
+      "adas": 0.67,
+      "rainSensor": 0.33,
+      "camera": 0.67
+    },
+    "TOYOTA:RAV 4 RHD:2010": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "acoustic": 0.6,
+      "shade": 0.2
+    },
+    "OPEL/VAUXHALL:MERIVA MPV:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "PORSCHE:CAYMAN:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "TESLA:S 5D HBK:2010": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "heated": 0.2,
+      "acoustic": 0.8,
+      "shade": 1,
+      "camera": 0.2
+    },
+    "SUBARU:FORESTER RHD:2010": {
+      "count": 3,
+      "heated": 1
+    },
+    "RENAULT:MASTER:2005": {
+      "count": 3,
+      "adas": 0.33,
+      "shade": 1,
+      "camera": 0.33
+    },
+    "MAZDA:6 4D SAL/5D EST LHD:2010": {
+      "count": 6,
+      "acoustic": 0.17,
+      "shade": 0.83
+    },
+    "NISSAN:NOTE 5D HBK RHD:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "NISSAN:NOTE 5D HBK LHD:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "HYUNDAI:GRAND SANTA FE:2010": {
+      "count": 6,
+      "heated": 0.17,
+      "shade": 0.67,
+      "camera": 0.17
+    },
+    "SUZUKI:SX4 S CROSS:2010": {
+      "count": 4,
+      "rainSensor": 0.25,
+      "shade": 0.75
+    },
+    "LEXUS:IS 4D SAL LHD:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:GOLF VII SPORTSVAN MPV:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "CITROEN:DS4 4D CPE:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "BMW:4 SERIES F33 2D CAB:2010": {
+      "count": 4,
+      "adas": 0.5,
+      "rainSensor": 0.5,
+      "camera": 0.5
+    },
+    "FORD:ECOSPORT B515 5D SUV:2010": {
+      "count": 8,
+      "acoustic": 0.38,
+      "shade": 0.63
+    },
+    "TOYOTA:COROLLA 4D SAL LHD:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "IVECO:DAILY S2000:2010": {
+      "count": 8,
+      "adas": 0.13,
+      "shade": 1,
+      "camera": 0.13
+    },
+    "RENAULT:T/T HIGH/K/C:2010": {
+      "count": 3,
+      "adas": 0.67,
+      "rainSensor": 0.33,
+      "camera": 0.67
+    },
+    "RENAULT:CAPTUR 5D SUV:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "CITROEN:C4 CACTUS 5D SUV:2010": {
+      "count": 11,
+      "shade": 1
+    },
+    "FORD:TRANSIT 2D HIGH ROOF:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "JAGUAR:F TYPE 2D CPE:2010": {
+      "count": 6,
+      "rainSensor": 0.33,
+      "heated": 0.33,
+      "shade": 0.5
+    },
+    "FORD:TRANSIT COURIER VAN:2010": {
+      "count": 17,
+      "shade": 1
+    },
+    "CITROEN:C1 3D/5D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "RENAULT:TWINGO III:2010": {
+      "count": 10,
+      "shade": 1
+    },
+    "MERCEDES:V CLASS W447:2010": {
+      "count": 15,
+      "antenna": 0.07,
+      "shade": 0.93
+    },
+    "BMW:X4 5D SUV:2010": {
+      "count": 11,
+      "adas": 0.09,
+      "rainSensor": 0.18,
+      "antenna": 0.09,
+      "shade": 1,
+      "camera": 0.09
+    },
+    "NISSAN:X TRAIL 5D SUV:2010": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "shade": 0.67
+    },
+    "VAUXHALL:VIVARO:2010": {
+      "count": 18,
+      "rainSensor": 0.11,
+      "acoustic": 0.22,
+      "shade": 0.78
+    },
+    "VAUXHALL:CORSA 3D/5D:2010": {
+      "count": 10,
+      "shade": 1
+    },
+    "JEEP:RENEGADE LHD:2015": {
+      "count": 6,
+      "adas": 0.33,
+      "acoustic": 0.67,
+      "camera": 0.33
+    },
+    "FIAT:500X 5D SUV RHD:2015": {
+      "count": 3,
+      "acoustic": 1
+    },
+    "FIAT:500X 5D SUV LHD:2015": {
+      "count": 9,
+      "heated": 0.11,
+      "acoustic": 0.56,
+      "shade": 0.44
+    },
+    "FIAT:500X 5D SUV:2015": {
+      "count": 10,
+      "adas": 0.2,
+      "acoustic": 0.1,
+      "shade": 0.7,
+      "camera": 0.2
+    },
+    "SMART:FORTWO 3D HBK:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "HYUNDAI:I20 5D HBK LHD:2015": {
+      "count": 6,
+      "adas": 0.67,
+      "rainSensor": 0.17,
+      "camera": 0.83
+    },
+    "RENAULT:ESPACE:2015": {
+      "count": 10,
+      "adas": 0.4,
+      "antenna": 0.1,
+      "shade": 0.6,
+      "camera": 0.4
+    },
+    "KIA:SORENTO 5D SUV LHD:2015": {
+      "count": 3,
+      "heated": 0.33,
+      "shade": 0.67
+    },
+    "JEEP:RENEGADE LHD:2010": {
+      "count": 3,
+      "adas": 0.67,
+      "heated": 0.33,
+      "acoustic": 0.33,
+      "camera": 0.67
+    },
+    "JEEP:RENEGADE:2010": {
+      "count": 17,
+      "antenna": 0.06,
+      "shade": 1
+    },
+    "BMW:X5 (E70):2005": {
+      "count": 7,
+      "hud": 0.29,
+      "shade": 1
+    },
+    "HONDA:CRV 5D SUV LHD:2015": {
+      "count": 9,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "SUZUKI:VITARA 5D:2015": {
+      "count": 6,
+      "adas": 0.17,
+      "rainSensor": 0.33,
+      "shade": 0.5,
+      "camera": 0.17
+    },
+    "VW:CADDY:2015": {
+      "count": 7,
+      "adas": 0.14,
+      "shade": 1,
+      "camera": 0.14
+    },
+    "SKODA:SUPERB 5D HBK/EST:2015": {
+      "count": 4,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "CITROEN:C4 5D HBK:2010": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "acoustic": 0.2,
+      "antenna": 0.2,
+      "shade": 0.8
+    },
+    "MAZDA:CX 3 RHD:2015": {
+      "count": 3,
+      "adas": 0.33,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "MAZDA:CX 3 LHD:2015": {
+      "count": 5,
+      "adas": 0.6,
+      "shade": 0.4,
+      "camera": 0.6
+    },
+    "VOLVO:XC90:2015": {
+      "count": 7,
+      "adas": 0.43,
+      "shade": 0.57,
+      "camera": 0.43
+    },
+    "KIA:SORENTO 5D SUV:2015": {
+      "count": 9,
+      "adas": 0.11,
+      "rainSensor": 0.11,
+      "heated": 0.22,
+      "shade": 0.67,
+      "camera": 0.11
+    },
+    "JAGUAR:XF (X260) 4D SAL:2015": {
+      "count": 11,
+      "shade": 1
+    },
+    "VAUXHALL:ASTRA 5D HBK LHD:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "VAUXHALL:ASTRA 5D HBK:2015": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 1
+    },
+    "FIAT:DOBLO:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "HONDA:HR V 5D SUV LHD:2015": {
+      "count": 3,
+      "adas": 0.33,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "HONDA:JAZZ 5D HBK LHD:2015": {
+      "count": 3,
+      "adas": 0.67,
+      "shade": 0.33,
+      "camera": 0.67
+    },
+    "FORD:GALAXY:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "NISSAN:NAVARA 4D PU:2015": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "SKODA:YETI SUV:2010": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "AUDI:A4 4D SAL/5D EST:2015": {
+      "count": 11,
+      "adas": 0.18,
+      "rainSensor": 0.18,
+      "acoustic": 0.45,
+      "shade": 0.36,
+      "camera": 0.18
+    },
+    "KIA:SPORTAGE:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "VAUXHALL:ADAM 3D HBK:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "JEEP:RENEGADE RHD:2010": {
+      "count": 4,
+      "acoustic": 0.75,
+      "shade": 0.25
+    },
+    "VOLVO:S90 4D SAL:2015": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "PORSCHE:718 BOXSTER CAB:2015": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:RAV 4 LHD:2015": {
+      "count": 12,
+      "adas": 0.67,
+      "heated": 0.17,
+      "acoustic": 0.33,
+      "antenna": 0.17,
+      "camera": 0.67
+    },
+    "TOYOTA:HI LUX 2D/4D PU LHD:2015": {
+      "count": 8,
+      "shade": 1
+    },
+    "FORD:K+ 5D HBK:2015": {
+      "count": 4,
+      "rainSensor": 0.25,
+      "heated": 0.25,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "CITROEN:JUMPY/SPACETOURER:2015": {
+      "count": 3,
+      "acoustic": 0.67,
+      "shade": 0.33
+    },
+    "RENAULT:PREMIUM:2010": {
+      "count": 4,
+      "adas": 0.75,
+      "rainSensor": 0.25,
+      "camera": 0.75
+    },
+    "LEXUS:RX 5D SUV RHD:2015": {
+      "count": 3,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "MERCEDES:E CLASS CAB C238:2015": {
+      "count": 3,
+      "acoustic": 1
+    },
+    "NISSAN:MICRA (B02E) LHD:2015": {
+      "count": 7,
+      "acoustic": 0.57,
+      "shade": 0.43
+    },
+    "SCANIA:R + S SERIE LHD:2015": {
+      "count": 3,
+      "rainSensor": 1,
+      "heated": 0.33
+    },
+    "TOYOTA:HI LUX 2D/4D PU RHD:2015": {
+      "count": 5,
+      "shade": 1
+    },
+    "KIA:RIO 5D HBK:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "TESLA:S 5D HBK LHD:2015": {
+      "count": 6,
+      "acoustic": 1,
+      "shade": 1
+    },
+    "LEXUS:IS 4D SAL LHD:2015": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "heated": 0.67,
+      "acoustic": 1
+    },
+    "SCANIA:R + S SERIE RHD:2015": {
+      "count": 3,
+      "rainSensor": 0.67,
+      "heated": 0.33
+    },
+    "MAZDA:CX 5 LHD:2015": {
+      "count": 5,
+      "adas": 1,
+      "camera": 1
+    },
+    "RENAULT:KOLEOS 5D SUV LHD:2015": {
+      "count": 5,
+      "acoustic": 1
+    },
+    "LEXUS:RX 5D SUV LHD:2015": {
+      "count": 10,
+      "adas": 0.7,
+      "heated": 0.2,
+      "acoustic": 0.2,
+      "shade": 0.1,
+      "camera": 0.7
+    },
+    "JEEP:COMPASS:2015": {
+      "count": 3,
+      "adas": 1,
+      "camera": 1
+    },
+    "SEAT:ARONA 5D SUV:2015": {
+      "count": 13,
+      "rainSensor": 0.23,
+      "acoustic": 0.38,
+      "antenna": 0.08,
+      "shade": 0.62,
+      "camera": 0.08
+    },
+    "TOYOTA:PRIUS 5D HBK RHD:2015": {
+      "count": 5,
+      "acoustic": 1
+    },
+    "VW:PASSAT CC:2005": {
+      "count": 3,
+      "adas": 0.33,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "VAUXHALL:GRANDLAND X:2015": {
+      "count": 6,
+      "adas": 0.17,
+      "shade": 0.83,
+      "camera": 0.17
+    },
+    "MERCEDES:X CLASS 4D PU:2015": {
+      "count": 4,
+      "acoustic": 0.5,
+      "shade": 0.5,
+      "camera": 0.25
+    },
+    "DACIA:DUSTER 5D CROSSOVER:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "PORSCHE:CAYENNE III:2015": {
+      "count": 8,
+      "adas": 0.38,
+      "acoustic": 0.25,
+      "antenna": 0.13,
+      "shade": 0.38,
+      "camera": 0.38
+    },
+    "CITROEN:C4 CACTUS 5D SUV:2015": {
+      "count": 4,
+      "acoustic": 0.75,
+      "shade": 0.25
+    },
+    "LEXUS:LS 500H 4D SAL:2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "VOLVO:V60 5D EST V432:2015": {
+      "count": 4,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "MAZDA:6 4D SAL/5D EST RHD:2015": {
+      "count": 3,
+      "acoustic": 1
+    },
+    "MERCEDES:SPRINTER:2015": {
+      "count": 24,
+      "rainSensor": 0.08,
+      "shade": 0.92
+    },
+    "FORD:KUGA:2015": {
+      "count": 5,
+      "adas": 0.2,
+      "rainSensor": 0.4,
+      "heated": 0.4,
+      "acoustic": 0.8,
+      "camera": 0.2
+    },
+    "KIA:CEED 5D HBK:2015": {
+      "count": 3,
+      "adas": 1,
+      "camera": 1
+    },
+    "VOLVO:FM:2015": {
+      "count": 3,
+      "adas": 1,
+      "camera": 1
+    },
+    "RENAULT:CAPTUR 5D SUV:2015": {
+      "count": 11,
+      "rainSensor": 0.09,
+      "acoustic": 0.09,
+      "shade": 0.91
+    },
+    "BMW:8 SERIES 2D CPE:2015": {
+      "count": 8,
+      "adas": 0.25,
+      "rainSensor": 0.13,
+      "acoustic": 0.5,
+      "antenna": 0.13,
+      "shade": 0.63,
+      "camera": 0.25
+    },
+    "HONDA:CRV 5D SUV RHD:2015": {
+      "count": 7,
+      "acoustic": 0.43,
+      "shade": 0.57
+    },
+    "MAZDA:6 4D SAL/5D EST LHD:2015": {
+      "count": 4,
+      "acoustic": 1
+    },
+    "VW:T CROSS 5D SUV:2015": {
+      "count": 12,
+      "adas": 0.25,
+      "antenna": 0.08,
+      "shade": 0.83,
+      "camera": 0.25
+    },
+    "TOYOTA:RAV 4:2015": {
+      "count": 13,
+      "adas": 0.15,
+      "antenna": 0.15,
+      "shade": 0.85,
+      "camera": 0.15
+    },
+    "FORD:ECOSPORT 5D SUV:2015": {
+      "count": 3,
+      "acoustic": 0.33,
+      "antenna": 0.33,
+      "shade": 0.33
+    },
+    "MERCEDES:EQC 5J:2015": {
+      "count": 4,
+      "adas": 0.5,
+      "rainSensor": 0.5,
+      "acoustic": 0.5,
+      "camera": 1
+    },
+    "PORSCHE:911 CPE:2015": {
+      "count": 5,
+      "shade": 1
+    },
+    "PORSCHE:911 CAB:2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "LAND ROVER:DISCOVERY SPORT:2015": {
+      "count": 3,
+      "acoustic": 1
+    },
+    "VW:ID.3 5D HBK 2020-:2020": {
+      "count": 4,
+      "adas": 0.5,
+      "antenna": 0.25,
+      "shade": 0.5,
+      "camera": 0.5
+    },
+    "PEUGEOT:208:2015": {
+      "count": 11,
+      "adas": 0.27,
+      "antenna": 0.09,
+      "shade": 0.73,
+      "camera": 0.27
+    },
+    "BMW:X6 G06 5D SUV:2015": {
+      "count": 4,
+      "adas": 1,
+      "camera": 1
+    },
+    "MERCEDES:ATEGO / AXOR:2015": {
+      "count": 3,
+      "adas": 1,
+      "camera": 1
+    },
+    "VW:GOLF VIII:2020": {
+      "count": 13,
+      "adas": 0.15,
+      "rainSensor": 0.08,
+      "acoustic": 0.08,
+      "shade": 0.77,
+      "camera": 0.15
+    },
+    "AUDI:Q7 5D SUV:2015": {
+      "count": 6,
+      "adas": 0.67,
+      "acoustic": 0.33,
+      "shade": 0.33,
+      "camera": 0.67
+    },
+    "SKODA:OCTAVIA IV 5D HBK:2020": {
+      "count": 9,
+      "adas": 0.22,
+      "acoustic": 0.33,
+      "shade": 0.44,
+      "camera": 0.22
+    },
+    "BMW:5 SERIES 5D EST:2010": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "BMW:5 SERIES 4D SAL:2010": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 0.83
+    },
+    "BMW:3 SERIES 5D EST:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "NEW:MINI F55 5D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "BMW:5 SERIES G30 4D SAL:2015": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 0.83
+    },
+    "BMW:3 SERIES 4D SAL G20:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "CITROEN:BERLINGO:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "FIAT:500 LARGE:2010": {
+      "count": 10,
+      "shade": 1
+    },
+    "FORD:FIESTA 3D HBK:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "FORD:FIESTA 5D HBK:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:FIESTA 5D HBK 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "FORD:FOCUS 5D EST 2010-:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "FOCUS:5D HBK 2010-:2010": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "FORD:FOCUS 5D HBK:2010": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "FOCUS:4D SAL 2010-:2010": {
+      "count": 12,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "FOCUS:5D EST 2010-:2010": {
+      "count": 13,
+      "antenna": 0.15,
+      "shade": 1
+    },
+    "FOCUS:5D HBK  2010-:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "FORD:MONDEO 5D EST:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:MONDEO 4D SAL:2010": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "FORD:TOURNEO CONNECT:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "HONDA:CIVIC 5D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "HYUNDAI:TUCSON:2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "HYUNDAI:I30 5D HBK:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "KIA:NIRO 5D SUV:2015": {
+      "count": 5,
+      "shade": 1
+    },
+    "MAZDA:CX 5:2010": {
+      "count": 22,
+      "antenna": 0.09,
+      "shade": 1
+    },
+    "MAZDA:6 4D SAL:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "MAZDA:6 5D EST:2010": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "MAZDA:CX 3:2015": {
+      "count": 12,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "MAZDA:CX 5:2015": {
+      "count": 12,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "MERCEDES:R CLASS LWB 2006-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "MERCEDES:CLS 4D W218 CPE:2010": {
+      "count": 5,
+      "antenna": 0.6,
+      "shade": 0.4
+    },
+    "MERCEDES:GLA X156 5D SUV:2010": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 0.75
+    },
+    "MERCEDES:A CLASS W176:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "MERCEDES:A CLASS 5D W176:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "NISSAN:QASHQAI 5D SUV:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "NISSAN:MICRA (B02E):2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "OPEL/VAUXHALL:ZAFIRA MPV:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "VAUXHALL:ASTRA 5D EST:2015": {
+      "count": 8,
+      "shade": 1
+    },
+    "VAUXHALL:INSIGNIA 5D EST:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:2008 5D SUV:2005": {
+      "count": 16,
+      "adas": 0.13,
+      "shade": 0.88,
+      "camera": 0.13
+    },
+    "PEUGEOT:208 3D/5D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "PEUGEOT:208 3D HBK 2011-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:208 5D HBK 2011-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:308 5D EST:2010": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "PEUGEOT:308 5D T9 HBK:2010": {
+      "count": 14,
+      "shade": 1
+    },
+    "RANGE:ROVER L405 R5 LWB:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "RANGE:ROVER L405 R5 LWB:2015": {
+      "count": 3,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "RENAULT:MEGANE GRAND SCENIC 2009-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "RENAULT:MEGANE SCENIC 5D:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:MEGANE SCENIC 5D 2009-:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "RENAULT:MEGANE IV 5D HBK:2015": {
+      "count": 11,
+      "shade": 1
+    },
+    "SEAT:LEON 5D EST:2010": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "SEAT:LEON 3D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "SEAT:ATECA 5D SUV:2015": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "SEAT:IBIZA 5D HBK:2015": {
+      "count": 9,
+      "acoustic": 0.11,
+      "antenna": 0.11,
+      "shade": 0.89
+    },
+    "SUZUKI:SWIFT 5D HBK:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "TOYOTA:AVENSIS EST 2009-:2005": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "TOYOTA:AVENSIS SAL 2009-:2005": {
+      "count": 9,
+      "shade": 1
+    },
+    "TOYOTA:AVENSIS EST:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 0.67
+    },
+    "TOYOTA:PRIUS 2009-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:PRIUS:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:AURIS 5D EST:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "TOYOTA:AURIS 5D HBK:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:COROLLA 4D SAL:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "LEXUS:IS 4D SAL:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A4  2007-:2005": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "antenna": 0.4,
+      "shade": 0.6,
+      "camera": 0.2
+    },
+    "AUDI:A4 EST 5D:2005": {
+      "count": 19,
+      "antenna": 0.37,
+      "shade": 1
+    },
+    "AUDI:A4 SAL 4D:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A5 CPE 2007-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:A5 SPORTBACK 2009-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "AUDI:A5 SPORTBACK:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "VW:TIGUAN:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:TIGUAN 2007-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:A6/C7 4D SAL 2010-:2010": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "AUDI:A6 5D EST:2010": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "VW:UP 3D HBK:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:UP 5D HBK:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:GOLF VII 5D EST:2010": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "VW:GOLF VII 5D HBK:2010": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:GOLF VII 3D HBK:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "AUDI:Q7 5D MVP:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:PASSAT B8 4D SAL:2015": {
+      "count": 10,
+      "shade": 1
+    },
+    "AUDI:A4:2015": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "shade": 0.6,
+      "camera": 0.2
+    },
+    "AUDI:A4 5D EST:2015": {
+      "count": 18,
+      "antenna": 0.22,
+      "shade": 1
+    },
+    "AUDI:A4 4D SAL:2015": {
+      "count": 19,
+      "antenna": 0.05,
+      "shade": 1
+    },
+    "AUDI:A5 5D HBK SPORTBACK:2015": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:CRAFTER 2D VAN:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "VOLVO:V90 5D EST:2015": {
+      "count": 9,
+      "acoustic": 0.11,
+      "antenna": 0.33,
+      "shade": 0.89
+    },
+    "RENAULT:TWINGO II:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "NISSAN:NOTE 5D HBK 2006-:2005": {
+      "count": 10,
+      "shade": 1
+    },
+    "HONDA:CRV RHD:2005": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "acoustic": 1
+    },
+    "JEEP:WRANGLER 3D+5D 2007-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "DODGE:NITRO 2007-:2005": {
+      "count": 11,
+      "shade": 1
+    },
+    "JEEP:PATRIOT 5D 2007-:2005": {
+      "count": 12,
+      "shade": 1
+    },
+    "VW:POLO 5D HBK:2015": {
+      "count": 12,
+      "adas": 0.08,
+      "rainSensor": 0.17,
+      "acoustic": 0.25,
+      "shade": 0.67,
+      "camera": 0.08
+    },
+    "FIAT:IDEA MPV 2004-:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "DODGE:JOURNEY 2008-:2005": {
+      "count": 10,
+      "shade": 1
+    },
+    "JEEP:GRAND CHEROKEE 2005-:2005": {
+      "count": 11,
+      "shade": 1
+    },
+    "CHRYSLER:GRAND VOYAGER:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "DODGE:JOURNEY:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "NISSAN:LEAF 5D HBK LHD:2010": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "acoustic": 0.67,
+      "shade": 0.33
+    },
+    "CHEVROLET:TAHOE 2000-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "HUMMER:H2 2004-:2000": {
+      "count": 10,
+      "shade": 1
+    },
+    "NISSAN:CUBE 5D HBK 2009-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "TOYOTA:RAV 4 LHD:2010": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "acoustic": 0.2,
+      "shade": 0.8
+    },
+    "CADILLAC:CTS 2003-:2000": {
+      "count": 9,
+      "shade": 1
+    },
+    "CHRYSLER:GRAND VOYAGER 2008-:2005": {
+      "count": 10,
+      "shade": 1
+    },
+    "BMW:X6 (E71):2005": {
+      "count": 3,
+      "adas": 0.33,
+      "hud": 0.33,
+      "shade": 1,
+      "camera": 0.33
+    },
+    "BMW:MINI CLUBMAN 2007-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "HONDA:CRV 2002-:2000": {
+      "count": 6,
+      "shade": 1
+    },
+    "JEEP:COMPASS 5D 2007-:2005": {
+      "count": 16,
+      "shade": 1
+    },
+    "TOYOTA:RAV 4:2010": {
+      "count": 16,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "FORD:FUSION 2002-:2000": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:CADDY 2004-:2000": {
+      "count": 17,
+      "shade": 1
+    },
+    "CITROEN:NEMO:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "CHEVROLET:TRAILBLAZER 2002-:2000": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "shade": 0.83
+    },
+    "MAZDA:2 5D HBK SUPERMINI:2015": {
+      "count": 8,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "BMW:Z4 E89 2D CAB 2009-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "SSANGYONG:TIVOLI 5D SUV:2015": {
+      "count": 7,
+      "shade": 1
+    },
+    "OPEL:GT 2D CONV 2007-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:MULTIVAN 2003-:2000": {
+      "count": 8,
+      "shade": 1
+    },
+    "CHEVROLET:HHR 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "HYUNDAI:I20 2D CPE LHD:2015": {
+      "count": 3,
+      "adas": 0.33,
+      "rainSensor": 0.67,
+      "camera": 0.33
+    },
+    "TOYOTA:YARIS 5D HBK:2020": {
+      "count": 3,
+      "adas": 0.67,
+      "shade": 0.33,
+      "camera": 0.67
+    },
+    "HYUNDAI:I20 5D HBK:2020": {
+      "count": 3,
+      "adas": 1,
+      "camera": 1
+    },
+    "NISSAN:JUKE 5D SUV:2020": {
+      "count": 9,
+      "adas": 0.22,
+      "acoustic": 0.22,
+      "shade": 0.56,
+      "camera": 0.44
+    },
+    "VW:CADDY:2020": {
+      "count": 5,
+      "adas": 0.4,
+      "acoustic": 0.2,
+      "shade": 0.4,
+      "camera": 0.4
+    },
+    "VW:VOLKSWAGEN T7 MULTIVAN:2020": {
+      "count": 4,
+      "acoustic": 1
+    },
+    "CHRYSLER:PT CRUISER:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "JEEP:RENAGADE LHD:2015": {
+      "count": 3,
+      "adas": 0.67,
+      "acoustic": 0.33,
+      "camera": 0.67
+    },
+    "MERCEDES:GLB 5D SUV:2015": {
+      "count": 3,
+      "adas": 0.33,
+      "acoustic": 0.67,
+      "antenna": 0.67,
+      "camera": 0.33
+    },
+    "VW:NEW BEETLE CABRIO:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "TOYOTA:HIGHLANDER 2001-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "SAAB:9.7X SUV 2005-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "BMW:7 SERIES 4D SAL:2010": {
+      "count": 9,
+      "acoustic": 0.11,
+      "hud": 0.11,
+      "shade": 1
+    },
+    "FORD:FOCUS C-MAX 2003-:2000": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:ID.4 SUV:2020": {
+      "count": 17,
+      "adas": 0.24,
+      "antenna": 0.06,
+      "shade": 0.76,
+      "camera": 0.24
+    },
+    "BMW:4 SERIES G26 4D CPE:2020": {
+      "count": 5,
+      "acoustic": 0.8,
+      "shade": 0.2
+    },
+    "HYUNDAI:SANTA FE 2001-:2000": {
+      "count": 9,
+      "heated": 0.11,
+      "antenna": 0.22,
+      "shade": 0.78
+    },
+    "HYUNDAI:SANTA FE 2006-:2005": {
+      "count": 5,
+      "heated": 0.2,
+      "shade": 0.8
+    },
+    "TOYOTA:LANDCRUISER SUV LHD 2009-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:Q3 SPORTBACK 5D SUV:2015": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "SSANGYONG:RODIUS MPV:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "CHEVROLET:MALIBU 4D SAL:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "KIA:SORENTO LHD:2010": {
+      "count": 4,
+      "adas": 0.25,
+      "rainSensor": 0.25,
+      "heated": 0.5,
+      "shade": 0.25,
+      "camera": 0.25
+    },
+    "HYUNDAI:IONIQ 5D HBK:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "CADILLAC:SRX 5D SUV:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "HYUNDAI:I55 5D SUV 2009-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "ASTON MARTIN:NEW DBS CPE:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "LANCIA:THEMA 4D SAL:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "SKODA:ENYAQ IV 5D SUV:2020": {
+      "count": 4,
+      "adas": 0.5,
+      "acoustic": 0.5,
+      "camera": 0.5
+    },
+    "KIA:OPIRUS 2003-:2000": {
+      "count": 7,
+      "rainSensor": 0.14,
+      "heated": 0.14,
+      "shade": 0.86
+    },
+    "LINCOLN:LS 4D SAL 2000-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "KIA:VENGA MPV LHD:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "FORD:KUGA 5D SUV 2020-:2020": {
+      "count": 7,
+      "adas": 0.29,
+      "rainSensor": 0.14,
+      "acoustic": 0.43,
+      "antenna": 0.14,
+      "shade": 0.29,
+      "camera": 0.29
+    },
+    "CITROEN:C4 5D SUV:2020": {
+      "count": 12,
+      "adas": 0.17,
+      "heated": 0.08,
+      "acoustic": 0.17,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "RENAULT:KOLEOS 5D SUV:2015": {
+      "count": 11,
+      "acoustic": 0.27,
+      "shade": 0.73
+    },
+    "VW:GOLF PLUS MONOSPACE:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "HYUNDAI:I20 5D HBK:2015": {
+      "count": 3,
+      "adas": 0.67,
+      "shade": 0.33,
+      "camera": 0.67
+    },
+    "PORSCHE:PANAMERA 5D HBK 2009-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "BMW:4 SERIES G22 2D CPE:2020": {
+      "count": 5,
+      "acoustic": 0.8,
+      "shade": 0.2
+    },
+    "HYUNDAI:GRANDEUR 4D SAL 2005-:2005": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 0.9
+    },
+    "HYUNDAI:SANTA FE:2010": {
+      "count": 11,
+      "shade": 1
+    },
+    "BMW:I3 5D HBK:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "TOYOTA:PRIUS 5D HBK LHD:2015": {
+      "count": 6,
+      "acoustic": 1
+    },
+    "PORSCHE:CAYENNE:2010": {
+      "count": 8,
+      "adas": 0.13,
+      "rainSensor": 0.13,
+      "heated": 0.13,
+      "acoustic": 0.25,
+      "shade": 0.75,
+      "camera": 0.25
+    },
+    "PORSCHE:CAYENNE 2010-:2010": {
+      "count": 7,
+      "acoustic": 0.14,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "SSANGYONG:KORANDO:2010": {
+      "count": 3,
+      "heated": 0.33,
+      "shade": 0.67
+    },
+    "MAZDA:CX-7 2007-:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "AUDI:A8 2002 UNTIL 02/:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "BMW:7 SERIES 4D SAL 2008-:2005": {
+      "count": 6,
+      "acoustic": 0.17,
+      "shade": 1
+    },
+    "CADILLAC:STS 2005-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "HYUNDAI:KONA 5D SUV LHD:2015": {
+      "count": 3,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "SSANGYONG:KORANDO 2010-:2010": {
+      "count": 4,
+      "heated": 0.25,
+      "shade": 0.75
+    },
+    "FORD:EXPLORER 5D SUV:2015": {
+      "count": 5,
+      "acoustic": 0.2,
+      "shade": 0.8
+    },
+    "KIA:CERATO 5D HBK/4D SAL 2004-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "BMW:6 SERIES E63 CPE/CAB:2000": {
+      "count": 6,
+      "shade": 1
+    },
+    "PEUGEOT:807:2000": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "VW:TOUAREG 2002-:2000": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "FORD USA:EDGE 5D SUV:2015": {
+      "count": 8,
+      "acoustic": 0.25,
+      "shade": 0.75
+    },
+    "AUDI:A8:2010": {
+      "count": 7,
+      "adas": 0.86,
+      "shade": 0.57,
+      "camera": 0.86
+    },
+    "SSANGYONG:RODIUS MPV 2005-:2005": {
+      "count": 12,
+      "heated": 0.08,
+      "antenna": 0.33,
+      "shade": 0.75
+    },
+    "AUDI:Q8 5D SUV:2015": {
+      "count": 7,
+      "adas": 0.43,
+      "acoustic": 0.29,
+      "antenna": 0.14,
+      "shade": 0.57,
+      "camera": 0.43
+    },
+    "VW:ID.3 5D HBK:2020": {
+      "count": 9,
+      "adas": 0.11,
+      "shade": 0.89,
+      "camera": 0.11
+    },
+    "HYUNDAI:TERRACAN JEEP:2000": {
+      "count": 6,
+      "heated": 0.17,
+      "antenna": 0.17,
+      "shade": 0.67
+    },
+    "SKODA:FABIA IV 5D HBK:2020": {
+      "count": 3,
+      "acoustic": 1,
+      "camera": 1
+    },
+    "RENAULT:MEGANE COUPE:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 0.67
+    },
+    "CADILLAC:XLR ROADSTER 2004-:2000": {
+      "count": 6,
+      "shade": 1
+    },
+    "PORSCHE:PANAMERA 5D HBK:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A8 2010-:2010": {
+      "count": 6,
+      "rainSensor": 0.33,
+      "heated": 0.17,
+      "acoustic": 0.33,
+      "shade": 1
+    },
+    "BMW:IX3 5D SUV:2020": {
+      "count": 4,
+      "rainSensor": 0.5,
+      "acoustic": 0.5,
+      "hud": 0.5,
+      "camera": 0.5
+    },
+    "DAEWOO:EVANDA/MAGNUS SAL 2002-:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "FORD:ECOSPORT B515 5D SUV:2015": {
+      "count": 3,
+      "acoustic": 1
+    },
+    "BMW:X6 2008-:2005": {
+      "count": 8,
+      "hud": 0.13,
+      "shade": 1
+    },
+    "PEUGEOT:407 CPE 2005-:2005": {
+      "count": 3,
+      "acoustic": 0.33,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "HONDA:E 5D HBK:2020": {
+      "count": 3,
+      "adas": 1,
+      "camera": 1
+    },
+    "JAGUAR:I PACE 5D SUV:2015": {
+      "count": 6,
+      "adas": 0.33,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "AUDI:A8 4D SAL:2015": {
+      "count": 4,
+      "adas": 0.25,
+      "acoustic": 0.75,
+      "camera": 0.25
+    },
+    "NISSAN:370Z 2D CAB 2009-:2005": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "shade": 0.67
+    },
+    "BMW:X3 SUV 2010-:2010": {
+      "count": 5,
+      "hud": 0.2,
+      "shade": 0.8
+    },
+    "HYUNDAI:GENESIS 4D SAL:2015": {
+      "count": 13,
+      "shade": 1
+    },
+    "MERCEDES:G CLASS 5D SUV:2015": {
+      "count": 8,
+      "adas": 0.13,
+      "acoustic": 0.13,
+      "shade": 0.75,
+      "camera": 0.13
+    },
+    "JAGUAR:XJ 4D SAL:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "ALFA ROMEO:ALFA GT 2004-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "ALFA ROMEO:159 5D EST 2005-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "ALFA ROMEO:BRERA CPE 2006-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "ASTON MARTIN:DBS CPE:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "BMW:X5:2000": {
+      "count": 5,
+      "antenna": 0.4,
+      "shade": 1
+    },
+    "NEW:MINI R50:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "BMW:5 SERIES EST 2003-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "BMW:X3:2000": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "BMW:3 SERIES CPE (E92):2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "BMW:MINI 2007-:2005": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "NEW:MINI COUNTRYMAN R60 2010-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "MINI:COUNTRYMAN 2010-:2010": {
+      "count": 10,
+      "shade": 1
+    },
+    "CITROEN:C5 EST 2001-:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "CITROEN:C1 3D 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "CITROEN:C1 5D 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "CITROEN:C5 EST 2008-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "CITROEN:C5 SAL:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "CITROEN:C5 SAL 2008-:2005": {
+      "count": 9,
+      "shade": 1
+    },
+    "CITROEN:C3 5D HBK:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "CITROEN:C4 PICASSO:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "CITROEN:C1 3D HBK:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "CITROEN:C1 5D HBK:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "DAEWOO:KALOS 5D:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "CHEVROLET:MATIZ 5D 2005-:2005": {
+      "count": 4,
+      "heated": 0.25,
+      "shade": 1
+    },
+    "SSANGYONG:KYRON 2006-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "CHEVROLET:CAPTIVA SUV 2006-:2005": {
+      "count": 9,
+      "antenna": 0.11,
+      "shade": 0.89
+    },
+    "CHEVROLET:CRUZE 4D SAL 2009-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "CHEVROLET:AVEO 5D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "CHEVROLET:AVEO 4D SAL:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "FIAT:DOBLO MINIVAN:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "FIAT:GRANDE PUNTO 3D 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "FIAT:BRAVO 5D 2007-:2005": {
+      "count": 11,
+      "shade": 1
+    },
+    "FIAT:PANDA 5D HBK 2011-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "FIAT:TIPO 5D HBK:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "FORD:MONDEO BRK:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "FORD:FIESTA 3D 2002-:2000": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:FOCUS 5D HBK:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "FORD:FOCUS 3D HBK 2004-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:FOCUS 5D HBK 2004-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "FORD:S MAX 2006-:2005": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 1
+    },
+    "FORD:MONDEO EST 2007-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:MONDEO HBK 4D/5D 2007-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "FORD:KUGA:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "FORD:GRAND C-MAX MPV 2010-:2010": {
+      "count": 10,
+      "shade": 1
+    },
+    "FORD:C-MAX COMPACT MPV 2010-:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:TRANSIT LWB V184:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "HONDA:CIVIC 3D HBK:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "HONDA:CIVIC 5D HBK:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "HONDA:CIVIC 3D HBK:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "HONDA:CRV 2007-:2005": {
+      "count": 9,
+      "antenna": 0.11,
+      "shade": 1
+    },
+    "HONDA:CRV:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "HONDA:ACCORD EST 2008-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "HONDA:JAZZ 5D HBK 2008-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "HONDA:JAZZ 5D HBK:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "HONDA:INSIGHT 5D HBK 2009-:2005": {
+      "count": 3,
+      "antenna": 0.67,
+      "shade": 0.33
+    },
+    "HONDA:CR-Z 2D CPE 2010-:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "HONDA:CRV 5D SUV:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "HONDA:CRV 5D SUV:2010": {
+      "count": 11,
+      "antenna": 0.09,
+      "shade": 1
+    },
+    "HONDA:JAZZ 5D HBK:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "HYUNDAI:TUCSON 2004-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "HYUNDAI:I20 5D HBK:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "HYUNDAI:IX35 5D SUV:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "HYUNDAI:IX35 5D SUV 2009-:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "HYUNDAI:I40 4D SAL:2010": {
+      "count": 3,
+      "antenna": 1,
+      "shade": 0.33
+    },
+    "HYUNDAI:I40 5D EST:2010": {
+      "count": 3,
+      "antenna": 0.67,
+      "shade": 0.33
+    },
+    "JAGUAR:X TYPE 2001-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "JAGUAR:XJ SERIES 2003-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "KIA:SPORTAGE 2004-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "KIA:SOUL:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "KIA:SPORTAGE:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "KIA:SPORTAGE 2010-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "KIA:RIO 5D HBK:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "KIA:CARENS:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "LANCIA:DELTA 2008-:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "MAZDA:CX 7:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "MAZDA:6 4D SAL 2008-:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 0.67
+    },
+    "MAZDA:6 5D EST 2008-:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 0.67
+    },
+    "MAZDA:6 5D HBK 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "MAZDA:3 5D HBK 2009-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "SMART:FOR FOUR 2004-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "MERCEDES:CLS (W219) 2004-:2000": {
+      "count": 6,
+      "shade": 1
+    },
+    "MERCEDES:M CLASS W164:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "MERCEDES:GLK 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "MERCEDES:B CLASS W246:2010": {
+      "count": 11,
+      "shade": 1
+    },
+    "MERCEDES:V CLASS (W639) 2003-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "MERCEDES:V CLASS (W639):2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "MITSUBISHI:COLT 3D 2005-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "NISSAN:350Z CPE 2003-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "NISSAN:QASHQAI+2:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "NISSAN:X-TRAIL 5D 2007-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "NISSAN:LEAF 5D HBK:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "NISSAN:LEAF 5D HBK:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "NISSAN:LEAF 5D HBK 2011-:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "NISSAN:NOTE 5D HBK:2010": {
+      "count": 11,
+      "shade": 1
+    },
+    "NISSAN:PULSAR 5D HBK:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:COMBO 2001-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:INSIGNIA EST 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VAUXHALL:INSIGNIA HBK:2005": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "VAUXHALL:ZAFIRA:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VAUXHALL:ASTRA TWIN TOP:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VAUXHALL:/ OPEL CORSA 3D 2007-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "VAUXHALL:/ OPEL CORSA 5D 2007-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VAUXHALL:/ OPEL CORSA 5D 2009-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:CORSA 5D 2007-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "OPEL/VAUXHALL:AGILA 5D HBK:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:ASTRA 5D EST 2010-:2010": {
+      "count": 14,
+      "shade": 1
+    },
+    "OPEL/VAUXHALL:ASTRA 5D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "VAUXHALL:CORSA 5D:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "VAUXHALL:CORSA 3D:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:407 SAL+EST:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "PEUGEOT:207 5D EST 2006-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "PEUGEOT:207 3D 2006-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "PEUGEOT:207 5D 2006-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:EXPERT (G9):2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:EXPERT (G9) 2006-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "PEUGEOT:308 2007-:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "PEUGEOT:308 5D HBK 2007-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "PEUGEOT:3008 MPV:2005": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "PEUGEOT:5008 2009-:2005": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "PEUGEOT:RCZ 2D CPE:2010": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "PEUGEOT:508 5D EST:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:508 4D SAL:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "PEUGEOT:108 3D/5D HBK:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "PEUGEOT:5008 5D SUV:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "PEUGEOT:508 5D HBK:2015": {
+      "count": 4,
+      "antenna": 0.5,
+      "shade": 1
+    },
+    "RANGE:ROVER 2009-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "RENAULT:MEGANE SCENIC:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "RENAULT:MEGANE II 5D EST 2003-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:CLIO 3D 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "RENAULT:KANGOO II:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "DACIA:DUSTER 5D CROSSOVER 2010-:2010": {
+      "count": 3,
+      "shade": 1
+    },
+    "RENAULT:KOLEOS 5D SUV:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "RENAULT:MEGANE 5D EST 2008-:2005": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 0.8
+    },
+    "RENAULT:MEGANE 5D HBK 2008-:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 0.67
+    },
+    "RENAULT:MEGANE 5D EST:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "RENAULT:MEGANE 5D HBK:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "RENAULT:CLIO IV HBK:2010": {
+      "count": 9,
+      "antenna": 0.11,
+      "shade": 1
+    },
+    "RENAULT:CAPTUR 5D MPV 2013-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "RENAULT:CAPTUR 5D MPV:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "RENAULT:GRAND SCENIC IV:2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "RENAULT:SCENIC IV:2015": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "SAAB:6 9.3 SAL:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "SAAB:9.3 SPORT COMBI 2005-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "SAAB:9.3 SAL 2002-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "SEAT:ALTEA XL 2007-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "SEAT:ALTEA/TOLEDO:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "SEAT:ALTEA/TOLEDO 2004-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "SEAT:IBIZA 5D EST 2010-:2010": {
+      "count": 9,
+      "shade": 1
+    },
+    "SEAT:IBIZA 5D HBK 2008-:2005": {
+      "count": 8,
+      "shade": 1
+    },
+    "SEAT:IBIZA 3D HBK 2008-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "SEAT:IBIZA 5D HBK:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "SEAT:TARRACO 5D SUV:2015": {
+      "count": 8,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "SKODA:OCTAVIA A5 EST:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "SKODA:OCTAVIA A5 EST 2004-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "SKODA:FABIA 2007-:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "SKODA:FABIA 5D HBK:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "SKODA:SUPERB 5D EST:2005": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "SKODA:SUPERB 5D HBK:2005": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "SKODA:SUPERB 5D EST 2008-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "SKODA:YETI SUV:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "SKODA:FABIA III 5D EST:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "SKODA:FABIA III 5D HBK:2010": {
+      "count": 6,
+      "shade": 1
+    },
+    "IMPREZA:5D HBK/IMPREZA XV:2010": {
+      "count": 9,
+      "shade": 1
+    },
+    "SUZUKI:ALTO 2009-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "SUZUKI:SWIFT 5D HBK 2010-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "TOYOTA:LANDCRUISER 3D 2003-:2000": {
+      "count": 3,
+      "antenna": 0.67,
+      "shade": 0.33
+    },
+    "TOYOTA:AVENSIS EST 2003-:2000": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 0.67
+    },
+    "TOYOTA:HI LUX 4D PU:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "LEXUS:IS200:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "TOYOTA:RAV 4:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "TOYOTA:AURIS 5D HBK 2007-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "TOYOTA:COROLLA 4D SAL:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "TOYOTA:LANDCRUISER V8 2008-:2005": {
+      "count": 5,
+      "heated": 0.2,
+      "antenna": 0.2,
+      "shade": 0.8
+    },
+    "TOYOTA:VERSO 2009-:2005": {
+      "count": 9,
+      "shade": 1
+    },
+    "TOYOTA:VERSO:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "LEXUS:RX350/450 H 2009-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "TOYOTA:VERSO S:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "LEXUS:CT200H 5D HBK:2010": {
+      "count": 12,
+      "shade": 1
+    },
+    "TOYOTA:AYGO 3D HBK:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:AYGO 5D HBK:2010": {
+      "count": 8,
+      "shade": 1
+    },
+    "TOYOTA:C HR 5D CROSSOVER:2015": {
+      "count": 7,
+      "acoustic": 0.14,
+      "shade": 0.86
+    },
+    "TOYOTA:PRIUS 5D HBK:2015": {
+      "count": 10,
+      "acoustic": 0.2,
+      "shade": 0.8
+    },
+    "TOYOTA:HI LUX 4D PU:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "TOYOTA:COROLLA 5D EST:2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "TOYOTA:COROLLA 5D HBK:2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:GOLF A5 3D/5D:2000": {
+      "count": 3,
+      "rainSensor": 0.33,
+      "antenna": 0.67,
+      "shade": 0.67
+    },
+    "VW:GOLF A5 GTI 3D:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A4 SAL:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A4 EST 2000-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A4 EST:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:TOURAN MPV 2011-:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:TOURAN MPV:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A3 3D:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A6 EST 2005-:2005": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "AUDI:A6 SAL 2004-:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:PASSAT B7 EST 2010-:2010": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "VW:PASSAT B6 EST 2005-:2005": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "VW:PASSAT B7 SAL:2010": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "VW:PASSAT B6 SAL 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:PASSAT B6 EST:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:PASSAT B6 SAL:2005": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "shade": 0.8
+    },
+    "VW:FOX 2005-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:GOLF 5D EST 2007-:2005": {
+      "count": 14,
+      "antenna": 0.29,
+      "shade": 1
+    },
+    "VW:JETTA 4D SAL:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:GOLF 5D EST:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:TT CPE 2006-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:SCIROCCO:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "AUDI:A3 CABRIO:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:GOLF VI 3D/5D HBK 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:GOLF VI 5D HBK:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:GOLF VI 3D HBK 2008-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VW:GOLF VI 5D HBK 2008-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:POLO 5D HBK:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A8 4D SAL 2010-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "AUDI:A3 3D:2010": {
+      "count": 4,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "AUDI:A3 5D:2010": {
+      "count": 7,
+      "shade": 1
+    },
+    "AUDI:A3 SPORTBACK 5D EST:2020": {
+      "count": 3,
+      "shade": 1
+    },
+    "VOLVO:V50 2003-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "VOLVO:C30 2007-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VOLVO:C30:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "VOLVO:V70 CROSS COUNTRY:2005": {
+      "count": 12,
+      "shade": 1
+    },
+    "VOLVO:S80 2006-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VOLVO:V70/V70 CROSS COUNTRY:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "FORD USA:MUSTANG 2D CPE:2015": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD USA:MUSTANG 2D CAB:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "JEEP:CHEROKEE:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "JEEP:COMMANDER 2006-:2005": {
+      "count": 12,
+      "shade": 1
+    },
+    "JEEP:GRAND CHEROKEE 2011-:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "BMW:IX 5D SUV:2020": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "acoustic": 0.5,
+      "hud": 0.33,
+      "shade": 0.5,
+      "camera": 0.5
+    },
+    "BMW:X5 (E70) SHADOW LINE 2006-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "BMW:X4 5D SUV (G02):2015": {
+      "count": 4,
+      "acoustic": 1,
+      "camera": 1
+    },
+    "CITROEN:C3 AIRCROSS 5D SUV:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "SSANGYONG:ACTYON SUV 2006-:2005": {
+      "count": 8,
+      "antenna": 0.25,
+      "shade": 0.75
+    },
+    "FORD:KUGA 5D SUV:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "HONDA:ACURA 5D RANGER 2000-:2000": {
+      "count": 3,
+      "shade": 1
+    },
+    "HONDA:CIVIC HYBRID 4D SAL 2006-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "HYUNDAI:XG SAL 2000-:2000": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 0.67
+    },
+    "HYUNDAI:IONIQ 5 5D HBK:2020": {
+      "count": 3,
+      "shade": 0.33,
+      "camera": 0.67
+    },
+    "KIA:CARNIVAL/SEDONA 2006-:2005": {
+      "count": 3,
+      "shade": 1
+    },
+    "KIA:CARENS MPV:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "DAF:XF / XG:2020": {
+      "count": 4,
+      "shade": 1
+    },
+    "MERCEDES:GL CLASS (W164) 2006-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "NISSAN:INFINITY FX35/45 2003-:2000": {
+      "count": 5,
+      "shade": 1
+    },
+    "NISSAN:MURANO 2008-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "VAUXHALL:CORSA 5D HBK:2020": {
+      "count": 5,
+      "shade": 1
+    },
+    "HOLDEN:VE COMMODORE 2008-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "RENAULT:LAGUNA  5D EST 2007-:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "RENAULT:TALISMAN 4D SAL:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "RENAULT:KAPTUR SUV:2015": {
+      "count": 3,
+      "shade": 1
+    },
+    "DACIA:SANDERO 5D HBK:2020": {
+      "count": 3,
+      "shade": 1
+    },
+    "SEAT:LEON 5D HBK:2020": {
+      "count": 4,
+      "shade": 1
+    },
+    "SKODA:OCTAVIA IV 5D EST:2020": {
+      "count": 4,
+      "shade": 1
+    },
+    "SUBARU:LEGACY (EZ5) SAL 2009-:2005": {
+      "count": 3,
+      "antenna": 0.33,
+      "shade": 0.67
+    },
+    "SUBARU:FORESTER:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "SUBARU:OUTBACK 5D EST:2015": {
+      "count": 8,
+      "antenna": 0.13,
+      "shade": 0.88
+    },
+    "SUBARU:LEGACY 4D SAL:2015": {
+      "count": 4,
+      "shade": 1
+    },
+    "SUZUKI:GRAND VITARA 5D 2005-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:LANDCRUISER 5D 2003-:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "TOYOTA:LEXUS GS300/GS430 2005-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "LEXUS:CT200H 5D HBK 2011-:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:GOLF A5 3D 2007-:2005": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:A8 LWB:2010": {
+      "count": 4,
+      "shade": 1
+    },
+    "VW:GOLF VIII VARIANT:2020": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:NEO 5D HBK:2020": {
+      "count": 3,
+      "shade": 1
+    },
+    "AUDI:A3 5D HBK:2020": {
+      "count": 4,
+      "shade": 1
+    },
+    "AUDI:Q4 E TRON 5D SUV:2020": {
+      "count": 4,
+      "acoustic": 0.5,
+      "camera": 1
+    },
+    "VW:T7 MULTIVAN:2020": {
+      "count": 5,
+      "shade": 1
+    },
+    "FISKER:KARMA 4D CPE:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "CADILLAC:ESCALADE 5D 1995-:1995": {
+      "count": 4,
+      "shade": 1
+    },
+    "CADILLAC:SRX 2005-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "CADILLAC:ESCALADE 2007-:2005": {
+      "count": 6,
+      "shade": 1
+    },
+    "CADILLAC:ATS 4D SAL:2010": {
+      "count": 5,
+      "shade": 1
+    },
+    "CHRYSLER:PT CRUISER 2000-:2000": {
+      "count": 4,
+      "shade": 1
+    },
+    "FORD:EXCURSION 2001-:2000": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:EXPEDITION 2007-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "HUMMER:H3 2005-:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "JEEP:WRANGLER 5D 2007-:2005": {
+      "count": 7,
+      "shade": 1
+    },
+    "JEEP:LIBERTY 4D 2006-:2005": {
+      "count": 4,
+      "shade": 1
+    },
+    "JEEP:CHEROKEE 2008-:2005": {
+      "count": 14,
+      "shade": 1
+    },
+    "JEEP:CHEROKEE:2010": {
+      "count": 4,
+      "shade": 1
+    }
+  },
+  "brandModel": {
+    "BMW:5 SERIES F10": {
+      "count": 9,
+      "rainSensor": 0.11,
+      "hud": 0.44,
+      "shade": 1
+    },
+    "BMW:X5 (F15) 5D SUV": {
+      "count": 15,
+      "adas": 0.07,
+      "rainSensor": 0.07,
+      "acoustic": 0.33,
+      "hud": 0.07,
+      "shade": 0.73,
+      "camera": 0.07
+    },
+    "BMW:X2 (XCITE) F39": {
+      "count": 5,
+      "adas": 0.4,
+      "rainSensor": 0.4,
+      "acoustic": 0.4,
+      "antenna": 0.2,
+      "shade": 0.2,
+      "camera": 0.4
+    },
+    "BMW:X1 SUV": {
+      "count": 9,
+      "adas": 0.22,
+      "antenna": 0.11,
+      "shade": 0.89,
+      "camera": 0.22
+    },
+    "NEW:MINI CLUBMAN F54": {
+      "count": 6,
+      "shade": 1
+    },
+    "NEW:MINI COUNTRYMAN F60": {
+      "count": 12,
+      "shade": 1
+    },
+    "BMW:6 SERIES GT G32": {
+      "count": 5,
+      "adas": 0.4,
+      "acoustic": 0.4,
+      "antenna": 0.2,
+      "shade": 0.2,
+      "camera": 0.4
+    },
+    "BMW:Z4 G29 2D CAB": {
+      "count": 6,
+      "adas": 0.33,
+      "shade": 1,
+      "camera": 0.33
+    },
+    "BMW:X5 5D SUV G05": {
+      "count": 6,
+      "adas": 0.67,
+      "rainSensor": 0.33,
+      "acoustic": 0.33,
+      "camera": 0.67
+    },
+    "CITROEN:BERLINGO 2008-": {
+      "count": 14,
+      "rainSensor": 0.07,
+      "shade": 1
+    },
+    "CITROEN:C3 (B618) 5D HBK": {
+      "count": 8,
+      "shade": 1
+    },
+    "FORD:FIESTA 3D 5D HBK": {
+      "count": 9,
+      "shade": 1
+    },
+    "FORD:KUGA": {
+      "count": 40,
+      "adas": 0.08,
+      "rainSensor": 0.13,
+      "heated": 0.1,
+      "acoustic": 0.2,
+      "antenna": 0.03,
+      "shade": 0.78,
+      "camera": 0.08
+    },
+    "FORD:FOCUS 5D HBK": {
+      "count": 17,
+      "adas": 0.12,
+      "rainSensor": 0.12,
+      "heated": 0.06,
+      "acoustic": 0.12,
+      "antenna": 0.12,
+      "shade": 0.76,
+      "camera": 0.12
+    },
+    "JAGUAR:XE (X760) 4D SAL": {
+      "count": 18,
+      "acoustic": 0.11,
+      "shade": 0.89
+    },
+    "JAGUAR:E PACE 5D SUV": {
+      "count": 17,
+      "adas": 0.24,
+      "acoustic": 0.47,
+      "shade": 0.29,
+      "camera": 0.71
+    },
+    "KIA:SPORTAGE RHD": {
+      "count": 7,
+      "heated": 0.14,
+      "shade": 0.86
+    },
+    "MAZDA:6 4D SAL/5D EST RHD": {
+      "count": 7,
+      "acoustic": 0.71,
+      "shade": 0.29
+    },
+    "MAZDA:3 HBK SAL": {
+      "count": 15,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "MERCEDES:M CLASS W166": {
+      "count": 7,
+      "shade": 1
+    },
+    "MERCEDES:C CLASS 2D CAB": {
+      "count": 7,
+      "shade": 1
+    },
+    "MERCEDES:E CLASS CPE C238": {
+      "count": 8,
+      "acoustic": 0.25,
+      "shade": 0.75
+    },
+    "MERCEDES:SPRINTER": {
+      "count": 27,
+      "rainSensor": 0.07,
+      "shade": 0.93
+    },
+    "NISSAN:MICRA (B02E) RHD": {
+      "count": 7,
+      "acoustic": 0.71,
+      "shade": 0.29
+    },
+    "PORSCHE:MACAN 5D SUV": {
+      "count": 9,
+      "acoustic": 0.22,
+      "shade": 0.78
+    },
+    "RANGE:ROVER EVOQUE R3 6/": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "RANGE:ROVER L405 R5": {
+      "count": 39,
+      "adas": 0.08,
+      "heated": 0.05,
+      "acoustic": 0.44,
+      "shade": 0.67,
+      "camera": 0.08
+    },
+    "LAND ROVER:DISCOVERY 5D": {
+      "count": 8,
+      "adas": 0.38,
+      "shade": 0.63,
+      "camera": 0.38
+    },
+    "RENAULT:MEGANE SCENIC": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "shade": 0.8,
+      "camera": 0.2
+    },
+    "RENAULT:KADJAR 5D SUV": {
+      "count": 14,
+      "rainSensor": 0.07,
+      "acoustic": 0.29,
+      "shade": 0.71
+    },
+    "SEAT:LEON 5D HBK": {
+      "count": 19,
+      "antenna": 0.11,
+      "shade": 1
+    },
+    "SKODA:KODIAQ 5D SUV": {
+      "count": 9,
+      "adas": 0.11,
+      "rainSensor": 0.11,
+      "acoustic": 0.22,
+      "shade": 0.67,
+      "camera": 0.11
+    },
+    "SKODA:KAROQ 5D SUV": {
+      "count": 6,
+      "adas": 0.33,
+      "rainSensor": 0.17,
+      "acoustic": 0.33,
+      "antenna": 0.17,
+      "shade": 0.33,
+      "camera": 0.33
+    },
+    "SKODA:SCALA 5D HBK": {
+      "count": 10,
+      "adas": 0.3,
+      "heated": 0.1,
+      "acoustic": 0.2,
+      "antenna": 0.2,
+      "shade": 0.5,
+      "camera": 0.5
+    },
+    "SKODA:KAMIQ 5D SUV": {
+      "count": 5,
+      "adas": 0.6,
+      "antenna": 0.2,
+      "shade": 0.4,
+      "camera": 0.6
+    },
+    "AUDI:Q7 2006-": {
+      "count": 15,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "VW:TIGUAN": {
+      "count": 15,
+      "adas": 0.13,
+      "acoustic": 0.07,
+      "antenna": 0.07,
+      "shade": 0.87,
+      "camera": 0.13
+    },
+    "VW:PASSAT CC": {
+      "count": 6,
+      "adas": 0.33,
+      "rainSensor": 0.33,
+      "heated": 0.17,
+      "acoustic": 0.33,
+      "shade": 0.33,
+      "camera": 0.33
+    },
+    "VW:SHARAN II MPV": {
+      "count": 10,
+      "adas": 0.2,
+      "rainSensor": 0.1,
+      "heated": 0.1,
+      "acoustic": 0.6,
+      "shade": 0.6,
+      "camera": 0.2
+    },
+    "VW:TOUAREG 2010-": {
+      "count": 7,
+      "shade": 1
+    },
+    "AUDI:A7  5D HBK 2010-": {
+      "count": 7,
+      "acoustic": 0.29,
+      "shade": 1,
+      "camera": 0.29
+    },
+    "AUDI:A7 5D HBK": {
+      "count": 9,
+      "adas": 0.11,
+      "acoustic": 0.22,
+      "antenna": 0.22,
+      "shade": 0.89,
+      "camera": 0.33
+    },
+    "AUDI:A6/C7 4D SAL 09/": {
+      "count": 5,
+      "acoustic": 0.4,
+      "shade": 0.8
+    },
+    "VW:UP 3D/5D HBK": {
+      "count": 9,
+      "adas": 0.56,
+      "antenna": 0.11,
+      "shade": 1,
+      "camera": 0.56
+    },
+    "AUDI:Q3 SUV": {
+      "count": 13,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "AUDI:A3 LIMOUSINE 4D SAL": {
+      "count": 11,
+      "acoustic": 0.18,
+      "shade": 0.82
+    },
+    "AUDI:A3 CAB": {
+      "count": 7,
+      "shade": 1
+    },
+    "VW:GOLF VII SPORTSVAN MPV": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "AUDI:Q7 5D JEEP": {
+      "count": 7,
+      "adas": 0.29,
+      "acoustic": 0.29,
+      "shade": 0.71,
+      "camera": 0.57
+    },
+    "AUDI:TT CPE": {
+      "count": 5,
+      "adas": 0.2,
+      "antenna": 0.2,
+      "shade": 1,
+      "camera": 0.2
+    },
+    "VW:TOURAN MPV": {
+      "count": 21,
+      "adas": 0.1,
+      "rainSensor": 0.05,
+      "acoustic": 0.05,
+      "antenna": 0.19,
+      "shade": 0.81,
+      "camera": 0.1
+    },
+    "AUDI:Q2 5D SUV": {
+      "count": 12,
+      "adas": 0.08,
+      "antenna": 0.08,
+      "shade": 1,
+      "camera": 0.08
+    },
+    "AUDI:Q5 5D SUV": {
+      "count": 11,
+      "adas": 0.18,
+      "rainSensor": 0.09,
+      "acoustic": 0.18,
+      "antenna": 0.09,
+      "shade": 0.64,
+      "camera": 0.18
+    },
+    "VW:CRAFTER": {
+      "count": 13,
+      "adas": 0.31,
+      "shade": 1,
+      "camera": 0.31
+    },
+    "VW:PASSAT ARTEON 4D CPE": {
+      "count": 13,
+      "acoustic": 0.15,
+      "shade": 0.85
+    },
+    "VW:T ROC 5D SUV": {
+      "count": 5,
+      "adas": 0.4,
+      "shade": 0.6,
+      "camera": 0.4
+    },
+    "VOLVO:XC60 5D SUV": {
+      "count": 24,
+      "acoustic": 0.42,
+      "shade": 0.58
+    },
+    "VOLVO:XC40 5D SUV": {
+      "count": 6,
+      "adas": 0.33,
+      "antenna": 0.33,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "FORD:FOCUS HBK SAL EST 98-04-": {
+      "count": 5,
+      "shade": 1
+    },
+    "RANGE:ROVER L322 02-": {
+      "count": 13,
+      "heated": 0.08,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "HONDA:CRV 02-": {
+      "count": 9,
+      "shade": 1
+    },
+    "RANGE:ROVER SPORT L320 05-": {
+      "count": 10,
+      "shade": 1
+    },
+    "FORD:FUSION 02-": {
+      "count": 10,
+      "shade": 1
+    },
+    "PEUGEOT:206 98-07-": {
+      "count": 5,
+      "shade": 1
+    },
+    "VAUXHALL:CORSA 3D 5D 00-": {
+      "count": 10,
+      "heated": 0.2,
+      "shade": 0.8
+    },
+    "CITROEN:BERLINGO 96-": {
+      "count": 6,
+      "heated": 0.67,
+      "shade": 0.33
+    },
+    "FORD:TRANSIT 86-00-": {
+      "count": 7,
+      "heated": 1
+    },
+    "LAND ROVER:DISCOVERY 3 L319 04-": {
+      "count": 13,
+      "shade": 1
+    },
+    "BMW:7 SERIES E38 94-01-": {
+      "count": 8,
+      "rainSensor": 0.38,
+      "heated": 0.75,
+      "shade": 0.38
+    },
+    "BMW:X5 E53 00-06-": {
+      "count": 14,
+      "shade": 1
+    },
+    "BMW:NEW MINI 00-": {
+      "count": 6,
+      "shade": 1
+    },
+    "BMW:3 SERIES E46 COMPACT 01-": {
+      "count": 5,
+      "shade": 1
+    },
+    "BMW:7 SERIES E65 01-": {
+      "count": 9,
+      "shade": 1
+    },
+    "BMW:Z4 E85 03-": {
+      "count": 5,
+      "shade": 1
+    },
+    "CITROEN:C3 02-": {
+      "count": 13,
+      "rainSensor": 0.08,
+      "shade": 1
+    },
+    "CITROEN:C5 2000-": {
+      "count": 7,
+      "rainSensor": 0.14,
+      "shade": 1
+    },
+    "CITROEN:XSARA PICASSO 99-": {
+      "count": 13,
+      "rainSensor": 0.08,
+      "shade": 1
+    },
+    "CITROEN:C2 03-": {
+      "count": 8,
+      "rainSensor": 0.13,
+      "shade": 1
+    },
+    "FIAT:STILO 3D 01-": {
+      "count": 9,
+      "shade": 1
+    },
+    "FORD:GALAXY 03/": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "heated": 0.4,
+      "acoustic": 0.4,
+      "shade": 0.8
+    },
+    "FORD:COUGAR 99-": {
+      "count": 6,
+      "shade": 1
+    },
+    "HONDA:CIVIC 5D 01-06-": {
+      "count": 8,
+      "shade": 1
+    },
+    "LANCIA:YPSILON 03-": {
+      "count": 6,
+      "shade": 1
+    },
+    "MERCEDES:E CLASS W210 95-02-": {
+      "count": 7,
+      "rainSensor": 0.43,
+      "shade": 0.57
+    },
+    "MERCEDES:CLK CPE W208 97-02-": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "shade": 0.8
+    },
+    "MERCEDES:C CLASS (W203) 2003-": {
+      "count": 6,
+      "shade": 1
+    },
+    "MERCEDES:C CLASS W203": {
+      "count": 7,
+      "shade": 1
+    },
+    "NISSAN:ALMERA TINO V10 00-": {
+      "count": 9,
+      "shade": 1
+    },
+    "VAUXHALL:ZAFRIA MPV 98-05-": {
+      "count": 8,
+      "shade": 1
+    },
+    "VAUXHALL:MERIVA": {
+      "count": 5,
+      "shade": 1
+    },
+    "VAUXHALL:MERIVA 03-": {
+      "count": 13,
+      "shade": 1
+    },
+    "VAUXHALL:VIVARO 01-": {
+      "count": 13,
+      "shade": 1
+    },
+    "PEUGEOT:206 3D 98-07-": {
+      "count": 5,
+      "shade": 1
+    },
+    "PEUGEOT:607 00-": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "shade": 1
+    },
+    "PEUGEOT:307 01-": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "acoustic": 0.2,
+      "shade": 1
+    },
+    "PEUGEOT:206 CABRIO 00-": {
+      "count": 7,
+      "rainSensor": 0.14,
+      "shade": 1
+    },
+    "RENAULT:LAGUNA HBK EST 94-01-": {
+      "count": 9,
+      "heated": 0.11,
+      "shade": 0.89
+    },
+    "RENAULT:MASTER 97-": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "heated": 0.33,
+      "shade": 0.5
+    },
+    "RENAULT:LAGUNA 00-": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "shade": 1
+    },
+    "RENAULT:MEGANE SCENIC 03-": {
+      "count": 12,
+      "rainSensor": 0.08,
+      "acoustic": 0.08,
+      "shade": 1
+    },
+    "RENAULT:MEGANE II 3D 5D 02-": {
+      "count": 6,
+      "heated": 0.17,
+      "shade": 0.83
+    },
+    "VW:TRANSPORTER T4 90-03-": {
+      "count": 12,
+      "heated": 0.25,
+      "antenna": 0.5,
+      "shade": 0.25
+    },
+    "VW:GOLF A5 03-": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:A4 00-": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:TOURAN MPV 2003-": {
+      "count": 7,
+      "shade": 1
+    },
+    "VOLVO:FH12 FH16 93- FM 98-": {
+      "count": 5,
+      "antenna": 1
+    },
+    "VOLVO:XC90": {
+      "count": 22,
+      "adas": 0.23,
+      "rainSensor": 0.18,
+      "heated": 0.05,
+      "acoustic": 0.09,
+      "shade": 0.86,
+      "camera": 0.14
+    },
+    "VOLVO:XC90 2002-": {
+      "count": 5,
+      "shade": 1
+    },
+    "BMW:X3 E83 03-": {
+      "count": 8,
+      "shade": 1
+    },
+    "PEUGEOT:407 SAL EST 04-": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "shade": 1
+    },
+    "SKODA:OCTAVIA A5 HBK EST 04-": {
+      "count": 6,
+      "shade": 1
+    },
+    "BMW:5 SERIES SAL+EST": {
+      "count": 6,
+      "rainSensor": 0.33,
+      "shade": 0.83
+    },
+    "BMW:1 SERIES E87 5D HBK 04-": {
+      "count": 7,
+      "rainSensor": 0.29,
+      "antenna": 0.14,
+      "shade": 0.71
+    },
+    "VAUXHALL:ZAFIRA  05-": {
+      "count": 9,
+      "rainSensor": 0.11,
+      "shade": 1
+    },
+    "PEUGEOT:1007 05-": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "shade": 1
+    },
+    "SEAT:LEON 05-": {
+      "count": 13,
+      "shade": 1
+    },
+    "VW:PASSAT B6 05-": {
+      "count": 9,
+      "rainSensor": 0.11,
+      "shade": 1
+    },
+    "VW:GOLF PLUS MONOSPACE 2005-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:FOCUS C MAX": {
+      "count": 13,
+      "heated": 0.08,
+      "shade": 1
+    },
+    "VW:MULTIVAN": {
+      "count": 13,
+      "shade": 1
+    },
+    "FORD:TOURNEO CONNECT": {
+      "count": 19,
+      "heated": 0.32,
+      "shade": 0.68
+    },
+    "PEUGEOT:207 3D+5D 2006-": {
+      "count": 8,
+      "rainSensor": 0.13,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:VIVARO 2001-": {
+      "count": 8,
+      "shade": 1
+    },
+    "RENAULT:CLIO 3D 5D 05-": {
+      "count": 5,
+      "shade": 1
+    },
+    "LANDROVER:FREELANDER 01/07-": {
+      "count": 8,
+      "shade": 1
+    },
+    "RENAULT:TWINGO II 07-": {
+      "count": 9,
+      "shade": 1
+    },
+    "HYUNDAI:SANTA FE LHD 2006-": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "heated": 0.4,
+      "shade": 0.4
+    },
+    "KIA:SPORTAGE LHD": {
+      "count": 7,
+      "rainSensor": 0.29,
+      "heated": 0.29,
+      "shade": 0.57
+    },
+    "FORD:MONDEO 07-": {
+      "count": 5,
+      "rainSensor": 0.4,
+      "heated": 0.2,
+      "shade": 1
+    },
+    "BMW:X5 (E70) 2006-": {
+      "count": 20,
+      "rainSensor": 0.1,
+      "antenna": 0.15,
+      "hud": 0.05,
+      "shade": 0.95
+    },
+    "SSANGYONG:REXTON 2002-": {
+      "count": 8,
+      "shade": 1
+    },
+    "FIAT:DUCATO III 06-": {
+      "count": 7,
+      "rainSensor": 0.14,
+      "shade": 1
+    },
+    "KIA:CEE&#039": {
+      "count": 29,
+      "rainSensor": 0.07,
+      "heated": 0.14,
+      "shade": 0.83,
+      "camera": 0.07
+    },
+    "MERCEDES:R CLASS 2006-": {
+      "count": 14,
+      "rainSensor": 0.07,
+      "antenna": 0.07,
+      "shade": 0.93
+    },
+    "MERCEDES:SPRINTER SWB 06-": {
+      "count": 7,
+      "heated": 0.29,
+      "shade": 0.71
+    },
+    "VW:TUAREG 02-": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "shade": 1
+    },
+    "FIAT:500 3D 07-": {
+      "count": 12,
+      "shade": 1
+    },
+    "VW:TIGUAN 07-": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "FORD:GALAXY 2006-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:S MAX 07-": {
+      "count": 7,
+      "rainSensor": 0.29,
+      "heated": 0.14,
+      "acoustic": 0.29,
+      "shade": 1
+    },
+    "BMW:5 SERIES E60/E61 03/2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:TOUAREG": {
+      "count": 7,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "KIA:PRO-CEE&#039": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "heated": 0.5,
+      "shade": 0.83
+    },
+    "SUBARU:B9 TRIBECA SUV 2006-": {
+      "count": 8,
+      "shade": 1
+    },
+    "TOYOTA:RAV 4 2006-": {
+      "count": 14,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "MITSUBISHI:OUTLANDER 2007-": {
+      "count": 6,
+      "rainSensor": 0.33,
+      "heated": 0.17,
+      "shade": 0.67
+    },
+    "CITROEN:NEMO 2008-": {
+      "count": 8,
+      "shade": 1
+    },
+    "MERCEDES:C CLASS (W203) 2000-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:KUGA 2008-": {
+      "count": 14,
+      "rainSensor": 0.14,
+      "heated": 0.21,
+      "shade": 0.86
+    },
+    "PEUGEOT:207CC 2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:MODUS J77 07/2004-": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:CADDY": {
+      "count": 17,
+      "adas": 0.18,
+      "acoustic": 0.06,
+      "shade": 0.82,
+      "camera": 0.18
+    },
+    "NISSAN:MURANO Z50 5D SUV 2004-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FIAT:DUCATO III": {
+      "count": 9,
+      "adas": 0.11,
+      "shade": 0.89,
+      "camera": 0.11
+    },
+    "RENAULT:KOLEOS 5D SUV 2008-": {
+      "count": 10,
+      "shade": 1
+    },
+    "SKODA:SUPERB 5D HBK 2008-": {
+      "count": 8,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "SUBARU:FORESTER 2008-": {
+      "count": 7,
+      "heated": 0.29,
+      "shade": 0.71
+    },
+    "TOYOTA:AVENSIS SAL+EST LHD 2009-": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:SCIROCCO 2008-": {
+      "count": 8,
+      "rainSensor": 0.13,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "VW:PASSAT CC 2008-": {
+      "count": 16,
+      "rainSensor": 0.13,
+      "acoustic": 0.06,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "FORD:KA 3D HBK 2008-": {
+      "count": 10,
+      "shade": 1
+    },
+    "SUZUKI:SX4 SUV 2006-": {
+      "count": 8,
+      "shade": 1
+    },
+    "KIA:SORENTO 5D 2002-": {
+      "count": 8,
+      "antenna": 0.25,
+      "shade": 0.75
+    },
+    "MERCEDES:SPRINTER SWB 2006-": {
+      "count": 7,
+      "shade": 1
+    },
+    "JEEP:CHEROKEE 2001-": {
+      "count": 14,
+      "shade": 1
+    },
+    "CITROEN:C3 PICASSO M5 2009-": {
+      "count": 15,
+      "shade": 1
+    },
+    "ALFA ROMEO:MITO 2008-": {
+      "count": 17,
+      "antenna": 0.06,
+      "shade": 1
+    },
+    "FIAT:DUCATO III 2006-": {
+      "count": 6,
+      "shade": 1
+    },
+    "VOLVO:XC 60": {
+      "count": 20,
+      "adas": 0.05,
+      "rainSensor": 0.15,
+      "antenna": 0.05,
+      "shade": 0.8,
+      "camera": 0.1
+    },
+    "VOLVO:XC 60  2008-": {
+      "count": 12,
+      "rainSensor": 0.25,
+      "acoustic": 0.08,
+      "shade": 0.92
+    },
+    "FORD:MONDEO SAL+HBK+EST 01/2009-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:GALAXY": {
+      "count": 9,
+      "rainSensor": 0.33,
+      "heated": 0.11,
+      "acoustic": 0.33,
+      "shade": 0.78
+    },
+    "RENAULT:MEGANE SCENIC 2009-": {
+      "count": 7,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "FIAT:DOBLO": {
+      "count": 8,
+      "shade": 1
+    },
+    "RENAULT:MASTER 2009-": {
+      "count": 10,
+      "shade": 1
+    },
+    "DACIA:SANDERO 5D HBK 2008-": {
+      "count": 9,
+      "shade": 1
+    },
+    "VW:POLO 2009-": {
+      "count": 15,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "CITROEN:DS3 3D HBK 2010-": {
+      "count": 12,
+      "shade": 1
+    },
+    "BMW:5 SERIES GT": {
+      "count": 11,
+      "adas": 0.18,
+      "rainSensor": 0.36,
+      "hud": 0.36,
+      "shade": 0.36,
+      "camera": 0.18
+    },
+    "BMW:X1 SUV 2010-": {
+      "count": 9,
+      "antenna": 0.11,
+      "shade": 1
+    },
+    "MAZDA:3 HBK SAL LHD": {
+      "count": 5,
+      "rainSensor": 0.8,
+      "heated": 0.4,
+      "shade": 0.2
+    },
+    "RANGE:ROVER L320 5D SUV": {
+      "count": 10,
+      "shade": 1
+    },
+    "HONDA:CIVIC 5D HBK 2005-": {
+      "count": 9,
+      "shade": 1
+    },
+    "SKODA:YETI SUV 2009-": {
+      "count": 10,
+      "shade": 1
+    },
+    "KIA:SOUL 2009-": {
+      "count": 8,
+      "shade": 1
+    },
+    "KIA:SORENTO 2010-": {
+      "count": 10,
+      "rainSensor": 0.2,
+      "heated": 0.2,
+      "shade": 0.7
+    },
+    "BMW:5 SERIES GT 2009-": {
+      "count": 7,
+      "rainSensor": 0.43,
+      "antenna": 0.29,
+      "hud": 0.29,
+      "shade": 0.71
+    },
+    "FIAT:DOBLO 2010-": {
+      "count": 9,
+      "shade": 1
+    },
+    "PEUGEOT:508 4D SAL+5D EST 2011-": {
+      "count": 5,
+      "shade": 1
+    },
+    "HYUNDAI:IX35 5D SUV LHD": {
+      "count": 5,
+      "heated": 0.2,
+      "shade": 0.8
+    },
+    "JAGUAR:XF 4D SAL": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:KANGOO II 2007-": {
+      "count": 12,
+      "shade": 1
+    },
+    "RENAULT:FLUENCE 4D SAL": {
+      "count": 10,
+      "rainSensor": 0.1,
+      "shade": 0.9
+    },
+    "AUDI:A1 3D HBK 10/2009-": {
+      "count": 7,
+      "shade": 1
+    },
+    "VW:SHARAN II MPV 2009-": {
+      "count": 16,
+      "shade": 1
+    },
+    "CITROEN:C4 5D HBK 2010-": {
+      "count": 13,
+      "shade": 1
+    },
+    "VW:PASSAT B7": {
+      "count": 6,
+      "adas": 0.17,
+      "rainSensor": 0.17,
+      "acoustic": 0.17,
+      "shade": 0.83,
+      "camera": 0.17
+    },
+    "AUDI:A4": {
+      "count": 8,
+      "adas": 0.38,
+      "rainSensor": 0.38,
+      "heated": 0.13,
+      "acoustic": 0.25,
+      "shade": 0.63,
+      "camera": 0.25
+    },
+    "AUDI:A5 CPE": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "AUDI:Q5": {
+      "count": 8,
+      "adas": 0.13,
+      "antenna": 0.13,
+      "shade": 0.88,
+      "camera": 0.13
+    },
+    "BMW:X3 SUV": {
+      "count": 13,
+      "adas": 0.08,
+      "rainSensor": 0.62,
+      "hud": 0.15,
+      "shade": 0.38,
+      "camera": 0.08
+    },
+    "FIAT:500 3D 2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:C-MAX MPV 2010-": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 1
+    },
+    "SKODA:ROOMSTER 2006-": {
+      "count": 9,
+      "shade": 1
+    },
+    "LEXUS:CT200H 5D HBK LHD": {
+      "count": 10,
+      "acoustic": 0.1,
+      "shade": 0.9
+    },
+    "AUDI:A6/C7 4D SAL": {
+      "count": 9,
+      "adas": 0.11,
+      "acoustic": 0.22,
+      "antenna": 0.11,
+      "shade": 0.89,
+      "camera": 0.11
+    },
+    "VW:JETTA 4D SAL 2011-": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 1
+    },
+    "HONDA:CIVIC 5D HBK RHD": {
+      "count": 5,
+      "acoustic": 0.4,
+      "shade": 0.6
+    },
+    "LANCIA:YPSILON 5D HBK 2011-": {
+      "count": 14,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "FIAT:PANDA 5D HBK/5D VAN": {
+      "count": 7,
+      "acoustic": 0.29,
+      "shade": 0.71
+    },
+    "HYUNDAI:I40 5D SAL/EST LHD": {
+      "count": 7,
+      "shade": 1
+    },
+    "MAZDA:5 MPV LHD": {
+      "count": 5,
+      "rainSensor": 0.4,
+      "shade": 0.6
+    },
+    "NISSAN:NV200 2009-": {
+      "count": 9,
+      "rainSensor": 0.11,
+      "heated": 0.11,
+      "shade": 0.89
+    },
+    "JEEP:GRAND CHEROKEE": {
+      "count": 11,
+      "adas": 0.09,
+      "shade": 0.91,
+      "camera": 0.09
+    },
+    "BMW:3 SERIES 4D SAL": {
+      "count": 8,
+      "shade": 1
+    },
+    "VW:JETTA 4D SAL": {
+      "count": 8,
+      "rainSensor": 0.13,
+      "acoustic": 0.13,
+      "shade": 0.88
+    },
+    "NEW:MINI COUPE 10/": {
+      "count": 7,
+      "shade": 1
+    },
+    "VW:GOLF VII 3D/5D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "MAZDA:CX 5 LHD": {
+      "count": 13,
+      "adas": 0.46,
+      "acoustic": 0.08,
+      "shade": 0.46,
+      "camera": 0.54
+    },
+    "RANGE:ROVER EVOQUE R5": {
+      "count": 10,
+      "shade": 1
+    },
+    "HONDA:CRV 5D SUV RHD": {
+      "count": 11,
+      "acoustic": 0.36,
+      "shade": 0.64
+    },
+    "HONDA:CRV 5D SUV LHD": {
+      "count": 14,
+      "acoustic": 0.43,
+      "shade": 0.57
+    },
+    "CITROEN:C3 5D HBK": {
+      "count": 5,
+      "shade": 1
+    },
+    "CITROEN:DS5 5D HBK": {
+      "count": 13,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "HYUNDAI:I40 5D SAL/EST RHD": {
+      "count": 6,
+      "shade": 1
+    },
+    "FIAT:500 CABRIO": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "SKODA:SUPERB 5D HBK/EST": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "SKODA:RAPID 5D HBK": {
+      "count": 9,
+      "acoustic": 0.11,
+      "antenna": 0.11,
+      "shade": 0.89
+    },
+    "PORSCHE:911 (991) CPE": {
+      "count": 8,
+      "shade": 1
+    },
+    "PORSCHE:911 (991) CAB": {
+      "count": 8,
+      "shade": 1
+    },
+    "PORSCHE:981 BOXSTER CAB": {
+      "count": 6,
+      "shade": 1
+    },
+    "NEW:MINI CLUBMAN": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:B MAX MINI MPV": {
+      "count": 30,
+      "antenna": 0.03,
+      "shade": 1
+    },
+    "VAUXHALL:MOKKA 5D SUV": {
+      "count": 5,
+      "shade": 1
+    },
+    "OPEL/VAUXHALL:MOKKA 5D SUV": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:TRANSIT CUSTOM": {
+      "count": 21,
+      "shade": 1
+    },
+    "MITSUBISHI:OUTLANDER LHD": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "heated": 0.17,
+      "acoustic": 0.5,
+      "shade": 0.17
+    },
+    "RENAULT:ZOE 5D HBK": {
+      "count": 9,
+      "adas": 0.11,
+      "acoustic": 0.11,
+      "antenna": 0.11,
+      "shade": 0.78,
+      "camera": 0.11
+    },
+    "HYUNDAI:SANTA FE LHD": {
+      "count": 6,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "MITSUBISHI:OUTLANDER": {
+      "count": 9,
+      "adas": 0.22,
+      "rainSensor": 0.22,
+      "heated": 0.22,
+      "acoustic": 0.22,
+      "shade": 0.44
+    },
+    "TOYOTA:RAV 4 RHD": {
+      "count": 7,
+      "rainSensor": 0.14,
+      "acoustic": 0.71,
+      "shade": 0.14
+    },
+    "PORSCHE:CAYMAN": {
+      "count": 7,
+      "shade": 1
+    },
+    "TESLA:S 5D HBK": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "heated": 0.2,
+      "acoustic": 0.8,
+      "shade": 1,
+      "camera": 0.2
+    },
+    "MAZDA:6 4D SAL/5D EST LHD": {
+      "count": 10,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "HYUNDAI:GRAND SANTA FE": {
+      "count": 8,
+      "heated": 0.13,
+      "acoustic": 0.25,
+      "shade": 0.5,
+      "camera": 0.13
+    },
+    "LEXUS:IS 4D SAL LHD": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "heated": 0.33,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "CITROEN:DS4 4D CPE": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:ECOSPORT B515 5D SUV": {
+      "count": 11,
+      "acoustic": 0.55,
+      "shade": 0.45
+    },
+    "IVECO:DAILY S2000": {
+      "count": 8,
+      "adas": 0.13,
+      "shade": 1,
+      "camera": 0.13
+    },
+    "RENAULT:T/T HIGH/K/C": {
+      "count": 5,
+      "adas": 0.8,
+      "rainSensor": 0.2,
+      "camera": 0.8
+    },
+    "RENAULT:CAPTUR 5D SUV": {
+      "count": 17,
+      "rainSensor": 0.06,
+      "acoustic": 0.06,
+      "shade": 0.94
+    },
+    "CITROEN:C4 CACTUS 5D SUV": {
+      "count": 15,
+      "acoustic": 0.2,
+      "shade": 0.8
+    },
+    "JAGUAR:F TYPE 2D CPE": {
+      "count": 6,
+      "rainSensor": 0.33,
+      "heated": 0.33,
+      "shade": 0.5
+    },
+    "FORD:TRANSIT COURIER VAN": {
+      "count": 17,
+      "shade": 1
+    },
+    "RENAULT:TWINGO III": {
+      "count": 10,
+      "shade": 1
+    },
+    "MERCEDES:V CLASS W447": {
+      "count": 16,
+      "antenna": 0.13,
+      "shade": 0.88
+    },
+    "BMW:X4 5D SUV": {
+      "count": 11,
+      "adas": 0.09,
+      "rainSensor": 0.18,
+      "antenna": 0.09,
+      "shade": 1,
+      "camera": 0.09
+    },
+    "VAUXHALL:VIVARO": {
+      "count": 18,
+      "rainSensor": 0.11,
+      "acoustic": 0.22,
+      "shade": 0.78
+    },
+    "VAUXHALL:CORSA 3D/5D": {
+      "count": 10,
+      "shade": 1
+    },
+    "JEEP:RENEGADE LHD": {
+      "count": 9,
+      "adas": 0.44,
+      "heated": 0.11,
+      "acoustic": 0.56,
+      "camera": 0.44
+    },
+    "BMW:X5 (E70) 05/": {
+      "count": 7,
+      "adas": 0.29,
+      "rainSensor": 0.29,
+      "shade": 1,
+      "camera": 0.29
+    },
+    "FIAT:500X 5D SUV LHD": {
+      "count": 9,
+      "heated": 0.11,
+      "acoustic": 0.56,
+      "shade": 0.44
+    },
+    "FIAT:500X 5D SUV": {
+      "count": 10,
+      "adas": 0.2,
+      "acoustic": 0.1,
+      "shade": 0.7,
+      "camera": 0.2
+    },
+    "SMART:FORTWO 3D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "HYUNDAI:I20 5D HBK LHD": {
+      "count": 6,
+      "adas": 0.67,
+      "rainSensor": 0.17,
+      "camera": 0.83
+    },
+    "RENAULT:ESPACE": {
+      "count": 11,
+      "adas": 0.36,
+      "antenna": 0.09,
+      "shade": 0.64,
+      "camera": 0.36
+    },
+    "TESLA:S 5D HBK LHD": {
+      "count": 7,
+      "acoustic": 1,
+      "shade": 1
+    },
+    "JEEP:RENEGADE": {
+      "count": 17,
+      "antenna": 0.06,
+      "shade": 1
+    },
+    "BMW:X5 (E70)": {
+      "count": 7,
+      "hud": 0.29,
+      "shade": 1
+    },
+    "SUZUKI:VITARA 5D": {
+      "count": 6,
+      "adas": 0.17,
+      "rainSensor": 0.33,
+      "shade": 0.5,
+      "camera": 0.17
+    },
+    "CITROEN:C4 5D HBK": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "acoustic": 0.2,
+      "antenna": 0.2,
+      "shade": 0.8
+    },
+    "MAZDA:CX 3 LHD": {
+      "count": 5,
+      "adas": 0.6,
+      "shade": 0.4,
+      "camera": 0.6
+    },
+    "KIA:SORENTO 5D SUV": {
+      "count": 11,
+      "adas": 0.27,
+      "rainSensor": 0.09,
+      "heated": 0.18,
+      "shade": 0.55,
+      "camera": 0.27
+    },
+    "FORD:S MAX 10/": {
+      "count": 7,
+      "adas": 0.14,
+      "acoustic": 0.14,
+      "antenna": 0.29,
+      "shade": 0.71,
+      "camera": 0.14
+    },
+    "JAGUAR:XF (X260) 4D SAL": {
+      "count": 11,
+      "shade": 1
+    },
+    "VAUXHALL:ASTRA 5D HBK": {
+      "count": 11,
+      "antenna": 0.09,
+      "shade": 1
+    },
+    "NISSAN:NAVARA 4D PU": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "SKODA:YETI SUV": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "AUDI:A4 4D SAL/5D EST": {
+      "count": 11,
+      "adas": 0.18,
+      "rainSensor": 0.18,
+      "acoustic": 0.45,
+      "shade": 0.36,
+      "camera": 0.18
+    },
+    "KIA:SPORTAGE": {
+      "count": 11,
+      "adas": 0.18,
+      "rainSensor": 0.18,
+      "heated": 0.09,
+      "shade": 0.82
+    },
+    "VAUXHALL:ADAM 3D HBK": {
+      "count": 5,
+      "shade": 1
+    },
+    "VOLVO:S90 4D SAL": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "PORSCHE:718 BOXSTER CAB": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:RAV 4 LHD": {
+      "count": 17,
+      "adas": 0.47,
+      "rainSensor": 0.06,
+      "heated": 0.12,
+      "acoustic": 0.29,
+      "antenna": 0.12,
+      "shade": 0.24,
+      "camera": 0.47
+    },
+    "TOYOTA:HI LUX 2D/4D PU LHD": {
+      "count": 8,
+      "shade": 1
+    },
+    "NISSAN:MICRA (B02E) LHD": {
+      "count": 7,
+      "acoustic": 0.57,
+      "shade": 0.43
+    },
+    "TOYOTA:HI LUX 2D/4D PU RHD": {
+      "count": 5,
+      "shade": 1
+    },
+    "KIA:RIO 5D HBK": {
+      "count": 9,
+      "shade": 1
+    },
+    "RENAULT:KOLEOS 5D SUV LHD": {
+      "count": 5,
+      "acoustic": 1
+    },
+    "LEXUS:RX 5D SUV LHD": {
+      "count": 10,
+      "adas": 0.7,
+      "heated": 0.2,
+      "acoustic": 0.2,
+      "shade": 0.1,
+      "camera": 0.7
+    },
+    "SEAT:ARONA 5D SUV": {
+      "count": 13,
+      "rainSensor": 0.23,
+      "acoustic": 0.38,
+      "antenna": 0.08,
+      "shade": 0.62,
+      "camera": 0.08
+    },
+    "TOYOTA:PRIUS 5D HBK RHD": {
+      "count": 5,
+      "acoustic": 1
+    },
+    "VAUXHALL:GRANDLAND X": {
+      "count": 6,
+      "adas": 0.17,
+      "shade": 0.83,
+      "camera": 0.17
+    },
+    "DACIA:DUSTER 5D CROSSOVER": {
+      "count": 6,
+      "shade": 1
+    },
+    "PORSCHE:CAYENNE III": {
+      "count": 8,
+      "adas": 0.38,
+      "acoustic": 0.25,
+      "antenna": 0.13,
+      "shade": 0.38,
+      "camera": 0.38
+    },
+    "LEXUS:LS 500H 4D SAL": {
+      "count": 6,
+      "shade": 1
+    },
+    "BMW:8 SERIES 2D CPE": {
+      "count": 8,
+      "adas": 0.25,
+      "rainSensor": 0.13,
+      "acoustic": 0.5,
+      "antenna": 0.13,
+      "shade": 0.63,
+      "camera": 0.25
+    },
+    "VW:T CROSS 5D SUV": {
+      "count": 12,
+      "adas": 0.25,
+      "antenna": 0.08,
+      "shade": 0.83,
+      "camera": 0.25
+    },
+    "TOYOTA:RAV 4": {
+      "count": 32,
+      "adas": 0.06,
+      "antenna": 0.13,
+      "shade": 0.94,
+      "camera": 0.06
+    },
+    "PORSCHE:911 CPE": {
+      "count": 5,
+      "shade": 1
+    },
+    "PORSCHE:911 CAB": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:RANGER PU 05/": {
+      "count": 5,
+      "adas": 0.4,
+      "rainSensor": 0.2,
+      "heated": 0.4,
+      "acoustic": 0.4,
+      "camera": 0.4
+    },
+    "PEUGEOT:208": {
+      "count": 11,
+      "adas": 0.27,
+      "antenna": 0.09,
+      "shade": 0.73,
+      "camera": 0.27
+    },
+    "VW:GOLF VIII": {
+      "count": 13,
+      "adas": 0.15,
+      "rainSensor": 0.08,
+      "acoustic": 0.08,
+      "shade": 0.77,
+      "camera": 0.15
+    },
+    "AUDI:Q7 5D SUV": {
+      "count": 7,
+      "adas": 0.57,
+      "acoustic": 0.29,
+      "antenna": 0.14,
+      "shade": 0.43,
+      "camera": 0.57
+    },
+    "SKODA:OCTAVIA IV 5D HBK": {
+      "count": 9,
+      "adas": 0.22,
+      "acoustic": 0.33,
+      "shade": 0.44,
+      "camera": 0.22
+    },
+    "BMW:5 SERIES 5D EST": {
+      "count": 8,
+      "antenna": 0.38,
+      "shade": 0.88
+    },
+    "BMW:5 SERIES 4D SAL": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 0.83
+    },
+    "BMW:5 SERIES G30 4D SAL": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 0.83
+    },
+    "CITROEN:BERLINGO": {
+      "count": 9,
+      "shade": 1
+    },
+    "FIAT:500 LARGE": {
+      "count": 10,
+      "shade": 1
+    },
+    "FORD:FIESTA 3D HBK": {
+      "count": 7,
+      "shade": 1
+    },
+    "FORD:FIESTA 5D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:FOCUS 5D EST 2010-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FOCUS:4D SAL 2010-": {
+      "count": 12,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "FOCUS:5D EST 2010-": {
+      "count": 13,
+      "antenna": 0.15,
+      "shade": 1
+    },
+    "FOCUS:5D HBK  2010-": {
+      "count": 8,
+      "shade": 1
+    },
+    "FORD:MONDEO 5D EST": {
+      "count": 6,
+      "shade": 1
+    },
+    "HONDA:CIVIC 5D HBK": {
+      "count": 9,
+      "shade": 1
+    },
+    "HYUNDAI:TUCSON": {
+      "count": 9,
+      "adas": 0.22,
+      "rainSensor": 0.22,
+      "heated": 0.11,
+      "shade": 0.78
+    },
+    "HYUNDAI:I30 5D HBK": {
+      "count": 5,
+      "heated": 0.2,
+      "shade": 0.8
+    },
+    "KIA:NIRO 5D SUV": {
+      "count": 5,
+      "shade": 1
+    },
+    "MAZDA:CX 5": {
+      "count": 34,
+      "antenna": 0.09,
+      "shade": 1
+    },
+    "MAZDA:6 4D SAL": {
+      "count": 6,
+      "shade": 1
+    },
+    "MAZDA:CX 3": {
+      "count": 12,
+      "antenna": 0.08,
+      "shade": 1
+    },
+    "MERCEDES:R CLASS LWB 2006-": {
+      "count": 6,
+      "shade": 1
+    },
+    "MERCEDES:CLS 4D W218 CPE": {
+      "count": 5,
+      "antenna": 0.6,
+      "shade": 0.4
+    },
+    "MERCEDES:A CLASS W176": {
+      "count": 8,
+      "shade": 1
+    },
+    "MERCEDES:A CLASS 5D W176": {
+      "count": 7,
+      "shade": 1
+    },
+    "NISSAN:MICRA (B02E)": {
+      "count": 6,
+      "shade": 1
+    },
+    "OPEL/VAUXHALL:ZAFIRA MPV": {
+      "count": 7,
+      "shade": 1
+    },
+    "VAUXHALL:ASTRA 5D EST": {
+      "count": 8,
+      "shade": 1
+    },
+    "PEUGEOT:2008 5D SUV": {
+      "count": 16,
+      "adas": 0.13,
+      "shade": 0.88,
+      "camera": 0.13
+    },
+    "PEUGEOT:308 5D EST": {
+      "count": 8,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "PEUGEOT:308 5D T9 HBK": {
+      "count": 14,
+      "shade": 1
+    },
+    "RANGE:ROVER L405 R5 LWB": {
+      "count": 11,
+      "acoustic": 0.09,
+      "shade": 0.91
+    },
+    "RENAULT:MEGANE SCENIC 5D": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:MEGANE SCENIC 5D 2009-": {
+      "count": 7,
+      "shade": 1
+    },
+    "RENAULT:MEGANE IV 5D HBK": {
+      "count": 11,
+      "shade": 1
+    },
+    "SEAT:LEON 5D EST": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "SEAT:IBIZA 5D HBK": {
+      "count": 12,
+      "acoustic": 0.08,
+      "antenna": 0.08,
+      "shade": 0.92
+    },
+    "SKODA:SUPERB 5D EST": {
+      "count": 7,
+      "antenna": 0.29,
+      "shade": 1
+    },
+    "TOYOTA:AVENSIS EST 2009-": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "TOYOTA:AVENSIS SAL 2009-": {
+      "count": 9,
+      "shade": 1
+    },
+    "TOYOTA:PRIUS 2009-": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:PRIUS": {
+      "count": 6,
+      "shade": 1
+    },
+    "TOYOTA:YARIS 5D HBK": {
+      "count": 6,
+      "adas": 0.33,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "TOYOTA:GRAND PRIUS 04/": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:AURIS 5D EST": {
+      "count": 6,
+      "shade": 1
+    },
+    "TOYOTA:AURIS 5D HBK": {
+      "count": 7,
+      "shade": 1
+    },
+    "TOYOTA:COROLLA 4D SAL": {
+      "count": 15,
+      "acoustic": 0.07,
+      "shade": 0.93
+    },
+    "AUDI:A4  2007-": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "antenna": 0.4,
+      "shade": 0.6,
+      "camera": 0.2
+    },
+    "AUDI:A4 EST 5D": {
+      "count": 19,
+      "antenna": 0.37,
+      "shade": 1
+    },
+    "AUDI:A5 CPE 2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:A5 SPORTBACK 2009-": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:TIGUAN 2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:A6 5D EST": {
+      "count": 7,
+      "antenna": 0.29,
+      "shade": 1
+    },
+    "VW:UP 3D HBK": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:GOLF VII 5D EST": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "VW:GOLF VII 5D HBK": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:GOLF VII 3D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:PASSAT B8 4D SAL": {
+      "count": 10,
+      "shade": 1
+    },
+    "AUDI:A4 5D EST": {
+      "count": 18,
+      "antenna": 0.22,
+      "shade": 1
+    },
+    "AUDI:A4 4D SAL": {
+      "count": 20,
+      "antenna": 0.05,
+      "shade": 1
+    },
+    "AUDI:A5 5D HBK SPORTBACK": {
+      "count": 5,
+      "shade": 1
+    },
+    "VOLVO:V90 5D EST": {
+      "count": 9,
+      "acoustic": 0.11,
+      "antenna": 0.33,
+      "shade": 0.89
+    },
+    "VAUXHALL:COMBO VAN 01-": {
+      "count": 10,
+      "shade": 1
+    },
+    "LAND ROVER:DISCOVERY 2 98-04-": {
+      "count": 14,
+      "shade": 1
+    },
+    "NISSAN:NOTE 5D HBK 2006-": {
+      "count": 10,
+      "shade": 1
+    },
+    "HONDA:CRV RHD": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "acoustic": 1
+    },
+    "DODGE:NITRO 2007-": {
+      "count": 11,
+      "shade": 1
+    },
+    "JEEP:PATRIOT 5D 2007-": {
+      "count": 12,
+      "shade": 1
+    },
+    "VW:POLO 5D HBK": {
+      "count": 15,
+      "adas": 0.07,
+      "rainSensor": 0.13,
+      "acoustic": 0.2,
+      "shade": 0.73,
+      "camera": 0.07
+    },
+    "JEEP:CHEROKEE": {
+      "count": 10,
+      "shade": 1
+    },
+    "SAAB:9-5 SAL EST 97-": {
+      "count": 5,
+      "shade": 1
+    },
+    "DODGE:JOURNEY 2008-": {
+      "count": 10,
+      "shade": 1
+    },
+    "JEEP:GRAND CHEROKEE 2005-": {
+      "count": 11,
+      "shade": 1
+    },
+    "CHRYSLER:GRAND VOYAGER": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:CADDY 04-": {
+      "count": 6,
+      "shade": 1
+    },
+    "KIA:SOUL 05/": {
+      "count": 7,
+      "shade": 1
+    },
+    "CHEVROLET:TAHOE 2000-": {
+      "count": 5,
+      "shade": 1
+    },
+    "HUMMER:H2 2004-": {
+      "count": 10,
+      "shade": 1
+    },
+    "NISSAN:CUBE 5D HBK 2009-": {
+      "count": 6,
+      "shade": 1
+    },
+    "ALFA ROMEO:166 98-": {
+      "count": 7,
+      "shade": 1
+    },
+    "CADILLAC:CTS 2003-": {
+      "count": 9,
+      "shade": 1
+    },
+    "CHRYSLER:GRAND VOYAGER 2008-": {
+      "count": 10,
+      "shade": 1
+    },
+    "HONDA:CRV 2002-": {
+      "count": 6,
+      "shade": 1
+    },
+    "JEEP:COMPASS 5D 2007-": {
+      "count": 16,
+      "shade": 1
+    },
+    "FORD:FUSION 2002-": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:CADDY 2004-": {
+      "count": 17,
+      "shade": 1
+    },
+    "CHEVROLET:TRAILBLAZER 2002-": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "shade": 0.83
+    },
+    "MAZDA:2 5D HBK SUPERMINI": {
+      "count": 8,
+      "acoustic": 0.5,
+      "shade": 0.5
+    },
+    "BMW:Z4 E89 2D CAB 2009-": {
+      "count": 6,
+      "shade": 1
+    },
+    "SSANGYONG:TIVOLI 5D SUV": {
+      "count": 7,
+      "shade": 1
+    },
+    "SUBARU:FORESTER": {
+      "count": 7,
+      "rainSensor": 0.29,
+      "heated": 0.43,
+      "shade": 0.57
+    },
+    "VW:MULTIVAN 2003-": {
+      "count": 8,
+      "shade": 1
+    },
+    "ASTON MARTIN:DB9 CPE 04-": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:MULTIVAN T5 03-": {
+      "count": 7,
+      "shade": 1
+    },
+    "BMW:7 SERIES 4D SAL": {
+      "count": 11,
+      "acoustic": 0.09,
+      "hud": 0.09,
+      "shade": 1
+    },
+    "HYUNDAI:I20 5D HBK": {
+      "count": 13,
+      "adas": 0.38,
+      "shade": 0.62,
+      "camera": 0.38
+    },
+    "NISSAN:JUKE 5D SUV": {
+      "count": 9,
+      "adas": 0.22,
+      "acoustic": 0.22,
+      "shade": 0.56,
+      "camera": 0.44
+    },
+    "CHRYSLER:PT CRUISER 00-": {
+      "count": 5,
+      "shade": 1
+    },
+    "SAAB:9.7X SUV 2005-": {
+      "count": 8,
+      "shade": 1
+    },
+    "CADILLAC:SEVILLE 98-": {
+      "count": 8,
+      "shade": 1
+    },
+    "SSANGYONG:RODIUS MPV": {
+      "count": 7,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "KIA:OPTIMA 4D SAL 01/": {
+      "count": 6,
+      "heated": 0.17,
+      "shade": 0.83
+    },
+    "HYUNDAI:GENESIS 4D SAL 01/": {
+      "count": 7,
+      "shade": 1
+    },
+    "FORD:FOCUS C-MAX 2003-": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:ID.4 SUV": {
+      "count": 17,
+      "adas": 0.24,
+      "antenna": 0.06,
+      "shade": 0.76,
+      "camera": 0.24
+    },
+    "BMW:4 SERIES G26 4D CPE": {
+      "count": 5,
+      "acoustic": 0.8,
+      "shade": 0.2
+    },
+    "HYUNDAI:SANTA FE 2001-": {
+      "count": 9,
+      "heated": 0.11,
+      "antenna": 0.22,
+      "shade": 0.78
+    },
+    "HYUNDAI:SANTA FE 2006-": {
+      "count": 5,
+      "heated": 0.2,
+      "shade": 0.8
+    },
+    "AUDI:Q3 SPORTBACK 5D SUV": {
+      "count": 6,
+      "acoustic": 0.33,
+      "shade": 0.67
+    },
+    "CHEVROLET:MALIBU 4D SAL": {
+      "count": 7,
+      "shade": 1
+    },
+    "CADILLAC:SRX 5D SUV": {
+      "count": 5,
+      "shade": 1
+    },
+    "HYUNDAI:I55 5D SUV 2009-": {
+      "count": 8,
+      "shade": 1
+    },
+    "LANCIA:THEMA 4D SAL": {
+      "count": 8,
+      "shade": 1
+    },
+    "KIA:OPIRUS 2003-": {
+      "count": 7,
+      "rainSensor": 0.14,
+      "heated": 0.14,
+      "shade": 0.86
+    },
+    "FORD:KUGA 5D SUV 2020-": {
+      "count": 7,
+      "adas": 0.29,
+      "rainSensor": 0.14,
+      "acoustic": 0.43,
+      "antenna": 0.14,
+      "shade": 0.29,
+      "camera": 0.29
+    },
+    "CITROEN:C4 5D SUV": {
+      "count": 12,
+      "adas": 0.17,
+      "heated": 0.08,
+      "acoustic": 0.17,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "RENAULT:KOLEOS 5D SUV": {
+      "count": 17,
+      "acoustic": 0.18,
+      "shade": 0.82
+    },
+    "BMW:4 SERIES G22 2D CPE": {
+      "count": 5,
+      "acoustic": 0.8,
+      "shade": 0.2
+    },
+    "HYUNDAI:GRANDEUR 4D SAL 2005-": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 0.9
+    },
+    "HYUNDAI:SANTA FE": {
+      "count": 16,
+      "shade": 1
+    },
+    "TOYOTA:PRIUS 5D HBK LHD": {
+      "count": 6,
+      "acoustic": 1
+    },
+    "PORSCHE:CAYENNE": {
+      "count": 9,
+      "adas": 0.11,
+      "rainSensor": 0.11,
+      "heated": 0.11,
+      "acoustic": 0.22,
+      "shade": 0.78,
+      "camera": 0.22
+    },
+    "MERCEDES:M CLASS W163 98-05-": {
+      "count": 8,
+      "shade": 1
+    },
+    "PORSCHE:CAYENNE 2010-": {
+      "count": 7,
+      "acoustic": 0.14,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "BMW:7 SERIES 4D SAL 2008-": {
+      "count": 6,
+      "acoustic": 0.17,
+      "shade": 1
+    },
+    "CADILLAC:STS 2005-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:EXPLORER 5D SUV": {
+      "count": 5,
+      "acoustic": 0.2,
+      "shade": 0.8
+    },
+    "HONDA:JAZZ 5D HBK": {
+      "count": 13,
+      "adas": 0.08,
+      "acoustic": 0.08,
+      "shade": 0.85,
+      "camera": 0.08
+    },
+    "BMW:6 SERIES E63 CPE/CAB": {
+      "count": 6,
+      "shade": 1
+    },
+    "PEUGEOT:807": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "VW:TOUAREG 2002-": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "FORD USA:EDGE 5D SUV": {
+      "count": 8,
+      "acoustic": 0.25,
+      "shade": 0.75
+    },
+    "AUDI:A8": {
+      "count": 7,
+      "adas": 0.86,
+      "shade": 0.57,
+      "camera": 0.86
+    },
+    "SSANGYONG:RODIUS MPV 2005-": {
+      "count": 12,
+      "heated": 0.08,
+      "antenna": 0.33,
+      "shade": 0.75
+    },
+    "AUDI:Q8 5D SUV": {
+      "count": 7,
+      "adas": 0.43,
+      "acoustic": 0.29,
+      "antenna": 0.14,
+      "shade": 0.57,
+      "camera": 0.43
+    },
+    "VW:ID.3 5D HBK": {
+      "count": 9,
+      "adas": 0.11,
+      "shade": 0.89,
+      "camera": 0.11
+    },
+    "HYUNDAI:TERRACAN JEEP": {
+      "count": 6,
+      "heated": 0.17,
+      "antenna": 0.17,
+      "shade": 0.67
+    },
+    "PEUGEOT:807 02-": {
+      "count": 7,
+      "rainSensor": 0.14,
+      "shade": 1
+    },
+    "VAUXHALL:SINTRA 97-": {
+      "count": 7,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "CADILLAC:XLR ROADSTER 2004-": {
+      "count": 6,
+      "shade": 1
+    },
+    "PORSCHE:PANAMERA 5D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "AUDI:A8 2010-": {
+      "count": 6,
+      "rainSensor": 0.33,
+      "heated": 0.17,
+      "acoustic": 0.33,
+      "shade": 1
+    },
+    "BMW:X6 2008-": {
+      "count": 8,
+      "hud": 0.13,
+      "shade": 1
+    },
+    "JAGUAR:I PACE 5D SUV": {
+      "count": 6,
+      "adas": 0.33,
+      "shade": 0.67,
+      "camera": 0.33
+    },
+    "BMW:X3 SUV 2010-": {
+      "count": 5,
+      "hud": 0.2,
+      "shade": 0.8
+    },
+    "HYUNDAI:GENESIS 4D SAL": {
+      "count": 13,
+      "shade": 1
+    },
+    "MERCEDES:G CLASS 5D SUV": {
+      "count": 8,
+      "adas": 0.13,
+      "acoustic": 0.13,
+      "shade": 0.75,
+      "camera": 0.13
+    },
+    "ALFA ROMEO:159 5D EST 2005-": {
+      "count": 5,
+      "shade": 1
+    },
+    "ALFA ROMEO:BRERA CPE 2006-": {
+      "count": 5,
+      "shade": 1
+    },
+    "BMW:X5": {
+      "count": 5,
+      "antenna": 0.4,
+      "shade": 1
+    },
+    "BMW:5 SERIES E60 SAL 03-": {
+      "count": 8,
+      "shade": 1
+    },
+    "BMW:5 SERIES EST 2003-": {
+      "count": 5,
+      "shade": 1
+    },
+    "BMW:3 SERIES E90 SAL 05-": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "BMW:MINI 2007-": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "MINI:COUNTRYMAN 2010-": {
+      "count": 10,
+      "shade": 1
+    },
+    "CITROEN:C4 5D 09/04-": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 1
+    },
+    "CITROEN:C4 3D 09/04-": {
+      "count": 9,
+      "shade": 1
+    },
+    "CITROEN:C4 PICASSO 02/2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "CITROEN:C5 EST 2008-": {
+      "count": 6,
+      "shade": 1
+    },
+    "CITROEN:C5 SAL 2008-": {
+      "count": 9,
+      "shade": 1
+    },
+    "CITROEN:C4 PICASSO": {
+      "count": 8,
+      "shade": 1
+    },
+    "CITROEN:C1 3D HBK": {
+      "count": 8,
+      "shade": 1
+    },
+    "CITROEN:C1 5D HBK": {
+      "count": 7,
+      "shade": 1
+    },
+    "SSANGYONG:KYRON 2006-": {
+      "count": 5,
+      "shade": 1
+    },
+    "CHEVROLET:CAPTIVA SUV 2006-": {
+      "count": 9,
+      "antenna": 0.11,
+      "shade": 0.89
+    },
+    "CHEVROLET:CRUZE 4D SAL 2009-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FIAT:PUNTO 5D 93-99-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FIAT:MAREA SAL 96-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FIAT:PUNTO 3D 99-06-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FIAT:MULTIPLA 98-06-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FIAT:PANDA 03-": {
+      "count": 9,
+      "shade": 1
+    },
+    "FIAT:CROMA 05-": {
+      "count": 8,
+      "shade": 1
+    },
+    "FIAT:BRAVO 5D 2007-": {
+      "count": 11,
+      "shade": 1
+    },
+    "FORD:FOCUS EST 98-04-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:MONDEO BRK": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:FIESTA 3D 2002-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:FOCUS 3D HBK 2004-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:S MAX 2006-": {
+      "count": 10,
+      "antenna": 0.1,
+      "shade": 1
+    },
+    "FORD:S MAX 06-": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:MONDEO EST 2007-": {
+      "count": 6,
+      "shade": 1
+    },
+    "FORD:MONDEO HBK 4D/5D 2007-": {
+      "count": 8,
+      "shade": 1
+    },
+    "FORD:GRAND C-MAX MPV 2010-": {
+      "count": 10,
+      "shade": 1
+    },
+    "FORD:C-MAX COMPACT MPV 2010-": {
+      "count": 6,
+      "shade": 1
+    },
+    "HONDA:CIVIC 3D HBK": {
+      "count": 7,
+      "shade": 1
+    },
+    "HONDA:CRV 2007-": {
+      "count": 9,
+      "antenna": 0.11,
+      "shade": 1
+    },
+    "HONDA:ACCORD EST 2008-": {
+      "count": 6,
+      "shade": 1
+    },
+    "HONDA:JAZZ 5D HBK 2008-": {
+      "count": 8,
+      "shade": 1
+    },
+    "HONDA:CR-Z 2D CPE 2010-": {
+      "count": 6,
+      "shade": 1
+    },
+    "HONDA:CRV 5D SUV": {
+      "count": 14,
+      "antenna": 0.07,
+      "shade": 1
+    },
+    "HYUNDAI:IX35 5D SUV": {
+      "count": 6,
+      "shade": 1
+    },
+    "HYUNDAI:IX35 5D SUV 2009-": {
+      "count": 7,
+      "shade": 1
+    },
+    "KIA:SPORTAGE 2004-": {
+      "count": 5,
+      "shade": 1
+    },
+    "MAZDA:3 5D HBK 2009-": {
+      "count": 5,
+      "shade": 1
+    },
+    "MERCEDES:CLS (W219) 2004-": {
+      "count": 6,
+      "shade": 1
+    },
+    "MERCEDES:B CLASS W246": {
+      "count": 11,
+      "shade": 1
+    },
+    "NISSAN:ALMERA N16 5D 00-": {
+      "count": 5,
+      "shade": 1
+    },
+    "NISSAN:NOTE 5D HBK": {
+      "count": 12,
+      "shade": 1
+    },
+    "NISSAN:JUKE SUV 06/": {
+      "count": 6,
+      "shade": 1
+    },
+    "NISSAN:LEAF 5D HBK": {
+      "count": 9,
+      "shade": 1
+    },
+    "NISSAN:LEAF 5D HBK 2011-": {
+      "count": 6,
+      "shade": 1
+    },
+    "NISSAN:PULSAR 5D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "VAUXHALL:CORSA 3D": {
+      "count": 7,
+      "shade": 1
+    },
+    "VAUXHALL:CORSA 5D 00-": {
+      "count": 5,
+      "shade": 1
+    },
+    "VAUXHALL:AGILA 00-": {
+      "count": 8,
+      "shade": 1
+    },
+    "VAUXHALL:INSIGNIA HBK": {
+      "count": 6,
+      "antenna": 0.5,
+      "shade": 0.83
+    },
+    "VAUXHALL:SIGNUM 03-": {
+      "count": 5,
+      "shade": 1
+    },
+    "VAUXHALL:/ OPEL CORSA 3D 2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "VAUXHALL:CORSA 5D": {
+      "count": 7,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL:ASTRA 5D EST 2010-": {
+      "count": 14,
+      "shade": 1
+    },
+    "VAUXHALL:MERIVA MPV 03/": {
+      "count": 6,
+      "shade": 1
+    },
+    "PEUGEOT:EXPERT 96-": {
+      "count": 6,
+      "heated": 0.33,
+      "shade": 0.67
+    },
+    "PEUGEOT:307 EST 01-": {
+      "count": 7,
+      "shade": 1
+    },
+    "PEUGEOT:207 5D EST 2006-": {
+      "count": 5,
+      "shade": 1
+    },
+    "PEUGEOT:207 3D 2006-": {
+      "count": 5,
+      "shade": 1
+    },
+    "PEUGEOT:EXPERT (G9) 2006-": {
+      "count": 6,
+      "shade": 1
+    },
+    "PEUGEOT:308 2007-": {
+      "count": 7,
+      "shade": 1
+    },
+    "PEUGEOT:308 5D HBK 2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "PEUGEOT:508 5D EST": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 1
+    },
+    "PEUGEOT:508 4D SAL": {
+      "count": 5,
+      "shade": 1
+    },
+    "RANGE:ROVER 09/94-02-": {
+      "count": 12,
+      "shade": 1
+    },
+    "LANDROVER:FREELANDER 5D 97-": {
+      "count": 6,
+      "shade": 1
+    },
+    "RENAULT:TWINGO 97-": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:KANGOO 97-": {
+      "count": 11,
+      "shade": 1
+    },
+    "RENAULT:LAGUNA EST 00-": {
+      "count": 11,
+      "antenna": 0.09,
+      "shade": 1
+    },
+    "RENAULT:ESPACE 02-": {
+      "count": 13,
+      "shade": 1
+    },
+    "RENAULT:MEGANE II 5D EST 2003-": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:MEGANE II 5D 02-": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:LAGUNA  5D EST 07-": {
+      "count": 8,
+      "shade": 1
+    },
+    "RENAULT:MEGANE 5D EST 2008-": {
+      "count": 5,
+      "antenna": 0.2,
+      "shade": 0.8
+    },
+    "RENAULT:MEGANE 5D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "RENAULT:CLIO IV HBK": {
+      "count": 9,
+      "antenna": 0.11,
+      "shade": 1
+    },
+    "RENAULT:CAPTUR 5D MPV": {
+      "count": 6,
+      "shade": 1
+    },
+    "RENAULT:GRAND SCENIC IV": {
+      "count": 6,
+      "shade": 1
+    },
+    "RENAULT:SCENIC IV": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "SAAB:9.3 SPORT COMBI 2005-": {
+      "count": 6,
+      "shade": 1
+    },
+    "SEAT:ALTEA/TOLEDO 2004-": {
+      "count": 5,
+      "shade": 1
+    },
+    "SEAT:IBIZA 5D EST 2010-": {
+      "count": 9,
+      "shade": 1
+    },
+    "SEAT:IBIZA 5D HBK 2008-": {
+      "count": 8,
+      "shade": 1
+    },
+    "SEAT:IBIZA 3D HBK 2008-": {
+      "count": 5,
+      "shade": 1
+    },
+    "SEAT:TARRACO 5D SUV": {
+      "count": 8,
+      "antenna": 0.13,
+      "shade": 1
+    },
+    "SKODA:FABIA 99-": {
+      "count": 7,
+      "shade": 1
+    },
+    "SKODA:FABIA 2007-": {
+      "count": 7,
+      "shade": 1
+    },
+    "SKODA:FABIA III 5D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "IMPREZA:5D HBK/IMPREZA XV": {
+      "count": 9,
+      "shade": 1
+    },
+    "TOYOTA:COROLLA 5H 02-": {
+      "count": 6,
+      "shade": 1
+    },
+    "TOYOTA:PRIUS 5D HBK": {
+      "count": 11,
+      "acoustic": 0.18,
+      "shade": 0.82
+    },
+    "TOYOTA:HI LUX 4D PU": {
+      "count": 6,
+      "shade": 1
+    },
+    "TOYOTA:LANDCRUISER V8 2008-": {
+      "count": 5,
+      "heated": 0.2,
+      "antenna": 0.2,
+      "shade": 0.8
+    },
+    "TOYOTA:VERSO 2009-": {
+      "count": 9,
+      "shade": 1
+    },
+    "LEXUS:CT200H 5D HBK": {
+      "count": 12,
+      "shade": 1
+    },
+    "TOYOTA:AYGO 3D HBK": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:AYGO 5D HBK": {
+      "count": 8,
+      "shade": 1
+    },
+    "TOYOTA:C HR 5D CROSSOVER": {
+      "count": 7,
+      "acoustic": 0.14,
+      "shade": 0.86
+    },
+    "TOYOTA:COROLLA 5D EST": {
+      "count": 6,
+      "shade": 1
+    },
+    "TOYOTA:COROLLA 5D HBK": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:GOLF A5 5D 03-": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:POLO 5D 01-": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:TOURAN MPV 2011-": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:A3 5D SPTBACK 08/04-": {
+      "count": 7,
+      "shade": 1
+    },
+    "AUDI:A3 3D": {
+      "count": 7,
+      "antenna": 0.14,
+      "shade": 1
+    },
+    "AUDI:A6 EST 2005-": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "VW:PASSAT B6 EST 2005-": {
+      "count": 6,
+      "antenna": 0.17,
+      "shade": 1
+    },
+    "VW:PASSAT B6 SAL": {
+      "count": 5,
+      "rainSensor": 0.2,
+      "shade": 0.8
+    },
+    "VW:GOLF 5D EST 2007-": {
+      "count": 14,
+      "antenna": 0.29,
+      "shade": 1
+    },
+    "VW:GOLF VI 5D HBK": {
+      "count": 5,
+      "shade": 1
+    },
+    "AUDI:A1 5D HBK 01/": {
+      "count": 8,
+      "antenna": 0.25,
+      "shade": 1
+    },
+    "AUDI:A1 3D HBK 10/": {
+      "count": 6,
+      "antenna": 0.33,
+      "shade": 1
+    },
+    "AUDI:A3 5D": {
+      "count": 7,
+      "shade": 1
+    },
+    "VOLVO:S80 SAL 98-00-": {
+      "count": 6,
+      "shade": 1
+    },
+    "VOLVO:XC90 02-": {
+      "count": 7,
+      "shade": 1
+    },
+    "VOLVO:V50 2003-": {
+      "count": 5,
+      "shade": 1
+    },
+    "VOLVO:V70 CROSS COUNTRY": {
+      "count": 12,
+      "shade": 1
+    },
+    "FORD USA:MUSTANG 2D CPE": {
+      "count": 6,
+      "shade": 1
+    },
+    "JEEP:COMMANDER 2006-": {
+      "count": 12,
+      "shade": 1
+    },
+    "JEEP:GRAND CHEROKEE 2011-": {
+      "count": 5,
+      "shade": 1
+    },
+    "BMW:IX 5D SUV": {
+      "count": 6,
+      "rainSensor": 0.17,
+      "acoustic": 0.5,
+      "hud": 0.33,
+      "shade": 0.5,
+      "camera": 0.5
+    },
+    "SSANGYONG:ACTYON SUV 2006-": {
+      "count": 8,
+      "antenna": 0.25,
+      "shade": 0.75
+    },
+    "HONDA:CIVIC HYBRID 4D SAL 2006-": {
+      "count": 5,
+      "shade": 1
+    },
+    "KIA:CARENS MPV": {
+      "count": 6,
+      "shade": 1
+    },
+    "MAZDA:323F 94-98-": {
+      "count": 5,
+      "heated": 0.8,
+      "shade": 0.2
+    },
+    "NISSAN:INFINITY FX35/45 2003-": {
+      "count": 5,
+      "shade": 1
+    },
+    "INFINITI:G (V36) 4D SAL 07/": {
+      "count": 5,
+      "shade": 1
+    },
+    "VAUXHALL:CORSA 5D HBK": {
+      "count": 5,
+      "shade": 1
+    },
+    "RENAULT:LAGUNA  5D EST 2007-": {
+      "count": 7,
+      "shade": 1
+    },
+    "SUBARU:OUTBACK 5D EST": {
+      "count": 8,
+      "antenna": 0.13,
+      "shade": 0.88
+    },
+    "SUZUKI:GRAND VITARA 5D 2005-": {
+      "count": 5,
+      "shade": 1
+    },
+    "TOYOTA:LEXUS GS300/GS430 2005-": {
+      "count": 6,
+      "shade": 1
+    },
+    "VW:GOLF A5 3D 2007-": {
+      "count": 5,
+      "shade": 1
+    },
+    "VW:GOLF VIII VARIANT": {
+      "count": 10,
+      "shade": 1
+    },
+    "VW:T7 MULTIVAN": {
+      "count": 5,
+      "shade": 1
+    },
+    "FISKER:KARMA 4D CPE": {
+      "count": 5,
+      "shade": 1
+    },
+    "CADILLAC:SRX 2005-": {
+      "count": 6,
+      "shade": 1
+    },
+    "CADILLAC:ESCALADE 2007-": {
+      "count": 6,
+      "shade": 1
+    },
+    "CADILLAC:ATS 4D SAL": {
+      "count": 5,
+      "shade": 1
+    },
+    "FORD:EXCURSION 2001-": {
+      "count": 6,
+      "shade": 1
+    },
+    "HUMMER:H3 2005-": {
+      "count": 7,
+      "shade": 1
+    },
+    "JEEP:WRANGLER 5D 2007-": {
+      "count": 7,
+      "shade": 1
+    },
+    "JEEP:CHEROKEE 2008-": {
+      "count": 14,
+      "shade": 1
+    }
+  },
+  "generation": {
+    "F10": {
+      "count": 11,
+      "rainSensor": 0.09,
+      "hud": 0.36,
+      "shade": 1
+    },
+    "BL": {
+      "count": 2095,
+      "adas": 0,
+      "rainSensor": 0.02,
+      "heated": 0.07,
+      "acoustic": 0,
+      "antenna": 0.14,
+      "shade": 0.87,
+      "camera": 0
+    },
+    "E39": {
+      "count": 10,
+      "rainSensor": 0.7,
+      "antenna": 0.2,
+      "shade": 0.4
+    },
+    "E46": {
+      "count": 19,
+      "rainSensor": 0.32,
+      "antenna": 0.11,
+      "shade": 0.68
+    },
+    "E60": {
+      "count": 15,
+      "shade": 1
+    },
+    "W210": {
+      "count": 14,
+      "rainSensor": 0.21,
+      "antenna": 0.29,
+      "shade": 0.5
+    },
+    "W203": {
+      "count": 27,
+      "rainSensor": 0.04,
+      "shade": 0.96
+    },
+    "T4": {
+      "count": 14,
+      "heated": 0.29,
+      "antenna": 0.5,
+      "shade": 0.29
+    },
+    "B6": {
+      "count": 40,
+      "adas": 0.03,
+      "rainSensor": 0.1,
+      "acoustic": 0.03,
+      "antenna": 0.03,
+      "shade": 0.95,
+      "camera": 0.03
+    },
+    "B9": {
+      "count": 10,
+      "adas": 0.2,
+      "rainSensor": 0.2,
+      "heated": 0.1,
+      "acoustic": 0.2,
+      "shade": 1
+    },
+    "B7": {
+      "count": 18,
+      "adas": 0.06,
+      "rainSensor": 0.11,
+      "heated": 0.06,
+      "acoustic": 0.11,
+      "antenna": 0.11,
+      "shade": 0.94,
+      "camera": 0.06
+    },
+    "B8": {
+      "count": 14,
+      "shade": 1
+    },
+    "T5": {
+      "count": 12,
+      "shade": 1
+    }
+  },
+  "brand": {
+    "ALFA ROMEO": {
+      "count": 80,
+      "adas": 0.01,
+      "heated": 0.01,
+      "acoustic": 0.03,
+      "antenna": 0.05,
+      "shade": 0.93,
+      "camera": 0.01
+    },
+    "BMW": {
+      "count": 568,
+      "adas": 0.07,
+      "rainSensor": 0.12,
+      "heated": 0.03,
+      "acoustic": 0.09,
+      "antenna": 0.1,
+      "hud": 0.06,
+      "shade": 0.76,
+      "camera": 0.08
+    },
+    "NEW": {
+      "count": 64,
+      "adas": 0.03,
+      "antenna": 0.06,
+      "shade": 0.97,
+      "camera": 0.03
+    },
+    "CITROEN": {
+      "count": 347,
+      "adas": 0.01,
+      "rainSensor": 0.04,
+      "heated": 0.02,
+      "acoustic": 0.03,
+      "antenna": 0.01,
+      "hud": 0,
+      "shade": 0.95,
+      "camera": 0.01
+    },
+    "FORD": {
+      "count": 720,
+      "adas": 0.02,
+      "rainSensor": 0.03,
+      "heated": 0.1,
+      "acoustic": 0.06,
+      "antenna": 0.03,
+      "shade": 0.85,
+      "camera": 0.02
+    },
+    "HYUNDAI": {
+      "count": 277,
+      "adas": 0.06,
+      "rainSensor": 0.03,
+      "heated": 0.08,
+      "acoustic": 0.03,
+      "antenna": 0.05,
+      "shade": 0.74,
+      "camera": 0.08
+    },
+    "JAGUAR": {
+      "count": 132,
+      "adas": 0.05,
+      "rainSensor": 0.09,
+      "heated": 0.13,
+      "acoustic": 0.08,
+      "antenna": 0.05,
+      "shade": 0.75,
+      "camera": 0.11
+    },
+    "KIA": {
+      "count": 280,
+      "adas": 0.06,
+      "rainSensor": 0.1,
+      "heated": 0.19,
+      "antenna": 0.01,
+      "shade": 0.72,
+      "camera": 0.07
+    },
+    "MAN": {
+      "count": 13,
+      "adas": 0.46,
+      "heated": 0.23,
+      "antenna": 0.08,
+      "shade": 0.23,
+      "camera": 0.46
+    },
+    "MAZDA": {
+      "count": 254,
+      "adas": 0.1,
+      "rainSensor": 0.11,
+      "heated": 0.05,
+      "acoustic": 0.08,
+      "antenna": 0.06,
+      "shade": 0.66,
+      "camera": 0.09
+    },
+    "MERCEDES": {
+      "count": 370,
+      "adas": 0.04,
+      "rainSensor": 0.05,
+      "heated": 0.04,
+      "acoustic": 0.06,
+      "antenna": 0.06,
+      "hud": 0,
+      "shade": 0.82,
+      "camera": 0.04
+    },
+    "MITSUBISHI": {
+      "count": 66,
+      "adas": 0.03,
+      "rainSensor": 0.18,
+      "heated": 0.21,
+      "acoustic": 0.12,
+      "shade": 0.52
+    },
+    "NISSAN": {
+      "count": 283,
+      "adas": 0.02,
+      "rainSensor": 0.06,
+      "heated": 0.03,
+      "acoustic": 0.09,
+      "antenna": 0.01,
+      "shade": 0.82,
+      "camera": 0.02
+    },
+    "PEUGEOT": {
+      "count": 369,
+      "adas": 0.02,
+      "rainSensor": 0.07,
+      "heated": 0.01,
+      "acoustic": 0.03,
+      "antenna": 0.04,
+      "shade": 0.95,
+      "camera": 0.02
+    },
+    "PORSCHE": {
+      "count": 112,
+      "adas": 0.04,
+      "rainSensor": 0.01,
+      "heated": 0.03,
+      "acoustic": 0.08,
+      "antenna": 0.11,
+      "shade": 0.79,
+      "camera": 0.05
+    },
+    "RANGE": {
+      "count": 163,
+      "adas": 0.02,
+      "rainSensor": 0.01,
+      "heated": 0.06,
+      "acoustic": 0.23,
+      "antenna": 0.02,
+      "shade": 0.82,
+      "camera": 0.02
+    },
+    "LAND ROVER": {
+      "count": 42,
+      "adas": 0.07,
+      "heated": 0.02,
+      "acoustic": 0.07,
+      "shade": 0.83,
+      "camera": 0.07
+    },
+    "RENAULT": {
+      "count": 551,
+      "adas": 0.03,
+      "rainSensor": 0.04,
+      "heated": 0.03,
+      "acoustic": 0.04,
+      "antenna": 0.02,
+      "shade": 0.87,
+      "camera": 0.03
+    },
+    "SEAT": {
+      "count": 185,
+      "adas": 0.01,
+      "rainSensor": 0.04,
+      "heated": 0.01,
+      "acoustic": 0.08,
+      "antenna": 0.06,
+      "shade": 0.9,
+      "camera": 0.01
+    },
+    "SKODA": {
+      "count": 198,
+      "adas": 0.08,
+      "rainSensor": 0.03,
+      "heated": 0.02,
+      "acoustic": 0.09,
+      "antenna": 0.06,
+      "shade": 0.81,
+      "camera": 0.09
+    },
+    "SUZUKI": {
+      "count": 62,
+      "adas": 0.05,
+      "rainSensor": 0.06,
+      "heated": 0.02,
+      "acoustic": 0.05,
+      "antenna": 0.03,
+      "shade": 0.79,
+      "camera": 0.05
+    },
+    "TOYOTA": {
+      "count": 444,
+      "adas": 0.04,
+      "rainSensor": 0.02,
+      "heated": 0.04,
+      "acoustic": 0.07,
+      "antenna": 0.04,
+      "hud": 0,
+      "shade": 0.82,
+      "camera": 0.04
+    },
+    "LEXUS": {
+      "count": 119,
+      "adas": 0.07,
+      "rainSensor": 0.02,
+      "heated": 0.06,
+      "acoustic": 0.13,
+      "antenna": 0.05,
+      "shade": 0.75,
+      "camera": 0.07
+    },
+    "AUDI": {
+      "count": 532,
+      "adas": 0.07,
+      "rainSensor": 0.04,
+      "heated": 0.01,
+      "acoustic": 0.07,
+      "antenna": 0.1,
+      "shade": 0.88,
+      "camera": 0.09
+    },
+    "VW": {
+      "count": 764,
+      "adas": 0.05,
+      "rainSensor": 0.04,
+      "heated": 0.01,
+      "acoustic": 0.04,
+      "antenna": 0.06,
+      "shade": 0.9,
+      "camera": 0.06
+    },
+    "VOLVO": {
+      "count": 263,
+      "adas": 0.08,
+      "rainSensor": 0.08,
+      "heated": 0.03,
+      "acoustic": 0.09,
+      "antenna": 0.07,
+      "shade": 0.78,
+      "camera": 0.08
+    },
+    "LANDROVER": {
+      "count": 25,
+      "shade": 1
+    },
+    "HONDA": {
+      "count": 267,
+      "adas": 0.03,
+      "rainSensor": 0.03,
+      "heated": 0.01,
+      "acoustic": 0.1,
+      "antenna": 0.04,
+      "shade": 0.84,
+      "camera": 0.04
+    },
+    "FIAT": {
+      "count": 326,
+      "adas": 0.02,
+      "rainSensor": 0.02,
+      "heated": 0.03,
+      "acoustic": 0.06,
+      "antenna": 0.01,
+      "shade": 0.89,
+      "camera": 0.02
+    },
+    "VAUXHALL": {
+      "count": 302,
+      "adas": 0,
+      "rainSensor": 0.02,
+      "heated": 0.03,
+      "acoustic": 0.02,
+      "antenna": 0.04,
+      "shade": 0.92,
+      "camera": 0
+    },
+    "LANCIA": {
+      "count": 45,
+      "antenna": 0.04,
+      "shade": 1
+    },
+    "MCC": {
+      "count": 11,
+      "shade": 1
+    },
+    "ROVER": {
+      "count": 20,
+      "rainSensor": 0.05,
+      "heated": 0.35,
+      "antenna": 0.2,
+      "shade": 0.45
+    },
+    "SAAB": {
+      "count": 54,
+      "shade": 1
+    },
+    "SUBARU": {
+      "count": 68,
+      "adas": 0.03,
+      "rainSensor": 0.07,
+      "heated": 0.29,
+      "acoustic": 0.01,
+      "antenna": 0.06,
+      "shade": 0.62,
+      "camera": 0.01
+    },
+    "CHRYSLER": {
+      "count": 57,
+      "shade": 1
+    },
+    "JEEP": {
+      "count": 181,
+      "adas": 0.07,
+      "rainSensor": 0.01,
+      "heated": 0.01,
+      "acoustic": 0.07,
+      "antenna": 0.01,
+      "shade": 0.86,
+      "camera": 0.07
+    },
+    "SSANGYONG": {
+      "count": 70,
+      "rainSensor": 0.01,
+      "heated": 0.04,
+      "acoustic": 0.01,
+      "antenna": 0.17,
+      "shade": 0.83
+    },
+    "OPEL/VAUXHALL": {
+      "count": 35,
+      "shade": 1
+    },
+    "VAUXHALL/OPEL": {
+      "count": 57,
+      "acoustic": 0.02,
+      "antenna": 0.07,
+      "shade": 0.91
+    },
+    "CHEVROLET": {
+      "count": 91,
+      "rainSensor": 0.05,
+      "heated": 0.05,
+      "antenna": 0.01,
+      "hud": 0.01,
+      "shade": 0.9
+    },
+    "SMART": {
+      "count": 18,
+      "rainSensor": 0.06,
+      "shade": 0.94
+    },
+    "DACIA": {
+      "count": 27,
+      "heated": 0.11,
+      "shade": 0.89
+    },
+    "TESLA": {
+      "count": 19,
+      "rainSensor": 0.05,
+      "heated": 0.05,
+      "acoustic": 0.84,
+      "shade": 0.74,
+      "camera": 0.26
+    },
+    "IVECO": {
+      "count": 14,
+      "adas": 0.07,
+      "acoustic": 0.29,
+      "shade": 0.71,
+      "camera": 0.07
+    },
+    "FOCUS": {
+      "count": 38,
+      "antenna": 0.11,
+      "shade": 1
+    },
+    "INFINITI": {
+      "count": 12,
+      "shade": 1
+    },
+    "CHEV": {
+      "count": 11,
+      "antenna": 0.36,
+      "shade": 0.73
+    },
+    "DODGE": {
+      "count": 28,
+      "rainSensor": 0.04,
+      "acoustic": 0.04,
+      "shade": 0.96,
+      "camera": 0.04
+    },
+    "HUMMER": {
+      "count": 17,
+      "shade": 1
+    },
+    "CADILLAC": {
+      "count": 63,
+      "acoustic": 0.02,
+      "shade": 0.98
+    },
+    "OPEL": {
+      "count": 11,
+      "adas": 0.18,
+      "rainSensor": 0.18,
+      "heated": 0.09,
+      "shade": 0.82
+    },
+    "ASTON MARTIN": {
+      "count": 31,
+      "heated": 0.13,
+      "antenna": 0.06,
+      "shade": 0.81
+    },
+    "FORD USA": {
+      "count": 20,
+      "acoustic": 0.1,
+      "shade": 0.9
+    },
+    "LINCOLN": {
+      "count": 12,
+      "heated": 0.17,
+      "shade": 0.83
+    },
+    "DAEWOO": {
+      "count": 16,
+      "heated": 0.13,
+      "antenna": 0.25,
+      "shade": 0.69
+    },
+    "MINI": {
+      "count": 11,
+      "heated": 0.09,
+      "shade": 0.91
+    },
+    "ADHESIVE": {
+      "count": 18,
+      "rainSensor": 0.94,
+      "camera": 0.06
+    },
+    "SENSOR": {
+      "count": 16,
+      "camera": 1
+    },
+    "SOLAR": {
+      "count": 16,
+      "shade": 1
+    }
+  }
+}

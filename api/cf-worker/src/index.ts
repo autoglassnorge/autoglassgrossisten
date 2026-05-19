@@ -394,7 +394,10 @@ interface FactoryEquipment {
   camera: boolean;
   adas: boolean;
   hud: boolean;
-  source: "bovsoft" | "biluppgifter" | "none";
+  source: "bovsoft" | "biluppgifter" | "catalog_guess" | "learned" | "learned_vin" | "none";
+  guessed?: boolean;
+  guessConfidence?: string;
+  guessSource?: string;
 }
 
 /**
@@ -623,8 +626,241 @@ async function searchCatalog(
 }
 
 // ============================================================================
+// LEARNING ENGINE — Hacker Mode v2.2
+// ============================================================================
+
+/** Simple SHA-256 hash for GDPR-safe regnr storage */
+async function sha256(text: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text.toUpperCase().trim());
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+interface SearchHistoryRecord {
+  regnr_hash: string;
+  make: string;
+  model: string;
+  year: number;
+  generation?: string;
+  body?: string;
+  chosen_eurocode?: string;
+  equipment: {
+    adas: boolean;
+    rainSensor: boolean;
+    heated: boolean;
+    acoustic: boolean;
+    antenna: boolean;
+    hud: boolean;
+    camera: boolean;
+    shade: boolean;
+  };
+  layer: number;
+  confidence: string;
+  source: string;
+  vin_prefix?: string;
+}
+
+/**
+ * Save search result to D1 for learning.
+ * GDPR-safe: only SHA-256 hash of regnr is stored.
+ */
+async function saveSearchResult(db: D1Database, record: SearchHistoryRecord): Promise<void> {
+  try {
+    await db.prepare(
+      `INSERT INTO search_history (
+        regnr_hash, make, model, year, generation, body, chosen_eurocode,
+        equipment_adas, equipment_rain_sensor, equipment_heated, equipment_acoustic,
+        equipment_antenna, equipment_hud, equipment_camera, equipment_shade,
+        layer, confidence, source, vin_prefix, search_count, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, datetime('now'), datetime('now'))
+       ON CONFLICT(regnr_hash) DO UPDATE SET
+         chosen_eurocode = excluded.chosen_eurocode,
+         equipment_adas = excluded.equipment_adas,
+         equipment_rain_sensor = excluded.equipment_rain_sensor,
+         equipment_heated = excluded.equipment_heated,
+         equipment_acoustic = excluded.equipment_acoustic,
+         equipment_antenna = excluded.equipment_antenna,
+         equipment_hud = excluded.equipment_hud,
+         equipment_camera = excluded.equipment_camera,
+         equipment_shade = excluded.equipment_shade,
+         layer = excluded.layer,
+         confidence = excluded.confidence,
+         source = excluded.source,
+         search_count = search_count + 1,
+         updated_at = datetime('now')`
+    ).bind(
+      record.regnr_hash,
+      record.make,
+      record.model,
+      record.year,
+      record.generation || null,
+      record.body || null,
+      record.chosen_eurocode || null,
+      record.equipment.adas ? 1 : 0,
+      record.equipment.rainSensor ? 1 : 0,
+      record.equipment.heated ? 1 : 0,
+      record.equipment.acoustic ? 1 : 0,
+      record.equipment.antenna ? 1 : 0,
+      record.equipment.hud ? 1 : 0,
+      record.equipment.camera ? 1 : 0,
+      record.equipment.shade ? 1 : 0,
+      record.layer,
+      record.confidence,
+      record.source,
+      record.vin_prefix || null
+    ).run();
+  } catch {
+    // Silently fail if migration 0005 not run yet
+  }
+}
+
+/**
+ * Get learned equipment from search history for a specific regnr.
+ * Returns null if no prior searches found.
+ */
+async function getLearnedEquipment(db: D1Database, regnr: string): Promise<{
+  equipment: SearchHistoryRecord["equipment"];
+  chosen_eurocode?: string;
+  search_count: number;
+} | null> {
+  try {
+    const hash = await sha256(regnr);
+    const row = await db.prepare(
+      `SELECT equipment_adas, equipment_rain_sensor, equipment_heated, equipment_acoustic,
+              equipment_antenna, equipment_hud, equipment_camera, equipment_shade,
+              chosen_eurocode, search_count
+       FROM search_history WHERE regnr_hash = ?`
+    ).bind(hash).first();
+    if (!row) return null;
+    return {
+      equipment: {
+        adas: !!(row as any).equipment_adas,
+        rainSensor: !!(row as any).equipment_rain_sensor,
+        heated: !!(row as any).equipment_heated,
+        acoustic: !!(row as any).equipment_acoustic,
+        antenna: !!(row as any).equipment_antenna,
+        hud: !!(row as any).equipment_hud,
+        camera: !!(row as any).equipment_camera,
+        shade: !!(row as any).equipment_shade,
+      },
+      chosen_eurocode: (row as any).chosen_eurocode || undefined,
+      search_count: (row as any).search_count || 1,
+    };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Get learned equipment by VIN prefix (first 6 chars).
+ * Aggregates across all searches with same VIN prefix.
+ */
+async function getLearnedByVinPrefix(db: D1Database, vin: string): Promise<{
+  equipment: SearchHistoryRecord["equipment"];
+  count: number;
+} | null> {
+  if (!vin || vin.length < 6) return null;
+  try {
+    const prefix = vin.slice(0, 6).toUpperCase();
+    const row = await db.prepare(
+      `SELECT
+        AVG(equipment_adas) as adas_prob,
+        AVG(equipment_rain_sensor) as rain_prob,
+        AVG(equipment_heated) as heated_prob,
+        AVG(equipment_acoustic) as acoustic_prob,
+        AVG(equipment_antenna) as antenna_prob,
+        AVG(equipment_hud) as hud_prob,
+        AVG(equipment_camera) as camera_prob,
+        AVG(equipment_shade) as shade_prob,
+        COUNT(*) as cnt
+       FROM search_history WHERE vin_prefix = ? AND search_count >= 1`
+    ).bind(prefix).first();
+    if (!row || (row as any).cnt < 3) return null;
+    return {
+      equipment: {
+        adas: ((row as any).adas_prob || 0) >= 0.5,
+        rainSensor: ((row as any).rain_prob || 0) >= 0.5,
+        heated: ((row as any).heated_prob || 0) >= 0.5,
+        acoustic: ((row as any).acoustic_prob || 0) >= 0.5,
+        antenna: ((row as any).antenna_prob || 0) >= 0.5,
+        hud: ((row as any).hud_prob || 0) >= 0.5,
+        camera: ((row as any).camera_prob || 0) >= 0.5,
+        shade: ((row as any).shade_prob || 0) >= 0.5,
+      },
+      count: (row as any).cnt,
+    };
+  } catch {
+    return null;
+  }
+}
+
+// ============================================================================
 // SEARCH LOGIC
 // ============================================================================
+
+// ============================================================================
+// CATEGORY DETECTION FROM DESCRIPTION
+// ============================================================================
+
+const TYPE_TO_CATEGORY: Record<string, string> = {
+  "WS": "frontrute",
+  "WINDSHIELD": "frontrute",
+  "WSH": "frontrute",
+  "FD": "dørglass",
+  "RD": "dørglass",
+  "LFD": "dørglass",
+  "RFD": "dørglass",
+  "LRD": "dørglass",
+  "RRD": "dørglass",
+  "DOOR": "dørglass",
+  "LRQ": "sideglass",
+  "RRQ": "sideglass",
+  "LFQ": "sideglass",
+  "RFQ": "sideglass",
+  "RQ": "sideglass",
+  "LRV": "sideglass",
+  "RRV": "sideglass",
+  "LFV": "sideglass",
+  "RFV": "sideglass",
+  "FV": "sideglass",
+  "RV": "sideglass",
+  "QTR": "sideglass",
+  "VENT": "sideglass",
+  "RR": "bakrute",
+  "REAR": "bakrute",
+  "BACK": "bakrute",
+  "RW": "bakrute",
+  "SR": "annet",
+  "SUNROOF": "annet",
+};
+
+function detectCategoryFromDescription(description: string | null): string | null {
+  if (!description) return null;
+  const d = description.toUpperCase();
+  // First try to find type code after semicolon (Pilkington format: "BRAND MODEL YEAR; WS GN...")
+  const afterSemi = d.match(/;\s*([A-Z]{1,4})\s/);
+  if (afterSemi) {
+    const code = afterSemi[1].trim();
+    if (TYPE_TO_CATEGORY[code]) {
+      return TYPE_TO_CATEGORY[code];
+    }
+  }
+  // Fallback: type code at start of description
+  const atStart = d.match(/^([A-Z]{1,4})\s/);
+  if (atStart) {
+    const code = atStart[1].trim();
+    if (TYPE_TO_CATEGORY[code]) {
+      return TYPE_TO_CATEGORY[code];
+    }
+  }
+  if (/\bWINDSHIELD\b|\bFRONT\s+WINDOW\b|\bFRONT\s+GLASS\b/.test(d)) return "frontrute";
+  if (/\bREAR\s+WINDOW\b|\bREAR\s+GLASS\b|\bBACK\s+WINDOW\b/.test(d)) return "bakrute";
+  if (/\bDOOR\s+GLASS\b|\bDOOR\s+WINDOW\b/.test(d)) return "dørglass";
+  if (/\bQUARTER\b|\bVENT\s+GLASS\b|\bSIDE\s+GLASS\b/.test(d)) return "sideglass";
+  return null;
+}
 
 // ============================================================================
 // EQUIPMENT DETECTION
@@ -632,15 +868,17 @@ async function searchCatalog(
 
 /**
  * Detect equipment flags from product description text.
- * Most descriptions use standardized codes:
+ * Pilkington standardized codes:
  *   RSN / RSNL / RSNLSN = Rain sensor
- *   HTD                 = Heated
- *   ACO                 = Acoustic
- *   ANT / GPS           = Antenna
- *   CAMERA / CAM        = Camera bracket / ADAS
- *   SOLAR               = Solar control (not a distinguishing feature for matching)
- *   VIN                 = VIN etched
- *   GY / GN / BL / CL   = Tint color (not equipment)
+ *   HTD / HT / UHTD       = Heated
+ *   ACO                   = Acoustic
+ *   ANT / GPS             = Antenna
+ *   CAMERA / CAM          = Camera bracket / ADAS
+ *   HUD                   = Head-up display
+ *   SOLAR / SOL / SOLA    = Solar control (tint/shade indicator)
+ *   PRIVACY               = Privacy tint
+ *   VIN                   = VIN etched
+ *   GN / BL / GY / CL     = Standard tint colors (not distinguishing)
  */
 function detectFlagsFromDescription(description: string | null): {
   adas: boolean;
@@ -651,15 +889,20 @@ function detectFlagsFromDescription(description: string | null): {
   camera: boolean;
   hud: boolean;
 } {
-  const d = (description || "").toUpperCase();
+  if (!description) {
+    return { adas: false, rainSensor: false, heated: false, acoustic: false, antenna: false, camera: false, hud: false };
+  }
+  const tokens = description.toUpperCase().split(/[\s;,.\[\]()]+/).filter(t => t.length >= 2);
+  const s = new Set(tokens);
+
   return {
-    adas: /\b(ADAS|FILSKIFTE|LANE.ASSIST|LANE|COLLISION|AUTO.BRAKE|EMERGENCY|BRAKE|DRIVE.ASSIST|PRO.PILOT|AUTOPILOT|TRAFFIC|AP|ACC|ADAPTIVE)\b/.test(d),
-    rainSensor: /\b(RSN|RSNL|RSNLSN|RAIN|REGN|WIPER|WASHER|VIPE|AUTOMATIC.WIPER|REGNSENSOR|VINDRUTE.VISKER)\b/.test(d),
-    heated: /\b(HTD|HT|HEATED|OPPVARM|VARME|DEFROST|DEFOG|EL.VARME|EL-VARME|HEATING|WARM|VARMET)\b/.test(d),
-    acoustic: /\b(ACO|ACOUSTIC|AKUSTIK|QUIET|STØYDEMP|STØY|NOISE|SILENT|SOUND|ACUSTIC)\b/.test(d),
-    antenna: /\b(ANT|ANTENNA|ANTENNE|GPS|RADIO|FM|DAB|AERIAL|ANTEN)\b/.test(d),
-    camera: /\b(CAMERA|CAM|KAMERA|SENSOR|BACKUP|REVERSING|360|FRONT.CAM|REAR.CAM)\b/.test(d),
-    hud: /\b(HUD|HEAD.UP|HEADUP|PROJEKSJON|PROJECTION|WINDSHIELD.DISPLAY)\b/.test(d),
+    adas: s.has("ADAS") || s.has("FILSKIFTE") || /\bLANE\s+ASSIST\b|\bLANE\s+DEPARTURE\b|\bCOLLISION\b|\bAUTO\s+BRAKE\b|\bEMERGENCY\s+BRAKE\b|\bDRIVE\s+ASSIST\b|\bPRO\s+PILOT\b|\bAUTOPILOT\b|\bTRAFFIC\s+ASSIST\b/.test(description.toUpperCase()),
+    rainSensor: s.has("RSN") || s.has("RSNL") || s.has("RSNLSN") || /\bRAIN\b|\bREGNSENSOR\b|\bAUTOMATIC\s+WIPER\b/.test(description.toUpperCase()),
+    heated: s.has("HTD") || s.has("HT") || s.has("UHTD") || /\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b/.test(description.toUpperCase()),
+    acoustic: s.has("ACO") || /\bACOUSTIC\b|\bAKUSTIK\b|\bQUIET\b|\bST[ØO]YDEMP\b|\bSILENT\b/.test(description.toUpperCase()),
+    antenna: s.has("ANT") || /\bANTENNA\b|\bANTENNE\b|\bGPS\b|\bRADIO\b|\bFM\b|\bDAB\b|\bAERIAL\b/.test(description.toUpperCase()),
+    camera: s.has("CAMERA") || s.has("CAM") || /\bKAMERA\b|\bSENSOR\b|\bBACKUP\b|\bREVERSING\b|\b360\b|\bFRONT\s+CAM\b|\bREAR\s+CAM\b/.test(description.toUpperCase()),
+    hud: s.has("HUD") || /\bHEAD\s*UP\b|\bHEADUP\b|\bPROJEKSJON\b|\bPROJECTION\b|\bWINDSHIELD\s+DISPLAY\b/.test(description.toUpperCase()),
   };
 }
 
@@ -685,9 +928,10 @@ function inferRecordEquipment(record: GlassRecord): {
   antenna: boolean;
   camera: boolean;
   hud: boolean;
+  shade: boolean;
 } {
   // Prefer explicit DB columns if set
-  if (record.rain_sensor || record.heated || record.acoustic || record.antenna || record.camera || record.adas) {
+  if (record.rain_sensor || record.heated || record.acoustic || record.antenna || record.camera || record.adas || record.shade) {
     return {
       adas: !!record.adas,
       rainSensor: !!record.rain_sensor,
@@ -696,10 +940,169 @@ function inferRecordEquipment(record: GlassRecord): {
       antenna: !!record.antenna,
       camera: !!record.camera,
       hud: !!record.hud,
+      shade: !!record.shade,
     };
   }
   // Fallback: parse from description
-  return detectFlagsFromDescription(record.description);
+  const flags = detectFlagsFromDescription(record.description);
+  // Also detect shade from description
+  const d = (record.description || "").toUpperCase();
+  const tokens = d.split(/[\s;,.\[\]()]+/).filter(t => t.length >= 2);
+  const s = new Set(tokens);
+  const shade = s.has("SOLAR") || s.has("SOL") || s.has("SOLA") ||
+                s.has("PRIVACY") || s.has("PRIV") || s.has("PRIVA") || s.has("PRIVAC") ||
+                s.has("DARK") || s.has("TOP") || s.has("TINT") ||
+                s.has("COATED") || s.has("HMSL");
+  return { ...flags, shade };
+}
+
+// ============================================================================
+// SMART EQUIPMENT GUESSER — Hacker Mode v2.2
+// ============================================================================
+
+/**
+ * Equipment signatures learned from catalog statistics.
+ * These are probability-based guesses when no API provides equipment data.
+ * Format: "BRAND:MODEL" → { camera: 0.67, adas: 0.67, acoustic: 0.33 }
+ * Only includes signatures with >= 5 samples and >= 30% probability.
+ */
+const CATALOG_EQUIPMENT_SIGNATURES: Record<string, Record<string, number>> = {
+  // BMW
+  "BMW:X5 5D SUV G05": { camera: 0.67, adas: 0.67, rainSensor: 0.33, acoustic: 0.33 },
+  "BMW:X2 (XCITE) F39": { camera: 0.40, adas: 0.40, rainSensor: 0.40, acoustic: 0.40 },
+  "BMW:6 SERIES GT G32": { camera: 0.40, adas: 0.40, acoustic: 0.40 },
+  "BMW:Z4 G29 2D CAB": { camera: 0.33, adas: 0.33 },
+  "BMW:5 SERIES F10": { hud: 0.44 },
+  "BMW:X5 (F15) 5D SUV": { acoustic: 0.33 },
+  "BMW:7 SERIES E38 94-01-": { heated: 0.75, rainSensor: 0.38 },
+  "BMW:5 SERIES GT": { rainSensor: 0.36, hud: 0.36 },
+  "BMW:5 SERIES GT 2009-": { rainSensor: 0.43 },
+  "BMW:5 SERIES SAL+EST": { rainSensor: 0.33 },
+  "BMW:X3 SUV": { rainSensor: 0.62 },
+  // VW
+  "VW:UP 3D/5D HBK": { camera: 0.56, adas: 0.56 },
+  "VW:PASSAT CC": { camera: 0.33, adas: 0.33, rainSensor: 0.33, acoustic: 0.33 },
+  "VW:SHARAN II MPV": { acoustic: 0.60 },
+  "VW:GOLF VII SPORTSVAN MPV": { acoustic: 0.33 },
+  "VW:CRAFTER": { camera: 0.31, adas: 0.31 },
+  "VW:T ROC 5D SUV": { camera: 0.40, adas: 0.40 },
+  "VW:TRANSPORTER T4 90-03-": { antenna: 0.50 },
+  // Audi
+  "AUDI:A4": { adas: 0.38, rainSensor: 0.38 },
+  "AUDI:A6/C7 4D SAL 09/": { acoustic: 0.40 },
+  "AUDI:A7 5D HBK": { camera: 0.33 },
+  "AUDI:Q7 5D JEEP": { camera: 0.57 },
+  // Skoda
+  "SKODA:KAROQ 5D SUV": { camera: 0.33, adas: 0.33, acoustic: 0.33 },
+  "SKODA:SCALA 5D HBK": { camera: 0.50, adas: 0.30 },
+  "SKODA:KAMIQ 5D SUV": { camera: 0.60, adas: 0.60 },
+  // Mazda
+  "MAZDA:6 4D SAL/5D EST RHD": { acoustic: 0.71 },
+  "MAZDA:3 HBK SAL LHD": { rainSensor: 0.80, heated: 0.40 },
+  "MAZDA:CX 5 LHD": { adas: 0.46 },
+  // Volvo
+  "VOLVO:XC60 5D SUV": { acoustic: 0.42 },
+  "VOLVO:XC40 5D SUV": { camera: 0.33, adas: 0.33, antenna: 0.33 },
+  // Ford
+  "FORD:TRANSIT 86-00-": { heated: 1.00 },
+  "FORD:GALAXY 03/": { heated: 0.40, acoustic: 0.40 },
+  "FORD:GALAXY": { rainSensor: 0.33, acoustic: 0.33 },
+  "FORD:TOURNEO CONNECT": { heated: 0.32 },
+  "FORD:MONDEO 07-": { rainSensor: 0.40 },
+  // Jaguar / Land Rover
+  "JAGUAR:E PACE 5D SUV": { camera: 0.71, acoustic: 0.47 },
+  "RANGE:ROVER L405 R5": { acoustic: 0.44 },
+  "LAND ROVER:DISCOVERY 5D": { camera: 0.38, adas: 0.38 },
+  // Others
+  "CITROEN:BERLINGO 96-": { heated: 0.67 },
+  "RENAULT:MASTER 97-": { heated: 0.33 },
+  "HYUNDAI:SANTA FE LHD 2006-": { heated: 0.40 },
+  "KIA:PRO-CEE": { heated: 0.50 },
+  "MITSUBISHI:OUTLANDER 2007-": { rainSensor: 0.33 },
+  "VOLVO:FH12 FH16 93- FM 98-": { antenna: 1.00 },
+  "HONDA:CIVIC 5D HBK RHD": { acoustic: 0.40 },
+  "MAZDA:5 MPV LHD": { rainSensor: 0.40 },
+};
+
+/** Generation → equipment signatures (from catalog statistics) */
+const GENERATION_EQUIPMENT_SIGNATURES: Record<string, Record<string, number>> = {
+  "B6": { shade: 0.90, adas: 0.02, rainSensor: 0.10, acoustic: 0.02 },
+  "BL": { shade: 0.51, antenna: 0.08, heated: 0.04 },
+  "E46": { rainSensor: 0.10, antenna: 0.03, shade: 0.22 },
+  "W203": { rainSensor: 0.02, shade: 0.44 },
+  "MK4": { heated: 0.04, shade: 0.06 },
+  "W210": { rainSensor: 0.07, antenna: 0.09, shade: 0.16 },
+  "MK3": { heated: 0.05, antenna: 0.10 },
+  "E36": { antenna: 0.15, shade: 0.08 },
+  "T4": { heated: 0.11, antenna: 0.18, shade: 0.11 },
+  "E90": { rainSensor: 0.03, antenna: 0.06, shade: 0.18 },
+};
+
+interface GuessedEquipment {
+  adas: number;        // 0.0 - 1.0 probability
+  rainSensor: number;
+  heated: number;
+  acoustic: number;
+  antenna: number;
+  camera: number;
+  hud: number;
+  shade: number;
+  confidence: "high" | "medium" | "low" | "none";
+  source: "catalog_signature" | "generation_signature" | "none";
+}
+
+/**
+ * Guess equipment based on catalog statistics + VIN/generation data.
+ * Returns probabilities (0.0-1.0) instead of booleans.
+ * This is used when Biluppgitter/Bovsoft APIs don't return equipment.
+ */
+function guessEquipment(
+  brand: string,
+  model: string,
+  year: number,
+  generation?: string | null
+): GuessedEquipment {
+  const empty: GuessedEquipment = {
+    adas: 0, rainSensor: 0, heated: 0, acoustic: 0,
+    antenna: 0, camera: 0, hud: 0, shade: 0,
+    confidence: "none", source: "none",
+  };
+
+  const b = brand.toUpperCase().trim();
+  const m = model.toUpperCase().trim();
+  const yearBucket = `${Math.floor(year / 5) * 5}`;
+
+  // Try exact brand:model match
+  const exactKey = `${b}:${m}`;
+  let sig = CATALOG_EQUIPMENT_SIGNATURES[exactKey];
+  let source: GuessedEquipment["source"] = "catalog_signature";
+
+  // Try generation match as fallback
+  if (!sig && generation) {
+    const gen = generation.toUpperCase();
+    sig = GENERATION_EQUIPMENT_SIGNATURES[gen];
+    source = "generation_signature";
+  }
+
+  if (!sig) return empty;
+
+  // Calculate confidence based on signature strength
+  const maxProb = Math.max(...Object.values(sig));
+  const confidence: GuessedEquipment["confidence"] =
+    maxProb >= 0.6 ? "high" : maxProb >= 0.3 ? "medium" : "low";
+
+  return {
+    adas: sig.adas || 0,
+    rainSensor: sig.rainSensor || 0,
+    heated: sig.heated || 0,
+    acoustic: sig.acoustic || 0,
+    antenna: sig.antenna || 0,
+    camera: sig.camera || 0,
+    hud: sig.hud || 0,
+    shade: sig.shade || 0,
+    confidence,
+    source,
+  };
 }
 
 function scoreCandidate(
@@ -730,6 +1133,14 @@ function scoreCandidate(
   if (!flags.camera && recordFlags.camera) score -= 4;
   if (!flags.rainSensor && recordFlags.rainSensor) score -= 3;
   if (!flags.heated && recordFlags.heated) score -= 2;
+
+  // Category scoring: prioritize windshields for regnr search (most common request)
+  const cat = c.category?.toLowerCase() || detectCategoryFromDescription(c.description);
+  if (cat === "frontrute") {
+    score += 8; // Slight bonus for windshields
+  } else if (cat === "annet" || cat === "unknown" || !cat) {
+    score -= 5; // Slight penalty for uncategorized
+  }
 
   // Year compatibility scoring
   const vehicleYear = vehicle.year;
@@ -1580,26 +1991,96 @@ async function searchByRegnr(regnr: string, env: Env): Promise<SearchResult> {
     factoryEquipment = await fetchBiluppgifterEquipment(regnr, env.BILUPPGIFTER_API_KEY);
   }
 
-  // Equipment flags from vehicle
-  const vehicleFlags: ReturnType<typeof detectFlagsFromOem> = factoryEquipment
-    ? {
-        adas: factoryEquipment.adas,
-        rainSensor: factoryEquipment.rainSensor,
-        heated: factoryEquipment.heated,
-        acoustic: factoryEquipment.acoustic,
-        antenna: factoryEquipment.antenna,
-        camera: factoryEquipment.camera,
-        hud: factoryEquipment.hud,
-      }
-    : {
-        adas: false,
-        rainSensor: false,
-        heated: false,
-        acoustic: false,
-        antenna: false,
-        camera: false,
-        hud: false,
-      };
+  // Learning Engine — check if we've seen this regnr before
+  const learned = await getLearnedEquipment(db, regnr);
+  const learnedByVin = vehicle.vin ? await getLearnedByVinPrefix(db, vehicle.vin) : null;
+
+  // Smart Equipment Guesser — Hacker Mode v2.2
+  // When Biluppgitter is unavailable, use catalog statistics to guess equipment
+  const guessedEquipment = guessEquipment(
+    vehicle.make,
+    vehicle.model,
+    vehicle.year,
+    unifiedVin?.generation || parseGenerationFromDescription(vehicle.model)
+  );
+
+  // Merge equipment sources (priority: Biluppgitter > Learned > Catalog Guess > None)
+  let effectiveEquipment: FactoryEquipment;
+  let equipSource = "none";
+
+  if (factoryEquipment) {
+    effectiveEquipment = { ...factoryEquipment, source: "biluppgifter" };
+    equipSource = "biluppgifter";
+  } else if (learned && learned.search_count >= 2) {
+    // Learned data with 2+ searches is fairly reliable
+    effectiveEquipment = {
+      rainSensor: learned.equipment.rainSensor,
+      heated: learned.equipment.heated,
+      acoustic: learned.equipment.acoustic,
+      antenna: learned.equipment.antenna,
+      camera: learned.equipment.camera,
+      adas: learned.equipment.adas,
+      hud: learned.equipment.hud,
+      source: "learned",
+      guessed: true,
+      guessConfidence: learned.search_count >= 5 ? "high" : "medium",
+      guessSource: "search_history",
+    };
+    equipSource = "learned";
+  } else if (learnedByVin && learnedByVin.count >= 3) {
+    // VIN-prefix learned data
+    effectiveEquipment = {
+      rainSensor: learnedByVin.equipment.rainSensor,
+      heated: learnedByVin.equipment.heated,
+      acoustic: learnedByVin.equipment.acoustic,
+      antenna: learnedByVin.equipment.antenna,
+      camera: learnedByVin.equipment.camera,
+      adas: learnedByVin.equipment.adas,
+      hud: learnedByVin.equipment.hud,
+      source: "learned_vin",
+      guessed: true,
+      guessConfidence: learnedByVin.count >= 10 ? "high" : "medium",
+      guessSource: "vin_prefix_history",
+    };
+    equipSource = "learned_vin";
+  } else if (guessedEquipment.confidence !== "none") {
+    effectiveEquipment = {
+      rainSensor: guessedEquipment.rainSensor >= 0.5,
+      heated: guessedEquipment.heated >= 0.5,
+      acoustic: guessedEquipment.acoustic >= 0.5,
+      antenna: guessedEquipment.antenna >= 0.5,
+      camera: guessedEquipment.camera >= 0.5,
+      adas: guessedEquipment.adas >= 0.5,
+      hud: guessedEquipment.hud >= 0.5,
+      source: "catalog_guess",
+      guessed: true,
+      guessConfidence: guessedEquipment.confidence,
+      guessSource: guessedEquipment.source,
+    };
+    equipSource = "catalog_guess";
+  } else {
+    effectiveEquipment = {
+      rainSensor: false,
+      heated: false,
+      acoustic: false,
+      antenna: false,
+      camera: false,
+      adas: false,
+      hud: false,
+      source: "none",
+    };
+  }
+
+  // Equipment flags from vehicle for scoring
+  const vehicleFlags: ReturnType<typeof detectFlagsFromOem> = {
+    adas: effectiveEquipment.adas,
+    rainSensor: effectiveEquipment.rainSensor,
+    heated: effectiveEquipment.heated,
+    acoustic: effectiveEquipment.acoustic,
+    antenna: effectiveEquipment.antenna,
+    camera: effectiveEquipment.camera,
+    hud: effectiveEquipment.hud,
+  };
 
   // Score and sort (with body compatibility + equipment + kType verification)
   const scored = candidates
@@ -1633,6 +2114,34 @@ async function searchByRegnr(regnr: string, env: Env): Promise<SearchResult> {
   if (vehicle.k_type > 0 && topCandidate) {
     // GDPR-safe: regnr is NOT passed — we aggregate (ktype, eurocode) frequencies only
     await insertKtypeMatch(db, vehicle.k_type, topCandidate.eurocode);
+  }
+
+  // Learning Engine: save this search result for future learning
+  if (topCandidate) {
+    const regnrHash = await sha256(regnr);
+    await saveSearchResult(db, {
+      regnr_hash: regnrHash,
+      make: vehicle.make,
+      model: vehicle.model,
+      year: vehicle.year,
+      generation: unifiedVin?.generation || parseGenerationFromDescription(vehicle.model) || undefined,
+      body: unifiedVin?.body || svvBody.bodyType || undefined,
+      chosen_eurocode: topCandidate.eurocode,
+      equipment: {
+        adas: effectiveEquipment.adas,
+        rainSensor: effectiveEquipment.rainSensor,
+        heated: effectiveEquipment.heated,
+        acoustic: effectiveEquipment.acoustic,
+        antenna: effectiveEquipment.antenna,
+        hud: effectiveEquipment.hud,
+        camera: effectiveEquipment.camera,
+        shade: inferRecordEquipment(topCandidate).shade,
+      },
+      layer,
+      confidence,
+      source: equipSource,
+      vin_prefix: vehicle.vin ? vehicle.vin.slice(0, 6).toUpperCase() : undefined,
+    });
   }
 
   return {
@@ -1676,11 +2185,37 @@ async function searchByRegnr(regnr: string, env: Env): Promise<SearchResult> {
               source: factoryEquipment.source,
             }
           : null,
+        guessedEquipment: guessedEquipment.confidence !== "none"
+          ? {
+              adas: guessedEquipment.adas,
+              rainSensor: guessedEquipment.rainSensor,
+              heated: guessedEquipment.heated,
+              acoustic: guessedEquipment.acoustic,
+              antenna: guessedEquipment.antenna,
+              camera: guessedEquipment.camera,
+              hud: guessedEquipment.hud,
+              shade: guessedEquipment.shade,
+              confidence: guessedEquipment.confidence,
+              source: guessedEquipment.source,
+            }
+          : null,
+        effectiveEquipment: {
+          rainSensor: effectiveEquipment.rainSensor,
+          heated: effectiveEquipment.heated,
+          acoustic: effectiveEquipment.acoustic,
+          adas: effectiveEquipment.adas,
+          camera: effectiveEquipment.camera,
+          antenna: effectiveEquipment.antenna,
+          hud: effectiveEquipment.hud,
+          source: effectiveEquipment.source,
+          guessed: effectiveEquipment.guessed,
+          guessConfidence: effectiveEquipment.guessConfidence,
+        },
       },
       candidates: candidatesWithEquipment,
       confidence,
       layer,
-      sources: [source, bovsoftVehicle ? "bovsoft" : "none", factoryEquipment?.source || "none"],
+      sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
     },
   };
 }
@@ -1712,7 +2247,7 @@ export default {
       const biluppgifterConfigured = !!(env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET");
       return jsonResponse({
         status: "ok",
-        version: "2.1",
+        version: "2.2",
         catalogSize: stats.total,
         brands: stats.brands,
         d1Configured: true,
