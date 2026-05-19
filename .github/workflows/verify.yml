@@ -19,6 +19,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install
       - name: TypeScript sjekk
+        working-directory: api/cf-worker
         run: npx tsc --noEmit
 
   smoke-test:
