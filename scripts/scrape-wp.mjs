@@ -7,6 +7,11 @@
 const WP_BASE = 'https://auto-glass.no';
 const OUT_DIR = './data/wp-scrape';
 
+import fs from 'fs';
+fs.mkdirSync(`${OUT_DIR}/pages`, { recursive: true });
+fs.mkdirSync(`${OUT_DIR}/posts`, { recursive: true });
+fs.mkdirSync(`${OUT_DIR}/media`, { recursive: true });
+
 async function fetchJson(path) {
   const url = `${WP_BASE}${path}`;
   console.log(`  → ${url}`);
@@ -16,7 +21,6 @@ async function fetchJson(path) {
 }
 
 async function writeJson(filename, data) {
-  const fs = await import('fs');
   fs.writeFileSync(filename, JSON.stringify(data, null, 2));
   console.log(`  ✓ ${filename}`);
 }
