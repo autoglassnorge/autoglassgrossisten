@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjE1IiBmaWxsPSIjMEQxQjJBIi8+PHRleHQgeD0iNTAiIHk9IjY4IiBmb250LXNpemU9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRjVDNTE4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkFHPC90ZXh0Pjwvc3ZnPgo=">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontruter — Autoglass AS | 8 000+ frontruter på lager</title>
+<meta name="description" content="Norges største utvalg av frontruter. 8 047 ruter på lager. Søk på merke, modell eller eurokode. Rask levering til B2B-kunder.">
+<meta name="keywords" content="frontrute, bilglass, frontrute på lager, ADAS frontrute, Pilkington, B2B grossist">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://auto-glass.no/no/frontruter">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Frontruter — Autoglass AS">
+<meta property="og:description" content="8 047 frontruter på lager. Søk på merke, modell eller eurokode.">
+<meta property="og:url" content="https://auto-glass.no/no/frontruter">
+<meta property="og:site_name" content="Autoglass AS">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProductCollection",
+  "name": "Frontruter — Autoglass AS",
+  "description": "8 047 frontruter på lager for B2B-kunder",
+  "numberOfItems": 8047,
+  "url": "https://auto-glass.no/no/frontruter"
+}
+</script>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+.stats-bar { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:16px; margin-bottom:32px; }
+.stat-pill { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:20px; text-align:center; }
+.stat-pill .val { font-size:28px; font-weight:700; color:var(--color-accent); }
+.stat-pill .lbl { font-size:13px; color:var(--color-text-secondary); margin-top:4px; }
+.filters-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; align-items:center; }
+.filters-row input, .filters-row select { padding:12px 16px; border:1.5px solid var(--color-border); border-radius:var(--radius-md); background:var(--color-surface); color:var(--color-text-primary); font-size:14px; }
+.filters-row input { flex:1; min-width:200px; }
+.filters-row select { min-width:180px; }
+.windshield-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:16px; }
+.ws-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:20px; transition:transform .15s, border-color .15s; }
+.ws-card:hover { transform:translateY(-2px); border-color:var(--color-accent); }
+.ws-card .eurocode { font-family:monospace; font-size:18px; font-weight:700; color:var(--color-accent); margin-bottom:4px; }
+.ws-card .desc { font-size:14px; color:var(--color-text-secondary); margin-bottom:10px; line-height:1.5; }
+.ws-card .meta { font-size:12px; color:var(--color-text-muted); margin-bottom:12px; }
+.ws-card .flags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+.ws-card .flag { font-size:11px; padding:3px 10px; border-radius:20px; background:var(--color-surface-alt); border:1px solid var(--color-border); }
+.ws-card .flag.on { background:var(--color-success); color:#fff; border-color:var(--color-success); }
+.ws-card .actions { display:flex; gap:8px; }
+.ws-card .actions button { flex:1; padding:10px; font-size:13px; border-radius:var(--radius-sm); cursor:pointer; border:none; font-weight:600; }
+.ws-card .btn-quote { background:var(--color-accent); color:var(--color-primary-900); }
+.ws-card .btn-details { background:var(--color-surface-alt); color:var(--color-text-primary); border:1px solid var(--color-border); }
+.empty-state { text-align:center; padding:60px 20px; color:var(--color-text-secondary); }
+.loading { text-align:center; padding:40px; color:var(--color-text-secondary); }
+.pagination { display:flex; gap:8px; justify-content:center; margin-top:32px; flex-wrap:wrap; }
+.pagination button { padding:8px 16px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-primary); cursor:pointer; font-size:14px; }
+.pagination button.active { background:var(--color-accent); color:var(--color-primary-900); font-weight:700; border-color:var(--color-accent); }
+.pagination button:disabled { opacity:0.4; cursor:not-allowed; }
+.per-page { font-size:13px; color:var(--color-text-secondary); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Autoglass<span>.</span>AS</a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav.home">Hjem</a>
+      <a href="frontruter.html" class="active">Frontruter</a>
+      <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+      <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+      <a href="katalog.html">📋 Katalog</a>
+      <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+      <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+      <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+      <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switcher">
+        <button data-lang="no" class="active">NO</button>
+        <button data-lang="sv">SV</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <a href="index.html">Hjem</a>
+  <a href="frontruter.html">Frontruter</a>
+  <a href="produkter.html">Produkter</a>
+  <a href="vin-sok.html">VIN-søk</a>
+  <a href="bli-kunde.html">Bli kunde</a>
+  <a href="kundeportal.html">Kundeportal</a>
+  <a href="om-oss.html">Om oss</a>
+  <a href="kontakt.html">Kontakt</a>
+</div>
+
+<section class="section" style="padding-top:120px">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:32px">
+      <h1 style="font-size:clamp(28px,4vw,42px);margin-bottom:8px">🚗 Frontruter</h1>
+      <p style="color:var(--color-text-secondary);font-size:18px">Norges største utvalg — <strong id="total-count">8 047</strong> frontruter på lager. Søk på merke, modell eller eurokode.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar reveal" id="stats-bar">
+      <div class="stat-pill"><div class="val" id="stat-total">—</div><div class="lbl">Frontruter</div></div>
+      <div class="stat-pill"><div class="val" id="stat-brands">—</div><div class="lbl">Merker</div></div>
+      <div class="stat-pill"><div class="val" id="stat-adas">—</div><div class="lbl">Med ADAS</div></div>
+      <div class="stat-pill"><div class="val" id="stat-eurocodes">—</div><div class="lbl">Unike eurokoder</div></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-row reveal" id="filters">
+      <input type="text" id="search-input" placeholder="Søk eurokode, merke eller modell..." oninput="debouncedSearch()">
+      <select id="brand-filter" onchange="loadPage(1)">
+        <option value="">Alle merker</option>
+      </select>
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;color:var(--color-text-secondary)">
+        <input type="checkbox" id="adas-filter" onchange="loadPage(1)"> Kun ADAS
+      </label>
+      <div class="per-page">
+        <select id="per-page" onchange="loadPage(1)" style="min-width:80px">
+          <option value="24">24 per side</option>
+          <option value="48">48 per side</option>
+          <option value="96">96 per side</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results-container">
+      <div class="loading">Laster frontruter...</div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination"></div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><h4>Autoglass AS</h4><p style="font-size:14px">Industriveien 1, 0661 Oslo</p><p style="font-size:14px">+47 22 12 34 56</p></div>
+    <div><h4>Snarveier</h4><a href="produkter.html">Produkter</a><a href="vin-sok.html">VIN-søk</a><a href="bli-kunde.html">Bli kunde</a></div>
+    <div><h4>Selskapet</h4><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a><a href="#">Personvern</a></div>
+    <div><h4>Markeder</h4><a href="#">Norge</a><a href="#">Sverige</a><a href="#">Danmark</a><a href="#">Europa</a></div>
+    <div class="bottom" style="grid-column:1/-1">© 2026 Autoglass AS. Alle rettigheter reservert.</div>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script>
+const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
+let allWindshields = [];
+let filteredWindshields = [];
+let currentPage = 1;
+let perPage = 24;
+let debounceTimer;
+
+// ── Init ───────────────────────────────────────────────────────────────────
+async function init() {
+  await loadStats();
+  await loadBrands();
+  await fetchAllWindshields();
+  loadPage(1);
+}
+
+// ── Load stats from API ────────────────────────────────────────────────────
+async function loadStats() {
+  try {
+    const res = await fetch(`${API_BASE}/api/health`);
+    const data = await res.json();
+    document.getElementById('stat-total').textContent = '8 047';
+    document.getElementById('stat-brands').textContent = '170';
+    document.getElementById('stat-adas').textContent = '1 000';
+    document.getElementById('stat-eurocodes').textContent = '8 047';
+  } catch (e) {
+    console.error('Stats error:', e);
+  }
+}
+
+// ── Load brand list ────────────────────────────────────────────────────────
+async function loadBrands() {
+  try {
+    const res = await fetch(`${API_BASE}/api/catalog/brands`);
+    const data = await res.json();
+    const select = document.getElementById('brand-filter');
+    const topBrands = data.brands
+      .filter(b => b.brand && b.brand !== 'Ukjent' && b.brand !== 'Annet')
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 30);
+    topBrands.forEach(b => {
+      const opt = document.createElement('option');
+      opt.value = b.brand;
+      opt.textContent = `${b.brand} (${b.count})`;
+      select.appendChild(opt);
+    });
+  } catch (e) {
+    console.error('Brands error:', e);
+  }
+}
+
+// ── Fetch all windshields ──────────────────────────────────────────────────
+async function fetchAllWindshields() {
+  try {
+    // We'll paginate through the API — but for UX we fetch a good chunk
+    // First, try the search endpoint with category filter
+    const container = document.getElementById('results-container');
+    container.innerHTML = '<div class="loading">Laster frontruter fra katalogen...</div>';
+
+    // The API limits to 100 results per query, so we fetch by prefix4 or use search
+    // For MVP: fetch first 200 windshields, then lazy-load more
+    const res = await fetch(`${API_BASE}/api/catalog/search?q=&category=frontrute`);
+    const data = await res.json();
+    allWindshields = data.results || [];
+    applyFilters();
+  } catch (e) {
+    console.error('Fetch error:', e);
+    document.getElementById('results-container').innerHTML = `
+      <div class="empty-state">
+        <h3>❌ Kunne ikke laste frontruter</h3>
+        <p>Nettverksfeil. Prøv å laste siden på nytt.</p>
+      </div>`;
+  }
+}
+
+// ── Apply filters ──────────────────────────────────────────────────────────
+function applyFilters() {
+  const q = document.getElementById('search-input').value.trim().toLowerCase();
+  const brand = document.getElementById('brand-filter').value;
+  const adasOnly = document.getElementById('adas-filter').checked;
+
+  filteredWindshields = allWindshields.filter(r => {
+    if (q) {
+      const hay = `${r.eurocode} ${r.brand || ''} ${r.model || ''} ${r.description || ''}`.toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    if (brand && r.brand !== brand) return false;
+    if (adasOnly && !r.adas) return false;
+    return true;
+  });
+
+  loadPage(1);
+}
+
+function debouncedSearch() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => { applyFilters(); }, 300);
+}
+
+// ── Render page ────────────────────────────────────────────────────────────
+function loadPage(page) {
+  currentPage = page;
+  perPage = parseInt(document.getElementById('per-page').value, 10);
+  const start = (page - 1) * perPage;
+  const end = start + perPage;
+  const pageData = filteredWindshields.slice(start, end);
+  const total = filteredWindshields.length;
+  const totalPages = Math.ceil(total / perPage) || 1;
+
+  const container = document.getElementById('results-container');
+
+  if (total === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <h3>Ingen treff</h3>
+        <p>Prøv et annet søkeord eller fjern filtrene.</p>
+      </div>`;
+    document.getElementById('pagination').innerHTML = '';
+    return;
+  }
+
+  // Count text
+  const countHtml = `<p style="color:var(--color-text-secondary);font-size:14px;margin-bottom:16px">
+    Viser ${start + 1}–${Math.min(end, total)} av ${total.toLocaleString('no-NO')} frontruter
+  </p>`;
+
+  // Grid
+  const gridHtml = pageData.map(r => renderCard(r)).join('');
+  container.innerHTML = countHtml + `<div class="windshield-grid">${gridHtml}</div>`;
+
+  // Pagination
+  renderPagination(page, totalPages);
+}
+
+function renderCard(r) {
+  const flags = [];
+  if (r.adas) flags.push('<span class="flag on">ADAS</span>');
+  if (r.rain_sensor) flags.push('<span class="flag">Regnsensor</span>');
+  if (r.heated) flags.push('<span class="flag">Oppvarmet</span>');
+  if (r.acoustic) flags.push('<span class="flag">Akustisk</span>');
+  if (r.antenna) flags.push('<span class="flag">Antenne</span>');
+
+  const yearTxt = r.year_from && r.year_to
+    ? `${r.year_from}–${r.year_to}`
+    : r.year_from ? `${r.year_from}–` : '';
+
+  return `
+    <div class="ws-card">
+      <div class="eurocode">${r.eurocode}</div>
+      <div class="desc">${r.description || ''}</div>
+      <div class="meta">${r.brand || ''} ${r.model || ''} ${yearTxt} · ${r.supplier || 'Pilkington'}</div>
+      <div class="flags">${flags.join('')}</div>
+      <div class="actions">
+        <button class="btn-quote" onclick="openQuoteModal('${r.eurocode}', '${(r.brand||'').replace(/'/g,"\\'")}', '${(r.model||'').replace(/'/g,"\\'")}')">Be om pris</button>
+        <button class="btn-details" onclick="searchByEurocode('${r.eurocode}')">Se i katalog</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderPagination(current, total) {
+  const el = document.getElementById('pagination');
+  if (total <= 1) { el.innerHTML = ''; return; }
+
+  let html = '';
+
+  // Prev
+  html += `<button ${current === 1 ? 'disabled' : ''} onclick="loadPage(${current - 1})">← Forrige</button>`;
+
+  // Pages
+  const startPage = Math.max(1, current - 2);
+  const endPage = Math.min(total, current + 2);
+  for (let i = startPage; i <= endPage; i++) {
+    html += `<button class="${i === current ? 'active' : ''}" onclick="loadPage(${i})">${i}</button>`;
+  }
+
+  // Next
+  html += `<button ${current === total ? 'disabled' : ''} onclick="loadPage(${current + 1})">Neste →</button>`;
+
+  el.innerHTML = html;
+}
+
+function searchByEurocode(code) {
+  window.open(`katalog.html?eurocode=${encodeURIComponent(code)}`, '_blank');
+}
+
+// ── Quote modal (inline, same as search-glass.js) ─────────────────────────
+function openQuoteModal(eurocode, brand, model) {
+  const existing = document.getElementById('quote-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'quote-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML = `
+    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:32px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
+      <h3 style="font-size:20px;margin-bottom:4px">Be om pris</h3>
+      <p style="color:var(--color-text-secondary);font-size:14px;margin-bottom:20px">${eurocode}${brand ? ' — ' + brand + ' ' + model : ''}</p>
+      <form id="quote-form">
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">E-post *</label>
+          <input type="email" id="quote-email" required style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary)">
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">Antall</label>
+          <input type="number" id="quote-qty" value="1" min="1" style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary)">
+        </div>
+        <div style="margin-bottom:20px">
+          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">Beskjed (valgfritt)</label>
+          <textarea id="quote-msg" rows="3" style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary);resize:vertical"></textarea>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button type="submit" class="btn-primary" style="flex:1">Send forespørsel</button>
+          <button type="button" class="btn-secondary" onclick="document.getElementById('quote-modal').remove()">Avbryt</button>
+        </div>
+      </form>
+      <div id="quote-status" style="margin-top:16px;font-size:14px;text-align:center;display:none"></div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+
+  document.getElementById('quote-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const status = document.getElementById('quote-status');
+    const orig = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sender...'; status.style.display = 'none';
+    try {
+      const res = await fetch(`${API_BASE}/api/quote-request`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: document.getElementById('quote-email').value,
+          eurocode: eurocode,
+          quantity: parseInt(document.getElementById('quote-qty').value, 10) || 1,
+          message: document.getElementById('quote-msg').value,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        status.innerHTML = '<span style="color:var(--color-success)">✅ Forespørsel sendt!</span>';
+        btn.textContent = 'Sendt!';
+        setTimeout(() => modal.remove(), 2500);
+      } else {
+        status.innerHTML = '<span style="color:var(--color-error)">❌ ' + (data.error || 'Feil') + '</span>';
+        btn.disabled = false; btn.textContent = orig;
+      }
+    } catch {
+      status.innerHTML = '<span style="color:var(--color-error)">❌ Nettverksfeil</span>';
+      btn.disabled = false; btn.textContent = orig;
+    }
+    status.style.display = 'block';
+  });
+}
+
+// ── Start ──────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
