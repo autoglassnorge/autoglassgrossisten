@@ -1,6 +1,6 @@
 /**
- * Autoglass AS — Cloudflare Worker API v2 (D1-optimized)
- * =======================================================
+ * Autoglass AS — Cloudflare Worker API v2.2 (Hardened)
+ * ========================================================================
  * Endepunkter:
  *   GET  /api/glass?regnr=AB12345       → søk på regnr via SVV → D1
  *   GET  /api/glass?prefix4=5351        → søk på prefix4 i D1
@@ -11,6 +11,13 @@
  *   GET  /api/catalog/search?q=...      → fulltext søk i D1
  *
  * Arkitektur: D1 (primær) + KV (cache + fallback)
+ * Nytt i v2.1: Bovsoft kType-integrasjon + statistisk læring
+ * Nytt i v2.2:
+ *   - SVV 401/403 returnerer 503 + Retry-After i stedet for 500-krasj
+ *   - Bovsoft 401/402/403/404 logges separat — vi ser når konto aktiveres
+ *   - ktype_matches GDPR-fikset: ingen regnr lagres, kun (ktype, eurocode, hit_count)
+ *   - KTYPE_CONFIDENCE_THRESHOLD=3 hindrer cache-poisoning fra enkelt-feil
+ *   - Feilrespons cachet IKKE (kun 200 OK ender i KV)
  */
 
 export interface Env {
@@ -145,8 +152,27 @@ interface SvvKjoretoyData {
   }>;
 }
 
-async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<TecdocVehicle | null> {
-  if (!apiKey || apiKey === "NOT_SET") return null;
+/**
+ * SVV fetch result — explicit error taxonomy so callers can return
+ * appropriate HTTP status codes instead of swallowing everything as null.
+ *
+ * status taxonomy:
+ *   - 'ok'             → vehicle data returned
+ *   - 'not_configured' → SVV_API_KEY missing/NOT_SET (deploy-time issue)
+ *   - 'auth_error'     → 401/403 from SVV (rotate key)
+ *   - 'not_found'      → 404 or empty list (regnr doesn't exist)
+ *   - 'upstream_error' → 5xx from SVV or network failure
+ *   - 'parse_error'    → response not parseable
+ */
+type SvvFetchResult =
+  | { status: "ok"; vehicle: TecdocVehicle }
+  | { status: "not_configured" | "auth_error" | "not_found" | "upstream_error" | "parse_error"; httpStatus?: number };
+
+async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<SvvFetchResult> {
+  if (!apiKey || apiKey === "NOT_SET") {
+    console.error("SVV: SVV_API_KEY not configured");
+    return { status: "not_configured" };
+  }
   try {
     const res = await fetch(
       `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(regnr)}`,
@@ -158,10 +184,29 @@ async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<Tec
         },
       }
     );
-    if (!res.ok) return null;
-    const data = (await res.json()) as SvvKjoretoyData;
+
+    if (res.status === 401 || res.status === 403) {
+      console.error(`SVV auth failed (${res.status}) — rotate SVV_API_KEY via 'wrangler secret put SVV_API_KEY'`);
+      return { status: "auth_error", httpStatus: res.status };
+    }
+    if (res.status === 404) {
+      return { status: "not_found", httpStatus: 404 };
+    }
+    if (!res.ok) {
+      console.warn(`SVV upstream error: HTTP ${res.status}`);
+      return { status: "upstream_error", httpStatus: res.status };
+    }
+
+    let data: SvvKjoretoyData;
+    try {
+      data = (await res.json()) as SvvKjoretoyData;
+    } catch (e) {
+      console.warn(`SVV parse error: ${e instanceof Error ? e.message : String(e)}`);
+      return { status: "parse_error" };
+    }
+
     const k = data.kjoretoydataListe?.[0];
-    if (!k) return null;
+    if (!k) return { status: "not_found" };
 
     const td = k.godkjenning?.tekniskGodkjenning?.tekniskeData;
     const generelt = td?.generelt;
@@ -178,27 +223,158 @@ async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<Tec
     const gvwr = td?.vekter?.tillattTotalvekt || 0;
 
     return {
-      regno: regnr,
-      vin,
-      make: merke.toUpperCase(),
-      model: model.toUpperCase(),
-      year,
-      k_type: 0,
-      typeCode,
-      length,
-      fuelCode,
-      engineCode,
-      seats,
-      gvwr,
+      status: "ok",
+      vehicle: {
+        regno: regnr,
+        vin,
+        make: merke.toUpperCase(),
+        model: model.toUpperCase(),
+        year,
+        k_type: 0,
+        typeCode,
+        length,
+        fuelCode,
+        engineCode,
+        seats,
+        gvwr,
+      },
     };
+  } catch (e) {
+    console.warn(`SVV network error: ${e instanceof Error ? e.message : String(e)}`);
+    return { status: "upstream_error" };
+  }
+}
+
+// ============================================================================
+// BOVSOFT REGNUM API — kType lookup
+// ============================================================================
+
+interface BovsoftVehicle {
+  ktype: number;
+  vin: string;
+  brand: string;
+  model: string;
+  type: string;
+  yearFrom: number;
+  yearTo: number;
+  body: string;
+  source: "bovsoft";
+}
+
+/**
+ * Fetch vehicle data from Bovsoft REGNUM API.
+ * Returns ktype (TecDoc type ID) + VIN + vehicle data.
+ *
+ * Endpoint: GET /bovsoft.regnum.run?id=ID&seccode=SECRET&nameservice=getktypefornumplatenorway&regnum=REG&contenttype=JSON
+ */
+async function fetchBovsoftVehicle(
+  regno: string,
+  clientId: string,
+  secCode: string
+): Promise<BovsoftVehicle | null> {
+  if (!clientId || !secCode || clientId === "NOT_SET") return null;
+
+  try {
+    const url = `http://54.38.179.43:150/bovsoft.regnum.run?id=${encodeURIComponent(clientId)}&seccode=${encodeURIComponent(secCode)}&nameservice=getktypefornumplatenorway&regnum=${encodeURIComponent(regno)}&contenttype=JSON`;
+    const res = await fetch(url, { method: "GET" });
+
+    if (!res.ok) {
+      console.warn(`Bovsoft HTTP ${res.status} for regnr=${regno}`);
+      return null;
+    }
+
+    const text = await res.text();
+    let data: Record<string, unknown> = {};
+
+    try {
+      data = JSON.parse(text) as Record<string, unknown>;
+    } catch {
+      console.warn(`Bovsoft: non-JSON response for regnr=${regno}`);
+      return null;
+    }
+
+    // Bovsoft response: { status: 200|401|402|403|404, statusText?: string, data?: { datacar: [...] }, countFREERequests?: number }
+    const bovStatus = typeof data.status === "number" ? data.status : parseInt(String(data.status), 10);
+    const bovStatusText = typeof data.statusText === "string" ? data.statusText : "";
+
+    // Diagnostic logging — critical for knowing when account becomes active
+    if (bovStatus === 401) {
+      console.error(`Bovsoft auth failed (401) — wrong client id or seccode. Check BOVSOFT_CLIENT_ID/BOVSOFT_SECCODE secrets.`);
+      return null;
+    }
+    if (bovStatus === 402) {
+      console.error(`Bovsoft zero balance (402) — top up account. countFREERequests=${data.countFREERequests}`);
+      return null;
+    }
+    if (bovStatus === 403) {
+      console.warn(`Bovsoft account pending (403): ${bovStatusText || "temp status, need wait confirmation"}. Contact bovsoft@gmail.com ref Client id=${clientId}.`);
+      return null;
+    }
+    if (bovStatus === 404) {
+      // regnr exists in our system but Bovsoft couldn't decode it — normal, just fall through
+      return null;
+    }
+    if (bovStatus !== 200) {
+      console.warn(`Bovsoft unexpected status=${bovStatus} statusText="${bovStatusText}" for regnr=${regno}`);
+      return null;
+    }
+
+    // Log remaining free requests every time — helps monitor quota
+    const freeReq = typeof data.countFREERequests === "number" ? data.countFREERequests : null;
+    if (freeReq !== null && freeReq < 50) {
+      console.warn(`Bovsoft countFREERequests=${freeReq} — low quota`);
+    }
+
+    const datacar = (data.data as Record<string, unknown> | undefined)?.datacar as Array<Record<string, unknown>> | undefined;
+    const car = datacar?.[0];
+    if (!car) return null;
+
+    const ktype = typeof car.ktype === "number" ? car.ktype : parseInt(String(car.ktype), 10);
+    if (!ktype || isNaN(ktype)) return null;
+
+    // Parse year from YYYYMM format
+    const parseYear = (val: unknown): number => {
+      if (!val) return 0;
+      const s = String(val);
+      const y = parseInt(s.slice(0, 4), 10);
+      return isNaN(y) ? 0 : y;
+    };
+
+    return {
+      ktype,
+      vin: String(car.vin || ""),
+      brand: String(car.manufCar || "").toUpperCase(),
+      model: String(car.modelCar || "").toUpperCase(),
+      type: String(car.typeCar || ""),
+      yearFrom: parseYear(car.typeFromYearCar),
+      yearTo: parseYear(car.typeToYearCar),
+      body: String(car.bodyCar || ""),
+      source: "bovsoft",
+    };
+  } catch (e) {
+    console.warn(`Bovsoft network error for regnr=${regno}: ${e instanceof Error ? e.message : String(e)}`);
+    return null;
+  }
+}
+
+/** Cache Bovsoft vehicle data in KV for 30 days */
+async function cacheBovsoftVehicle(kv: KVNamespace, regnr: string, vehicle: BovsoftVehicle): Promise<void> {
+  await kv.put(`bovsoft:${regnr.toUpperCase()}`, JSON.stringify(vehicle), { expirationTtl: 30 * 24 * 60 * 60 });
+}
+
+/** Get cached Bovsoft vehicle data from KV */
+async function getCachedBovsoftVehicle(kv: KVNamespace, regnr: string): Promise<BovsoftVehicle | null> {
+  const cached = await kv.get(`bovsoft:${regnr.toUpperCase()}`);
+  if (!cached) return null;
+  try {
+    return JSON.parse(cached) as BovsoftVehicle;
   } catch {
     return null;
   }
 }
 
 // ============================================================================
-// ============================================================================
-// FACTORY EQUIPMENT LOOKUP (Bovsoft REGNUM + Biluppgitter fallback)
+// FACTORY EQUIPMENT LOOKUP (Biluppgitter)
 // ============================================================================
 
 interface FactoryEquipment {
@@ -213,75 +389,8 @@ interface FactoryEquipment {
 }
 
 /**
- * Fetch factory equipment from Bovsoft REGNUM API.
- * Primary source: pays per successful request, no monthly subscription.
- *
- * Endpoint: GET /bovsoft.regnum.clientapi?client=ID&seccode=SECRET&regnum=REG&country=NO
- */
-async function fetchBovsoftEquipment(
-  regno: string,
-  clientId: string,
-  secCode: string
-): Promise<FactoryEquipment | null> {
-  if (!clientId || !secCode || clientId === "NOT_SET") return null;
-
-  try {
-    const url = `http://webservice.bovsoft.com:150/bovsoft.regnum.clientapi?client=${encodeURIComponent(clientId)}&seccode=${encodeURIComponent(secCode)}&regnum=${encodeURIComponent(regno)}&country=NO`;
-    const res = await fetch(url, { method: "GET" });
-
-    if (!res.ok) return null;
-
-    const text = await res.text();
-    let data: Record<string, unknown> = {};
-
-    // Bovsoft returns JSON by default, but might return XML
-    try {
-      data = JSON.parse(text) as Record<string, unknown>;
-    } catch {
-      // If XML, we can't parse easily — fallback to Biluppgifter
-      return null;
-    }
-
-    // Bovsoft response structure is unknown until we test.
-    // Attempt common field names for equipment/options.
-    const opts = extractOptionsFromBovsoft(data);
-
-    return {
-      rainSensor: opts.some((o) => /rain|regn|vindrutetorkare|wipe|torkar/i.test(o)),
-      heated: opts.some((o) => /heat|varme|uppvarm|defrost/i.test(o)),
-      acoustic: opts.some((o) => /acoustic|akustik|akustisk|quiet|støydemp/i.test(o)),
-      antenna: opts.some((o) => /antenna|antenn|radio|fm|dab/i.test(o)),
-      camera: opts.some((o) => /camera|kamera|sensor/i.test(o)),
-      adas: opts.some((o) => /adas|lane|filskifte|autonomous|assist/i.test(o)),
-      hud: opts.some((o) => /hud|head.up|projeksjon/i.test(o)),
-      source: "bovsoft",
-    };
-  } catch {
-    return null;
-  }
-}
-
-/** Extract options array from Bovsoft response (heuristic until we know structure) */
-function extractOptionsFromBovsoft(data: Record<string, unknown>): string[] {
-  const results: string[] = [];
-
-  function walk(obj: unknown) {
-    if (typeof obj === "string") {
-      results.push(obj.toLowerCase());
-    } else if (Array.isArray(obj)) {
-      obj.forEach(walk);
-    } else if (obj && typeof obj === "object") {
-      Object.values(obj).forEach(walk);
-    }
-  }
-
-  walk(data);
-  return results;
-}
-
-/**
- * Fetch factory equipment from Biluppgitter API (fallback).
- * Already implemented, kept as secondary source.
+ * Fetch factory equipment from Biluppgitter API.
+ * Kept as equipment source since Bovsoft does not return equipment flags.
  */
 async function fetchBiluppgifterEquipment(
   regno: string,
@@ -386,6 +495,71 @@ async function queryByBrandOnly(db: D1Database, brand: string, modelHint?: strin
   return (results || []) as unknown as GlassRecord[];
 }
 
+// === kType-based queries (statistical learning) ===
+
+/** Query glass catalog by ktype (when we have ktype populated in DB) */
+async function queryByKtype(db: D1Database, ktype: number): Promise<GlassRecord[]> {
+  const { results } = await db
+    .prepare("SELECT * FROM glass_catalog WHERE ktype = ? LIMIT 20")
+    .bind(ktype)
+    .all();
+  return (results || []) as unknown as GlassRecord[];
+}
+
+/**
+ * Confidence threshold for Layer 0 (statistical match).
+ * A ktype→eurocode mapping must have been observed at least this many times
+ * before we trust it as 'exact'. Prevents single misclassifications from
+ * permanently poisoning the cache.
+ */
+const KTYPE_CONFIDENCE_THRESHOLD = 3;
+
+/**
+ * Query statistical ktype→eurocode mapping from learned data.
+ * Returns frequency-sorted candidates. Schema v3 (after migration 0003):
+ *   ktype_matches(ktype, eurocode, hit_count, first_seen, last_seen)
+ * No regnr stored — GDPR-safe aggregation only.
+ */
+async function queryKtypeMapping(db: D1Database, ktype: number): Promise<{ eurocode: string; frequency: number }[]> {
+  try {
+    const { results } = await db
+      .prepare(`
+        SELECT eurocode, hit_count as frequency
+        FROM ktype_matches
+        WHERE ktype = ?
+        ORDER BY hit_count DESC
+        LIMIT 5
+      `)
+      .bind(ktype)
+      .all();
+    return (results || []) as unknown as { eurocode: string; frequency: number }[];
+  } catch {
+    // Table might not exist yet (migration 0003 not run)
+    return [];
+  }
+}
+
+/**
+ * Record a ktype→eurocode observation for statistical learning.
+ * NOTE: regnr is intentionally NOT stored — it is a personal data identifier
+ * under Norwegian law when linkable to a vehicle owner. We aggregate by
+ * (ktype, eurocode) only, incrementing hit_count on each observation.
+ */
+async function insertKtypeMatch(db: D1Database, ktype: number, eurocode: string): Promise<void> {
+  if (!ktype || !eurocode) return;
+  try {
+    await db.prepare(
+      `INSERT INTO ktype_matches (ktype, eurocode, hit_count, first_seen, last_seen)
+       VALUES (?, ?, 1, datetime('now'), datetime('now'))
+       ON CONFLICT(ktype, eurocode) DO UPDATE SET
+         hit_count = hit_count + 1,
+         last_seen = datetime('now')`
+    ).bind(ktype, eurocode.toUpperCase()).run();
+  } catch {
+    // Silently fail if migration 0003 not run yet
+  }
+}
+
 async function getCatalogStats(db: D1Database): Promise<{ total: number; brands: number }> {
   const totalRow = await db.prepare("SELECT COUNT(*) as cnt FROM glass_catalog").first();
   const brandRow = await db.prepare("SELECT COUNT(DISTINCT brand) as cnt FROM glass_catalog").first();
@@ -480,7 +654,7 @@ function detectFlagsFromDescription(description: string | null): {
   };
 }
 
-/** Legacy OEM-based detection (kept for future Biluppgifter/TecDoc integration) */
+/** Legacy OEM-based detection (kept for future Biluppgitter/TecDoc integration) */
 function detectFlagsFromOem(oemDescriptions: string[]) {
   return {
     adas: oemDescriptions.some((d) => /adas|camera|sensor|kamera|filskifte|lane|collision/i.test(d)),
@@ -523,7 +697,8 @@ function scoreCandidate(
   c: GlassRecord,
   flags: ReturnType<typeof detectFlagsFromOem>,
   vehicle: TecdocVehicle,
-  vinInfo: ReturnType<typeof decodeVwTransporterBody>
+  vinInfo: ReturnType<typeof decodeVwTransporterBody>,
+  bovsoftInfo?: BovsoftVehicle
 ): number {
   let score = 0;
 
@@ -562,6 +737,15 @@ function scoreCandidate(
       score += 10;
     } else if (vehicleYear < yr.from - 10) {
       score -= 30;
+    }
+  }
+
+  // kType generation verification bonus
+  if (bovsoftInfo) {
+    const bovGen = inferGenerationFromYearRange(c.brand || "", c.model || "", bovsoftInfo.yearFrom, bovsoftInfo.yearTo);
+    const recordGen = parseGenerationFromDescription(c.description) || parseGenerationFromDescription(c.model);
+    if (bovGen && recordGen && bovGen === recordGen) {
+      score += 25; // Strong generation match via kType year range
     }
   }
 
@@ -611,15 +795,35 @@ function expectedGeneration(brand: string, model: string, year: number): string 
     if (year <= 2015) return "T5";
     return "T6";
   }
+  // BMW 3-series generations
+  if (key.includes("bmw") && (key.includes("3") || key.includes("tre"))) {
+    if (year <= 1990) return "E30";
+    if (year <= 2000) return "E36";
+    if (year <= 2006) return "E46";
+    if (year <= 2012) return "E90";
+    if (year <= 2018) return "F30";
+    return "G20";
+  }
+  // Mercedes C-Class
+  if (key.includes("mercedes") && (key.includes("c") || key.includes("190"))) {
+    if (year <= 1993) return "W201";
+    if (year <= 2000) return "W202";
+    if (year <= 2007) return "W203";
+    if (year <= 2014) return "W204";
+    if (year <= 2021) return "W205";
+    return "W206";
+  }
   return null;
 }
+
+// ============================================================================
+// VIN DECODING
+// ============================================================================
 
 function decodeVwTransporterBody(vin: string, lengthMm?: number): { generation: string; body: string; wheelbase: string; roof?: string } | null {
   if (!vin || vin.length < 8) return null;
   const wmi = vin.slice(0, 3).toUpperCase();
   if (wmi !== "WV1" && wmi !== "WV2") return null;
-  // VW T5/T6 VIN: WV1ZZZ7H... where 7H/7J/7E/7F/7L is body code
-  // VDS positions 4-9: ZZZ7H (position 7=7, position 8=H/J/E/F/L)
   const bodyCode = vin[7].toUpperCase();
   const bodyMap: Record<string, { body: string; wheelbase: string }> = {
     "E": { body: "double_cab", wheelbase: "swb" },
@@ -630,48 +834,179 @@ function decodeVwTransporterBody(vin: string, lengthMm?: number): { generation: 
   };
   const info = bodyMap[bodyCode];
   if (!info) return null;
-  // Determine generation from position 10 (model year character)
   const yearChar = vin.length >= 10 ? vin[9].toUpperCase() : "";
   let generation = "T5";
-  if (yearChar >= "G" && yearChar <= "L") generation = "T5"; // 2005-2015
-  if (yearChar >= "M") generation = "T6"; // 2015+
+  if (yearChar >= "G" && yearChar <= "L") generation = "T5";
+  if (yearChar >= "M") generation = "T6";
 
-  // SVV length is more reliable than VIN for wheelbase on some EU builds
-  // T5 SWB = ~4892mm, LWB = ~5292mm
   let wheelbase = info.wheelbase;
   let roof: string | undefined;
   if (lengthMm && lengthMm > 1000) {
-    if (lengthMm >= 5100) {
-      wheelbase = "lwb";
-    } else if (lengthMm <= 5000) {
-      wheelbase = "swb";
-    }
-    // High roof detection: if description later contains HIGH, mark it
-    // (we can't detect roof height from length alone)
+    if (lengthMm >= 5100) wheelbase = "lwb";
+    else if (lengthMm <= 5000) wheelbase = "swb";
   }
 
   return { generation, body: info.body, wheelbase, roof };
+}
+
+/** Decode BMW VIN (WBA/WBS prefix) to model series */
+function decodeBmwVin(vin: string): { series: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 7) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  if (!wmi.startsWith("WB")) return null; // BMW WMI
+  const modelCode = vin.slice(3, 7).toUpperCase(); // Positions 4-7
+  // BMW F30 3-series: 3V51, 3V52, etc.
+  // BMW G20 3-series: 3V31, 3V32, etc.
+  const series = modelCode[0];
+  if (series === "3") {
+    const gen = modelCode[1];
+    if (gen === "V" || gen === "W") return { series: "3", generation: "F30", body: "sedan" };
+    if (gen === "X" || gen === "Y") return { series: "3", generation: "G20", body: "sedan" };
+    return { series: "3", generation: "E90", body: "sedan" };
+  }
+  if (series === "5") {
+    return { series: "5", generation: "F10", body: "sedan" };
+  }
+  return { series, generation: "unknown", body: "sedan" };
+}
+
+/** Decode Mercedes VIN (WDB/WDD prefix) */
+function decodeMercedesVin(vin: string): { class: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 6) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  if (!wmi.startsWith("WD")) return null;
+  const classCode = vin.slice(3, 6).toUpperCase();
+  // WDD205 = C-Class W205
+  if (classCode.startsWith("205")) return { class: "C", generation: "W205", body: "sedan" };
+  if (classCode.startsWith("206")) return { class: "C", generation: "W206", body: "sedan" };
+  if (classCode.startsWith("204")) return { class: "C", generation: "W204", body: "sedan" };
+  if (classCode.startsWith("213")) return { class: "E", generation: "W213", body: "sedan" };
+  if (classCode.startsWith("212")) return { class: "E", generation: "W212", body: "sedan" };
+  return { class: "unknown", generation: "unknown", body: "sedan" };
+}
+
+/** Decode Audi VIN (WAU/WAU prefix) */
+function decodeAudiVin(vin: string): { model: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 7) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  if (!wmi.startsWith("WA")) return null;
+  const modelCode = vin.slice(3, 7).toUpperCase();
+  // Audi A4 B8: 8K2, 8K5
+  // Audi A4 B9: 8W2, 8W5
+  if (modelCode.startsWith("8K")) return { model: "A4", generation: "B8", body: "sedan" };
+  if (modelCode.startsWith("8W")) return { model: "A4", generation: "B9", body: "sedan" };
+  // Audi A3 8V
+  if (modelCode.startsWith("8V")) return { model: "A3", generation: "8V", body: "hatch" };
+  return { model: "unknown", generation: "unknown", body: "sedan" };
+}
+
+/** Decode Ford VIN (WF0 prefix) */
+function decodeFordVin(vin: string): { model: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 7) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  if (wmi !== "WF0" && wmi !== "1FT" && wmi !== "3FA") return null;
+  const modelCode = vin.slice(5, 7).toUpperCase();
+  // Ford Focus Mk3: P1
+  // Ford Focus Mk4: H1
+  if (modelCode === "P1") return { model: "Focus", generation: "Mk3", body: "hatch" };
+  if (modelCode === "H1") return { model: "Focus", generation: "Mk4", body: "hatch" };
+  return { model: "unknown", generation: "unknown", body: "sedan" };
+}
+
+/** Decode Hyundai/Kia VIN */
+function decodeHyundaiVin(vin: string): { model: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 6) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  // Hyundai WMI: KMx, MEx, NLx, TMA
+  // Kia WMI: KNx, MEx, NLx
+  if (!wmi.startsWith("KM") && !wmi.startsWith("KN") && !wmi.startsWith("ME") && !wmi.startsWith("NL") && !wmi.startsWith("TMA")) return null;
+  const modelCode = vin.slice(3, 5).toUpperCase();
+  // Hyundai i30 GD = HDE
+  // Hyundai i30 PD = PDE
+  if (modelCode === "HD") return { model: "i30", generation: "GD", body: "hatch" };
+  if (modelCode === "PD") return { model: "i30", generation: "PD", body: "hatch" };
+  return { model: "unknown", generation: "unknown", body: "hatch" };
+}
+
+/** Decode Toyota VIN */
+function decodeToyotaVin(vin: string): { model: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 7) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  // Toyota WMI: JTD, JT1, JT2, JT3, JT5, JT6, NMT, SB1
+  if (!wmi.startsWith("JT") && !wmi.startsWith("NMT") && !wmi.startsWith("SB1")) return null;
+  const modelCode = vin.slice(3, 6).toUpperCase();
+  // Toyota Corolla E210: ZRE21, ZWE21
+  // Toyota Corolla E180: ZRE18
+  if (modelCode.startsWith("ZRE21") || modelCode.startsWith("ZWE21")) return { model: "Corolla", generation: "E210", body: "sedan" };
+  if (modelCode.startsWith("ZRE18")) return { model: "Corolla", generation: "E180", body: "sedan" };
+  return { model: "unknown", generation: "unknown", body: "sedan" };
+}
+
+/** Unified VIN decoder — tries all known makes */
+function decodeVin(vin: string, lengthMm?: number): { make: string; generation: string; body: string; wheelbase?: string } | null {
+  if (!vin || vin.length < 8) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+
+  // VW Transporter
+  if (wmi === "WV1" || wmi === "WV2") {
+    const result = decodeVwTransporterBody(vin, lengthMm);
+    if (result) return { make: "volkswagen", generation: result.generation, body: result.body, wheelbase: result.wheelbase };
+  }
+
+  // BMW
+  if (wmi.startsWith("WB")) {
+    const result = decodeBmwVin(vin);
+    if (result) return { make: "bmw", generation: result.generation, body: result.body };
+  }
+
+  // Mercedes
+  if (wmi.startsWith("WD")) {
+    const result = decodeMercedesVin(vin);
+    if (result) return { make: "mercedes", generation: result.generation, body: result.body };
+  }
+
+  // Audi
+  if (wmi.startsWith("WA")) {
+    const result = decodeAudiVin(vin);
+    if (result) return { make: "audi", generation: result.generation, body: result.body };
+  }
+
+  // Ford
+  if (wmi === "WF0" || wmi.startsWith("1FT") || wmi.startsWith("3FA")) {
+    const result = decodeFordVin(vin);
+    if (result) return { make: "ford", generation: result.generation, body: result.body };
+  }
+
+  // Hyundai/Kia
+  if (wmi.startsWith("KM") || wmi.startsWith("KN") || wmi.startsWith("ME") || wmi.startsWith("NL") || wmi.startsWith("TMA")) {
+    const result = decodeHyundaiVin(vin);
+    if (result) return { make: "hyundai", generation: result.generation, body: result.body };
+  }
+
+  // Toyota
+  if (wmi.startsWith("JT") || wmi.startsWith("NMT") || wmi.startsWith("SB1")) {
+    const result = decodeToyotaVin(vin);
+    if (result) return { make: "toyota", generation: result.generation, body: result.body };
+  }
+
+  return null;
 }
 
 /** Infer body variant from SVV data (length, seats, GVWR) */
 function inferBodyFromSvvData(vehicle: TecdocVehicle): { wheelbase?: string; bodyType?: string; variant?: string } {
   const result: { wheelbase?: string; bodyType?: string; variant?: string } = {};
 
-  // Wheelbase from length
   if (vehicle.length && vehicle.length > 1000) {
-    // VW T5/T6: SWB ~4890mm, LWB ~5290mm
     if (vehicle.length >= 5100) result.wheelbase = "lwb";
     else if (vehicle.length <= 5000) result.wheelbase = "swb";
   }
 
-  // Body type from seats
   if (vehicle.seats) {
     if (vehicle.seats <= 3) result.bodyType = "van";
-    else if (vehicle.seats <= 6) result.bodyType = "kombi"; // or double cab
-    else if (vehicle.seats >= 7) result.bodyType = "passenger"; // caravelle/multivan
+    else if (vehicle.seats <= 6) result.bodyType = "kombi";
+    else if (vehicle.seats >= 7) result.bodyType = "passenger";
   }
 
-  // Variant hints from GVWR
   if (vehicle.gvwr) {
     if (vehicle.gvwr >= 3000) result.variant = "heavy";
     else if (vehicle.gvwr <= 2800) result.variant = "light";
@@ -690,40 +1025,33 @@ function scoreBodyCompatibility(
   const desc = (record.description + " " + (record.model || "")).toLowerCase();
   const svvBody = inferBodyFromSvvData(vehicle);
 
-  // ── Wheelbase matching ──
   if (svvBody.wheelbase || vinInfo?.wheelbase) {
     const wb = svvBody.wheelbase || vinInfo?.wheelbase;
     if (wb === "lwb") {
       if (desc.includes("lwb") || desc.includes("lang")) score += 15;
       else if (desc.includes("swb") || desc.includes("kort")) score -= 15;
-      // If no wheelbase mentioned, neutral (many parts fit both)
     } else if (wb === "swb") {
       if (desc.includes("swb") || desc.includes("kort")) score += 10;
       else if (desc.includes("lwb") || desc.includes("lang")) score -= 15;
     }
   }
 
-  // ── Body type matching ──
   if (svvBody.bodyType) {
     if (svvBody.bodyType === "van" && (desc.includes("van") || desc.includes("kasse"))) score += 10;
     if (svvBody.bodyType === "passenger" && (desc.includes("multivan") || desc.includes("caravelle"))) score += 10;
     if (svvBody.bodyType === "kombi" && desc.includes("kombi")) score += 10;
   }
 
-  // ── Double cab detection ──
   if (vehicle.seats && vehicle.seats >= 5 && vehicle.seats <= 6) {
     if (desc.includes("double cab") || desc.includes("doble cab") || desc.includes("crew")) score += 12;
-    // If it clearly says "van" with 2 seats but vehicle has 5+, penalise
     if ((desc.includes("van") || desc.includes("kasse")) && !desc.includes("double") && !desc.includes("crew")) score -= 5;
   }
 
-  // ── High roof ──
   if (vinInfo?.roof === "high" || desc.includes("high")) {
     if (desc.includes("high") && vinInfo?.roof === "high") score += 10;
     else if (desc.includes("high") && vinInfo?.roof !== "high") score -= 8;
   }
 
-  // ── Multivan vs Transporter ──
   if (desc.includes("multivan") && svvBody.bodyType === "van") score -= 5;
   if (desc.includes("transporter") && svvBody.bodyType === "passenger") score -= 3;
 
@@ -736,14 +1064,12 @@ function modelMatches(vehicleModel: string, recordModel: string | null, vehicleM
   const rm = recordModel.toLowerCase().trim();
   if (vm.includes(rm) || rm.includes(vm)) return true;
 
-  // VW T5/T6: Transporter, Multivan, Caravelle share many parts
   const make = (vehicleMake || "").toLowerCase();
   if (make.includes("volkswagen")) {
     const vwModels = ["transporter", "multivan", "caravelle", "california"];
     const vmIsVw = vwModels.some((m) => vm.includes(m));
     const rmIsVw = vwModels.some((m) => rm.includes(m));
     if (vmIsVw && rmIsVw) {
-      // Both are VW van models — check generation match
       const vmGen = vm.match(/\b(t[456])\b/);
       const rmGen = rm.match(/\b(t[456])\b/);
       if (!vmGen || !rmGen || vmGen[1] === rmGen[1]) return true;
@@ -761,19 +1087,15 @@ function modelMatches(vehicleModel: string, recordModel: string | null, vehicleM
 }
 
 function yearCompatible(record: GlassRecord, vehicleYear: number, vehicleMake: string, vehicleModel: string): boolean {
-  // Generation check first (most reliable)
   const expectedGen = expectedGeneration(vehicleMake, vehicleModel, vehicleYear);
   const recordGen = parseGenerationFromDescription(record.description) || parseGenerationFromDescription(record.model);
   if (expectedGen && recordGen) {
     return expectedGen === recordGen;
   }
 
-  // If we know expected generation but record has no generation info,
-  // try to infer from year range in description
   if (expectedGen && !recordGen) {
     const yr = parseYearRangeFromDescription(record.description);
     if (yr.from && yr.to) {
-      // If the year range clearly belongs to a different generation, reject
       const inferredGen = inferGenerationFromYearRange(vehicleMake, vehicleModel, yr.from, yr.to);
       if (inferredGen && inferredGen !== expectedGen) {
         return false;
@@ -789,12 +1111,10 @@ function yearCompatible(record: GlassRecord, vehicleYear: number, vehicleMake: s
     }
   }
 
-  // If DB has explicit year range, use strict bounds
   if (record.year_from !== null && record.year_to !== null) {
     return vehicleYear >= record.year_from && vehicleYear <= record.year_to;
   }
 
-  // Parse from description with strict bounds
   const yr = parseYearRangeFromDescription(record.description);
   if (yr.from && yr.to) {
     return vehicleYear >= yr.from && vehicleYear <= yr.to;
@@ -803,110 +1123,212 @@ function yearCompatible(record: GlassRecord, vehicleYear: number, vehicleMake: s
     return vehicleYear >= yr.from;
   }
 
-  // No year info = allow it (can't reject)
   return true;
 }
 
 function inferGenerationFromYearRange(brand: string, model: string, from: number, to: number): string | null {
   const key = `${brand} ${model}`.toLowerCase();
   if (key.includes("volkswagen") && key.includes("transporter")) {
-    // Check if range overlaps more with one generation
     if (to <= 1991) return "T3";
     if (from >= 1990 && to <= 2003) return "T4";
     if (from >= 2003 && to <= 2015) return "T5";
     if (from >= 2015) return "T6";
   }
+  if (key.includes("bmw") && (key.includes("3") || key.includes("tre"))) {
+    if (to <= 1990) return "E30";
+    if (from >= 1990 && to <= 2000) return "E36";
+    if (from >= 1998 && to <= 2006) return "E46";
+    if (from >= 2005 && to <= 2012) return "E90";
+    if (from >= 2011 && to <= 2018) return "F30";
+    if (from >= 2018) return "G20";
+  }
+  if (key.includes("mercedes") && (key.includes("c") || key.includes("190"))) {
+    if (to <= 1993) return "W201";
+    if (from >= 1993 && to <= 2000) return "W202";
+    if (from >= 2000 && to <= 2007) return "W203";
+    if (from >= 2007 && to <= 2014) return "W204";
+    if (from >= 2014 && to <= 2021) return "W205";
+    if (from >= 2021) return "W206";
+  }
   return null;
 }
 
-async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
-  // 1. Lookup vehicle via SVV
-  let vehicle: TecdocVehicle | null = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
+// ============================================================================
+// MAIN SEARCH
+// ============================================================================
+
+/**
+ * Result shape: includes httpStatus so the HTTP handler can return the
+ * correct status code (200 OK, 404 not found, 503 upstream down, 500 misconfig).
+ */
+type SearchResult = {
+  httpStatus: number;
+  retryAfter?: number;
+  body: unknown;
+};
+
+async function searchByRegnr(regnr: string, env: Env): Promise<SearchResult> {
+  // 1. Lookup vehicle via SVV — typed result so we can distinguish auth vs not-found vs upstream
+  const svvResult = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
   let source = "svv.enkeltoppslag";
 
-  if (!vehicle) {
-    return { error: "Kunne ikke slå opp registreringsnummer", regnr };
+  if (svvResult.status !== "ok") {
+    switch (svvResult.status) {
+      case "not_configured":
+        return {
+          httpStatus: 503,
+          retryAfter: 3600,
+          body: { error: "Kjøretøyoppslag midlertidig utilgjengelig (konfigurasjon)", regnr, code: "svv_not_configured" },
+        };
+      case "auth_error":
+        return {
+          httpStatus: 503,
+          retryAfter: 3600,
+          body: { error: "Kjøretøyoppslag midlertidig utilgjengelig", regnr, code: "svv_auth_error" },
+        };
+      case "upstream_error":
+      case "parse_error":
+        return {
+          httpStatus: 503,
+          retryAfter: 60,
+          body: { error: "Kjøretøyoppslag midlertidig utilgjengelig", regnr, code: "svv_upstream_error" },
+        };
+      case "not_found":
+      default:
+        return {
+          httpStatus: 404,
+          body: { error: "Kunne ikke slå opp registreringsnummer", regnr },
+        };
+    }
   }
 
-  // 2. Find matching glass in D1
+  const vehicle: TecdocVehicle = svvResult.vehicle;
+
+  // 2. Lookup Bovsoft kType (cached first, then API)
+  let bovsoftVehicle: BovsoftVehicle | null = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
+  if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
+    bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
+    if (bovsoftVehicle) {
+      await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
+    }
+  }
+
+  // Cross-validate: if Bovsoft brand differs from SVV, log and prefer SVV
+  if (bovsoftVehicle && bovsoftVehicle.brand && vehicle.make) {
+    const bovBrand = bovsoftVehicle.brand.toLowerCase().replace(/[^a-z]/g, "");
+    const svvBrand = vehicle.make.toLowerCase().replace(/[^a-z]/g, "");
+    if (bovBrand !== svvBrand && !bovBrand.includes(svvBrand) && !svvBrand.includes(bovBrand)) {
+      console.warn(`Brand mismatch for ${regnr}: SVV=${vehicle.make}, Bovsoft=${bovsoftVehicle.brand}`);
+    }
+  }
+
+  // Merge kType into vehicle if available
+  if (bovsoftVehicle && bovsoftVehicle.ktype > 0) {
+    vehicle.k_type = bovsoftVehicle.ktype;
+  }
+
+  // 3. Find matching glass in D1
   const db = env.GLASS_CATALOG_D1;
   const candidates: GlassRecord[] = [];
   let layer = 4;
   let confidence: string = "none";
 
-  // Try to match by brand + model + year (with year/generation compatibility filter)
-  // First: narrow by model name in SQL to avoid huge result sets
-  let modelHint = vehicle.model.length >= 3 ? vehicle.model.toLowerCase() : undefined;
-  let extraHints: string[] | undefined;
-  // VW T5/T6: Transporter, Multivan, Caravelle share parts — search all variants
-  if (vehicle.make.toLowerCase().includes("volkswagen")) {
-    const vwVariants = ["transporter", "multivan", "caravelle", "california"];
-    if (vwVariants.some((v) => vehicle.model.toLowerCase().includes(v))) {
-      extraHints = vwVariants.filter((v) => !vehicle.model.toLowerCase().includes(v));
+  // === Layer 0: kType exact match (statistical learning) ===
+  if (vehicle.k_type > 0) {
+    // First: direct kType lookup in catalog (if ktype column is populated)
+    const ktypeDirect = await queryByKtype(db, vehicle.k_type);
+    if (ktypeDirect.length > 0) {
+      candidates.push(...ktypeDirect);
+      layer = 0;
+      confidence = "exact";
     }
-  }
 
-  const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year, modelHint);
-  let l1Extra: GlassRecord[] = [];
-  if (extraHints) {
-    for (const hint of extraHints) {
-      const extra = await queryByBrandAndYear(db, vehicle.make, vehicle.year, hint);
-      l1Extra.push(...extra);
-    }
-  }
-  // Deduplicate by eurocode
-  const l1All = [...l1, ...l1Extra];
-  const seen = new Set<string>();
-  const l1Deduped = l1All.filter((r) => { if (seen.has(r.eurocode)) return false; seen.add(r.eurocode); return true; });
-
-  const l1Compatible = l1Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
-  const l1Model = l1Compatible.filter((r) => modelMatches(vehicle.model, r.model, vehicle.make));
-
-  if (l1Model.length > 0) {
-    candidates.push(...l1Model);
-    layer = 1;
-    confidence = "high";
-  } else if (l1Compatible.length > 0) {
-    candidates.push(...l1Compatible);
-    layer = 2;
-    confidence = "medium";
-  } else {
-    // Fallback: broader search without model hint
-    const l3 = await queryByBrandOnly(db, vehicle.make, modelHint);
-    let l3Extra: GlassRecord[] = [];
-    if (extraHints) {
-      for (const hint of extraHints) {
-        const extra = await queryByBrandOnly(db, vehicle.make, hint);
-        l3Extra.push(...extra);
+    // Second: statistical mapping from learned data — only trust if seen enough times
+    if (candidates.length === 0) {
+      const ktypeMappings = await queryKtypeMapping(db, vehicle.k_type);
+      if (ktypeMappings.length > 0) {
+        const topMapping = ktypeMappings[0];
+        if (topMapping.frequency >= KTYPE_CONFIDENCE_THRESHOLD) {
+          const mappedRecord = await queryByEurocode(db, topMapping.eurocode);
+          if (mappedRecord) {
+            candidates.push(mappedRecord);
+            layer = 0;
+            // 'exact' only when overwhelming evidence (10+ hits); 'high' otherwise
+            confidence = topMapping.frequency >= 10 ? "exact" : "high";
+          }
+        }
+        // Below threshold — don't poison the result, let Layer 1-4 handle it
       }
     }
-    const l3All = [...l3, ...l3Extra];
-    const seen3 = new Set<string>();
-    const l3Deduped = l3All.filter((r) => { if (seen3.has(r.eurocode)) return false; seen3.add(r.eurocode); return true; });
-    const l3Compatible = l3Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
-    if (l3Compatible.length > 0) {
-      candidates.push(...l3Compatible);
-      layer = 3;
+  }
+
+  // === Layer 1-3: brand + model + year matching ===
+  if (candidates.length === 0) {
+    let modelHint = vehicle.model.length >= 3 ? vehicle.model.toLowerCase() : undefined;
+    let extraHints: string[] | undefined;
+    if (vehicle.make.toLowerCase().includes("volkswagen")) {
+      const vwVariants = ["transporter", "multivan", "caravelle", "california"];
+      if (vwVariants.some((v) => vehicle.model.toLowerCase().includes(v))) {
+        extraHints = vwVariants.filter((v) => !vehicle.model.toLowerCase().includes(v));
+      }
+    }
+
+    const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year, modelHint);
+    let l1Extra: GlassRecord[] = [];
+    if (extraHints) {
+      for (const hint of extraHints) {
+        const extra = await queryByBrandAndYear(db, vehicle.make, vehicle.year, hint);
+        l1Extra.push(...extra);
+      }
+    }
+    const l1All = [...l1, ...l1Extra];
+    const seen = new Set<string>();
+    const l1Deduped = l1All.filter((r) => { if (seen.has(r.eurocode)) return false; seen.add(r.eurocode); return true; });
+
+    const l1Compatible = l1Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
+    const l1Model = l1Compatible.filter((r) => modelMatches(vehicle.model, r.model, vehicle.make));
+
+    if (l1Model.length > 0) {
+      candidates.push(...l1Model);
+      layer = 1;
+      confidence = "high";
+    } else if (l1Compatible.length > 0) {
+      candidates.push(...l1Compatible);
+      layer = 2;
       confidence = "medium";
+    } else {
+      const l3 = await queryByBrandOnly(db, vehicle.make, modelHint);
+      let l3Extra: GlassRecord[] = [];
+      if (extraHints) {
+        for (const hint of extraHints) {
+          const extra = await queryByBrandOnly(db, vehicle.make, hint);
+          l3Extra.push(...extra);
+        }
+      }
+      const l3All = [...l3, ...l3Extra];
+      const seen3 = new Set<string>();
+      const l3Deduped = l3All.filter((r) => { if (seen3.has(r.eurocode)) return false; seen3.add(r.eurocode); return true; });
+      const l3Compatible = l3Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
+      if (l3Compatible.length > 0) {
+        candidates.push(...l3Compatible);
+        layer = 3;
+        confidence = "medium";
+      }
     }
   }
 
-  // Decode VIN for extra matching info (with SVV length override)
+  // Decode VIN for all supported makes
   const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
+  const unifiedVin = vehicle.vin ? decodeVin(vehicle.vin, vehicle.length) : null;
   const svvBody = inferBodyFromSvvData(vehicle);
 
-  // Try Bovsoft REGNUM first, then Biluppgitter as fallback
+  // Fetch equipment from Biluppgitter (Bovsoft does not return equipment)
   let factoryEquipment: FactoryEquipment | null = null;
-
-  if (env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
-    factoryEquipment = await fetchBovsoftEquipment(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
-  }
-
-  if (!factoryEquipment && env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
+  if (env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
     factoryEquipment = await fetchBiluppgifterEquipment(regnr, env.BILUPPGIFTER_API_KEY);
   }
 
-  // Equipment flags from vehicle — factory data first, then neutral (no penalty)
+  // Equipment flags from vehicle
   const vehicleFlags: ReturnType<typeof detectFlagsFromOem> = factoryEquipment
     ? {
         adas: factoryEquipment.adas,
@@ -927,22 +1349,20 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
         hud: false,
       };
 
-  // Score and sort (with body compatibility + equipment)
+  // Score and sort (with body compatibility + equipment + kType verification)
   const scored = candidates
-    .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo) }))
+    .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined) }))
     .sort((a, b) => b.score - a.score)
     .map((s) => s.c);
 
-  // Attach parsed equipment to each candidate for frontend display
   const candidatesWithEquipment = scored.slice(0, 10).map((c) => ({
     ...c,
     _equipment: inferRecordEquipment(c),
   }));
 
   // Determine confidence level
-  // "exact" = factory data available + all equipment flags match top candidate
   const topCandidate = candidatesWithEquipment[0];
-  if (factoryEquipment && topCandidate) {
+  if (factoryEquipment && topCandidate && confidence !== "exact") {
     const topEq = inferRecordEquipment(topCandidate);
     const allMatch =
       factoryEquipment.adas === topEq.adas &&
@@ -957,39 +1377,59 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
     }
   }
 
+  // Save kType→eurocode mapping for statistical learning
+  if (vehicle.k_type > 0 && topCandidate) {
+    // GDPR-safe: regnr is NOT passed — we aggregate (ktype, eurocode) frequencies only
+    await insertKtypeMatch(db, vehicle.k_type, topCandidate.eurocode);
+  }
+
   return {
-    vehicle: {
-      regnr: vehicle.regno,
-      vin: vehicle.vin,
-      make: vehicle.make,
-      model: vehicle.model,
-      year: vehicle.year,
-      kType: vehicle.k_type,
-      typeCode: vehicle.typeCode,
-      length: vehicle.length,
-      fuelCode: vehicle.fuelCode,
-      engineCode: vehicle.engineCode,
-      seats: vehicle.seats,
-      gvwr: vehicle.gvwr,
-      vinDecode: vinInfo,
-      svvBody,
-      factoryEquipment: factoryEquipment
-        ? {
-            rainSensor: factoryEquipment.rainSensor,
-            heated: factoryEquipment.heated,
-            acoustic: factoryEquipment.acoustic,
-            adas: factoryEquipment.adas,
-            camera: factoryEquipment.camera,
-            antenna: factoryEquipment.antenna,
-            hud: factoryEquipment.hud,
-            source: factoryEquipment.source,
-          }
-        : null,
+    httpStatus: 200,
+    body: {
+      vehicle: {
+        regnr: vehicle.regno,
+        vin: vehicle.vin,
+        make: vehicle.make,
+        model: vehicle.model,
+        year: vehicle.year,
+        kType: vehicle.k_type,
+        typeCode: vehicle.typeCode,
+        length: vehicle.length,
+        fuelCode: vehicle.fuelCode,
+        engineCode: vehicle.engineCode,
+        seats: vehicle.seats,
+        gvwr: vehicle.gvwr,
+        vinDecode: vinInfo,
+        unifiedVin,
+        svvBody,
+        bovsoft: bovsoftVehicle
+          ? {
+              ktype: bovsoftVehicle.ktype,
+              brand: bovsoftVehicle.brand,
+              model: bovsoftVehicle.model,
+              yearFrom: bovsoftVehicle.yearFrom,
+              yearTo: bovsoftVehicle.yearTo,
+              body: bovsoftVehicle.body,
+            }
+          : null,
+        factoryEquipment: factoryEquipment
+          ? {
+              rainSensor: factoryEquipment.rainSensor,
+              heated: factoryEquipment.heated,
+              acoustic: factoryEquipment.acoustic,
+              adas: factoryEquipment.adas,
+              camera: factoryEquipment.camera,
+              antenna: factoryEquipment.antenna,
+              hud: factoryEquipment.hud,
+              source: factoryEquipment.source,
+            }
+          : null,
+      },
+      candidates: candidatesWithEquipment,
+      confidence,
+      layer,
+      sources: [source, bovsoftVehicle ? "bovsoft" : "none", factoryEquipment?.source || "none"],
     },
-    candidates: candidatesWithEquipment,
-    confidence,
-    layer,
-    sources: [source, factoryEquipment?.source || "none"],
   };
 }
 
@@ -1020,6 +1460,7 @@ export default {
       const biluppgifterConfigured = !!(env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET");
       return jsonResponse({
         status: "ok",
+        version: "2.1",
         catalogSize: stats.total,
         brands: stats.brands,
         d1Configured: true,
@@ -1037,13 +1478,18 @@ export default {
       const eurocode = url.searchParams.get("eurocode");
 
       if (regnr) {
-        // Check cache
-        const cache = await getCache(env.GLASS_CATALOG, cacheKey("glass", { regnr }));
+        // Cache hit — always 200 (we only cache successful lookups)
+        const cache = await getCache<unknown>(env.GLASS_CATALOG, cacheKey("glass", { regnr }));
         if (cache) return jsonResponse(cache);
 
         const result = await searchByRegnr(regnr, env);
-        await setCache(env.GLASS_CATALOG, cacheKey("glass", { regnr }), result, 300);
-        return jsonResponse(result);
+        // Only cache successful 200 responses; never cache errors (auth/upstream/not_found)
+        if (result.httpStatus === 200) {
+          await setCache(env.GLASS_CATALOG, cacheKey("glass", { regnr }), result.body, 300);
+        }
+        const extraHeaders: Record<string, string> = {};
+        if (result.retryAfter) extraHeaders["Retry-After"] = String(result.retryAfter);
+        return jsonResponse(result.body, result.httpStatus, extraHeaders);
       }
 
       if (prefix4) {

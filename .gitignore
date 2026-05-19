@@ -36,3 +36,4 @@ data/master-catalog*.json
 data/master-catalog*.json.gz
 dist-mirror/
 data/wp-scrape/
+*.bak
