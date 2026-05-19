@@ -1,18 +1,19 @@
 # WordPress → Ny Cloudflare Pages (permanent redirects)
-/bli-kunde/           /bli-kunde.html         301
-/kundeservice/        /kontakt.html           301
-/min-konto/           /kundeportal.html       301
-/om-oss/              /om-oss.html            301
-/personvern/          /personvern.html        301
-/vilkar-betingelser/  /vilkar.html            301
-/kontakt-oss/         /kontakt.html           301
+# Cloudflare Pages strips trailing slashes BEFORE _redirects, so source paths must NOT have trailing slashes
+/bli-kunde            /bli-kunde              301
+/kundeservice         /kontakt                301
+/min-konto            /kundeportal            301
+/om-oss               /om-oss                 301
+/personvern           /personvern             301
+/vilkar-betingelser   /vilkar                 301
+/kontakt-oss          /kontakt                301
 
 # WooCommerce redirects (shop pages → produkter/frontruter)
-/shop/                /produkter.html         301
-/produkt/*            /produkter.html         301
-/kategori/*           /produkter.html         301
-/sidekurv/            /produkter.html         301
-/kasse/               /produkter.html         301
+/shop                 /produkter              301
+/produkt/*            /produkter              301
+/kategori/*           /produkter              301
+/sidekurv             /produkter              301
+/kasse                /produkter              301
 
 # API passthrough
 /api/*                https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 200
