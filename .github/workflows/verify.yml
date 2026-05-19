@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install
+      - run: cd api/cf-worker && npm install
       - name: TypeScript sjekk
         working-directory: api/cf-worker
         run: npx tsc --noEmit
