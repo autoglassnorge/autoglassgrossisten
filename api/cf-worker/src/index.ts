@@ -195,6 +195,77 @@ async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<Tec
 }
 
 // ============================================================================
+// BILUPPGIFTER EQUIPMENT LOOKUP (Stub — ready for integration after API call)
+// ============================================================================
+
+interface BiluppgifterEquipment {
+  rainSensor: boolean;
+  heated: boolean;
+  acoustic: boolean;
+  antenna: boolean;
+  camera: boolean;
+  adas: boolean;
+  hud: boolean;
+}
+
+/**
+ * Fetch factory equipment data from Biluppgifter API.
+ * Called AFTER the user gets a working API key from Biluppgifter tomorrow.
+ *
+ * Endpoint: GET /api/v1/vehicle-configurator/regno/{regno}?country_code=NO
+ * Returns factory options like "Automatiska vindrutetorkare" (rain sensor),
+ * "Akustikglas" (acoustic glass), etc.
+ *
+ * Alternative: /api/v1/oem2/vin/{vin} returns eq_code + description pairs.
+ */
+async function fetchBiluppgifterEquipment(
+  regno: string,
+  apiKey: string
+): Promise<BiluppgifterEquipment | null> {
+  if (!apiKey || apiKey === "NOT_SET") return null;
+
+  try {
+    const res = await fetch(
+      `https://api.biluppgifter.se/api/v1/vehicle-configurator/regno/${encodeURIComponent(regno)}?country_code=NO`,
+      {
+        headers: {
+          "Accept": "application/json",
+          "Authorization": `Bearer ${apiKey}`,
+          "User-Agent": "AutoglassAS-B2B/1.0",
+        },
+      }
+    );
+
+    if (!res.ok) {
+      // Try OEM2 VIN endpoint as fallback
+      return null;
+    }
+
+    const data = await res.json() as {
+      data?: {
+        options?: Array<{ name?: string; description?: string }>;
+      };
+    };
+
+    const options = (data.data?.options || []).map((o) =>
+      `${o.name || ""} ${o.description || ""}`.toLowerCase()
+    );
+
+    return {
+      rainSensor: options.some((o) => /rain|regn|vindrutetorkare|wipe/i.test(o)),
+      heated: options.some((o) => /heat|varme|uppvarm/i.test(o)),
+      acoustic: options.some((o) => /acoustic|akustik|akustisk/i.test(o)),
+      antenna: options.some((o) => /antenna|antenn|radio/i.test(o)),
+      camera: options.some((o) => /camera|kamera|sensor/i.test(o)),
+      adas: options.some((o) => /adas|lane|filskifte|autonomous/i.test(o)),
+      hud: options.some((o) => /hud|head.up/i.test(o)),
+    };
+  } catch {
+    return null;
+  }
+}
+
+// ============================================================================
 // D1 QUERIES
 // ============================================================================
 
@@ -309,6 +380,44 @@ async function searchCatalog(
 // SEARCH LOGIC
 // ============================================================================
 
+// ============================================================================
+// EQUIPMENT DETECTION
+// ============================================================================
+
+/**
+ * Detect equipment flags from product description text.
+ * Most descriptions use standardized codes:
+ *   RSN / RSNL / RSNLSN = Rain sensor
+ *   HTD                 = Heated
+ *   ACO                 = Acoustic
+ *   ANT / GPS           = Antenna
+ *   CAMERA / CAM        = Camera bracket / ADAS
+ *   SOLAR               = Solar control (not a distinguishing feature for matching)
+ *   VIN                 = VIN etched
+ *   GY / GN / BL / CL   = Tint color (not equipment)
+ */
+function detectFlagsFromDescription(description: string | null): {
+  adas: boolean;
+  rainSensor: boolean;
+  heated: boolean;
+  acoustic: boolean;
+  antenna: boolean;
+  camera: boolean;
+  hud: boolean;
+} {
+  const d = (description || "").toUpperCase();
+  return {
+    adas: /\b(ADAS|FILSKIFTE|LANE ASSIST|COLLISION|AUTO BRAKE)\b/.test(d),
+    rainSensor: /\b(RSN|RSNL|RSNLSN|RAIN SENSOR|REGN SENSOR)\b/.test(d),
+    heated: /\b(HTD|HEATED|OPPVARM|VARME|DEFROST)\b/.test(d),
+    acoustic: /\b(ACO|ACOUSTIC|AKUSTISK|QUIET|STØYDEMP)\b/.test(d),
+    antenna: /\b(ANT|ANTENNA|ANTENNE|GPS|RADIO|FM|DAB)\b/.test(d),
+    camera: /\b(CAMERA|CAM|KAMERA|SENSOR)\b/.test(d),
+    hud: /\b(HUD|HEAD.UP|PROJEKSJON)\b/.test(d),
+  };
+}
+
+/** Legacy OEM-based detection (kept for future Biluppgifter/TecDoc integration) */
 function detectFlagsFromOem(oemDescriptions: string[]) {
   return {
     adas: oemDescriptions.some((d) => /adas|camera|sensor|kamera|filskifte|lane|collision/i.test(d)),
@@ -316,22 +425,66 @@ function detectFlagsFromOem(oemDescriptions: string[]) {
     heated: oemDescriptions.some((d) => /heat|oppvarm|varme|defrost/i.test(d)),
     acoustic: oemDescriptions.some((d) => /acoustic|akustisk|quiet|støydemp/i.test(d)),
     antenna: oemDescriptions.some((d) => /antenna|antenne|radio|fm|dab/i.test(d)),
+    camera: oemDescriptions.some((d) => /camera|kamera|sensor/i.test(d)),
     hud: oemDescriptions.some((d) => /hud|head.up|projeksjon/i.test(d)),
   };
 }
 
-function scoreCandidate(c: GlassRecord, flags: ReturnType<typeof detectFlagsFromOem>, vehicleYear: number): number {
+/** Infer equipment from DB columns + description fallback */
+function inferRecordEquipment(record: GlassRecord): {
+  adas: boolean;
+  rainSensor: boolean;
+  heated: boolean;
+  acoustic: boolean;
+  antenna: boolean;
+  camera: boolean;
+  hud: boolean;
+} {
+  // Prefer explicit DB columns if set
+  if (record.rain_sensor || record.heated || record.acoustic || record.antenna || record.camera || record.adas) {
+    return {
+      adas: !!record.adas,
+      rainSensor: !!record.rain_sensor,
+      heated: !!record.heated,
+      acoustic: !!record.acoustic,
+      antenna: !!record.antenna,
+      camera: !!record.camera,
+      hud: !!record.hud,
+    };
+  }
+  // Fallback: parse from description
+  return detectFlagsFromDescription(record.description);
+}
+
+function scoreCandidate(
+  c: GlassRecord,
+  flags: ReturnType<typeof detectFlagsFromOem>,
+  vehicle: TecdocVehicle,
+  vinInfo: ReturnType<typeof decodeVwTransporterBody>
+): number {
   let score = 0;
-  if (flags.adas && c.adas) score += 10;
-  if (flags.rainSensor && c.rain_sensor) score += 8;
-  if (flags.heated && c.heated) score += 6;
-  if (flags.acoustic && c.acoustic) score += 4;
-  if (flags.antenna && c.antenna) score += 4;
-  if (flags.hud && c.hud) score += 6;
-  if (!flags.adas && c.adas) score -= 3;
-  if (!flags.hud && c.hud) score -= 2;
+
+  // Infer equipment from DB columns + description parsing
+  const recordFlags = inferRecordEquipment(c);
+
+  // Equipment matching (high weight when we know vehicle equipment)
+  if (flags.adas && recordFlags.adas) score += 15;
+  if (flags.rainSensor && recordFlags.rainSensor) score += 12;
+  if (flags.heated && recordFlags.heated) score += 10;
+  if (flags.acoustic && recordFlags.acoustic) score += 8;
+  if (flags.antenna && recordFlags.antenna) score += 8;
+  if (flags.hud && recordFlags.hud) score += 10;
+  if (flags.camera && recordFlags.camera) score += 12;
+
+  // Penalize if record has equipment the vehicle doesn't have
+  if (!flags.adas && recordFlags.adas) score -= 5;
+  if (!flags.hud && recordFlags.hud) score -= 3;
+  if (!flags.camera && recordFlags.camera) score -= 4;
+  if (!flags.rainSensor && recordFlags.rainSensor) score -= 3;
+  if (!flags.heated && recordFlags.heated) score -= 2;
 
   // Year compatibility scoring
+  const vehicleYear = vehicle.year;
   const yr = parseYearRangeFromDescription(c.description);
   if (yr.from && yr.to) {
     if (vehicleYear >= yr.from && vehicleYear <= yr.to) {
@@ -348,6 +501,9 @@ function scoreCandidate(c: GlassRecord, flags: ReturnType<typeof detectFlagsFrom
       score -= 30;
     }
   }
+
+  // Body / chassis compatibility (VIN + SVV data)
+  score += scoreBodyCompatibility(c, vehicle, vinInfo);
 
   return score;
 }
@@ -395,7 +551,7 @@ function expectedGeneration(brand: string, model: string, year: number): string 
   return null;
 }
 
-function decodeVwTransporterBody(vin: string): { generation: string; body: string; wheelbase: string } | null {
+function decodeVwTransporterBody(vin: string, lengthMm?: number): { generation: string; body: string; wheelbase: string; roof?: string } | null {
   if (!vin || vin.length < 8) return null;
   const wmi = vin.slice(0, 3).toUpperCase();
   if (wmi !== "WV1" && wmi !== "WV2") return null;
@@ -416,14 +572,121 @@ function decodeVwTransporterBody(vin: string): { generation: string; body: strin
   let generation = "T5";
   if (yearChar >= "G" && yearChar <= "L") generation = "T5"; // 2005-2015
   if (yearChar >= "M") generation = "T6"; // 2015+
-  return { generation, body: info.body, wheelbase: info.wheelbase };
+
+  // SVV length is more reliable than VIN for wheelbase on some EU builds
+  // T5 SWB = ~4892mm, LWB = ~5292mm
+  let wheelbase = info.wheelbase;
+  let roof: string | undefined;
+  if (lengthMm && lengthMm > 1000) {
+    if (lengthMm >= 5100) {
+      wheelbase = "lwb";
+    } else if (lengthMm <= 5000) {
+      wheelbase = "swb";
+    }
+    // High roof detection: if description later contains HIGH, mark it
+    // (we can't detect roof height from length alone)
+  }
+
+  return { generation, body: info.body, wheelbase, roof };
 }
 
-function modelMatches(vehicleModel: string, recordModel: string | null): boolean {
+/** Infer body variant from SVV data (length, seats, GVWR) */
+function inferBodyFromSvvData(vehicle: TecdocVehicle): { wheelbase?: string; bodyType?: string; variant?: string } {
+  const result: { wheelbase?: string; bodyType?: string; variant?: string } = {};
+
+  // Wheelbase from length
+  if (vehicle.length && vehicle.length > 1000) {
+    // VW T5/T6: SWB ~4890mm, LWB ~5290mm
+    if (vehicle.length >= 5100) result.wheelbase = "lwb";
+    else if (vehicle.length <= 5000) result.wheelbase = "swb";
+  }
+
+  // Body type from seats
+  if (vehicle.seats) {
+    if (vehicle.seats <= 3) result.bodyType = "van";
+    else if (vehicle.seats <= 6) result.bodyType = "kombi"; // or double cab
+    else if (vehicle.seats >= 7) result.bodyType = "passenger"; // caravelle/multivan
+  }
+
+  // Variant hints from GVWR
+  if (vehicle.gvwr) {
+    if (vehicle.gvwr >= 3000) result.variant = "heavy";
+    else if (vehicle.gvwr <= 2800) result.variant = "light";
+  }
+
+  return result;
+}
+
+/** Score body compatibility between record description and vehicle data */
+function scoreBodyCompatibility(
+  record: GlassRecord,
+  vehicle: TecdocVehicle,
+  vinInfo: ReturnType<typeof decodeVwTransporterBody>
+): number {
+  let score = 0;
+  const desc = (record.description + " " + (record.model || "")).toLowerCase();
+  const svvBody = inferBodyFromSvvData(vehicle);
+
+  // ── Wheelbase matching ──
+  if (svvBody.wheelbase || vinInfo?.wheelbase) {
+    const wb = svvBody.wheelbase || vinInfo?.wheelbase;
+    if (wb === "lwb") {
+      if (desc.includes("lwb") || desc.includes("lang")) score += 15;
+      else if (desc.includes("swb") || desc.includes("kort")) score -= 15;
+      // If no wheelbase mentioned, neutral (many parts fit both)
+    } else if (wb === "swb") {
+      if (desc.includes("swb") || desc.includes("kort")) score += 10;
+      else if (desc.includes("lwb") || desc.includes("lang")) score -= 15;
+    }
+  }
+
+  // ── Body type matching ──
+  if (svvBody.bodyType) {
+    if (svvBody.bodyType === "van" && (desc.includes("van") || desc.includes("kasse"))) score += 10;
+    if (svvBody.bodyType === "passenger" && (desc.includes("multivan") || desc.includes("caravelle"))) score += 10;
+    if (svvBody.bodyType === "kombi" && desc.includes("kombi")) score += 10;
+  }
+
+  // ── Double cab detection ──
+  if (vehicle.seats && vehicle.seats >= 5 && vehicle.seats <= 6) {
+    if (desc.includes("double cab") || desc.includes("doble cab") || desc.includes("crew")) score += 12;
+    // If it clearly says "van" with 2 seats but vehicle has 5+, penalise
+    if ((desc.includes("van") || desc.includes("kasse")) && !desc.includes("double") && !desc.includes("crew")) score -= 5;
+  }
+
+  // ── High roof ──
+  if (vinInfo?.roof === "high" || desc.includes("high")) {
+    if (desc.includes("high") && vinInfo?.roof === "high") score += 10;
+    else if (desc.includes("high") && vinInfo?.roof !== "high") score -= 8;
+  }
+
+  // ── Multivan vs Transporter ──
+  if (desc.includes("multivan") && svvBody.bodyType === "van") score -= 5;
+  if (desc.includes("transporter") && svvBody.bodyType === "passenger") score -= 3;
+
+  return score;
+}
+
+function modelMatches(vehicleModel: string, recordModel: string | null, vehicleMake?: string): boolean {
   if (!recordModel || recordModel.trim() === "") return false;
   const vm = vehicleModel.toLowerCase().trim();
   const rm = recordModel.toLowerCase().trim();
   if (vm.includes(rm) || rm.includes(vm)) return true;
+
+  // VW T5/T6: Transporter, Multivan, Caravelle share many parts
+  const make = (vehicleMake || "").toLowerCase();
+  if (make.includes("volkswagen")) {
+    const vwModels = ["transporter", "multivan", "caravelle", "california"];
+    const vmIsVw = vwModels.some((m) => vm.includes(m));
+    const rmIsVw = vwModels.some((m) => rm.includes(m));
+    if (vmIsVw && rmIsVw) {
+      // Both are VW van models — check generation match
+      const vmGen = vm.match(/\b(t[456])\b/);
+      const rmGen = rm.match(/\b(t[456])\b/);
+      if (!vmGen || !rmGen || vmGen[1] === rmGen[1]) return true;
+    }
+  }
+
   const tokenize = (s: string) => s.split(/[^a-z0-9]+/).filter((t) => t.length >= 2);
   const vTokens = tokenize(vm);
   const rTokens = tokenize(rm);
@@ -510,10 +773,31 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
 
   // Try to match by brand + model + year (with year/generation compatibility filter)
   // First: narrow by model name in SQL to avoid huge result sets
-  const modelHint = vehicle.model.length >= 3 ? vehicle.model.toLowerCase() : undefined;
+  let modelHint = vehicle.model.length >= 3 ? vehicle.model.toLowerCase() : undefined;
+  let extraHints: string[] | undefined;
+  // VW T5/T6: Transporter, Multivan, Caravelle share parts — search all variants
+  if (vehicle.make.toLowerCase().includes("volkswagen")) {
+    const vwVariants = ["transporter", "multivan", "caravelle", "california"];
+    if (vwVariants.some((v) => vehicle.model.toLowerCase().includes(v))) {
+      extraHints = vwVariants.filter((v) => !vehicle.model.toLowerCase().includes(v));
+    }
+  }
+
   const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year, modelHint);
-  const l1Compatible = l1.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
-  const l1Model = l1Compatible.filter((r) => modelMatches(vehicle.model, r.model));
+  let l1Extra: GlassRecord[] = [];
+  if (extraHints) {
+    for (const hint of extraHints) {
+      const extra = await queryByBrandAndYear(db, vehicle.make, vehicle.year, hint);
+      l1Extra.push(...extra);
+    }
+  }
+  // Deduplicate by eurocode
+  const l1All = [...l1, ...l1Extra];
+  const seen = new Set<string>();
+  const l1Deduped = l1All.filter((r) => { if (seen.has(r.eurocode)) return false; seen.add(r.eurocode); return true; });
+
+  const l1Compatible = l1Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
+  const l1Model = l1Compatible.filter((r) => modelMatches(vehicle.model, r.model, vehicle.make));
 
   if (l1Model.length > 0) {
     candidates.push(...l1Model);
@@ -526,7 +810,17 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
   } else {
     // Fallback: broader search without model hint
     const l3 = await queryByBrandOnly(db, vehicle.make, modelHint);
-    const l3Compatible = l3.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
+    let l3Extra: GlassRecord[] = [];
+    if (extraHints) {
+      for (const hint of extraHints) {
+        const extra = await queryByBrandOnly(db, vehicle.make, hint);
+        l3Extra.push(...extra);
+      }
+    }
+    const l3All = [...l3, ...l3Extra];
+    const seen3 = new Set<string>();
+    const l3Deduped = l3All.filter((r) => { if (seen3.has(r.eurocode)) return false; seen3.add(r.eurocode); return true; });
+    const l3Compatible = l3Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
     if (l3Compatible.length > 0) {
       candidates.push(...l3Compatible);
       layer = 3;
@@ -534,15 +828,48 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
     }
   }
 
-  // Score and sort
-  const flags = detectFlagsFromOem([]);
+  // Decode VIN for extra matching info (with SVV length override)
+  const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
+  const svvBody = inferBodyFromSvvData(vehicle);
+
+  // Try Biluppgifter for factory equipment data (if key works)
+  let biluppgifterEquipment: BiluppgifterEquipment | null = null;
+  if (env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
+    biluppgifterEquipment = await fetchBiluppgifterEquipment(regnr, env.BILUPPGIFTER_API_KEY);
+  }
+
+  // Equipment flags from vehicle — Biluppgifter first, then neutral (no penalty)
+  const vehicleFlags: ReturnType<typeof detectFlagsFromOem> = biluppgifterEquipment
+    ? {
+        adas: biluppgifterEquipment.adas,
+        rainSensor: biluppgifterEquipment.rainSensor,
+        heated: biluppgifterEquipment.heated,
+        acoustic: biluppgifterEquipment.acoustic,
+        antenna: biluppgifterEquipment.antenna,
+        camera: biluppgifterEquipment.camera,
+        hud: biluppgifterEquipment.hud,
+      }
+    : {
+        adas: false,
+        rainSensor: false,
+        heated: false,
+        acoustic: false,
+        antenna: false,
+        camera: false,
+        hud: false,
+      };
+
+  // Score and sort (with body compatibility + equipment)
   const scored = candidates
-    .map((c) => ({ c, score: scoreCandidate(c, flags, vehicle.year) }))
+    .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo) }))
     .sort((a, b) => b.score - a.score)
     .map((s) => s.c);
 
-  // Decode VIN for extra matching info
-  const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin) : null;
+  // Attach parsed equipment to each candidate for frontend display
+  const candidatesWithEquipment = scored.slice(0, 10).map((c) => ({
+    ...c,
+    _equipment: inferRecordEquipment(c),
+  }));
 
   return {
     vehicle: {
@@ -559,11 +886,11 @@ async function searchByRegnr(regnr: string, env: Env): Promise<unknown> {
       seats: vehicle.seats,
       gvwr: vehicle.gvwr,
       vinDecode: vinInfo,
+      svvBody,
     },
-    candidates: scored.slice(0, 10),
+    candidates: candidatesWithEquipment,
     confidence,
     layer,
-    flags,
     sources: [source],
   };
 }
