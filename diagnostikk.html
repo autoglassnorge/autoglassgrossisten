@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjE1IiBmaWxsPSIjMEQxQjJBIi8+PHRleHQgeD0iNTAiIHk9IjY4IiBmb250LXNpemU9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRjVDNTE4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkFHPC90ZXh0Pjwvc3ZnPgo=">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostikk — Autoglass AS</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+.status-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:32px }
+.status-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:24px }
+.status-card h3 { font-size:16px; margin-bottom:12px; display:flex; align-items:center; gap:8px }
+.status-ok { color:var(--color-success) }
+.status-warn { color:var(--color-warning) }
+.status-err { color:var(--color-error) }
+.status-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700 }
+.status-badge.ok { background:rgba(22,163,74,0.12); color:var(--color-success) }
+.status-badge.warn { background:rgba(217,119,6,0.12); color:var(--color-warning) }
+.status-badge.err { background:rgba(220,38,38,0.12); color:var(--color-error) }
+.test-box { margin-top:24px; padding:20px; background:var(--color-surface-alt); border-radius:var(--radius-md); border:1px solid var(--color-border) }
+.test-box input { padding:12px 16px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-primary); font-size:16px; text-transform:uppercase; letter-spacing:1px }
+.test-box button { padding:12px 24px; border-radius:var(--radius-md); border:none; background:var(--color-accent); color:#0f172a; font-size:16px; font-weight:700; cursor:pointer; margin-left:8px }
+.test-result { margin-top:16px; font-size:14px; line-height:1.7 }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Autoglass<span>.</span>AS</a>
+    <nav class="nav-links">
+      <a href="index.html">Hjem</a>
+      <a href="frontruter.html">Frontruter</a>
+      <a href="vin-sok.html">VIN-søk</a>
+      <a href="kundeportal.html">Kundeportal</a>
+    </nav>
+  </div>
+</header>
+
+<section class="section" style="padding-top:120px">
+  <div class="container" style="max-width:900px">
+    <h1 class="reveal">🔧 Diagnostikk — 100% riktig frontrute</h1>
+    <p class="reveal" style="margin-top:8px;color:var(--color-text-secondary)">Sjekk at alle systemer er på plass for å garantere eksakt riktig match.</p>
+
+    <div class="status-grid reveal">
+
+      <div class="status-card">
+        <h3><span id="svv-icon">⏳</span> SVV Enkeltoppslag</h3>
+        <p style="font-size:14px;color:var(--color-text-secondary);margin-bottom:12px">Henter kjøretøydata fra Statens Vegvesen. Krever API-nøkkel.</p>
+        <span id="svv-badge" class="status-badge warn">Sjekker...</span>
+        <p id="svv-detail" style="font-size:13px;margin-top:8px;color:var(--color-text-muted)"></p>
+      </div>
+
+      <div class="status-card">
+        <h3><span id="bov-icon">⏳</span> Bovsoft REGNUM</h3>
+        <p style="font-size:14px;color:var(--color-text-secondary);margin-bottom:12px">Fabrikkdata: regnsensor, varme, acoustic, ADAS. Betaling per oppslag.</p>
+        <span id="bov-badge" class="status-badge warn">Sjekker...</span>
+        <p id="bov-detail" style="font-size:13px;margin-top:8px;color:var(--color-text-muted)"></p>
+      </div>
+
+      <div class="status-card">
+        <h3><span id="bil-icon">⏳</span> Biluppgitter</h3>
+        <p style="font-size:14px;color:var(--color-text-secondary);margin-bottom:12px">Backup-kilde for fabrikkdata. Krever API-key fra biluppgifter.se.</p>
+        <span id="bil-badge" class="status-badge warn">Sjekker...</span>
+        <p id="bil-detail" style="font-size:13px;margin-top:8px;color:var(--color-text-muted)"></p>
+      </div>
+
+      <div class="status-card">
+        <h3><span id="d1-icon">⏳</span> D1 Database</h3>
+        <p style="font-size:14px;color:var(--color-text-secondary);margin-bottom:12px">8,047 frontruter med equipment-flagg. Hovedkatalog.</p>
+        <span id="d1-badge" class="status-badge warn">Sjekker...</span>
+        <p id="d1-detail" style="font-size:13px;margin-top:8px;color:var(--color-text-muted)"></p>
+      </div>
+
+    </div>
+
+    <div class="test-box reveal">
+      <h3 style="margin-bottom:12px">🚗 Test regnr-søk</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="text" id="test-regnr" placeholder="AB12345" maxlength="7" style="width:160px">
+        <button onclick="runTest()">Test</button>
+      </div>
+      <div id="test-result" class="test-result"></div>
+    </div>
+
+    <div class="reveal" style="margin-top:40px;padding:24px;background:var(--color-primary-900);color:#fff;border-radius:var(--radius-lg)">
+      <h2 style="font-size:20px;margin-bottom:12px">📋 Sjekkliste før go-live</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:14px">
+        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="chk-svv"> SVV API-key gyldig</label>
+        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="chk-bov"> Bovsoft CLIENT_ID + SECCODE</label>
+        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="chk-bil"> Biluppgitter API-key (backup)</label>
+        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="chk-exact"> EXACT confidence testet med 10+ regnr</label>
+        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="chk-equip"> Equipment-sjekkliste i quote-modal verifisert</label>
+        <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="chk-worker"> Worker deployet uten feil</label>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><h4>Autoglass AS</h4><p style="font-size:14px">Ole Deviks vei 26, 0666 Oslo</p><p style="font-size:14px">+47 21378390</p></div>
+    <div class="bottom" style="grid-column:1/-1">© 2026 Autoglass AS</div>
+  </div>
+</footer>
+
+<script>
+const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
+
+function setStatus(id, status, text, detail) {
+  const badge = document.getElementById(id + '-badge');
+  const icon = document.getElementById(id + '-icon');
+  const det = document.getElementById(id + '-detail');
+  badge.className = 'status-badge ' + status;
+  badge.textContent = text;
+  icon.textContent = status === 'ok' ? '✅' : status === 'err' ? '❌' : '⚠️';
+  if (det) det.textContent = detail || '';
+}
+
+async function checkAll() {
+  // Check health
+  try {
+    const res = await fetch(`${API_BASE}/api/health`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    setStatus('svv', data.svvConfigured ? 'ok' : 'err', data.svvConfigured ? 'Aktiv' : 'Mangler', data.svvConfigured ? 'API-key konfigurert' : 'SVV_API_KEY mangler eller er utløpt');
+    setStatus('bov', data.bovsoftConfigured ? 'ok' : 'warn', data.bovsoftConfigured ? 'Aktiv' : 'Ikke konfigurert', data.bovsoftConfigured ? 'Bovsoft REGNUM klar' : 'Registrer på bovsoft.regnum.login');
+    setStatus('bil', data.biluppgifterConfigured ? 'ok' : 'warn', data.biluppgifterConfigured ? 'Aktiv' : 'Ikke konfigurert', data.biluppgifterConfigured ? 'Biluppgitter klar' : 'Send e-post til api@biluppgifter.se');
+    setStatus('d1', data.d1Configured ? 'ok' : 'err', data.d1Configured ? 'Aktiv' : 'Feil', `Katalog: ${data.catalogSize || '?'} ruter, ${data.brands || '?'} merker`);
+
+    // Update checkboxes
+    document.getElementById('chk-svv').checked = data.svvConfigured;
+    document.getElementById('chk-bov').checked = data.bovsoftConfigured;
+    document.getElementById('chk-bil').checked = data.biluppgifterConfigured;
+    document.getElementById('chk-worker').checked = true;
+  } catch (e) {
+    setStatus('svv', 'err', 'Ukjent', 'Worker nede: ' + e.message);
+    setStatus('bov', 'err', 'Ukjent', 'Worker nede');
+    setStatus('bil', 'err', 'Ukjent', 'Worker neden');
+    setStatus('d1', 'err', 'Ukjent', 'Worker nede');
+  }
+}
+
+async function runTest() {
+  const regnr = document.getElementById('test-regnr').value.trim().toUpperCase();
+  const result = document.getElementById('test-result');
+  if (!regnr) { result.innerHTML = '<span style="color:var(--color-error)">Skriv inn regnr</span>'; return; }
+
+  result.innerHTML = '<span style="color:var(--color-text-secondary)">Søker...</span>';
+  try {
+    const res = await fetch(`${API_BASE}/api/glass?regnr=${encodeURIComponent(regnr)}`);
+    const data = await res.json();
+
+    if (data.error) {
+      result.innerHTML = `<span style="color:var(--color-error)">❌ ${data.error}</span>`;
+      return;
+    }
+
+    const v = data.vehicle || {};
+    const conf = data.confidence || 'none';
+    const top = (data.candidates || [])[0];
+    const eq = v.factoryEquipment || {};
+
+    let html = `<div style="padding:16px;background:var(--color-surface-alt);border-radius:var(--radius-md);border:1px solid var(--color-border)">`;
+    html += `<p><strong>${v.make} ${v.model} (${v.year})</strong> — ${v.regnr}</p>`;
+    html += `<p>Konfidens: <span class="status-badge ${conf === 'exact' ? 'ok' : conf === 'high' ? 'ok' : 'warn'}">${conf.toUpperCase()}</span></p>`;
+
+    if (eq.source && eq.source !== 'none') {
+      html += `<p style="margin-top:8px;font-size:13px">Fabrikkdata (${eq.source}): `;
+      html += [`Regnsensor:${eq.rainSensor?'Ja':'Nei'}`, `Varme:${eq.heated?'Ja':'Nei'}`, `Acoustic:${eq.acoustic?'Ja':'Nei'}`, `ADAS:${eq.adas?'Ja':'Nei'}`].join(' · ');
+      html += `</p>`;
+    } else {
+      html += `<p style="margin-top:8px;font-size:13px;color:var(--color-warning)">⚠️ Ingen fabrikkdata tilgjengelig</p>`;
+    }
+
+    if (top) {
+      html += `<p style="margin-top:8px">Topp match: <strong>${top.eurocode}</strong></p>`;
+      html += `<p style="font-size:13px;color:var(--color-text-secondary)">${top.description || ''}</p>`;
+    }
+
+    html += `</div>`;
+    result.innerHTML = html;
+  } catch (e) {
+    result.innerHTML = `<span style="color:var(--color-error)">❌ Feil: ${e.message}</span>`;
+  }
+}
+
+checkAll();
+</script>
+</body>
+</html>
