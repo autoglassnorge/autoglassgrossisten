@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjE1IiBmaWxsPSIjMEQxQjJBIi8+PHRleHQgeD0iNTAiIHk9IjY4IiBmb250LXNpemU9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRjVDNTE4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkFHPC90ZXh0Pjwvc3ZnPgo=">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aktuelt — Autoglass AS</title>
+<meta name="description" content="Nyheter og oppdateringer fra Autoglass AS.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://auto-glass.no/no/aktuelt">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Autoglass<span>.</span>AS</a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav.home">Hjem</a>
+      <a href="frontruter.html">Frontruter</a>
+      <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+      <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+      <a href="katalog.html">📋 Katalog</a>
+      <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+      <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+      <a href="aktuelt.html">Aktuelt</a>
+      <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+      <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switcher">
+        <button data-lang="no" class="active">NO</button>
+        <button data-lang="sv">SV</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <a href="index.html">Hjem</a><a href="frontruter.html">Frontruter</a><a href="produkter.html">Produkter</a>
+  <a href="vin-sok.html">VIN-søk</a><a href="bli-kunde.html">Bli kunde</a>
+  <a href="kundeportal.html">Kundeportal</a><a href="aktuelt.html">Aktuelt</a><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a>
+</div>
+
+<section class="section" style="padding-top:120px">
+  <div class="container">
+    <h1 class="reveal">Aktuelt</h1>
+    <p class="reveal" style="margin-top:12px;color:var(--color-text-secondary)">Nyheter, oppdateringer og tips fra Autoglass AS.</p>
+
+    <div style="margin-top:48px;display:grid;gap:32px">
+
+      <!-- Blog post 1 -->
+      <article class="reveal card" style="padding:32px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="background:var(--color-accent);color:#0f172a;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700">NYHET</span>
+          <time style="color:var(--color-text-muted);font-size:14px">19. mai 2026</time>
+        </div>
+        <h2 style="font-size:22px;margin-bottom:12px">Ny nettside lansert!</h2>
+        <p style="color:var(--color-text-secondary);line-height:1.7">
+          Autoglass AS lanserer i dag vår nye nettside med forbedret søk, raskere bestilling og bedre oversikt over vårt sortiment.
+          Den nye løsningen gjør det enklere enn noen gang å finne riktig bilglass — enten du søker med registreringsnummer, eurokode eller bilmodell.
+        </p>
+        <p style="margin-top:16px">
+          <a href="vin-sok.html" style="color:var(--color-accent);font-weight:600">Prøv VIN-søket →</a>
+        </p>
+      </article>
+
+      <!-- Blog post 2 -->
+      <article class="reveal card" style="padding:32px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="background:var(--color-surface-alt);color:var(--color-text-secondary);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700">PRODUKT</span>
+          <time style="color:var(--color-text-muted);font-size:14px">15. mai 2026</time>
+        </div>
+        <h2 style="font-size:22px;margin-bottom:12px">Over 8 000 frontruter i katalogen</h2>
+        <p style="color:var(--color-text-secondary);line-height:1.7">
+          Vi har nå registrert over 8 000 frontruter i vår digitale katalog, med full informasjon om årsmodell,
+          utstyr som regnsensor, akustisk glass, oppvarming og ADAS-kompatibilitet. Søk etter merke, modell eller eurokode.
+        </p>
+        <p style="margin-top:16px">
+          <a href="frontruter.html" style="color:var(--color-accent);font-weight:600">Se frontrute-katalogen →</a>
+        </p>
+      </article>
+
+      <!-- Blog post 3 -->
+      <article class="reveal card" style="padding:32px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <span style="background:var(--color-surface-alt);color:var(--color-text-secondary);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700">KUNDE</span>
+          <time style="color:var(--color-text-muted);font-size:14px">10. mai 2026</time>
+        </div>
+        <h2 style="font-size:22px;margin-bottom:12px">Bli kunde hos Autoglass AS</h2>
+        <p style="color:var(--color-text-secondary);line-height:1.7">
+          Er du verksted, bilglassbedrift eller annen næringsdrivende? Registrer deg som kunde og få tilgang til vår nettbutikk,
+          direkte prisforespørsler og personlig kundebehandler. Vi leverer til over 500 verksteder i hele Norge.
+        </p>
+        <p style="margin-top:16px">
+          <a href="bli-kunde.html" style="color:var(--color-accent);font-weight:600">Bli kunde her →</a>
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><h4>Autoglass AS</h4><p style="font-size:14px">Ole Deviks vei 26, 0666 Oslo</p><p style="font-size:14px">+47 21378390</p></div>
+    <div><h4>Snarveier</h4><a href="produkter.html">Produkter</a><a href="vin-sok.html">VIN-søk</a><a href="bli-kunde.html">Bli kunde</a></div>
+    <div><h4>Selskapet</h4><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a><a href="personvern.html">Personvern</a></div>
+    <div><h4>Markeder</h4><a href="#">Norge</a><a href="#">Sverige</a><a href="#">Danmark</a><a href="#">Europa</a></div>
+    <div class="bottom" style="grid-column:1/-1">© 2026 Autoglass AS. Alle rettigheter reservert.</div>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

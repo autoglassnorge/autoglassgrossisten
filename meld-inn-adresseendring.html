@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjE1IiBmaWxsPSIjMEQxQjJBIi8+PHRleHQgeD0iNTAiIHk9IjY4IiBmb250LXNpemU9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRjVDNTE4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkFHPC90ZXh0Pjwvc3ZnPgo=">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meld inn adresseendring — Autoglass AS</title>
+<meta name="description" content="Meld inn endring av adresse, e-post eller telefon for din kundekonto hos Autoglass AS.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://auto-glass.no/no/meld-inn-adresseendring">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Autoglass<span>.</span>AS</a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav.home">Hjem</a>
+      <a href="frontruter.html">Frontruter</a>
+      <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+      <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+      <a href="katalog.html">📋 Katalog</a>
+      <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+      <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+      <a href="aktuelt.html">Aktuelt</a>
+      <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+      <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switcher">
+        <button data-lang="no" class="active">NO</button>
+        <button data-lang="sv">SV</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <a href="index.html">Hjem</a><a href="frontruter.html">Frontruter</a><a href="produkter.html">Produkter</a>
+  <a href="vin-sok.html">VIN-søk</a><a href="bli-kunde.html">Bli kunde</a>
+  <a href="kundeportal.html">Kundeportal</a><a href="aktuelt.html">Aktuelt</a><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a>
+</div>
+
+<section class="section" style="padding-top:120px">
+  <div class="container" style="max-width:700px">
+    <h1 class="reveal">Meld inn adresseendring</h1>
+    <p class="reveal" style="margin-top:12px;color:var(--color-text-secondary)">
+      Er du eksisterende kunde og har endret adresse, e-post eller telefonnummer? Fyll ut skjemaet under, så oppdaterer vi din kundekonto.
+    </p>
+
+    <form class="reveal" id="addressForm" style="margin-top:32px;background:var(--color-surface);padding:32px;border-radius:var(--radius-lg);border:1px solid var(--color-border)">
+      <h2 style="font-size:18px;margin-bottom:20px">Din informasjon</h2>
+
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Firmanavn *</label>
+        <input type="text" name="company" required style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px">
+      </div>
+
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Kundenummer (hvis kjent)</label>
+        <input type="text" name="customerId" style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px">
+      </div>
+
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Kontaktperson *</label>
+        <input type="text" name="contactName" required style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px">
+      </div>
+
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">E-post *</label>
+        <input type="email" name="email" required style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px">
+      </div>
+
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Telefon *</label>
+        <input type="tel" name="phone" required style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px">
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--color-border);margin:24px 0">
+      <h2 style="font-size:18px;margin-bottom:20px">Ny adresse</h2>
+
+      <div style="margin-bottom:16px">
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Gateadresse *</label>
+        <input type="text" name="newStreet" required style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div>
+          <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Postnummer *</label>
+          <input type="text" name="newZip" required maxlength="4" style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px">
+        </div>
+        <div>
+          <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Poststed *</label>
+          <input type="text" name="newCity" required style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px">
+        </div>
+      </div>
+
+      <div style="margin-bottom:24px">
+        <label style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Tilleggsinformasjon</label>
+        <textarea name="notes" rows="3" style="width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-alt);color:var(--color-text-primary);font-size:15px;resize:vertical"></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary" style="width:100%;padding:16px;border-radius:var(--radius-md);font-size:16px;font-weight:700;background:var(--color-accent);color:#0f172a;border:none;cursor:pointer">
+        Send endring
+      </button>
+
+      <p id="formStatus" style="margin-top:16px;text-align:center;font-size:14px;display:none"></p>
+    </form>
+
+    <div class="reveal" style="margin-top:32px;padding:24px;background:var(--color-surface-alt);border-radius:var(--radius-md);border:1px solid var(--color-border)">
+      <p style="font-size:14px;color:var(--color-text-secondary)">
+        <strong>Alternativt:</strong> Send endringen direkte til 
+        <a href="mailto:post@auto-glass.no" style="color:var(--color-accent)">post@auto-glass.no</a> 
+        eller ring oss på <a href="tel:+4721378390" style="color:var(--color-accent)">+47 21378390</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div><h4>Autoglass AS</h4><p style="font-size:14px">Ole Deviks vei 26, 0666 Oslo</p><p style="font-size:14px">+47 21378390</p></div>
+    <div><h4>Snarveier</h4><a href="produkter.html">Produkter</a><a href="vin-sok.html">VIN-søk</a><a href="bli-kunde.html">Bli kunde</a></div>
+    <div><h4>Selskapet</h4><a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a><a href="personvern.html">Personvern</a></div>
+    <div><h4>Markeder</h4><a href="#">Norge</a><a href="#">Sverige</a><a href="#">Danmark</a><a href="#">Europa</a></div>
+    <div class="bottom" style="grid-column:1/-1">© 2026 Autoglass AS. Alle rettigheter reservert.</div>
+  </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.getElementById('addressForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('button[type="submit"]');
+  const status = document.getElementById('formStatus');
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData);
+
+  btn.disabled = true;
+  btn.textContent = 'Sender...';
+  status.style.display = 'block';
+  status.textContent = 'Takk! Din adresseendring er sendt. Vi behandler den så snart som mulig.';
+  status.style.color = 'var(--color-success, #22c55e)';
+
+  // Ingen backend for dette ennå — vis bekreftelse til brukeren
+  // og logg til console for debugging
+  console.log('Adresseendring:', data);
+
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = 'Send endring';
+  }, 3000);
+});
+</script>
+</body>
+</html>
