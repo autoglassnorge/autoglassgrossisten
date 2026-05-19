@@ -1,0 +1,35 @@
+To: bovsoft@gmail.com
+Subject: Client id=461 — Account Confirmation + Additional Services Inquiry
+
+Hi Bovsoft Support,
+
+I have registered for your REGNUM service (Client ID: 461) and paid for 333 requests.
+
+My account currently shows status 403 — please confirm it so I can begin using the API.
+
+Additionally, I would like to ask if you offer any of the following services:
+
+1. Part lookup by kType
+   - After decoding a license plate to kType, can we query your API to find
+     OEM part numbers or aftermarket article numbers for that vehicle?
+
+2. Glass / windshield specific data
+   - We are an auto glass wholesaler and need to match exact windshields.
+   - Do you have access to glass part numbers (e.g., Pilkington, Glavista,
+     Euroglass, NAGS codes) linked to kType?
+
+3. TecDoc integration
+   - Do you provide TecDoc TAF data or an API to convert kType → OE number?
+
+4. Equipment flags
+   - Does your service return factory equipment data (rain sensor, heated
+     windshield, ADAS, acoustic glass) for a given kType or VIN?
+
+If you do not offer these directly, can you recommend a partner or data
+provider who does?
+
+Thank you,
+Tom Arne Jensen
+Autoglass AS
+tomarnejensen@gmail.com
++47 21378390

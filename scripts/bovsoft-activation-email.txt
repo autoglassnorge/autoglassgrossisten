@@ -1,0 +1,19 @@
+To: bovsoft@gmail.com
+Subject: Client id=461 — Account Confirmation Required (Paid for 333 requests)
+
+Hi Bovsoft Support,
+
+I have registered for your REGNUM service and paid for 333 requests.
+
+My account details:
+- Client ID: 461
+- Current status: 403 (temp status, awaiting confirmation)
+- Service needed: getktypefornumplatenorway (Norway)
+
+Please confirm my account so I can start using the API.
+
+Thank you,
+Tom Arne Jensen
+Autoglass AS
+tomarnejensen@gmail.com
++47 21378390

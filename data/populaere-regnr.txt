@@ -1,0 +1,61 @@
+# Populære norske regnr for kType-bootstrap
+# Kilde: Vanlige biler på norske veier + test-regnr
+# Format: ett regnr per linje
+
+# Volkswagen (T5/T6 - stor kundegruppe for Autoglass)
+DT10555
+BS12345
+CV98765
+
+# BMW (3-serie, 5-serie)
+AB12345
+BD54321
+
+# Mercedes (C-klasse, E-klasse)
+AX12345
+BY67890
+
+# Audi (A3, A4, A6)
+AK12345
+BL98765
+
+# Toyota (Corolla, Prius, Yaris)
+CT12345
+DR98765
+
+# Ford (Focus, Mondeo)
+EL12345
+FM98765
+
+# Hyundai/Kia (i30, Sportage)
+GN12345
+HO98765
+
+# Volvo (V70, XC60, XC90)
+JP12345
+KN98765
+
+# Skoda (Octavia, Superb)
+LR12345
+MS98765
+
+# Nissan (Qashqai, Leaf)
+NT12345
+OW98765
+
+# Mazda (3, 6, CX-5)
+PA12345
+QB98765
+
+# Peugeot/Citroën (3008, C4)
+RC12345
+SD98765
+
+# Tesla (Model 3, Model Y)
+TE12345
+UF98765
+
+# Test-regnr (for verifisering)
+TEST123
+UX71699
+SU18018

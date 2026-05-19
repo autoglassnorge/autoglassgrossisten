@@ -653,13 +653,13 @@ function detectFlagsFromDescription(description: string | null): {
 } {
   const d = (description || "").toUpperCase();
   return {
-    adas: /\b(ADAS|FILSKIFTE|LANE ASSIST|COLLISION|AUTO BRAKE)\b/.test(d),
-    rainSensor: /\b(RSN|RSNL|RSNLSN|RAIN SENSOR|REGN SENSOR)\b/.test(d),
-    heated: /\b(HTD|HEATED|OPPVARM|VARME|DEFROST)\b/.test(d),
-    acoustic: /\b(ACO|ACOUSTIC|AKUSTISK|QUIET|STØYDEMP)\b/.test(d),
-    antenna: /\b(ANT|ANTENNA|ANTENNE|GPS|RADIO|FM|DAB)\b/.test(d),
-    camera: /\b(CAMERA|CAM|KAMERA|SENSOR)\b/.test(d),
-    hud: /\b(HUD|HEAD.UP|PROJEKSJON)\b/.test(d),
+    adas: /\b(ADAS|FILSKIFTE|LANE.ASSIST|LANE|COLLISION|AUTO.BRAKE|EMERGENCY|BRAKE|DRIVE.ASSIST|PRO.PILOT|AUTOPILOT|TRAFFIC|AP|ACC|ADAPTIVE)\b/.test(d),
+    rainSensor: /\b(RSN|RSNL|RSNLSN|RAIN|REGN|WIPER|WASHER|VIPE|AUTOMATIC.WIPER|REGNSENSOR|VINDRUTE.VISKER)\b/.test(d),
+    heated: /\b(HTD|HT|HEATED|OPPVARM|VARME|DEFROST|DEFOG|EL.VARME|EL-VARME|HEATING|WARM|VARMET)\b/.test(d),
+    acoustic: /\b(ACO|ACOUSTIC|AKUSTIK|QUIET|STØYDEMP|STØY|NOISE|SILENT|SOUND|ACUSTIC)\b/.test(d),
+    antenna: /\b(ANT|ANTENNA|ANTENNE|GPS|RADIO|FM|DAB|AERIAL|ANTEN)\b/.test(d),
+    camera: /\b(CAMERA|CAM|KAMERA|SENSOR|BACKUP|REVERSING|360|FRONT.CAM|REAR.CAM)\b/.test(d),
+    hud: /\b(HUD|HEAD.UP|HEADUP|PROJEKSJON|PROJECTION|WINDSHIELD.DISPLAY)\b/.test(d),
   };
 }
 
@@ -707,7 +707,8 @@ function scoreCandidate(
   flags: ReturnType<typeof detectFlagsFromOem>,
   vehicle: TecdocVehicle,
   vinInfo: ReturnType<typeof decodeVwTransporterBody>,
-  bovsoftInfo?: BovsoftVehicle
+  bovsoftInfo?: BovsoftVehicle,
+  unifiedVin?: ReturnType<typeof decodeVin>
 ): number {
   let score = 0;
 
@@ -749,6 +750,44 @@ function scoreCandidate(
     }
   }
 
+  // VIN model year verification (works for ALL makes)
+  if (unifiedVin?.modelYear && c.year_from) {
+    const vinYear = unifiedVin.modelYear;
+    if (Math.abs(vinYear - c.year_from) <= 1) {
+      score += 15; // VIN model year matches DB year
+    } else if (Math.abs(vinYear - c.year_from) <= 3) {
+      score += 5;
+    } else if (Math.abs(vinYear - c.year_from) > 5) {
+      score -= 20; // VIN year clearly doesn't match
+    }
+  }
+
+  // VIN generation cross-check with description
+  if (unifiedVin?.generation) {
+    const descGen = parseGenerationFromDescription(c.description) || parseGenerationFromDescription(c.model);
+    if (descGen && unifiedVin.generation.toUpperCase() === descGen.toUpperCase()) {
+      score += 30; // Strong match: VIN generation = description generation
+    }
+  }
+
+  // VIN body type cross-check with description
+  if (unifiedVin?.body) {
+    const desc = (c.description + " " + (c.model || "")).toLowerCase();
+    const vinBody = unifiedVin.body.toLowerCase();
+    // Map VIN body to description keywords
+    const bodyKeywords: Record<string, string[]> = {
+      "sedan": ["sedan", "4d", "4-d", "saloon"],
+      "hatch": ["hatch", "5d", "5-d", "hatchback", "3d", "3-d"],
+      "wagon": ["wagon", "stasjons", "estate", "touring", "sw", " kombi"],
+      "suv": ["suv", "cross", "xc", "4x4"],
+      "van": ["van", "varebil", "box"],
+      "coupe": ["coupe", "2d", "2-d"],
+    };
+    const keywords = bodyKeywords[vinBody] || [];
+    const hasBodyMatch = keywords.some((k) => desc.includes(k));
+    if (hasBodyMatch) score += 12;
+  }
+
   // kType generation verification bonus
   if (bovsoftInfo) {
     const bovGen = inferGenerationFromYearRange(c.brand || "", c.model || "", bovsoftInfo.yearFrom, bovsoftInfo.yearTo);
@@ -766,33 +805,63 @@ function scoreCandidate(
 
 function parseYearRangeFromDescription(desc: string | null): { from: number | null; to: number | null } {
   if (!desc) return { from: null, to: null };
-  // Match patterns like "T3 79-91", "2015", "2009-", "90-03-"
-  // Use (^|\s) to ensure we start at a word boundary, not after a dash
-  const m = desc.match(/(?:^|\s)(\d{2,4})\s*[-–]\s*(\d{2,4})?\s*(?:[-–])?\s*[;\)]/);
-  if (m) {
-    let from = parseInt(m[1], 10);
-    let to = m[2] ? parseInt(m[2], 10) : null;
-    // Handle 2-digit years
-    if (from < 50) from += 2000;
-    else if (from < 100) from += 1900;
-    if (to !== null) {
-      if (to < 50) to += 2000;
-      else if (to < 100) to += 1900;
-    }
+  const d = desc;
+
+  // Pattern 1: "2015-2019;" or "2015-2019 " or "2015 - 2019"
+  const m1 = d.match(/(?:^|\s|\()(\d{4})\s*[-–]\s*(\d{4})\s*[;\)\s]/);
+  if (m1) {
+    return { from: parseInt(m1[1], 10), to: parseInt(m1[2], 10) };
+  }
+
+  // Pattern 2: "T3 79-91" or "90-03" (2-digit years)
+  const m2 = d.match(/(?:^|\s|\()(\d{2})\s*[-–]\s*(\d{2})\s*[;\)\s]/);
+  if (m2) {
+    let from = parseInt(m2[1], 10);
+    let to = parseInt(m2[2], 10);
+    if (from < 50) from += 2000; else from += 1900;
+    if (to < 50) to += 2000; else to += 1900;
     return { from, to };
   }
-  // Single year like "2015;" or " 2016 "
-  const m2 = desc.match(/(?:^|\s)(19\d{2}|20\d{2})(?:\s*[;\)])/);
-  if (m2) {
-    return { from: parseInt(m2[1], 10), to: null };
+
+  // Pattern 3: "2009-" or "2015- " (open-ended)
+  const m3 = d.match(/(?:^|\s|\()(\d{4})\s*[-–]\s*[;\)\s]/);
+  if (m3) {
+    return { from: parseInt(m3[1], 10), to: null };
   }
+
+  // Pattern 4: "2015;" or " 2016 " or "(2017)"
+  const m4 = d.match(/(?:^|\s|\()(19\d{2}|20\d{2})(?:\s*[;\)\s]|$)/);
+  if (m4) {
+    return { from: parseInt(m4[1], 10), to: null };
+  }
+
   return { from: null, to: null };
 }
 
 function parseGenerationFromDescription(desc: string | null): string | null {
   if (!desc) return null;
-  const m = desc.match(/\b(T[1-6]|MK\s*[IVX]+|SERIES\s+[A-Z]\d*|GENERATION\s+\d+)\b/i);
-  return m ? m[1].toUpperCase() : null;
+  // VW: T1-T6
+  const vw = desc.match(/\b(T[1-6])\b/i);
+  if (vw) return vw[1].toUpperCase();
+  // BMW: E30, E36, E46, E90, F30, G20
+  const bmw = desc.match(/\b(E30|E36|E46|E90|F30|G20)\b/i);
+  if (bmw) return bmw[1].toUpperCase();
+  // Mercedes: W201, W202, W203, W204, W205, W206
+  const merc = desc.match(/\b(W20[1-6])\b/i);
+  if (merc) return merc[1].toUpperCase();
+  // Audi: B8, B9, 8V, 8Y
+  const audi = desc.match(/\b(B[89]|8[VY])\b/i);
+  if (audi) return audi[1].toUpperCase();
+  // Ford Focus: MK3, MK4
+  const ford = desc.match(/\b(MK\s*[34])\b/i);
+  if (ford) return ford[1].toUpperCase();
+  // Volvo: P3, SPA
+  const volvo = desc.match(/\b(P3|SPA)\b/i);
+  if (volvo) return volvo[1].toUpperCase();
+  // Generic: MK I, MK II, GENERATION 1
+  const generic = desc.match(/\b(MK\s*[IVX]+|SERIES\s+[A-Z]\d*|GENERATION\s+\d+)\b/i);
+  if (generic) return generic[1].toUpperCase();
+  return null;
 }
 
 function expectedGeneration(brand: string, model: string, year: number): string | null {
@@ -813,6 +882,14 @@ function expectedGeneration(brand: string, model: string, year: number): string 
     if (year <= 2018) return "F30";
     return "G20";
   }
+  // BMW 5-series
+  if (key.includes("bmw") && (key.includes("5") || key.includes("fem"))) {
+    if (year <= 1995) return "E34";
+    if (year <= 2003) return "E39";
+    if (year <= 2010) return "E60";
+    if (year <= 2016) return "F10";
+    return "G30";
+  }
   // Mercedes C-Class
   if (key.includes("mercedes") && (key.includes("c") || key.includes("190"))) {
     if (year <= 1993) return "W201";
@@ -821,6 +898,72 @@ function expectedGeneration(brand: string, model: string, year: number): string 
     if (year <= 2014) return "W204";
     if (year <= 2021) return "W205";
     return "W206";
+  }
+  // Mercedes E-Class
+  if (key.includes("mercedes") && (key.includes("e") || key.includes("klasse"))) {
+    if (year <= 1995) return "W124";
+    if (year <= 2002) return "W210";
+    if (year <= 2009) return "W211";
+    if (year <= 2016) return "W212";
+    return "W213";
+  }
+  // Audi A3
+  if (key.includes("audi") && key.includes("3")) {
+    if (year <= 2003) return "8L";
+    if (year <= 2012) return "8P";
+    if (year <= 2020) return "8V";
+    return "8Y";
+  }
+  // Audi A4
+  if (key.includes("audi") && key.includes("4")) {
+    if (year <= 2000) return "B5";
+    if (year <= 2004) return "B6";
+    if (year <= 2008) return "B7";
+    if (year <= 2015) return "B8";
+    return "B9";
+  }
+  // Volvo V70
+  if (key.includes("volvo") && key.includes("70")) {
+    if (year <= 2000) return "P80";
+    if (year <= 2007) return "P2";
+    return "P3";
+  }
+  // Volvo XC60
+  if (key.includes("volvo") && key.includes("xc60")) {
+    if (year <= 2017) return "P3";
+    return "SPA";
+  }
+  // Volvo XC90
+  if (key.includes("volvo") && key.includes("xc90")) {
+    if (year <= 2014) return "P2";
+    return "SPA";
+  }
+  // Ford Focus
+  if (key.includes("ford") && key.includes("focus")) {
+    if (year <= 2004) return "Mk1";
+    if (year <= 2010) return "Mk2";
+    if (year <= 2018) return "Mk3";
+    return "Mk4";
+  }
+  // Nissan Qashqai
+  if (key.includes("nissan") && key.includes("qashqai")) {
+    if (year <= 2013) return "J10";
+    if (year <= 2021) return "J11";
+    return "J12";
+  }
+  // Mazda 3
+  if (key.includes("mazda") && key.includes("3")) {
+    if (year <= 2008) return "BK";
+    if (year <= 2013) return "BL";
+    if (year <= 2018) return "BM";
+    return "BP";
+  }
+  // Skoda Octavia
+  if (key.includes("skoda") && key.includes("octavia")) {
+    if (year <= 2004) return "1U";
+    if (year <= 2012) return "1Z";
+    if (year <= 2020) return "5E";
+    return "NX";
   }
   return null;
 }
@@ -951,51 +1094,151 @@ function decodeToyotaVin(vin: string): { model: string; generation: string; body
   return { model: "unknown", generation: "unknown", body: "sedan" };
 }
 
+/** Decode Volvo VIN (YV1, YV2, YV3, LVY, MHY) */
+function decodeVolvoVin(vin: string): { model: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 7) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  // Volvo WMI: YV1/YV2/YV3 (USA/Sverige), LVY (Belgia), MHY (Malaysia)
+  if (!wmi.startsWith("YV") && !wmi.startsWith("LVY") && !wmi.startsWith("MHY")) return null;
+  const seriesCode = vin.slice(3, 5).toUpperCase();
+  // Volvo model codes: https://www.volvoclub.org.uk/tech/VIN_A.shtml
+  // S60 = RS, S80 = TS, V70 = SW, XC60 = DZ, XC90 = CZ
+  const modelMap: Record<string, { model: string; gen: string; body: string }> = {
+    "RS": { model: "S60", gen: "P3", body: "sedan" },
+    "TS": { model: "S80", gen: "P3", body: "sedan" },
+    "SW": { model: "V70", gen: "P3", body: "wagon" },
+    "DZ": { model: "XC60", gen: "SPA", body: "suv" },
+    "CZ": { model: "XC90", gen: "SPA", body: "suv" },
+  };
+  const info = modelMap[seriesCode];
+  if (!info) return { model: "unknown", generation: "unknown", body: "sedan" };
+  return { model: info.model, generation: info.gen, body: info.body };
+}
+
+/** Decode Nissan VIN (SJN, MNT, MLH, MMB) */
+function decodeNissanVin(vin: string): { model: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 6) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  // Nissan WMI: SJN (UK), MNT (Thailand), MLH (Thailand), MMB (Thailand), JN1/JN6 (Japan)
+  if (!wmi.startsWith("SJN") && !wmi.startsWith("MNT") && !wmi.startsWith("MLH") && !wmi.startsWith("MMB") && !wmi.startsWith("JN")) return null;
+  const modelCode = vin.slice(3, 5).toUpperCase();
+  // Nissan Qashqai J11 = J11, Leaf ZE = ZE
+  if (modelCode === "J1") return { model: "Qashqai", generation: "J11", body: "suv" };
+  if (modelCode === "ZE") return { model: "Leaf", generation: "ZE1", body: "hatch" };
+  return { model: "unknown", generation: "unknown", body: "sedan" };
+}
+
+/** Decode Mazda VIN (JM1, JM6, JM7, JM0, 3MZ) */
+function decodeMazdaVin(vin: string): { model: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 6) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  // Mazda WMI: JM0/JM1/JM6/JM7 (Japan), 3MZ (Mexico)
+  if (!wmi.startsWith("JM") && !wmi.startsWith("3MZ")) return null;
+  const modelCode = vin.slice(3, 5).toUpperCase();
+  // Mazda 3 BM/BN = BM, Mazda 6 GJ = GJ, CX-5 KE/KF = KE
+  if (modelCode === "BM" || modelCode === "BN") return { model: "3", generation: "BM", body: "hatch" };
+  if (modelCode === "GJ") return { model: "6", generation: "GJ", body: "sedan" };
+  if (modelCode === "KE" || modelCode === "KF") return { model: "CX-5", generation: "KE", body: "suv" };
+  return { model: "unknown", generation: "unknown", body: "sedan" };
+}
+
+/** Decode Skoda VIN (TMB, TMJ, TMK, WVW) */
+function decodeSkodaVin(vin: string): { model: string; generation: string; body: string } | null {
+  if (!vin || vin.length < 6) return null;
+  const wmi = vin.slice(0, 3).toUpperCase();
+  // Skoda WMI: TMB/TMJ/TMK (Tsjekkia), WVW (Tyskland - noen Skoda)
+  if (!wmi.startsWith("TM") && !wmi.startsWith("WVW")) return null;
+  const modelCode = vin.slice(3, 5).toUpperCase();
+  // Skoda Octavia 3 = 5E, Superb 3 = 3V, Fabia = 6Y/NJ
+  if (modelCode === "5E" || modelCode === "NX") return { model: "Octavia", generation: "3", body: "wagon" };
+  if (modelCode === "3V" || modelCode === "3T") return { model: "Superb", generation: "3", body: "sedan" };
+  return { model: "unknown", generation: "unknown", body: "hatch" };
+}
+
+/** Extract model year from VIN position 10 (valid for all manufacturers, 1980+) */
+function decodeVinModelYear(vin: string): number | null {
+  if (!vin || vin.length < 10) return null;
+  const yearChar = vin[9].toUpperCase();
+  // VIN model year mapping (cycles every 30 years)
+  const yearMap: Record<string, number> = {
+    "A": 2010, "B": 2011, "C": 2012, "D": 2013, "E": 2014, "F": 2015,
+    "G": 2016, "H": 2017, "J": 2018, "K": 2019, "L": 2020, "M": 2021,
+    "N": 2022, "P": 2023, "R": 2024, "S": 2025, "T": 2026, "V": 2027,
+    "W": 2028, "X": 2029, "Y": 2030, "1": 2001, "2": 2002, "3": 2003,
+    "4": 2004, "5": 2005, "6": 2006, "7": 2007, "8": 2008, "9": 2009,
+  };
+  return yearMap[yearChar] || null;
+}
+
 /** Unified VIN decoder — tries all known makes */
-function decodeVin(vin: string, lengthMm?: number): { make: string; generation: string; body: string; wheelbase?: string } | null {
+function decodeVin(vin: string, lengthMm?: number): { make: string; generation: string; body: string; wheelbase?: string; modelYear?: number } | null {
   if (!vin || vin.length < 8) return null;
   const wmi = vin.slice(0, 3).toUpperCase();
 
   // VW Transporter
   if (wmi === "WV1" || wmi === "WV2") {
     const result = decodeVwTransporterBody(vin, lengthMm);
-    if (result) return { make: "volkswagen", generation: result.generation, body: result.body, wheelbase: result.wheelbase };
+    if (result) return { make: "volkswagen", generation: result.generation, body: result.body, wheelbase: result.wheelbase, modelYear: decodeVinModelYear(vin) || undefined };
   }
 
   // BMW
   if (wmi.startsWith("WB")) {
     const result = decodeBmwVin(vin);
-    if (result) return { make: "bmw", generation: result.generation, body: result.body };
+    if (result) return { make: "bmw", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
   }
 
   // Mercedes
   if (wmi.startsWith("WD")) {
     const result = decodeMercedesVin(vin);
-    if (result) return { make: "mercedes", generation: result.generation, body: result.body };
+    if (result) return { make: "mercedes", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
   }
 
   // Audi
   if (wmi.startsWith("WA")) {
     const result = decodeAudiVin(vin);
-    if (result) return { make: "audi", generation: result.generation, body: result.body };
+    if (result) return { make: "audi", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
   }
 
   // Ford
   if (wmi === "WF0" || wmi.startsWith("1FT") || wmi.startsWith("3FA")) {
     const result = decodeFordVin(vin);
-    if (result) return { make: "ford", generation: result.generation, body: result.body };
+    if (result) return { make: "ford", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
   }
 
   // Hyundai/Kia
   if (wmi.startsWith("KM") || wmi.startsWith("KN") || wmi.startsWith("ME") || wmi.startsWith("NL") || wmi.startsWith("TMA")) {
     const result = decodeHyundaiVin(vin);
-    if (result) return { make: "hyundai", generation: result.generation, body: result.body };
+    if (result) return { make: "hyundai", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
   }
 
   // Toyota
   if (wmi.startsWith("JT") || wmi.startsWith("NMT") || wmi.startsWith("SB1")) {
     const result = decodeToyotaVin(vin);
-    if (result) return { make: "toyota", generation: result.generation, body: result.body };
+    if (result) return { make: "toyota", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
+  }
+
+  // Volvo
+  if (wmi.startsWith("YV") || wmi.startsWith("LVY") || wmi.startsWith("MHY")) {
+    const result = decodeVolvoVin(vin);
+    if (result) return { make: "volvo", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
+  }
+
+  // Nissan
+  if (wmi.startsWith("SJN") || wmi.startsWith("MNT") || wmi.startsWith("MLH") || wmi.startsWith("MMB") || wmi.startsWith("JN")) {
+    const result = decodeNissanVin(vin);
+    if (result) return { make: "nissan", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
+  }
+
+  // Mazda
+  if (wmi.startsWith("JM") || wmi.startsWith("3MZ")) {
+    const result = decodeMazdaVin(vin);
+    if (result) return { make: "mazda", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
+  }
+
+  // Skoda
+  if (wmi.startsWith("TM") || wmi.startsWith("WVW")) {
+    const result = decodeSkodaVin(vin);
+    if (result) return { make: "skoda", generation: result.generation, body: result.body, modelYear: decodeVinModelYear(vin) || undefined };
   }
 
   return null;
@@ -1360,7 +1603,7 @@ async function searchByRegnr(regnr: string, env: Env): Promise<SearchResult> {
 
   // Score and sort (with body compatibility + equipment + kType verification)
   const scored = candidates
-    .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined) }))
+    .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined, unifiedVin || undefined) }))
     .sort((a, b) => b.score - a.score)
     .map((s) => s.c);
 
