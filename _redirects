@@ -1,34 +1,18 @@
-# Cloudflare Pages Redirects
-# https://developers.cloudflare.com/pages/platform/redirects/
+# WordPress → Ny Cloudflare Pages (permanent redirects)
+/bli-kunde/           /bli-kunde.html         301
+/kundeservice/        /kontakt.html           301
+/min-konto/           /kundeportal.html       301
+/om-oss/              /om-oss.html            301
+/personvern/          /personvern.html        301
+/vilkar-betingelser/  /vilkar.html            301
+/kontakt-oss/         /kontakt.html           301
 
-# Language-based redirects (default = Norwegian)
-/               /no/                301
-/sv             /sv/                301
-/en             /en/                301
+# WooCommerce redirects (shop pages → produkter/frontruter)
+/shop/                /produkter.html         301
+/produkt/*            /produkter.html         301
+/kategori/*           /produkter.html         301
+/sidekurv/            /produkter.html         301
+/kasse/               /produkter.html         301
 
-# Canonical trailing slashes
-/no             /no/                301
-/sv             /sv/                301
-/en             /en/                301
-
-# Path redirects
-/no/produkter   /produkter.html     200
-/no/vin-sok     /vin-sok.html       200
-/no/bli-kunde   /bli-kunde.html     200
-/no/kundeportal /kundeportal.html   200
-/no/om-oss      /om-oss.html        200
-/no/kontakt     /kontakt.html       200
-
-/sv/produkter   /produkter.html     200
-/sv/vin-sok     /vin-sok.html       200
-/sv/bli-kunde   /bli-kunde.html     200
-/sv/kundeportal /kundeportal.html   200
-/sv/om-oss      /om-oss.html        200
-/sv/kontakt     /kontakt.html       200
-
-/en/produkter   /produkter.html     200
-/en/vin-sok     /vin-sok.html       200
-/en/bli-kunde   /bli-kunde.html     200
-/en/kundeportal /kundeportal.html   200
-/en/om-oss      /om-oss.html        200
-/en/kontakt     /kontakt.html       200
+# API passthrough
+/api/*                https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 200
