@@ -71,4 +71,11 @@ CREATE TABLE IF NOT EXISTS ktype_matches (
 );
 
 CREATE INDEX IF NOT EXISTS idx_ktype_matches_eurocode ON ktype_matches(eurocode);
+
+-- Rate limiting (D1-basert, unngår KV write-kvote)
+CREATE TABLE IF NOT EXISTS rate_limits (
+  key TEXT PRIMARY KEY,
+  count INTEGER DEFAULT 1,
+  expires_at DATETIME
+);
 CREATE INDEX IF NOT EXISTS idx_ktype_matches_last_seen ON ktype_matches(last_seen DESC);

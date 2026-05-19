@@ -110,15 +110,24 @@ function cacheKey(endpoint: string, params: Record<string, string>): string {
 }
 
 // ============================================================================
-// RATE LIMITING
+// RATE LIMITING (D1-basert — unngår KV write-kvote)
 // ============================================================================
 
-async function checkRateLimit(kv: KVNamespace, ip: string): Promise<boolean> {
+async function checkRateLimit(db: D1Database, ip: string): Promise<boolean> {
   const key = `rate:${ip}`;
-  const count = parseInt((await kv.get(key)) || "0", 10);
-  if (count > 120) return false; // 120 req/min
-  await kv.put(key, String(count + 1), { expirationTtl: 60 });
-  return true;
+  try {
+    const row = await db.prepare("SELECT count FROM rate_limits WHERE key = ? AND expires_at > datetime('now')").bind(key).first();
+    const count = row ? (row as any).count : 0;
+    if (count > 120) return false; // 120 req/min
+    await db.prepare(
+      `INSERT INTO rate_limits (key, count, expires_at) VALUES (?, ?, datetime('now', '+1 minute'))
+       ON CONFLICT(key) DO UPDATE SET count = count + 1, expires_at = excluded.expires_at`
+    ).bind(key, count + 1).run();
+    return true;
+  } catch {
+    // If table doesn't exist yet, allow through (don't block on migration missing)
+    return true;
+  }
 }
 
 // ============================================================================
@@ -1448,7 +1457,7 @@ export default {
     const clientIp = request.headers.get("CF-Connecting-IP") || "unknown";
 
     // Rate limiting
-    if (!(await checkRateLimit(env.GLASS_CATALOG, clientIp))) {
+    if (!(await checkRateLimit(env.GLASS_CATALOG_D1, clientIp))) {
       return errorResponse("For mange forespørsler. Prøv igjen om et minutt.", 429);
     }
 
