@@ -32,6 +32,19 @@
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
+<style>
+.portal-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px; margin-bottom:24px; }
+.portal-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:24px; }
+.portal-card h3 { font-size:18px; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+.portal-card .icon { font-size:24px; }
+.saved-vehicles, .recent-searches { display:flex; flex-direction:column; gap:10px; }
+.empty-hint { color:var(--color-text-secondary); font-size:14px; padding:20px 0; }
+.login-prompt { display:flex; flex-direction:column; align-items:center; gap:20px; padding:48px 32px; text-align:center; }
+.login-prompt h2 { font-size:28px; }
+.login-prompt p { color:var(--color-text-secondary); max-width:400px; }
+.user-badge { display:inline-flex; align-items:center; gap:10px; background:var(--color-surface); border:1px solid var(--color-border); padding:10px 18px; border-radius:var(--radius-md); font-size:14px; }
+.user-badge .dot { width:8px; height:8px; background:var(--color-success); border-radius:50%; }
+</style>
 </head>
 <body>
 
@@ -67,77 +80,83 @@
   <a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a>
 </div>
 
-<section class="section" style="padding-top:140px;min-height:70vh;display:flex;align-items:center">
-  <div class="container" style="max-width:480px">
-    <div class="reveal" style="text-align:center;margin-bottom:40px">
-      <h1 style="font-size:32px;margin-bottom:12px">Kundeportal</h1>
-      <p style="color:var(--color-text-secondary)">Logg inn for å se dine priser, bestille og sjekke ordrehistorikk.</p>
+<section class="section" style="padding-top:120px;min-height:70vh">
+  <div class="container" style="max-width:800px">
+
+    <!-- Uautentisert: login-prompt -->
+    <div id="login-prompt" class="reveal" style="display:none">
+      <div class="login-prompt">
+        <h2>🔐 Kundeportal</h2>
+        <p>Logg inn for å se dine lagrede kjøretøy, siste søk og sende forespørsler direkte fra portalen.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <a href="kundeportal.html" class="btn-primary" style="padding:14px 32px;font-size:16px">Logg inn</a>
+          <a href="bli-kunde.html" class="btn-secondary" style="padding:14px 32px;font-size:16px">Bli kunde</a>
+        </div>
+        <p style="font-size:13px;margin-top:16px">Nye kunder blir godkjent manuelt innen 24 timer.</p>
+      </div>
     </div>
 
-    <div id="auth-section" class="reveal" style="padding:40px;background:var(--color-surface-alt);border-radius:var(--radius-lg);border:1px solid var(--color-border)">
-      <form id="login-form">
-        <div class="form-group">
-          <label>E-post</label>
-          <input type="email" id="login-email" placeholder="din@bedrift.no" required>
-        </div>
-        <div class="form-group">
-          <label>Passord</label>
-          <input type="password" id="login-password" placeholder="••••••••" required>
-        </div>
-        <button type="submit" class="btn-primary" style="width:100%;margin-top:8px">Logg inn</button>
-      </form>
-      <div style="text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid var(--color-border)">
-        <p style="font-size:14px;color:var(--color-text-secondary);margin-bottom:12px">Eller bruk magic link (ingen passord)</p>
-        <form id="magic-link-form">
-          <div style="display:flex;gap:8px">
-            <input type="email" placeholder="din@bedrift.no" required style="flex:1;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px">
-            <button type="submit" class="btn-secondary" style="padding:12px 20px;font-size:13px">Send link</button>
+    <!-- Autentisert: portal-innhold -->
+    <div id="portal-section" class="reveal" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px">
+        <div>
+          <h1 style="font-size:28px;margin-bottom:4px">Kundeportal</h1>
+          <div class="user-badge">
+            <span class="dot"></span>
+            <span id="user-email">Laster...</span>
           </div>
-        </form>
+        </div>
+        <button onclick="handleLogout()" class="btn-secondary btn-sm">Logg ut</button>
+      </div>
+
+      <div class="portal-grid">
+        <!-- Lagrede kjøretøy -->
+        <div class="portal-card" style="grid-column:1 / -1">
+          <h3><span class="icon">🚗</span> Lagrede kjøretøy</h3>
+          <div id="saved-vehicles" class="saved-vehicles">
+            <p class="empty-hint">Laster...</p>
+          </div>
+        </div>
+
+        <!-- Siste søk -->
+        <div class="portal-card">
+          <h3><span class="icon">🔍</span> Siste søk</h3>
+          <div id="recent-searches" class="recent-searches">
+            <p class="empty-hint">Ingen nylige søk.</p>
+          </div>
+        </div>
+
+        <!-- Rask handling -->
+        <div class="portal-card">
+          <h3><span class="icon">⚡</span> Rask handling</h3>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="vin-sok.html" class="btn-primary" style="text-align:center">Nytt glass-søk</a>
+            <a href="katalog.html" class="btn-secondary" style="text-align:center">Bla i katalogen</a>
+            <a href="kontakt.html" class="btn-secondary" style="text-align:center">Kontakt oss</a>
+          </div>
+        </div>
+
+        <!-- Firmainfo (placeholder) -->
+        <div class="portal-card">
+          <h3><span class="icon">🏢</span> Firmainfo</h3>
+          <div style="font-size:14px;color:var(--color-text-secondary);line-height:1.7">
+            <p><strong>Kundenummer:</strong> <span id="customer-id">—</span></p>
+            <p><strong>Rabattgruppe:</strong> <span id="discount-group">Standard B2B</span></p>
+            <p><strong>Betalingsbetingelser:</strong> Netto 14 dager</p>
+            <p style="margin-top:8px;font-size:12px">Full firmainfo og prisliste krever UNI Micro-integrasjon.</p>
+          </div>
+        </div>
+
+        <!-- Ordrehistorikk (placeholder) -->
+        <div class="portal-card">
+          <h3><span class="icon">📦</span> Ordrehistorikk</h3>
+          <p class="empty-hint">Ordrehistorikk vil vises her når UNI Micro-integrasjonen er på plass.</p>
+        </div>
       </div>
     </div>
 
-    <div id="portal-section" class="reveal" style="display:none;padding:40px;background:var(--color-surface-alt);border-radius:var(--radius-lg);border:1px solid var(--color-border)">
-      <h2 style="font-size:24px;margin-bottom:8px">Velkommen tilbake</h2>
-      <p style="color:var(--color-text-secondary);margin-bottom:24px">Innlogget som <strong id="user-email"></strong></p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
-        <a href="#" class="glass-card" style="text-align:center;padding:24px">
-          <div style="font-size:32px;margin-bottom:8px">📋</div>
-          <h3 style="font-size:16px">Mine priser</h3>
-        </a>
-        <a href="vin-sok.html" class="glass-card" style="text-align:center;padding:24px">
-          <div style="font-size:32px;margin-bottom:8px">🔍</div>
-          <h3 style="font-size:16px">Ny bestilling</h3>
-        </a>
-        <a href="#" class="glass-card" style="text-align:center;padding:24px">
-          <div style="font-size:32px;margin-bottom:8px">📦</div>
-          <h3 style="font-size:16px">Ordrehistorikk</h3>
-        </a>
-        <a href="#" class="glass-card" style="text-align:center;padding:24px">
-          <div style="font-size:32px;margin-bottom:8px">💳</div>
-          <h3 style="font-size:16px">Fakturaer</h3>
-        </a>
-      </div>
-
-      <button onclick="signOut()" class="btn-secondary" style="width:100%">Logg ut</button>
-    </div>
-
-    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--color-text-secondary)">
-      Ikke kunde ennå? <a href="bli-kunde.html" style="color:var(--color-accent);font-weight:600">Bli grossistkunde</a>
-    </p>
   </div>
 </section>
-
-<script>
-function doLogin() {
-  const email = document.getElementById('login-email').value;
-  alert('Demo: Innlogging simulert for ' + email + '\n\nI produksjon: Kobles til Supabase Auth.');
-}
-function sendMagicLink() {
-  alert('Demo: Magic link sendt!\n\nI produksjon: Kobles til Resend/SendGrid + Supabase.');
-}
-</script>
 
 <footer class="site-footer">
   <div class="container">
@@ -148,15 +167,9 @@ function sendMagicLink() {
     <div class="bottom" style="grid-column:1/-1">© 2026 Autoglass AS. Alle rettigheter reservert.</div>
   </div>
 </footer>
+
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 <script src="js/auth.js"></script>
-<script>
-// Supabase config — settes via window.__AG_CONFIG__ eller .env
-window.__AG_CONFIG__ = {
-  supabaseUrl: "",
-  supabaseKey: ""
-};
-</script>
 </body>
 </html>

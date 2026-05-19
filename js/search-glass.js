@@ -123,6 +123,16 @@ class GlassSearch {
     const layerLabels = ['', 'Eksakt match', 'År + merke', 'Merke', 'Prefix4'];
     const layerLabel = layerLabels[data.layer || 0] || 'Statistisk match';
 
+    // Store last search vehicle for quote modal
+    if (v.regnr) {
+      window.__lastSearchVehicle = {
+        regnr: v.regnr,
+        make: v.make,
+        model: v.model,
+        year: v.year,
+      };
+    }
+
     let html = '';
 
     // Vehicle banner (only in full mode)
@@ -237,8 +247,8 @@ class GlassSearch {
         </div>
         ${nagsHtml}
         <div style="display:flex;gap:12px;margin-top:16px">
-          <button class="btn-primary" style="padding:10px 20px;font-size:13px">Be om pris</button>
-          <button class="btn-secondary" style="padding:10px 20px;font-size:13px">Se detaljer</button>
+          <button class="btn-primary" style="padding:10px 20px;font-size:13px" onclick="openQuoteModal('${c.eurocode}', '${(c.brand || '').replace(/'/g, "\\'")}', '${(c.model || '').replace(/'/g, "\\'")}')">Be om pris</button>
+          <button class="btn-secondary" style="padding:10px 20px;font-size:13px" onclick="saveVehicleFromSearch('${c.eurocode}', '${(c.brand || '').replace(/'/g, "\\'")}', '${(c.model || '').replace(/'/g, "\\'")}')">Lagre kjøretøy</button>
         </div>
       </div>
     `;
@@ -253,6 +263,117 @@ class GlassSearch {
     const instance = container._glassSearch;
     if (instance) instance.search(regnr);
   }
+}
+
+// ============================================================================
+// QUOTE MODAL
+// ============================================================================
+
+function openQuoteModal(eurocode, brand, model) {
+  const existing = document.getElementById('quote-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'quote-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML = `
+    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:32px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
+      <h3 style="font-size:20px;margin-bottom:4px">Be om pris</h3>
+      <p style="color:var(--color-text-secondary);font-size:14px;margin-bottom:20px">${eurocode}${brand ? ' — ' + brand + ' ' + model : ''}</p>
+      <form id="quote-form">
+        <div class="form-group" style="margin-bottom:14px">
+          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">E-post *</label>
+          <input type="email" id="quote-email" required style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary)"
+            value="${(typeof currentUser !== 'undefined' && currentUser?.email) || ''}">
+        </div>
+        <div class="form-group" style="margin-bottom:14px">
+          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">Antall</label>
+          <input type="number" id="quote-qty" value="1" min="1" style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary)">
+        </div>
+        <div class="form-group" style="margin-bottom:20px">
+          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">Beskjed (valgfritt)</label>
+          <textarea id="quote-msg" rows="3" style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary);resize:vertical"></textarea>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button type="submit" class="btn-primary" style="flex:1">Send forespørsel</button>
+          <button type="button" class="btn-secondary" onclick="document.getElementById('quote-modal').remove()">Avbryt</button>
+        </div>
+      </form>
+      <div id="quote-status" style="margin-top:16px;font-size:14px;text-align:center;display:none"></div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.remove();
+  });
+
+  document.getElementById('quote-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const status = document.getElementById('quote-status');
+    const originalText = btn.textContent;
+
+    btn.disabled = true;
+    btn.textContent = 'Sender...';
+    status.style.display = 'none';
+
+    const lastSearch = window.__lastSearchVehicle || {};
+
+    try {
+      const res = await fetch('https://autoglass-glass-sok.autoglassnorge.workers.dev/api/quote-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: document.getElementById('quote-email').value,
+          eurocode: eurocode,
+          regnr: lastSearch.regnr || '',
+          quantity: parseInt(document.getElementById('quote-qty').value, 10) || 1,
+          message: document.getElementById('quote-msg').value,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        status.innerHTML = '<span style="color:var(--color-success)">✅ Forespørsel sendt! Vi kontakter deg innen 24 timer.</span>';
+        btn.textContent = 'Sendt!';
+        setTimeout(() => modal.remove(), 2500);
+      } else {
+        status.innerHTML = '<span style="color:var(--color-error)">❌ ' + (data.error || 'Noe gikk galt') + '</span>';
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    } catch (err) {
+      status.innerHTML = '<span style="color:var(--color-error)">❌ Nettverksfeil. Prøv igjen.</span>';
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+    status.style.display = 'block';
+  });
+}
+
+// ============================================================================
+// SAVE VEHICLE
+// ============================================================================
+
+function saveVehicleFromSearch(eurocode, brand, model) {
+  if (typeof currentUser === 'undefined' || !currentUser) {
+    alert('Logg inn for å lagre kjøretøy. Gå til Kundeportal → Logg inn.');
+    return;
+  }
+  const lastSearch = window.__lastSearchVehicle || {};
+  const vehicle = {
+    regnr: lastSearch.regnr || '',
+    make: lastSearch.make || brand || '',
+    model: lastSearch.model || model || '',
+    year: lastSearch.year || 0,
+    eurocode: eurocode,
+  };
+  if (!vehicle.regnr) {
+    alert('Ingen regnr å lagre. Utfør et søk først.');
+    return;
+  }
+  saveVehicle(currentUser.email, vehicle);
+  alert('🚗 ' + vehicle.make + ' ' + vehicle.model + ' (' + vehicle.regnr + ') lagret!');
 }
 
 // Auto-init any data-glass-search elements

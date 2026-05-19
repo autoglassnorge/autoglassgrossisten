@@ -994,6 +994,61 @@ export default {
       return jsonResponse({ query: q, count: results.length, results });
     }
 
+    // ── Auth: /api/me ──────────────────────────────────────────────────────
+    if (path === "/api/me") {
+      const email = request.headers.get("CF-Access-Authenticated-User-Email");
+      if (!email) {
+        return jsonResponse({ authenticated: false }, 401);
+      }
+      return jsonResponse({ authenticated: true, email });
+    }
+
+    // ── Quote Request: POST /api/quote-request ─────────────────────────────
+    if (path === "/api/quote-request" && request.method === "POST") {
+      try {
+        const body = await request.json() as {
+          email?: string;
+          eurocode?: string;
+          regnr?: string;
+          quantity?: number;
+          message?: string;
+        };
+        if (!body.email || !body.eurocode) {
+          return errorResponse("Mangler påkrevde felt: email, eurocode");
+        }
+        const db = env.GLASS_CATALOG_D1;
+        await db.prepare(
+          `INSERT INTO quote_requests (email, eurocode, regnr, quantity, message, created_at, status)
+           VALUES (?, ?, ?, ?, ?, datetime('now'), 'new')`
+        ).bind(
+          body.email,
+          body.eurocode,
+          body.regnr || null,
+          body.quantity || 1,
+          body.message || null
+        ).run();
+        return jsonResponse({ success: true, message: "Forespørsel mottatt" });
+      } catch (e) {
+        return errorResponse("Kunne ikke lagre forespørsel: " + (e as Error).message, 500);
+      }
+    }
+
+    // ── Admin: GET /api/admin/quotes ───────────────────────────────────────
+    if (path === "/api/admin/quotes" && request.method === "GET") {
+      const email = request.headers.get("CF-Access-Authenticated-User-Email");
+      if (!email) {
+        return errorResponse("Krever innlogging", 401);
+      }
+      try {
+        const { results } = await env.GLASS_CATALOG_D1
+          .prepare("SELECT * FROM quote_requests ORDER BY created_at DESC LIMIT 200")
+          .all();
+        return jsonResponse({ quotes: results || [] });
+      } catch (e) {
+        return errorResponse("Kunne ikke hente forespørsler: " + (e as Error).message, 500);
+      }
+    }
+
     return errorResponse("Ukjent endepunkt", 404);
   },
 };
