@@ -1830,7 +1830,7 @@ type SearchResult = {
   body: unknown;
 };
 
-async function searchByRegnr(regnr: string, env: Env): Promise<SearchResult> {
+async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): Promise<SearchResult> {
   // 1. Lookup vehicle via SVV — typed result so we can distinguish auth vs not-found vs upstream
   const svvResult = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
   let source = "svv.enkeltoppslag";
@@ -2085,13 +2085,23 @@ async function searchByRegnr(regnr: string, env: Env): Promise<SearchResult> {
   // Score and sort (with body compatibility + equipment + kType verification)
   const scored = candidates
     .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined, unifiedVin || undefined) }))
-    .sort((a, b) => b.score - a.score)
-    .map((s) => s.c);
+    .sort((a, b) => b.score - a.score);
 
-  const candidatesWithEquipment = scored.slice(0, 10).map((c) => ({
-    ...c,
-    _equipment: inferRecordEquipment(c),
+  // Optional category filter (e.g., ?regnr=SU18018&category=frontrute)
+  const filteredScored = categoryFilter
+    ? scored.filter((s) => {
+        const cat = s.c.category?.toLowerCase() || detectCategoryFromDescription(s.c.description);
+        return cat === categoryFilter.toLowerCase();
+      })
+    : scored;
+
+  const candidatesWithEquipment = filteredScored.slice(0, 10).map((s) => ({
+    ...s.c,
+    _score: s.score,
+    _equipment: inferRecordEquipment(s.c),
   }));
+
+  const topPick = candidatesWithEquipment[0] || null;
 
   // Determine confidence level
   const topCandidate = candidatesWithEquipment[0];
@@ -2213,6 +2223,7 @@ async function searchByRegnr(regnr: string, env: Env): Promise<SearchResult> {
         },
       },
       candidates: candidatesWithEquipment,
+      top_pick: topPick,
       confidence,
       layer,
       sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
@@ -2266,13 +2277,17 @@ export default {
 
       if (regnr) {
         // Cache hit — always 200 (we only cache successful lookups)
-        const cache = await getCache<unknown>(env.GLASS_CATALOG, cacheKey("glass", { regnr }));
+        const categoryFilter = url.searchParams.get("category") || undefined;
+        const cacheKeyParams: Record<string, string> = { regnr };
+        if (categoryFilter) cacheKeyParams.category = categoryFilter;
+        // Cache hit — always 200 (we only cache successful lookups)
+        const cache = await getCache<unknown>(env.GLASS_CATALOG, cacheKey("glass", cacheKeyParams));
         if (cache) return jsonResponse(cache);
 
-        const result = await searchByRegnr(regnr, env);
+        const result = await searchByRegnr(regnr, env, categoryFilter || undefined);
         // Only cache successful 200 responses; never cache errors (auth/upstream/not_found)
         if (result.httpStatus === 200) {
-          await setCache(env.GLASS_CATALOG, cacheKey("glass", { regnr }), result.body, 300);
+          await setCache(env.GLASS_CATALOG, cacheKey("glass", cacheKeyParams), result.body, 300);
         }
         const extraHeaders: Record<string, string> = {};
         if (result.retryAfter) extraHeaders["Retry-After"] = String(result.retryAfter);
