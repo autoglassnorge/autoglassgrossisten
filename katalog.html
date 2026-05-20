@@ -2,81 +2,84 @@
 <html lang="no">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="images/favicon.png" sizes="32x32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Autoglass AS — Produktkatalog</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; padding: 20px; line-height: 1.5; }
-  h1 { font-size: 26px; margin-bottom: 6px; color: #fbbf24; }
-  .subtitle { color: #94a3b8; margin-bottom: 20px; font-size: 14px; }
+  body { padding: 0; }
+  .catalog-wrap { padding: 24px 0 60px; }
+  h1 { font-size: 26px; margin-bottom: 6px; color: var(--color-accent); }
+  .subtitle { color: var(--color-text-secondary); margin-bottom: 20px; font-size: 14px; }
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px; }
-  .stat-card { background: #1e293b; padding: 14px; border-radius: 10px; border: 1px solid #334155; text-align: center; }
-  .stat-value { font-size: 22px; font-weight: 700; color: #fbbf24; }
-  .stat-label { font-size: 11px; color: #94a3b8; margin-top: 2px; }
-  .mode-tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid #334155; }
-  .mode-tab { padding: 12px 24px; background: transparent; border: none; color: #94a3b8; font-size: 15px; cursor: pointer; font-weight: 500; border-bottom: 3px solid transparent; margin-bottom: -2px; }
-  .mode-tab:hover { color: #e2e8f0; }
-  .mode-tab.active { color: #fbbf24; border-bottom-color: #fbbf24; }
+  .stat-card { background: var(--color-surface-alt); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: center; }
+  .stat-value { font-size: 22px; font-weight: 700; color: var(--color-accent); }
+  .stat-label { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .mode-tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid var(--color-border); }
+  .mode-tab { padding: 12px 24px; background: transparent; border: none; color: var(--color-text-secondary); font-size: 15px; cursor: pointer; font-weight: 500; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+  .mode-tab:hover { color: var(--color-text-primary); }
+  .mode-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
   .mode-panel { display: none; }
   .mode-panel.active { display: block; }
-  .search-box { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
-  .search-box h2 { font-size: 18px; margin-bottom: 12px; color: #fbbf24; }
-  .search-box p { color: #94a3b8; font-size: 13px; margin-bottom: 16px; }
+  .search-box { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px; }
+  .search-box h2 { font-size: 18px; margin-bottom: 12px; color: var(--color-accent); }
+  .search-box p { color: var(--color-text-secondary); font-size: 13px; margin-bottom: 16px; }
   .regnr-input { display: flex; gap: 12px; max-width: 500px; }
-  .regnr-input input { flex: 1; padding: 14px 18px; border-radius: 10px; border: 2px solid #334155; background: #0f172a; color: #e2e8f0; font-size: 18px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-  .regnr-input input:focus { outline: none; border-color: #fbbf24; }
-  .btn-primary { padding: 14px 28px; border-radius: 10px; border: none; background: #fbbf24; color: #0f172a; font-size: 16px; font-weight: 700; cursor: pointer; }
-  .btn-primary:hover { background: #f59e0b; }
+  .regnr-input input { flex: 1; padding: 14px 18px; border-radius: 10px; border: 2px solid var(--color-border); background: var(--color-surface); color: var(--color-text-primary); font-size: 18px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .regnr-input input:focus { outline: none; border-color: var(--color-accent); }
+  .btn-primary { padding: 14px 28px; border-radius: 10px; border: none; background: var(--color-accent); color: var(--color-primary-900); font-size: 16px; font-weight: 700; cursor: pointer; }
+  .btn-primary:hover { background: var(--color-accent-hover); }
   .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-  .vehicle-result { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; margin-top: 20px; }
-  .vehicle-result h3 { font-size: 20px; color: #fbbf24; margin-bottom: 8px; }
-  .vehicle-meta { color: #94a3b8; font-size: 13px; margin-bottom: 12px; }
+  .vehicle-result { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; margin-top: 20px; }
+  .vehicle-result h3 { font-size: 20px; color: var(--color-accent); margin-bottom: 8px; }
+  .vehicle-meta { color: var(--color-text-secondary); font-size: 13px; margin-bottom: 12px; }
   .vehicle-flags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
   .vflag { padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; }
   .vflag-on { background: #166534; color: #86efac; }
   .vflag-off { background: #451a03; color: #fdba74; }
-  .candidate-card { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 16px; margin-bottom: 12px; }
-  .candidate-card.top { border-color: #fbbf24; }
+  .candidate-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px; }
+  .candidate-card.top { border-color: var(--color-accent); }
   .candidate-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-  .candidate-eurocode { font-family: monospace; font-size: 18px; font-weight: 700; color: #fbbf24; }
+  .candidate-eurocode { font-family: monospace; font-size: 18px; font-weight: 700; color: var(--color-accent); }
   .candidate-conf { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
   .conf-high { background: #166534; color: #86efac; }
   .conf-medium { background: #854d0e; color: #fde047; }
   .conf-low { background: #7f1d1d; color: #fca5a5; }
-  .candidate-desc { color: #94a3b8; font-size: 13px; margin-bottom: 8px; }
-  .candidate-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: #64748b; }
+  .candidate-desc { color: var(--color-text-secondary); font-size: 13px; margin-bottom: 8px; }
+  .candidate-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--color-text-muted); }
   .candidate-img { width: 80px; height: 50px; object-fit: cover; border-radius: 6px; margin-top: 10px; }
   .filters { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-  .filters input, .filters select { padding: 10px 14px; border-radius: 8px; border: 1px solid #334155; background: #1e293b; color: #e2e8f0; font-size: 14px; }
+  .filters input, .filters select { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface-alt); color: var(--color-text-primary); font-size: 14px; }
   .filters input { flex: 1; min-width: 200px; }
   .filters select { min-width: 160px; }
   .flag-filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-  .flag-filters label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; color: #94a3b8; }
-  .flag-filters input[type="checkbox"] { width: 18px; height: 18px; accent-color: #fbbf24; }
+  .flag-filters label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; color: var(--color-text-secondary); }
+  .flag-filters input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-accent); }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  th { text-align: left; padding: 10px; background: #1e293b; color: #fbbf24; font-weight: 600; position: sticky; top: 0; cursor: pointer; border-bottom: 2px solid #334155; font-size: 11px; text-transform: uppercase; }
-  th:hover { background: #334155; }
-  td { padding: 8px 10px; border-bottom: 1px solid #1e293b; }
-  tr:hover td { background: #1e293b; }
-  .eurocode { font-family: monospace; font-weight: 600; color: #fbbf24; font-size: 13px; }
-  .brand { color: #60a5fa; font-weight: 500; }
+  th { text-align: left; padding: 10px; background: var(--color-surface-alt); color: var(--color-accent); font-weight: 600; position: sticky; top: 0; cursor: pointer; border-bottom: 2px solid var(--color-border); font-size: 11px; text-transform: uppercase; }
+  th:hover { background: var(--color-border); }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--color-surface-alt); }
+  tr:hover td { background: var(--color-surface-alt); }
+  .eurocode { font-family: monospace; font-weight: 600; color: var(--color-accent); font-size: 13px; }
+  .brand { color: #2563eb; font-weight: 500; }
   .flag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; margin-right: 3px; }
   .flag-adas { background: #dc2626; color: white; }
   .flag-rain { background: #2563eb; color: white; }
   .flag-heat { background: #ea580c; color: white; }
   .image-thumb { width: 50px; height: 35px; object-fit: cover; border-radius: 4px; }
-  .no-image { width: 50px; height: 35px; background: #1e293b; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #475569; }
+  .no-image { width: 50px; height: 35px; background: var(--color-surface-alt); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--color-text-muted); }
   .pagination { display: flex; gap: 6px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
-  .pagination button { padding: 6px 12px; border-radius: 6px; border: 1px solid #334155; background: #1e293b; color: #e2e8f0; cursor: pointer; font-size: 13px; }
-  .pagination button:hover { background: #334155; }
-  .pagination button.active { background: #fbbf24; color: #0f172a; font-weight: 700; }
-  .count-bar { color: #94a3b8; font-size: 13px; margin-bottom: 12px; }
+  .pagination button { padding: 6px 12px; border-radius: 6px; border: 1px solid var(--color-border); background: var(--color-surface-alt); color: var(--color-text-primary); cursor: pointer; font-size: 13px; }
+  .pagination button:hover { background: var(--color-border); }
+  .pagination button.active { background: var(--color-accent); color: var(--color-primary-900); font-weight: 700; }
+  .count-bar { color: var(--color-text-secondary); font-size: 13px; margin-bottom: 12px; }
   .error-msg { background: #7f1d1d; color: #fca5a5; padding: 16px; border-radius: 10px; margin-top: 16px; }
-  .loading { text-align: center; padding: 40px; color: #94a3b8; }
-  .empty-state { text-align: center; padding: 60px 20px; color: #64748b; }
-  .empty-state h3 { color: #94a3b8; margin-bottom: 8px; }
+  .loading { text-align: center; padding: 40px; color: var(--color-text-secondary); }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--color-text-muted); }
+  .empty-state h3 { color: var(--color-text-secondary); margin-bottom: 8px; }
   @media (max-width: 768px) { 
-    body { padding: 10px; } 
     h1 { font-size: 20px; } 
     table { font-size: 10px; } 
     th, td { padding: 5px; } 
@@ -87,9 +90,54 @@
 </style>
 </head>
 <body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html"><img src="images/logo.png" alt="Autoglass AS" class="logo-img" height="40"></a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav.home">Hjem</a>
+      <a href="frontruter.html">Frontruter</a>
+      <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+      <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+      <a href="katalog.html" class="active">📋 Katalog</a>
+      <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+      <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+      <a href="aktuelt.html">Aktuelt</a>
+      <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+      <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switcher">
+        <button data-lang="no" class="active">NO</button>
+        <button data-lang="sv">SV</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Bytt tema">🌓</button>
+      <a href="kundeportal.html" class="btn-login" data-i18n="nav.login">Logg inn</a>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Meny">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <a href="index.html" data-i18n="nav.home">Hjem</a>
+  <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+  <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+  <a href="katalog.html" class="active">📋 Katalog</a>
+  <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+  <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+  <a href="aktuelt.html">Aktuelt</a>
+  <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+  <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+</div>
+
+<main class="catalog-wrap">
+<div class="container">
 <h1>🚗 Autoglass AS — Produktkatalog</h1>
 <p class="subtitle">Søk på regnr eller bla i katalogen</p>
-
 <div class="stats" id="stats">
   <div class="stat-card"><div class="stat-value" id="statTotal">—</div><div class="stat-label">Produkter</div></div>
   <div class="stat-card"><div class="stat-value" id="statBrands">—</div><div class="stat-label">Merker</div></div>
@@ -427,15 +475,42 @@ function sortData() {
 
 function goPage(p) { currentPage = p; render(); }
 </script>
+</div>
+</main>
 
-<footer style="margin-top:60px;padding:30px 0;border-top:1px solid #334155;text-align:center;color:#64748b;font-size:13px">
-  <p>© 2026 Autoglass AS. Alle rettigheter reservert.</p>
-  <p style="margin-top:8px">
-    <a href="personvern.html" style="color:#94a3b8;margin:0 8px">Personvern</a>
-    <a href="vilkar.html" style="color:#94a3b8;margin:0 8px">Vilkår</a>
-    <a href="kontakt.html" style="color:#94a3b8;margin:0 8px">Kontakt</a>
-  </p>
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <h4>Autoglass AS</h4>
+      <p style="font-size:14px;margin-bottom:8px">Norges ledende bilglass-grossist</p>
+      <p style="font-size:14px">Kontakt oss via kundeportalen eller skjemaet på kontaktsiden.</p>
+    </div>
+    <div>
+      <h4>Snarveier</h4>
+      <a href="produkter.html">Produkter</a>
+      <a href="vin-sok.html">VIN-søk</a>
+      <a href="bli-kunde.html">Bli kunde</a>
+      <a href="kundeportal.html">Kundeportal</a><a href="aktuelt.html">Aktuelt</a>
+    </div>
+    <div>
+      <h4>Selskapet</h4>
+      <a href="om-oss.html">Om oss</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+    <div>
+      <h4>Markeder</h4>
+      <a href="#">Norge</a>
+      <a href="#">Sverige</a>
+      <a href="#">Danmark</a>
+      <a href="#">Europa</a>
+    </div>
+    <div class="bottom" style="grid-column:1/-1">
+      © 2026 Autoglass AS. Alle rettigheter reservert.
+    </div>
+  </div>
 </footer>
 
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
