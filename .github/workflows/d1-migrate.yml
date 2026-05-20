@@ -13,6 +13,22 @@ jobs:
           node-version: '20'
       - run: npm install -g wrangler
 
+      - name: D1 Migration 0002 — add ktype column
+        working-directory: api/cf-worker
+        run: |
+          wrangler d1 execute glass-catalog-db --remote --file migrations/0002_add_ktype.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: D1 Migration 0003 — ktype_matches table
+        working-directory: api/cf-worker
+        run: |
+          wrangler d1 execute glass-catalog-db --remote --file migrations/0003_fix_ktype_matches.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: D1 Migration 0005 — search_history
         working-directory: api/cf-worker
         run: |
@@ -267,8 +283,14 @@ jobs:
       - name: Verify
         working-directory: api/cf-worker
         run: |
+          echo "=== search_history ==="
           wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as total FROM search_history"
+          echo "=== equipment enriched ==="
           wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as enriched FROM glass_catalog WHERE acoustic=1 OR camera=1 OR heated=1 OR rain_sensor=1 OR antenna=1"
+          echo "=== ktype column exists ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as has_ktype FROM pragma_table_info('glass_catalog') WHERE name='ktype'"
+          echo "=== ktype_matches table ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as ktype_tables FROM sqlite_master WHERE type='table' AND name='ktype_matches'"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
