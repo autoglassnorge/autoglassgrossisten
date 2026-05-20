@@ -7,6 +7,7 @@
 .site-header .container{display:flex;align-items:center;justify-content:space-between;height:72px}
 .logo{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--color-text-primary);letter-spacing:-0.02em}
 .logo span{color:var(--color-accent)}
+.logo-img{height:40px;width:auto;display:block}
 .nav-links{display:flex;gap:32px;align-items:center}
 .nav-links a{font-size:14px;font-weight:500;color:var(--color-text-secondary);transition:color var(--transition-fast)}
 .nav-links a:hover{color:var(--color-text-primary)}
