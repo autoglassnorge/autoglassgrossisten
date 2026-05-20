@@ -179,7 +179,7 @@ async function loadBrands() {
     const res = await fetch(API_BASE + '/api/catalog/brands');
     const data = await res.json();
     const sel = document.getElementById('brandFilter');
-    data.brands.forEach(b => {
+    data.brands.sort((a, b) => a.brand.localeCompare(b.brand)).forEach(b => {
       const opt = document.createElement('option');
       opt.value = b.brand;
       opt.textContent = b.brand + ' (' + b.count.toLocaleString('nb-NO') + ')';
