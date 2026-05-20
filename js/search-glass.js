@@ -63,7 +63,7 @@ class GlassSearch {
     this.setLoading(true);
 
     const type = this.getSelectedType();
-    const typeParam = type ? `&type=${encodeURIComponent(type)}` : '';
+    const typeParam = type ? `&category=${encodeURIComponent(type)}` : '';
     const url = `${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}${typeParam}`;
     console.log('[GlassSearch] Fetching:', url);
 
@@ -120,8 +120,8 @@ class GlassSearch {
 
     const v = data.vehicle || {};
     const flags = data.flags || {};
-    const layerLabels = ['', 'Eksakt match', 'År + merke', 'Merke', 'Prefix4'];
-    const layerLabel = layerLabels[data.layer || 0] || 'Statistisk match';
+    const layerLabels = ['Eksakt match', 'Merke + modell + år', 'Merke + modell', 'Merke', 'Prefix4'];
+    const layerLabel = layerLabels[(data.layer || 1) - 1] || 'Statistisk match';
 
     // Store last search vehicle for quote modal
     if (v.regnr) {
