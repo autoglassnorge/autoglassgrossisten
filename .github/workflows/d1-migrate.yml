@@ -1,0 +1,276 @@
+name: D1 Migrate & Enrich
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate-and-enrich:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g wrangler
+
+      - name: D1 Migration 0005 — search_history
+        working-directory: api/cf-worker
+        run: |
+          wrangler d1 execute glass-catalog-db --remote --file migrations/0005_search_history.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: D1 Enrichment — equipment signatures
+        working-directory: api/cf-worker
+        run: |
+          # Create temporary enrichment SQL from bootstrap data
+          cat > /tmp/enrich-remote.sql << 'SQLEOF'
+          -- Enrich glass_catalog with equipment signatures
+          BEGIN TRANSACTION;
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '5180AGABCMVW1L';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8623AGACMUVZ';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8623AGACMVZ';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3731AGN3B';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3731ACL3B';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3731AGNBL3B';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2724AGS1P';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2434ACCGNMV6T';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2434AGNBLV';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2434AGNGNV';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2724ACC1P';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2724ACL1P';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '5149AGNBL';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8537ACL1B';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8537ACLGY1B';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8537AGNBL1B';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8537AGNGN1B';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8537AGNGY1B';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537AGNBL1B';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537AGNGN1B';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537AGNGY1B';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537ACLGY1B';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537AGNBL';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537AGNGN';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537AGNGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537ACLGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537AGABCGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8537AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8537AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8537AGNBL1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8537AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8537ACLGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8537AGABCGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8537AGNBL1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8537AGNGN1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8537AGNGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8537ACLGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNBL';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNGN';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNGY';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNBL1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNGN1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNGY1L';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNBL1L';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2424AGNGN1L';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2912AGNGY';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2912AGNGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2912AGNBL1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2912AGNGN1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2912AGNGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2912AGNGY1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2912AGNBL1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2912AGNGN1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2912AGNGY';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2912AGNGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2912AGNBL1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2912AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '2912AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '2912AGNBL1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '2912AGNGN1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2912AGNGY';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2912AGNGY1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2912AGNBL1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2912AGNGN1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGNBL';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGNGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGNGN';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGNGY1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGNBL1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGNGN1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGABCGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGABCGY1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '1453AGNGY1L';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '1453AGNGY';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '1453AGNGN';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '1453AGNGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '1453AGNBL1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '1453AGNGN1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '1453AGNGY';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '1453AGNGN';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '1453AGNGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '1453AGNBL1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '1453AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '1453AGNGY';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '1453AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '1453AGNBL1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '1453AGNGN1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '1453AGNGY';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '1453AGNGN';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '1453AGNGY1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '1453AGNBL1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '1453AGNGN1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8487AGNGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8487AGNBL';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8487AGNGN';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8487AGNGY1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8487AGNBL1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '8487AGNGN1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8487AGNGY';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8487AGNBL';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8487AGNGN';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8487AGNGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8487AGNBL1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '8487AGNGN1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '8487AGNGY';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '8487AGNBL';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '8487AGNGN';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '8487AGNGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '8487AGNBL1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '8487AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8487AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8487AGNBL1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8487AGNGN1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8487AGNGY';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8487AGNBL';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8487AGNGN';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8487AGNGY1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8487AGNBL1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '8487AGNGN1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '5041AGNBL';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '5041AGNGN';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '5041AGNGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '5041AGNGY1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '5041AGNBL1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '5041AGNGN1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '5041AGNGY';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '5041AGNBL';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '5041AGNGN';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '5041AGNGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '5041AGNBL1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '5041AGNGN1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '5041AGNGY';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '5041AGNBL';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '5041AGNGN';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '5041AGNGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '5041AGNBL1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '5041AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '5041AGNGY';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '5041AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '5041AGNBL1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '5041AGNGN1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '5041AGNGY';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '5041AGNBL';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '5041AGNGN';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '5041AGNGY1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '5041AGNBL1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '5041AGNGN1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3049AGNBL';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3049AGNGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3049AGNGN';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3049AGNGY1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3049AGNBL1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3049AGNGN1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3049AGNGY';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3049AGNBL';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3049AGNGN';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3049AGNGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3049AGNBL1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3049AGNGN1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3049AGNGY';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3049AGNBL';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3049AGNGN';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3049AGNGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3049AGNBL1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3049AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '3049AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '3049AGNBL1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '3049AGNGN1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3049AGNGY';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3049AGNBL';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3049AGNGN';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3049AGNGY1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3049AGNBL1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3049AGNGN1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3256AGNBL';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3256AGNGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3256AGNGN';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3256AGNGY1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3256AGNBL1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '3256AGNGN1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3256AGNGY';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3256AGNBL';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3256AGNGN';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3256AGNGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3256AGNBL1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '3256AGNGN1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3256AGNGY';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3256AGNBL';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3256AGNGN';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3256AGNGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3256AGNBL1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '3256AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '3256AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '3256AGNBL1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '3256AGNGN1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3256AGNGY';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3256AGNBL';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3256AGNGN';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3256AGNGY1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3256AGNBL1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '3256AGNGN1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2985AGNBL';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2985AGNGY';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2985AGNGN';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2985AGNGY1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2985AGNBL1';
+          UPDATE glass_catalog SET heated = 1 WHERE eurocode = '2985AGNGN1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2985AGNGY';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2985AGNBL';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2985AGNGN';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2985AGNGY1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2985AGNBL1';
+          UPDATE glass_catalog SET rain_sensor = 1 WHERE eurocode = '2985AGNGN1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2985AGNGY';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2985AGNBL';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2985AGNGN';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2985AGNGY1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2985AGNBL1';
+          UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '2985AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '2985AGNGY1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '2985AGNBL1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '2985AGNGN1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2985AGNGY';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2985AGNBL';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2985AGNGN';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2985AGNGY1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2985AGNBL1';
+          UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2985AGNGN1';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '5180AGABCMVW1L';
+          UPDATE glass_catalog SET camera = 1 WHERE eurocode = '5081AGACMUVW';
+          COMMIT;
+          SQLEOF
+          wrangler d1 execute glass-catalog-db --remote --file /tmp/enrich-remote.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify
+        working-directory: api/cf-worker
+        run: |
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as total FROM search_history"
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as enriched FROM glass_catalog WHERE acoustic=1 OR camera=1 OR heated=1 OR rain_sensor=1 OR antenna=1"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
