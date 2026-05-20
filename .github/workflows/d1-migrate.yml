@@ -26,8 +26,7 @@ jobs:
         run: |
           # Create temporary enrichment SQL from bootstrap data
           cat > /tmp/enrich-remote.sql << 'SQLEOF'
-          -- Enrich glass_catalog with equipment signatures
-          BEGIN TRANSACTION;
+          -- Enrich glass_catalog with equipment signatures (D1 auto-commits each statement)
           UPDATE glass_catalog SET acoustic = 1 WHERE eurocode = '5180AGABCMVW1L';
           UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8623AGACMUVZ';
           UPDATE glass_catalog SET camera = 1 WHERE eurocode = '8623AGACMVZ';
@@ -259,7 +258,6 @@ jobs:
           UPDATE glass_catalog SET antenna = 1 WHERE eurocode = '2985AGNGN1';
           UPDATE glass_catalog SET camera = 1 WHERE eurocode = '5180AGABCMVW1L';
           UPDATE glass_catalog SET camera = 1 WHERE eurocode = '5081AGACMUVW';
-          COMMIT;
           SQLEOF
           wrangler d1 execute glass-catalog-db --remote --file /tmp/enrich-remote.sql
         env:
