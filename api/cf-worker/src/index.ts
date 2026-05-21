@@ -90,6 +90,50 @@ const CORS_HEADERS = {
   "Content-Type": "application/json",
 };
 
+/** Convert D1 snake_case record to frontend camelCase */
+function normalizeRecord(r: GlassRecord): Record<string, unknown> {
+  return {
+    id: r.id,
+    eurocode: r.eurocode,
+    articleNumber: r.article_number,
+    scanNumber: r.scan_number,
+    category: r.category,
+    supplier: r.supplier,
+    brand: r.brand,
+    model: r.model,
+    yearFrom: r.year_from,
+    yearTo: r.year_to,
+    prefix4: r.prefix4,
+    adas: r.adas,
+    rainSensor: r.rain_sensor,
+    heated: r.heated,
+    acoustic: r.acoustic,
+    antenna: r.antenna,
+    hud: r.hud,
+    shade: r.shade,
+    camera: r.camera,
+    laneAssist: r.lane_assist,
+    price: r.price,
+    stockStatus: r.stock_status,
+    warehouseLocation: r.warehouse_location,
+    oemNumbers: r.oem_numbers,
+    crossReferences: r.cross_references,
+    weight: r.weight,
+    dimensions: r.dimensions,
+    description: r.description,
+    imageUrl: r.image_url,
+    pdfUrl: r.pdf_url,
+    source: r.source,
+    nagsCodes: r.nags_codes,
+    brandOriginal: r.brand_original,
+    ktype: r.ktype,
+    createdAt: r.created_at,
+    typeCode: r.typeCode,
+    typeCodeDesc: r.typeCodeDesc,
+    position: r.position,
+  };
+}
+
 function jsonResponse(data: unknown, status = 200, extraHeaders?: Record<string, string>): Response {
   return new Response(JSON.stringify(data), {
     status,
@@ -2312,7 +2356,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       record.category || inferTypeCodeFromRecord(record) || 'annet'
     );
     return {
-      ...record,
+      ...normalizeRecord(record),
       _score: s.score,
       _equipment: inferRecordEquipment(record),
       nagsCodes: nagsCodes.length > 0 ? nagsCodes : undefined,
@@ -2535,7 +2579,7 @@ export default {
         if (cache) return jsonResponse(cache);
 
         const results = await queryByPrefix4(env.GLASS_CATALOG_D1, prefix4);
-        const data = { query: { prefix4 }, count: results.length, results };
+        const data = { query: { prefix4 }, count: results.length, results: results.map(normalizeRecord) };
         await setCache(env.GLASS_CATALOG, cacheKey("glass", { prefix4 }), data, 3600);
         return jsonResponse(data);
       }
@@ -2545,7 +2589,7 @@ export default {
         if (cache) return jsonResponse(cache);
 
         const result = await queryByEurocode(env.GLASS_CATALOG_D1, eurocode);
-        const data = { query: { eurocode }, count: result ? 1 : 0, results: result ? [result] : [] };
+        const data = { query: { eurocode }, count: result ? 1 : 0, results: result ? [normalizeRecord(result)] : [] };
         await setCache(env.GLASS_CATALOG, cacheKey("glass", { eurocode }), data, 3600);
         return jsonResponse(data);
       }
@@ -2577,7 +2621,7 @@ export default {
       const yearMin = url.searchParams.get("yearMin") ? parseInt(url.searchParams.get("yearMin")!, 10) : undefined;
       const yearMax = url.searchParams.get("yearMax") ? parseInt(url.searchParams.get("yearMax")!, 10) : undefined;
       const results = await searchCatalog(env.GLASS_CATALOG_D1, q, { brand, category, yearMin, yearMax });
-      return jsonResponse({ query: q, count: results.length, results });
+      return jsonResponse({ query: q, count: results.length, results: results.map(normalizeRecord) });
     }
 
     // ── Auth: /api/me ──────────────────────────────────────────────────────
