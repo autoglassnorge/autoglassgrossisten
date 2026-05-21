@@ -838,19 +838,26 @@ function inferTypeCodeFromRecord(record: GlassRecord): string | null {
   if (cat === "frontrute") return "F";
   if (cat === "bakrute") return "B";
 
+  // Door glass (dørglass) — position from description keywords
   if (cat === "dørglass") {
-    if (desc.includes("FV") || desc.includes("VENSTRE") || desc.includes("LFD") || desc.includes("LEFT")) return "DFF";
-    if (desc.includes("FH") || desc.includes("HØYRE") || desc.includes("RFD") || desc.includes("RIGHT")) return "DPF";
-    if (desc.includes("BV") || desc.includes("BAK V") || desc.includes("LRD")) return "DFB";
-    if (desc.includes("BH") || desc.includes("BAK H") || desc.includes("RRD")) return "DPB";
+    // Rear doors first (longer match) to avoid "BAK" matching before "BAK V"
+    if (/\b(BAK\s*H|BH|RRD|RIGHT\s*REAR)\b/.test(desc)) return "DPB";
+    if (/\b(BAK\s*V|BV|LRD|LEFT\s*REAR)\b/.test(desc)) return "DFB";
+    if (/\b(FORAN\s*H|FH|RFD|RIGHT\s*FRONT|R\.\s*F\.\s*D)\b/.test(desc)) return "DPF";
+    if (/\b(FORAN\s*V|FV|LFD|LEFT\s*FRONT|L\.\s*F\.\s*D)\b/.test(desc)) return "DFF";
   }
 
-  if (cat === "sideglass") {
-    if (desc.includes("FV") || desc.includes("FORAN V") || desc.includes("LFQ") || desc.includes("LRV")) return "SFB1";
-    if (desc.includes("FH") || desc.includes("FORAN H") || desc.includes("RFQ") || desc.includes("RRV")) return "SPB1";
-    if (desc.includes("BV") || desc.includes("BAK V") || desc.includes("LRQ")) return "SFB2";
-    if (desc.includes("BH") || desc.includes("BAK H") || desc.includes("RRQ")) return "SPB2";
+  // Side glass (sideglass / quarter)
+  if (cat === "sideglass" || cat === "quarter") {
+    if (/\b(BAK\s*H|BH|RRQ|RIGHT\s*REAR)\b/.test(desc)) return "SPB2";
+    if (/\b(BAK\s*V|BV|LRQ|LEFT\s*REAR)\b/.test(desc)) return "SFB2";
+    if (/\b(FORAN\s*H|FH|RFQ|RIGHT\s*FRONT|R\.\s*F\.\s*Q)\b/.test(desc)) return "SPB1";
+    if (/\b(FORAN\s*V|FV|LFQ|LEFT\s*FRONT|L\.\s*F\.\s*Q)\b/.test(desc)) return "SFB1";
   }
+
+  // Fallback: try to detect from description even without category
+  if (/\bWINDSHIELD\b|\bWINDSCREEN\b|\bFRONT\s+GLASS\b/.test(desc)) return "F";
+  if (/\bREAR\s+WINDOW\b|\bBACK\s+WINDOW\b|\bREAR\s+GLASS\b/.test(desc)) return "B";
 
   return null;
 }
@@ -1374,12 +1381,11 @@ function scoreCandidate(
   if (!flags.rainSensor && recordFlags.rainSensor) score -= 3;
   if (!flags.heated && recordFlags.heated) score -= 2;
 
-  // Category scoring: prioritize windshields for regnr search (most common request)
+  // Category scoring: no bias — all glass types are equally important
+  // Users want to find ALL types (front, rear, door, side) for a given vehicle
   const cat = c.category?.toLowerCase() || detectCategoryFromDescription(c.description);
-  if (cat === "frontrute") {
-    score += 8; // Slight bonus for windshields
-  } else if (cat === "annet" || cat === "unknown" || !cat) {
-    score -= 5; // Slight penalty for uncategorized
+  if (cat === "annet" || cat === "unknown" || !cat) {
+    score -= 5; // Penalty for uncategorized remains
   }
 
   // Year compatibility scoring
@@ -2373,7 +2379,35 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       })
     : scored;
 
-  const candidatesWithEquipment = filteredScored.slice(0, 10).map((s) => {
+  // === Top-per-type selection ===
+  // Instead of global top-N, ensure each glass type is represented.
+  // Group by inferred type code, take top 3 per type, flatten.
+  const MAX_PER_TYPE = 3;
+  const MAX_TOTAL = 30;
+
+  const byType = new Map<string, typeof filteredScored>();
+  for (const s of filteredScored) {
+    const code = s.c.typeCode || inferTypeCodeFromRecord(s.c) || "UNKNOWN";
+    if (!byType.has(code)) byType.set(code, []);
+    byType.get(code)!.push(s);
+  }
+
+  const selected: typeof filteredScored = [];
+  // First pass: one from each type (round-robin) to ensure coverage
+  let round = 0;
+  while (selected.length < MAX_TOTAL) {
+    let addedInRound = 0;
+    for (const [, list] of byType) {
+      if (list[round] && selected.length < MAX_TOTAL) {
+        selected.push(list[round]);
+        addedInRound++;
+      }
+    }
+    if (addedInRound === 0 || round >= MAX_PER_TYPE - 1) break;
+    round++;
+  }
+
+  const candidatesWithEquipment = selected.map((s) => {
     const record = s.c;
     const nagsCodes = lookupNagsByVehicle(
       record.brand || '',
