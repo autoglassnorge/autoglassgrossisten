@@ -19,22 +19,27 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Installer avhengigheter
-        run: npm install
+        run: |
+          npm install
+          npm install -g wrangler
 
       - name: Generer D1 SQL fra catalog-prod.json
         run: node scripts/migrate-to-d1.mjs
 
       - name: Synkroniser D1 (full replace)
+        working-directory: api/cf-worker
         run: |
           # Truncate + re-insert for full sync
-          npx wrangler d1 execute glass-catalog-db --remote --command "DELETE FROM glass_catalog"
-          npx wrangler d1 execute glass-catalog-db --remote --file=/tmp/d1-insert.sql
+          wrangler d1 execute glass-catalog-db --remote --command "DELETE FROM glass_catalog"
+          wrangler d1 execute glass-catalog-db --remote --file=/tmp/d1-insert.sql
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Verifiser D1 count
+        working-directory: api/cf-worker
         run: |
-          COUNT=$(npx wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as c FROM glass_catalog" 2>/dev/null | grep -o '"c":[0-9]*' | cut -d: -f2)
+          COUNT=$(wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as c FROM glass_catalog" 2>/dev/null | grep -o '"c":[0-9]*' | cut -d: -f2)
           echo "D1 records: $COUNT"
           if [ "$COUNT" -lt 39000 ]; then
             echo "❌ D1 sync failed — only $COUNT records"
@@ -43,11 +48,14 @@ jobs:
           echo "✅ D1 sync OK — $COUNT records"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy Worker (pick up new data)
-        run: cd api/cf-worker && npx wrangler deploy
+        working-directory: api/cf-worker
+        run: wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Smoke-test etter deploy
         run: |
