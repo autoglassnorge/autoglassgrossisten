@@ -1,0 +1,58 @@
+name: Sync Catalog to D1
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 0"  # Søndag kl 05:00 CET
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  sync-d1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Installer avhengigheter
+        run: npm install
+
+      - name: Generer D1 SQL fra catalog-prod.json
+        run: node scripts/migrate-to-d1.mjs
+
+      - name: Synkroniser D1 (full replace)
+        run: |
+          # Truncate + re-insert for full sync
+          npx wrangler d1 execute glass-catalog-db --remote --command "DELETE FROM glass_catalog"
+          npx wrangler d1 execute glass-catalog-db --remote --file=/tmp/d1-insert.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Verifiser D1 count
+        run: |
+          COUNT=$(npx wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as c FROM glass_catalog" 2>/dev/null | grep -o '"c":[0-9]*' | cut -d: -f2)
+          echo "D1 records: $COUNT"
+          if [ "$COUNT" -lt 39000 ]; then
+            echo "❌ D1 sync failed — only $COUNT records"
+            exit 1
+          fi
+          echo "✅ D1 sync OK — $COUNT records"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Deploy Worker (pick up new data)
+        run: cd api/cf-worker && npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Smoke-test etter deploy
+        run: |
+          sleep 10
+          HEALTH=$(curl -sf https://autoglass-glass-sok.autoglassnorge.workers.dev/api/health | jq -r '.catalogSize')
+          echo "Health catalogSize: $HEALTH"
+          if [ "$HEALTH" -lt 39000 ]; then exit 1; fi
+          echo "✅ Smoke-test passed"

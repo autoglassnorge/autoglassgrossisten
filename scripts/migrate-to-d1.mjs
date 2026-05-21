@@ -7,7 +7,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const CATALOG_PATH = path.join(process.cwd(), "data", "catalog-prod-v2.json");
+const CATALOG_PATH = path.join(process.cwd(), "data", "catalog-prod.json");
 const BATCH_SIZE = 100; // D1 limit is around 100 params per query
 const OUTPUT_SQL = "/tmp/d1-insert.sql";
 
