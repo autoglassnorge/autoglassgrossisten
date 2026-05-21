@@ -35,9 +35,12 @@ export interface Env {
 interface GlassRecord {
   id: number;
   eurocode: string;
+  article_number: string | null;
+  scan_number: string | null;
+  category: string;
+  supplier: string | null;
   brand: string;
   model: string | null;
-  category: string;
   year_from: number | null;
   year_to: number | null;
   prefix4: string;
@@ -53,10 +56,18 @@ interface GlassRecord {
   price: number | null;
   stock_status: number | null;
   warehouse_location: string | null;
-  supplier: string | null;
-  image_url: string | null;
+  oem_numbers: string | null;
+  cross_references: string | null;
+  weight: number | null;
+  dimensions: string | null;
   description: string;
+  image_url: string | null;
+  pdf_url: string | null;
   source: string;
+  nags_codes: string | null;
+  brand_original: string | null;
+  ktype: number | null;
+  created_at: string | null;
   typeCode?: string;
   typeCodeDesc?: string;
   position?: "driver" | "passenger" | null;
@@ -91,7 +102,7 @@ const CORS_HEADERS = {
 };
 
 /** Convert D1 snake_case record to frontend camelCase */
-function normalizeRecord(r: GlassRecord): Record<string, unknown> {
+function normalizeRecord(r: GlassRecord): any {
   return {
     id: r.id,
     eurocode: r.eurocode,
