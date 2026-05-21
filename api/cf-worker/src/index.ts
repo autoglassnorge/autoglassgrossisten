@@ -493,7 +493,7 @@ async function queryByBrandAndYear(
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " LIMIT 200";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 500";
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
 }
@@ -509,7 +509,7 @@ async function queryByBrandOnly(db: D1Database, brand: string, modelHint?: strin
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " LIMIT 200";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 500";
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
 }
