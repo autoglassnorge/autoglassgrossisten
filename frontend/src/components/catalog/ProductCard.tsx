@@ -47,10 +47,15 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
 
         {/* Type code badge */}
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
           <Badge className="bg-white/90 text-gray-800 text-[10px] sm:text-xs">
             {typeCodeShort(product.typeCode || product.category)}
           </Badge>
+          {product.nagsCodes && product.nagsCodes.length > 0 && (
+            <Badge variant="outline" className="bg-white/90 text-[10px] sm:text-xs font-mono text-blue-700 border-blue-200">
+              🇺🇸 {product.nagsCodes[0]}
+            </Badge>
+          )}
         </div>
       </div>
 

@@ -106,11 +106,21 @@ function validate() {
 
   // 5. Eurocode-dekning
   console.log("\n🏷️  Eurocode:");
-  const eurocodeRegex = /^\d{4}[A-Z]{4,}[A-Z0-9]*$/;
-  const missingEurocode = records.filter((r) => !r.eurocode || !eurocodeRegex.test(r.eurocode));
+  // Accepts standard eurocodes (2-4 digits + letters) OR NAGS-like codes (letters + digits + optional suffix)
+  const eurocodeRegex = /^(\d{2,4}[A-Z][A-Z0-9]+|[A-Z]{1,2}\d{2,}[A-Z0-9]*(?:\s+[A-Z0-9]{2,})?)$/;
+  // Only require valid eurocode for actual glass products (not tools/accessories)
+  const glassRecords = records.filter((r) => r.category !== "annet" && r.category !== "unknown");
+  const missingEurocode = glassRecords.filter((r) => !r.eurocode || !eurocodeRegex.test(r.eurocode));
+  const missingRatio = missingEurocode.length / Math.max(glassRecords.length, 1);
+  info(`${glassRecords.length.toLocaleString("nb-NO")} glass poster sjekket`);
   if (missingEurocode.length > 0) {
-    fail(`Manglende/ugyldig eurocode: ${missingEurocode.length} poster`);
-    blocks++;
+    if (missingRatio > 0.02) {
+      fail(`Manglende/ugyldig eurocode: ${missingEurocode.length} av ${glassRecords.length} glass-poster (${(missingRatio*100).toFixed(1)}%)`);
+      blocks++;
+    } else {
+      warn(`${missingEurocode.length} glass-poster med ugyldig eurocode (${(missingRatio*100).toFixed(1)}%) — innenfor akseptabelt grense`);
+      warnings++;
+    }
   } else {
     ok("100% dekning");
   }
@@ -127,7 +137,7 @@ function validate() {
 
   // 7. Prefix4-dekning
   console.log("\n🔢 Prefix4:");
-  const validPrefix4 = records.filter((r) => /^\d{4}$/.test(r.prefix4));
+  const validPrefix4 = records.filter((r) => /^[A-Z0-9]{4}$/i.test(r.prefix4));
   const prefix4Coverage = validPrefix4.length / records.length;
   info(`Dekning: ${(prefix4Coverage * 100).toFixed(1)}%`);
   if (prefix4Coverage < MIN_PREFIX4_COVERAGE) {

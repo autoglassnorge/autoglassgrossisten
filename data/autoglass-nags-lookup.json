@@ -1,0 +1,1096 @@
+{
+  "meta": {
+    "generatedAt": "2026-05-21T08:52:49.609Z",
+    "count": 149
+  },
+  "lookup": {
+    "W1046GB": [
+      {
+        "code": "DW1125",
+        "confidence": 1,
+        "model": "PROBE"
+      }
+    ],
+    "W1100GB": [
+      {
+        "code": "DW1064",
+        "confidence": 1,
+        "model": "TOWN CAR"
+      }
+    ],
+    "W1142GB": [
+      {
+        "code": "DW1142",
+        "confidence": 1,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W1145GB": [
+      {
+        "code": "DW1125",
+        "confidence": 1,
+        "model": "PROBE"
+      }
+    ],
+    "W1203GB": [
+      {
+        "code": "DW1064",
+        "confidence": 1,
+        "model": "TOWN CAR"
+      }
+    ],
+    "W1320GB": [
+      {
+        "code": "DW1064",
+        "confidence": 1,
+        "model": "TOWN CAR"
+      }
+    ],
+    "W1346GB": [
+      {
+        "code": "DW1346",
+        "confidence": 1,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W1510GB": [
+      {
+        "code": "DW1346",
+        "confidence": 1,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W1554GB": [
+      {
+        "code": "DW1346",
+        "confidence": 1,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W1678GB": [
+      {
+        "code": "DW1449",
+        "confidence": 1,
+        "model": "LIBERTY"
+      }
+    ],
+    "W1840GNM": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W1840GYM": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W374C": [
+      {
+        "code": "DW374",
+        "confidence": 1,
+        "model": "THUNDERBIRD"
+      }
+    ],
+    "W374GN": [
+      {
+        "code": "DW374",
+        "confidence": 1,
+        "model": "THUNDERBIRD"
+      }
+    ],
+    "W1435GB": [
+      {
+        "code": "DW1535",
+        "confidence": 0.94,
+        "model": "RENDEZVOUS"
+      }
+    ],
+    "W1526GB": [
+      {
+        "code": "DW1526",
+        "confidence": 0.93,
+        "model": "PACIFICA"
+      }
+    ],
+    "W1317GB": [
+      {
+        "code": "DW1335",
+        "confidence": 0.7,
+        "model": "RANGER"
+      }
+    ],
+    "W1537GB": [
+      {
+        "code": "DW436",
+        "confidence": 0.91,
+        "model": "F SERIES"
+      }
+    ],
+    "W1287GB": [
+      {
+        "code": "DW1286",
+        "confidence": 0.9,
+        "model": "LUMINA"
+      }
+    ],
+    "W1555GB": [
+      {
+        "code": "DW1293",
+        "confidence": 0.9,
+        "model": "DURANGO"
+      }
+    ],
+    "W540GB": [
+      {
+        "code": "DW540",
+        "confidence": 0.9,
+        "model": "THUNDERBIRD"
+      }
+    ],
+    "W651GB": [
+      {
+        "code": "DW651",
+        "confidence": 0.9,
+        "model": "THUNDERBIRD"
+      }
+    ],
+    "W1256GB": [
+      {
+        "code": "DW1358",
+        "confidence": 0.89,
+        "model": "EXPEDITION"
+      }
+    ],
+    "W1582GB": [
+      {
+        "code": "DW1358",
+        "confidence": 0.59,
+        "model": "EXPEDITION"
+      }
+    ],
+    "W600GB": [
+      {
+        "code": "DW600",
+        "confidence": 0.89,
+        "model": "THUNDERBIRD"
+      }
+    ],
+    "DB8320GN": [
+      {
+        "code": "DB6856",
+        "confidence": 0.88,
+        "model": "BLAZER"
+      }
+    ],
+    "DB8690GN": [
+      {
+        "code": "DB6856",
+        "confidence": 0.88,
+        "model": "BLAZER"
+      }
+    ],
+    "DB8690YP": [
+      {
+        "code": "DB6856",
+        "confidence": 0.88,
+        "model": "BLAZER"
+      }
+    ],
+    "DB8696GN": [
+      {
+        "code": "DB6856",
+        "confidence": 0.88,
+        "model": "BLAZER"
+      }
+    ],
+    "DB8696YP": [
+      {
+        "code": "DB6856",
+        "confidence": 0.88,
+        "model": "BLAZER"
+      }
+    ],
+    "DB9193YP": [
+      {
+        "code": "DB6856",
+        "confidence": 0.88,
+        "model": "BLAZER"
+      }
+    ],
+    "W1206GB": [
+      {
+        "code": "DW1362",
+        "confidence": 0.88,
+        "model": "EXPLORER"
+      }
+    ],
+    "DB10081GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB10081YP": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB11378YP": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB12001YP": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB6755GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB7162GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB7163GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB7187GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB7187YP": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB7942GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB7942YP": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB8038GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB8930GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB8932YP": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DB9847GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "DD7936GN": [
+      {
+        "code": "DB9846",
+        "confidence": 0.87,
+        "model": "VOYAGER"
+      }
+    ],
+    "W1160GB": [
+      {
+        "code": "DW0847",
+        "confidence": 0.82,
+        "model": "BLAZER"
+      },
+      {
+        "code": "DW1445",
+        "confidence": 0.6,
+        "model": "BLAZER"
+      },
+      {
+        "code": "DW1159",
+        "confidence": 0.54,
+        "model": "BLAZER"
+      }
+    ],
+    "W849GB": [
+      {
+        "code": "DW0847",
+        "confidence": 0.82,
+        "model": "BLAZER"
+      },
+      {
+        "code": "DW1445",
+        "confidence": 0.58,
+        "model": "BLAZER"
+      }
+    ],
+    "W1024GB": [
+      {
+        "code": "DW988",
+        "confidence": 0.85,
+        "model": "CAMARO"
+      }
+    ],
+    "W1127GB": [
+      {
+        "code": "DW967",
+        "confidence": 0.85,
+        "model": "AEROSTAR"
+      }
+    ],
+    "W1155GB": [
+      {
+        "code": "DW988",
+        "confidence": 0.85,
+        "model": "CAMARO"
+      }
+    ],
+    "DB8339GN": [
+      {
+        "code": "DB6566",
+        "confidence": 0.84,
+        "model": "BLAZER"
+      }
+    ],
+    "DB8340GN": [
+      {
+        "code": "DB6566",
+        "confidence": 0.84,
+        "model": "BLAZER"
+      }
+    ],
+    "DB8340YP": [
+      {
+        "code": "DB6566",
+        "confidence": 0.84,
+        "model": "BLAZER"
+      }
+    ],
+    "W1140GB": [
+      {
+        "code": "DW952",
+        "confidence": 0.77,
+        "model": "CHEROKEE"
+      },
+      {
+        "code": "DW1140",
+        "confidence": 0.7,
+        "model": "CHEROKEE"
+      }
+    ],
+    "W1522GB": [
+      {
+        "code": "DW1358",
+        "confidence": 0.84,
+        "model": "F150"
+      },
+      {
+        "code": "DW1529",
+        "confidence": 0.72,
+        "model": "F150"
+      }
+    ],
+    "W993GB": [
+      {
+        "code": "DW993",
+        "confidence": 0.84,
+        "model": "CAVALIER"
+      }
+    ],
+    "W1027GB": [
+      {
+        "code": "DW1027",
+        "confidence": 0.83,
+        "model": "WRANGLER"
+      }
+    ],
+    "W1168GB": [
+      {
+        "code": "DW0847",
+        "confidence": 0.82,
+        "model": "BLAZER"
+      },
+      {
+        "code": "DW1445",
+        "confidence": 0.56,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6563GN": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6563YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6564GN": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6564YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6577YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6578YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6579YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6580YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8346GN": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8347GN": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8424GN": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8424YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8425GN": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8425YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8688YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8689YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8694YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ8695YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ9685GN": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DS8686YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DS8687YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "DV8852YP": [
+      {
+        "code": "DQ6563",
+        "confidence": 0.81,
+        "model": "BLAZER"
+      }
+    ],
+    "W1529GB": [
+      {
+        "code": "DW1529",
+        "confidence": 0.75,
+        "model": "F150"
+      }
+    ],
+    "W1551GB": [
+      {
+        "code": "DW1529",
+        "confidence": 0.75,
+        "model": "F150"
+      }
+    ],
+    "W1667GB": [
+      {
+        "code": "DW1529",
+        "confidence": 0.75,
+        "model": "F150"
+      }
+    ],
+    "W685C": [
+      {
+        "code": "DW0685",
+        "confidence": 0.72,
+        "model": "BLAZER"
+      }
+    ],
+    "1821BZB": [
+      {
+        "code": "FW0713",
+        "confidence": 0.7,
+        "model": "TROOPER"
+      }
+    ],
+    "3599AGNCMUVZ": [
+      {
+        "code": "DW03008",
+        "confidence": 0.7,
+        "model": "EXPLORER"
+      }
+    ],
+    "3599AGNCMVZ": [
+      {
+        "code": "DW03008",
+        "confidence": 0.7,
+        "model": "EXPLORER"
+      }
+    ],
+    "AJ18AGRCMVW1T": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "DQ10793YP": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W1374GB": [
+      {
+        "code": "DW1374",
+        "confidence": 0.7,
+        "model": "EXCURSION"
+      }
+    ],
+    "W1533GB": [
+      {
+        "code": "DW1533",
+        "confidence": 0.58,
+        "model": "COLORADO"
+      }
+    ],
+    "W1591GB": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W1592GB": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W1613GB": [
+      {
+        "code": "DW1583",
+        "confidence": 0.7,
+        "model": "EQUINOX"
+      }
+    ],
+    "W1627GB": [
+      {
+        "code": "DW1627",
+        "confidence": 0.7,
+        "model": "COMMANDER"
+      }
+    ],
+    "W1701GY": [
+      {
+        "code": "DW1627",
+        "confidence": 0.7,
+        "model": "COMMANDER"
+      }
+    ],
+    "W2030GY": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W2416GN": [
+      {
+        "code": "DW02479",
+        "confidence": 0.7,
+        "model": "WRANGLER"
+      }
+    ],
+    "W2417GN": [
+      {
+        "code": "DW02479",
+        "confidence": 0.7,
+        "model": "WRANGLER"
+      }
+    ],
+    "W2581GN": [
+      {
+        "code": "DW02479",
+        "confidence": 0.7,
+        "model": "WRANGLER"
+      }
+    ],
+    "W2776GN": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W2777GN": [
+      {
+        "code": "DW1554",
+        "confidence": 0.7,
+        "model": "GRAND CHEROKEE"
+      }
+    ],
+    "W2969GN": [
+      {
+        "code": "DW02479",
+        "confidence": 0.7,
+        "model": "WRANGLER"
+      }
+    ],
+    "DB8426YP": [
+      {
+        "code": "DB8284",
+        "confidence": 0.69,
+        "model": "S10"
+      }
+    ],
+    "W1798GB": [
+      {
+        "code": "DW1582",
+        "confidence": 0.69,
+        "model": "EXPEDITION"
+      },
+      {
+        "code": "DW1358",
+        "confidence": 0.59,
+        "model": "EXPEDITION"
+      }
+    ],
+    "W1798GN": [
+      {
+        "code": "DW1582",
+        "confidence": 0.69,
+        "model": "EXPEDITION"
+      },
+      {
+        "code": "DW1358",
+        "confidence": 0.59,
+        "model": "EXPEDITION"
+      }
+    ],
+    "DB8426GN": [
+      {
+        "code": "DB8284",
+        "confidence": 0.67,
+        "model": "S10"
+      }
+    ],
+    "DY90075YP": [
+      {
+        "code": "DB8284",
+        "confidence": 0.67,
+        "model": "S10"
+      }
+    ],
+    "DB9288GN": [
+      {
+        "code": "DB7640",
+        "confidence": 0.61,
+        "model": "RANGER"
+      }
+    ],
+    "DQ9331GN": [
+      {
+        "code": "DT1158",
+        "confidence": 0.61,
+        "model": "F SERIES"
+      }
+    ],
+    "DQ9331YP": [
+      {
+        "code": "DT1158",
+        "confidence": 0.61,
+        "model": "F SERIES"
+      }
+    ],
+    "DQ9332GN": [
+      {
+        "code": "DT1158",
+        "confidence": 0.61,
+        "model": "F SERIES"
+      }
+    ],
+    "W1511GB": [
+      {
+        "code": "DW1346",
+        "confidence": 0.61,
+        "model": "CHEROKEE"
+      }
+    ],
+    "W1723GB": [
+      {
+        "code": "DW1554",
+        "confidence": 0.61,
+        "model": "CHEROKEE"
+      }
+    ],
+    "W1724GB": [
+      {
+        "code": "DW1554",
+        "confidence": 0.61,
+        "model": "CHEROKEE"
+      }
+    ],
+    "W2056GN": [
+      {
+        "code": "DW1554",
+        "confidence": 0.61,
+        "model": "CHEROKEE"
+      }
+    ],
+    "W2056GY": [
+      {
+        "code": "DW1554",
+        "confidence": 0.61,
+        "model": "CHEROKEE"
+      }
+    ],
+    "W2493GN": [
+      {
+        "code": "DW436",
+        "confidence": 0.61,
+        "model": "F SERIES"
+      }
+    ],
+    "W2506GN": [
+      {
+        "code": "DW1554",
+        "confidence": 0.61,
+        "model": "CHEROKEE"
+      }
+    ],
+    "3597ACDCHMVZ": [
+      {
+        "code": "DW02697",
+        "confidence": 0.6,
+        "model": "MUSTANG"
+      }
+    ],
+    "3597ACDCHMVZ1E": [
+      {
+        "code": "DW02697",
+        "confidence": 0.6,
+        "model": "MUSTANG"
+      }
+    ],
+    "3597AGACHMVZ": [
+      {
+        "code": "DW02697",
+        "confidence": 0.6,
+        "model": "MUSTANG"
+      }
+    ],
+    "3597AGACHMVZ1E": [
+      {
+        "code": "DW02697",
+        "confidence": 0.6,
+        "model": "MUSTANG"
+      }
+    ],
+    "W1557GB": [
+      {
+        "code": "DW1445",
+        "confidence": 0.6,
+        "model": "BLAZER"
+      },
+      {
+        "code": "DW1557",
+        "confidence": 0.56,
+        "model": "BLAZER"
+      }
+    ],
+    "W1506GB": [
+      {
+        "code": "DW1114",
+        "confidence": 0.58,
+        "model": "CROWN VICTORIA"
+      }
+    ],
+    "W2888GN": [
+      {
+        "code": "DW02974",
+        "confidence": 0.58,
+        "model": "F150"
+      }
+    ],
+    "W2977GN": [
+      {
+        "code": "DW02974",
+        "confidence": 0.58,
+        "model": "F150"
+      }
+    ],
+    "W849GN": [
+      {
+        "code": "DW1445",
+        "confidence": 0.58,
+        "model": "BLAZER"
+      }
+    ],
+    "DB13097YP": [
+      {
+        "code": "DB6856",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6325YPN": [
+      {
+        "code": "DQ8337",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6326YPN": [
+      {
+        "code": "DQ8337",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6327YPN": [
+      {
+        "code": "DQ8337",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6328YPN": [
+      {
+        "code": "DQ8337",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6329YP": [
+      {
+        "code": "DQ8337",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6330YP": [
+      {
+        "code": "DQ8337",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6336YP": [
+      {
+        "code": "DQ8337",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "DQ6337YP": [
+      {
+        "code": "DQ8337",
+        "confidence": 0.57,
+        "model": "BLAZER"
+      }
+    ],
+    "W1179GB": [
+      {
+        "code": "DW1347",
+        "confidence": 0.57,
+        "model": "NEON"
+      }
+    ],
+    "DB12398YP": [
+      {
+        "code": "DB437",
+        "confidence": 0.56,
+        "model": "F SERIES"
+      }
+    ],
+    "DB12649YP": [
+      {
+        "code": "DB437",
+        "confidence": 0.56,
+        "model": "F SERIES"
+      }
+    ],
+    "W1414GB": [
+      {
+        "code": "DW1212",
+        "confidence": 0.56,
+        "model": "SEBRING"
+      }
+    ],
+    "W1584GB": [
+      {
+        "code": "DW1445",
+        "confidence": 0.56,
+        "model": "TRAILBLAZER"
+      }
+    ],
+    "W1585GB": [
+      {
+        "code": "DW1445",
+        "confidence": 0.56,
+        "model": "TRAILBLAZER"
+      }
+    ],
+    "W1618GB": [
+      {
+        "code": "DW1509",
+        "confidence": 0.56,
+        "model": "EXPLORER"
+      }
+    ],
+    "W1619GB": [
+      {
+        "code": "DW1509",
+        "confidence": 0.56,
+        "model": "EXPLORER"
+      }
+    ],
+    "W1468GB": [
+      {
+        "code": "DW1347",
+        "confidence": 0.51,
+        "model": "NEON"
+      }
+    ]
+  }
+}

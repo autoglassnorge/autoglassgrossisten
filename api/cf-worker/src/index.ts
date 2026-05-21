@@ -20,6 +20,9 @@
  *   - Feilrespons cachet IKKE (kun 200 OK ender i KV)
  */
 
+import { getNagsCodes } from "./nags";
+import { lookupNagsByVehicle } from "./nags-by-vehicle";
+
 export interface Env {
   GLASS_CATALOG: KVNamespace;
   GLASS_CATALOG_D1: D1Database;
@@ -54,6 +57,7 @@ interface GlassRecord {
   typeCode?: string;
   typeCodeDesc?: string;
   position?: "driver" | "passenger" | null;
+  nagsCodes?: string[];
 }
 
 interface TecdocVehicle {
@@ -2280,11 +2284,22 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       })
     : scored;
 
-  const candidatesWithEquipment = filteredScored.slice(0, 10).map((s) => ({
-    ...s.c,
-    _score: s.score,
-    _equipment: inferRecordEquipment(s.c),
-  }));
+  const candidatesWithEquipment = filteredScored.slice(0, 10).map((s) => {
+    const record = s.c;
+    const nagsCodes = lookupNagsByVehicle(
+      record.brand || '',
+      record.model || '',
+      record.year_from,
+      record.year_to,
+      record.category || inferTypeCodeFromRecord(record) || 'annet'
+    );
+    return {
+      ...record,
+      _score: s.score,
+      _equipment: inferRecordEquipment(record),
+      nagsCodes: nagsCodes.length > 0 ? nagsCodes : undefined,
+    };
+  });
 
   const topPick = candidatesWithEquipment[0] || null;
 

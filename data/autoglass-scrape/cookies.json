@@ -1,0 +1,72 @@
+[
+  {
+    "name": "wordpress_sec_c4d6583a4ba33e8f0d0e0b193515efb4",
+    "value": "post66%7C1779469254%7CoOz1t3ZjHEIlPMWXyU1xzqb6riEMknCKMuAn23Wo0U5%7Cc8ee4b794c2e38bcd3c7b0d0660ddf8deaa060623d327b72dc3673a7360f1e20",
+    "domain": "auto-glass.no",
+    "path": "/wp-content/plugins",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "wordpress_sec_c4d6583a4ba33e8f0d0e0b193515efb4",
+    "value": "post66%7C1779469254%7CoOz1t3ZjHEIlPMWXyU1xzqb6riEMknCKMuAn23Wo0U5%7Cc8ee4b794c2e38bcd3c7b0d0660ddf8deaa060623d327b72dc3673a7360f1e20",
+    "domain": "auto-glass.no",
+    "path": "/wp-admin",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga",
+    "value": "GA1.2.1279511858.1779296455",
+    "domain": ".auto-glass.no",
+    "path": "/",
+    "expires": 1813856458.337777,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gid",
+    "value": "GA1.2.900682234.1779296455",
+    "domain": ".auto-glass.no",
+    "path": "/",
+    "expires": 1779382858,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gat_UA-15096479-2",
+    "value": "1",
+    "domain": ".auto-glass.no",
+    "path": "/",
+    "expires": 1779296514,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "wordpress_logged_in_c4d6583a4ba33e8f0d0e0b193515efb4",
+    "value": "post66%7C1779469254%7CoOz1t3ZjHEIlPMWXyU1xzqb6riEMknCKMuAn23Wo0U5%7C1527c199beef1d48e0882bf63ab18715db5c9d49cec5749295179654d1367b6a",
+    "domain": "auto-glass.no",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga_X8QCNN7ZX9",
+    "value": "GS2.2.s1779296455$o1$g0$t1779296455$j60$l0$h0",
+    "domain": ".auto-glass.no",
+    "path": "/",
+    "expires": 1813856455.040242,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

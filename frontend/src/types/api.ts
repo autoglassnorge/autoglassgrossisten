@@ -11,7 +11,7 @@ export interface Product {
   price: number;
   stockStatus: number;
   imageUrl: string;
-  nagsCodes: string[];
+  nagsCodes?: string[];
 
   // NEW: type code & position fields
   typeCode: string;
