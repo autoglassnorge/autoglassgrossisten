@@ -50,6 +50,9 @@ interface GlassRecord {
   shade: number;
   camera: number;
   lane_assist: number;
+  price: number | null;
+  stock_status: number | null;
+  warehouse_location: string | null;
   supplier: string | null;
   image_url: string | null;
   description: string;
