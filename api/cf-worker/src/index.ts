@@ -2165,6 +2165,21 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
         candidates.push(...l3Compatible);
         layer = 3;
         confidence = "medium";
+      } else {
+        // Layer 3b: brand-only without modelHint, then filter with modelMatches
+        // This catches cases where SVV model has suffixes not in catalog (e.g. "WRANGLER UNLIMITED" vs "WRANGLER")
+        const l3b = await queryByBrandOnly(db, vehicle.make);
+        const l3bCompatible = l3b.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
+        const l3bModel = l3bCompatible.filter((r) => modelMatches(vehicle.model, r.model, vehicle.make));
+        if (l3bModel.length > 0) {
+          candidates.push(...l3bModel);
+          layer = 3;
+          confidence = "medium";
+        } else if (l3bCompatible.length > 0) {
+          candidates.push(...l3bCompatible);
+          layer = 3;
+          confidence = "low";
+        }
       }
     }
   }
