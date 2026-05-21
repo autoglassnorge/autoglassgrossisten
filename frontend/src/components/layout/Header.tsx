@@ -32,9 +32,11 @@ export function Header() {
         <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center gap-3 px-3 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <span className="text-lg sm:text-xl font-bold text-autoglass-blue tracking-tight">
-              Autoglass<span className="text-gray-800">.no</span>
-            </span>
+            <img
+              src="/logo.png"
+              alt="Autoglass"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop search */}
