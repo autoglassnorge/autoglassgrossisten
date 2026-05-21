@@ -92,6 +92,14 @@ npm run scrape:glavista
 npm run scrape:pilkington
 npm run scrape:pilkington:v2:loop
 
+# Pris-oppdatering
+npm run price:check                  # Dry-run pris-sjekk
+npm run price:update                 # Oppdater priser fra auto-glass.no
+npm run price:update:full            # Full scraping (alle kategorier)
+npm run price:login                  # Forny cookies for scraping
+npm run price:sync                   # Synkroniser CSV-priser til catalog
+npm run price:pipeline               # Full pipeline (scrape + sync)
+
 # Bygg data
 npm run build:prefix4                # Bygg prefix4-cache
 npm run merge                        # Merge kataloger til master
@@ -166,6 +174,7 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 | 2026-05-19 | Cloudflare Access over Supabase Auth | Godkjent |
 | 2026-05-19 | D1 `quote_requests` over e-post | Godkjent |
 | 2026-05-19 | localStorage for lagrede kjøretøy (MVP) | Godkjent |
+| 2026-05-21 | Daglig pris-sjekk fra auto-glass.no | Godkjent |
 
 ---
 
@@ -177,7 +186,13 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 **Fiks:** Fjern `if (cached) return cached` — last alltid chunks.
 **Lærdom:** KV-metadata og KV-data er separate konsepter.
 
+### Pris-synkronisering (2026-05-21)
+**Løsning:** Daglig sample (200 kategorier) + ukentlig full scrape fra auto-glass.no.
+**Threshold:** >1% endringsrate → trigger full scrape.
+**Auth:** Cookie-basert (Playwright login ved utløp).
+**Sync:** `scripts/sync-prices-to-catalog.mjs` oppdaterer `catalog-prod.json`.
+
 ---
 
-**Sist oppdatert:** 2026-05-18  
-**Versjon:** 2.0 (+Agent-økosystem)
+**Sist oppdatert:** 2026-05-21  
+**Versjon:** 2.1 (+Pris-synkronisering)

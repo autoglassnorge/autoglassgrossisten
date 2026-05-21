@@ -1,0 +1,156 @@
+name: Daily Price Check
+
+# Kjører daglig kl 07:00 CET (05:00 UTC)
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode'
+        required: true
+        default: 'sample'
+        type: choice
+        options:
+          - sample
+          - full
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  price-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Installer avhengigheter
+        run: npm install
+
+      - name: Installer Playwright
+        run: npx playwright install chromium
+        if: github.event.inputs.mode == 'full' || github.event.schedule == '0 5 * * 0'
+
+      - name: Dekod cookies fra secret
+        run: |
+          mkdir -p data/autoglass-scrape
+          echo "${{ secrets.AUTO_GLASS_COOKIES_B64 }}" | base64 -d > data/autoglass-scrape/cookies.json
+          echo "Cookies file size: $(wc -c < data/autoglass-scrape/cookies.json) bytes"
+
+      - name: Verifiser cookies (test-login)
+        run: |
+          node -e "
+          const cookies = require('./data/autoglass-scrape/cookies.json');
+          const sec = cookies.find(c => c.name.includes('wordpress_sec'));
+          if (!sec) { console.error('No wordpress_sec cookie found'); process.exit(1); }
+          const expires = new Date(sec.expires * 1000);
+          console.log('Cookie expires:', expires.toISOString());
+          if (expires < new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)) {
+            console.error('⚠️  Cookies expire within 7 days! Run: node scripts/login-autoglass.mjs');
+            process.exit(1);
+          }
+          console.log('✅ Cookies valid');
+          "
+
+      - name: Kjør daglig pris-sjekk (sample)
+        if: github.event.inputs.mode != 'full' && github.event.schedule != '0 5 * * 0'
+        run: |
+          node scripts/update-prices.mjs --dry-run
+
+      - name: Kjør ukentlig pris-oppdatering (full)
+        if: github.event.inputs.mode == 'full' || github.event.schedule == '0 5 * * 0'
+        run: |
+          node scripts/update-prices.mjs --full
+
+      - name: Sjekk om prisendringer ble funnet
+        id: check_changes
+        run: |
+          if [ -f data/autoglass-scrape/.price-update-status.json ]; then
+            HAS_CHANGES=$(node -e "console.log(require('./data/autoglass-scrape/.price-update-status.json').hasChanges ? 'true' : 'false')")
+            echo "has_changes=$HAS_CHANGES" >> $GITHUB_OUTPUT
+            echo "Changes detected: $HAS_CHANGES"
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Synkroniser priser til catalog
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          node scripts/sync-prices-to-catalog.mjs
+
+      - name: Last opp oppdatert katalog til KV
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          npx ts-node --compiler-options '{"module":"CommonJS","types":["node"]}' api/cf-worker/scripts/upload-catalog.ts
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          KV_NAMESPACE_ID: ${{ secrets.GLASS_KV_NAMESPACE_ID }}
+
+      - name: Last opp diff-rapport som artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: price-diff-report
+          path: |
+            data/autoglass-scrape/price-diff.json
+            data/autoglass-scrape/price-update-report.md
+            data/autoglass-scrape/price-update.log
+            data/autoglass-scrape/.price-update-status.json
+
+      - name: Commit oppdaterte filer
+        if: steps.check_changes.outputs.has_changes == 'true' && success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/autoglass-scrape/products-autoglass-no.csv
+          git add data/autoglass-scrape/price-update.log
+          git add data/catalog-prod.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: price update $(date -I)"
+            git push
+          fi
+
+  # ── Opprett Issue ved feil ───────────────────────────────────
+  notify-on-failure:
+    needs: price-check
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Opprett Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `🚨 Pris-sjekk feilet — ${new Date().toISOString().split('T')[0]}`;
+            const body = `## Daglig/ukentlig pris-sjekk feilet
+
+            - **Dato:** ${new Date().toISOString()}
+            - **Workflow:** ${context.workflow}
+            - **Run:** ${context.runId}
+
+            ### Mulige årsaker
+            1. Cookies utløpt (kjør \`node scripts/login-autoglass.mjs\` lokalt)
+            2. auto-glass.no utilgjengelig
+            3. Rate-limiting eller timeout
+
+            ### Neste steg
+            - Sjekk workflow-loggene
+            - Forny cookies: \`node scripts/login-autoglass.mjs\`
+            - Kjør manuelt med \`workflow_dispatch\`
+            `;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ['bug', 'price-sync', 'automated']
+            });

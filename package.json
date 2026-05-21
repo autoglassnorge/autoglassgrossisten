@@ -21,10 +21,19 @@
     "pages:deploy": "wrangler pages deploy . --project-name=autoglass-frontend",
     "full:pipeline": "npm run scrape:glavista && npm run scrape:pilkington && npm run build:prefix4 && npm run merge && npm run worker:upload",
     "scrape:pilkington:v2": "npx ts-node --transpile-only --compiler-options '{module:CommonJS}' api/scrapers/pilkington-scraper.ts",
-    "scrape:pilkington:v2:loop": "while true; do npx ts-node --transpile-only --compiler-options '{module:CommonJS}' api/scrapers/pilkington-scraper.ts >> /tmp/pilk-v2.log 2>&1; EXIT=53312?; if [ 53312EXIT -eq 0 ]; then sleep 2; else sleep 30; fi; done"
+    "scrape:pilkington:v2:loop": "while true; do npx ts-node --transpile-only --compiler-options '{module:CommonJS}' api/scrapers/pilkington-scraper.ts >> /tmp/pilk-v2.log 2>&1; EXIT=53312?; if [ 53312EXIT -eq 0 ]; then sleep 2; else sleep 30; fi; done",
+    "price:check": "node scripts/update-prices.mjs --dry-run",
+    "price:update": "node scripts/update-prices.mjs",
+    "price:update:full": "node scripts/update-prices.mjs --full",
+    "price:login": "node scripts/login-autoglass.mjs",
+    "price:sync": "node scripts/sync-prices-to-catalog.mjs",
+    "price:pipeline": "node scripts/update-prices-full.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.19.41",
+    "csv-parse": "^6.2.1",
+    "csv-stringify": "^6.7.0",
+    "node-html-parser": "^7.1.0",
     "playwright": "^1.60.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
