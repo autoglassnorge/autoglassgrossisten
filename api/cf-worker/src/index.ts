@@ -166,7 +166,13 @@ async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
 }
 
 async function setCache(kv: KVNamespace, key: string, data: unknown, ttlSeconds = 300): Promise<void> {
-  await kv.put(key, JSON.stringify(data), { expirationTtl: ttlSeconds });
+  try {
+    await kv.put(key, JSON.stringify(data), { expirationTtl: ttlSeconds });
+  } catch (e) {
+    // Silently ignore KV write failures (quota exhausted, etc.)
+    // Reads still work; we just skip caching for this request.
+    console.warn(`KV write failed for key ${key}: ${e instanceof Error ? e.message : String(e)}`);
+  }
 }
 
 function cacheKey(endpoint: string, params: Record<string, string>): string {
