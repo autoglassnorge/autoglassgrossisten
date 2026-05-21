@@ -25,7 +25,9 @@ function main() {
   
   let sql = "-- D1 Migration: glass_catalog\n";
   sql += "PRAGMA foreign_keys=OFF;\n";
-  sql += "BEGIN TRANSACTION;\n\n";
+  // Note: D1 does not support BEGIN TRANSACTION in wrangler d1 execute --file
+  // Each statement is auto-committed
+
   
   let batchCount = 0;
   
@@ -51,7 +53,7 @@ function main() {
     }
   }
   
-  sql += "COMMIT;\n";
+  // End of migration
   sql += `INSERT OR REPLACE INTO catalog_meta (key, value, updated_at) VALUES ('total_records', '${records.length}', datetime('now'));\n`;
   
   fs.writeFileSync(OUTPUT_SQL, sql);
