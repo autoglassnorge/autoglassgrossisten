@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Search, Loader2, AlertTriangle } from 'lucide-react';
+import { Search, Loader2, AlertTriangle, Car, Wrench } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
-import { searchByRegnr } from '@/api/glass';
+import { searchByRegnr, SearchError } from '@/api/glass';
 import { formatLayerLabel, formatConfidence } from '@/utils/formatters';
 
 import { VehicleCard } from '@/components/search/VehicleCard';
@@ -19,7 +19,6 @@ export default function SearchPage() {
   const [regnr, setRegnr] = useState(initialRegnr);
   const [activeRegnr, setActiveRegnr] = useState(initialRegnr);
   const [selectedType, setSelectedType] = useState<string | null>(null);
-
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['search', activeRegnr],
@@ -47,6 +46,12 @@ export default function SearchPage() {
   const vehicle = data?.vehicle;
   const candidates = data?.candidates ?? [];
   const conf = data?.confidence ? formatConfidence(data.confidence) : null;
+
+  // Determine error type for better messaging
+  const errorStatus = error instanceof SearchError ? error.status : undefined;
+  const isNotFound = errorStatus === 404;
+  const isUpstreamError = errorStatus === 503;
+  const isInternalError = errorStatus === 500;
 
   // Group by type code
   const grouped = useMemo(() => {
@@ -86,12 +91,67 @@ export default function SearchPage() {
         </Button>
       </form>
 
+      {/* Error states */}
       {error && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 flex items-start gap-3">
-          <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
-          <div>
-            <p className="font-medium text-red-800">Kunne ikke finne kjøretøy</p>
-            <p className="text-sm text-red-700">Sjekk at registreringsnummeret er riktig, eller prøv å søke i katalogen.</p>
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 sm:p-6 mb-4">
+          <div className="flex items-start gap-3">
+            <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              {isNotFound ? (
+                <>
+                  <p className="font-medium text-red-800">Kunne ikke finne kjøretøy</p>
+                  <p className="text-sm text-red-700 mt-1">
+                    Registreringsnummeret <strong>{activeRegnr}</strong> ble ikke funnet i Statens vegvesen sitt register.
+                    Dette kan skyldes:
+                  </p>
+                  <ul className="text-sm text-red-700 mt-2 list-disc list-inside space-y-0.5">
+                    <li>Feil tastet registreringsnummer</li>
+                    <li>Kjøretøyet er avregistrert</li>
+                    <li>Utlandsk kjøretøy som ikke er i det norske registeret</li>
+                  </ul>
+                </>
+              ) : isUpstreamError ? (
+                <>
+                  <p className="font-medium text-red-800">Kjøretøyoppslag midlertidig utilgjengelig</p>
+                  <p className="text-sm text-red-700 mt-1">
+                    Vi får ikke kontakt med Statens vegvesen sitt register akkurat nå. Prøv igjen om noen minutter.
+                  </p>
+                </>
+              ) : isInternalError ? (
+                <>
+                  <p className="font-medium text-red-800">En teknisk feil oppstod</p>
+                  <p className="text-sm text-red-700 mt-1">
+                    Det oppstod en feil under søket. Vi har logget feilen og jobber med å rette den. Prøv igjen senere.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="font-medium text-red-800">Søk feilet</p>
+                  <p className="text-sm text-red-700 mt-1">{error.message}</p>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Fallback options */}
+          <div className="mt-4 flex flex-col sm:flex-row gap-2">
+            <a href="/katalog">
+              <Button variant="outline" className="w-full sm:w-auto gap-2">
+                <Car className="h-4 w-4" />
+                Søk i katalogen
+              </Button>
+            </a>
+            <button
+              type="button"
+              onClick={() => {
+                setRegnr('');
+                setActiveRegnr('');
+              }}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-50"
+            >
+              <Wrench className="h-4 w-4" />
+              Prøv et annet regnr
+            </button>
           </div>
         </div>
       )}
@@ -179,9 +239,11 @@ export default function SearchPage() {
           <p className="text-sm text-amber-700 mt-1">
             Vi fant kjøretøyet, men har ingen registrerte glass som passer. Prøv å søke i katalogen manuelt.
           </p>
-          <Button variant="outline" className="mt-4" onClick={() => window.location.href = '/katalog'}>
-            Åpne katalog
-          </Button>
+          <a href="/katalog">
+            <Button variant="outline" className="mt-4">
+              Åpne katalog
+            </Button>
+          </a>
         </div>
       )}
     </div>

@@ -2077,6 +2077,7 @@ type SearchResult = {
 };
 
 async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): Promise<SearchResult> {
+  try {
   // 1. Lookup vehicle via SVV — typed result so we can distinguish auth vs not-found vs upstream
   const svvResult = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
   let source = "svv.enkeltoppslag";
@@ -2570,6 +2571,13 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
     },
   };
+  } catch (e) {
+    console.error(`searchByRegnr exception for ${regnr}: ${e instanceof Error ? e.message : String(e)}`);
+    return {
+      httpStatus: 500,
+      body: { error: "En intern feil oppstod under søket. Prøv igjen senere.", regnr, code: "internal_error" },
+    };
+  }
 }
 
 // ============================================================================
