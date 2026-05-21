@@ -7,16 +7,19 @@ import { ProductGrid } from '@/components/catalog/ProductGrid';
 import { FilterPanel } from '@/components/catalog/FilterPanel';
 import { BottomSheet } from '@/components/search/BottomSheet';
 import { fetchCatalog } from '@/api/catalog';
+import { useDebounce } from '@/hooks/useDebounce';
 import type { CatalogFilters } from '@/types/api';
 
 export default function CatalogPage() {
   const [filters, setFilters] = useState<CatalogFilters>({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const debouncedSearch = useDebounce(searchQuery, 300);
 
   const { data, isLoading } = useQuery({
-    queryKey: ['catalog', filters, searchQuery],
-    queryFn: () => fetchCatalog(1, 48, { ...filters, query: searchQuery || undefined }),
+    queryKey: ['catalog', filters, debouncedSearch, page],
+    queryFn: () => fetchCatalog(page, 48, { ...filters, query: debouncedSearch || undefined }),
   });
 
   const availableFilters = data?.filters ?? {
@@ -34,6 +37,9 @@ export default function CatalogPage() {
     filters.priceMin ||
     filters.priceMax;
 
+  const products = data?.products ?? [];
+  const hasMore = data?.hasMore ?? false;
+
   return (
     <div className="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
       <div className="mb-4 sm:mb-8">
@@ -49,7 +55,7 @@ export default function CatalogPage() {
         <Input
           placeholder="Søk etter eurokode, NAGS, merke eller modell..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
           className="pl-10 h-12 sm:h-14 text-base"
         />
       </div>
@@ -77,18 +83,36 @@ export default function CatalogPage() {
           <FilterPanel
             filters={filters}
             availableFilters={availableFilters}
-            onChange={setFilters}
+            onChange={(f) => { setFilters(f); setPage(1); }}
           />
         </aside>
 
         {/* Product grid */}
         <div className="flex-1 min-w-0">
-          {isLoading ? (
+          {isLoading && page === 1 ? (
             <div className="flex items-center justify-center py-20">
               <Loader2 className="h-8 w-8 animate-spin text-autoglass-blue" />
             </div>
           ) : (
-            <ProductGrid products={data?.products ?? []} />
+            <>
+              <ProductGrid products={products} />
+              {hasMore && (
+                <div className="mt-6 flex justify-center">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="min-h-[44px] px-8"
+                    onClick={() => setPage((p) => p + 1)}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    ) : null}
+                    Last flere
+                  </Button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

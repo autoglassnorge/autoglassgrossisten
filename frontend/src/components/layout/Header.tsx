@@ -9,7 +9,8 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const cartTotal = useCartStore((s) => s.totalItems());
+  const cartItems = useCartStore((s) => s.items);
+  const cartTotal = cartItems.reduce((sum, i) => sum + i.quantity, 0);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,18 +57,20 @@ export function Header() {
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1 ml-auto">
             {navLinks.map((link) => (
-              <Button key={link.href} variant="ghost" size="sm" onClick={() => navigate(link.href)}>
-                {link.label}
-              </Button>
+              <Link key={link.href} to={link.href}>
+                <Button variant="ghost" size="sm">{link.label}</Button>
+              </Link>
             ))}
-            <Button variant="ghost" size="sm" className="relative min-h-[44px] min-w-[44px]" onClick={() => navigate('/kasse')}>
-              <ShoppingCart className="h-5 w-5" />
-              {cartTotal > 0 && (
-                <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                  {cartTotal}
-                </span>
-              )}
-            </Button>
+            <Link to="/kasse">
+              <Button variant="ghost" size="sm" className="relative min-h-[44px] min-w-[44px]">
+                <ShoppingCart className="h-5 w-5" />
+                {cartTotal > 0 && (
+                  <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                    {cartTotal}
+                  </span>
+                )}
+              </Button>
+            </Link>
           </nav>
 
           {/* Mobile actions */}
@@ -81,20 +84,20 @@ export function Header() {
             >
               <Search className="h-5 w-5" />
             </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="relative min-h-[44px] min-w-[44px] px-2"
-              onClick={() => navigate('/kasse')}
-              aria-label="Handlekurv"
-            >
-              <ShoppingCart className="h-5 w-5" />
-              {cartTotal > 0 && (
-                <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                  {cartTotal}
-                </span>
-              )}
-            </Button>
+            <Link to="/kasse" aria-label="Handlekurv">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="relative min-h-[44px] min-w-[44px] px-2"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                {cartTotal > 0 && (
+                  <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                    {cartTotal}
+                  </span>
+                )}
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="sm"
@@ -111,9 +114,9 @@ export function Header() {
         {mobileOpen && (
           <div className="md:hidden border-t bg-white px-4 py-3 space-y-2 animate-fade-in">
             {navLinks.map((link) => (
-              <Button key={link.href} variant="ghost" className="w-full justify-start min-h-[44px]" onClick={() => { navigate(link.href); setMobileOpen(false); }}>
-                {link.label}
-              </Button>
+              <Link key={link.href} to={link.href} className="block" onClick={() => setMobileOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start min-h-[44px]">{link.label}</Button>
+              </Link>
             ))}
           </div>
         )}

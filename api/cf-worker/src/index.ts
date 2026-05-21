@@ -183,7 +183,7 @@ async function checkRateLimit(db: D1Database, ip: string): Promise<boolean> {
   try {
     const row = await db.prepare("SELECT count FROM rate_limits WHERE key = ? AND expires_at > datetime('now')").bind(key).first();
     const count = row ? (row as any).count : 0;
-    if (count > 120) return false; // 120 req/min
+    if (count > 300) return false; // 300 req/min
     await db.prepare(
       `INSERT INTO rate_limits (key, count, expires_at) VALUES (?, ?, datetime('now', '+1 minute'))
        ON CONFLICT(key) DO UPDATE SET count = count + 1, expires_at = excluded.expires_at`
@@ -242,13 +242,24 @@ type SvvFetchResult =
   | { status: "ok"; vehicle: TecdocVehicle }
   | { status: "not_configured" | "auth_error" | "not_found" | "upstream_error" | "parse_error"; httpStatus?: number };
 
+async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = 10000): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { ...options, signal: controller.signal });
+    return res;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<SvvFetchResult> {
   if (!apiKey || apiKey === "NOT_SET") {
     console.error("SVV: SVV_API_KEY not configured");
     return { status: "not_configured" };
   }
   try {
-    const res = await fetch(
+    const res = await fetchWithTimeout(
       `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(regnr)}`,
       {
         headers: {
@@ -256,7 +267,8 @@ async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<Svv
           "SVV-Authorization": `Apikey ${apiKey}`,
           "User-Agent": "AutoglassAS-B2B/1.0",
         },
-      }
+      },
+      15000
     );
 
     if (res.status === 401 || res.status === 403) {
@@ -350,7 +362,7 @@ async function fetchBovsoftVehicle(
 
   try {
     const url = `http://54.38.179.43:150/bovsoft.regnum.run?id=${encodeURIComponent(clientId)}&seccode=${encodeURIComponent(secCode)}&nameservice=getktypefornumplatenorway&regnum=${encodeURIComponent(regno)}&contenttype=JSON`;
-    const res = await fetch(url, { method: "GET" });
+    const res = await fetchWithTimeout(url, { method: "GET" }, 15000);
 
     if (!res.ok) {
       console.warn(`Bovsoft HTTP ${res.status} for regnr=${regno}`);
@@ -476,7 +488,7 @@ async function fetchBiluppgifterEquipment(
   if (!apiKey || apiKey === "NOT_SET") return null;
 
   try {
-    const res = await fetch(
+    const res = await fetchWithTimeout(
       `https://api.biluppgifter.se/api/v1/vehicle-configurator/regno/${encodeURIComponent(regno)}?country_code=NO`,
       {
         headers: {
@@ -484,7 +496,8 @@ async function fetchBiluppgifterEquipment(
           "Authorization": `Bearer ${apiKey}`,
           "User-Agent": "AutoglassAS-B2B/1.0",
         },
-      }
+      },
+      15000
     );
 
     if (!res.ok) return null;
@@ -663,7 +676,9 @@ async function getCategoriesWithCount(db: D1Database): Promise<Array<{ category:
 async function searchCatalog(
   db: D1Database,
   q: string,
-  filters: { brand?: string; category?: string; yearMin?: number; yearMax?: number }
+  filters: { brand?: string; category?: string; yearMin?: number; yearMax?: number },
+  offset = 0,
+  limit = 100
 ): Promise<GlassRecord[]> {
   let sql = "SELECT * FROM glass_catalog WHERE (eurocode LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)";
   const params: (string | number)[] = [`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`];
@@ -684,7 +699,8 @@ async function searchCatalog(
     sql += " AND (year_from IS NULL OR year_from <= ?)";
     params.push(filters.yearMax);
   }
-  sql += " LIMIT 100";
+  sql += " LIMIT ? OFFSET ?";
+  params.push(limit, offset);
 
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
@@ -2631,8 +2647,22 @@ export default {
       const category = url.searchParams.get("category") || undefined;
       const yearMin = url.searchParams.get("yearMin") ? parseInt(url.searchParams.get("yearMin")!, 10) : undefined;
       const yearMax = url.searchParams.get("yearMax") ? parseInt(url.searchParams.get("yearMax")!, 10) : undefined;
-      const results = await searchCatalog(env.GLASS_CATALOG_D1, q, { brand, category, yearMin, yearMax });
-      return jsonResponse({ query: q, count: results.length, results: results.map(normalizeRecord) });
+      const page = parseInt(url.searchParams.get("page") || "1", 10);
+      const perPage = Math.min(parseInt(url.searchParams.get("per_page") || "48", 10), 100);
+      const offset = (page - 1) * perPage;
+      const results = await searchCatalog(env.GLASS_CATALOG_D1, q, { brand, category, yearMin, yearMax }, offset, perPage + 1);
+      const hasMore = results.length > perPage;
+      const sliced = hasMore ? results.slice(0, perPage) : results;
+      return jsonResponse({
+        query: q,
+        page,
+        perPage,
+        count: sliced.length,
+        total: results.length, // approximate
+        hasMore,
+        products: sliced.map(normalizeRecord),
+        filters: { brands: [], categories: [], years: { min: 1960, max: 2030 }, prices: { min: 0, max: 150000 } },
+      });
     }
 
     // ── Auth: /api/me ──────────────────────────────────────────────────────

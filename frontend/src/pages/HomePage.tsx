@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, Truck, Shield, Users, Package } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
@@ -52,20 +52,22 @@ export default function HomePage() {
 
           {/* Quick links */}
           <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-3">
-            <Button
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 min-h-[44px]"
-              onClick={() => navigate('/katalog')}
-            >
-              Bla i katalog
-            </Button>
-            <Button
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 min-h-[44px]"
-              onClick={() => navigate('/katalog')}
-            >
-              Frontruter
-            </Button>
+            <Link to="/katalog">
+              <Button
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10 min-h-[44px]"
+              >
+                Bla i katalog
+              </Button>
+            </Link>
+            <Link to="/katalog">
+              <Button
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10 min-h-[44px]"
+              >
+                Frontruter
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -113,12 +115,16 @@ export default function HomePage() {
           <h2 className="text-2xl sm:text-3xl font-bold">Klar for å finne riktig glass?</h2>
           <p className="mt-3 sm:mt-4 text-sm sm:text-base text-blue-100">Søk i katalogen eller bruk registreringsnummer for å finne eksakt match.</p>
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-            <Button size="lg" className="bg-white text-autoglass-blue hover:bg-blue-50 min-h-[44px]" onClick={() => navigate('/katalog')}>
-              Åpne katalog
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 min-h-[44px]" onClick={() => navigate('/sok')}>
-              Søk med regnr
-            </Button>
+            <Link to="/katalog">
+              <Button size="lg" className="bg-white text-autoglass-blue hover:bg-blue-50 min-h-[44px]">
+                Åpne katalog
+              </Button>
+            </Link>
+            <Link to="/sok">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 min-h-[44px]">
+                Søk med regnr
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

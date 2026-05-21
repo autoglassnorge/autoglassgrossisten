@@ -46,6 +46,7 @@ export interface CatalogResponse {
   total: number;
   page: number;
   perPage: number;
+  hasMore: boolean;
   filters: {
     brands: string[];
     categories: string[];

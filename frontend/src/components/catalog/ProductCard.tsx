@@ -5,15 +5,20 @@ import { Button } from '@/components/ui/Button';
 import type { Product } from '@/types/api';
 import { formatPrice, formatYearRange, typeCodeShort, positionColor } from '@/utils/formatters';
 import { useCartStore } from '@/stores/cartStore';
+import { useState } from 'react';
 
 interface ProductCardProps {
   product: Product;
 }
 
+function useInCart(eurocode: string) {
+  return useCartStore((s) => s.items.some((i) => i.product.eurocode === eurocode));
+}
+
 export function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
-  const cartItems = useCartStore((s) => s.items);
-  const inCart = cartItems.some((i) => i.product.eurocode === product.eurocode);
+  const inCart = useInCart(product.eurocode);
+  const [imgError, setImgError] = useState(false);
 
   const stockDot = product.stockStatus > 0 ? 'bg-green-500' : 'bg-amber-500';
   const stockText = product.stockStatus > 0 ? `${product.stockStatus} på lager` : 'Bestillingsvare';
@@ -22,13 +27,13 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card className="group flex flex-col h-full overflow-hidden">
       {/* Image */}
       <div className="relative aspect-[16/10] bg-gray-100 overflow-hidden">
-        {product.imageUrl ? (
+        {!imgError && product.imageUrl ? (
           <img
             src={product.imageUrl}
             alt={product.title}
             className="h-full w-full object-cover transition-transform group-hover:scale-105"
             loading="lazy"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            onError={() => setImgError(true)}
           />
         ) : (
           <div className="flex h-full items-center justify-center text-gray-400 text-sm">
