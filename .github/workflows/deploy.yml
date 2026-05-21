@@ -72,19 +72,17 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm install -g wrangler
 
-      - name: Bygg Pages-dist
-        run: |
-          mkdir -p dist
-          cp *.html dist/ 2>/dev/null || true
-          cp -r css dist/ 2>/dev/null || true
-          cp -r js dist/ 2>/dev/null || true
-          cp -r assets dist/ 2>/dev/null || true
-          cp -r images dist/ 2>/dev/null || true
-          cp _redirects dist/ 2>/dev/null || true
+      - name: Installer frontend-avhengigheter
+        working-directory: frontend
+        run: npm install
+
+      - name: Bygg React/Vite-frontend
+        working-directory: frontend
+        run: npm run build
 
       - name: Deploy til Cloudflare Pages
         run: |
-          npx wrangler pages deploy dist \
+          npx wrangler pages deploy frontend/dist \
             --project-name=autoglass-frontend
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -123,7 +121,7 @@ jobs:
 
       - name: Static file check (Pages)
         run: |
-          curl -sfI https://autoglass-frontend.pages.dev/css/tokens.css | grep -q "200" || exit 1
+          curl -sf https://autoglass-frontend.pages.dev/ | grep -q "autoglass\|react\|<div id=\"root\">" || exit 1
           echo "✅ Pages static serving OK"
 
       - name: API smoke test
