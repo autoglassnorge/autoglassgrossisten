@@ -12,6 +12,23 @@ export interface Product {
   stockStatus: number;
   imageUrl: string;
   nagsCodes: string[];
+
+  // NEW: type code & position fields
+  typeCode: string;
+  typeCodeDesc: string;
+  position: 'driver' | 'passenger' | 'center' | null;
+  properties: {
+    heated: boolean;
+    rainSensor: boolean;
+    adas: boolean;
+    hud: boolean;
+    acoustic: boolean;
+    antenna: boolean;
+    color: string | null;
+    solar: boolean;
+    tinted: boolean;
+  };
+  sourceUrl: string;
 }
 
 export interface CatalogFilters {
@@ -43,6 +60,7 @@ export interface VehicleInfo {
   year: number;
   vin: string;
   k_type: number;
+  submodel?: string | null;
 }
 
 export interface EquipmentFlags {
@@ -56,6 +74,14 @@ export interface EquipmentFlags {
   laneAssist: boolean;
 }
 
+export interface ConfidenceInfo {
+  score: number;
+  label: string;
+  reasons: string[];
+  layer: number;
+  groundTruth: boolean;
+}
+
 export interface SearchResult {
   vehicle: VehicleInfo;
   candidates: Product[];
@@ -63,4 +89,8 @@ export interface SearchResult {
   layer: number;
   equipment?: EquipmentFlags;
   regnr?: string;
+
+  // NEW: structured confidence + grouped results
+  confidenceInfo?: ConfidenceInfo;
+  resultsByType?: Record<string, Product[]>;
 }

@@ -51,6 +51,9 @@ interface GlassRecord {
   image_url: string | null;
   description: string;
   source: string;
+  typeCode?: string;
+  typeCodeDesc?: string;
+  position?: "driver" | "passenger" | null;
 }
 
 interface TecdocVehicle {
@@ -623,6 +626,165 @@ async function searchCatalog(
 
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
+}
+
+// ============================================================================
+// GROUND TRUTH
+// ============================================================================
+
+interface GroundTruthRecord {
+  id: number;
+  regnr_hash: string;
+  vin: string | null;
+  vin_prefix: string | null;
+  k_type: number | null;
+  make: string;
+  model: string;
+  year: number;
+  submodel: string | null;
+  frontrute_eurocode: string | null;
+  bakrute_eurocode: string | null;
+  sideglass_fv_eurocode: string | null;
+  sideglass_fh_eurocode: string | null;
+  sideglass_bv_eurocode: string | null;
+  sideglass_bh_eurocode: string | null;
+  dor_fv_eurocode: string | null;
+  dor_fh_eurocode: string | null;
+  dor_bv_eurocode: string | null;
+  dor_bh_eurocode: string | null;
+  verified_by: string;
+  verified_at: string;
+  source_url: string | null;
+  confidence: number;
+}
+
+async function queryGroundTruth(db: D1Database, regnr: string): Promise<GroundTruthRecord | null> {
+  const hash = await sha256(regnr);
+  try {
+    const row = await db.prepare("SELECT * FROM ground_truth WHERE regnr_hash = ?").bind(hash).first();
+    return row as unknown as GroundTruthRecord | null;
+  } catch {
+    return null;
+  }
+}
+
+async function queryGroundTruthByVehicle(
+  db: D1Database,
+  make: string,
+  model: string,
+  year: number
+): Promise<GroundTruthRecord | null> {
+  try {
+    const row = await db
+      .prepare("SELECT * FROM ground_truth WHERE make = ? AND model = ? AND year = ? ORDER BY confidence DESC LIMIT 1")
+      .bind(make, model, year)
+      .first();
+    return row as unknown as GroundTruthRecord | null;
+  } catch {
+    return null;
+  }
+}
+
+// ============================================================================
+// AUTO-GLASS.NO MAPPING (KV-backed)
+// ============================================================================
+
+interface AutoGlassMapping {
+  make: string;
+  model: string;
+  year: number;
+  typeCodes: Record<string, string>; // typeCode -> eurocode
+}
+
+async function getAutoGlassMapping(
+  kv: KVNamespace,
+  make: string,
+  model: string,
+  year: number
+): Promise<AutoGlassMapping | null> {
+  const key = `autoglass:map:${make.toUpperCase()}:${model.toUpperCase()}:${year}`;
+  const cached = await kv.get(key);
+  if (!cached) return null;
+  try {
+    return JSON.parse(cached) as AutoGlassMapping;
+  } catch {
+    return null;
+  }
+}
+
+// ============================================================================
+// TYPE CODE HELPERS
+// ============================================================================
+
+const GT_FIELD_TO_TYPE: Record<
+  string,
+  { code: string; desc: string; position: "driver" | "passenger" | null }
+> = {
+  frontrute_eurocode: { code: "F", desc: "Frontrute", position: null },
+  bakrute_eurocode: { code: "B", desc: "Bakrute", position: null },
+  sideglass_fv_eurocode: { code: "SFB1", desc: "Sideglass foran venstre", position: "driver" },
+  sideglass_fh_eurocode: { code: "SPB1", desc: "Sideglass foran høyre", position: "passenger" },
+  sideglass_bv_eurocode: { code: "SFB2", desc: "Sideglass bak venstre", position: "driver" },
+  sideglass_bh_eurocode: { code: "SPB2", desc: "Sideglass bak høyre", position: "passenger" },
+  dor_fv_eurocode: { code: "DFF", desc: "Dørglass foran venstre", position: "driver" },
+  dor_fh_eurocode: { code: "DPF", desc: "Dørglass foran høyre", position: "passenger" },
+  dor_bv_eurocode: { code: "DFB", desc: "Dørglass bak venstre", position: "driver" },
+  dor_bh_eurocode: { code: "DPB", desc: "Dørglass bak høyre", position: "passenger" },
+};
+
+async function groundTruthToCandidates(
+  db: D1Database,
+  gt: GroundTruthRecord
+): Promise<GlassRecord[]> {
+  const candidates: GlassRecord[] = [];
+  for (const [field, meta] of Object.entries(GT_FIELD_TO_TYPE)) {
+    const eurocode = (gt as unknown as Record<string, unknown>)[field] as string | null;
+    if (!eurocode) continue;
+    const rec = await queryByEurocode(db, eurocode);
+    if (rec) {
+      candidates.push({
+        ...rec,
+        typeCode: meta.code,
+        typeCodeDesc: meta.desc,
+        position: meta.position,
+      });
+    }
+  }
+  return candidates;
+}
+
+function inferTypeCodeFromRecord(record: GlassRecord): string | null {
+  const cat = record.category?.toLowerCase() || detectCategoryFromDescription(record.description);
+  const desc = (record.description || "").toUpperCase();
+
+  if (cat === "frontrute") return "F";
+  if (cat === "bakrute") return "B";
+
+  if (cat === "dørglass") {
+    if (desc.includes("FV") || desc.includes("VENSTRE") || desc.includes("LFD") || desc.includes("LEFT")) return "DFF";
+    if (desc.includes("FH") || desc.includes("HØYRE") || desc.includes("RFD") || desc.includes("RIGHT")) return "DPF";
+    if (desc.includes("BV") || desc.includes("BAK V") || desc.includes("LRD")) return "DFB";
+    if (desc.includes("BH") || desc.includes("BAK H") || desc.includes("RRD")) return "DPB";
+  }
+
+  if (cat === "sideglass") {
+    if (desc.includes("FV") || desc.includes("FORAN V") || desc.includes("LFQ") || desc.includes("LRV")) return "SFB1";
+    if (desc.includes("FH") || desc.includes("FORAN H") || desc.includes("RFQ") || desc.includes("RRV")) return "SPB1";
+    if (desc.includes("BV") || desc.includes("BAK V") || desc.includes("LRQ")) return "SFB2";
+    if (desc.includes("BH") || desc.includes("BAK H") || desc.includes("RRQ")) return "SPB2";
+  }
+
+  return null;
+}
+
+function groupByTypeCode(candidates: GlassRecord[]): Record<string, GlassRecord[]> {
+  const groups: Record<string, GlassRecord[]> = {};
+  for (const c of candidates) {
+    const code = c.typeCode || inferTypeCodeFromRecord(c) || "UNKNOWN";
+    if (!groups[code]) groups[code] = [];
+    groups[code].push(c);
+  }
+  return groups;
 }
 
 // ============================================================================
@@ -1867,7 +2029,24 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
 
   const vehicle: TecdocVehicle = svvResult.vehicle;
 
-  // 2. Lookup Bovsoft kType (cached first, then API)
+  // 2. Check ground_truth database FIRST (layer -1: verified mapping)
+  const db = env.GLASS_CATALOG_D1;
+  let groundTruth: GroundTruthRecord | null = null;
+  let gtCandidates: GlassRecord[] = [];
+  try {
+    groundTruth = await queryGroundTruth(db, regnr);
+    if (!groundTruth) {
+      // Fallback: lookup by make+model+year
+      groundTruth = await queryGroundTruthByVehicle(db, vehicle.make, vehicle.model, vehicle.year);
+    }
+    if (groundTruth) {
+      gtCandidates = await groundTruthToCandidates(db, groundTruth);
+    }
+  } catch {
+    // Ground truth table might not exist yet — silently continue
+  }
+
+  // 3. Lookup Bovsoft kType (cached first, then API)
   let bovsoftVehicle: BovsoftVehicle | null = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
   if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
     bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
@@ -1890,14 +2069,20 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     vehicle.k_type = bovsoftVehicle.ktype;
   }
 
-  // 3. Find matching glass in D1
-  const db = env.GLASS_CATALOG_D1;
+  // Find matching glass in D1 (db already declared above)
   const candidates: GlassRecord[] = [];
   let layer = 4;
   let confidence: string = "none";
 
+  // === Layer -1: Ground truth from auto-glass.no ===
+  if (gtCandidates.length > 0) {
+    candidates.push(...gtCandidates);
+    layer = -1;
+    confidence = "exact";
+  }
+
   // === Layer 0: kType exact match (statistical learning) ===
-  if (vehicle.k_type > 0) {
+  if (candidates.length === 0 && vehicle.k_type > 0) {
     // First: direct kType lookup in catalog (if ktype column is populated)
     const ktypeDirect = await queryByKtype(db, vehicle.k_type);
     if (ktypeDirect.length > 0) {
@@ -2226,6 +2411,24 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       top_pick: topPick,
       confidence,
       layer,
+      confidenceInfo: {
+        score: layer === -1 ? 100 : layer === 0 ? 95 : layer === 1 ? 85 : layer === 2 ? 65 : layer === 3 ? 45 : 25,
+        label: confidence,
+        reasons: layer === -1
+          ? ['Verifisert i ground truth database (auto-glass.no)']
+          : layer === 0
+            ? ['Eksakt match på kType fra TecDoc']
+            : layer === 1
+              ? ['Match på merke, modell og årsmodell']
+              : layer === 2
+                ? ['Match på merke og årsmodell', 'Verifiser modell før bestilling']
+                : layer === 3
+                  ? ['Kun match på merke', 'Sterkt anbefalt å verifisere modell og år']
+                  : ['Begrenset data tilgjengelig'],
+        layer,
+        groundTruth: layer === -1,
+      },
+      resultsByType: groupByTypeCode(candidatesWithEquipment),
       sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
     },
   };

@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Search, Loader2 } from 'lucide-react';
+import { Search, Loader2, SlidersHorizontal } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 import { ProductGrid } from '@/components/catalog/ProductGrid';
 import { FilterPanel } from '@/components/catalog/FilterPanel';
+import { BottomSheet } from '@/components/search/BottomSheet';
 import { fetchCatalog } from '@/api/catalog';
 import type { CatalogFilters } from '@/types/api';
 
 export default function CatalogPage() {
   const [filters, setFilters] = useState<CatalogFilters>({});
   const [searchQuery, setSearchQuery] = useState('');
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: ['catalog', filters, searchQuery],
@@ -23,28 +26,53 @@ export default function CatalogPage() {
     prices: { min: 0, max: 150000 },
   };
 
+  const hasActiveFilters =
+    filters.brand?.length ||
+    filters.category?.length ||
+    filters.yearFrom ||
+    filters.yearTo ||
+    filters.priceMin ||
+    filters.priceMax;
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Katalog</h1>
-        <p className="mt-2 text-gray-600">
+    <div className="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
+      <div className="mb-4 sm:mb-8">
+        <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Katalog</h1>
+        <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">
           {data?.total.toLocaleString('no-NO') ?? '...'} produkter på lager
         </p>
       </div>
 
       {/* Search bar */}
-      <div className="relative mb-6">
+      <div className="relative mb-4">
         <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
         <Input
           placeholder="Søk etter eurokode, NAGS, merke eller modell..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10 h-12 text-base"
+          className="pl-10 h-12 sm:h-14 text-base"
         />
       </div>
 
-      <div className="flex gap-8">
-        {/* Sidebar filters */}
+      {/* Mobile filter button */}
+      <div className="flex items-center gap-2 mb-4 lg:hidden">
+        <Button
+          variant="outline"
+          className="flex-1 gap-2 min-h-[44px]"
+          onClick={() => setFilterOpen(true)}
+        >
+          <SlidersHorizontal className="h-4 w-4" />
+          Filter
+          {hasActiveFilters && (
+            <span className="ml-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-autoglass-blue text-[10px] font-bold text-white">
+              ✓
+            </span>
+          )}
+        </Button>
+      </div>
+
+      <div className="flex gap-6 lg:gap-8">
+        {/* Desktop sidebar filters */}
         <aside className="hidden lg:block w-64 flex-shrink-0">
           <FilterPanel
             filters={filters}
@@ -64,6 +92,23 @@ export default function CatalogPage() {
           )}
         </div>
       </div>
+
+      {/* Mobile filter bottom sheet */}
+      <BottomSheet open={filterOpen} onClose={() => setFilterOpen(false)} title="Filter">
+        <FilterPanel
+          filters={filters}
+          availableFilters={availableFilters}
+          onChange={(f) => { setFilters(f); }}
+        />
+        <div className="mt-6 flex gap-2">
+          <Button variant="outline" className="flex-1 min-h-[44px]" onClick={() => setFilters({})}>
+            Nullstill
+          </Button>
+          <Button className="flex-1 min-h-[44px]" onClick={() => setFilterOpen(false)}>
+            Vis resultater
+          </Button>
+        </div>
+      </BottomSheet>
     </div>
   );
 }
