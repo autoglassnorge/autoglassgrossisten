@@ -160,18 +160,10 @@ async function main() {
     );
   }
 
-  // 3. Full catalog_records
-  console.log("📤 Laster opp catalog_records...");
-  const recordsBody = JSON.stringify(catalog.records);
-  console.log(`   Størrelse: ${(recordsBody.length / 1024 / 1024).toFixed(2)} MB`);
-  tasks.push(
-    limit(() =>
-      uploadJSON("catalog_records", catalog.records).catch((e) => {
-        errors.push({ key: "catalog_records", error: (e as Error).message });
-        return { key: "catalog_records", size: 0 };
-      })
-    )
-  );
+  // 3. Full catalog_records — SKIPPED (exceeds KV 27MiB limit, use D1 + chunks instead)
+  console.log("📤 Hopper over catalog_records (bruker D1 + chunks istedenfor)...");
+  // const recordsBody = JSON.stringify(catalog.records);
+  // console.log(`   Størrelse: ${(recordsBody.length / 1024 / 1024).toFixed(2)} MB`);
 
   // 4. Chunked backup
   console.log("\n📤 Laster opp records i chunker...");
