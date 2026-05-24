@@ -1,0 +1,49 @@
+name: D1 Nord Glass Import
+
+on:
+  workflow_dispatch:
+
+jobs:
+  import-nordglass:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g wrangler
+
+      - name: Create nordglass_staging table
+        working-directory: api/cf-worker
+        run: |
+          wrangler d1 execute glass-catalog-db --remote --file migrations/0012_nordglass_staging.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Import Nord Glass batches
+        working-directory: api/cf-worker
+        run: |
+          BATCH_COUNT=$(ls ../../data/nordglass-batches/batch-*.sql | wc -l)
+          echo "Importing $BATCH_COUNT batches..."
+          i=0
+          for f in ../../data/nordglass-batches/batch-*.sql; do
+            i=$((i + 1))
+            echo "[$i/$BATCH_COUNT] Importing $(basename $f)..."
+            wrangler d1 execute glass-catalog-db --remote --file "$f" > /dev/null 2>&1
+          done
+          echo "Done!"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify
+        working-directory: api/cf-worker
+        run: |
+          echo "=== nordglass_staging count ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT parse_status, COUNT(*) as count FROM nordglass_staging GROUP BY parse_status"
+          echo "=== Total ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as total FROM nordglass_staging"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
