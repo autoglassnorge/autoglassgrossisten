@@ -22,6 +22,9 @@
 
 import { getNagsCodes } from "./nags";
 import { lookupNagsByVehicle } from "./nags-by-vehicle";
+import { resolveGlass, upsertGlassRule } from "./vin-glass-resolver";
+import { handleVinLookup, handleVinLookupStatus } from "./vin-lookup-api";
+import { fetchSvvEnkeltoppslag, fetchWithTimeout, SvvFetchResult, SvvKjoretoyData, TecdocVehicle } from "./providers/svv";
 
 export interface Env {
   GLASS_CATALOG: KVNamespace;
@@ -30,6 +33,11 @@ export interface Env {
   BOVSOFT_CLIENT_ID: string;
   BOVSOFT_SECCODE: string;
   SVV_API_KEY: string;
+  RAPIDAPI_KEY?: string; // DEPRECATED: RapidAPI Autoways fjernet 2026-05-21
+  VINCARIO_API_KEY?: string;
+  VINCARIO_SECRET_KEY?: string;
+  MACS_VIS_API_KEY?: string;
+  AGM_API_KEY?: string;
 }
 
 interface GlassRecord {
@@ -53,6 +61,7 @@ interface GlassRecord {
   shade: number;
   camera: number;
   lane_assist: number;
+  adas_features: string | null;
   price: number | null;
   stock_status: number | null;
   warehouse_location: string | null;
@@ -72,21 +81,6 @@ interface GlassRecord {
   typeCodeDesc?: string;
   position?: "driver" | "passenger" | null;
   nagsCodes?: string[];
-}
-
-interface TecdocVehicle {
-  regno: string;
-  vin: string;
-  make: string;
-  model: string;
-  year: number;
-  k_type: number;
-  typeCode?: string;
-  length?: number;
-  fuelCode?: string;
-  engineCode?: string;
-  seats?: number;
-  gvwr?: number;
 }
 
 // ============================================================================
@@ -115,15 +109,20 @@ function normalizeRecord(r: GlassRecord): any {
     yearFrom: r.year_from,
     yearTo: r.year_to,
     prefix4: r.prefix4,
-    adas: r.adas,
-    rainSensor: r.rain_sensor,
-    heated: r.heated,
-    acoustic: r.acoustic,
-    antenna: r.antenna,
-    hud: r.hud,
-    shade: r.shade,
-    camera: r.camera,
-    laneAssist: r.lane_assist,
+    properties: {
+      adas: !!r.adas,
+      rainSensor: !!r.rain_sensor,
+      heated: !!r.heated,
+      acoustic: !!r.acoustic,
+      antenna: !!r.antenna,
+      hud: !!r.hud,
+      shade: !!r.shade,
+      camera: !!r.camera,
+      color: r.color || null,
+      solar: !!r.solar,
+      tinted: !!r.tinted,
+    },
+    adasFeatures: r.adas_features ? JSON.parse(r.adas_features) : [],
     price: r.price,
     stockStatus: r.stock_status,
     warehouseLocation: r.warehouse_location,
@@ -160,6 +159,8 @@ function errorResponse(message: string, status = 400): Response {
 // CACHE (KV)
 // ============================================================================
 
+const CACHE_VERSION = "1";
+
 async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
   const cached = await kv.get(key);
   return cached ? JSON.parse(cached) : null;
@@ -180,6 +181,35 @@ function cacheKey(endpoint: string, params: Record<string, string>): string {
   return `cache:v2:${endpoint}:${sorted.map(([k, v]) => `${k}=${v}`).join("&")}`;
 }
 
+// Cache envelope for versionert, tidsstemplet caching
+interface CacheEnvelope<T> {
+  version: string;
+  cachedAt: string;
+  data: T;
+}
+
+function buildCacheEnvelope<T>(data: T, version = CACHE_VERSION): CacheEnvelope<T> {
+  return { version, cachedAt: new Date().toISOString(), data };
+}
+
+// Normaliserer catalog/search-params til en konsistent cache key
+function normalizeCatalogSearchParams(url: URL): Record<string, string> {
+  const out: Record<string, string> = {};
+  const q = url.searchParams.get("q")?.trim().toLowerCase() || "";
+  if (q) out.q = q;
+  const brand = url.searchParams.get("brand")?.trim().toLowerCase();
+  if (brand) out.brand = brand;
+  const category = url.searchParams.get("category")?.trim().toLowerCase();
+  if (category) out.category = category;
+  const yearMin = url.searchParams.get("yearMin");
+  if (yearMin) out.yearMin = yearMin;
+  const yearMax = url.searchParams.get("yearMax");
+  if (yearMax) out.yearMax = yearMax;
+  out.page = String(parseInt(url.searchParams.get("page") || "1", 10));
+  out.per_page = String(parseInt(url.searchParams.get("per_page") || "48", 10));
+  return out;
+}
+
 // ============================================================================
 // RATE LIMITING (D1-basert — unngår KV write-kvote)
 // ============================================================================
@@ -198,142 +228,6 @@ async function checkRateLimit(db: D1Database, ip: string): Promise<boolean> {
   } catch {
     // If table doesn't exist yet, allow through (don't block on migration missing)
     return true;
-  }
-}
-
-// ============================================================================
-// SVV API
-// ============================================================================
-
-interface SvvKjoretoyData {
-  kjoretoydataListe?: Array<{
-    kjoretoyId?: { understellsnummer?: string };
-    forstegangsregistrering?: { registrertForstegangNorgeDato?: string };
-    godkjenning?: {
-      tekniskGodkjenning?: {
-        tekniskeData?: {
-          generelt?: {
-            merke?: Array<{ merke: string }>;
-            handelsbetegnelse?: Array<string>;
-            typebetegnelse?: string;
-          };
-          dimensjoner?: { lengde?: number; bredde?: number };
-          motorOgDrivverk?: {
-            motor?: Array<{
-              drivstoff?: Array<{ drivstoffKode?: { kodeVerdi?: string } }>;
-              motorKode?: string;
-            }>;
-          };
-          persontall?: { sitteplasserTotalt?: number };
-          vekter?: { tillattTotalvekt?: number };
-        };
-      };
-    };
-  }>;
-}
-
-/**
- * SVV fetch result — explicit error taxonomy so callers can return
- * appropriate HTTP status codes instead of swallowing everything as null.
- *
- * status taxonomy:
- *   - 'ok'             → vehicle data returned
- *   - 'not_configured' → SVV_API_KEY missing/NOT_SET (deploy-time issue)
- *   - 'auth_error'     → 401/403 from SVV (rotate key)
- *   - 'not_found'      → 404 or empty list (regnr doesn't exist)
- *   - 'upstream_error' → 5xx from SVV or network failure
- *   - 'parse_error'    → response not parseable
- */
-type SvvFetchResult =
-  | { status: "ok"; vehicle: TecdocVehicle }
-  | { status: "not_configured" | "auth_error" | "not_found" | "upstream_error" | "parse_error"; httpStatus?: number };
-
-async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = 10000): Promise<Response> {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
-    return res;
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-
-async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Promise<SvvFetchResult> {
-  if (!apiKey || apiKey === "NOT_SET") {
-    console.error("SVV: SVV_API_KEY not configured");
-    return { status: "not_configured" };
-  }
-  try {
-    const res = await fetchWithTimeout(
-      `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(regnr)}`,
-      {
-        headers: {
-          "Accept": "application/json",
-          "SVV-Authorization": `Apikey ${apiKey}`,
-          "User-Agent": "AutoglassAS-B2B/1.0",
-        },
-      },
-      15000
-    );
-
-    if (res.status === 401 || res.status === 403) {
-      console.error(`SVV auth failed (${res.status}) — rotate SVV_API_KEY via 'wrangler secret put SVV_API_KEY'`);
-      return { status: "auth_error", httpStatus: res.status };
-    }
-    if (res.status === 404) {
-      return { status: "not_found", httpStatus: 404 };
-    }
-    if (!res.ok) {
-      console.warn(`SVV upstream error: HTTP ${res.status}`);
-      return { status: "upstream_error", httpStatus: res.status };
-    }
-
-    let data: SvvKjoretoyData;
-    try {
-      data = (await res.json()) as SvvKjoretoyData;
-    } catch (e) {
-      console.warn(`SVV parse error: ${e instanceof Error ? e.message : String(e)}`);
-      return { status: "parse_error" };
-    }
-
-    const k = data.kjoretoydataListe?.[0];
-    if (!k) return { status: "not_found" };
-
-    const td = k.godkjenning?.tekniskGodkjenning?.tekniskeData;
-    const generelt = td?.generelt;
-    const merke = generelt?.merke?.[0]?.merke || "";
-    const model = generelt?.handelsbetegnelse?.[0] || "";
-    const typeCode = generelt?.typebetegnelse || "";
-    const regDate = k.forstegangsregistrering?.registrertForstegangNorgeDato || "";
-    const year = regDate ? parseInt(regDate.split("-")[0], 10) : 0;
-    const vin = k.kjoretoyId?.understellsnummer || "";
-    const length = td?.dimensjoner?.lengde || 0;
-    const fuelCode = td?.motorOgDrivverk?.motor?.[0]?.drivstoff?.[0]?.drivstoffKode?.kodeVerdi || "";
-    const engineCode = td?.motorOgDrivverk?.motor?.[0]?.motorKode || "";
-    const seats = td?.persontall?.sitteplasserTotalt || 0;
-    const gvwr = td?.vekter?.tillattTotalvekt || 0;
-
-    return {
-      status: "ok",
-      vehicle: {
-        regno: regnr,
-        vin,
-        make: merke.toUpperCase(),
-        model: model.toUpperCase(),
-        year,
-        k_type: 0,
-        typeCode,
-        length,
-        fuelCode,
-        engineCode,
-        seats,
-        gvwr,
-      },
-    };
-  } catch (e) {
-    console.warn(`SVV network error: ${e instanceof Error ? e.message : String(e)}`);
-    return { status: "upstream_error" };
   }
 }
 
@@ -656,12 +550,16 @@ async function insertKtypeMatch(db: D1Database, ktype: number, eurocode: string)
   }
 }
 
-async function getCatalogStats(db: D1Database): Promise<{ total: number; brands: number }> {
-  const totalRow = await db.prepare("SELECT COUNT(*) as cnt FROM glass_catalog").first();
-  const brandRow = await db.prepare("SELECT COUNT(DISTINCT brand) as cnt FROM glass_catalog").first();
+async function getCatalogStats(db: D1Database): Promise<{ total: number; brands: number; rulesCount: number }> {
+  const [totalRow, brandRow, rulesRow] = await Promise.all([
+    db.prepare("SELECT COUNT(*) as cnt FROM glass_catalog").first(),
+    db.prepare("SELECT COUNT(DISTINCT brand) as cnt FROM glass_catalog").first(),
+    db.prepare("SELECT COUNT(*) as cnt FROM glass_rules").first(),
+  ]);
   return {
     total: (totalRow as any)?.cnt || 0,
     brands: (brandRow as any)?.cnt || 0,
+    rulesCount: (rulesRow as any)?.cnt || 0,
   };
 }
 
@@ -2137,16 +2035,73 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     // Ground truth table might not exist yet — silently continue
   }
 
-  // 3. Lookup Bovsoft kType (cached first, then API)
-  let bovsoftVehicle: BovsoftVehicle | null = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
-  if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
-    bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
-    if (bovsoftVehicle) {
-      await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
+  // 3. Hybrid kType resolution: glass_rules → Bovsoft → resolveGlass fallback
+  let resolvedKtype: number | null = null;
+  let ktypeSource = "none";
+
+  // 3a. Check glass_rules (statistical learning from previous searches)
+  try {
+    const normalizedKey = [
+      vehicle.make.toLowerCase().trim().replace(/\s+/g, "_"),
+      vehicle.model.toLowerCase().trim().replace(/\s+/g, "_"),
+      String(vehicle.year),
+    ].join(":");
+    const ruleResult = await db
+      .prepare("SELECT ktype, confidence FROM glass_rules WHERE normalized_key = ? AND active = 1 ORDER BY confidence DESC, evidence_count DESC LIMIT 1")
+      .bind(normalizedKey).first<{ ktype: number; confidence: number }>();
+    if (ruleResult && ruleResult.ktype && ruleResult.confidence >= 0.75) {
+      resolvedKtype = ruleResult.ktype;
+      ktypeSource = "glass_rules";
+      console.log(`[kType] Glass rule hit for ${regnr}: kType=${resolvedKtype}, conf=${ruleResult.confidence}`);
+    }
+  } catch {
+    // glass_rules table might not exist yet — silently continue
+  }
+
+  // 3b. Bovsoft kType (cached first, then API)
+  let bovsoftVehicle: BovsoftVehicle | null = null;
+  if (!resolvedKtype) {
+    bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
+    if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
+      bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
+      if (bovsoftVehicle) {
+        await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
+      }
+    }
+    if (bovsoftVehicle && bovsoftVehicle.ktype > 0) {
+      resolvedKtype = bovsoftVehicle.ktype;
+      ktypeSource = "bovsoft";
     }
   }
 
-  // Cross-validate: if Bovsoft brand differs from SVV, log and prefer SVV
+  // 3c. Fallback: resolveGlass via vPIC (gratis) or paid APIs
+  if (!resolvedKtype && vehicle.vin) {
+    try {
+      const glassResult = await resolveGlass({
+        db,
+        vin: vehicle.vin,
+        opening: "windshield",
+        market: "EU",
+        mode: "auto",
+        regnr,
+        vehicleMake: vehicle.make,
+        vehicleModel: vehicle.model,
+        vehicleYear: vehicle.year,
+        vincarioApiKey: env.VINCARIO_API_KEY,
+        vincarioSecretKey: env.VINCARIO_SECRET_KEY,
+        macsVisApiKey: env.MACS_VIS_API_KEY,
+        agmApiKey: env.AGM_API_KEY,
+      });
+      if (glassResult.status === "resolved" && glassResult.match?.ktype) {
+        resolvedKtype = glassResult.match.ktype;
+        ktypeSource = glassResult.paidLookupUsed ? "paid_api" : "vpic_rules";
+      }
+    } catch (e) {
+      console.warn(`[kType] resolveGlass fallback failed for ${regnr}:`, e);
+    }
+  }
+
+  // 3d. Cross-validate: if Bovsoft brand differs from SVV, log and prefer SVV
   if (bovsoftVehicle && bovsoftVehicle.brand && vehicle.make) {
     const bovBrand = bovsoftVehicle.brand.toLowerCase().replace(/[^a-z]/g, "");
     const svvBrand = vehicle.make.toLowerCase().replace(/[^a-z]/g, "");
@@ -2155,9 +2110,51 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     }
   }
 
-  // Merge kType into vehicle if available
-  if (bovsoftVehicle && bovsoftVehicle.ktype > 0) {
-    vehicle.k_type = bovsoftVehicle.ktype;
+  // 3e. Merge kType into vehicle + save to glass_rules for future learning
+  if (resolvedKtype && resolvedKtype > 0) {
+    vehicle.k_type = resolvedKtype;
+
+    // Persist in glass_rules for next time (fire-and-forget)
+    try {
+      const normalizedKey = [
+        vehicle.make.toLowerCase().trim().replace(/\s+/g, "_"),
+        vehicle.model.toLowerCase().trim().replace(/\s+/g, "_"),
+        String(vehicle.year),
+      ].join(":");
+      await upsertGlassRule(db, {
+        normalizedKey,
+        market: "EU",
+        opening: "windshield",
+        featureSig: "default",
+        match: {
+          ktype: resolvedKtype,
+          confidence: ktypeSource === "bovsoft" ? 0.90 : 0.75,
+          source: ktypeSource,
+        },
+      });
+    } catch {
+      // glass_rules might not exist yet — silently continue
+    }
+  }
+
+  // 3f. Also save SVV vehicle data to vin_decode_cache (fire-and-forget)
+  if (vehicle.vin) {
+    try {
+      await db.prepare(`
+        INSERT INTO vin_decode_cache
+          (vin, market, source, make, model, year, normalized_key, confidence, expires_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now', '+60 days'))
+        ON CONFLICT(vin) DO UPDATE SET
+          make = excluded.make, model = excluded.model, year = excluded.year,
+          normalized_key = excluded.normalized_key, expires_at = excluded.expires_at
+      `).bind(
+        vehicle.vin, "EU", "svv", vehicle.make, vehicle.model, vehicle.year,
+        [vehicle.make, vehicle.model, String(vehicle.year)].join(":").toLowerCase().replace(/\s+/g, "_"),
+        0.85
+      ).run();
+    } catch {
+      // vin_decode_cache might not exist yet — silently continue
+    }
   }
 
   // Find matching glass in D1 (db already declared above)
@@ -2436,7 +2433,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
   // Determine confidence level
   const topCandidate = candidatesWithEquipment[0];
   if (factoryEquipment && topCandidate && confidence !== "exact") {
-    const topEq = inferRecordEquipment(topCandidate);
+    const topEq = topCandidate._equipment || inferRecordEquipment(topCandidate);
     const allMatch =
       factoryEquipment.adas === topEq.adas &&
       factoryEquipment.rainSensor === topEq.rainSensor &&
@@ -2475,7 +2472,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
         antenna: effectiveEquipment.antenna,
         hud: effectiveEquipment.hud,
         camera: effectiveEquipment.camera,
-        shade: inferRecordEquipment(topCandidate).shade,
+        shade: (topCandidate._equipment || inferRecordEquipment(topCandidate)).shade,
       },
       layer,
       confidence,
@@ -2591,7 +2588,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
 // ============================================================================
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: CORS_HEADERS });
     }
@@ -2611,15 +2608,21 @@ export default {
       const svvConfigured = !!(env.SVV_API_KEY && env.SVV_API_KEY !== "NOT_SET");
       const bovsoftConfigured = !!(env.BOVSOFT_CLIENT_ID && env.BOVSOFT_CLIENT_ID !== "NOT_SET");
       const biluppgifterConfigured = !!(env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET");
+      const vincarioConfigured = !!(env.VINCARIO_API_KEY && env.VINCARIO_SECRET_KEY);
+      const macsVisConfigured = !!env.MACS_VIS_API_KEY;
       return jsonResponse({
         status: "ok",
-        version: "2.2",
+        version: "2.3",
         catalogSize: stats.total,
         brands: stats.brands,
+        rulesCount: stats.rulesCount,
+        rulesConfigured: stats.rulesCount > 0,
         d1Configured: true,
         svvConfigured,
         bovsoftConfigured,
         biluppgifterConfigured,
+        vincarioConfigured,
+        macsVisConfigured,
         timestamp: new Date().toISOString(),
       });
     }
@@ -2697,11 +2700,24 @@ export default {
       const yearMax = url.searchParams.get("yearMax") ? parseInt(url.searchParams.get("yearMax")!, 10) : undefined;
       const page = parseInt(url.searchParams.get("page") || "1", 10);
       const perPage = Math.min(parseInt(url.searchParams.get("per_page") || "48", 10), 100);
+
+      // ── KV Cache (180s TTL) ──────────────────────────────────────────────
+      const cacheParams = normalizeCatalogSearchParams(url);
+      const cacheKeyStr = cacheKey("catalog:search", cacheParams);
+      const cached = await getCache<CacheEnvelope<unknown>>(env.GLASS_CATALOG, cacheKeyStr);
+      if (cached && cached.version === CACHE_VERSION && cached.data) {
+        return jsonResponse(cached.data, 200, {
+          "X-Cache-Status": "HIT",
+          "X-Cache-Key": cacheKeyStr,
+          "X-Cached-At": cached.cachedAt,
+        });
+      }
+
       const offset = (page - 1) * perPage;
       const results = await searchCatalog(env.GLASS_CATALOG_D1, q, { brand, category, yearMin, yearMax }, offset, perPage + 1);
       const hasMore = results.length > perPage;
       const sliced = hasMore ? results.slice(0, perPage) : results;
-      return jsonResponse({
+      const responseBody = {
         query: q,
         page,
         perPage,
@@ -2710,6 +2726,15 @@ export default {
         hasMore,
         products: sliced.map(normalizeRecord),
         filters: { brands: [], categories: [], years: { min: 1960, max: 2030 }, prices: { min: 0, max: 150000 } },
+      };
+
+      // Store in KV with envelope (version + cachedAt)
+      const envelope = buildCacheEnvelope(responseBody, CACHE_VERSION);
+      await setCache(env.GLASS_CATALOG, cacheKeyStr, envelope, 180);
+
+      return jsonResponse(responseBody, 200, {
+        "X-Cache-Status": "MISS",
+        "X-Cache-Key": cacheKeyStr,
       });
     }
 
@@ -2750,6 +2775,16 @@ export default {
       } catch (e) {
         return errorResponse("Kunne ikke lagre forespørsel: " + (e as Error).message, 500);
       }
+    }
+
+    // ── VIN Lookup: POST /api/vin-lookup ───────────────────────────────────
+    if (path === "/api/vin-lookup" && request.method === "POST") {
+      return handleVinLookup(request, env, ctx);
+    }
+
+    // ── VIN Lookup Status: GET /api/vin-lookup/status ──────────────────────
+    if (path === "/api/vin-lookup/status" && request.method === "GET") {
+      return handleVinLookupStatus(request, env);
     }
 
     // ── Admin: GET /api/admin/quotes ───────────────────────────────────────
