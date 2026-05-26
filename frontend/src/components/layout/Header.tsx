@@ -24,6 +24,7 @@ export function Header() {
 
   const navLinks = [
     { label: 'Katalog', href: '/katalog' },
+    { label: 'Bla', href: '/bla' },
     { label: 'Søk', href: '/sok' },
   ];
 

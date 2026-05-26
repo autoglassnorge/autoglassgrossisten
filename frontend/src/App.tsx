@@ -5,6 +5,7 @@ import HomePage from '@/pages/HomePage'
 import CatalogPage from '@/pages/CatalogPage'
 import SearchPage from '@/pages/SearchPage'
 import AccountPage from '@/pages/AccountPage'
+import BrowsePage from '@/pages/BrowsePage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/katalog" element={<CatalogPage />} />
+          <Route path="/bla" element={<BrowsePage />} />
           <Route path="/sok" element={<SearchPage />} />
           <Route path="/kasse" element={<AccountPage />} />
           <Route path="*" element={

@@ -40,7 +40,7 @@ export function Footer() {
             <h4 className="font-semibold text-gray-900 mb-4">Lenker</h4>
             <ul className="space-y-2 text-sm text-gray-600">
               <li><a href="https://auto-glass.no" className="hover:text-autoglass-blue">auto-glass.no</a></li>
-              <li><a href="https://autoglass-frontend.pages.dev" className="hover:text-autoglass-blue">Grossistportal</a></li>
+              <li><a href="https://www.finnbilglass.no" className="hover:text-autoglass-blue">finnbilglass.no</a></li>
               <li><span className="text-gray-400">B2B Katalog v3.0</span></li>
             </ul>
           </div>

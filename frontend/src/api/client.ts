@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
 
 class ApiError extends Error {
   constructor(public status: number, public data?: unknown) {
