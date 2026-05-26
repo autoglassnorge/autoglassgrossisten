@@ -447,6 +447,161 @@ async function queryByEurocode(db: D1Database, eurocode: string): Promise<GlassR
   return result as unknown as GlassRecord | null;
 }
 
+/** Normalize SVV/API brand names to D1 catalog brand names */
+function normalizeBrand(brand: string): string {
+  const b = brand.toUpperCase().trim();
+  const map: Record<string, string> = {
+    'VOLKSWAGEN': 'VW',
+    'VW TRUCKS': 'VW',
+    'MERCEDES-BENZ': 'MERCEDES',
+    'MERCEDES BENZ': 'MERCEDES',
+    'LAND ROVER': 'LANDROVER',
+    'ROLLS ROYCE': 'ROLLS ROYCE',
+    'VAUXHALL': 'OPEL',
+    'VAUXHALL/OPEL': 'OPEL',
+    'OPEL/VAUXHALL': 'OPEL',
+    'CITROËN': 'CITROEN',
+    'DS': 'CITROEN',
+    'ALFA': 'ALFA ROMEO',
+    'ABARTH': 'FIAT',
+    'LAMBORGH.': 'LAMBORGHINI',
+    'MITS.': 'MITSUBISHI',
+    'MITS': 'MITSUBISHI',
+    'NISS': 'NISSAN',
+    'HON': 'HONDA',
+    'TOY': 'TOYOTA',
+    'REN': 'RENAULT',
+    'REN.': 'RENAULT',
+    'RENAU': 'RENAULT',
+    'HYUNADI': 'HYUNDAI',
+    'HYUN.': 'HYUNDAI',
+    'PEUG': 'PEUGEOT',
+    'CHEV': 'CHEVROLET',
+    'CHEVR.': 'CHEVROLET',
+    'CHEVROLET': 'DAEWOO (CHEVROLET)',
+    'DAEWOO': 'DAEWOO (CHEVROLET)',
+    'SUZ': 'SUZUKI',
+    'FOR': 'FORD',
+    'FORD,': 'FORD',
+    'KIA.': 'KIA',
+    'SUB.': 'SUBARU',
+    'MAZ.': 'MAZDA',
+    'MAZDA.': 'MAZDA',
+    'LEX.': 'LEXUS',
+    'JAG': 'JAGUAR',
+    'POR': 'PORSCHE',
+    'PORSCH': 'PORSCHE',
+    'AUDI.': 'AUDI',
+    'BMW.': 'BMW',
+    'MERC.': 'MERCEDES',
+    'MERC': 'MERCEDES',
+    'VOLVO.': 'VOLVO',
+    'SEAT.': 'SEAT',
+    'SKODA.': 'SKODA',
+    'MINI.': 'MINI',
+    'SAAB.': 'SAAB',
+    'DODGE.': 'DODGE',
+    'CHRY': 'CHRYSLER',
+    'CHRSYLER': 'CHRYSLER',
+    'HUM': 'HUMMER',
+    'PONT': 'PONTIAC',
+    'JEEP.': 'JEEP',
+    'CAD': 'CADILLAC',
+    'LINCOLN.': 'LINCOLN',
+    'BUICK.': 'BUICK',
+    'GMC,': 'GMC',
+    'GMC': 'GMC',
+    'HOLDEN.': 'HOLDEN',
+    'ISUZU.': 'ISUZU',
+    'DAIHATSU.': 'DAIHATSU',
+    'LADA': 'LADA / TOGLIATTI',
+    'ZASTAVA': 'LADA / TOGLIATTI',
+    'DACIA.': 'DACIA',
+    'LADA / TOGLIATTI': 'LADA / TOGLIATTI',
+    'SSANYONG': 'SSANGYONG',
+    'SSAN.': 'SSANGYONG',
+    'SMART.': 'SMART',
+    'TESLA.': 'TESLA',
+    'FERRARI.': 'FERRARI',
+    'MASERATI.': 'MASERATI',
+    'LAMBORGHINI.': 'LAMBORGHINI',
+    'BENTLEY.': 'BENTLEY',
+    'ASTON': 'ASTON MARTIN',
+    'LOTUS.': 'LOTUS',
+    'MG.': 'MG',
+    'ROVER.': 'ROVER',
+    'MC LAREN': 'McLAREN',
+    'MCLAREN': 'McLAREN',
+    'INEOS.': 'INEOS',
+    'MAXUS.': 'MAXUS',
+    'POLESTAR.': 'POLESTAR',
+    'CUPRA.': 'CUPRA',
+    'HONGQI.': 'HONGQI',
+    'VOYAH.': 'VOYAH',
+    'XPENG.': 'XPENG',
+    'ZEEKR.': 'ZEEKR',
+    'BYD.': 'BYD',
+    'ORA.': 'ORA',
+    'NIO.': 'NIO',
+    'THINK.': 'THINK',
+    'FISKER.': 'FISKER',
+    'RIVIAN': 'USA CARS',
+    'LUCID': 'USA CARS',
+    'TVR.': 'TVR',
+    'TVR': 'TVR',
+    'JC INDIGO': 'JC INDIGO',
+    'KEWET': 'KEWET',
+    'AIXAM': 'AIXAM',
+    'AIWAYS': 'AIWAYS',
+    'DFSK (SERES)': 'DFSK (SERES)',
+    'DONGFENG': 'DONGFENG',
+    'EXLANTIX': 'EXLANTIX',
+    'JAC (CH)': 'JAC (CH)',
+    'LYNK & CO': 'LYNK & CO',
+    'MAN': 'MAN',
+    'SCANIA': 'SCANIA TRUCKS',
+    'DAF': 'DAF',
+    'IVECO': 'IVECO (FIAT) TRUCKS',
+    'HINO': 'HINO TRUCKS',
+    'ISUZU TRUCKS': 'ISUZU',
+  };
+  return map[b] || b;
+}
+
+/** Get all brand aliases for a given brand (for DB queries) */
+function getBrandAliases(brand: string): string[] {
+  const normalized = normalizeBrand(brand);
+  // Reverse lookup: find all keys that map to this normalized value
+  const map: Record<string, string> = {
+    'VOLKSWAGEN': 'VW',
+    'VW TRUCKS': 'VW',
+    'MERCEDES-BENZ': 'MERCEDES',
+    'MERCEDES BENZ': 'MERCEDES',
+    'LAND ROVER': 'LANDROVER',
+    'VAUXHALL': 'OPEL',
+    'VAUXHALL/OPEL': 'OPEL',
+    'OPEL/VAUXHALL': 'OPEL',
+    'CITROËN': 'CITROEN',
+    'DS': 'CITROEN',
+    'ALFA': 'ALFA ROMEO',
+    'ABARTH': 'FIAT',
+    'CHEVROLET': 'DAEWOO (CHEVROLET)',
+    'DAEWOO': 'DAEWOO (CHEVROLET)',
+    'SCANIA': 'SCANIA TRUCKS',
+    'MCLAREN': 'McLAREN',
+    'MC LAREN': 'McLAREN',
+    'SSANYONG': 'SSANGYONG',
+  };
+  const aliases = new Set<string>([normalized]);
+  for (const [key, val] of Object.entries(map)) {
+    if (val === normalized) {
+      aliases.add(key);
+      aliases.add(val);
+    }
+  }
+  return Array.from(aliases);
+}
+
 async function queryByBrandAndYear(
   db: D1Database,
   brand: string,
@@ -454,8 +609,10 @@ async function queryByBrandAndYear(
   modelHint?: string,
   prefix4?: string
 ): Promise<GlassRecord[]> {
-  let sql = "SELECT * FROM glass_catalog WHERE brand = ? AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?)";
-  const params: (string | number)[] = [brand, year, year];
+  const brands = getBrandAliases(brand);
+  const placeholders = brands.map(() => '?').join(',');
+  let sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?)`;
+  const params: (string | number)[] = [...brands, year, year];
   if (modelHint) {
     sql += " AND (model LIKE ? OR description LIKE ?)";
     params.push(`%${modelHint}%`, `%${modelHint}%`);
@@ -470,8 +627,10 @@ async function queryByBrandAndYear(
 }
 
 async function queryByBrandOnly(db: D1Database, brand: string, modelHint?: string, prefix4?: string): Promise<GlassRecord[]> {
-  let sql = "SELECT * FROM glass_catalog WHERE brand = ?";
-  const params: (string | number)[] = [brand];
+  const brands = getBrandAliases(brand);
+  const placeholders = brands.map(() => '?').join(',');
+  let sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders})`;
+  const params: (string | number)[] = [...brands];
   if (modelHint) {
     sql += " AND (model LIKE ? OR description LIKE ?)";
     params.push(`%${modelHint}%`, `%${modelHint}%`);
@@ -657,9 +816,10 @@ async function queryGroundTruthByVehicle(
   year: number
 ): Promise<GroundTruthRecord | null> {
   try {
+    const normalizedMake = normalizeBrand(make);
     const row = await db
       .prepare("SELECT * FROM ground_truth WHERE make = ? AND model = ? AND year = ? ORDER BY confidence DESC LIMIT 1")
-      .bind(make, model, year)
+      .bind(normalizedMake, model, year)
       .first();
     return row as unknown as GroundTruthRecord | null;
   } catch {
