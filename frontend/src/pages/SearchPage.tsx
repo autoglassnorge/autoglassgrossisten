@@ -9,6 +9,7 @@ import { formatLayerLabel, formatConfidence } from '@/utils/formatters';
 
 import { VehicleCard } from '@/components/search/VehicleCard';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
+import { EquipmentVerifier } from '@/components/search/EquipmentVerifier';
 import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
 import { ProductCard } from '@/components/catalog/ProductCard';
 import type { Product } from '@/types/api';
@@ -19,6 +20,7 @@ export default function SearchPage() {
   const [regnr, setRegnr] = useState(initialRegnr);
   const [activeRegnr, setActiveRegnr] = useState(initialRegnr);
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [equipmentFiltered, setEquipmentFiltered] = useState<Product[] | null>(null);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['search', activeRegnr],
@@ -34,6 +36,7 @@ export default function SearchPage() {
   // Reset type filter when search changes
   useEffect(() => {
     setSelectedType(null);
+    setEquipmentFiltered(null);
   }, [activeRegnr]);
 
   const handleSearch = (e: React.FormEvent) => {
@@ -53,24 +56,14 @@ export default function SearchPage() {
   const isUpstreamError = errorStatus === 503;
   const isInternalError = errorStatus === 500;
 
-  // Group by type code
-  const grouped = useMemo(() => {
-    const map: Record<string, Product[]> = {};
-    candidates.forEach((c) => {
-      const key = c.typeCode || 'Ukjent';
-      if (!map[key]) map[key] = [];
-      map[key].push(c);
-    });
-    return map;
-  }, [candidates]);
-
-  // Filtered products
+  // Filtered products (type + equipment)
+  const baseProducts = equipmentFiltered ?? candidates;
   const filteredProducts = useMemo(() => {
     if (selectedType) {
-      return grouped[selectedType] ?? [];
+      return baseProducts.filter(p => (p.typeCode || 'Ukjent') === selectedType);
     }
-    return candidates;
-  }, [selectedType, grouped, candidates]);
+    return baseProducts;
+  }, [selectedType, baseProducts]);
 
   return (
     <div className="mx-auto max-w-5xl px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
@@ -178,6 +171,14 @@ export default function SearchPage() {
                 {formatLayerLabel(data.layer)}
               </span>
             </div>
+          )}
+
+          {/* Equipment verifier — show when confidence is medium/low */}
+          {data.confidenceInfo && data.confidenceInfo.score < 90 && candidates.length > 1 && (
+            <EquipmentVerifier
+              products={candidates}
+              onFilter={setEquipmentFiltered}
+            />
           )}
 
           {/* Type code tabs */}

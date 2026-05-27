@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, X, HelpCircle, Shield, Thermometer, Droplets, Volume2, Radio, Monitor, Sun, Eye } from 'lucide-react';
+import { Check, X, HelpCircle, Thermometer, Droplets, Volume2, Radio, Monitor, Sun, Eye } from 'lucide-react';
 import type { Product } from '@/types/api';
 
 interface Props {
@@ -9,30 +9,52 @@ interface Props {
 
 const FEATURES = [
   { key: 'hud', label: 'Head-Up Display (HUD)', icon: <Monitor className="h-4 w-4" />, desc: 'Viser hastighet/navigasjon i frontruten' },
-  { key: 'akustisk', label: 'Akustisk glass', icon: <Volume2 className="h-4 w-4" />, desc: 'Dempet støy fra trafikk' },
-  { key: 'coated', label: 'Coated / Hydrophobic', icon: <Shield className="h-4 w-4" />, desc: 'Vannavvisende belegg' },
-  { key: 'varme', label: 'Varmeelement', icon: <Thermometer className="h-4 w-4" />, desc: 'Rask avising av ruten' },
-  { key: 'sensor', label: 'Regnsensor', icon: <Droplets className="h-4 w-4" />, desc: 'Automatisk vindusviskere' },
-  { key: 'kamera', label: 'Kamera / ADAS', icon: <Eye className="h-4 w-4" />, desc: 'Kamera bak frontruten (sporholder, etc.)' },
-  { key: 'antenne', label: 'Antenne i glass', icon: <Radio className="h-4 w-4" />, desc: 'FM/GPS-antenne integrert i ruten' },
-  { key: 'solar', label: 'Solar / Varmereflekterende', icon: <Sun className="h-4 w-4" />, desc: 'Reduserer varme fra solen' },
+  { key: 'acoustic', label: 'Akustisk glass', icon: <Volume2 className="h-4 w-4" />, desc: 'Dempet støy fra trafikk' },
+  { key: 'heated', label: 'Varmeelement', icon: <Thermometer className="h-4 w-4" />, desc: 'Rask avising av ruten' },
+  { key: 'rainSensor', label: 'Regnsensor', icon: <Droplets className="h-4 w-4" />, desc: 'Automatisk vindusviskere' },
+  { key: 'camera', label: 'Kamera / ADAS', icon: <Eye className="h-4 w-4" />, desc: 'Kamera bak frontruten (sporholder, etc.)' },
+  { key: 'antenna', label: 'Antenne i glass', icon: <Radio className="h-4 w-4" />, desc: 'FM/GPS-antenne integrert i ruten' },
+  { key: 'shade', label: 'Solar / Varmereflekterende', icon: <Sun className="h-4 w-4" />, desc: 'Reduserer varme fra solen' },
 ];
 
 /**
- * Check if a product description contains a feature
+ * Check if a product description contains a feature.
+ * Matches the backend detectFlagsFromDescription logic.
  */
 function productHasFeature(product: Product, key: string): boolean {
   const d = (product.description || '').toUpperCase();
+  const tokens = d.split(/[\s;,.\[\]()+-]+/).filter(t => t.length >= 1);
+  const s = new Set(tokens);
+
   switch (key) {
-    case 'hud': return d.includes('HUD');
-    case 'akustisk': return d.includes('AKU') || d.includes('AKUST');
-    case 'coated': return d.includes('COAT') || d.includes('CS');
-    case 'varme': return d.includes('ELM') || d.includes('VARM') || d.includes('+EL') || d.includes('EL ');
-    case 'sensor': return d.includes('SENS') || d.includes('RSN');
-    case 'kamera': return d.includes('LDW') || d.includes('ADAS') || d.includes('CITY');
-    case 'antenne': return d.includes('ANT') || d.includes('AG') || d.includes('GNAG');
-    case 'solar': return d.includes('SOLAR') || d.includes('SOL');
-    default: return false;
+    case 'hud':
+      return s.has('HUD') || s.has('H.U.D') || /\bHEAD\s*UP\b|\bHEADUP\b|\bPROJEKSJON\b|\bPROJECTION\b/.test(d);
+    case 'acoustic':
+      return s.has('ACO') || s.has('AKU') || /\bACOUSTIC\b|\bAKUSTIK\b|\bQUIET\b|\bSILENT\b/.test(d);
+    case 'heated':
+      return s.has('HTD') || s.has('HT') || s.has('UHTD') || s.has('ELEK') || s.has('VARM') ||
+        /\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b/.test(d) ||
+        /(?:^|[\s+])(EL)(?:[\s+.]|[+-]|$)/.test(d);
+    case 'rainSensor':
+      return s.has('RSN') || s.has('RSNL') || s.has('RSNLSN') ||
+        s.has('REGN') || s.has('REGNS') || s.has('REGNSEN') || s.has('REGNSENSOR') ||
+        /\bRAIN\b|\bAUTOMATIC\s+WIPER\b|\bVINDRUTETORKARE\b|\bLYS\/REGN\b|\bLYS\/REGNS\b/.test(d);
+    case 'camera': {
+      const hasCam = s.has('CAMERA') || s.has('CAM') || /\bKAMERA\b|\bBACKUP\b|\bREVERSING\b|\b360\b/.test(d);
+      const hasLdw = /\bLDW\b/.test(d);
+      const hasAdasText = s.has('ADAS') || s.has('FILSKIFTE') ||
+        /\bLANE\s+ASSIST\b|\bLANE\s+DEPARTURE\b|\bCOLLISION\b|\bAUTO\s+BRAKE\b|\bEMERGENCY\s+BRAKE\b|\bDRIVE\s+ASSIST\b|\bPRO\s+PILOT\b|\bAUTOPILOT\b|\bTRAFFIC\s+ASSIST\b|\bCITY\s+SAFETY\b/.test(d);
+      const sensWithAdas = (s.has('SENS') || s.has('SENSOR')) && (hasLdw || hasCam || s.has('HUD') || s.has('H.U.D'));
+      return hasCam || hasLdw || hasAdasText || sensWithAdas;
+    }
+    case 'antenna':
+      return s.has('ANT') || s.has('GNAG') || /\bANTENNA\b|\bANTENNE\b|\bGPS\b|\bRADIO\b|\bFM\b|\bDAB\b|\bAERIAL\b/.test(d);
+    case 'shade':
+      return s.has('SOLAR') || s.has('SOL') || s.has('SOLA') || s.has('PRIVACY') || s.has('PRIV') ||
+        s.has('DARK') || s.has('TOP') || s.has('TINT') || s.has('COATED') || s.has('HMSL') ||
+        /\bSOTET\b|\bSOLAR\s+CONTROL\b|\bTOPSHADE\b/.test(d);
+    default:
+      return false;
   }
 }
 

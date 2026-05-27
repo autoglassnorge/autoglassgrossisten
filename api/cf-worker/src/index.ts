@@ -69,6 +69,9 @@ interface GlassRecord {
   cross_references: string | null;
   weight: number | null;
   dimensions: string | null;
+  color: string | null;
+  solar: number | null;
+  tinted: number | null;
   description: string;
   image_url: string | null;
   pdf_url: string | null;
@@ -793,6 +796,15 @@ interface GroundTruthRecord {
   dor_fh_eurocode: string | null;
   dor_bv_eurocode: string | null;
   dor_bh_eurocode: string | null;
+  adas: number;
+  rain_sensor: number;
+  heated: number;
+  acoustic: number;
+  antenna: number;
+  hud: number;
+  camera: number;
+  shade: number;
+  properties: string | null;
   verified_by: string;
   verified_at: string;
   source_url: string | null;
@@ -813,14 +825,27 @@ async function queryGroundTruthByVehicle(
   db: D1Database,
   make: string,
   model: string,
-  year: number
+  year: number,
+  equipment?: { adas?: boolean; rainSensor?: boolean; heated?: boolean; acoustic?: boolean; antenna?: boolean; hud?: boolean; camera?: boolean }
 ): Promise<GroundTruthRecord | null> {
   try {
     const normalizedMake = normalizeBrand(make);
-    const row = await db
-      .prepare("SELECT * FROM ground_truth WHERE make = ? AND model = ? AND year = ? ORDER BY confidence DESC LIMIT 1")
-      .bind(normalizedMake, model, year)
-      .first();
+    let sql = "SELECT * FROM ground_truth WHERE make = ? AND model = ? AND year = ?";
+    const params: (string | number)[] = [normalizedMake, model, year];
+
+    // Optional equipment filtering for exact variant matching
+    if (equipment) {
+      if (equipment.adas !== undefined) { sql += " AND adas = ?"; params.push(equipment.adas ? 1 : 0); }
+      if (equipment.rainSensor !== undefined) { sql += " AND rain_sensor = ?"; params.push(equipment.rainSensor ? 1 : 0); }
+      if (equipment.heated !== undefined) { sql += " AND heated = ?"; params.push(equipment.heated ? 1 : 0); }
+      if (equipment.acoustic !== undefined) { sql += " AND acoustic = ?"; params.push(equipment.acoustic ? 1 : 0); }
+      if (equipment.antenna !== undefined) { sql += " AND antenna = ?"; params.push(equipment.antenna ? 1 : 0); }
+      if (equipment.hud !== undefined) { sql += " AND hud = ?"; params.push(equipment.hud ? 1 : 0); }
+      if (equipment.camera !== undefined) { sql += " AND camera = ?"; params.push(equipment.camera ? 1 : 0); }
+    }
+
+    sql += " ORDER BY confidence DESC LIMIT 1";
+    const row = await db.prepare(sql).bind(...params).first();
     return row as unknown as GroundTruthRecord | null;
   } catch {
     return null;
@@ -1179,17 +1204,26 @@ function detectCategoryFromDescription(description: string | null): string | nul
 
 /**
  * Detect equipment flags from product description text.
- * Pilkington standardized codes:
+ * Supports Pilkington/Glavista/Autoglass standardized codes plus
+ * Norwegian/Swedish/English variants found across all suppliers.
+ *
+ * Pilkington codes:
  *   RSN / RSNL / RSNLSN = Rain sensor
  *   HTD / HT / UHTD       = Heated
  *   ACO                   = Acoustic
  *   ANT / GPS             = Antenna
  *   CAMERA / CAM          = Camera bracket / ADAS
- *   HUD                   = Head-up display
+ *   HUD / H.U.D           = Head-up display
  *   SOLAR / SOL / SOLA    = Solar control (tint/shade indicator)
  *   PRIVACY               = Privacy tint
- *   VIN                   = VIN etched
  *   GN / BL / GY / CL     = Standard tint colors (not distinguishing)
+ *
+ * Additional variants detected:
+ *   REGN / REGNS / REGNSEN / LYS/REGN = Rain sensor (NO/SE)
+ *   EL / ELEK / VARM                   = Heated (NO/SE)
+ *   AKU                                = Acoustic (NO)
+ *   LDW / SENS / 1-3 CAM               = ADAS/camera
+ *   SOTET / SOLAR CONTROL / TOPSHADE   = Shade/privacy
  */
 function detectFlagsFromDescription(description: string | null): {
   adas: boolean;
@@ -1203,17 +1237,62 @@ function detectFlagsFromDescription(description: string | null): {
   if (!description) {
     return { adas: false, rainSensor: false, heated: false, acoustic: false, antenna: false, camera: false, hud: false };
   }
-  const tokens = description.toUpperCase().split(/[\s;,.\[\]()]+/).filter(t => t.length >= 2);
+  const d = description.toUpperCase();
+
+  // Tokenize for exact word matching (handles + and . separators)
+  const tokens = d.split(/[\s;,.\[\]()+-]+/).filter(t => t.length >= 1);
   const s = new Set(tokens);
 
+  // Rain sensor — expanded with NO/SE variants and Pilkington codes
+  const rainSensor =
+    s.has("RSN") || s.has("RSNL") || s.has("RSNLSN") ||
+    s.has("REGN") || s.has("REGNS") || s.has("REGNSEN") || s.has("REGNSENSOR") ||
+    /\bRAIN\b|\bAUTOMATIC\s+WIPER\b|\bVINDRUTETORKARE\b|\bLYS\/REGN\b|\bLYS\/REGNS\b/.test(d);
+
+  // Heated — expanded with NO/SE variants
+  // Note: 'EL' is only matched as a standalone token surrounded by separators
+  const heated =
+    s.has("HTD") || s.has("HT") || s.has("UHTD") || s.has("ELEK") || s.has("VARM") ||
+    /\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b/.test(d) ||
+    // 'EL' as standalone token (e.g. "EL+GN", "+EL+", " EL ")
+    /(?:^|[\s+])(EL)(?:[\s+.]|[+-]|$)/.test(d);
+
+  // Acoustic — expanded with NO variant
+  const acoustic =
+    s.has("ACO") || s.has("AKU") ||
+    /\bACOUSTIC\b|\bAKUSTIK\b|\bQUIET\b|\bST[\u00d8O]YDEMP\b|\bSILENT\b/.test(d);
+
+  // Antenna
+  const antenna =
+    s.has("ANT") || s.has("GNAG") ||
+    /\bANTENNA\b|\bANTENNE\b|\bGPS\b|\bRADIO\b|\bFM\b|\bDAB\b|\bAERIAL\b/.test(d);
+
+  // Camera / ADAS — expanded with LDW, CAM counts, SENS
+  const hasCam = s.has("CAMERA") || s.has("CAM") || /\bKAMERA\b|\bBACKUP\b|\bREVERSING\b|\b360\b/.test(d);
+  const hasLdw = /\bLDW\b/.test(d);
+  const hasAdasText =
+    s.has("ADAS") || s.has("FILSKIFTE") ||
+    /\bLANE\s+ASSIST\b|\bLANE\s+DEPARTURE\b|\bCOLLISION\b|\bAUTO\s+BRAKE\b|\bEMERGENCY\s+BRAKE\b|\bDRIVE\s+ASSIST\b|\bPRO\s+PILOT\b|\bAUTOPILOT\b|\bTRAFFIC\s+ASSIST\b|\bCITY\s+SAFETY\b/.test(d);
+  // SENS/SENSOR in context of ADAS (when combined with LDW, HUD, or CAM)
+  const sensWithAdas = (s.has("SENS") || s.has("SENSOR")) && (hasLdw || hasCam || s.has("HUD") || s.has("H.U.D"));
+  const camera = hasCam || hasLdw || hasAdasText || sensWithAdas;
+
+  // ADAS = camera + LDW + ADAS text (anything that indicates driver assistance)
+  const adas = hasAdasText || hasLdw || hasCam || sensWithAdas;
+
+  // HUD
+  const hud =
+    s.has("HUD") || s.has("H.U.D") ||
+    /\bHEAD\s*UP\b|\bHEADUP\b|\bPROJEKSJON\b|\bPROJECTION\b|\bWINDSHIELD\s+DISPLAY\b/.test(d);
+
   return {
-    adas: s.has("ADAS") || s.has("FILSKIFTE") || /\bLANE\s+ASSIST\b|\bLANE\s+DEPARTURE\b|\bCOLLISION\b|\bAUTO\s+BRAKE\b|\bEMERGENCY\s+BRAKE\b|\bDRIVE\s+ASSIST\b|\bPRO\s+PILOT\b|\bAUTOPILOT\b|\bTRAFFIC\s+ASSIST\b/.test(description.toUpperCase()),
-    rainSensor: s.has("RSN") || s.has("RSNL") || s.has("RSNLSN") || /\bRAIN\b|\bREGNSENSOR\b|\bAUTOMATIC\s+WIPER\b/.test(description.toUpperCase()),
-    heated: s.has("HTD") || s.has("HT") || s.has("UHTD") || /\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b/.test(description.toUpperCase()),
-    acoustic: s.has("ACO") || /\bACOUSTIC\b|\bAKUSTIK\b|\bQUIET\b|\bST[ØO]YDEMP\b|\bSILENT\b/.test(description.toUpperCase()),
-    antenna: s.has("ANT") || /\bANTENNA\b|\bANTENNE\b|\bGPS\b|\bRADIO\b|\bFM\b|\bDAB\b|\bAERIAL\b/.test(description.toUpperCase()),
-    camera: s.has("CAMERA") || s.has("CAM") || /\bKAMERA\b|\bSENSOR\b|\bBACKUP\b|\bREVERSING\b|\b360\b|\bFRONT\s+CAM\b|\bREAR\s+CAM\b/.test(description.toUpperCase()),
-    hud: s.has("HUD") || /\bHEAD\s*UP\b|\bHEADUP\b|\bPROJEKSJON\b|\bPROJECTION\b|\bWINDSHIELD\s+DISPLAY\b/.test(description.toUpperCase()),
+    adas,
+    rainSensor,
+    heated,
+    acoustic,
+    antenna,
+    camera,
+    hud,
   };
 }
 
@@ -2529,6 +2608,30 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     camera: effectiveEquipment.camera,
     hud: effectiveEquipment.hud,
   };
+
+  // Re-check ground_truth with equipment filtering for exact variant matching
+  // If a more specific ground truth entry exists with matching equipment, use it
+  if (!groundTruth || (groundTruth && groundTruth.make === vehicle.make)) {
+    try {
+      const gtWithEquipment = await queryGroundTruthByVehicle(db, vehicle.make, vehicle.model, vehicle.year, {
+        adas: effectiveEquipment.adas,
+        rainSensor: effectiveEquipment.rainSensor,
+        heated: effectiveEquipment.heated,
+        acoustic: effectiveEquipment.acoustic,
+        antenna: effectiveEquipment.antenna,
+        hud: effectiveEquipment.hud,
+        camera: effectiveEquipment.camera,
+      });
+      if (gtWithEquipment) {
+        groundTruth = gtWithEquipment;
+        gtCandidates = await groundTruthToCandidates(db, groundTruth);
+        layer = -1;
+        confidence = "exact";
+      }
+    } catch {
+      // Silently continue if query fails
+    }
+  }
 
   // Score and sort (with body compatibility + equipment + kType verification)
   const scored = candidates
