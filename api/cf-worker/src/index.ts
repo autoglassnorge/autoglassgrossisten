@@ -1052,6 +1052,16 @@ interface CalibrationRequirement {
   notes: string | null;
 }
 
+interface KtypeRegistryInfo {
+  ktype: number;
+  brand: string;
+  model: string;
+  yearFrom: number | null;
+  yearTo: number | null;
+  body: string | null;
+  source: string;
+}
+
 async function queryCalibrationRequirements(
   db: D1Database,
   make: string,
@@ -1082,6 +1092,31 @@ async function queryCalibrationRequirements(
     }));
   } catch {
     return [];
+  }
+}
+
+async function queryKtypeRegistry(db: D1Database, ktype: number): Promise<KtypeRegistryInfo | null> {
+  try {
+    const row = await db
+      .prepare(
+        `SELECT ktype, brand, model, year_from, year_to, body, source
+         FROM ktype_registry
+         WHERE ktype = ?`
+      )
+      .bind(ktype)
+      .first();
+    if (!row) return null;
+    return {
+      ktype: (row as any).ktype,
+      brand: (row as any).brand,
+      model: (row as any).model,
+      yearFrom: (row as any).year_from,
+      yearTo: (row as any).year_to,
+      body: (row as any).body,
+      source: (row as any).source,
+    };
+  } catch {
+    return null;
   }
 }
 
@@ -2674,6 +2709,9 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     }
   }
 
+  // Lookup ktype registry info when we have a resolved ktype
+  const ktypeRegistryInfo = resolvedKtype ? await queryKtypeRegistry(db, resolvedKtype) : null;
+
   // Find matching glass in D1 (db already declared above)
   const candidates: GlassRecord[] = [];
   let layer = 4;
@@ -3135,6 +3173,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
         vehicle.model,
         vehicle.year
       ),
+      ktypeInfo: ktypeRegistryInfo,
       sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
     },
   };
