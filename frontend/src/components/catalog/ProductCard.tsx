@@ -1,4 +1,4 @@
-import { ShoppingCart, Check, Thermometer, Droplets, Shield } from 'lucide-react';
+import { ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, ListChecks, Paperclip } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -87,6 +87,22 @@ export function ProductCard({ product }: ProductCardProps) {
           {formatYearRange(product.yearFrom, product.yearTo)}
         </div>
 
+        {/* Lister/klips warning */}
+        {(product.properties?.listRequired || product.properties?.klipsRequired) && (
+          <div className="mt-2 rounded-md bg-amber-50 border border-amber-200 px-2 py-1.5">
+            <p className="text-[10px] font-medium text-amber-800 flex items-start gap-1">
+              <AlertTriangle className="h-3 w-3 flex-shrink-0 mt-0.5" />
+              <span>
+                {product.properties?.listRequired && product.properties?.klipsRequired
+                  ? 'Krever lister og klips — bestilles separat'
+                  : product.properties?.listRequired
+                    ? 'Krever lister — bestilles separat'
+                    : 'Krever klips — bestilles separat'}
+              </span>
+            </p>
+          </div>
+        )}
+
         {/* Properties row */}
         <div className="mt-2 flex flex-wrap gap-1.5">
           {product.properties?.adas && (
@@ -112,6 +128,21 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.properties?.hud && (
             <span className="inline-flex items-center gap-0.5 rounded bg-purple-50 px-1.5 py-0.5 text-[10px] font-medium text-purple-700">
               HUD
+            </span>
+          )}
+          {product.properties?.listRequired && (
+            <span className="inline-flex items-center gap-0.5 rounded bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-700">
+              <AlertTriangle className="h-3 w-3" /> Krever lister
+            </span>
+          )}
+          {product.properties?.listIncluded && (
+            <span className="inline-flex items-center gap-0.5 rounded bg-green-50 px-1.5 py-0.5 text-[10px] font-medium text-green-700">
+              <ListChecks className="h-3 w-3" /> Inkl. lister
+            </span>
+          )}
+          {product.properties?.hasKlips && (
+            <span className="inline-flex items-center gap-0.5 rounded bg-yellow-50 px-1.5 py-0.5 text-[10px] font-medium text-yellow-700">
+              <Paperclip className="h-3 w-3" /> Med klips
             </span>
           )}
         </div>

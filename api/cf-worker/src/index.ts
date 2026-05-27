@@ -124,6 +124,16 @@ function normalizeRecord(r: GlassRecord): any {
       color: r.color || null,
       solar: !!r.solar,
       tinted: !!r.tinted,
+      ...(() => {
+        const eq = inferRecordEquipment(r);
+        return {
+          hasList: eq.hasList,
+          listRequired: eq.listRequired,
+          listIncluded: eq.listIncluded,
+          hasKlips: eq.hasKlips,
+          klipsRequired: eq.klipsRequired,
+        };
+      })(),
     },
     adasFeatures: r.adas_features ? JSON.parse(r.adas_features) : [],
     price: r.price,
@@ -1319,6 +1329,11 @@ function inferRecordEquipment(record: GlassRecord): {
   camera: boolean;
   hud: boolean;
   shade: boolean;
+  hasList: boolean;
+  listRequired: boolean;
+  listIncluded: boolean;
+  hasKlips: boolean;
+  klipsRequired: boolean;
 } {
   // Prefer explicit DB columns if set
   if (record.rain_sensor || record.heated || record.acoustic || record.antenna || record.camera || record.adas || record.shade) {
@@ -1331,6 +1346,11 @@ function inferRecordEquipment(record: GlassRecord): {
       camera: !!record.camera,
       hud: !!record.hud,
       shade: !!record.shade,
+      hasList: false,
+      listRequired: false,
+      listIncluded: false,
+      hasKlips: false,
+      klipsRequired: false,
     };
   }
   // Fallback: parse from description
@@ -1343,7 +1363,14 @@ function inferRecordEquipment(record: GlassRecord): {
                 s.has("PRIVACY") || s.has("PRIV") || s.has("PRIVA") || s.has("PRIVAC") ||
                 s.has("DARK") || s.has("TOP") || s.has("TINT") ||
                 s.has("COATED") || s.has("HMSL");
-  return { ...flags, shade };
+  // Parse lister/klips from description
+  const hasList = /\b(PYNTELIST|LIST|GUMMILIST|BUNNLIST|KANTLIST|RAMMELIST|DEKORLIST)\b/.test(d);
+  const listRequired = hasList && /\b(NB\b|HUSK|MÅ HA|MÅH|KUN MED|FOR LIST|FOR GUMMILIST|TA PÅ EN LIST)\b/.test(d);
+  const listIncluded = hasList && /\b(INNK|INNKAPSL|INKL|INKLUDERT|MED LIST)\b/.test(d);
+  const hasKlips = /\b(KLIPS)\b/.test(d);
+  const klipsRequired = hasKlips && /\b(NB\b|HUSK|MÅ HA|MÅH|KUN MED)\b/.test(d);
+
+  return { ...flags, shade, hasList, listRequired, listIncluded, hasKlips, klipsRequired };
 }
 
 // ============================================================================

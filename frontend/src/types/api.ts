@@ -27,6 +27,11 @@ export interface Product {
     color: string | null;
     solar: boolean;
     tinted: boolean;
+    hasList?: boolean;
+    listRequired?: boolean;
+    listIncluded?: boolean;
+    hasKlips?: boolean;
+    klipsRequired?: boolean;
   };
   sourceUrl: string;
 }
