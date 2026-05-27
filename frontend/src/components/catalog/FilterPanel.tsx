@@ -6,8 +6,8 @@ import { categoryLabel } from '@/utils/formatters';
 interface FilterPanelProps {
   filters: CatalogFilters;
   availableFilters: {
-    brands: Array<{ brand: string; count: number }> | string[];
-    categories: Array<{ category: string; count: number }> | string[];
+    brands: string[];
+    categories: string[];
     years: { min: number; max: number };
     prices: { min: number; max: number };
   };
@@ -44,67 +44,57 @@ export function FilterPanel({ filters, availableFilters, onChange }: FilterPanel
 
       {/* Category */}
       <div>
-        <h4 className="text-base font-semibold mb-2">Glass-type</h4>
+        <h4 className="text-sm font-medium mb-2">Glass-type</h4>
         <div className="space-y-1">
-          {availableFilters.categories.map((item) => {
-            const cat = typeof item === 'string' ? item : item.category;
-            const count = typeof item === 'string' ? undefined : item.count;
-            return (
-              <label key={cat} className="flex items-center gap-2.5 text-base cursor-pointer min-h-[44px]">
-                <input
-                  type="checkbox"
-                  checked={filters.category?.includes(cat) ?? false}
-                  onChange={(e) => {
-                    const current = filters.category ?? [];
-                    update({
-                      category: e.target.checked
-                        ? [...current, cat]
-                        : current.filter((c) => c !== cat),
-                    });
-                  }}
-                  className="rounded border-gray-300 h-5 w-5"
-                />
-                <span className="flex-1">{categoryLabel(cat)}</span>
-                {count !== undefined && <span className="text-sm text-gray-500">({count})</span>}
-              </label>
-            );
-          })}
+          {availableFilters.categories.map((cat) => (
+            <label key={cat} className="flex items-center gap-2 text-sm cursor-pointer">
+              <input
+                type="checkbox"
+                checked={filters.category?.includes(cat) ?? false}
+                onChange={(e) => {
+                  const current = filters.category ?? [];
+                  update({
+                    category: e.target.checked
+                      ? [...current, cat]
+                      : current.filter((c) => c !== cat),
+                  });
+                }}
+                className="rounded border-gray-300"
+              />
+              {categoryLabel(cat)}
+            </label>
+          ))}
         </div>
       </div>
 
       {/* Brand */}
       <div>
-        <h4 className="text-base font-semibold mb-2">Merke</h4>
+        <h4 className="text-sm font-medium mb-2">Merke</h4>
         <div className="max-h-48 overflow-y-auto space-y-1 pr-2">
-          {availableFilters.brands.map((item) => {
-            const brand = typeof item === 'string' ? item : item.brand;
-            const count = typeof item === 'string' ? undefined : item.count;
-            return (
-              <label key={brand} className="flex items-center gap-2.5 text-base cursor-pointer min-h-[44px]">
-                <input
-                  type="checkbox"
-                  checked={filters.brand?.includes(brand) ?? false}
-                  onChange={(e) => {
-                    const current = filters.brand ?? [];
-                    update({
-                      brand: e.target.checked
-                        ? [...current, brand]
-                        : current.filter((b) => b !== brand),
-                    });
-                  }}
-                  className="rounded border-gray-300 h-5 w-5"
-                />
-                <span className="flex-1">{brand}</span>
-                {count !== undefined && <span className="text-sm text-gray-500">({count})</span>}
-              </label>
-            );
-          })}
+          {availableFilters.brands.map((brand) => (
+            <label key={brand} className="flex items-center gap-2 text-sm cursor-pointer">
+              <input
+                type="checkbox"
+                checked={filters.brand?.includes(brand) ?? false}
+                onChange={(e) => {
+                  const current = filters.brand ?? [];
+                  update({
+                    brand: e.target.checked
+                      ? [...current, brand]
+                      : current.filter((b) => b !== brand),
+                  });
+                }}
+                className="rounded border-gray-300"
+              />
+              {brand}
+            </label>
+          ))}
         </div>
       </div>
 
       {/* Year */}
       <div>
-        <h4 className="text-base font-semibold mb-2">Årsmodell</h4>
+        <h4 className="text-sm font-medium mb-2">Årsmodell</h4>
         <div className="flex items-center gap-2">
           <input
             type="number"
@@ -120,28 +110,6 @@ export function FilterPanel({ filters, availableFilters, onChange }: FilterPanel
             value={filters.yearTo ?? ''}
             onChange={(e) => update({ yearTo: e.target.value ? Number(e.target.value) : undefined })}
             className="w-20 h-8 rounded-md border px-2 text-sm"
-          />
-        </div>
-      </div>
-
-      {/* Price */}
-      <div>
-        <h4 className="text-base font-semibold mb-2">Pris (kr)</h4>
-        <div className="flex items-center gap-2">
-          <input
-            type="number"
-            placeholder="Fra"
-            value={filters.priceMin ?? ''}
-            onChange={(e) => update({ priceMin: e.target.value ? Number(e.target.value) : undefined })}
-            className="w-24 h-8 rounded-md border px-2 text-sm"
-          />
-          <span className="text-gray-400">—</span>
-          <input
-            type="number"
-            placeholder="Til"
-            value={filters.priceMax ?? ''}
-            onChange={(e) => update({ priceMax: e.target.value ? Number(e.target.value) : undefined })}
-            className="w-24 h-8 rounded-md border px-2 text-sm"
           />
         </div>
       </div>

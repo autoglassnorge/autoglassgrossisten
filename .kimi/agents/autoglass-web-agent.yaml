@@ -1,31 +1,5 @@
-version: 2
+version: 1
 agent:
   extend: default
   name: autoglass-web
   system_prompt_path: ./autoglass-web-agent.md
-  metadata:
-    created: "2026-05-18"
-    updated: "2026-05-23"
-    owner: "Autoglass AS"
-    description: "Frontend Engineer — HTML, CSS, JS, SEO, tilgjengelighet, i18n"
-  triggers:
-    file_patterns:
-      - "*.html"
-      - "css/*"
-      - "js/*"
-      - "frontend/*"
-    keywords:
-      - "html"
-      - "css"
-      - "js"
-      - "seo"
-      - "i18n"
-      - "lighthouse"
-      - "frontend"
-      - "grensesnitt"
-  capabilities:
-    - validate_html
-    - seo_check
-    - i18n_audit
-    - lighthouse_audit
-  dependencies: []

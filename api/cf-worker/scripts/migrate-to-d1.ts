@@ -47,7 +47,6 @@ interface GlassRecord {
   shade: boolean;
   camera: boolean;
   laneAssist: boolean;
-  adasFeatures?: string[];
   price: number | null;
   stockStatus: number;
   warehouseLocation: string | null;
@@ -93,7 +92,6 @@ function recordToValues(r: GlassRecord): string {
     escapeSql(r.shade),
     escapeSql(r.camera),
     escapeSql(r.laneAssist),
-    escapeSql(r.adasFeatures ? JSON.stringify(r.adasFeatures) : null),
     escapeSql(r.price),
     escapeSql(r.stockStatus),
     escapeSql(JSON.stringify(r.oemNumbers || [])),
@@ -138,7 +136,7 @@ function main() {
     "eurocode", "article_number", "scan_number", "category", "supplier",
     "brand", "model", "year_from", "year_to", "adas", "rain_sensor",
     "heated", "acoustic", "antenna", "hud", "shade", "camera", "lane_assist",
-    "price", "stock_status", "warehouse_location", "adas_features", "oem_numbers",
+    "price", "stock_status", "warehouse_location", "oem_numbers",
     "cross_references", "nags_codes", "weight", "width", "height",
     "thickness", "description", "prefix4", "image_url", "pdf_url",
     "source", "last_updated",

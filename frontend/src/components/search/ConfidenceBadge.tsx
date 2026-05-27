@@ -19,7 +19,7 @@ export function ConfidenceBadge({ confidence, showDetails = true }: ConfidenceBa
         type="button"
         onClick={() => showDetails && setExpanded(!expanded)}
         className={cn(
-          'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-sm font-semibold min-h-[36px]',
+          'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold min-h-[28px]',
           info.colorClass,
           showDetails && 'cursor-pointer'
         )}
@@ -28,11 +28,6 @@ export function ConfidenceBadge({ confidence, showDetails = true }: ConfidenceBa
           <AlertTriangle className="h-3 w-3" />
         ) : null}
         <span>{info.label}</span>
-        {confidence.groundTruth && (
-          <span className="ml-1 inline-flex items-center rounded bg-green-100 px-1.5 py-0.5 text-xs font-bold text-green-700 border border-green-300">
-            ✓ VERIFISERT
-          </span>
-        )}
         {showDetails && (
           expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />
         )}

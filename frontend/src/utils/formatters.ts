@@ -1,8 +1,5 @@
 export function formatPrice(n: number | null | undefined): string {
-  if (n == null || isNaN(n) || n <= 0) {
-    // Alltid vis pris — vis kontakt-oss når pris mangler
-    return 'Kontakt oss';
-  }
+  if (n == null || isNaN(n)) return '–';
   return new Intl.NumberFormat('no-NO', { style: 'currency', currency: 'NOK' }).format(n);
 }
 

@@ -3,42 +3,27 @@
     {
       "alias": "glass-data",
       "command": "kimi --agent-file .kimi/agents/autoglass-data-agent.yaml",
-      "description": "Data pipeline — scraper, merge, kvalitet, eurocode, prefix4"
+      "description": "Data pipeline agent — scraper, merge, kvalitet"
     },
     {
       "alias": "glass-worker",
       "command": "kimi --agent-file .kimi/agents/autoglass-worker-agent.yaml",
-      "description": "Worker — API, KV, D1, Cloudflare, deploy, smoke-test"
+      "description": "Worker agent — API, KV, Cloudflare"
     },
     {
       "alias": "glass-web",
       "command": "kimi --agent-file .kimi/agents/autoglass-web-agent.yaml",
-      "description": "Web — HTML, CSS, JS, SEO, i18n, Lighthouse"
+      "description": "Web agent — frontend, SEO, i18n"
     },
     {
       "alias": "glass-ops",
       "command": "kimi --agent-file .kimi/agents/autoglass-ops-agent.yaml",
-      "description": "Ops — CI/CD, deploy, secrets, GitHub Actions, uptime"
+      "description": "Ops agent — deploy, CI/CD, monitor"
     },
     {
       "alias": "glass-arch",
       "command": "kimi --agent-file .kimi/agents/autoglass-architect-agent.yaml",
-      "description": "Architect — ADR, refaktorering, plan, arkitektur-beslutninger"
-    },
-    {
-      "alias": "glass-ktype",
-      "command": "kimi --agent-file .kimi/agents/autoglass-ktype-agent.yaml",
-      "description": "kType — Bovsoft, SVV, statistisk læring, matching, bootstrap"
-    },
-    {
-      "alias": "glass-match",
-      "command": "kimi --agent-file .kimi/agents/autoglass-ktype-agent.yaml",
-      "description": "Quick alias: glass matching / regnr-søk / kType-oppslag"
-    },
-    {
-      "alias": "glass-report",
-      "command": "kimi --agent-file .kimi/agents/autoglass-architect-agent.yaml",
-      "description": "Quick alias: rapporter, CEO-brief, status, analyse"
+      "description": "Architect agent — ADR, refaktorering, plan"
     }
   ]
 }

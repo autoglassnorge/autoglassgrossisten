@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Autoglass AS — B2B grossistnettside for bilglass. 7 sider, trespråklig, VIN-søk, kundeportal.",
   "private": true,
-  "engines": {
-    "node": ">=22.0.0"
-  },
   "scripts": {
     "dev": "npx serve .",
     "export:unimicro": "cd api/unimicro-export && npx ts-node --compiler-options '{\"module\":\"CommonJS\"}' export-catalog.ts",
@@ -21,7 +18,7 @@
     "worker:dev": "cd api/cf-worker && wrangler dev",
     "worker:deploy": "cd api/cf-worker && wrangler deploy",
     "worker:upload": "npx ts-node --compiler-options '{\"module\":\"CommonJS\"}' api/cf-worker/scripts/upload-catalog.ts",
-    "pages:deploy": "wrangler pages deploy dist --project-name=autoglass-frontend --branch=main --commit-dirty=true",
+    "pages:deploy": "wrangler pages deploy . --project-name=autoglass-frontend",
     "full:pipeline": "npm run scrape:glavista && npm run scrape:pilkington && npm run build:prefix4 && npm run merge && npm run worker:upload",
     "scrape:pilkington:v2": "npx ts-node --transpile-only --compiler-options '{module:CommonJS}' api/scrapers/pilkington-scraper.ts",
     "scrape:pilkington:v2:loop": "while true; do npx ts-node --transpile-only --compiler-options '{module:CommonJS}' api/scrapers/pilkington-scraper.ts >> /tmp/pilk-v2.log 2>&1; EXIT=53312?; if [ 53312EXIT -eq 0 ]; then sleep 2; else sleep 30; fi; done",
@@ -33,17 +30,13 @@
     "price:pipeline": "node scripts/update-prices-full.mjs"
   },
   "devDependencies": {
-    "@types/node": "^22.15.17",
-    "apify-client": "^2.23.3",
-    "better-sqlite3": "^12.10.0",
-    "cheerio": "^1.2.0",
+    "@types/node": "^20.19.41",
     "csv-parse": "^6.2.1",
     "csv-stringify": "^6.7.0",
     "node-html-parser": "^7.1.0",
     "playwright": "^1.60.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.86.0"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "node-fetch": "^2.7.0",

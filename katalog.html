@@ -493,13 +493,6 @@ function goPage(p) { currentPage = p; render(); }
       <a href="kundeportal.html">Kundeportal</a><a href="aktuelt.html">Aktuelt</a>
     </div>
     <div>
-      <h4>Fagkunnskap</h4>
-      <a href="adas-kompatibilitet.html">ADAS-kompatibilitet</a>
-      <a href="oem-oee-aftermarket.html">OEM, OEE, Aftermarket</a>
-      <a href="lim-montering.html">Lim og montering</a>
-      <a href="kvalitet-dokumentasjon.html">Kvalitet og dokumentasjon</a>
-    </div>
-    <div>
       <h4>Selskapet</h4>
       <a href="om-oss.html">Om oss</a>
       <a href="kontakt.html">Kontakt</a>
@@ -519,104 +512,5 @@ function goPage(p) { currentPage = p; render(); }
 
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
-<script src="js/search-engine.js"></script>
-<script src="js/cart.js"></script>
-<script>
-// ── Regnr search (beholdes uendret) ─────────────────────────────────────────
-const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
-
-async function searchRegnr() {
-  const input = document.getElementById('regnrInput');
-  const btn = document.getElementById('regnrBtn');
-  const result = document.getElementById('regnrResult');
-  const regnr = input.value.trim().toUpperCase();
-  if (!regnr) return;
-  btn.disabled = true;
-  btn.textContent = 'Søker...';
-  result.innerHTML = '<div class="loading">Søker etter ' + regnr + '...</div>';
-  try {
-    const res = await fetch(API_BASE + '/api/glass?regnr=' + encodeURIComponent(regnr));
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    if (data.error) {
-      result.innerHTML = '<div class="error-msg">❌ ' + data.error + '<br><br>Prøv et annet registreringsnummer, eller bytt til "Bla i katalog" for å søke manuelt.</div>';
-      return;
-    }
-    const v = data.vehicle || {};
-    const flags = data.flags || {};
-    const candidates = data.candidates || [];
-    let html = '<div class="vehicle-result">';
-    html += '<h3>🚗 ' + (v.make || '?') + ' ' + (v.model || '?') + (v.year ? ' (' + v.year + ')' : '') + '</h3>';
-    html += '<div class="vehicle-meta">Reg.nr: ' + (v.regnr || '-') + ' · VIN: ' + ((v.vin || '-').slice(0,8) + '...' + (v.vin || '-').slice(-4)) + '</div>';
-    html += '<div class="vehicle-flags">';
-    html += '<span class="vflag ' + (flags.adas ? 'vflag-on' : 'vflag-off') + '">ADAS ' + (flags.adas ? '✓' : '✗') + '</span>';
-    html += '<span class="vflag ' + (flags.rainSensor ? 'vflag-on' : 'vflag-off') + '">Regnsensor ' + (flags.rainSensor ? '✓' : '✗') + '</span>';
-    html += '<span class="vflag ' + (flags.heated ? 'vflag-on' : 'vflag-off') + '">Oppvarmet ' + (flags.heated ? '✓' : '✗') + '</span>';
-    html += '<span class="vflag ' + (flags.acoustic ? 'vflag-on' : 'vflag-off') + '">Akustisk ' + (flags.acoustic ? '✓' : '✗') + '</span>';
-    html += '</div>';
-    if (candidates.length === 0) {
-      html += '<p style="color:#94a3b8;margin-top:12px;">Ingen glass-kandidater funnet. Prøv å søke i katalogen manuelt.</p>';
-    } else {
-      html += '<h4 style="margin:16px 0 12px;color:#fbbf24;font-size:16px;">🎯 ' + candidates.length + ' anbefalt' + (candidates.length > 1 ? 'e glass' : ' glass') + '</h4>';
-      candidates.forEach((c, i) => {
-        const confClass = i === 0 ? 'conf-high' : 'conf-medium';
-        const confLabel = i === 0 ? '⭐ Beste match' : 'Match';
-        const img = c.image_url ? '<img src="' + c.image_url + '" class="candidate-img" loading="lazy" onerror="this.style.display=\'none\'">' : '';
-        const cflags = [];
-        if (c.adas) cflags.push('<span class="flag flag-adas">ADAS</span>');
-        if (c.rain_sensor) cflags.push('<span class="flag flag-rain">Regn</span>');
-        if (c.heated) cflags.push('<span class="flag flag-heat">Varme</span>');
-        html += '<div class="candidate-card ' + (i === 0 ? 'top' : '') + '">';
-        html += '<div class="candidate-header">';
-        html += '<div><div class="candidate-eurocode">' + c.eurocode + '</div><div class="candidate-desc">' + (c.description || '') + '</div></div>';
-        html += '<span class="candidate-conf ' + confClass + '">' + confLabel + '</span>';
-        html += '</div>';
-        html += '<div class="candidate-meta">' + (c.brand || '?') + ' ' + (c.model || '') + ' · ' + (c.year_from || '') + ' · ' + (c.supplier || '') + '</div>';
-        html += cflags.join('');
-        html += img;
-        html += '<div style="margin-top:10px"><button class="btn-primary" style="padding:8px 16px;font-size:13px" onclick=\'addToCart({eurocode:"' + c.eurocode + '",description:' + JSON.stringify(c.description || '') + ',brand:' + JSON.stringify(c.brand || '') + ',model:' + JSON.stringify(c.model || '') + ',category:"frontrute",supplier:' + JSON.stringify(c.supplier || '') + ',imageUrl:' + JSON.stringify(c.image_url || '') + ',adas:' + (c.adas ? 1 : 0) + ',rain_sensor:' + (c.rain_sensor ? 1 : 0) + ',heated:' + (c.heated ? 1 : 0) + ',acoustic:' + (c.acoustic ? 1 : 0) + ',quantity:1})\'>🛒 Legg i kurv</button></div>';
-        html += '</div>';
-      });
-    }
-    html += '</div>';
-    result.innerHTML = html;
-  } catch (e) {
-    result.innerHTML = '<div class="error-msg">❌ Nettverksfeil: ' + e.message + '<br><br>Sannsynlig årsak: Ad-blocker blokkerer API-kall.<br>Løsning: Slå av ad-blocker for denne siden, eller prøv i inkognito-vindu.</div>';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Søk';
-  }
-}
-
-document.getElementById('regnrInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') searchRegnr(); });
-
-function setMode(mode) {
-  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.mode-panel').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
-  document.getElementById('mode-' + mode).classList.add('active');
-  if (mode === 'catalog') {
-    SearchEngine.init({
-      container: '#catalogContent',
-      mode: 'table',
-      filters: ['brand', 'category', 'adas', 'rain', 'heated', 'acoustic', 'year'],
-      perPage: 100,
-      showFilters: false,
-      showSearchBox: false,
-      showPagination: true,
-    });
-  }
-}
-
-async function loadStats() {
-  try {
-    const res = await fetch(API_BASE + '/api/health');
-    const data = await res.json();
-    document.getElementById('statTotal').textContent = (data.catalogSize || 0).toLocaleString('nb-NO');
-    document.getElementById('statBrands').textContent = (data.brands || 0).toLocaleString('nb-NO');
-  } catch (e) {}
-}
-loadStats();
-</script>
 </body>
 </html>

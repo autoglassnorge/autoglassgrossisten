@@ -48,7 +48,6 @@ CREATE INDEX IF NOT EXISTS idx_year_to ON glass_catalog(year_to);
 CREATE INDEX IF NOT EXISTS idx_supplier ON glass_catalog(supplier);
 CREATE INDEX IF NOT EXISTS idx_eurocode ON glass_catalog(eurocode);
 CREATE INDEX IF NOT EXISTS idx_ktype ON glass_catalog(ktype);
-CREATE INDEX IF NOT EXISTS idx_model_nocase ON glass_catalog(model COLLATE NOCASE);
 
 -- Metadata table for tracking
 CREATE TABLE IF NOT EXISTS catalog_meta (

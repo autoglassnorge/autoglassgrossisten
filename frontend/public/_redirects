@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects for React SPA
+# Serve static files directly, fallback to index.html for routes
+
+/videos/* /videos/:splat 200
+/assets/* /assets/:splat 200
+/images/* /images/:splat 200
+/favicon.png /favicon.png 200
+/logo.png /logo.png 200
+
+# SPA fallback — all other routes → index.html
+/* /index.html 200

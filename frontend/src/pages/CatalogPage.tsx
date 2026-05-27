@@ -19,7 +19,7 @@ export default function CatalogPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: ['catalog', filters, debouncedSearch, page],
-    queryFn: () => fetchCatalog(page, 48, { ...filters, query: debouncedSearch || undefined, sort: filters.sort, order: filters.order }),
+    queryFn: () => fetchCatalog(page, 48, { ...filters, query: debouncedSearch || undefined }),
   });
 
   const availableFilters = data?.filters ?? {
@@ -49,33 +49,15 @@ export default function CatalogPage() {
         </p>
       </div>
 
-      {/* Search bar + Sort */}
-      <div className="flex gap-3 mb-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
-          <Input
-            placeholder="Søk etter eurokode, NAGS, merke eller modell..."
-            value={searchQuery}
-            onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
-            className="pl-10 h-12 sm:h-14 text-base"
-          />
-        </div>
-        <select
-          value={`${filters.sort || 'brand'}-${filters.order || 'asc'}`}
-          onChange={(e) => {
-            const [sort, order] = e.target.value.split('-') as [CatalogFilters['sort'], CatalogFilters['order']];
-            setFilters((f) => ({ ...f, sort, order }));
-            setPage(1);
-          }}
-          className="h-12 sm:h-14 rounded-md border px-3 text-sm bg-white"
-        >
-          <option value="brand-asc">Merke A–Å</option>
-          <option value="brand-desc">Merke Å–A</option>
-          <option value="price-asc">Pris lav–høy</option>
-          <option value="price-desc">Pris høy–lav</option>
-          <option value="year-desc">Nyeste først</option>
-          <option value="year-asc">Eldste først</option>
-        </select>
+      {/* Search bar */}
+      <div className="relative mb-4">
+        <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+        <Input
+          placeholder="Søk etter eurokode, NAGS, merke eller modell..."
+          value={searchQuery}
+          onChange={(e) => { setSearchQuery(e.target.value); setPage(1); }}
+          className="pl-10 h-12 sm:h-14 text-base"
+        />
       </div>
 
       {/* Mobile filter button */}

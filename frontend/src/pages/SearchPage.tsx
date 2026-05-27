@@ -4,62 +4,42 @@ import { useQuery } from '@tanstack/react-query';
 import { Search, Loader2, AlertTriangle, Car, Wrench } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
-import { searchByRegnr, searchByVin, searchByOem, SearchError } from '@/api/glass';
+import { searchByRegnr, SearchError } from '@/api/glass';
 import { formatLayerLabel, formatConfidence } from '@/utils/formatters';
-import { GLASS_TYPE_GROUPS } from '@/utils/glass-categories';
-import type { Product } from '@/types/api';
 
 import { VehicleCard } from '@/components/search/VehicleCard';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
-import { GlassTypeSelector } from '@/components/catalog/GlassTypeSelector';
-import { GlassPositionSelector, GLASS_POSITIONS, matchesPosition } from '@/components/search/GlassPositionSelector';
+import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
 import { ProductCard } from '@/components/catalog/ProductCard';
-import { BestMatchBanner, rankByEquipmentMatch } from '@/components/search/BestMatchBanner';
-import { ImageUploadOcr } from '@/components/search/ImageUploadOcr';
-import { AIWindshieldAnalyzer } from '@/components/search/AIWindshieldAnalyzer';
+import type { Product } from '@/types/api';
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
   const initialRegnr = searchParams.get('regnr') ?? '';
-  const initialVin = searchParams.get('vin') ?? '';
-  const initialOem = searchParams.get('oem') ?? '';
-
-  const searchMode = initialVin ? 'vin' : initialOem ? 'oem' : 'regnr';
-  const initialQuery = initialVin || initialOem || initialRegnr;
-
-  const [query, setQuery] = useState(initialQuery);
-  const [activeQuery, setActiveQuery] = useState(initialQuery);
-  const [selectedType, setSelectedType] = useState<string | null>('F');
-  const [positionFilter, setPositionFilter] = useState<string | null>(null);
-  const [colorFilter, setColorFilter] = useState<string | null>(null);
-  const [, setWindshieldFilter] = useState<Product[] | null>(null);
+  const [regnr, setRegnr] = useState(initialRegnr);
+  const [activeRegnr, setActiveRegnr] = useState(initialRegnr);
+  const [selectedType, setSelectedType] = useState<string | null>(null);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['search', searchMode, activeQuery],
-    queryFn: () => {
-      if (searchMode === 'vin') return searchByVin(activeQuery);
-      if (searchMode === 'oem') return searchByOem(activeQuery);
-      return searchByRegnr(activeQuery);
-    },
-    enabled: activeQuery.length >= 2,
+    queryKey: ['search', activeRegnr],
+    queryFn: () => searchByRegnr(activeRegnr),
+    enabled: activeRegnr.length >= 2,
     retry: 1,
   });
 
   useEffect(() => {
-    if (initialQuery) setActiveQuery(initialQuery);
-  }, [initialQuery]);
+    if (initialRegnr) setActiveRegnr(initialRegnr);
+  }, [initialRegnr]);
 
-  // Reset type filter when search changes — default to front glass
+  // Reset type filter when search changes
   useEffect(() => {
-    setSelectedType('F');
-    setPositionFilter(null);
-    setColorFilter(null);
-  }, [activeQuery]);
+    setSelectedType(null);
+  }, [activeRegnr]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim().length >= 2) {
-      setActiveQuery(query.trim().toUpperCase());
+    if (regnr.trim().length >= 2) {
+      setActiveRegnr(regnr.trim().toUpperCase());
     }
   };
 
@@ -67,93 +47,49 @@ export default function SearchPage() {
   const candidates = data?.candidates ?? [];
   const conf = data?.confidence ? formatConfidence(data.confidence) : null;
 
-  // Smart sort: if vehicle has equipment data, sort by equipment match
-  const smartSortedCandidates = useMemo(() => {
-    if (!vehicle?.effectiveEquipment || !selectedType) return candidates;
-    // Only sort within the selected type (e.g. frontrute)
-    const group = GLASS_TYPE_GROUPS.find((g) => g.key === selectedType);
-    if (!group) return candidates;
-    const typeProducts = candidates.filter((c) => group.codes.includes(c.typeCode));
-    const others = candidates.filter((c) => !group.codes.includes(c.typeCode));
-    const ranked = rankByEquipmentMatch(typeProducts, vehicle);
-    return [...ranked.map((r) => r.product), ...others];
-  }, [candidates, vehicle, selectedType]);
-
   // Determine error type for better messaging
   const errorStatus = error instanceof SearchError ? error.status : undefined;
   const isNotFound = errorStatus === 404;
   const isUpstreamError = errorStatus === 503;
   const isInternalError = errorStatus === 500;
 
-  // Filtered products — support position, color, and type filters
-  // Uses smartSortedCandidates when equipment data is available
+  // Group by type code
+  const grouped = useMemo(() => {
+    const map: Record<string, Product[]> = {};
+    candidates.forEach((c) => {
+      const key = c.typeCode || 'Ukjent';
+      if (!map[key]) map[key] = [];
+      map[key].push(c);
+    });
+    return map;
+  }, [candidates]);
+
+  // Filtered products
   const filteredProducts = useMemo(() => {
-    let result = smartSortedCandidates;
-    
-    // Apply position filter from GlassPositionSelector
-    if (positionFilter) {
-      const pos = GLASS_POSITIONS.find((p) => p.id === positionFilter);
-      if (pos) {
-        result = result.filter((c) => matchesPosition(c, pos));
-      }
-    }
-    
-    // Apply color filter
-    if (colorFilter && colorFilter !== 'all') {
-      result = result.filter((c) => {
-        const desc = (c.description || '').toUpperCase();
-        return desc.includes(colorFilter);
-      });
-    }
-    
-    // Apply type filter
     if (selectedType) {
-      const group = GLASS_TYPE_GROUPS.find((g) => g.key === selectedType);
-      if (group) {
-        result = result.filter((c) => group.codes.includes(c.typeCode));
-      } else if (selectedType === 'Annet') {
-        const known = GLASS_TYPE_GROUPS.flatMap((g) => g.codes);
-        result = result.filter((c) => !known.includes(c.typeCode));
-      } else {
-        result = result.filter((c) => c.typeCode === selectedType);
-      }
+      return grouped[selectedType] ?? [];
     }
-    
-    return result;
-  }, [selectedType, positionFilter, colorFilter, candidates]);
+    return candidates;
+  }, [selectedType, grouped, candidates]);
 
   return (
     <div className="mx-auto max-w-5xl px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
       <h1 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">Søk med registreringsnummer</h1>
       <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-8">Tast inn bilens registreringsnummer for å finne riktig glass.</p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4 sm:mb-8">
-        <form onSubmit={handleSearch} className="flex gap-2 lg:col-span-2">
-          <Input
-            placeholder={searchMode === 'vin' ? 'WVWZZZ...' : searchMode === 'oem' ? 'OEM-nummer' : 'AB12345'}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="h-14 flex-1 text-lg uppercase"
-            maxLength={searchMode === 'vin' ? 17 : 30}
-          />
-          <Button type="submit" size="lg" className="h-14 px-4 sm:px-6 gap-2 flex-shrink-0" disabled={isLoading}>
-            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Search className="h-5 w-5" />}
-            <span className="hidden sm:inline">Søk</span>
-          </Button>
-        </form>
-
-        {/* OCR bilde-opplasting — kun for regnr-søk */}
-        {searchMode === 'regnr' && (
-          <div className="lg:col-span-1">
-            <ImageUploadOcr
-              onRegnrFound={(regnr) => {
-                setQuery(regnr);
-                setActiveQuery(regnr);
-              }}
-            />
-          </div>
-        )}
-      </div>
+      <form onSubmit={handleSearch} className="flex gap-2 mb-4 sm:mb-8">
+        <Input
+          placeholder="AB12345"
+          value={regnr}
+          onChange={(e) => setRegnr(e.target.value)}
+          className="h-14 flex-1 text-lg uppercase"
+          maxLength={8}
+        />
+        <Button type="submit" size="lg" className="h-14 px-4 sm:px-6 gap-2 flex-shrink-0" disabled={isLoading}>
+          {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Search className="h-5 w-5" />}
+          <span className="hidden sm:inline">Søk</span>
+        </Button>
+      </form>
 
       {/* Error states */}
       {error && (
@@ -165,7 +101,7 @@ export default function SearchPage() {
                 <>
                   <p className="font-medium text-red-800">Kunne ikke finne kjøretøy</p>
                   <p className="text-sm text-red-700 mt-1">
-                    <strong>{activeQuery}</strong> ble ikke funnet i Statens vegvesen sitt register.
+                    Registreringsnummeret <strong>{activeRegnr}</strong> ble ikke funnet i Statens vegvesen sitt register.
                     Dette kan skyldes:
                   </p>
                   <ul className="text-sm text-red-700 mt-2 list-disc list-inside space-y-0.5">
@@ -208,13 +144,13 @@ export default function SearchPage() {
             <button
               type="button"
               onClick={() => {
-                setQuery('');
-                setActiveQuery('');
+                setRegnr('');
+                setActiveRegnr('');
               }}
               className="inline-flex items-center justify-center gap-2 rounded-md border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-50"
             >
               <Wrench className="h-4 w-4" />
-              Prøv på nytt
+              Prøv et annet regnr
             </button>
           </div>
         </div>
@@ -244,39 +180,12 @@ export default function SearchPage() {
             </div>
           )}
 
-          {/* Interactive glass position selector */}
+          {/* Type code tabs */}
           {candidates.length > 0 && (
-            <GlassPositionSelector
-              products={candidates}
-              onFilter={(pos, color) => {
-                setPositionFilter(pos);
-                setColorFilter(color);
-              }}
-            />
-          )}
-
-          {/* Glass type category selector (secondary filter) */}
-          {candidates.length > 0 && (
-            <GlassTypeSelector
+            <TypeCodeTabs
               products={candidates}
               activeType={selectedType}
               onSelect={setSelectedType}
-            />
-          )}
-
-          {/* AI Windshield Analyzer — show when multiple front windshields */}
-          {selectedType === 'Frontrute' && candidates.filter(c => c.typeCode === 'F').length > 1 && (
-            <AIWindshieldAnalyzer
-              products={candidates.filter(c => c.typeCode === 'F')}
-              onFilter={(filtered) => setWindshieldFilter(filtered.length < candidates.filter(c => c.typeCode === 'F').length ? filtered : null)}
-            />
-          )}
-
-          {/* Smart best match banner */}
-          {vehicle?.effectiveEquipment && filteredProducts.length > 1 && (
-            <BestMatchBanner
-              products={filteredProducts}
-              vehicle={vehicle}
             />
           )}
 
@@ -312,8 +221,8 @@ export default function SearchPage() {
             <button
               type="button"
               onClick={() => {
-                setQuery('');
-                setActiveQuery('');
+                setRegnr('');
+                setActiveRegnr('');
               }}
               className="text-sm text-autoglass-blue hover:underline"
             >
