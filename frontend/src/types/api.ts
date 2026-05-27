@@ -94,6 +94,16 @@ export interface ConfidenceInfo {
   groundTruth: boolean;
 }
 
+export interface CalibrationRequirement {
+  sensorType: string;
+  sensorLabel: string;
+  calibrationTriggers: string[];
+  calibrationType: string;
+  cscToolSupported: boolean;
+  targetPlate: string | null;
+  notes: string | null;
+}
+
 export interface SearchResult {
   vehicle: VehicleInfo;
   candidates: Product[];
@@ -101,6 +111,7 @@ export interface SearchResult {
   layer: number;
   equipment?: EquipmentFlags;
   regnr?: string;
+  calibrationRequirements?: CalibrationRequirement[];
 
   // NEW: structured confidence + grouped results
   confidenceInfo?: ConfidenceInfo;

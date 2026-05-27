@@ -37,3 +37,7 @@ data/master-catalog*.json.gz
 dist-mirror/
 data/wp-scrape/
 *.bak
+
+# CSC parsed data (PNG pages)
+data/csc-parsed/*.png
+

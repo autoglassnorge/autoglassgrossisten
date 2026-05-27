@@ -280,6 +280,15 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: D1 Migration 0008 — ADAS calibration requirements
+        working-directory: api/cf-worker
+        run: |
+          wrangler d1 execute glass-catalog-db --remote --file migrations/0008_adas_calibration_requirements.sql
+          wrangler d1 execute glass-catalog-db --remote --file generated-csc-inserts.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Verify
         working-directory: api/cf-worker
         run: |
@@ -291,6 +300,8 @@ jobs:
           wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as has_ktype FROM pragma_table_info('glass_catalog') WHERE name='ktype'"
           echo "=== ktype_matches table ==="
           wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as ktype_tables FROM sqlite_master WHERE type='table' AND name='ktype_matches'"
+          echo "=== ADAS calibration requirements ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as csc_count FROM adas_calibration_requirements"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

@@ -1039,6 +1039,53 @@ async function queryGroundTruthByVehicle(
 }
 
 // ============================================================================
+// ADAS CALIBRATION REQUIREMENTS (Hella Gutmann CSC)
+// ============================================================================
+
+interface CalibrationRequirement {
+  sensorType: string;
+  sensorLabel: string;
+  calibrationTriggers: string[];
+  calibrationType: string;
+  cscToolSupported: boolean;
+  targetPlate: string | null;
+  notes: string | null;
+}
+
+async function queryCalibrationRequirements(
+  db: D1Database,
+  make: string,
+  model: string,
+  year: number
+): Promise<CalibrationRequirement[]> {
+  try {
+    const normalizedMake = normalizeBrand(make);
+    const { results } = await db
+      .prepare(
+        `SELECT sensor_type, sensor_label, calibration_triggers, calibration_type,
+                csc_tool_supported, target_plate, notes
+         FROM adas_calibration_requirements
+         WHERE brand = ? AND model = ? AND year_from <= ? AND (year_to IS NULL OR year_to >= ?)
+         ORDER BY sensor_type`
+      )
+      .bind(normalizedMake, model, year, year)
+      .all();
+
+    return (results || []).map((r: any) => ({
+      sensorType: r.sensor_type,
+      sensorLabel: r.sensor_label,
+      calibrationTriggers: r.calibration_triggers ? JSON.parse(r.calibration_triggers) : [],
+      calibrationType: r.calibration_type || "unknown",
+      cscToolSupported: !!r.csc_tool_supported,
+      targetPlate: r.target_plate || null,
+      notes: r.notes || null,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+// ============================================================================
 // AUTO-GLASS.NO MAPPING (KV-backed)
 // ============================================================================
 
@@ -3082,6 +3129,12 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
           .slice(0, 5)
           .map(([prefix4, count]) => ({ prefix4, count }));
       })(),
+      calibrationRequirements: await queryCalibrationRequirements(
+        db,
+        vehicle.make,
+        vehicle.model,
+        vehicle.year
+      ),
       sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
     },
   };
