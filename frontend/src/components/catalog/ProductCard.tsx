@@ -1,9 +1,9 @@
-import { ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, ListChecks, Paperclip } from 'lucide-react';
+import { ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, Paperclip } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import type { Product } from '@/types/api';
-import { formatPrice, formatYearRange, typeCodeShort, positionColor } from '@/utils/formatters';
+import { formatPrice, typeCodeShort, positionColor } from '@/utils/formatters';
 import { useCartStore } from '@/stores/cartStore';
 import { useState } from 'react';
 
@@ -80,31 +80,46 @@ export function ProductCard({ product }: ProductCardProps) {
         <h3 className="font-semibold text-gray-900 text-sm sm:text-base line-clamp-2 mb-1">
           {product.title || `${product.brand} ${product.model}`}
         </h3>
-        <div className="text-xs text-gray-500">
-          {product.brand} {product.model}
-        </div>
-        <div className="text-xs text-gray-400 mt-0.5">
-          {formatYearRange(product.yearFrom, product.yearTo)}
-        </div>
 
-        {/* Lister/klips warning */}
-        {(product.properties?.listRequired || product.properties?.klipsRequired) && (
-          <div className="mt-2 rounded-md bg-amber-50 border border-amber-200 px-2 py-1.5">
-            <p className="text-[10px] font-medium text-amber-800 flex items-start gap-1">
-              <AlertTriangle className="h-3 w-3 flex-shrink-0 mt-0.5" />
-              <span>
-                {product.properties?.listRequired && product.properties?.klipsRequired
-                  ? 'Krever lister og klips — bestilles separat'
-                  : product.properties?.listRequired
-                    ? 'Krever lister — bestilles separat'
-                    : 'Krever klips — bestilles separat'}
+        {/* Standardized description */}
+        {product.standardDescription && (
+          <p className="text-[11px] text-gray-500 leading-relaxed mt-1 line-clamp-3">
+            {product.standardDescription}
+          </p>
+        )}
+
+        {/* Compatibility info (lists/clips) */}
+        {(product.properties?.listRequired || product.properties?.listIncluded || product.properties?.klipsRequired || product.properties?.hasKlips) && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {product.properties?.listRequired && (
+              <span className="inline-flex items-center gap-0.5 rounded bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-700 border border-red-100">
+                <AlertTriangle className="h-3 w-3" />
+                Krever {product.properties?.listType || 'lister'} — bestill separat
               </span>
-            </p>
+            )}
+            {product.properties?.listIncluded && (
+              <span className="inline-flex items-center gap-0.5 rounded bg-green-50 px-1.5 py-0.5 text-[10px] font-medium text-green-700 border border-green-100">
+                <Check className="h-3 w-3" />
+                Inkl. {product.properties?.listType || 'lister'}
+              </span>
+            )}
+            {product.properties?.klipsRequired && (
+              <span className="inline-flex items-center gap-0.5 rounded bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-700 border border-red-100">
+                <AlertTriangle className="h-3 w-3" />
+                Krever {product.properties?.klipsType || 'klips'} — bestill separat
+              </span>
+            )}
+            {product.properties?.hasKlips && !product.properties?.klipsRequired && (
+              <span className="inline-flex items-center gap-0.5 rounded bg-yellow-50 px-1.5 py-0.5 text-[10px] font-medium text-yellow-700 border border-yellow-100">
+                <Paperclip className="h-3 w-3" />
+                Inkl. {product.properties?.klipsType || 'klips'}
+              </span>
+            )}
           </div>
         )}
 
-        {/* Properties row */}
-        <div className="mt-2 flex flex-wrap gap-1.5">
+        {/* Equipment badges */}
+        <div className="mt-2 flex flex-wrap gap-1">
           {product.properties?.adas && (
             <span className="inline-flex items-center gap-0.5 rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-700">
               <Shield className="h-3 w-3" /> ADAS
@@ -130,19 +145,24 @@ export function ProductCard({ product }: ProductCardProps) {
               HUD
             </span>
           )}
-          {product.properties?.listRequired && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-700">
-              <AlertTriangle className="h-3 w-3" /> Krever lister
+          {product.properties?.antenna && (
+            <span className="inline-flex items-center gap-0.5 rounded bg-teal-50 px-1.5 py-0.5 text-[10px] font-medium text-teal-700">
+              Antenne
             </span>
           )}
-          {product.properties?.listIncluded && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-green-50 px-1.5 py-0.5 text-[10px] font-medium text-green-700">
-              <ListChecks className="h-3 w-3" /> Inkl. lister
+          {product.properties?.camera && (
+            <span className="inline-flex items-center gap-0.5 rounded bg-indigo-50 px-1.5 py-0.5 text-[10px] font-medium text-indigo-700">
+              Kamera
             </span>
           )}
-          {product.properties?.hasKlips && (
+          {product.properties?.solar && (
             <span className="inline-flex items-center gap-0.5 rounded bg-yellow-50 px-1.5 py-0.5 text-[10px] font-medium text-yellow-700">
-              <Paperclip className="h-3 w-3" /> Med klips
+              Solar
+            </span>
+          )}
+          {product.properties?.tinted && (
+            <span className="inline-flex items-center gap-0.5 rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-600">
+              Tinted
             </span>
           )}
         </div>

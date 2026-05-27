@@ -137,11 +137,6 @@ function generateTitle(r: GlassRecord): string {
   if (r.hud) eqParts.push('HUD');
   if (r.camera) eqParts.push('Kamera');
 
-  const eq = inferRecordEquipment(r);
-  if (eq.listRequired) eqParts.push('Krever lister');
-  else if (eq.listIncluded) eqParts.push('Inkl. lister');
-  if (eq.klipsRequired) eqParts.push('Krever klips');
-
   // Build title
   let title = parts.join(' ');
   if (colorParts.length > 0) {
@@ -152,6 +147,114 @@ function generateTitle(r: GlassRecord): string {
   }
 
   return title || `${r.brand || ''} ${r.model || ''}`.trim() || r.eurocode;
+}
+
+/** Generate a standardized human-readable description with full technical details */
+function generateDescription(r: GlassRecord): string {
+  const parts: string[] = [];
+  const d = (r.description || '').toUpperCase();
+  const eq = inferRecordEquipment(r);
+
+  // Vehicle info
+  const vehicleParts: string[] = [];
+  if (r.brand) vehicleParts.push(r.brand);
+  if (r.model && r.model !== r.brand) vehicleParts.push(r.model);
+  if (r.year_from && r.year_to) {
+    vehicleParts.push(`${r.year_from}–${r.year_to}`);
+  } else if (r.year_from) {
+    vehicleParts.push(`fra ${r.year_from}`);
+  }
+  if (vehicleParts.length > 0) {
+    parts.push('Kjøretøy: ' + vehicleParts.join(' '));
+  }
+
+  // Glass type / position
+  const positionParts: string[] = [];
+  const catMap: Record<string, string> = {
+    frontrute: 'Frontrute',
+    bakrute: 'Bakrute',
+    'dørrute-frem': 'Dørrute fremme',
+    'dørrute-bak': 'Dørrute bak',
+    siderute: 'Siderute',
+    annet: 'Annet glass',
+  };
+  const cat = catMap[r.category] || r.category;
+  if (cat) positionParts.push(cat);
+
+  // Side (VS/HS)
+  if (d.includes('VS') || d.includes('VENSTRE')) positionParts.push('venstre side');
+  else if (d.includes('HS') || d.includes('HØYRE')) positionParts.push('høyre side');
+
+  // Special variants
+  if (d.includes('TODELT')) positionParts.push('todelt');
+  if (d.includes('ÅPNB') || d.includes('ÅPNINGSBAR')) positionParts.push('åpningsbar');
+  if (d.includes('LAV')) positionParts.push('lav');
+  if (d.includes('LANG')) positionParts.push('lang');
+  if (d.includes('KORT')) positionParts.push('kort');
+
+  if (positionParts.length > 0) {
+    parts.push('Type: ' + positionParts.join(', '));
+  }
+
+  // Color
+  const colorParts: string[] = [];
+  if (d.includes('SOTE') || d.includes('YP')) colorParts.push('Sotet');
+  else if (d.includes('GD') || d.includes('MØRK GRØNN')) colorParts.push('Mørk grønn');
+  else if (d.includes('GN') && d.includes('SOLAR')) colorParts.push('Grønn solar');
+  else if (d.includes('GN')) colorParts.push('Grønn');
+  else if (d.includes('GY')) colorParts.push('Grå');
+  else if (d.includes('GB')) colorParts.push('Grå/blå');
+  else if (d.includes('BL')) colorParts.push('Blå');
+  else if (d.includes('BZ') || d.includes('BRONZE')) colorParts.push('Bronze');
+  else if (d.includes('CL') || d.includes('KLAR')) colorParts.push('Klar');
+
+  if (colorParts.length > 0) {
+    parts.push('Farge: ' + colorParts.join(', '));
+  }
+
+  // Equipment
+  const equipParts: string[] = [];
+  if (r.adas) equipParts.push('ADAS (avansert førerassistanse)');
+  if (r.heated) equipParts.push('Elektrisk oppvarming');
+  if (r.rain_sensor) equipParts.push('Regnsensor');
+  if (r.acoustic) equipParts.push('Akustisk laminert glass');
+  if (r.hud) equipParts.push('Head-up display (HUD)');
+  if (r.camera) equipParts.push('Kamera (f.eks. filskifteassistanse)');
+  if (r.antenna) equipParts.push('Innebygd antenne');
+  if (eq.shade) equipParts.push('Solbeskyttelse / privacy');
+
+  if (equipParts.length > 0) {
+    parts.push('Utstyr: ' + equipParts.join(', '));
+  }
+
+  // Dimensions
+  let dims: { width?: number; height?: number; thickness?: number } = {};
+  try {
+    dims = JSON.parse(r.dimensions || '{}');
+  } catch { /* ignore */ }
+  if (dims.width || dims.height || dims.thickness) {
+    const dimParts: string[] = [];
+    if (dims.width) dimParts.push(`bredde ${dims.width} cm`);
+    if (dims.height) dimParts.push(`høyde ${dims.height} cm`);
+    if (dims.thickness) dimParts.push(`tykkelse ${dims.thickness} mm`);
+    parts.push('Mål: ' + dimParts.join(', '));
+  }
+
+  // Lists / clips compatibility
+  if (eq.listRequired) {
+    const listType = eq.listType || 'lister';
+    parts.push(`⚠ Krever ${listType} — bestilles separat`);
+  } else if (eq.listIncluded) {
+    const listType = eq.listType || 'lister';
+    parts.push(`✓ Inkluderer ${listType}`);
+  }
+  if (eq.klipsRequired) {
+    parts.push('⚠ Krever klips — bestilles separat');
+  } else if (eq.hasKlips) {
+    parts.push('✓ Inkluderer klips');
+  }
+
+  return parts.join('. ');
 }
 
 // ============================================================================
@@ -199,11 +302,14 @@ function normalizeRecord(r: GlassRecord): any {
           hasList: eq.hasList,
           listRequired: eq.listRequired,
           listIncluded: eq.listIncluded,
+          listType: eq.listType,
           hasKlips: eq.hasKlips,
           klipsRequired: eq.klipsRequired,
+          klipsType: eq.klipsType,
         };
       })(),
     },
+    standardDescription: generateDescription(r),
     adasFeatures: r.adas_features ? JSON.parse(r.adas_features) : [],
     price: r.price,
     stockStatus: r.stock_status,
@@ -213,6 +319,7 @@ function normalizeRecord(r: GlassRecord): any {
     weight: r.weight,
     dimensions: r.dimensions,
     description: r.description,
+    rawDescription: r.description,
     imageUrl: r.image_url,
     pdfUrl: r.pdf_url,
     source: r.source,
@@ -1401,8 +1508,10 @@ function inferRecordEquipment(record: GlassRecord): {
   hasList: boolean;
   listRequired: boolean;
   listIncluded: boolean;
+  listType: string | null;
   hasKlips: boolean;
   klipsRequired: boolean;
+  klipsType: string | null;
 } {
   // Prefer explicit DB columns if set
   if (record.rain_sensor || record.heated || record.acoustic || record.antenna || record.camera || record.adas || record.shade) {
@@ -1418,8 +1527,10 @@ function inferRecordEquipment(record: GlassRecord): {
       hasList: false,
       listRequired: false,
       listIncluded: false,
+      listType: null,
       hasKlips: false,
       klipsRequired: false,
+      klipsType: null,
     };
   }
   // Fallback: parse from description
@@ -1439,7 +1550,25 @@ function inferRecordEquipment(record: GlassRecord): {
   const hasKlips = /\b(KLIPS)\b/.test(d);
   const klipsRequired = hasKlips && /\b(NB\b|HUSK|MÅ HA|MÅH|KUN MED)\b/.test(d);
 
-  return { ...flags, shade, hasList, listRequired, listIncluded, hasKlips, klipsRequired };
+  // Detect specific list type
+  let listType: string | null = null;
+  if (hasList) {
+    if (d.includes("PYNTELIST")) listType = "pyntelister";
+    else if (d.includes("GUMMILIST")) listType = "gummilister";
+    else if (d.includes("BUNNLIST")) listType = "bunnlister";
+    else if (d.includes("KANTLIST")) listType = "kantlister";
+    else if (d.includes("RAMMELIST")) listType = "rammelister";
+    else if (d.includes("DEKORLIST")) listType = "dekorlister";
+    else if (/\bLIST\b/.test(d)) listType = "lister";
+  }
+
+  // Detect specific klips type
+  let klipsType: string | null = null;
+  if (hasKlips) {
+    klipsType = "klips"; // Generic for now — extend if we see variants
+  }
+
+  return { ...flags, shade, hasList, listRequired, listIncluded, listType, hasKlips, klipsRequired, klipsType };
 }
 
 // ============================================================================

@@ -5,6 +5,8 @@ export interface Product {
   model: string;
   title: string;
   description: string;
+  standardDescription?: string;
+  rawDescription?: string;
   category: string;
   yearFrom: number | null;
   yearTo: number | null;
@@ -27,11 +29,14 @@ export interface Product {
     color: string | null;
     solar: boolean;
     tinted: boolean;
+    camera?: boolean;
     hasList?: boolean;
     listRequired?: boolean;
     listIncluded?: boolean;
+    listType?: string | null;
     hasKlips?: boolean;
     klipsRequired?: boolean;
+    klipsType?: string | null;
   };
   sourceUrl: string;
 }
