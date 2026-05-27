@@ -13,6 +13,7 @@ export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -20,18 +21,40 @@ export function HeroVideo() {
 
     const onCanPlay = () => setVideoReady(true);
     const onError = () => setVideoError(true);
+    const onEnded = () => setVideoEnded(true);
 
     video.addEventListener('canplay', onCanPlay);
     video.addEventListener('error', onError);
+    video.addEventListener('ended', onEnded);
 
-    // If video src is empty or 404, error will fire quickly
     video.load();
 
     return () => {
       video.removeEventListener('canplay', onCanPlay);
       video.removeEventListener('error', onError);
+      video.removeEventListener('ended', onEnded);
     };
   }, []);
+
+  // Pause video when scrolled out of viewport (saves battery/data)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !videoReady) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [videoReady]);
 
   const particles = useMemo<Particle[]>(() => {
     return Array.from({ length: 18 }, (_, i) => ({
@@ -55,7 +78,7 @@ export function HeroVideo() {
     }));
   }, []);
 
-  const showFallback = !videoReady || videoError;
+  const showFallback = !videoReady || videoError || videoEnded;
 
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -63,11 +86,10 @@ export function HeroVideo() {
       <video
         ref={videoRef}
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-          videoReady && !videoError ? 'opacity-100' : 'opacity-0'
+          videoReady && !videoError && !videoEnded ? 'opacity-100' : 'opacity-0'
         }`}
         autoPlay
         muted
-        loop
         playsInline
         preload="auto"
         poster=""

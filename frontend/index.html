@@ -5,6 +5,9 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Autoglass AS - Norges største bilglass-grossist. 130 000+ ruter på lager." />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Autoglass AS - B2B Grossist</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,5 +16,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Cache-bust: force reload if this HTML is stale
+      (function() {
+        var deployed = 'v3-' + new Date().toISOString().slice(0,10);
+        var stored = localStorage.getItem('ag-version');
+        if (stored && stored !== deployed) {
+          localStorage.setItem('ag-version', deployed);
+          location.reload(true);
+        } else {
+          localStorage.setItem('ag-version', deployed);
+        }
+      })();
+    </script>
   </body>
 </html>
