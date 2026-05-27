@@ -62,6 +62,7 @@ export interface VehicleInfo {
   vin: string;
   k_type: number;
   submodel?: string | null;
+  effectiveEquipment?: EquipmentFlags | null;
 }
 
 export interface EquipmentFlags {
