@@ -22,6 +22,15 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: D1 Migration 0009 — ktype_registry
+        working-directory: api/cf-worker
+        run: |
+          wrangler d1 execute glass-catalog-db --remote --file migrations/0009_ktype_registry.sql
+          wrangler d1 execute glass-catalog-db --remote --file generated-ktype-inserts.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Verify
         working-directory: api/cf-worker
         run: |
@@ -29,6 +38,9 @@ jobs:
           wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as csc_count FROM adas_calibration_requirements"
           echo "=== By sensor type ==="
           wrangler d1 execute glass-catalog-db --remote --command "SELECT sensor_type, COUNT(*) as c FROM adas_calibration_requirements GROUP BY sensor_type"
+          echo "=== ktype_registry ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as ktype_count FROM ktype_registry"
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT brand, COUNT(*) as c FROM ktype_registry GROUP BY brand"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
