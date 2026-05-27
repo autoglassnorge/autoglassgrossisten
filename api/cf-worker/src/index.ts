@@ -86,6 +86,74 @@ interface GlassRecord {
   nagsCodes?: string[];
 }
 
+/** Generate a clean, standardized title from catalog record data */
+function generateTitle(r: GlassRecord): string {
+  const parts: string[] = [];
+
+  // Brand + Model
+  const brandModel = [r.brand, r.model].filter(Boolean).join(' ');
+  if (brandModel) parts.push(brandModel);
+
+  // Year range
+  if (r.year_from && r.year_to) {
+    parts.push(`(${r.year_from}–${r.year_to})`);
+  } else if (r.year_from) {
+    parts.push(`(fra ${r.year_from})`);
+  }
+
+  // Category
+  const catMap: Record<string, string> = {
+    frontrute: 'Frontrute',
+    bakrute: 'Bakrute',
+    'dørrute-frem': 'Dørrute fremme',
+    'dørrute-bak': 'Dørrute bak',
+    siderute: 'Siderute',
+    annet: 'Annet glass',
+  };
+  const cat = catMap[r.category] || r.category;
+  if (cat) parts.push('· ' + cat);
+
+  // Color from description
+  const d = (r.description || '').toUpperCase();
+  const colorParts: string[] = [];
+  if (d.includes('SOTE') || d.includes('YP')) colorParts.push('Sotet');
+  else if (d.includes('GD') || d.includes('MØRK GRØNN')) colorParts.push('Mørk grønn');
+  else if (d.includes('GN') && d.includes('SOLAR')) colorParts.push('Grønn solar');
+  else if (d.includes('GN')) colorParts.push('Grønn');
+  else if (d.includes('GY') && d.includes('EL')) colorParts.push('Grå m/el');
+  else if (d.includes('GY')) colorParts.push('Grå');
+  else if (d.includes('GB')) colorParts.push('Grå/blå');
+  else if (d.includes('BL') && d.includes('BLÅ')) colorParts.push('Blå');
+  else if (d.includes('BL')) colorParts.push('Blå');
+  else if (d.includes('BZ') || d.includes('BRONZE')) colorParts.push('Bronze');
+  else if (d.includes('CL') || d.includes('KLAR')) colorParts.push('Klar');
+
+  // Equipment
+  const eqParts: string[] = [];
+  if (r.adas) eqParts.push('ADAS');
+  if (r.heated) eqParts.push('Varme');
+  if (r.rain_sensor) eqParts.push('Regnsensor');
+  if (r.acoustic) eqParts.push('Akustisk');
+  if (r.hud) eqParts.push('HUD');
+  if (r.camera) eqParts.push('Kamera');
+
+  const eq = inferRecordEquipment(r);
+  if (eq.listRequired) eqParts.push('Krever lister');
+  else if (eq.listIncluded) eqParts.push('Inkl. lister');
+  if (eq.klipsRequired) eqParts.push('Krever klips');
+
+  // Build title
+  let title = parts.join(' ');
+  if (colorParts.length > 0) {
+    title += ' · ' + colorParts.join(', ');
+  }
+  if (eqParts.length > 0) {
+    title += ' · ' + eqParts.join(', ');
+  }
+
+  return title || `${r.brand || ''} ${r.model || ''}`.trim() || r.eurocode;
+}
+
 // ============================================================================
 // CORS
 // ============================================================================
@@ -103,6 +171,7 @@ function normalizeRecord(r: GlassRecord): any {
   return {
     id: r.id,
     eurocode: r.eurocode,
+    title: generateTitle(r),
     articleNumber: r.article_number,
     scanNumber: r.scan_number,
     category: r.category,
