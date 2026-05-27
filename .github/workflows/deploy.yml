@@ -98,7 +98,8 @@ jobs:
         if: steps.check-catalog.outputs.changed == 'true'
         working-directory: api/cf-worker
         run: |
-          echo "🔄 Sletter eksisterende data og inserter ${wc -l < generated-inserts.sql} linjer..."
+          LINES=$(wc -l < generated-inserts.sql)
+          echo "🔄 Sletter eksisterende data og inserter $LINES linjer..."
           wrangler d1 execute glass-catalog-db --file=generated-inserts.sql --remote --yes
           echo "✅ D1-synkronisering fullført"
         env:
