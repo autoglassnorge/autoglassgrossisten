@@ -62,7 +62,65 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-  # ── 2. Deploy frontend til Cloudflare Pages ───────────────────
+  # ── 2. Synkroniser D1-database ────────────────────────────────
+  sync-d1:
+    runs-on: ubuntu-latest
+    needs: [deploy-worker]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm install -g wrangler
+
+      - name: Sjekk om katalog har endret seg
+        id: check-catalog
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -qE '(data/catalog-prod\.json|api/cf-worker/generated-inserts\.sql)'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "📦 Katalog-endring oppdaget – synkroniserer D1"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "⏭️ Ingen katalog-endring – hopper over D1-synkronisering"
+          fi
+
+      - name: Kjør schema (idempotent)
+        if: steps.check-catalog.outputs.changed == 'true'
+        working-directory: api/cf-worker
+        run: wrangler d1 execute glass-catalog-db --file=schema.sql --remote --yes
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Synkroniser glass_catalog til D1
+        if: steps.check-catalog.outputs.changed == 'true'
+        working-directory: api/cf-worker
+        run: |
+          echo "🔄 Sletter eksisterende data og inserter ${wc -l < generated-inserts.sql} linjer..."
+          wrangler d1 execute glass-catalog-db --file=generated-inserts.sql --remote --yes
+          echo "✅ D1-synkronisering fullført"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verifiser D1-synkronisering
+        if: steps.check-catalog.outputs.changed == 'true'
+        working-directory: api/cf-worker
+        run: |
+          COUNT=$(wrangler d1 execute glass-catalog-db --command="SELECT COUNT(*) as count FROM glass_catalog" --remote --yes --json | jq -r '.[0].results[0].count')
+          echo "📊 D1 glass_catalog: $COUNT records"
+          if [ "$COUNT" -lt 18000 ]; then
+            echo "❌ For få records i D1: $COUNT (forventet ~18737)"
+            exit 1
+          fi
+          echo "✅ D1-verifisering OK"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  # ── 3. Deploy frontend til Cloudflare Pages ───────────────────
   deploy-frontend:
     runs-on: ubuntu-latest
     steps:
@@ -88,11 +146,11 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-  # ── 3. Verifikasjon ───────────────────────────────────────────
+  # ── 4. Verifikasjon ───────────────────────────────────────────
   verify-deploy:
     runs-on: ubuntu-latest
     needs: [deploy-worker, deploy-frontend]
-    if: always() && needs.deploy-worker.result == 'success'
+    if: always() && needs.deploy-worker.result == 'success' && needs.deploy-frontend.result == 'success'
     steps:
       - name: Health check (Worker API)
         run: |

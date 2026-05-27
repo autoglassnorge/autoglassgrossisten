@@ -45,7 +45,7 @@ async function main() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     if (data.status !== "ok") throw new Error(`status=${data.status}`);
-    if (data.catalogSize < 30000) throw new Error(`catalogSize=${data.catalogSize}`);
+    if (data.catalogSize < 18000) throw new Error(`catalogSize=${data.catalogSize} (forventet >= 18000)`);
   });
 
   // 2. Regnr-oppslag
@@ -66,8 +66,8 @@ async function main() {
   }
 
   // 3. Prefix4-oppslag (merk: kan være tregt pga full katalog-lasting)
-  await test("Prefix4 5351", async () => {
-    const res = await fetch(`${BASE_URL}/api/glass?prefix4=5351`);
+  await test("Prefix4 1802", async () => {
+    const res = await fetch(`${BASE_URL}/api/glass?prefix4=1802`);
     if (res.status === 503) {
       throw new Error("HTTP 503 (CPU limit — kjent issue med stor katalog)");
     }
@@ -77,8 +77,8 @@ async function main() {
   });
 
   // 4. Eurocode-oppslag (merk: kan være tregt pga full katalog-lasting)
-  await test("Eurocode 5351AGNMV", async () => {
-    const res = await fetch(`${BASE_URL}/api/glass?eurocode=5351AGNMV`);
+  await test("Eurocode 1802GYEL", async () => {
+    const res = await fetch(`${BASE_URL}/api/glass?eurocode=1802GYEL`);
     if (res.status === 503) {
       throw new Error("HTTP 503 (CPU limit — kjent issue med stor katalog)");
     }

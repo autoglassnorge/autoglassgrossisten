@@ -94,19 +94,18 @@ function recordToValues(r: GlassRecord): string {
     escapeSql(r.laneAssist),
     escapeSql(r.price),
     escapeSql(r.stockStatus),
+    escapeSql(r.warehouseLocation),
     escapeSql(JSON.stringify(r.oemNumbers || [])),
     escapeSql(JSON.stringify(r.crossReferences || [])),
     escapeSql(JSON.stringify(r.nagsCodes || [])),
     escapeSql(r.weight),
-    escapeSql(d.width),
-    escapeSql(d.height),
-    escapeSql(d.thickness),
+    escapeSql(JSON.stringify(r.dimensions || { width: null, height: null, thickness: null })),
     escapeSql(r.description),
     escapeSql(r.prefix4),
     escapeSql(r.imageUrl),
     escapeSql(r.pdfUrl),
     escapeSql(r.source),
-    escapeSql(r.lastUpdated),
+    escapeSql(r.brandOriginal || r.brand),
   ].join(", ");
 }
 
@@ -125,10 +124,11 @@ function main() {
   console.log(`📂 ${records.length.toLocaleString()} records å migrere`);
 
   const lines: string[] = [];
-  lines.push("-- Auto-generert av migrate-to-d1.ts");
-  lines.push(`-- Kildedata: ${catalog.meta.version || catalog.meta.mergedAt}`);
-  lines.push("--");
-  lines.push("BEGIN TRANSACTION;");
+  lines.push("-- Auto-generert fra catalog-prod.json");
+  lines.push(`-- Timestamp: ${new Date().toISOString()}`);
+  lines.push(`-- Records: ${records.length}`);
+  lines.push("");
+  lines.push("DELETE FROM glass_catalog;");
   lines.push("");
 
   // Insert glass_catalog i batcher
@@ -137,9 +137,9 @@ function main() {
     "brand", "model", "year_from", "year_to", "adas", "rain_sensor",
     "heated", "acoustic", "antenna", "hud", "shade", "camera", "lane_assist",
     "price", "stock_status", "warehouse_location", "oem_numbers",
-    "cross_references", "nags_codes", "weight", "width", "height",
-    "thickness", "description", "prefix4", "image_url", "pdf_url",
-    "source", "last_updated",
+    "cross_references", "nags_codes", "weight", "dimensions",
+    "description", "prefix4", "image_url", "pdf_url",
+    "source", "brand_original",
   ].join(", ");
 
   for (let i = 0; i < records.length; i += BATCH_SIZE) {
@@ -152,24 +152,8 @@ function main() {
   }
   console.log();
 
-  // Insert prefix4-cache hvis den finnes
-  if (fs.existsSync(CACHE_PATH)) {
-    console.log("\n📂 Migrerer prefix4-cache...");
-    const cache = JSON.parse(fs.readFileSync(CACHE_PATH, "utf-8"));
-    const entries = cache.entries || {};
-    let cacheCount = 0;
-
-    for (const [key, items] of Object.entries(entries) as [string, Array<{ prefix4: string; confidence: number }>][]) {
-      for (const item of items) {
-        lines.push(`INSERT OR IGNORE INTO prefix4_cache (cache_key, prefix4, confidence) VALUES (${escapeSql(key)}, ${escapeSql(item.prefix4)}, ${escapeSql(item.confidence)});`);
-        cacheCount++;
-      }
-    }
-    console.log(`   ${cacheCount} cache-entries`);
-  }
-
   lines.push("");
-  lines.push("COMMIT;");
+  lines.push(`INSERT OR REPLACE INTO catalog_meta (key, value, updated_at) VALUES ('total_records', '${records.length}', datetime('now'));`);
 
   fs.writeFileSync(OUTPUT_SQL, lines.join("\n"));
 
