@@ -18,10 +18,15 @@ let brandFixed = 0;
 let eurocodeFixed = 0;
 
 for (const r of records) {
-  // Fix prefix4: use first 4 chars of eurocode, or first 4 chars of articleNumber
-  if (!r.prefix4 || !/^\d{4}$/.test(r.prefix4)) {
+  // Fix prefix4: use first 4 chars of eurocode (any chars, not just digits).
+  // Pad with leading zeros for eurocodes shorter than 4 chars.
+  if (!r.prefix4 || !/^.{4}$/.test(r.prefix4)) {
     if (r.eurocode && r.eurocode.length >= 4) {
       r.prefix4 = r.eurocode.substring(0, 4);
+      prefix4Fixed++;
+    } else if (r.eurocode && r.eurocode.length > 0) {
+      // Pad short eurocodes with leading zeros to make 4 chars
+      r.prefix4 = r.eurocode.padStart(4, '0');
       prefix4Fixed++;
     } else if (r.articleNumber && r.articleNumber.length >= 4) {
       r.prefix4 = r.articleNumber.substring(0, 4);
@@ -63,7 +68,7 @@ console.log();
 // Re-check
 const stillBadEuro = records.filter(r => !r.eurocode || !eurocodeRegex.test(r.eurocode));
 const stillBadBrand = records.filter(r => !r.brand || r.brand.trim() === '');
-const stillBadPrefix4 = records.filter(r => !/^\d{4}$/.test(r.prefix4));
+const stillBadPrefix4 = records.filter(r => !/^.{4}$/.test(r.prefix4));
 
 console.log('   Remaining issues:');
 console.log(`     Bad eurocodes:  ${stillBadEuro.length}`);
