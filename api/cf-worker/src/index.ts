@@ -1065,10 +1065,10 @@ async function queryCalibrationRequirements(
         `SELECT sensor_type, sensor_label, calibration_triggers, calibration_type,
                 csc_tool_supported, target_plate, notes
          FROM adas_calibration_requirements
-         WHERE brand = ? COLLATE NOCASE AND model LIKE ? || '%' COLLATE NOCASE AND year_from <= ? AND (year_to IS NULL OR year_to >= ?)
+         WHERE brand = ? COLLATE NOCASE AND model LIKE ? COLLATE NOCASE AND year_from <= ? AND (year_to IS NULL OR year_to >= ?)
          ORDER BY sensor_type`
       )
-      .bind(normalizedMake, model, year, year)
+      .bind(normalizedMake, model.split(/\s+/)[0] + "%", year, year)
       .all();
 
     return (results || []).map((r: any) => ({
