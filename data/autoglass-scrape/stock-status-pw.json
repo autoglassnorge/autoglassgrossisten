@@ -1,0 +1,5074 @@
+[
+  {
+    "sku": "2304ACDCMUVZ2L",
+    "status": 0
+  },
+  {
+    "sku": "2304ACDCMUVZ95",
+    "status": 0
+  },
+  {
+    "sku": "2304BYQSABKWZ",
+    "status": 0
+  },
+  {
+    "sku": "2304LGCS4FDKZ",
+    "status": 0
+  },
+  {
+    "sku": "2304LYQS4RDKZ",
+    "status": 0
+  },
+  {
+    "sku": "2304RGCS4FDKZ",
+    "status": 0
+  },
+  {
+    "sku": "2304RYQS4RDKZ",
+    "status": 0
+  },
+  {
+    "sku": "2300ACDCMUVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "2300ACDCMUVZ2L",
+    "status": 1
+  },
+  {
+    "sku": "2300AGACMUVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "2300AGACMUVZ2L",
+    "status": 1
+  },
+  {
+    "sku": "2300AGACMVZ",
+    "status": 0
+  },
+  {
+    "sku": "2300BYPRA",
+    "status": 1
+  },
+  {
+    "sku": "2300LGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2300LGSR5FVWZ",
+    "status": 1
+  },
+  {
+    "sku": "2300LYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2300RGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2300RYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "1276BZ",
+    "status": 1
+  },
+  {
+    "sku": "1276C",
+    "status": 0
+  },
+  {
+    "sku": "1276GB",
+    "status": 1
+  },
+  {
+    "sku": "1536GB",
+    "status": 0
+  },
+  {
+    "sku": "8761GN",
+    "status": 1
+  },
+  {
+    "sku": "2370GN",
+    "status": 1
+  },
+  {
+    "sku": "2370GYELM",
+    "status": 1
+  },
+  {
+    "sku": "2370GYM",
+    "status": 1
+  },
+  {
+    "sku": "27063GN",
+    "status": 1
+  },
+  {
+    "sku": "27064GN",
+    "status": 1
+  },
+  {
+    "sku": "2466LGST2FD",
+    "status": 1
+  },
+  {
+    "sku": "2466RGST2FD",
+    "status": 1
+  },
+  {
+    "sku": "29588GN",
+    "status": 1
+  },
+  {
+    "sku": "29588YP",
+    "status": 1
+  },
+  {
+    "sku": "29589GN",
+    "status": 1
+  },
+  {
+    "sku": "29590GN",
+    "status": 1
+  },
+  {
+    "sku": "29591GN",
+    "status": 1
+  },
+  {
+    "sku": "29591YP",
+    "status": 1
+  },
+  {
+    "sku": "29592GN",
+    "status": 1
+  },
+  {
+    "sku": "29592YP",
+    "status": 1
+  },
+  {
+    "sku": "3126GN",
+    "status": 1
+  },
+  {
+    "sku": "3126GNELM",
+    "status": 1
+  },
+  {
+    "sku": "3126GYM",
+    "status": 1
+  },
+  {
+    "sku": "2310AGNCMVZ",
+    "status": 0
+  },
+  {
+    "sku": "2310AGNCMVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "2310BGNRA",
+    "status": 0
+  },
+  {
+    "sku": "2310BYPRA",
+    "status": 0
+  },
+  {
+    "sku": "2310LGNR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2310LGNR5RDW",
+    "status": 0
+  },
+  {
+    "sku": "2310LGNR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2310LYPR5RDW",
+    "status": 0
+  },
+  {
+    "sku": "2310LYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2310RGNR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2310RGNR5RDW",
+    "status": 0
+  },
+  {
+    "sku": "2310RGNR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2310RYPR5RDW",
+    "status": 0
+  },
+  {
+    "sku": "2310RYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "29223GD",
+    "status": 0
+  },
+  {
+    "sku": "29223GN",
+    "status": 0
+  },
+  {
+    "sku": "29224GD",
+    "status": 1
+  },
+  {
+    "sku": "29224GN",
+    "status": 1
+  },
+  {
+    "sku": "30309GN",
+    "status": 1
+  },
+  {
+    "sku": "30310GN",
+    "status": 1
+  },
+  {
+    "sku": "30311GN",
+    "status": 1
+  },
+  {
+    "sku": "30311GP",
+    "status": 1
+  },
+  {
+    "sku": "30312GN",
+    "status": 1
+  },
+  {
+    "sku": "30312GP",
+    "status": 1
+  },
+  {
+    "sku": "30313GD",
+    "status": 1
+  },
+  {
+    "sku": "30313GN",
+    "status": 1
+  },
+  {
+    "sku": "3050GN",
+    "status": 1
+  },
+  {
+    "sku": "3050GNELM",
+    "status": 1
+  },
+  {
+    "sku": "3050GNELM2",
+    "status": 1
+  },
+  {
+    "sku": "28875GN",
+    "status": 1
+  },
+  {
+    "sku": "28876GN",
+    "status": 1
+  },
+  {
+    "sku": "28877GN",
+    "status": 1
+  },
+  {
+    "sku": "28877YP",
+    "status": 1
+  },
+  {
+    "sku": "28878GN",
+    "status": 1
+  },
+  {
+    "sku": "28878YP",
+    "status": 1
+  },
+  {
+    "sku": "28879GN",
+    "status": 0
+  },
+  {
+    "sku": "28879YP",
+    "status": 1
+  },
+  {
+    "sku": "28880GN",
+    "status": 1
+  },
+  {
+    "sku": "28880YP",
+    "status": 0
+  },
+  {
+    "sku": "28881GN",
+    "status": 0
+  },
+  {
+    "sku": "28881YP",
+    "status": 1
+  },
+  {
+    "sku": "28882GN",
+    "status": 1
+  },
+  {
+    "sku": "28882YP",
+    "status": 1
+  },
+  {
+    "sku": "28883GN",
+    "status": 1
+  },
+  {
+    "sku": "28883YP",
+    "status": 1
+  },
+  {
+    "sku": "2982GY",
+    "status": 1
+  },
+  {
+    "sku": "2982GYM",
+    "status": 1
+  },
+  {
+    "sku": "30828GN",
+    "status": 1
+  },
+  {
+    "sku": "30828YP",
+    "status": 1
+  },
+  {
+    "sku": "30830GN",
+    "status": 1
+  },
+  {
+    "sku": "30831GN",
+    "status": 1
+  },
+  {
+    "sku": "30831YP",
+    "status": 1
+  },
+  {
+    "sku": "30832GN",
+    "status": 1
+  },
+  {
+    "sku": "30832YP",
+    "status": 1
+  },
+  {
+    "sku": "30833GN",
+    "status": 0
+  },
+  {
+    "sku": "30833YP",
+    "status": 1
+  },
+  {
+    "sku": "30834GN",
+    "status": 1
+  },
+  {
+    "sku": "30834YP",
+    "status": 1
+  },
+  {
+    "sku": "30835GN",
+    "status": 0
+  },
+  {
+    "sku": "30835GN2",
+    "status": 1
+  },
+  {
+    "sku": "30835GNC",
+    "status": 0
+  },
+  {
+    "sku": "30835YP2",
+    "status": 0
+  },
+  {
+    "sku": "30835YPC",
+    "status": 1
+  },
+  {
+    "sku": "30836GN",
+    "status": 1
+  },
+  {
+    "sku": "30836GN2",
+    "status": 1
+  },
+  {
+    "sku": "30836GNC",
+    "status": 0
+  },
+  {
+    "sku": "30836YP2",
+    "status": 1
+  },
+  {
+    "sku": "30836YPC",
+    "status": 1
+  },
+  {
+    "sku": "3355GNCM",
+    "status": 1
+  },
+  {
+    "sku": "3355GNCMU",
+    "status": 1
+  },
+  {
+    "sku": "3355GYM",
+    "status": 1
+  },
+  {
+    "sku": "30829GN",
+    "status": 1
+  },
+  {
+    "sku": "3355PYKIT",
+    "status": 1
+  },
+  {
+    "sku": "2303AGACMUVZ",
+    "status": 0
+  },
+  {
+    "sku": "2303AGACMUVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "2303AGACMUVZ2L",
+    "status": 1
+  },
+  {
+    "sku": "2303AGACMVZ",
+    "status": 1
+  },
+  {
+    "sku": "2303BGSRAZ",
+    "status": 0
+  },
+  {
+    "sku": "2303BYPRAZ",
+    "status": 0
+  },
+  {
+    "sku": "2303LGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2303LGSR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2303LYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2303RGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2303RGSR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2303RYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2480AGACMUVZ",
+    "status": 1
+  },
+  {
+    "sku": "2480AGACMVZ",
+    "status": 1
+  },
+  {
+    "sku": "2480BGSRA",
+    "status": 1
+  },
+  {
+    "sku": "2480BYPRA",
+    "status": 1
+  },
+  {
+    "sku": "2480LGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2480LGSR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2480LGSR5RVWZ",
+    "status": 1
+  },
+  {
+    "sku": "2480LYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2480LYPR5RVWZ",
+    "status": 1
+  },
+  {
+    "sku": "2480RGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2480RGSR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2480RGSR5RVWZ",
+    "status": 1
+  },
+  {
+    "sku": "2480RYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2480RYPR5RVWZ",
+    "status": 1
+  },
+  {
+    "sku": "2307AGRCMUVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "2307ASCRS",
+    "status": 0
+  },
+  {
+    "sku": "2307BYPRABZ",
+    "status": 0
+  },
+  {
+    "sku": "2307LGAR5FDKW",
+    "status": 0
+  },
+  {
+    "sku": "2307LGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2307LYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2307LYPR5RVZ1M",
+    "status": 0
+  },
+  {
+    "sku": "2307RGAR5FDKW",
+    "status": 0
+  },
+  {
+    "sku": "2307RGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2307RYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2307RYPR5RVZ1M",
+    "status": 0
+  },
+  {
+    "sku": "2540CSGM",
+    "status": 1
+  },
+  {
+    "sku": "2540GGM",
+    "status": 1
+  },
+  {
+    "sku": "2540GY",
+    "status": 1
+  },
+  {
+    "sku": "26619GN",
+    "status": 1
+  },
+  {
+    "sku": "26620GN",
+    "status": 1
+  },
+  {
+    "sku": "26621GN",
+    "status": 1
+  },
+  {
+    "sku": "26621YP",
+    "status": 1
+  },
+  {
+    "sku": "26622GN",
+    "status": 0
+  },
+  {
+    "sku": "26622YP",
+    "status": 1
+  },
+  {
+    "sku": "26623GN",
+    "status": 1
+  },
+  {
+    "sku": "26623YP",
+    "status": 1
+  },
+  {
+    "sku": "26624GN",
+    "status": 1
+  },
+  {
+    "sku": "26624YP",
+    "status": 1
+  },
+  {
+    "sku": "26625GN",
+    "status": 1
+  },
+  {
+    "sku": "26625YP",
+    "status": 0
+  },
+  {
+    "sku": "26626GN",
+    "status": 1
+  },
+  {
+    "sku": "26626YP",
+    "status": 1
+  },
+  {
+    "sku": "26627GN",
+    "status": 1
+  },
+  {
+    "sku": "26627GP",
+    "status": 1
+  },
+  {
+    "sku": "29320GN",
+    "status": 1
+  },
+  {
+    "sku": "29320YP",
+    "status": 1
+  },
+  {
+    "sku": "29321GN",
+    "status": 1
+  },
+  {
+    "sku": "29321GN2",
+    "status": 1
+  },
+  {
+    "sku": "29322GN",
+    "status": 1
+  },
+  {
+    "sku": "29322GN2",
+    "status": 1
+  },
+  {
+    "sku": "29323GN",
+    "status": 1
+  },
+  {
+    "sku": "29323GN2",
+    "status": 1
+  },
+  {
+    "sku": "29323YP",
+    "status": 1
+  },
+  {
+    "sku": "29323YP2",
+    "status": 1
+  },
+  {
+    "sku": "29324GN",
+    "status": 1
+  },
+  {
+    "sku": "29324GN2",
+    "status": 1
+  },
+  {
+    "sku": "29324YP",
+    "status": 1
+  },
+  {
+    "sku": "29324YP2",
+    "status": 1
+  },
+  {
+    "sku": "29325GN",
+    "status": 1
+  },
+  {
+    "sku": "29325YP",
+    "status": 1
+  },
+  {
+    "sku": "29326GN",
+    "status": 1
+  },
+  {
+    "sku": "29326YP",
+    "status": 1
+  },
+  {
+    "sku": "29327GN",
+    "status": 1
+  },
+  {
+    "sku": "29327GN2",
+    "status": 0
+  },
+  {
+    "sku": "29327YP",
+    "status": 1
+  },
+  {
+    "sku": "29327YP2",
+    "status": 1
+  },
+  {
+    "sku": "29328GN",
+    "status": 1
+  },
+  {
+    "sku": "29328GN2",
+    "status": 0
+  },
+  {
+    "sku": "29328YP",
+    "status": 1
+  },
+  {
+    "sku": "29328YP2",
+    "status": 1
+  },
+  {
+    "sku": "3077CSGYM",
+    "status": 1
+  },
+  {
+    "sku": "3077CSGYM2",
+    "status": 1
+  },
+  {
+    "sku": "3077GNCM",
+    "status": 0
+  },
+  {
+    "sku": "3077GNM",
+    "status": 1
+  },
+  {
+    "sku": "3077GY",
+    "status": 1
+  },
+  {
+    "sku": "3077GY2",
+    "status": 1
+  },
+  {
+    "sku": "3077GYM",
+    "status": 1
+  },
+  {
+    "sku": "3077GYM2",
+    "status": 1
+  },
+  {
+    "sku": "3078CSMU",
+    "status": 1
+  },
+  {
+    "sku": "3078CSMU2",
+    "status": 1
+  },
+  {
+    "sku": "3078GNCMU",
+    "status": 1
+  },
+  {
+    "sku": "3078GNMU",
+    "status": 1
+  },
+  {
+    "sku": "3078GNMU2",
+    "status": 1
+  },
+  {
+    "sku": "2487AGACMUVZ",
+    "status": 1
+  },
+  {
+    "sku": "2487AGACMUVZ2L",
+    "status": 0
+  },
+  {
+    "sku": "2487AGACMUVZ3L",
+    "status": 1
+  },
+  {
+    "sku": "2487AGACMVZ",
+    "status": 0
+  },
+  {
+    "sku": "2487BGNRAZ",
+    "status": 1
+  },
+  {
+    "sku": "2487BYPRAZ",
+    "status": 1
+  },
+  {
+    "sku": "2487LGAR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2487LGNR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2487LGNR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2487LGNR5RQA1G",
+    "status": 0
+  },
+  {
+    "sku": "2487LGNR5RVWZ1M",
+    "status": 0
+  },
+  {
+    "sku": "2487LYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2487LYPR5RQA1G",
+    "status": 1
+  },
+  {
+    "sku": "2487LYPR5RQAZ",
+    "status": 1
+  },
+  {
+    "sku": "2487LYPR5RVWZ1M",
+    "status": 1
+  },
+  {
+    "sku": "2487RGAR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2487RGNR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2487RGNR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2487RGNR5RQA1G",
+    "status": 0
+  },
+  {
+    "sku": "2487RGNR5RVWZ1M",
+    "status": 0
+  },
+  {
+    "sku": "2487RYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2487RYPR5RQA1G",
+    "status": 1
+  },
+  {
+    "sku": "2487RYPR5RQAZ",
+    "status": 1
+  },
+  {
+    "sku": "2487RYPR5RVWZ1M",
+    "status": 1
+  },
+  {
+    "sku": "2311AGACMUVZ01L",
+    "status": 0
+  },
+  {
+    "sku": "2311AGACMUVZ02L",
+    "status": 0
+  },
+  {
+    "sku": "2311AGACMVZ",
+    "status": 0
+  },
+  {
+    "sku": "2311ASMR",
+    "status": 0
+  },
+  {
+    "sku": "2311BGSRAZ",
+    "status": 0
+  },
+  {
+    "sku": "2311BYPRAZ",
+    "status": 0
+  },
+  {
+    "sku": "2311LGNR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2311LGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2311LYPR5RQAQZ",
+    "status": 0
+  },
+  {
+    "sku": "2311RGNR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2311RGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2311RYPR5RQAQZ",
+    "status": 0
+  },
+  {
+    "sku": "2488AGACMUVZ",
+    "status": 1
+  },
+  {
+    "sku": "2488AGACMUVZ2L",
+    "status": 0
+  },
+  {
+    "sku": "2488AGACMVZ",
+    "status": 1
+  },
+  {
+    "sku": "2488ASGRT",
+    "status": 1
+  },
+  {
+    "sku": "2488BGSRABZ",
+    "status": 1
+  },
+  {
+    "sku": "2488BYPRABZ",
+    "status": 1
+  },
+  {
+    "sku": "2488LGRR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2488LGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2488LGSR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2488LGSR5RQZ",
+    "status": 1
+  },
+  {
+    "sku": "2488LGSR5RVWZ1M",
+    "status": 0
+  },
+  {
+    "sku": "2488LYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2488LYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2488LYPR5RVWZ1M",
+    "status": 1
+  },
+  {
+    "sku": "2488RGRR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2488RGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2488RGSR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2488RGSR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2488RGSR5RVWZ1M",
+    "status": 0
+  },
+  {
+    "sku": "2488RYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2488RYPR5RQZ",
+    "status": 1
+  },
+  {
+    "sku": "2488RYPR5RVWZ1M",
+    "status": 1
+  },
+  {
+    "sku": "30366GD",
+    "status": 1
+  },
+  {
+    "sku": "30366GN",
+    "status": 1
+  },
+  {
+    "sku": "30367GN",
+    "status": 1
+  },
+  {
+    "sku": "30368GN",
+    "status": 1
+  },
+  {
+    "sku": "30369GD",
+    "status": 1
+  },
+  {
+    "sku": "30369GN",
+    "status": 1
+  },
+  {
+    "sku": "30370GD",
+    "status": 1
+  },
+  {
+    "sku": "30370GN",
+    "status": 1
+  },
+  {
+    "sku": "30371GD",
+    "status": 1
+  },
+  {
+    "sku": "30371GN",
+    "status": 0
+  },
+  {
+    "sku": "30372GD",
+    "status": 1
+  },
+  {
+    "sku": "30372GN",
+    "status": 0
+  },
+  {
+    "sku": "30373GD",
+    "status": 1
+  },
+  {
+    "sku": "30373GN",
+    "status": 1
+  },
+  {
+    "sku": "30374GD",
+    "status": 1
+  },
+  {
+    "sku": "30374GN",
+    "status": 1
+  },
+  {
+    "sku": "3257CSGYM",
+    "status": 1
+  },
+  {
+    "sku": "3257CSMU",
+    "status": 1
+  },
+  {
+    "sku": "3257GNCM",
+    "status": 1
+  },
+  {
+    "sku": "3257GNCMU",
+    "status": 0
+  },
+  {
+    "sku": "3257GNMU",
+    "status": 1
+  },
+  {
+    "sku": "3257GYM",
+    "status": 1
+  },
+  {
+    "sku": "2293CSG",
+    "status": 1
+  },
+  {
+    "sku": "2293CSGM",
+    "status": 1
+  },
+  {
+    "sku": "2293GY",
+    "status": 0
+  },
+  {
+    "sku": "2293GYM",
+    "status": 1
+  },
+  {
+    "sku": "2406CSGM",
+    "status": 1
+  },
+  {
+    "sku": "2406GYM",
+    "status": 1
+  },
+  {
+    "sku": "25201GN",
+    "status": 1
+  },
+  {
+    "sku": "25201GNL",
+    "status": 1
+  },
+  {
+    "sku": "25202GN",
+    "status": 1
+  },
+  {
+    "sku": "25202GNL",
+    "status": 1
+  },
+  {
+    "sku": "25203GN",
+    "status": 1
+  },
+  {
+    "sku": "25203GNL",
+    "status": 1
+  },
+  {
+    "sku": "25203YP",
+    "status": 1
+  },
+  {
+    "sku": "25204GN",
+    "status": 1
+  },
+  {
+    "sku": "25204GNL",
+    "status": 1
+  },
+  {
+    "sku": "25204YP",
+    "status": 1
+  },
+  {
+    "sku": "25205GN",
+    "status": 1
+  },
+  {
+    "sku": "25205YP",
+    "status": 1
+  },
+  {
+    "sku": "25206GN",
+    "status": 1
+  },
+  {
+    "sku": "25206YP",
+    "status": 1
+  },
+  {
+    "sku": "25207GN",
+    "status": 0
+  },
+  {
+    "sku": "25207YP",
+    "status": 1
+  },
+  {
+    "sku": "25208GN",
+    "status": 1
+  },
+  {
+    "sku": "25208YP",
+    "status": 1
+  },
+  {
+    "sku": "25209GN",
+    "status": 1
+  },
+  {
+    "sku": "25209YP",
+    "status": 1
+  },
+  {
+    "sku": "2752CSGM",
+    "status": 1
+  },
+  {
+    "sku": "2752GY",
+    "status": 1
+  },
+  {
+    "sku": "2752GYM",
+    "status": 1
+  },
+  {
+    "sku": "27782GN",
+    "status": 0
+  },
+  {
+    "sku": "27782YP",
+    "status": 0
+  },
+  {
+    "sku": "27783GN",
+    "status": 0
+  },
+  {
+    "sku": "27784GN",
+    "status": 1
+  },
+  {
+    "sku": "27785GN",
+    "status": 1
+  },
+  {
+    "sku": "27785YP",
+    "status": 1
+  },
+  {
+    "sku": "27786GN",
+    "status": 1
+  },
+  {
+    "sku": "27786YP",
+    "status": 1
+  },
+  {
+    "sku": "27787GN",
+    "status": 0
+  },
+  {
+    "sku": "27787YP",
+    "status": 1
+  },
+  {
+    "sku": "27788GN",
+    "status": 1
+  },
+  {
+    "sku": "27788YP",
+    "status": 1
+  },
+  {
+    "sku": "27789GN",
+    "status": 1
+  },
+  {
+    "sku": "27789YP",
+    "status": 1
+  },
+  {
+    "sku": "27789YP2",
+    "status": 1
+  },
+  {
+    "sku": "27790GN",
+    "status": 1
+  },
+  {
+    "sku": "27790GN2",
+    "status": 0
+  },
+  {
+    "sku": "27790YP",
+    "status": 1
+  },
+  {
+    "sku": "27790YP2",
+    "status": 1
+  },
+  {
+    "sku": "2780CSMU",
+    "status": 1
+  },
+  {
+    "sku": "2780GNMU",
+    "status": 1
+  },
+  {
+    "sku": "2967CSGYM",
+    "status": 1
+  },
+  {
+    "sku": "2967GYCM",
+    "status": 1
+  },
+  {
+    "sku": "2967GYM",
+    "status": 1
+  },
+  {
+    "sku": "2968CSMU",
+    "status": 1
+  },
+  {
+    "sku": "2968GNCMU",
+    "status": 1
+  },
+  {
+    "sku": "2968GNMU",
+    "status": 1
+  },
+  {
+    "sku": "30203GN",
+    "status": 0
+  },
+  {
+    "sku": "30204GN",
+    "status": 0
+  },
+  {
+    "sku": "30205GN",
+    "status": 1
+  },
+  {
+    "sku": "30205YP",
+    "status": 1
+  },
+  {
+    "sku": "30206GN",
+    "status": 1
+  },
+  {
+    "sku": "30206YP",
+    "status": 1
+  },
+  {
+    "sku": "30207YP",
+    "status": 1
+  },
+  {
+    "sku": "30208YP",
+    "status": 1
+  },
+  {
+    "sku": "30209YP",
+    "status": 0
+  },
+  {
+    "sku": "30210YP",
+    "status": 0
+  },
+  {
+    "sku": "30211GN",
+    "status": 1
+  },
+  {
+    "sku": "30211YP",
+    "status": 1
+  },
+  {
+    "sku": "3228CSGYM",
+    "status": 1
+  },
+  {
+    "sku": "3228GNCM",
+    "status": 1
+  },
+  {
+    "sku": "3228GNCMU",
+    "status": 1
+  },
+  {
+    "sku": "2492AGACMUVZ1L",
+    "status": 1
+  },
+  {
+    "sku": "2492AGACMVZ1L",
+    "status": 1
+  },
+  {
+    "sku": "2492ASGRT",
+    "status": 1
+  },
+  {
+    "sku": "2492BGSRAZ",
+    "status": 0
+  },
+  {
+    "sku": "2492BYPRAZ",
+    "status": 0
+  },
+  {
+    "sku": "2492LGRR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2492LYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2492LYPR5RQAJZ",
+    "status": 0
+  },
+  {
+    "sku": "2492LYPR5RVZ1M",
+    "status": 1
+  },
+  {
+    "sku": "2492LYQR5RDKW",
+    "status": 1
+  },
+  {
+    "sku": "2492LYQR5RVKZ1M",
+    "status": 1
+  },
+  {
+    "sku": "2492RGRR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2492RYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2492RYPR5RQAJZ",
+    "status": 1
+  },
+  {
+    "sku": "2492RYPR5RVZ1M",
+    "status": 1
+  },
+  {
+    "sku": "2492RYQR5RDKW",
+    "status": 1
+  },
+  {
+    "sku": "2492RYQR5RVKZ1M",
+    "status": 1
+  },
+  {
+    "sku": "28479GN",
+    "status": 1
+  },
+  {
+    "sku": "28480GN",
+    "status": 1
+  },
+  {
+    "sku": "28481GN",
+    "status": 0
+  },
+  {
+    "sku": "28481YP",
+    "status": 1
+  },
+  {
+    "sku": "28482GN",
+    "status": 1
+  },
+  {
+    "sku": "28482YP",
+    "status": 1
+  },
+  {
+    "sku": "28483GN",
+    "status": 0
+  },
+  {
+    "sku": "28483YP",
+    "status": 1
+  },
+  {
+    "sku": "28484GN",
+    "status": 1
+  },
+  {
+    "sku": "28484YP",
+    "status": 1
+  },
+  {
+    "sku": "28485GN",
+    "status": 0
+  },
+  {
+    "sku": "28485YP",
+    "status": 1
+  },
+  {
+    "sku": "28485YP2",
+    "status": 0
+  },
+  {
+    "sku": "28486GN",
+    "status": 0
+  },
+  {
+    "sku": "28486YP",
+    "status": 0
+  },
+  {
+    "sku": "28486YP2",
+    "status": 0
+  },
+  {
+    "sku": "28487GN",
+    "status": 1
+  },
+  {
+    "sku": "28487YP",
+    "status": 0
+  },
+  {
+    "sku": "2883GNCMU",
+    "status": 1
+  },
+  {
+    "sku": "2884GYM",
+    "status": 1
+  },
+  {
+    "sku": "2886GNMU",
+    "status": 1
+  },
+  {
+    "sku": "2969GYCM",
+    "status": 1
+  },
+  {
+    "sku": "2969GYM",
+    "status": 0
+  },
+  {
+    "sku": "2970GNCMU",
+    "status": 1
+  },
+  {
+    "sku": "2970GNMU",
+    "status": 1
+  },
+  {
+    "sku": "3309CSCMU",
+    "status": 0
+  },
+  {
+    "sku": "3309CSMU",
+    "status": 1
+  },
+  {
+    "sku": "3309GNCMU",
+    "status": 1
+  },
+  {
+    "sku": "30577GN",
+    "status": 1
+  },
+  {
+    "sku": "30578GN",
+    "status": 1
+  },
+  {
+    "sku": "30579GN",
+    "status": 0
+  },
+  {
+    "sku": "30579YP",
+    "status": 1
+  },
+  {
+    "sku": "30580GN",
+    "status": 0
+  },
+  {
+    "sku": "30580YP",
+    "status": 1
+  },
+  {
+    "sku": "30581GN",
+    "status": 0
+  },
+  {
+    "sku": "30581YP",
+    "status": 1
+  },
+  {
+    "sku": "30582GN",
+    "status": 0
+  },
+  {
+    "sku": "30582YP",
+    "status": 1
+  },
+  {
+    "sku": "30583GN",
+    "status": 0
+  },
+  {
+    "sku": "30583YP",
+    "status": 1
+  },
+  {
+    "sku": "30584GN",
+    "status": 0
+  },
+  {
+    "sku": "30584YP",
+    "status": 1
+  },
+  {
+    "sku": "30585GN2",
+    "status": 1
+  },
+  {
+    "sku": "30585YP2",
+    "status": 1
+  },
+  {
+    "sku": "2498AGACMUVZ1L",
+    "status": 1
+  },
+  {
+    "sku": "2498AGACMVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "2498BYPRABZ",
+    "status": 1
+  },
+  {
+    "sku": "2498LGRR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2498LYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2498LYPR5RVWZ1M",
+    "status": 0
+  },
+  {
+    "sku": "2498LYQR5RDKW",
+    "status": 0
+  },
+  {
+    "sku": "2498LYQR5RVKW1Z",
+    "status": 0
+  },
+  {
+    "sku": "2498RGRR5FDKW",
+    "status": 0
+  },
+  {
+    "sku": "2498RYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2498RYPR5RVWZ1M",
+    "status": 0
+  },
+  {
+    "sku": "2498RYQR5RDKW",
+    "status": 0
+  },
+  {
+    "sku": "2498RYQR5RVKW1Z",
+    "status": 0
+  },
+  {
+    "sku": "2493AGACMUVZ1L",
+    "status": 1
+  },
+  {
+    "sku": "2493AGACMVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "2493BYPRAZ",
+    "status": 1
+  },
+  {
+    "sku": "2493LGRR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2493LYQR5RDK",
+    "status": 1
+  },
+  {
+    "sku": "2493LYQR5RDKW",
+    "status": 1
+  },
+  {
+    "sku": "2493LYQR5RVKWZ",
+    "status": 0
+  },
+  {
+    "sku": "2493RGRR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2493RYQR5RDK",
+    "status": 1
+  },
+  {
+    "sku": "2493RYQR5RDKW",
+    "status": 1
+  },
+  {
+    "sku": "2493RYQR5RVKWZ",
+    "status": 0
+  },
+  {
+    "sku": "2305AGACMUVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "2305BYPRAZ",
+    "status": 0
+  },
+  {
+    "sku": "2305LGAR5FDKW",
+    "status": 0
+  },
+  {
+    "sku": "2305LYQR5RDKW",
+    "status": 0
+  },
+  {
+    "sku": "2305LYQR5RQKZ",
+    "status": 0
+  },
+  {
+    "sku": "2305RGAR5FDKW",
+    "status": 0
+  },
+  {
+    "sku": "2305RYQR5RDKW",
+    "status": 0
+  },
+  {
+    "sku": "2305RYQR5RQKZ",
+    "status": 0
+  },
+  {
+    "sku": "2037GN",
+    "status": 1
+  },
+  {
+    "sku": "23907GN",
+    "status": 0
+  },
+  {
+    "sku": "23908GN",
+    "status": 1
+  },
+  {
+    "sku": "23909GN",
+    "status": 1
+  },
+  {
+    "sku": "23910GN",
+    "status": 1
+  },
+  {
+    "sku": "23911GN",
+    "status": 1
+  },
+  {
+    "sku": "23912GN",
+    "status": 1
+  },
+  {
+    "sku": "23913GN",
+    "status": 1
+  },
+  {
+    "sku": "23257GN",
+    "status": 1
+  },
+  {
+    "sku": "23258GN",
+    "status": 1
+  },
+  {
+    "sku": "23259GN",
+    "status": 1
+  },
+  {
+    "sku": "23260GN",
+    "status": 1
+  },
+  {
+    "sku": "27999GN",
+    "status": 1
+  },
+  {
+    "sku": "28000GN",
+    "status": 1
+  },
+  {
+    "sku": "28001GN",
+    "status": 1
+  },
+  {
+    "sku": "28002GN",
+    "status": 1
+  },
+  {
+    "sku": "28003GN",
+    "status": 1
+  },
+  {
+    "sku": "28003YP",
+    "status": 1
+  },
+  {
+    "sku": "2806GNM",
+    "status": 1
+  },
+  {
+    "sku": "2806GY",
+    "status": 1
+  },
+  {
+    "sku": "2806GYM",
+    "status": 0
+  },
+  {
+    "sku": "2444BGSTW",
+    "status": 1
+  },
+  {
+    "sku": "2517GGM",
+    "status": 0
+  },
+  {
+    "sku": "2517GY",
+    "status": 0
+  },
+  {
+    "sku": "26453GN",
+    "status": 1
+  },
+  {
+    "sku": "26454GN",
+    "status": 1
+  },
+  {
+    "sku": "28775GN",
+    "status": 1
+  },
+  {
+    "sku": "28777GN",
+    "status": 1
+  },
+  {
+    "sku": "28778GN",
+    "status": 1
+  },
+  {
+    "sku": "28779GN",
+    "status": 1
+  },
+  {
+    "sku": "2959GNIM",
+    "status": 1
+  },
+  {
+    "sku": "2489AGSCMUVZ",
+    "status": 1
+  },
+  {
+    "sku": "2489AGSCMVZ",
+    "status": 0
+  },
+  {
+    "sku": "2489LGST2FD",
+    "status": 1
+  },
+  {
+    "sku": "2489RGST2FD",
+    "status": 1
+  },
+  {
+    "sku": "2438GG",
+    "status": 1
+  },
+  {
+    "sku": "2438GGEL",
+    "status": 0
+  },
+  {
+    "sku": "25213GN",
+    "status": 0
+  },
+  {
+    "sku": "25214GN",
+    "status": 0
+  },
+  {
+    "sku": "E402AGNCMVZ01L",
+    "status": 0
+  },
+  {
+    "sku": "E402AGSCVZ",
+    "status": 1
+  },
+  {
+    "sku": "E402BGSRW",
+    "status": 1
+  },
+  {
+    "sku": "E402BYPRW",
+    "status": 0
+  },
+  {
+    "sku": "E402LGSR5FDW",
+    "status": 1
+  },
+  {
+    "sku": "E402LGSR5RDW",
+    "status": 1
+  },
+  {
+    "sku": "E402LYPR5RDW",
+    "status": 0
+  },
+  {
+    "sku": "E402LYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "E402RGSR5FDW",
+    "status": 1
+  },
+  {
+    "sku": "E402RGSR5RDW",
+    "status": 1
+  },
+  {
+    "sku": "E402RYPR5RDW",
+    "status": 0
+  },
+  {
+    "sku": "E402RYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "E407AGSCMVW",
+    "status": 1
+  },
+  {
+    "sku": "E407AGSCV",
+    "status": 0
+  },
+  {
+    "sku": "E407BGNHZ",
+    "status": 0
+  },
+  {
+    "sku": "E407BYPHZ",
+    "status": 1
+  },
+  {
+    "sku": "E407LGNH5FDW",
+    "status": 1
+  },
+  {
+    "sku": "E407LGNH5FQZ",
+    "status": 0
+  },
+  {
+    "sku": "E407LGNH5RDW",
+    "status": 1
+  },
+  {
+    "sku": "E407LYPH5RDW",
+    "status": 1
+  },
+  {
+    "sku": "E407RGNH5FDW",
+    "status": 1
+  },
+  {
+    "sku": "E407RGNH5FQZ",
+    "status": 0
+  },
+  {
+    "sku": "E407RGNH5RDW",
+    "status": 1
+  },
+  {
+    "sku": "E407RYPH5RDW",
+    "status": 1
+  },
+  {
+    "sku": "E409LCLV2FDW",
+    "status": 1
+  },
+  {
+    "sku": "E409RCLV2FDW",
+    "status": 1
+  },
+  {
+    "sku": "E403ACDCMUVZ",
+    "status": 1
+  },
+  {
+    "sku": "E403BYPSA",
+    "status": 1
+  },
+  {
+    "sku": "E403LGAS4FDKW",
+    "status": 1
+  },
+  {
+    "sku": "E403LYPS4RDW",
+    "status": 1
+  },
+  {
+    "sku": "E403RGAS4FDKW",
+    "status": 1
+  },
+  {
+    "sku": "E403RYPS4RDW",
+    "status": 1
+  },
+  {
+    "sku": "E405AGACMUVZ",
+    "status": 1
+  },
+  {
+    "sku": "E405AGACMVZ",
+    "status": 0
+  },
+  {
+    "sku": "E405BYPSAZ",
+    "status": 1
+  },
+  {
+    "sku": "E405LGRS4FDKW",
+    "status": 1
+  },
+  {
+    "sku": "E405LYPS4RDW",
+    "status": 1
+  },
+  {
+    "sku": "E405RGRS4FDKW",
+    "status": 1
+  },
+  {
+    "sku": "E405RYPS4RDW",
+    "status": 1
+  },
+  {
+    "sku": "E406AGACMUVZ",
+    "status": 0
+  },
+  {
+    "sku": "E406BYPRZ",
+    "status": 1
+  },
+  {
+    "sku": "E406LGAR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "E406LYPR5RDW",
+    "status": 1
+  },
+  {
+    "sku": "E406LYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "E406RGAR5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "E406RYPR5RDW",
+    "status": 1
+  },
+  {
+    "sku": "E406RYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "E410AGACMUVZ",
+    "status": 0
+  },
+  {
+    "sku": "E410BYPRA",
+    "status": 0
+  },
+  {
+    "sku": "E410LGRM5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "E410LYPR5RDW",
+    "status": 0
+  },
+  {
+    "sku": "E410RGRM5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "1541BZB",
+    "status": 1
+  },
+  {
+    "sku": "1541C",
+    "status": 1
+  },
+  {
+    "sku": "1541GB",
+    "status": 1
+  },
+  {
+    "sku": "20784BZ",
+    "status": 1
+  },
+  {
+    "sku": "20784C",
+    "status": 1
+  },
+  {
+    "sku": "20784GN",
+    "status": 1
+  },
+  {
+    "sku": "20827BZ",
+    "status": 0
+  },
+  {
+    "sku": "20827CL",
+    "status": 1
+  },
+  {
+    "sku": "20827GN",
+    "status": 0
+  },
+  {
+    "sku": "20828BZ",
+    "status": 0
+  },
+  {
+    "sku": "20828CL",
+    "status": 1
+  },
+  {
+    "sku": "20828GN",
+    "status": 0
+  },
+  {
+    "sku": "20829CL",
+    "status": 0
+  },
+  {
+    "sku": "20829GN",
+    "status": 0
+  },
+  {
+    "sku": "20830CL",
+    "status": 1
+  },
+  {
+    "sku": "20830GN",
+    "status": 0
+  },
+  {
+    "sku": "20833CL",
+    "status": 0
+  },
+  {
+    "sku": "20834CL",
+    "status": 0
+  },
+  {
+    "sku": "20834GN",
+    "status": 0
+  },
+  {
+    "sku": "20931GN",
+    "status": 0
+  },
+  {
+    "sku": "20932GN",
+    "status": 0
+  },
+  {
+    "sku": "21013CL",
+    "status": 0
+  },
+  {
+    "sku": "21014CL",
+    "status": 0
+  },
+  {
+    "sku": "21015CL",
+    "status": 0
+  },
+  {
+    "sku": "21017CL",
+    "status": 0
+  },
+  {
+    "sku": "21018CL",
+    "status": 0
+  },
+  {
+    "sku": "21018GN",
+    "status": 0
+  },
+  {
+    "sku": "1514BZ",
+    "status": 0
+  },
+  {
+    "sku": "1514C",
+    "status": 1
+  },
+  {
+    "sku": "20735BZ",
+    "status": 1
+  },
+  {
+    "sku": "20735CL",
+    "status": 0
+  },
+  {
+    "sku": "20735GN",
+    "status": 0
+  },
+  {
+    "sku": "20736BZ",
+    "status": 0
+  },
+  {
+    "sku": "20736CL",
+    "status": 0
+  },
+  {
+    "sku": "20736GN",
+    "status": 1
+  },
+  {
+    "sku": "8762BZ",
+    "status": 1
+  },
+  {
+    "sku": "8762C",
+    "status": 0
+  },
+  {
+    "sku": "8762GN",
+    "status": 1
+  },
+  {
+    "sku": "8763BZ",
+    "status": 0
+  },
+  {
+    "sku": "8763CL",
+    "status": 0
+  },
+  {
+    "sku": "8763GN",
+    "status": 0
+  },
+  {
+    "sku": "8764BZ",
+    "status": 0
+  },
+  {
+    "sku": "8764CL",
+    "status": 0
+  },
+  {
+    "sku": "8764GN",
+    "status": 0
+  },
+  {
+    "sku": "8765BZ",
+    "status": 0
+  },
+  {
+    "sku": "8765CL",
+    "status": 0
+  },
+  {
+    "sku": "8765GN",
+    "status": 0
+  },
+  {
+    "sku": "8766CL",
+    "status": 0
+  },
+  {
+    "sku": "8766GN",
+    "status": 0
+  },
+  {
+    "sku": "8767BZ",
+    "status": 0
+  },
+  {
+    "sku": "8767CL",
+    "status": 0
+  },
+  {
+    "sku": "8767GN",
+    "status": 0
+  },
+  {
+    "sku": "8768BZ",
+    "status": 0
+  },
+  {
+    "sku": "8768CL",
+    "status": 0
+  },
+  {
+    "sku": "8768GN",
+    "status": 0
+  },
+  {
+    "sku": "20424BZ",
+    "status": 0
+  },
+  {
+    "sku": "20424CL",
+    "status": 0
+  },
+  {
+    "sku": "20424GN",
+    "status": 0
+  },
+  {
+    "sku": "2776GN",
+    "status": 1
+  },
+  {
+    "sku": "2776GNEL",
+    "status": 0
+  },
+  {
+    "sku": "2776GNELM",
+    "status": 0
+  },
+  {
+    "sku": "2776GY",
+    "status": 1
+  },
+  {
+    "sku": "2776GYEL",
+    "status": 1
+  },
+  {
+    "sku": "2776GYELM",
+    "status": 1
+  },
+  {
+    "sku": "27893GN",
+    "status": 1
+  },
+  {
+    "sku": "27894GN",
+    "status": 0
+  },
+  {
+    "sku": "27895GN",
+    "status": 1
+  },
+  {
+    "sku": "27895YP",
+    "status": 0
+  },
+  {
+    "sku": "27896GN",
+    "status": 1
+  },
+  {
+    "sku": "27896YP",
+    "status": 1
+  },
+  {
+    "sku": "27897GN",
+    "status": 1
+  },
+  {
+    "sku": "27897GN2",
+    "status": 1
+  },
+  {
+    "sku": "27897YP",
+    "status": 0
+  },
+  {
+    "sku": "27897YP2",
+    "status": 1
+  },
+  {
+    "sku": "27898GN",
+    "status": 1
+  },
+  {
+    "sku": "27898GN2",
+    "status": 1
+  },
+  {
+    "sku": "27898YP",
+    "status": 1
+  },
+  {
+    "sku": "27898YP2",
+    "status": 1
+  },
+  {
+    "sku": "28064GN",
+    "status": 1
+  },
+  {
+    "sku": "28064YP",
+    "status": 1
+  },
+  {
+    "sku": "2692GN",
+    "status": 1
+  },
+  {
+    "sku": "27406GN",
+    "status": 1
+  },
+  {
+    "sku": "27407GN",
+    "status": 1
+  },
+  {
+    "sku": "27408GN",
+    "status": 1
+  },
+  {
+    "sku": "27409GN",
+    "status": 1
+  },
+  {
+    "sku": "27410GN",
+    "status": 1
+  },
+  {
+    "sku": "30428GN",
+    "status": 1
+  },
+  {
+    "sku": "30428YP",
+    "status": 1
+  },
+  {
+    "sku": "30435GN",
+    "status": 0
+  },
+  {
+    "sku": "30436GN",
+    "status": 0
+  },
+  {
+    "sku": "3287GN",
+    "status": 1
+  },
+  {
+    "sku": "3287GNC",
+    "status": 1
+  },
+  {
+    "sku": "27411GN",
+    "status": 1
+  },
+  {
+    "sku": "27412GN",
+    "status": 1
+  },
+  {
+    "sku": "27413GN",
+    "status": 1
+  },
+  {
+    "sku": "27413YP",
+    "status": 1
+  },
+  {
+    "sku": "27414GN",
+    "status": 1
+  },
+  {
+    "sku": "27414YP",
+    "status": 1
+  },
+  {
+    "sku": "30429GN",
+    "status": 1
+  },
+  {
+    "sku": "30430GN",
+    "status": 1
+  },
+  {
+    "sku": "30431GN",
+    "status": 1
+  },
+  {
+    "sku": "30431GN2",
+    "status": 1
+  },
+  {
+    "sku": "30431YP",
+    "status": 1
+  },
+  {
+    "sku": "30431YP2",
+    "status": 1
+  },
+  {
+    "sku": "30432GN",
+    "status": 1
+  },
+  {
+    "sku": "30432GN2",
+    "status": 1
+  },
+  {
+    "sku": "30432YP",
+    "status": 1
+  },
+  {
+    "sku": "30432YP2",
+    "status": 1
+  },
+  {
+    "sku": "2556CSM",
+    "status": 1
+  },
+  {
+    "sku": "2556GN",
+    "status": 1
+  },
+  {
+    "sku": "2556GYM",
+    "status": 1
+  },
+  {
+    "sku": "26669GN",
+    "status": 0
+  },
+  {
+    "sku": "26670GN",
+    "status": 1
+  },
+  {
+    "sku": "26671GN",
+    "status": 1
+  },
+  {
+    "sku": "26672GN",
+    "status": 1
+  },
+  {
+    "sku": "26673GN",
+    "status": 1
+  },
+  {
+    "sku": "26674GN",
+    "status": 1
+  },
+  {
+    "sku": "2380CSM",
+    "status": 1
+  },
+  {
+    "sku": "2380GN",
+    "status": 1
+  },
+  {
+    "sku": "2380GYM",
+    "status": 1
+  },
+  {
+    "sku": "25717GN",
+    "status": 1
+  },
+  {
+    "sku": "25718GN",
+    "status": 0
+  },
+  {
+    "sku": "25719GN",
+    "status": 1
+  },
+  {
+    "sku": "25720GN",
+    "status": 0
+  },
+  {
+    "sku": "25721GN",
+    "status": 1
+  },
+  {
+    "sku": "25722GN",
+    "status": 1
+  },
+  {
+    "sku": "25723GN",
+    "status": 1
+  },
+  {
+    "sku": "25724GN",
+    "status": 1
+  },
+  {
+    "sku": "25725GN",
+    "status": 1
+  },
+  {
+    "sku": "2746GZPH5PR",
+    "status": 0
+  },
+  {
+    "sku": "2758AGSCIMVZ1P",
+    "status": 1
+  },
+  {
+    "sku": "2758BGSH",
+    "status": 1
+  },
+  {
+    "sku": "2758BYPH",
+    "status": 1
+  },
+  {
+    "sku": "2758LGSH5FD",
+    "status": 1
+  },
+  {
+    "sku": "2758LGSH5FVWZ",
+    "status": 1
+  },
+  {
+    "sku": "2758LGSH5RD",
+    "status": 1
+  },
+  {
+    "sku": "2758LYPH5RD",
+    "status": 1
+  },
+  {
+    "sku": "2758RGSH5FD",
+    "status": 1
+  },
+  {
+    "sku": "2758RGSH5FVWZ",
+    "status": 1
+  },
+  {
+    "sku": "2758RGSH5RD",
+    "status": 1
+  },
+  {
+    "sku": "2758RYPH5RD",
+    "status": 1
+  },
+  {
+    "sku": "28994GN",
+    "status": 1
+  },
+  {
+    "sku": "28994GP",
+    "status": 0
+  },
+  {
+    "sku": "28995GN",
+    "status": 1
+  },
+  {
+    "sku": "28996GN",
+    "status": 1
+  },
+  {
+    "sku": "28997GN",
+    "status": 1
+  },
+  {
+    "sku": "28998GN",
+    "status": 1
+  },
+  {
+    "sku": "28999GN",
+    "status": 1
+  },
+  {
+    "sku": "29000GD",
+    "status": 1
+  },
+  {
+    "sku": "29000GN",
+    "status": 1
+  },
+  {
+    "sku": "29001GD",
+    "status": 1
+  },
+  {
+    "sku": "29001GN",
+    "status": 1
+  },
+  {
+    "sku": "29002GD",
+    "status": 1
+  },
+  {
+    "sku": "29002GN",
+    "status": 1
+  },
+  {
+    "sku": "3008GN",
+    "status": 1
+  },
+  {
+    "sku": "3009CGG",
+    "status": 1
+  },
+  {
+    "sku": "3009CSGM",
+    "status": 1
+  },
+  {
+    "sku": "3009CSGM2",
+    "status": 1
+  },
+  {
+    "sku": "2760BGDR",
+    "status": 1
+  },
+  {
+    "sku": "2760LGDR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2760LGDR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2760LGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2760LGSR5FVWZ",
+    "status": 0
+  },
+  {
+    "sku": "2760RGDR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2760RGDR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2760RGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2760RGSR5FVWZ",
+    "status": 0
+  },
+  {
+    "sku": "28683GN",
+    "status": 1
+  },
+  {
+    "sku": "28684GN",
+    "status": 1
+  },
+  {
+    "sku": "28685GN",
+    "status": 1
+  },
+  {
+    "sku": "28686GN",
+    "status": 1
+  },
+  {
+    "sku": "28687GD",
+    "status": 1
+  },
+  {
+    "sku": "28687GN",
+    "status": 1
+  },
+  {
+    "sku": "28688GD",
+    "status": 1
+  },
+  {
+    "sku": "28688GN",
+    "status": 1
+  },
+  {
+    "sku": "28689GD",
+    "status": 1
+  },
+  {
+    "sku": "28689GN",
+    "status": 0
+  },
+  {
+    "sku": "28690GD",
+    "status": 1
+  },
+  {
+    "sku": "28690GN",
+    "status": 1
+  },
+  {
+    "sku": "28691GD",
+    "status": 1
+  },
+  {
+    "sku": "28691GN",
+    "status": 0
+  },
+  {
+    "sku": "2940GN",
+    "status": 0
+  },
+  {
+    "sku": "2940GNM",
+    "status": 1
+  },
+  {
+    "sku": "2539CSM",
+    "status": 0
+  },
+  {
+    "sku": "2539GN",
+    "status": 1
+  },
+  {
+    "sku": "26005GN",
+    "status": 1
+  },
+  {
+    "sku": "26006GN",
+    "status": 1
+  },
+  {
+    "sku": "26007GN",
+    "status": 1
+  },
+  {
+    "sku": "26601GN",
+    "status": 1
+  },
+  {
+    "sku": "26602GN",
+    "status": 0
+  },
+  {
+    "sku": "26603GN",
+    "status": 1
+  },
+  {
+    "sku": "26604GN",
+    "status": 1
+  },
+  {
+    "sku": "26605GN",
+    "status": 0
+  },
+  {
+    "sku": "26606GN",
+    "status": 0
+  },
+  {
+    "sku": "26607GN",
+    "status": 1
+  },
+  {
+    "sku": "2630CSM",
+    "status": 1
+  },
+  {
+    "sku": "2630GN",
+    "status": 1
+  },
+  {
+    "sku": "2630GNM",
+    "status": 1
+  },
+  {
+    "sku": "2630GY",
+    "status": 1
+  },
+  {
+    "sku": "27087GN",
+    "status": 0
+  },
+  {
+    "sku": "27088GN",
+    "status": 1
+  },
+  {
+    "sku": "27089GN",
+    "status": 1
+  },
+  {
+    "sku": "27089GNL",
+    "status": 0
+  },
+  {
+    "sku": "27090GN",
+    "status": 1
+  },
+  {
+    "sku": "27090GNL",
+    "status": 0
+  },
+  {
+    "sku": "27091GN",
+    "status": 1
+  },
+  {
+    "sku": "27092GN",
+    "status": 1
+  },
+  {
+    "sku": "27093GD",
+    "status": 1
+  },
+  {
+    "sku": "27093GN",
+    "status": 1
+  },
+  {
+    "sku": "27094GD",
+    "status": 1
+  },
+  {
+    "sku": "27094GN",
+    "status": 1
+  },
+  {
+    "sku": "27095GN",
+    "status": 1
+  },
+  {
+    "sku": "27095GNL",
+    "status": 1
+  },
+  {
+    "sku": "27096GN",
+    "status": 1
+  },
+  {
+    "sku": "27096GNL",
+    "status": 1
+  },
+  {
+    "sku": "27097GN",
+    "status": 0
+  },
+  {
+    "sku": "27097GNL",
+    "status": 0
+  },
+  {
+    "sku": "27098GN",
+    "status": 1
+  },
+  {
+    "sku": "27098GNL",
+    "status": 1
+  },
+  {
+    "sku": "27099GN",
+    "status": 1
+  },
+  {
+    "sku": "27100GN",
+    "status": 1
+  },
+  {
+    "sku": "27101GDA",
+    "status": 1
+  },
+  {
+    "sku": "27101GN",
+    "status": 1
+  },
+  {
+    "sku": "27101GNA",
+    "status": 1
+  },
+  {
+    "sku": "29436GN",
+    "status": 1
+  },
+  {
+    "sku": "29436GP",
+    "status": 0
+  },
+  {
+    "sku": "29437GN",
+    "status": 1
+  },
+  {
+    "sku": "29438GN",
+    "status": 1
+  },
+  {
+    "sku": "29439GN",
+    "status": 1
+  },
+  {
+    "sku": "29440GN",
+    "status": 1
+  },
+  {
+    "sku": "29441GN",
+    "status": 1
+  },
+  {
+    "sku": "29441GP",
+    "status": 1
+  },
+  {
+    "sku": "29442GN",
+    "status": 1
+  },
+  {
+    "sku": "29442GP",
+    "status": 1
+  },
+  {
+    "sku": "29443GN",
+    "status": 1
+  },
+  {
+    "sku": "29443GP",
+    "status": 0
+  },
+  {
+    "sku": "29444GN",
+    "status": 1
+  },
+  {
+    "sku": "29444GP",
+    "status": 1
+  },
+  {
+    "sku": "3090GN",
+    "status": 1
+  },
+  {
+    "sku": "3090GNM",
+    "status": 1
+  },
+  {
+    "sku": "2765AGRCHIMVZ",
+    "status": 1
+  },
+  {
+    "sku": "2765BYPRBIZ",
+    "status": 1
+  },
+  {
+    "sku": "2765LGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2765LGSR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2765LYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2765LYPR5RQZ",
+    "status": 1
+  },
+  {
+    "sku": "2765RGSR5FD",
+    "status": 1
+  },
+  {
+    "sku": "2765RGSR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2765RYPR5RD",
+    "status": 0
+  },
+  {
+    "sku": "2765RYPR5RQZ",
+    "status": 1
+  },
+  {
+    "sku": "2750BYPR",
+    "status": 1
+  },
+  {
+    "sku": "2750LYPR5RQZ1D",
+    "status": 0
+  },
+  {
+    "sku": "2750RYPR5RQZ1D",
+    "status": 1
+  },
+  {
+    "sku": "3031GNCM",
+    "status": 1
+  },
+  {
+    "sku": "3031GNM2",
+    "status": 0
+  },
+  {
+    "sku": "3031GY",
+    "status": 1
+  },
+  {
+    "sku": "3031GYM",
+    "status": 1
+  },
+  {
+    "sku": "2753CSM",
+    "status": 1
+  },
+  {
+    "sku": "28024GD",
+    "status": 1
+  },
+  {
+    "sku": "28024GN",
+    "status": 1
+  },
+  {
+    "sku": "28024GP2",
+    "status": 1
+  },
+  {
+    "sku": "28025GDL",
+    "status": 1
+  },
+  {
+    "sku": "28025GN",
+    "status": 0
+  },
+  {
+    "sku": "28026GDL",
+    "status": 1
+  },
+  {
+    "sku": "28026GN",
+    "status": 1
+  },
+  {
+    "sku": "28027GD",
+    "status": 1
+  },
+  {
+    "sku": "28027GN",
+    "status": 0
+  },
+  {
+    "sku": "28028GD",
+    "status": 0
+  },
+  {
+    "sku": "28028GN",
+    "status": 0
+  },
+  {
+    "sku": "28029GDL",
+    "status": 0
+  },
+  {
+    "sku": "28029GN",
+    "status": 0
+  },
+  {
+    "sku": "28029GN2",
+    "status": 0
+  },
+  {
+    "sku": "28030GDL",
+    "status": 0
+  },
+  {
+    "sku": "28030GN",
+    "status": 1
+  },
+  {
+    "sku": "28030GN2",
+    "status": 1
+  },
+  {
+    "sku": "30113GN",
+    "status": 0
+  },
+  {
+    "sku": "30114GN",
+    "status": 0
+  },
+  {
+    "sku": "30115GN",
+    "status": 1
+  },
+  {
+    "sku": "30116GN",
+    "status": 1
+  },
+  {
+    "sku": "30124GN",
+    "status": 0
+  },
+  {
+    "sku": "30124YP",
+    "status": 1
+  },
+  {
+    "sku": "30125GN",
+    "status": 1
+  },
+  {
+    "sku": "30125YP",
+    "status": 1
+  },
+  {
+    "sku": "30125YPL",
+    "status": 0
+  },
+  {
+    "sku": "30126GN",
+    "status": 1
+  },
+  {
+    "sku": "30126YP",
+    "status": 1
+  },
+  {
+    "sku": "30126YPL",
+    "status": 1
+  },
+  {
+    "sku": "30127YP",
+    "status": 1
+  },
+  {
+    "sku": "30128YP",
+    "status": 0
+  },
+  {
+    "sku": "30129GN",
+    "status": 1
+  },
+  {
+    "sku": "30129YP",
+    "status": 0
+  },
+  {
+    "sku": "30130GN",
+    "status": 1
+  },
+  {
+    "sku": "30130YP",
+    "status": 0
+  },
+  {
+    "sku": "3211CSCM",
+    "status": 1
+  },
+  {
+    "sku": "3211CSM",
+    "status": 1
+  },
+  {
+    "sku": "3211CSM2",
+    "status": 0
+  },
+  {
+    "sku": "27791GN",
+    "status": 1
+  },
+  {
+    "sku": "27791GNL",
+    "status": 0
+  },
+  {
+    "sku": "27792GN",
+    "status": 0
+  },
+  {
+    "sku": "27792GNL",
+    "status": 0
+  },
+  {
+    "sku": "27793GN",
+    "status": 0
+  },
+  {
+    "sku": "27793GNL",
+    "status": 0
+  },
+  {
+    "sku": "27794GN",
+    "status": 1
+  },
+  {
+    "sku": "27794GNL",
+    "status": 1
+  },
+  {
+    "sku": "27795GN",
+    "status": 1
+  },
+  {
+    "sku": "27795GP",
+    "status": 0
+  },
+  {
+    "sku": "27796GN",
+    "status": 1
+  },
+  {
+    "sku": "27796GP",
+    "status": 0
+  },
+  {
+    "sku": "27797GN",
+    "status": 0
+  },
+  {
+    "sku": "27797GP",
+    "status": 0
+  },
+  {
+    "sku": "27798GN",
+    "status": 0
+  },
+  {
+    "sku": "27798GP",
+    "status": 0
+  },
+  {
+    "sku": "27799GN",
+    "status": 1
+  },
+  {
+    "sku": "27799GP",
+    "status": 1
+  },
+  {
+    "sku": "27800GP",
+    "status": 1
+  },
+  {
+    "sku": "2753LGAM5FQKZ",
+    "status": 0
+  },
+  {
+    "sku": "2753LGSM5FQZ",
+    "status": 1
+  },
+  {
+    "sku": "2753RGAM5FQKZ",
+    "status": 0
+  },
+  {
+    "sku": "2753RGSM5FQZ",
+    "status": 0
+  },
+  {
+    "sku": "30117YP",
+    "status": 1
+  },
+  {
+    "sku": "30117YPL",
+    "status": 1
+  },
+  {
+    "sku": "30118YP",
+    "status": 1
+  },
+  {
+    "sku": "30118YPL",
+    "status": 1
+  },
+  {
+    "sku": "30119YP",
+    "status": 1
+  },
+  {
+    "sku": "30120YP",
+    "status": 0
+  },
+  {
+    "sku": "30123GN",
+    "status": 1
+  },
+  {
+    "sku": "30123YD",
+    "status": 1
+  },
+  {
+    "sku": "2329CS",
+    "status": 1
+  },
+  {
+    "sku": "2329CSM",
+    "status": 1
+  },
+  {
+    "sku": "2329GN",
+    "status": 1
+  },
+  {
+    "sku": "2329GNM",
+    "status": 1
+  },
+  {
+    "sku": "2329GY",
+    "status": 1
+  },
+  {
+    "sku": "25429GN",
+    "status": 1
+  },
+  {
+    "sku": "25429GNL",
+    "status": 1
+  },
+  {
+    "sku": "25430GN",
+    "status": 0
+  },
+  {
+    "sku": "25431GN",
+    "status": 1
+  },
+  {
+    "sku": "25431GNL",
+    "status": 1
+  },
+  {
+    "sku": "25432GN",
+    "status": 1
+  },
+  {
+    "sku": "25432GNL",
+    "status": 1
+  },
+  {
+    "sku": "25433GN",
+    "status": 0
+  },
+  {
+    "sku": "25434GN",
+    "status": 0
+  },
+  {
+    "sku": "25435GN",
+    "status": 1
+  },
+  {
+    "sku": "25435GN2",
+    "status": 1
+  },
+  {
+    "sku": "2543CSM",
+    "status": 1
+  },
+  {
+    "sku": "28308GN",
+    "status": 1
+  },
+  {
+    "sku": "28308GP",
+    "status": 1
+  },
+  {
+    "sku": "28311GN",
+    "status": 1
+  },
+  {
+    "sku": "28311GNL",
+    "status": 1
+  },
+  {
+    "sku": "28312GN",
+    "status": 1
+  },
+  {
+    "sku": "28312GNL",
+    "status": 1
+  },
+  {
+    "sku": "28313GN",
+    "status": 0
+  },
+  {
+    "sku": "28313GNL",
+    "status": 1
+  },
+  {
+    "sku": "28314GN",
+    "status": 1
+  },
+  {
+    "sku": "28314GNL",
+    "status": 1
+  },
+  {
+    "sku": "28315GN",
+    "status": 1
+  },
+  {
+    "sku": "28315GNC",
+    "status": 1
+  },
+  {
+    "sku": "28316GN",
+    "status": 1
+  },
+  {
+    "sku": "28316GNC",
+    "status": 1
+  },
+  {
+    "sku": "2856GN",
+    "status": 1
+  },
+  {
+    "sku": "2856GNM",
+    "status": 1
+  },
+  {
+    "sku": "25611GN",
+    "status": 0
+  },
+  {
+    "sku": "25611GNL",
+    "status": 1
+  },
+  {
+    "sku": "25612GN",
+    "status": 0
+  },
+  {
+    "sku": "25612GNL",
+    "status": 1
+  },
+  {
+    "sku": "25613GN",
+    "status": 1
+  },
+  {
+    "sku": "25614GN",
+    "status": 1
+  },
+  {
+    "sku": "25615GN",
+    "status": 1
+  },
+  {
+    "sku": "28309GN",
+    "status": 1
+  },
+  {
+    "sku": "28310GN",
+    "status": 0
+  },
+  {
+    "sku": "28317GN",
+    "status": 0
+  },
+  {
+    "sku": "28317GP",
+    "status": 1
+  },
+  {
+    "sku": "28317YPL",
+    "status": 1
+  },
+  {
+    "sku": "28318GN",
+    "status": 0
+  },
+  {
+    "sku": "28318GP",
+    "status": 1
+  },
+  {
+    "sku": "28319GN",
+    "status": 1
+  },
+  {
+    "sku": "28319GP",
+    "status": 1
+  },
+  {
+    "sku": "28319GPL",
+    "status": 0
+  },
+  {
+    "sku": "28320GN",
+    "status": 1
+  },
+  {
+    "sku": "28320GP",
+    "status": 1
+  },
+  {
+    "sku": "28320GPL",
+    "status": 0
+  },
+  {
+    "sku": "28321GN",
+    "status": 1
+  },
+  {
+    "sku": "28321GP",
+    "status": 1
+  },
+  {
+    "sku": "2761AGRCHIMVZ",
+    "status": 0
+  },
+  {
+    "sku": "2761AGRCIMVZ",
+    "status": 0
+  },
+  {
+    "sku": "2761BYPRA",
+    "status": 1
+  },
+  {
+    "sku": "2761LYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2761LYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2761LYPR5RVWZ",
+    "status": 0
+  },
+  {
+    "sku": "2761LYQR5RDKW",
+    "status": 0
+  },
+  {
+    "sku": "2761RYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2761RYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2761RYPR5RVWZ",
+    "status": 0
+  },
+  {
+    "sku": "2761RYQR5RDKW",
+    "status": 0
+  },
+  {
+    "sku": "2768AGACHMUVZ1L",
+    "status": 1
+  },
+  {
+    "sku": "2768AGACMVZ",
+    "status": 0
+  },
+  {
+    "sku": "2768BYPCA",
+    "status": 0
+  },
+  {
+    "sku": "2768BYPHAZ",
+    "status": 1
+  },
+  {
+    "sku": "2768LGAH5FDKW",
+    "status": 0
+  },
+  {
+    "sku": "2768LGSH5FD1H",
+    "status": 0
+  },
+  {
+    "sku": "2768LYPH5RDW",
+    "status": 0
+  },
+  {
+    "sku": "2768LYPH5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2768LYQH5RDKW",
+    "status": 1
+  },
+  {
+    "sku": "2768RGAH5FDKW",
+    "status": 0
+  },
+  {
+    "sku": "2768RGSH5FD1H",
+    "status": 0
+  },
+  {
+    "sku": "2768RYPH5RDW",
+    "status": 0
+  },
+  {
+    "sku": "2768RYPH5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2768RYQH5RDKW",
+    "status": 1
+  },
+  {
+    "sku": "6577LGRH5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "6577RGRH5FDKW",
+    "status": 1
+  },
+  {
+    "sku": "2706CSMU",
+    "status": 1
+  },
+  {
+    "sku": "27515GNL",
+    "status": 0
+  },
+  {
+    "sku": "27516GNL",
+    "status": 1
+  },
+  {
+    "sku": "27517GNL",
+    "status": 0
+  },
+  {
+    "sku": "27518GNL",
+    "status": 0
+  },
+  {
+    "sku": "27519GN",
+    "status": 1
+  },
+  {
+    "sku": "27520GN",
+    "status": 0
+  },
+  {
+    "sku": "27521GD",
+    "status": 0
+  },
+  {
+    "sku": "2462CS",
+    "status": 1
+  },
+  {
+    "sku": "2462CSM",
+    "status": 1
+  },
+  {
+    "sku": "2462GN",
+    "status": 1
+  },
+  {
+    "sku": "26043GN",
+    "status": 1
+  },
+  {
+    "sku": "26044GN",
+    "status": 1
+  },
+  {
+    "sku": "26045GN",
+    "status": 1
+  },
+  {
+    "sku": "26046GN",
+    "status": 1
+  },
+  {
+    "sku": "26047GD",
+    "status": 1
+  },
+  {
+    "sku": "26047GN",
+    "status": 1
+  },
+  {
+    "sku": "26048GD",
+    "status": 1
+  },
+  {
+    "sku": "26048GN",
+    "status": 1
+  },
+  {
+    "sku": "26049GD",
+    "status": 1
+  },
+  {
+    "sku": "26049GN",
+    "status": 1
+  },
+  {
+    "sku": "26050GD",
+    "status": 1
+  },
+  {
+    "sku": "26050GN",
+    "status": 1
+  },
+  {
+    "sku": "26051GD",
+    "status": 1
+  },
+  {
+    "sku": "26051GN",
+    "status": 1
+  },
+  {
+    "sku": "2740CSM",
+    "status": 1
+  },
+  {
+    "sku": "2820CSM",
+    "status": 1
+  },
+  {
+    "sku": "6733GN",
+    "status": 1
+  },
+  {
+    "sku": "6734GN",
+    "status": 0
+  },
+  {
+    "sku": "760GN",
+    "status": 1
+  },
+  {
+    "sku": "2749GZPH5PR",
+    "status": 0
+  },
+  {
+    "sku": "29829GNL",
+    "status": 0
+  },
+  {
+    "sku": "29830GNL",
+    "status": 0
+  },
+  {
+    "sku": "29831GN",
+    "status": 1
+  },
+  {
+    "sku": "29831GNL",
+    "status": 0
+  },
+  {
+    "sku": "29832GN",
+    "status": 1
+  },
+  {
+    "sku": "29832GNL",
+    "status": 0
+  },
+  {
+    "sku": "29833GP",
+    "status": 1
+  },
+  {
+    "sku": "29834GP",
+    "status": 1
+  },
+  {
+    "sku": "29835GP",
+    "status": 0
+  },
+  {
+    "sku": "29836GP",
+    "status": 0
+  },
+  {
+    "sku": "29837GP",
+    "status": 1
+  },
+  {
+    "sku": "29838GP",
+    "status": 1
+  },
+  {
+    "sku": "3168GNAM",
+    "status": 1
+  },
+  {
+    "sku": "2762AGRCHIMVZ",
+    "status": 1
+  },
+  {
+    "sku": "2762BYPRA",
+    "status": 1
+  },
+  {
+    "sku": "2762LYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2762LYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2762LYQR5RDKW",
+    "status": 1
+  },
+  {
+    "sku": "2762RYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2762RYPR5RQZ",
+    "status": 0
+  },
+  {
+    "sku": "2762RYQR5RDKW",
+    "status": 1
+  },
+  {
+    "sku": "2764AGACHIMVZ",
+    "status": 1
+  },
+  {
+    "sku": "2764AGACIMVW",
+    "status": 0
+  },
+  {
+    "sku": "2764BYPRA",
+    "status": 1
+  },
+  {
+    "sku": "2764LGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2764LGSR5FD1A",
+    "status": 1
+  },
+  {
+    "sku": "2764LYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "2764RGSR5FD",
+    "status": 0
+  },
+  {
+    "sku": "2764RGSR5FD1A",
+    "status": 1
+  },
+  {
+    "sku": "2764RYPR5RD",
+    "status": 1
+  },
+  {
+    "sku": "29511GN",
+    "status": 1
+  },
+  {
+    "sku": "29512GN",
+    "status": 1
+  },
+  {
+    "sku": "29515GP",
+    "status": 1
+  },
+  {
+    "sku": "29516GP",
+    "status": 1
+  },
+  {
+    "sku": "29517GP",
+    "status": 1
+  },
+  {
+    "sku": "3110GN",
+    "status": 0
+  },
+  {
+    "sku": "3110GNM",
+    "status": 1
+  },
+  {
+    "sku": "3110GNM2",
+    "status": 0
+  },
+  {
+    "sku": "2035C",
+    "status": 1
+  },
+  {
+    "sku": "2035GY",
+    "status": 1
+  },
+  {
+    "sku": "23231GN",
+    "status": 1
+  },
+  {
+    "sku": "23671GN",
+    "status": 0
+  },
+  {
+    "sku": "23672GN",
+    "status": 0
+  },
+  {
+    "sku": "23673GN",
+    "status": 1
+  },
+  {
+    "sku": "23674GN",
+    "status": 1
+  },
+  {
+    "sku": "1054C",
+    "status": 1
+  },
+  {
+    "sku": "1054GB",
+    "status": 1
+  },
+  {
+    "sku": "27821CL",
+    "status": 1
+  },
+  {
+    "sku": "27822CL",
+    "status": 1
+  },
+  {
+    "sku": "7893C",
+    "status": 1
+  },
+  {
+    "sku": "7894C",
+    "status": 1
+  },
+  {
+    "sku": "7897C",
+    "status": 1
+  },
+  {
+    "sku": "7898C",
+    "status": 1
+  },
+  {
+    "sku": "1850GN",
+    "status": 1
+  },
+  {
+    "sku": "1850GN2",
+    "status": 0
+  },
+  {
+    "sku": "1850GNM",
+    "status": 1
+  },
+  {
+    "sku": "1850GY",
+    "status": 1
+  },
+  {
+    "sku": "1850GY2",
+    "status": 1
+  },
+  {
+    "sku": "22033GN",
+    "status": 1
+  },
+  {
+    "sku": "22034GN",
+    "status": 1
+  },
+  {
+    "sku": "22035GN",
+    "status": 1
+  },
+  {
+    "sku": "22036GN",
+    "status": 1
+  },
+  {
+    "sku": "22037GN",
+    "status": 0
+  },
+  {
+    "sku": "23075GN",
+    "status": 1
+  },
+  {
+    "sku": "22846GN",
+    "status": 0
+  },
+  {
+    "sku": "22847GN",
+    "status": 1
+  },
+  {
+    "sku": "22848GN",
+    "status": 1
+  },
+  {
+    "sku": "22849GN",
+    "status": 0
+  },
+  {
+    "sku": "22850GN",
+    "status": 0
+  },
+  {
+    "sku": "1661GG",
+    "status": 1
+  },
+  {
+    "sku": "21285GN",
+    "status": 1
+  },
+  {
+    "sku": "21286GN",
+    "status": 1
+  },
+  {
+    "sku": "21287GN",
+    "status": 1
+  },
+  {
+    "sku": "21288GN",
+    "status": 1
+  },
+  {
+    "sku": "21289GN",
+    "status": 1
+  },
+  {
+    "sku": "21290GN",
+    "status": 1
+  },
+  {
+    "sku": "21291GN",
+    "status": 1
+  },
+  {
+    "sku": "21292GN",
+    "status": 1
+  },
+  {
+    "sku": "21293GN",
+    "status": 0
+  },
+  {
+    "sku": "21294GN",
+    "status": 0
+  },
+  {
+    "sku": "21296GN",
+    "status": 0
+  },
+  {
+    "sku": "21997GN",
+    "status": 0
+  },
+  {
+    "sku": "21998GN",
+    "status": 0
+  },
+  {
+    "sku": "21999GN",
+    "status": 0
+  },
+  {
+    "sku": "2129CS",
+    "status": 1
+  },
+  {
+    "sku": "2129CSM",
+    "status": 1
+  },
+  {
+    "sku": "2129GN",
+    "status": 1
+  },
+  {
+    "sku": "2129GY",
+    "status": 0
+  },
+  {
+    "sku": "2129GYM",
+    "status": 1
+  },
+  {
+    "sku": "23915GN",
+    "status": 1
+  },
+  {
+    "sku": "23916GN",
+    "status": 1
+  },
+  {
+    "sku": "23917GN",
+    "status": 1
+  },
+  {
+    "sku": "23918GN",
+    "status": 1
+  },
+  {
+    "sku": "23919GN",
+    "status": 0
+  },
+  {
+    "sku": "2544CSM",
+    "status": 0
+  },
+  {
+    "sku": "23921GN",
+    "status": 0
+  },
+  {
+    "sku": "23922GN",
+    "status": 1
+  },
+  {
+    "sku": "23923GN",
+    "status": 1
+  },
+  {
+    "sku": "23924GN",
+    "status": 1
+  },
+  {
+    "sku": "23925GN",
+    "status": 0
+  },
+  {
+    "sku": "26189GN",
+    "status": 1
+  },
+  {
+    "sku": "26190GN",
+    "status": 1
+  },
+  {
+    "sku": "24599GN",
+    "status": 0
+  },
+  {
+    "sku": "24600GN",
+    "status": 0
+  },
+  {
+    "sku": "24601GN",
+    "status": 0
+  },
+  {
+    "sku": "24651GN",
+    "status": 1
+  },
+  {
+    "sku": "24652GN",
+    "status": 0
+  },
+  {
+    "sku": "2284CS",
+    "status": 0
+  },
+  {
+    "sku": "2284CSM",
+    "status": 0
+  },
+  {
+    "sku": "2284GB",
+    "status": 1
+  },
+  {
+    "sku": "2284GY",
+    "status": 1
+  },
+  {
+    "sku": "25129GN",
+    "status": 1
+  },
+  {
+    "sku": "25130GN",
+    "status": 1
+  },
+  {
+    "sku": "25131GN",
+    "status": 1
+  },
+  {
+    "sku": "25132GN",
+    "status": 0
+  },
+  {
+    "sku": "25133GD",
+    "status": 1
+  },
+  {
+    "sku": "25133GN",
+    "status": 1
+  },
+  {
+    "sku": "25134GD",
+    "status": 1
+  },
+  {
+    "sku": "25134GN",
+    "status": 0
+  },
+  {
+    "sku": "25135GD",
+    "status": 0
+  },
+  {
+    "sku": "25135GN",
+    "status": 0
+  },
+  {
+    "sku": "25136GD",
+    "status": 0
+  },
+  {
+    "sku": "25136GN",
+    "status": 1
+  },
+  {
+    "sku": "25137GD",
+    "status": 1
+  },
+  {
+    "sku": "25137GN",
+    "status": 1
+  },
+  {
+    "sku": "2672CSM",
+    "status": 1
+  },
+  {
+    "sku": "1744GN",
+    "status": 1
+  },
+  {
+    "sku": "1744GY",
+    "status": 1
+  },
+  {
+    "sku": "21510GN",
+    "status": 1
+  },
+  {
+    "sku": "22533GN",
+    "status": 1
+  },
+  {
+    "sku": "22534GN",
+    "status": 1
+  },
+  {
+    "sku": "22535GN",
+    "status": 1
+  },
+  {
+    "sku": "22536GN",
+    "status": 1
+  },
+  {
+    "sku": "21511GN",
+    "status": 1
+  },
+  {
+    "sku": "21512GN",
+    "status": 1
+  },
+  {
+    "sku": "21513GN",
+    "status": 1
+  },
+  {
+    "sku": "21514GN",
+    "status": 1
+  },
+  {
+    "sku": "21515GN",
+    "status": 0
+  },
+  {
+    "sku": "21516GN",
+    "status": 0
+  },
+  {
+    "sku": "22485GN",
+    "status": 0
+  },
+  {
+    "sku": "22486GN",
+    "status": 0
+  },
+  {
+    "sku": "22487GN",
+    "status": 1
+  },
+  {
+    "sku": "2077CS",
+    "status": 1
+  },
+  {
+    "sku": "2077CSM",
+    "status": 1
+  },
+  {
+    "sku": "2077GN",
+    "status": 0
+  },
+  {
+    "sku": "2077GNM",
+    "status": 0
+  },
+  {
+    "sku": "2077GY",
+    "status": 1
+  },
+  {
+    "sku": "2077GYM",
+    "status": 1
+  },
+  {
+    "sku": "23497CL",
+    "status": 1
+  },
+  {
+    "sku": "23497GN",
+    "status": 1
+  },
+  {
+    "sku": "23498CL",
+    "status": 1
+  },
+  {
+    "sku": "23498GN",
+    "status": 1
+  },
+  {
+    "sku": "23499CL",
+    "status": 1
+  },
+  {
+    "sku": "23499GN",
+    "status": 1
+  },
+  {
+    "sku": "23500CL",
+    "status": 1
+  },
+  {
+    "sku": "23500GN",
+    "status": 1
+  },
+  {
+    "sku": "23501GN",
+    "status": 1
+  },
+  {
+    "sku": "23502GN",
+    "status": 1
+  },
+  {
+    "sku": "23503CL",
+    "status": 1
+  },
+  {
+    "sku": "23503GN",
+    "status": 1
+  },
+  {
+    "sku": "23504CL",
+    "status": 1
+  },
+  {
+    "sku": "23504GN",
+    "status": 1
+  },
+  {
+    "sku": "23505CL",
+    "status": 1
+  },
+  {
+    "sku": "23505GN",
+    "status": 1
+  },
+  {
+    "sku": "23505YP",
+    "status": 0
+  },
+  {
+    "sku": "23739GN",
+    "status": 1
+  },
+  {
+    "sku": "23740GN",
+    "status": 1
+  },
+  {
+    "sku": "23743GN",
+    "status": 1
+  },
+  {
+    "sku": "23744GN",
+    "status": 1
+  },
+  {
+    "sku": "24968GN",
+    "status": 1
+  },
+  {
+    "sku": "25703GN",
+    "status": 1
+  },
+  {
+    "sku": "25704GN",
+    "status": 1
+  },
+  {
+    "sku": "2741LGSV4RQ",
+    "status": 1
+  },
+  {
+    "sku": "2741RGSV3MQ",
+    "status": 1
+  },
+  {
+    "sku": "28427GN",
+    "status": 1
+  },
+  {
+    "sku": "28428GN",
+    "status": 0
+  },
+  {
+    "sku": "28429GN",
+    "status": 1
+  },
+  {
+    "sku": "28430GN",
+    "status": 1
+  },
+  {
+    "sku": "28431GN",
+    "status": 1
+  },
+  {
+    "sku": "28431GN2",
+    "status": 1
+  },
+  {
+    "sku": "28431GP",
+    "status": 1
+  },
+  {
+    "sku": "28431GP2",
+    "status": 1
+  },
+  {
+    "sku": "28432GN",
+    "status": 1
+  },
+  {
+    "sku": "28432GN2",
+    "status": 1
+  },
+  {
+    "sku": "28432GN3",
+    "status": 1
+  },
+  {
+    "sku": "28432GP",
+    "status": 1
+  },
+  {
+    "sku": "28432GP2",
+    "status": 1
+  },
+  {
+    "sku": "28433GN",
+    "status": 0
+  },
+  {
+    "sku": "28433GP",
+    "status": 1
+  },
+  {
+    "sku": "28434GN",
+    "status": 1
+  },
+  {
+    "sku": "28434GP",
+    "status": 1
+  },
+  {
+    "sku": "28435GN",
+    "status": 1
+  },
+  {
+    "sku": "28435GP",
+    "status": 1
+  },
+  {
+    "sku": "28436GP",
+    "status": 1
+  },
+  {
+    "sku": "28437GN",
+    "status": 1
+  },
+  {
+    "sku": "28437GP",
+    "status": 0
+  },
+  {
+    "sku": "28438GN",
+    "status": 1
+  },
+  {
+    "sku": "28438GP",
+    "status": 1
+  },
+  {
+    "sku": "2885CS",
+    "status": 1
+  },
+  {
+    "sku": "2885CSM",
+    "status": 1
+  },
+  {
+    "sku": "2885GN",
+    "status": 1
+  },
+  {
+    "sku": "2885GN2",
+    "status": 1
+  },
+  {
+    "sku": "2885GNCM",
+    "status": 1
+  },
+  {
+    "sku": "2885GYM",
+    "status": 1
+  },
+  {
+    "sku": "6573BYPVOW",
+    "status": 1
+  },
+  {
+    "sku": "6573BYPVRU",
+    "status": 1
+  },
+  {
+    "sku": "6573LGSV2FD",
+    "status": 1
+  },
+  {
+    "sku": "6573LGSV3FVWZ",
+    "status": 1
+  },
+  {
+    "sku": "6573LGSV3RD1J",
+    "status": 1
+  },
+  {
+    "sku": "6573LGSV3RDOZ",
+    "status": 1
+  },
+  {
+    "sku": "6573LGSV3RDZ",
+    "status": 1
+  },
+  {
+    "sku": "6573LGSV3RQW1J",
+    "status": 1
+  },
+  {
+    "sku": "6573LGSV3RVWZ",
+    "status": 0
+  },
+  {
+    "sku": "6573RGSV3FVWZ",
+    "status": 1
+  },
+  {
+    "sku": "6573AGRCMOVZ1L",
+    "status": 0
+  },
+  {
+    "sku": "6573AGRCMVZ",
+    "status": 1
+  },
+  {
+    "sku": "1211C",
+    "status": 1
+  },
+  {
+    "sku": "1211GB",
+    "status": 1
+  },
+  {
+    "sku": "1953CS",
+    "status": 1
+  },
+  {
+    "sku": "1953GY",
+    "status": 1
+  },
+  {
+    "sku": "22539GN",
+    "status": 1
+  },
+  {
+    "sku": "22539GN2",
+    "status": 1
+  },
+  {
+    "sku": "22540GN",
+    "status": 0
+  },
+  {
+    "sku": "22540GN2",
+    "status": 1
+  },
+  {
+    "sku": "22672GN",
+    "status": 1
+  },
+  {
+    "sku": "22673GN",
+    "status": 1
+  },
+  {
+    "sku": "22674GN",
+    "status": 1
+  },
+  {
+    "sku": "22675GN",
+    "status": 1
+  },
+  {
+    "sku": "22676GN",
+    "status": 1
+  },
+  {
+    "sku": "22677GN",
+    "status": 1
+  },
+  {
+    "sku": "22678GN",
+    "status": 0
+  },
+  {
+    "sku": "23066GN",
+    "status": 0
+  },
+  {
+    "sku": "23581GN",
+    "status": 1
+  },
+  {
+    "sku": "23582GN",
+    "status": 1
+  },
+  {
+    "sku": "1932C",
+    "status": 1
+  },
+  {
+    "sku": "1932GY",
+    "status": 1
+  },
+  {
+    "sku": "22541CL",
+    "status": 1
+  },
+  {
+    "sku": "22541GN",
+    "status": 1
+  },
+  {
+    "sku": "22542CL",
+    "status": 1
+  },
+  {
+    "sku": "22542GN",
+    "status": 1
+  },
+  {
+    "sku": "22543CL",
+    "status": 1
+  },
+  {
+    "sku": "22543GN",
+    "status": 1
+  },
+  {
+    "sku": "22544CL",
+    "status": 1
+  },
+  {
+    "sku": "22544GN",
+    "status": 1
+  },
+  {
+    "sku": "22547CL",
+    "status": 1
+  },
+  {
+    "sku": "22547GN",
+    "status": 1
+  },
+  {
+    "sku": "22906CL",
+    "status": 1
+  },
+  {
+    "sku": "22906GN",
+    "status": 1
+  },
+  {
+    "sku": "23647C",
+    "status": 1
+  },
+  {
+    "sku": "23647GN",
+    "status": 1
+  },
+  {
+    "sku": "2761CSM",
+    "status": 1
+  },
+  {
+    "sku": "2761GN",
+    "status": 1
+  },
+  {
+    "sku": "2761GN2",
+    "status": 0
+  },
+  {
+    "sku": "2761GNCM",
+    "status": 1
+  },
+  {
+    "sku": "2761GNCM2",
+    "status": 1
+  },
+  {
+    "sku": "2761GYM",
+    "status": 1
+  },
+  {
+    "sku": "27823GN",
+    "status": 1
+  },
+  {
+    "sku": "27824GN",
+    "status": 1
+  },
+  {
+    "sku": "27825GN",
+    "status": 1
+  },
+  {
+    "sku": "27826GN",
+    "status": 1
+  },
+  {
+    "sku": "27827GN",
+    "status": 1
+  },
+  {
+    "sku": "27827GN2",
+    "status": 1
+  },
+  {
+    "sku": "27827YP",
+    "status": 1
+  },
+  {
+    "sku": "27828GN",
+    "status": 1
+  },
+  {
+    "sku": "27828GN2",
+    "status": 0
+  },
+  {
+    "sku": "27828YP",
+    "status": 1
+  },
+  {
+    "sku": "27847GN",
+    "status": 0
+  },
+  {
+    "sku": "27848GN",
+    "status": 1
+  },
+  {
+    "sku": "3750BYPVF",
+    "status": 0
+  },
+  {
+    "sku": "6552LGSP4RDF",
+    "status": 0
+  },
+  {
+    "sku": "6552LGSV4MQ1J",
+    "status": 0
+  },
+  {
+    "sku": "6552LGSV4MQ2J",
+    "status": 0
+  },
+  {
+    "sku": "6552LGSV4RQ",
+    "status": 0
+  },
+  {
+    "sku": "6552LGSV4RQ1J",
+    "status": 0
+  },
+  {
+    "sku": "6552LYPV4MQ1J",
+    "status": 0
+  },
+  {
+    "sku": "6552LYPV4MQ2J",
+    "status": 0
+  },
+  {
+    "sku": "6552LYPV4RQ",
+    "status": 0
+  },
+  {
+    "sku": "6552LYPV4RQ1J",
+    "status": 0
+  },
+  {
+    "sku": "6552RGSV4MQ2J",
+    "status": 0
+  },
+  {
+    "sku": "6552RGSV4RD",
+    "status": 0
+  },
+  {
+    "sku": "6552RGSV4RQ",
+    "status": 0
+  },
+  {
+    "sku": "6552RGSV4RQ1J",
+    "status": 0
+  },
+  {
+    "sku": "6552RYPV4RQ",
+    "status": 0
+  },
+  {
+    "sku": "6552RYPV4RQ1J",
+    "status": 0
+  }
+]

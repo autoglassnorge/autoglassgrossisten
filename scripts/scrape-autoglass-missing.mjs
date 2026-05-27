@@ -1,117 +1,69 @@
 #!/usr/bin/env node
 /**
- * Scrape missing auto-glass.no URLs (0-2132)
+ * Scrape missing auto-glass.no URLs using Playwright
+ * Targets only URLs not present in products-complete.ndjson
  */
-import { parse } from 'node-html-parser';
+import { chromium } from 'playwright';
 import { readFileSync, writeFileSync, existsSync, appendFileSync, mkdirSync } from 'fs';
 import { resolve } from 'path';
 
+const EMAIL = 'post@alfadrift.no';
+const PASSWORD = 'Viking123';
+const BASE_URL = 'https://auto-glass.no';
 const DATA_DIR = resolve('/Users/taj/bilglass/data/autoglass-scrape');
+const MISSING_FILE = resolve(DATA_DIR, 'missing-urls.json');
+const CHECKPOINT_FILE = resolve(DATA_DIR, 'checkpoint-missing.json');
 const OUTPUT_FILE = resolve(DATA_DIR, 'products-missing.ndjson');
-const COOKIE_FILE = resolve(DATA_DIR, 'cookies.json');
+const COMPLETE_FILE = resolve(DATA_DIR, 'products-complete.ndjson');
 
-const RATE_LIMIT_MS = 150;
-const CONCURRENCY = 5;
-const FETCH_TIMEOUT = 15000;
+const RATE_LIMIT_MS = 250;
+const SAVE_EVERY = 50;
 
-async function fetchWithTimeout(url, options, timeout) {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-  try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
-    clearTimeout(id);
-    return res;
-  } catch (e) {
-    clearTimeout(id);
-    throw e;
-  }
-}
-
-async function fetchCategoryPage(url, cookieHeader) {
-  const res = await fetchWithTimeout(url, {
-    headers: {
-      'Cookie': cookieHeader,
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'Accept-Language': 'nb-NO,nb;q=0.9,no;q=0.8,en-US;q=0.7,en;q=0.6',
-    },
-    redirect: 'follow',
-  }, FETCH_TIMEOUT);
-  
-  if (!res.ok) {
-    if (res.status === 404) return { products: [], hasNext: false, status: 404 };
-    throw new Error(`HTTP ${res.status}`);
-  }
-  
-  const html = await res.text();
-  const root = parse(html);
-  
-  const products = [];
-  const cards = root.querySelectorAll('.product');
-  
-  for (const card of cards) {
-    const titleEl = card.querySelector('.woocommerce-loop-product__title');
-    const skuEl = card.querySelector('.sku');
-    const typeCodeEl = card.querySelector('.typecode');
-    const priceEl = card.querySelector('.woocommerce-Price-amount');
-    
-    const title = titleEl?.textContent?.trim() || null;
-    const sku = skuEl?.textContent?.trim() || null;
-    const typeCode = typeCodeEl?.textContent?.trim() || null;
-    const typeCodeRel = typeCodeEl?.getAttribute('rel')?.trim() || null;
-    
-    let price = null;
-    if (priceEl) {
-      const priceText = priceEl.textContent.replace(/\s/g, '').replace(/\./g, '');
-      const match = priceText.match(/(\d+)/);
-      if (match) price = parseInt(match[1], 10);
-    }
-    
-    if (title || sku) {
-      products.push({ title, sku, typeCode, typeCodeRel, price });
-    }
-  }
-  
-  const hasNext = root.querySelector('a.next, .next.page-numbers') !== null;
-  return { products, hasNext, status: res.status };
-}
+try { mkdirSync(DATA_DIR, { recursive: true }); } catch (e) {}
 
 async function main() {
-  const cookies = JSON.parse(readFileSync(COOKIE_FILE, 'utf-8'));
-  const cookieHeader = cookies.map(c => `${c.name}=${c.value}`).join('; ');
+  const missing = JSON.parse(readFileSync(MISSING_FILE, 'utf-8'));
   
-  const categoryTree = JSON.parse(readFileSync('/Users/taj/bilglass/data/autoglass-category-tree.json', 'utf-8'));
-  
-  // Build all URLs
-  const allUrls = [];
-  for (const brand of categoryTree) {
-    for (const model of brand.models) {
-      for (const year of model.years) {
-        allUrls.push({ brand: brand.name, model: model.name, submodel: null, yearRange: year.yearRange, url: year.url });
-      }
-      for (const submodel of model.submodels) {
-        for (const year of submodel.years) {
-          allUrls.push({ brand: brand.name, model: model.name, submodel: submodel.name, yearRange: year.yearRange, url: year.url });
-        }
-      }
-    }
+  let startIndex = 0;
+  if (existsSync(CHECKPOINT_FILE)) {
+    const cp = JSON.parse(readFileSync(CHECKPOINT_FILE, 'utf-8'));
+    startIndex = cp.lastIndex || 0;
   }
   
-  // Load already scraped URLs
-  const existingUrls = new Set();
-  if (existsSync('/Users/taj/bilglass/data/autoglass-scrape/products.ndjson')) {
-    const lines = readFileSync('/Users/taj/bilglass/data/autoglass-scrape/products.ndjson', 'utf-8').trim().split('\n');
-    for (const line of lines) {
-      const d = JSON.parse(line);
-      existingUrls.add(d.url);
+  console.log(`📋 Missing URLs: ${missing.length} | Starting from: ${startIndex} | Remaining: ${missing.length - startIndex}`);
+  
+  const browser = await chromium.launch({ headless: true });
+  const context = await browser.newContext();
+  
+  // Block heavy resources for speed
+  await context.route('**/*', (route, request) => {
+    const type = request.resourceType();
+    if (type === 'image' || type === 'stylesheet' || type === 'font' || type === 'media') {
+      route.abort();
+    } else {
+      route.continue();
     }
+  });
+  
+  const page = await context.newPage();
+  
+  // Login
+  console.log('🔐 Logging in...');
+  await page.goto(`${BASE_URL}/min-konto/`, { timeout: 20000, waitUntil: 'domcontentloaded' });
+  await page.waitForSelector('#username', { timeout: 10000 });
+  await page.fill('#username', EMAIL);
+  await page.fill('#password', PASSWORD);
+  await page.click('button[name="login"]');
+  await page.waitForLoadState('domcontentloaded');
+  
+  try {
+    await page.waitForSelector('a[href*="logout"]', { timeout: 10000 });
+  } catch (e) {
+    console.log('❌ Login failed');
+    await browser.close();
+    process.exit(1);
   }
-  
-  // Filter to missing URLs (first 2133)
-  const urlsToScrape = allUrls.slice(0, 2133).filter(u => !existingUrls.has(u.url));
-  
-  console.log(`📋 Missing URLs to scrape: ${urlsToScrape.length} / 2133`);
-  console.log(`⚡ Using fetch() with ${CONCURRENCY} concurrent requests\n`);
+  console.log('✅ Logged in\n');
   
   let totalProducts = 0;
   let processed = 0;
@@ -119,66 +71,99 @@ async function main() {
   let errors = 0;
   const startTime = Date.now();
   
-  for (let i = 0; i < urlsToScrape.length; i += CONCURRENCY) {
-    const batch = urlsToScrape.slice(i, Math.min(i + CONCURRENCY, urlsToScrape.length));
-    const pct = ((i / urlsToScrape.length) * 100).toFixed(1);
+  for (let i = startIndex; i < missing.length; i++) {
+    const meta = missing[i];
+    const pct = ((i / missing.length) * 100).toFixed(1);
     const elapsed = ((Date.now() - startTime) / 1000 / 60).toFixed(1);
-    process.stdout.write(`\r[${pct}%] ${i+1}/${urlsToScrape.length} | Products: ${totalProducts} | Empty: ${emptyUrls} | Errors: ${errors} | ${elapsed}min`);
+    const rate = processed > 0 ? (elapsed / processed).toFixed(2) : '0';
+    process.stdout.write(`\r[${pct}%] ${i+1}/${missing.length} | ${meta.brand} ${meta.model} ${meta.submodel || ''} (${meta.yearRange}) | Products: ${totalProducts} | Empty: ${emptyUrls} | Errors: ${errors} | ${elapsed}min | ${rate}min/url`);
     
-    const results = await Promise.allSettled(
-      batch.map(async (meta) => {
-        let pageNum = 1;
-        let hasMore = true;
-        const allProducts = [];
+    try {
+      let pageNum = 1;
+      let hasMore = true;
+      const allProducts = [];
+      
+      while (hasMore) {
+        const url = pageNum === 1 ? meta.url : `${meta.url}${meta.url.includes('?') ? '&' : '?'}page=${pageNum}`;
         
-        while (hasMore) {
-          const url = pageNum === 1 ? meta.url : `${meta.url}${meta.url.includes('?') ? '&' : '?'}page=${pageNum}`;
-          const result = await fetchCategoryPage(url, cookieHeader);
-          
-          if (result.status === 404) {
-            hasMore = false;
-            break;
-          }
-          
-          allProducts.push(...result.products);
-          hasMore = result.hasNext;
-          pageNum++;
-          
-          if (hasMore) await new Promise(r => setTimeout(r, RATE_LIMIT_MS));
+        await page.goto(url, { timeout: 20000, waitUntil: 'domcontentloaded' });
+        
+        // Quick check if products exist
+        const productCount = await page.locator('.product').count();
+        if (productCount === 0) {
+          hasMore = false;
+          break;
         }
         
-        return { meta, allProducts };
-      })
-    );
-    
-    for (const result of results) {
-      if (result.status === 'fulfilled') {
-        const { meta, allProducts } = result.value;
-        if (allProducts.length > 0) {
-          const record = {
-            brand: meta.brand,
-            model: meta.model,
-            submodel: meta.submodel,
-            yearRange: meta.yearRange,
-            url: meta.url,
-            products: allProducts,
-            scrapedAt: new Date().toISOString()
-          };
-          appendFileSync(OUTPUT_FILE, JSON.stringify(record) + '\n');
-          totalProducts += allProducts.length;
-        } else {
-          emptyUrls++;
+        const cards = await page.locator('.product').all();
+        for (const card of cards) {
+          try {
+            const title = await card.locator('.woocommerce-loop-product__title').textContent().catch(() => null);
+            const sku = await card.locator('.sku').textContent().catch(() => null);
+            const typeCode = await card.locator('.typecode').textContent().catch(() => null);
+            const typeCodeRel = await card.locator('.typecode').getAttribute('rel').catch(() => null);
+            const priceText = await card.locator('.woocommerce-Price-amount').textContent().catch(() => null);
+            
+            let price = null;
+            if (priceText) {
+              const match = priceText.replace(/\s/g, '').replace(/\./g, '').match(/(\d+)/);
+              if (match) price = parseInt(match[1], 10);
+            }
+            
+            allProducts.push({
+              title: title?.trim() || null,
+              sku: sku?.trim() || null,
+              typeCode: typeCode?.trim() || null,
+              typeCodeRel: typeCodeRel?.trim() || null,
+              price
+            });
+          } catch (e) {}
         }
-        processed++;
-      } else {
-        errors++;
+        
+        hasMore = await page.locator('a.next, .next.page-numbers').count() > 0;
+        pageNum++;
+        
+        if (hasMore) await new Promise(r => setTimeout(r, RATE_LIMIT_MS));
       }
+      
+      if (allProducts.length > 0) {
+        const record = {
+          brand: meta.brand,
+          model: meta.model,
+          submodel: meta.submodel,
+          yearRange: meta.yearRange,
+          url: meta.url,
+          products: allProducts,
+          scrapedAt: new Date().toISOString()
+        };
+        appendFileSync(OUTPUT_FILE, JSON.stringify(record) + '\n');
+        totalProducts += allProducts.length;
+      } else {
+        emptyUrls++;
+      }
+      
+      processed++;
+      
+      if ((i + 1) % SAVE_EVERY === 0) {
+        writeFileSync(CHECKPOINT_FILE, JSON.stringify({ lastIndex: i + 1, timestamp: new Date().toISOString() }, null, 2));
+      }
+      
+    } catch (e) {
+      console.error(`\n⚠️  Error at ${meta.url}: ${e.message}`);
+      errors++;
+      writeFileSync(CHECKPOINT_FILE, JSON.stringify({ lastIndex: i, timestamp: new Date().toISOString() }, null, 2));
+      try { await page.goto(`${BASE_URL}/min-konto/`, { timeout: 15000, waitUntil: 'domcontentloaded' }); } catch (e2) {}
     }
     
-    await new Promise(r => setTimeout(r, RATE_LIMIT_MS));
+    if (i < missing.length - 1) {
+      await new Promise(r => setTimeout(r, RATE_LIMIT_MS));
+    }
   }
   
+  writeFileSync(CHECKPOINT_FILE, JSON.stringify({ lastIndex: missing.length, timestamp: new Date().toISOString() }, null, 2));
   console.log(`\n\n✅ Done! ${processed} URLs, ${totalProducts} products, ${emptyUrls} empty, ${errors} errors`);
+  
+  await browser.close();
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

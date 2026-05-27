@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "version": "1.0",
+    "source": "vdveer-engineering.nl/vag-option-pr-codes + planetvag PR search",
+    "scope": "Glass-relevante PR-koder for VW, Audi, Skoda, Seat, Cupra",
+    "lastUpdated": "2026-05-26"
+  },
+  "families": {
+    "4G": {
+      "name": "Frontrute (WSS - Windschutzscheibe)",
+      "codes": {
+        "4GA": { "description": "Uten frontrute", "flags": { "category": "frontrute", "missing": true } },
+        "4GB": { "description": "Laminert frontrute med VIN-vindu", "flags": { "laminated": true, "vinWindow": true } },
+        "4GC": { "description": "Varmereflekterende frontrute med solstripe", "flags": { "heatReflective": true, "shade": true } },
+        "4GD": { "description": "Klar frontrute", "flags": { "laminated": true } },
+        "4GE": { "description": "Klar frontrute med VIN-vindu", "flags": { "laminated": true, "vinWindow": true } },
+        "4GF": { "description": "Varmereflekterende frontrute", "flags": { "heatReflective": true } },
+        "4GG": { "description": "Laminert frontrute med solstripe, oppvarmet", "flags": { "laminated": true, "shade": true, "heated": true } },
+        "4GH": { "description": "Varmereflekterende frontrute med solstripe", "flags": { "heatReflective": true, "shade": true } },
+        "4GJ": { "description": "Varmereflekterende frontrute med VIN-vindu", "flags": { "heatReflective": true, "vinWindow": true } },
+        "4GK": { "description": "Laminert frontrute med solstripe", "flags": { "laminated": true, "shade": true } },
+        "4GL": { "description": "Laminert frontrute (standard)", "flags": { "laminated": true } },
+        "4GM": { "description": "Laminert frontrute m/solstripe + VIN-vindu, oppvarmet", "flags": { "laminated": true, "shade": true, "vinWindow": true, "heated": true } },
+        "4GN": { "description": "Laminert frontrute m/solstripe + VIN-vindu", "flags": { "laminated": true, "shade": true, "vinWindow": true } },
+        "4GP": { "description": "Varmereflekterende frontrute m/solstripe + VIN-vindu", "flags": { "heatReflective": true, "shade": true, "vinWindow": true } },
+        "4GQ": { "description": "Varmereflekterende frontrute", "flags": { "heatReflective": true } },
+        "4GR": { "description": "Laminert frontrute, oppvarmet", "flags": { "laminated": true, "heated": true } },
+        "4GS": { "description": "Varmereflekterende frontrute", "flags": { "heatReflective": true } },
+        "4GT": { "description": "Varmereflekterende frontrute", "flags": { "heatReflective": true } },
+        "4GU": { "description": "Klar frontrute m/solstripe + VIN-vindu", "flags": { "laminated": true, "shade": true, "vinWindow": true } },
+        "4GV": { "description": "Klar frontrute", "flags": { "laminated": true } },
+        "4GW": { "description": "Varmereflekterende frontrute", "flags": { "heatReflective": true } },
+        "4GX": { "description": "Varmereflekterende frontrute, oppvarmet", "flags": { "heatReflective": true, "heated": true } },
+        "4GY": { "description": "Laminert frontrute", "flags": { "laminated": true } },
+        "4GZ": { "description": "Klar plastfrontrute (ikke glass)", "flags": { "plastic": true } }
+      }
+    },
+    "8N": {
+      "name": "Vindusvisker + regn/lyssensor (SWS - Scheibenwischer-Steuerung)",
+      "codes": {
+        "8N0": { "description": "Uten intermittent kontroll", "flags": { "rainSensor": false } },
+        "8N1": { "description": "Intermittent kontroll", "flags": { "rainSensor": false } },
+        "8N2": { "description": "Intermittent kontroll, trinnløs", "flags": { "rainSensor": false } },
+        "8N3": { "description": "Intermittent kontroll med regnsensor", "flags": { "rainSensor": true } },
+        "8N4": { "description": "Intermittent kontroll med potensiometer (4 hastigheter)", "flags": { "rainSensor": false } },
+        "8N5": { "description": "Intermittent kontroll", "flags": { "rainSensor": false } },
+        "8N6": { "description": "Intermittent kontroll med regn-/lyssensor", "flags": { "rainSensor": true, "lightSensor": true } },
+        "8N7": { "description": "Intermittent kontroll med regn-/lyssensor", "flags": { "rainSensor": true, "lightSensor": true } },
+        "8N8": { "description": "Intermittent kontroll med fotosensor", "flags": { "lightSensor": true } }
+      }
+    },
+    "4K": {
+      "name": "Sideruter + bakrute (SSH - Seitenscheibe/Heckscheibe)",
+      "codes": {
+        "4KA": { "description": "Side- og bakruter i klart glass", "flags": {} },
+        "4KC": { "description": "Side- og bakruter i varmereflekterende glass", "flags": { "sidesHeatReflective": true } },
+        "4KD": { "description": "Side- og bakruter tonet", "flags": { "tinted": true } },
+        "4KE": { "description": "Side- og bakruter i laminert glass", "flags": { "sidesLaminated": true } },
+        "4KF": { "description": "Sideruter varmereflekterende, B-stolpe + bakvindu mørkt tonet", "flags": { "tinted": true, "privacyGlass": true } },
+        "4KP": { "description": "Side- og bakruter i akustisk glass", "flags": { "acoustic": true } },
+        "4KQ": { "description": "Side- og bakruter i varmereflekterende glass (blå)", "flags": { "sidesHeatReflective": true, "blueTint": true } },
+        "4KN": { "description": "Laminerte side-/bakruter med metallag, innbruddssikre", "flags": { "sidesLaminated": true, "burglaryResistant": true } }
+      }
+    },
+    "QV": {
+      "name": "ADAS / Kjøreassistent",
+      "codes": {
+        "QV1": { "description": "Lane Departure Warning / Lane Assist", "flags": { "laneAssist": true, "camera": true } },
+        "QV3": { "description": "Front Assist (avstandskontroll)", "flags": { "adas": true, "camera": true } },
+        "QV5": { "description": "Travel Assist (avansert lane keep + ACC)", "flags": { "adas": true, "laneAssist": true, "camera": true } }
+      }
+    },
+    "KA": {
+      "name": "Kamera/HUD i frontrute",
+      "codes": {
+        "KA1": { "description": "Kamera i frontrute for kjøreassistent", "flags": { "camera": true, "adas": true } },
+        "KA2": { "description": "Multifunkjonskamera + lane assist", "flags": { "camera": true, "laneAssist": true, "adas": true } },
+        "KS1": { "description": "Head-up display (HUD)", "flags": { "hud": true } }
+      }
+    }
+  },
+  "compatibility": {
+    "VW": ["VOLKSWAGEN", "VW"],
+    "Audi": ["AUDI"],
+    "Skoda": ["SKODA", "ŠKODA"],
+    "Seat": ["SEAT", "CUPRA"]
+  }
+}

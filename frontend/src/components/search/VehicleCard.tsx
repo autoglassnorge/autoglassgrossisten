@@ -82,7 +82,7 @@ export function VehicleCard({ vehicle, equipment, regnr }: VehicleCardProps) {
             {activeEquipment.map((key) => (
               <span
                 key={key}
-                className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-700"
+                className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-sm text-gray-700"
               >
                 <span>{equipmentIcons[key]}</span>
                 <span className="hidden sm:inline">{equipmentLabels[key]}</span>
@@ -91,7 +91,7 @@ export function VehicleCard({ vehicle, equipment, regnr }: VehicleCardProps) {
             ))}
           </div>
         ) : (
-          <p className="text-xs text-gray-400">Ingen kjente utstyrsdetaljer</p>
+          <p className="text-sm text-gray-500">Ingen kjente utstyrsdetaljer</p>
         )}
       </div>
     </div>

@@ -25,10 +25,12 @@ import { lookupNagsByVehicle } from "./nags-by-vehicle";
 import { resolveGlass, upsertGlassRule } from "./vin-glass-resolver";
 import { handleVinLookup, handleVinLookupStatus } from "./vin-lookup-api";
 import { fetchSvvEnkeltoppslag, fetchWithTimeout, SvvFetchResult, SvvKjoretoyData, TecdocVehicle } from "./providers/svv";
+import { decodeVinVincario } from "./providers/vincario";
 
 export interface Env {
   GLASS_CATALOG: KVNamespace;
   GLASS_CATALOG_D1: D1Database;
+  AI: Ai;
   BILUPPGIFTER_API_KEY: string;
   BOVSOFT_CLIENT_ID: string;
   BOVSOFT_SECCODE: string;
@@ -61,7 +63,10 @@ interface GlassRecord {
   shade: number;
   camera: number;
   lane_assist: number;
-  adas_features: string | null;
+  // color: string | null;    // not in D1 yet
+  // solar: number;           // not in D1 yet
+  // tinted: number;          // not in D1 yet
+  // adas_features: string | null; // not in D1 yet
   price: number | null;
   stock_status: number | null;
   warehouse_location: string | null;
@@ -95,6 +100,17 @@ const CORS_HEADERS = {
   "Content-Type": "application/json",
 };
 
+/** Optimized column list — avoid SELECT * to reduce data transfer and prevent
+ *  future column additions from leaking into queries unexpectedly. */
+const CATALOG_COLUMNS = [
+  "id", "eurocode", "article_number", "scan_number", "category", "supplier",
+  "brand", "model", "year_from", "year_to", "prefix4", "adas", "rain_sensor",
+  "heated", "acoustic", "antenna", "hud", "shade", "camera", "lane_assist",
+  "price", "stock_status", "warehouse_location", "oem_numbers", "cross_references",
+  "weight", "dimensions", "description", "image_url", "pdf_url", "source",
+  "nags_codes", "brand_original", "ktype", "created_at",
+].join(", ");
+
 /** Convert D1 snake_case record to frontend camelCase */
 function normalizeRecord(r: GlassRecord): any {
   return {
@@ -118,11 +134,11 @@ function normalizeRecord(r: GlassRecord): any {
       hud: !!r.hud,
       shade: !!r.shade,
       camera: !!r.camera,
-      color: r.color || null,
-      solar: !!r.solar,
-      tinted: !!r.tinted,
+      color: (r as any).color || null,
+      solar: !!(r as any).solar,
+      tinted: !!(r as any).tinted,
     },
-    adasFeatures: r.adas_features ? JSON.parse(r.adas_features) : [],
+    adasFeatures: (r as any).adas_features ? JSON.parse((r as any).adas_features) : [],
     price: r.price,
     stockStatus: r.stock_status,
     warehouseLocation: r.warehouse_location,
@@ -159,7 +175,7 @@ function errorResponse(message: string, status = 400): Response {
 // CACHE (KV)
 // ============================================================================
 
-const CACHE_VERSION = "1";
+const CACHE_VERSION = "4";
 
 async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
   const cached = await kv.get(key);
@@ -178,7 +194,7 @@ async function setCache(kv: KVNamespace, key: string, data: unknown, ttlSeconds 
 
 function cacheKey(endpoint: string, params: Record<string, string>): string {
   const sorted = Object.entries(params).sort(([a], [b]) => a.localeCompare(b));
-  return `cache:v2:${endpoint}:${sorted.map(([k, v]) => `${k}=${v}`).join("&")}`;
+  return `cache:v${CACHE_VERSION}:${endpoint}:${sorted.map(([k, v]) => `${k}=${v}`).join("&")}`;
 }
 
 // Cache envelope for versionert, tidsstemplet caching
@@ -433,7 +449,7 @@ async function fetchBiluppgifterEquipment(
 
 async function queryByPrefix4(db: D1Database, prefix4: string, limit = 50): Promise<GlassRecord[]> {
   const { results } = await db
-    .prepare("SELECT * FROM glass_catalog WHERE prefix4 = ? LIMIT ?")
+    .prepare(`SELECT ${CATALOG_COLUMNS} FROM glass_catalog WHERE prefix4 = ? LIMIT ?`)
     .bind(prefix4, limit)
     .all();
   return (results || []) as unknown as GlassRecord[];
@@ -441,7 +457,7 @@ async function queryByPrefix4(db: D1Database, prefix4: string, limit = 50): Prom
 
 async function queryByEurocode(db: D1Database, eurocode: string): Promise<GlassRecord | null> {
   const result = await db
-    .prepare("SELECT * FROM glass_catalog WHERE eurocode = ? COLLATE NOCASE")
+    .prepare(`SELECT ${CATALOG_COLUMNS} FROM glass_catalog WHERE eurocode = ? COLLATE NOCASE`)
     .bind(eurocode)
     .first();
   return result as unknown as GlassRecord | null;
@@ -456,12 +472,12 @@ function normalizeBrand(brand: string): string {
     'MERCEDES-BENZ': 'MERCEDES',
     'MERCEDES BENZ': 'MERCEDES',
     'LAND ROVER': 'LANDROVER',
+    'ROLLS-ROYCE': 'ROLLS ROYCE',
     'ROLLS ROYCE': 'ROLLS ROYCE',
     'VAUXHALL': 'OPEL',
     'VAUXHALL/OPEL': 'OPEL',
     'OPEL/VAUXHALL': 'OPEL',
     'CITROËN': 'CITROEN',
-    'DS': 'CITROEN',
     'ALFA': 'ALFA ROMEO',
     'ABARTH': 'FIAT',
     'LAMBORGH.': 'LAMBORGHINI',
@@ -541,7 +557,6 @@ function normalizeBrand(brand: string): string {
     'XPENG.': 'XPENG',
     'ZEEKR.': 'ZEEKR',
     'BYD.': 'BYD',
-    'ORA.': 'ORA',
     'NIO.': 'NIO',
     'THINK.': 'THINK',
     'FISKER.': 'FISKER',
@@ -549,57 +564,48 @@ function normalizeBrand(brand: string): string {
     'LUCID': 'USA CARS',
     'TVR.': 'TVR',
     'TVR': 'TVR',
-    'JC INDIGO': 'JC INDIGO',
     'KEWET': 'KEWET',
     'AIXAM': 'AIXAM',
-    'AIWAYS': 'AIWAYS',
     'DFSK (SERES)': 'DFSK (SERES)',
     'DONGFENG': 'DONGFENG',
-    'EXLANTIX': 'EXLANTIX',
     'JAC (CH)': 'JAC (CH)',
-    'LYNK & CO': 'LYNK & CO',
     'MAN': 'MAN',
     'SCANIA': 'SCANIA TRUCKS',
     'DAF': 'DAF',
     'IVECO': 'IVECO (FIAT) TRUCKS',
-    'HINO': 'HINO TRUCKS',
     'ISUZU TRUCKS': 'ISUZU',
   };
   return map[b] || b;
 }
 
-/** Get all brand aliases for a given brand (for DB queries) */
+/** Get all D1 brand variants for a given brand (for DB queries)
+ *  Input: SVV/API brand name → returns all D1 brand names to search
+ */
 function getBrandAliases(brand: string): string[] {
   const normalized = normalizeBrand(brand);
-  // Reverse lookup: find all keys that map to this normalized value
-  const map: Record<string, string> = {
-    'VOLKSWAGEN': 'VW',
-    'VW TRUCKS': 'VW',
-    'MERCEDES-BENZ': 'MERCEDES',
-    'MERCEDES BENZ': 'MERCEDES',
-    'LAND ROVER': 'LANDROVER',
-    'VAUXHALL': 'OPEL',
-    'VAUXHALL/OPEL': 'OPEL',
-    'OPEL/VAUXHALL': 'OPEL',
-    'CITROËN': 'CITROEN',
-    'DS': 'CITROEN',
-    'ALFA': 'ALFA ROMEO',
-    'ABARTH': 'FIAT',
-    'CHEVROLET': 'DAEWOO (CHEVROLET)',
-    'DAEWOO': 'DAEWOO (CHEVROLET)',
-    'SCANIA': 'SCANIA TRUCKS',
-    'MCLAREN': 'McLAREN',
-    'MC LAREN': 'McLAREN',
-    'SSANYONG': 'SSANGYONG',
+  // D1 primary brand → all D1 brand variants that exist in the catalog
+  const aliasMap: Record<string, string[]> = {
+    'VW': ['VW', 'VW TRUCKS'],
+    'MERCEDES': ['MERCEDES', 'MERCEDES TRUCKS'],
+    'CITROEN': ['CITROEN', 'CITROEN TRUCKS'],
+    'FIAT': ['FIAT', 'FIAT TRUCKS'],
+    'FORD': ['FORD', 'FORD TRUCKS'],
+    'MAZDA': ['MAZDA', 'MAZDA TRUCKS'],
+    'MITSUBISHI': ['MITSUBISHI', 'MITSUBISHI TRUCKS'],
+    'NISSAN': ['NISSAN', 'NISSAN TRUCKS'],
+    'PEUGEOT': ['PEUGEOT', 'PEUGEOT TRUCKS'],
+    'RENAULT': ['RENAULT', 'RENAULT TRUCKS'],
+    'TOYOTA': ['TOYOTA', 'TOYOTA TRUCKS'],
+    'VOLVO': ['VOLVO', 'VOLVO TRUCKS'],
+    'SCANIA TRUCKS': ['SCANIA TRUCKS'],
+    'IVECO (FIAT) TRUCKS': ['IVECO (FIAT) TRUCKS'],
+    'DAEWOO (CHEVROLET)': ['DAEWOO (CHEVROLET)'],
+    'LANDROVER': ['LANDROVER'],
+    'ROLLS ROYCE': ['ROLLS ROYCE'],
+    'McLAREN': ['McLAREN'],
+    'LADA / TOGLIATTI': ['LADA / TOGLIATTI'],
   };
-  const aliases = new Set<string>([normalized]);
-  for (const [key, val] of Object.entries(map)) {
-    if (val === normalized) {
-      aliases.add(key);
-      aliases.add(val);
-    }
-  }
-  return Array.from(aliases);
+  return aliasMap[normalized] || [normalized];
 }
 
 async function queryByBrandAndYear(
@@ -611,7 +617,7 @@ async function queryByBrandAndYear(
 ): Promise<GlassRecord[]> {
   const brands = getBrandAliases(brand);
   const placeholders = brands.map(() => '?').join(',');
-  let sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?)`;
+  let sql = `SELECT ${CATALOG_COLUMNS} FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?)`;
   const params: (string | number)[] = [...brands, year, year];
   if (modelHint) {
     sql += " AND (model LIKE ? OR description LIKE ?)";
@@ -621,7 +627,7 @@ async function queryByBrandAndYear(
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 500";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 100";
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
 }
@@ -629,7 +635,7 @@ async function queryByBrandAndYear(
 async function queryByBrandOnly(db: D1Database, brand: string, modelHint?: string, prefix4?: string): Promise<GlassRecord[]> {
   const brands = getBrandAliases(brand);
   const placeholders = brands.map(() => '?').join(',');
-  let sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders})`;
+  let sql = `SELECT ${CATALOG_COLUMNS} FROM glass_catalog WHERE brand IN (${placeholders})`;
   const params: (string | number)[] = [...brands];
   if (modelHint) {
     sql += " AND (model LIKE ? OR description LIKE ?)";
@@ -639,7 +645,7 @@ async function queryByBrandOnly(db: D1Database, brand: string, modelHint?: strin
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 500";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 100";
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
 }
@@ -649,7 +655,7 @@ async function queryByBrandOnly(db: D1Database, brand: string, modelHint?: strin
 /** Query glass catalog by ktype (when we have ktype populated in DB) */
 async function queryByKtype(db: D1Database, ktype: number): Promise<GlassRecord[]> {
   const { results } = await db
-    .prepare("SELECT * FROM glass_catalog WHERE ktype = ? LIMIT 20")
+    .prepare(`SELECT ${CATALOG_COLUMNS} FROM glass_catalog WHERE ktype = ? LIMIT 20`)
     .bind(ktype)
     .all();
   return (results || []) as unknown as GlassRecord[];
@@ -739,30 +745,63 @@ async function getCategoriesWithCount(db: D1Database): Promise<Array<{ category:
 async function searchCatalog(
   db: D1Database,
   q: string,
-  filters: { brand?: string; category?: string; yearMin?: number; yearMax?: number },
+  filters: { brand?: string; category?: string; yearMin?: number; yearMax?: number; priceMin?: number; priceMax?: number },
   offset = 0,
-  limit = 100
+  limit = 100,
+  sort = "brand",
+  order = "asc"
 ): Promise<GlassRecord[]> {
-  let sql = "SELECT * FROM glass_catalog WHERE (eurocode LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)";
-  const params: (string | number)[] = [`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`];
+  const qTrim = q.trim().toUpperCase();
+  const params: (string | number)[] = [];
+  const whereClauses: string[] = [];
+
+  // Smart query handling: use index-friendly lookups where possible
+  if (qTrim) {
+    const isEurocodeLike = /^[A-Z0-9]{4,12}$/.test(qTrim);
+    if (isEurocodeLike) {
+      // Likely an exact eurocode — use equality (hits idx_eurocode_nocase)
+      whereClauses.push("(eurocode = ? COLLATE NOCASE OR brand = ? COLLATE NOCASE OR model LIKE ? OR description LIKE ?)");
+      params.push(qTrim, qTrim, `%${qTrim}%`, `%${qTrim}%`);
+    } else {
+      // General search — prefix-like on model can use idx_model if added;
+      // fallback to full LIKE for description
+      whereClauses.push("(eurocode LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)");
+      params.push(`%${qTrim}%`, `%${qTrim}%`, `%${qTrim}%`, `%${qTrim}%`);
+    }
+  }
 
   if (filters.brand) {
-    sql += " AND brand = ?";
+    whereClauses.push("brand = ? COLLATE NOCASE");
     params.push(filters.brand);
   }
   if (filters.category) {
-    sql += " AND category = ?";
+    whereClauses.push("category = ?");
     params.push(filters.category);
   }
   if (filters.yearMin !== undefined) {
-    sql += " AND (year_to IS NULL OR year_to >= ?)";
+    whereClauses.push("(year_to IS NULL OR year_to >= ?)");
     params.push(filters.yearMin);
   }
   if (filters.yearMax !== undefined) {
-    sql += " AND (year_from IS NULL OR year_from <= ?)";
+    whereClauses.push("(year_from IS NULL OR year_from <= ?)");
     params.push(filters.yearMax);
   }
-  sql += " LIMIT ? OFFSET ?";
+  if (filters.priceMin !== undefined) {
+    whereClauses.push("(price IS NOT NULL AND price >= ?)");
+    params.push(filters.priceMin);
+  }
+  if (filters.priceMax !== undefined) {
+    whereClauses.push("(price IS NOT NULL AND price <= ?)");
+    params.push(filters.priceMax);
+  }
+
+  // Sort mapping
+  const sortCol = sort === "price" ? "price" : sort === "year" ? "year_from" : "brand";
+  const sortDir = order.toLowerCase() === "desc" ? "DESC" : "ASC";
+  const secondarySort = sortCol === "brand" ? ", model ASC, year_from DESC" : ", brand ASC, model ASC";
+
+  const whereSql = whereClauses.length > 0 ? `WHERE ${whereClauses.join(" AND ")}` : "";
+  const sql = `SELECT ${CATALOG_COLUMNS} FROM glass_catalog ${whereSql} ORDER BY ${sortCol} ${sortDir}${secondarySort} LIMIT ? OFFSET ?`;
   params.push(limit, offset);
 
   const { results } = await db.prepare(sql).bind(...params).all();
@@ -775,36 +814,42 @@ async function searchCatalog(
 
 interface GroundTruthRecord {
   id: number;
-  regnr_hash: string;
-  vin: string | null;
-  vin_prefix: string | null;
-  k_type: number | null;
+  regnr: string;
+  regnr_hash?: string; // legacy
+  vin?: string | null;
+  vin_prefix?: string | null;
+  k_type?: number | null;
   make: string;
   model: string;
   year: number;
-  submodel: string | null;
-  frontrute_eurocode: string | null;
-  bakrute_eurocode: string | null;
-  sideglass_fv_eurocode: string | null;
-  sideglass_fh_eurocode: string | null;
-  sideglass_bv_eurocode: string | null;
-  sideglass_bh_eurocode: string | null;
-  dor_fv_eurocode: string | null;
-  dor_fh_eurocode: string | null;
-  dor_bv_eurocode: string | null;
-  dor_bh_eurocode: string | null;
-  verified_by: string;
+  submodel?: string | null;
+  eurocode: string | null;
+  // Legacy multi-field format
+  frontrute_eurocode?: string | null;
+  bakrute_eurocode?: string | null;
+  sideglass_fv_eurocode?: string | null;
+  sideglass_fh_eurocode?: string | null;
+  sideglass_bv_eurocode?: string | null;
+  sideglass_bh_eurocode?: string | null;
+  dor_fv_eurocode?: string | null;
+  dor_fh_eurocode?: string | null;
+  dor_bv_eurocode?: string | null;
+  dor_bh_eurocode?: string | null;
+  verified_by?: string;
   verified_at: string;
   source_url: string | null;
   confidence: number;
 }
 
 async function queryGroundTruth(db: D1Database, regnr: string): Promise<GroundTruthRecord | null> {
-  const hash = await sha256(regnr);
   try {
-    const row = await db.prepare("SELECT * FROM ground_truth WHERE regnr_hash = ?").bind(hash).first();
+    const row = await db.prepare("SELECT * FROM ground_truth WHERE regnr = ?").bind(regnr.toUpperCase()).first();
+    if (row) {
+      console.log(`[groundTruth] Hit for ${regnr}: eurocode=${(row as any).eurocode}`);
+    }
     return row as unknown as GroundTruthRecord | null;
-  } catch {
+  } catch (e) {
+    console.error(`[groundTruth] Error for ${regnr}:`, e);
     return null;
   }
 }
@@ -818,7 +863,7 @@ async function queryGroundTruthByVehicle(
   try {
     const normalizedMake = normalizeBrand(make);
     const row = await db
-      .prepare("SELECT * FROM ground_truth WHERE make = ? AND model = ? AND year = ? ORDER BY confidence DESC LIMIT 1")
+      .prepare("SELECT * FROM ground_truth WHERE make = ? AND model = ? AND year = ? ORDER BY verified_at DESC LIMIT 1")
       .bind(normalizedMake, model, year)
       .first();
     return row as unknown as GroundTruthRecord | null;
@@ -879,10 +924,31 @@ async function groundTruthToCandidates(
   gt: GroundTruthRecord
 ): Promise<GlassRecord[]> {
   const candidates: GlassRecord[] = [];
-  for (const [field, meta] of Object.entries(GT_FIELD_TO_TYPE)) {
-    const eurocode = (gt as unknown as Record<string, unknown>)[field] as string | null;
-    if (!eurocode) continue;
+  // Support both old multi-field format and new simple eurocode format
+  const eurocode = (gt as unknown as Record<string, unknown>).eurocode as string | null;
+  if (eurocode) {
     const rec = await queryByEurocode(db, eurocode);
+    if (rec) {
+      // Infer type code from record itself
+      const typeCode = inferTypeCodeFromRecord(rec) || 'F';
+      const typeDescs: Record<string, string> = {
+        F: 'Frontrute', B: 'Bakrute',
+        DFF: 'Dørrute fremre førerside', DFB: 'Dørrute bak venstre',
+        DPF: 'Dørrute fremre passasjerside', DPB: 'Dørrute bak høyre',
+        SFB1: 'Sideglass bak førerside', SPB1: 'Sideglass bak passasjerside',
+      };
+      candidates.push({
+        ...rec,
+        typeCode,
+        typeCodeDesc: typeDescs[typeCode] || typeCode,
+      });
+    }
+  }
+  // Also check legacy multi-field format
+  for (const [field, meta] of Object.entries(GT_FIELD_TO_TYPE)) {
+    const fieldEurocode = (gt as unknown as Record<string, unknown>)[field] as string | null;
+    if (!fieldEurocode || fieldEurocode === eurocode) continue;
+    const rec = await queryByEurocode(db, fieldEurocode);
     if (rec) {
       candidates.push({
         ...rec,
@@ -922,6 +988,14 @@ function inferTypeCodeFromRecord(record: GlassRecord): string | null {
   // Fallback: try to detect from description even without category
   if (/\bWINDSHIELD\b|\bWINDSCREEN\b|\bFRONT\s+GLASS\b/.test(desc)) return "F";
   if (/\bREAR\s+WINDOW\b|\bBACK\s+WINDOW\b|\bREAR\s+GLASS\b/.test(desc)) return "B";
+
+  // Quarter panel glass (often categorized as "annet" but detectable from description)
+  if (/\bRRQ\b/.test(desc)) return "SPB2"; // Right rear quarter
+  if (/\bLRQ\b/.test(desc)) return "SFB2"; // Left rear quarter
+  if (/\bRFQ\b/.test(desc)) return "SPB1"; // Right front quarter
+  if (/\bLFQ\b/.test(desc)) return "SFB1"; // Left front quarter
+  if (/\bR\s+RQ\b/.test(desc)) return "SPB2"; // Right rear quarter (spaced)
+  if (/\bL\s+RQ\b/.test(desc)) return "SFB2"; // Left rear quarter (spaced)
 
   return null;
 }
@@ -1022,8 +1096,8 @@ async function saveSearchResult(db: D1Database, record: SearchHistoryRecord): Pr
       record.source,
       record.vin_prefix || null
     ).run();
-  } catch {
-    // Silently fail if migration 0005 not run yet
+  } catch (e) {
+    console.error('[saveSearchResult] Failed:', e instanceof Error ? e.message : String(e));
   }
 }
 
@@ -1965,6 +2039,52 @@ function decodeVin(vin: string, lengthMm?: number): { make: string; generation: 
   return null;
 }
 
+/** Filter candidates by body type mismatch */
+function filterByBodyType(
+  candidates: GlassRecord[],
+  vehicle: TecdocVehicle,
+  svvBody: { wheelbase?: string; bodyType?: string; variant?: string }
+): GlassRecord[] {
+  if (!svvBody.bodyType) return candidates;
+
+  return candidates.filter((record) => {
+    const desc = (record.description || "").toLowerCase();
+    const model = (record.model || "").toLowerCase();
+    const fullText = desc + " " + model;
+
+    // Van detection in product
+    const isVan = fullText.includes("van") || fullText.includes("kasse") || fullText.includes("lastebil") || fullText.includes("truck");
+    // Passenger detection
+    const isPassenger = fullText.includes("multivan") || fullText.includes("caravelle") || fullText.includes("personbil") || fullText.includes("sedan") || fullText.includes("kombi");
+    // SUV detection
+    const isSuv = fullText.includes("suv") || fullText.includes("4x4") || fullText.includes("awd");
+    // Cabriolet detection
+    const isCabrio = fullText.includes("cabrio") || fullText.includes("convertible") || fullText.includes("roadster");
+    // Coupe detection
+    const isCoupe = fullText.includes("coupe") || fullText.includes("coupé");
+    // Pickup detection
+    const isPickup = fullText.includes("pickup") || fullText.includes("doble cab") || fullText.includes("double cab");
+
+    // Match against SVV body type
+    switch (svvBody.bodyType) {
+      case "van":
+        // If product is clearly passenger-only, filter it out
+        if (isPassenger && !isVan) return false;
+        break;
+      case "passenger":
+        // If product is clearly van-only, filter it out
+        if (isVan && !isPassenger) return false;
+        break;
+      case "kombi":
+        // Kombi is flexible — only filter extreme mismatches
+        if (isCabrio || isPickup) return false;
+        break;
+    }
+
+    return true;
+  });
+}
+
 /** Infer body variant from SVV data (length, seats, GVWR) */
 function inferBodyFromSvvData(vehicle: TecdocVehicle): { wheelbase?: string; bodyType?: string; variant?: string } {
   const result: { wheelbase?: string; bodyType?: string; variant?: string } = {};
@@ -2031,31 +2151,115 @@ function scoreBodyCompatibility(
   return score;
 }
 
+// ============================================================================
+// MODEL MATCHING v2.1 — Synonyms, fuzzy matching, generation extraction
+// ============================================================================
+
+const MODEL_SYNONYMS: Record<string, string[]> = {
+  // Volkswagen
+  transporter: ["transporter", "multivan", "caravelle", "california", "t5", "t6", "t4"],
+  multivan: ["transporter", "multivan", "caravelle", "california", "t5", "t6", "t4"],
+  caravelle: ["transporter", "multivan", "caravelle", "california", "t5", "t6", "t4"],
+  // Mercedes
+  sprinter: ["sprinter"],
+  vito: ["vito", "viano", "v-klasse", "v-klass", "v-klasse", "v-class"],
+  viano: ["vito", "viano", "v-klasse", "v-klass", "v-klasse", "v-class"],
+  // Ford
+  transit: ["transit", "tourneo"],
+  tourneo: ["transit", "tourneo"],
+  // Fiat
+  ducato: ["ducato", "jumper", "boxer"],
+  jumper: ["ducato", "jumper", "boxer"],
+  boxer: ["ducato", "jumper", "boxer"],
+  // Toyota
+  hiace: ["hiace", "hi-ace"],
+  // Opel/Vauxhall
+  vivaro: ["vivaro", "trafic", "talento"],
+  trafic: ["vivaro", "trafic", "talento"],
+  movano: ["movano", "master", "interstar"],
+  master: ["movano", "master", "interstar"],
+};
+
+function extractGeneration(model: string): string | null {
+  const m = model.toLowerCase();
+  // VW T4/T5/T6
+  const vwGen = m.match(/\b(t[456])\b/);
+  if (vwGen) return vwGen[1];
+  // Mercedes W210/W211/W212 etc
+  const mercGen = m.match(/\b(w\d{3})\b/);
+  if (mercGen) return mercGen[1];
+  // BMW E39/E46/F30 etc
+  const bmwGen = m.match(/\b([efg]\d{2})\b/);
+  if (bmwGen) return bmwGen[1];
+  // Audi B8/B9/C7 etc
+  const audiGen = m.match(/\b([bc]\d)\b/);
+  if (audiGen) return audiGen[1];
+  // Ford Mk7/Mk8
+  const fordGen = m.match(/\b(mk\d)\b/);
+  if (fordGen) return fordGen[1];
+  return null;
+}
+
 function modelMatches(vehicleModel: string, recordModel: string | null, vehicleMake?: string): boolean {
   if (!recordModel || recordModel.trim() === "") return false;
   const vm = vehicleModel.toLowerCase().trim();
   const rm = recordModel.toLowerCase().trim();
+
+  // Exact or substring match
   if (vm.includes(rm) || rm.includes(vm)) return true;
 
   const make = (vehicleMake || "").toLowerCase();
-  if (make.includes("volkswagen")) {
+
+  // === Synonym matching ===
+  for (const [canonical, variants] of Object.entries(MODEL_SYNONYMS)) {
+    const vmHasVariant = variants.some((v) => vm.includes(v));
+    const rmHasVariant = variants.some((v) => rm.includes(v));
+    if (vmHasVariant && rmHasVariant) {
+      // Both are in same synonym group — check generation
+      const vmGen = extractGeneration(vm);
+      const rmGen = extractGeneration(rm);
+      if (!vmGen || !rmGen || vmGen === rmGen) return true;
+    }
+  }
+
+  // === VW special case (backward compat) ===
+  if (make.includes("volkswagen") || make.includes("vw")) {
     const vwModels = ["transporter", "multivan", "caravelle", "california"];
     const vmIsVw = vwModels.some((m) => vm.includes(m));
     const rmIsVw = vwModels.some((m) => rm.includes(m));
     if (vmIsVw && rmIsVw) {
-      const vmGen = vm.match(/\b(t[456])\b/);
-      const rmGen = rm.match(/\b(t[456])\b/);
-      if (!vmGen || !rmGen || vmGen[1] === rmGen[1]) return true;
+      const vmGen = extractGeneration(vm);
+      const rmGen = extractGeneration(rm);
+      if (!vmGen || !rmGen || vmGen === rmGen) return true;
     }
   }
 
-  const tokenize = (s: string) => s.split(/[^a-z0-9]+/).filter((t) => t.length >= 2);
+  // === Fuzzy token matching ===
+  const tokenize = (s: string) =>
+    s.split(/[^a-z0-9]+/).filter((t) => t.length >= 2);
   const vTokens = tokenize(vm);
   const rTokens = tokenize(rm);
-  const common = rTokens.filter((t) => vTokens.includes(t));
+
+  // Levenshtein-inspired: allow 1-char diff for tokens >= 5 chars
+  const fuzzyMatch = (a: string, b: string): boolean => {
+    if (a === b) return true;
+    if (a.length >= 5 && b.length >= 5) {
+      let diff = 0;
+      const maxLen = Math.max(a.length, b.length);
+      for (let i = 0; i < maxLen; i++) {
+        if (a[i] !== b[i]) diff++;
+        if (diff > 1) return false;
+      }
+      return diff <= 1;
+    }
+    return false;
+  };
+
+  const common = rTokens.filter((rt) => vTokens.some((vt) => fuzzyMatch(rt, vt)));
   if (common.length >= 2) return true;
   if (common.length === 1 && common[0].length >= 4) return true;
   if (rTokens.length === 1 && vTokens.includes(rTokens[0]) && rTokens[0].length >= 3) return true;
+
   return false;
 }
 
@@ -2130,6 +2334,113 @@ function inferGenerationFromYearRange(brand: string, model: string, from: number
 // MAIN SEARCH
 // ============================================================================
 
+// ============================================================================
+// AI WINDSHIELD ANALYSIS — Cloudflare Workers AI (Llama 3.2 Vision)
+// ============================================================================
+
+interface WindshieldAnalysis {
+  hud: boolean;
+  rainSensor: boolean;
+  camera: boolean;
+  heated: boolean;
+  antenna: boolean;
+  acoustic: boolean;
+  color: string | null;
+  confidence: number;
+  reasoning: string;
+}
+
+async function handleAnalyzeWindshield(request: Request, env: Env): Promise<Response> {
+  try {
+    const body = await request.json<{ image: string }>();
+    const base64Image = body.image;
+
+    if (!base64Image) {
+      return errorResponse("Mangler bilde. Send som base64 i 'image' felt.", 400);
+    }
+
+    // Convert base64 to Uint8Array for AI
+    const binary = atob(base64Image.split(',')[1] || base64Image);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+
+    const response = await env.AI.run("@cf/meta/llama-3.2-11b-vision-instruct", {
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: `Analyze this car windshield image carefully. Look for these specific features and respond ONLY with a valid JSON object in this exact format:
+
+{
+  "hud": boolean,           // Head-up display projector visible behind steering wheel
+  "rainSensor": boolean,    // Small round sensor behind rearview mirror
+  "camera": boolean,        // Camera module behind rearview mirror (ADAS/lane assist)
+  "heated": boolean,        // Visible heating wires/elements in glass
+  "antenna": boolean,       // Silver antenna lines in glass
+  "acoustic": boolean,      // "Acoustic" text or symbol on glass edge
+  "color": string | null,   // Glass color: "green", "blue", "gray", "clear", "tinted", or null
+  "confidence": number,     // 0-1 overall confidence
+  "reasoning": string       // Brief explanation of what you see
+}
+
+Be precise. If unsure, set confidence below 0.5 and use false for booleans.`
+            },
+            {
+              type: "image",
+              image: bytes,
+            }
+          ]
+        }
+      ]
+    });
+
+    // Parse AI response
+    const aiText = (response as any).response || "";
+    
+    // Extract JSON from response
+    let analysis: WindshieldAnalysis;
+    try {
+      const jsonMatch = aiText.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        analysis = JSON.parse(jsonMatch[0]);
+      } else {
+        throw new Error("No JSON found in AI response");
+      }
+    } catch {
+      // Fallback: parse text heuristically
+      const text = aiText.toLowerCase();
+      analysis = {
+        hud: text.includes("hud") && !text.includes("no hud") && !text.includes("without hud"),
+        rainSensor: text.includes("rain sensor") || text.includes("sensor"),
+        camera: text.includes("camera") || text.includes("adas") || text.includes("lane"),
+        heated: text.includes("heated") || text.includes("heating") || text.includes("defrost"),
+        antenna: text.includes("antenna") || text.includes("aerial"),
+        acoustic: text.includes("acoustic") || text.includes("sound"),
+        color: text.includes("green") ? "green" : text.includes("blue") ? "blue" : text.includes("gray") ? "gray" : text.includes("tint") ? "tinted" : null,
+        confidence: 0.3,
+        reasoning: aiText.slice(0, 500),
+      };
+    }
+
+    return jsonResponse({
+      success: true,
+      analysis,
+      raw: aiText.slice(0, 1000),
+    });
+
+  } catch (e) {
+    console.error("[AI] Windshield analysis failed:", e);
+    return errorResponse(
+      e instanceof Error ? e.message : "AI-analyse feilet",
+      500
+    );
+  }
+}
+
 /**
  * Result shape: includes httpStatus so the HTTP handler can return the
  * correct status code (200 OK, 404 not found, 503 upstream down, 500 misconfig).
@@ -2190,9 +2501,10 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     }
     if (groundTruth) {
       gtCandidates = await groundTruthToCandidates(db, groundTruth);
+      console.log(`[searchByRegnr] Ground truth: ${gtCandidates.length} candidates for ${regnr}`);
     }
-  } catch {
-    // Ground truth table might not exist yet — silently continue
+  } catch (e) {
+    console.error(`[searchByRegnr] Ground truth error for ${regnr}:`, e);
   }
 
   // 3. Hybrid kType resolution: glass_rules → Bovsoft → resolveGlass fallback
@@ -2318,7 +2630,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
   }
 
   // Find matching glass in D1 (db already declared above)
-  const candidates: GlassRecord[] = [];
+  let candidates: GlassRecord[] = [];
   let layer = 4;
   let confidence: string = "none";
 
@@ -2428,10 +2740,21 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     }
   }
 
+  // Infer body type from SVV data for filtering
+  const svvBody = inferBodyFromSvvData(vehicle);
+
+  // === Body-type filtering ===
+  // Filter out candidates that clearly don't match the vehicle's body type
+  if (candidates.length > 1) {
+    const bodyFiltered = filterByBodyType(candidates, vehicle, svvBody);
+    if (bodyFiltered.length > 0 && bodyFiltered.length < candidates.length) {
+      candidates = bodyFiltered;
+    }
+  }
+
   // Decode VIN for all supported makes
   const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
   const unifiedVin = vehicle.vin ? decodeVin(vehicle.vin, vehicle.length) : null;
-  const svvBody = inferBodyFromSvvData(vehicle);
 
   // Fetch equipment from Biluppgitter (Bovsoft does not return equipment)
   let factoryEquipment: FactoryEquipment | null = null;
@@ -2573,15 +2896,32 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
 
   const candidatesWithEquipment = selected.map((s) => {
     const record = s.c;
+    const inferredTypeCode = inferTypeCodeFromRecord(record);
     const nagsCodes = lookupNagsByVehicle(
       record.brand || '',
       record.model || '',
       record.year_from,
       record.year_to,
-      record.category || inferTypeCodeFromRecord(record) || 'annet'
+      record.category || inferredTypeCode || 'annet'
     );
+    const normalized = normalizeRecord(record);
+    // Override typeCode with inferred value if D1 doesn't have it
+    if (inferredTypeCode && (!normalized.typeCode || normalized.typeCode === 'Ukjent')) {
+      normalized.typeCode = inferredTypeCode;
+      const typeLabels: Record<string, string> = {
+        F: 'Frontrute', B: 'Bakrute',
+        DFF: 'Dørrute fremre førerside', DFB: 'Dørrute bak venstre',
+        DPF: 'Dørrute fremre passasjerside', DPB: 'Dørrute bak høyre',
+        DFFV: 'Ventilrute fremre venstre', DPFV: 'Ventilrute fremre høyre',
+        DFBV: 'Ventilrute bak venstre', DPBV: 'Ventilrute bak høyre',
+        SFB1: 'Sideglass bak førerside', SPB1: 'Sideglass bak passasjerside',
+        SFB2: 'Sideglass bak 2 førerside', SPB2: 'Sideglass bak 2 passasjerside',
+        SFB3: 'Sideglass bak 3 førerside', SPB3: 'Sideglass bak 3 passasjerside',
+      };
+      normalized.typeCodeDesc = typeLabels[inferredTypeCode] || inferredTypeCode;
+    }
     return {
-      ...normalizeRecord(record),
+      ...normalized,
       _score: s.score,
       _equipment: inferRecordEquipment(record),
       nagsCodes: nagsCodes.length > 0 ? nagsCodes : undefined,
@@ -2730,6 +3070,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
         layer,
         groundTruth: layer === -1,
       },
+      // Ground truth active when layer === -1
       resultsByType: groupByTypeCode(candidatesWithEquipment),
       sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
     },
@@ -2739,6 +3080,181 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     return {
       httpStatus: 500,
       body: { error: "En intern feil oppstod under søket. Prøv igjen senere.", regnr, code: "internal_error" },
+    };
+  }
+}
+
+// ============================================================================
+// VIN SEARCH
+// ============================================================================
+
+async function searchByVin(vin: string, env: Env): Promise<SearchResult> {
+  try {
+    const db = env.GLASS_CATALOG_D1;
+    const upperVin = vin.trim().toUpperCase();
+
+    // Validate VIN format (17 chars, no I/O/Q)
+    if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(upperVin)) {
+      return {
+        httpStatus: 400,
+        body: { error: "Ugyldig VIN-format. VIN må være 17 tegn.", vin: upperVin },
+      };
+    }
+
+    // Decode VIN via Vincario
+    const vincario = await decodeVinVincario(upperVin, {
+      apiKey: env.VINCARIO_API_KEY || "",
+      secretKey: env.VINCARIO_SECRET_KEY || "",
+    });
+
+    if (!vincario.vehicle) {
+      return {
+        httpStatus: 404,
+        body: { error: "Kunne ikke dekode VIN. Sjekk at VIN er korrekt.", vin: upperVin },
+      };
+    }
+
+    const v = vincario.vehicle;
+    const make = normalizeBrand(v.make || "");
+    const model = v.model || "";
+    const year = v.year || new Date().getFullYear();
+
+    // Search catalog by brand + year + model hint
+    const brandAliases = getBrandAliases(make);
+    const placeholders = brandAliases.map(() => '?').join(',');
+    const sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?) AND (model LIKE ? OR description LIKE ?)`;
+    const params: (string | number)[] = [...brandAliases, year, year, `%${model}%`, `%${model}%`];
+    const { results } = await db.prepare(sql).bind(...params).all<GlassRecord>();
+    const candidates = (results || []).slice(0, 30);
+
+    const candidatesWithEquipment = candidates.map((c) => {
+      const inferredTypeCode = inferTypeCodeFromRecord(c);
+      const normalized = normalizeRecord(c);
+      if (inferredTypeCode && (!normalized.typeCode || normalized.typeCode === 'Ukjent')) {
+        normalized.typeCode = inferredTypeCode;
+      }
+      return {
+        ...normalized,
+        _score: 50,
+        _equipment: inferRecordEquipment(c),
+      };
+    });
+
+    return {
+      httpStatus: 200,
+      body: {
+        vehicle: {
+          vin: upperVin,
+          make: v.make,
+          model: v.model,
+          year: v.year,
+          body: v.body,
+          engineType: v.engineType,
+          fuelType: v.fuelType,
+          vinDecode: vincario,
+        },
+        candidates: candidatesWithEquipment,
+        top_pick: candidatesWithEquipment[0] || null,
+        confidence: "medium",
+        layer: 3,
+        confidenceInfo: {
+          score: 45,
+          label: "medium",
+          reasons: ["Søk basert på VIN-dekoding"],
+          layer: 3,
+          groundTruth: false,
+        },
+        sources: ["vincario"],
+      },
+    };
+  } catch (e) {
+    console.error(`searchByVin exception for ${vin}: ${e instanceof Error ? e.message : String(e)}`);
+    return {
+      httpStatus: 500,
+      body: { error: "En intern feil oppstod under VIN-søket.", vin },
+    };
+  }
+}
+
+// ============================================================================
+// OEM SEARCH
+// ============================================================================
+
+async function searchByOem(oem: string, env: Env): Promise<SearchResult> {
+  try {
+    const db = env.GLASS_CATALOG_D1;
+    const cleanOem = oem.trim().toUpperCase();
+
+    if (cleanOem.length < 3) {
+      return {
+        httpStatus: 400,
+        body: { error: "OEM-nummer må være minst 3 tegn.", oem: cleanOem },
+      };
+    }
+
+    // Direct match on oem_numbers, article_number, scan_number, or nags_codes (JSON array stored as string)
+    const { results } = await db
+      .prepare("SELECT * FROM glass_catalog WHERE oem_numbers LIKE ? OR article_number = ? OR scan_number = ? OR nags_codes LIKE ? LIMIT 20")
+      .bind(`%${cleanOem}%`, cleanOem, cleanOem, `%${cleanOem}%`)
+      .all<GlassRecord>();
+
+    const candidates = (results || []);
+
+    if (candidates.length === 0) {
+      return {
+        httpStatus: 404,
+        body: { error: "Ingen produkter funnet for dette OEM-nummeret.", oem: cleanOem },
+      };
+    }
+
+    // Also fetch related products with same prefix4/brand/model
+    const primary = candidates[0];
+    let related: GlassRecord[] = [];
+    if (primary.prefix4) {
+      const { results: rel } = await db
+        .prepare("SELECT * FROM glass_catalog WHERE prefix4 = ? AND eurocode != ? LIMIT 10")
+        .bind(primary.prefix4, primary.eurocode)
+        .all<GlassRecord>();
+      related = (rel || []);
+    }
+
+    const allRecords = [...candidates, ...related];
+    const candidatesWithEquipment = allRecords.map((c) => {
+      const inferredTypeCode = inferTypeCodeFromRecord(c);
+      const normalized = normalizeRecord(c);
+      if (inferredTypeCode && (!normalized.typeCode || normalized.typeCode === 'Ukjent')) {
+        normalized.typeCode = inferredTypeCode;
+      }
+      return {
+        ...normalized,
+        _score: c.eurocode === primary.eurocode ? 100 : 30,
+        _equipment: inferRecordEquipment(c),
+      };
+    });
+
+    return {
+      httpStatus: 200,
+      body: {
+        query: { oem: cleanOem },
+        candidates: candidatesWithEquipment,
+        top_pick: candidatesWithEquipment[0],
+        confidence: "high",
+        layer: 1,
+        confidenceInfo: {
+          score: 85,
+          label: "high",
+          reasons: ["Direkte OEM-nummer match"],
+          layer: 1,
+          groundTruth: false,
+        },
+        sources: ["oem_lookup"],
+      },
+    };
+  } catch (e) {
+    console.error(`searchByOem exception for ${oem}: ${e instanceof Error ? e.message : String(e)}`);
+    return {
+      httpStatus: 500,
+      body: { error: "En intern feil oppstod under OEM-søket.", oem },
     };
   }
 }
@@ -2787,29 +3303,43 @@ export default {
       });
     }
 
+    // AI Windshield Analysis
+    if (path === "/api/analyze-windshield" && request.method === "POST") {
+      return await handleAnalyzeWindshield(request, env);
+    }
+
     // Glass search
     if (path === "/api/glass") {
       const regnr = url.searchParams.get("regnr");
+      const vin = url.searchParams.get("vin");
+      const oem = url.searchParams.get("oem");
       const prefix4 = url.searchParams.get("prefix4");
       const eurocode = url.searchParams.get("eurocode");
 
       if (regnr) {
-        // Cache hit — always 200 (we only cache successful lookups)
         const categoryFilter = url.searchParams.get("category") || undefined;
         const cacheKeyParams: Record<string, string> = { regnr };
         if (categoryFilter) cacheKeyParams.category = categoryFilter;
-        // Cache hit — always 200 (we only cache successful lookups)
         const cache = await getCache<unknown>(env.GLASS_CATALOG, cacheKey("glass", cacheKeyParams));
         if (cache) return jsonResponse(cache);
 
         const result = await searchByRegnr(regnr, env, categoryFilter || undefined);
-        // Only cache successful 200 responses; never cache errors (auth/upstream/not_found)
         if (result.httpStatus === 200) {
           await setCache(env.GLASS_CATALOG, cacheKey("glass", cacheKeyParams), result.body, 300);
         }
         const extraHeaders: Record<string, string> = {};
         if (result.retryAfter) extraHeaders["Retry-After"] = String(result.retryAfter);
         return jsonResponse(result.body, result.httpStatus, extraHeaders);
+      }
+
+      if (vin) {
+        const result = await searchByVin(vin, env);
+        return jsonResponse(result.body, result.httpStatus);
+      }
+
+      if (oem) {
+        const result = await searchByOem(oem, env);
+        return jsonResponse(result.body, result.httpStatus);
       }
 
       if (prefix4) {
@@ -2832,7 +3362,7 @@ export default {
         return jsonResponse(data);
       }
 
-      return errorResponse("Mangler parameter: regnr, prefix4 eller eurocode");
+      return errorResponse("Mangler parameter: regnr, vin, oem, prefix4 eller eurocode");
     }
 
     // Catalog metadata endpoints
@@ -2858,6 +3388,10 @@ export default {
       const category = url.searchParams.get("category") || undefined;
       const yearMin = url.searchParams.get("yearMin") ? parseInt(url.searchParams.get("yearMin")!, 10) : undefined;
       const yearMax = url.searchParams.get("yearMax") ? parseInt(url.searchParams.get("yearMax")!, 10) : undefined;
+      const priceMin = url.searchParams.get("priceMin") ? parseInt(url.searchParams.get("priceMin")!, 10) : undefined;
+      const priceMax = url.searchParams.get("priceMax") ? parseInt(url.searchParams.get("priceMax")!, 10) : undefined;
+      const sort = url.searchParams.get("sort") || "brand"; // brand | price | year
+      const order = url.searchParams.get("order") || "asc"; // asc | desc
       const page = parseInt(url.searchParams.get("page") || "1", 10);
       const perPage = Math.min(parseInt(url.searchParams.get("per_page") || "48", 10), 100);
 
@@ -2873,19 +3407,55 @@ export default {
         });
       }
 
+      const db = env.GLASS_CATALOG_D1;
       const offset = (page - 1) * perPage;
-      const results = await searchCatalog(env.GLASS_CATALOG_D1, q, { brand, category, yearMin, yearMax }, offset, perPage + 1);
+
+      // Build filter object for searchCatalog
+      const searchFilters: Parameters<typeof searchCatalog>[2] = { brand, category, yearMin, yearMax, priceMin, priceMax };
+
+      let results: GlassRecord[] = [];
+      try {
+        results = await searchCatalog(db, q, searchFilters, offset, perPage + 1, sort, order);
+      } catch (e) {
+        return jsonResponse({ error: "Search failed", details: e instanceof Error ? e.message : String(e) }, 500);
+      }
       const hasMore = results.length > perPage;
       const sliced = hasMore ? results.slice(0, perPage) : results;
+
+      // Fetch real filter metadata (cached separately, low overhead)
+      let brands: Array<{ brand: string; count: number }> = [];
+      let categories: Array<{ category: string; count: number }> = [];
+      let yearRange = { minYear: 1960, maxYear: 2030 };
+      let priceRange = { minPrice: 0, maxPrice: 150000 };
+      try {
+        const brandsCached = await getCache<{ brands: Array<{ brand: string; count: number }> }>(env.GLASS_CATALOG, "catalog:brands");
+        brands = brandsCached?.brands ?? await getBrandsWithCount(db);
+      } catch { brands = []; }
+      try {
+        const catsCached = await getCache<{ categories: Array<{ category: string; count: number }> }>(env.GLASS_CATALOG, "catalog:categories");
+        categories = catsCached?.categories ?? await getCategoriesWithCount(db);
+      } catch { categories = []; }
+      try {
+        yearRange = await db.prepare("SELECT MIN(year_from) as minYear, MAX(year_to) as maxYear FROM glass_catalog WHERE year_from IS NOT NULL AND year_from > 0").first<{ minYear: number; maxYear: number }>() || yearRange;
+      } catch { /* keep defaults */ }
+      try {
+        priceRange = await db.prepare("SELECT MIN(price) as minPrice, MAX(price) as maxPrice FROM glass_catalog WHERE price IS NOT NULL AND price > 0").first<{ minPrice: number; maxPrice: number }>() || priceRange;
+      } catch { /* keep defaults */ }
+
       const responseBody = {
         query: q,
         page,
         perPage,
         count: sliced.length,
-        total: results.length, // approximate
+        total: sliced.length + (hasMore ? 1 : 0), // at-least indicator; true count requires COUNT(*) which is expensive
         hasMore,
         products: sliced.map(normalizeRecord),
-        filters: { brands: [], categories: [], years: { min: 1960, max: 2030 }, prices: { min: 0, max: 150000 } },
+        filters: {
+          brands: Array.isArray(brands) ? brands : [],
+          categories: Array.isArray(categories) ? categories : [],
+          years: { min: yearRange?.minYear ?? 1960, max: yearRange?.maxYear ?? 2030 },
+          prices: { min: Math.floor(priceRange?.minPrice ?? 0), max: Math.ceil(priceRange?.maxPrice ?? 150000) },
+        },
       };
 
       // Store in KV with envelope (version + cachedAt)

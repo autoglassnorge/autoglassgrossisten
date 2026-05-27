@@ -1,0 +1,2185 @@
+{
+  "meta": {
+    "generatedAt": "2026-05-24T01:44:54.982Z",
+    "totalDiscoveries": 153,
+    "exactMappings": 349,
+    "aliasCount": 125,
+    "uniqueKtypes": 132
+  },
+  "exact_map": {
+    "SKODA|SUPERB|2009": 32787,
+    "SKODA|SUPERB": 32787,
+    "SKODA|SUPERB_II_STASJONSVOGN_(3T5)|2009": 32787,
+    "THINK|CITY|2010": 12152,
+    "THINK|CITY": 12152,
+    "VOLVO|240|1974": 6272,
+    "VOLVO|240": 6272,
+    "VOLVO|240_(P242,_P244)|1974": 6272,
+    "OPEL|GRANDLAND|2019": 136486,
+    "OPEL|GRANDLAND": 136486,
+    "OPEL|GRANDLAND_X_(A18)|2019": 136486,
+    "PEUGEOT|307|2003": 18550,
+    "PEUGEOT|307": 18550,
+    "PEUGEOT|307_CC_(3B)|2003": 18550,
+    "VW|CARAVELLE|2003": 17370,
+    "VW|CARAVELLE": 17370,
+    "VW|CARAVELLE_V_BUSS_(7HB,_7HJ,_7EB,_7EJ,_7EF,_7EG,_7HF,_7EC)|2003": 17370,
+    "BMW|X1|2009": 32114,
+    "BMW|X1": 32114,
+    "BMW|X1_(E84)|2009": 32114,
+    "FORD|FOCUS|2004": 18378,
+    "FORD|FOCUS": 18378,
+    "FORD|FOCUS_II_(DA_,_HCP,_DP)|2004": 18378,
+    "BMW|3|2009": 34946,
+    "BMW|3": 34946,
+    "BMW|3_TOURING_(E91)|2009": 34946,
+    "TOYOTA|LAND|2008": 29493,
+    "TOYOTA|LAND": 29493,
+    "TOYOTA|LAND_CRUISER_(_J2_)|2008": 29493,
+    "BMW|X3|2007": 25497,
+    "BMW|X3": 25497,
+    "BMW|X3_(E83)|2007": 25497,
+    "OPEL|COMBO|2012": 13931,
+    "OPEL|COMBO": 13931,
+    "OPEL|COMBO_KASSEVOGN_/_STASJONSVOGN_(X12)|2012": 13931,
+    "MERCEDES-BENZ|BKLASSE|2011": 12171,
+    "MERCEDES-BENZ|BKLASSE": 12171,
+    "MERCEDES-BENZ|B-KLASSE_(W246,_W242)|2011": 12171,
+    "SKODA|OCTAVIA|2011": 4819,
+    "SKODA|OCTAVIA": 4819,
+    "SKODA|OCTAVIA_II_COMBI_(1Z5)|2011": 4819,
+    "CITROËN|AIRCROSS|2012": 55134,
+    "CITROËN|AIRCROSS": 55134,
+    "AUDI|Q5|2012": 56108,
+    "AUDI|Q5": 56108,
+    "AUDI|Q5_(8RB)|2012": 56108,
+    "AUDI|A4|2011": 15997,
+    "AUDI|A4": 15997,
+    "AUDI|A4_ALLROAD_(8KH,_B8)|2011": 15997,
+    "MINI|MINI|2013": 100572,
+    "MINI|MINI": 100572,
+    "MINI|MINI_(F56)|2013": 100572,
+    "VOLVO|340360|1983": 6328,
+    "VOLVO|340360": 6328,
+    "VOLVO|340-360_(343,_345)|1983": 6328,
+    "NISSAN|CARAVAN|1988": 10649,
+    "NISSAN|CARAVAN": 10649,
+    "NISSAN|CARAVAN_KASSEVOGN_(E24)|1988": 10649,
+    "VW|PASSAT|1996": 5729,
+    "VW|PASSAT": 5729,
+    "VW|PASSAT_(3B2)|1996": 5729,
+    "TOYOTA|RAV|2000": 14907,
+    "TOYOTA|RAV": 14907,
+    "TOYOTA|RAV_4_II_(_A2_)|2000": 14907,
+    "TOYOTA|COROLLA|2001": 16373,
+    "TOYOTA|COROLLA": 16373,
+    "TOYOTA|COROLLA_(_E12_)|2001": 16373,
+    "VW|EUROVAN|2004": 18185,
+    "VW|EUROVAN": 18185,
+    "VW|EUROVAN_V_KASSEVOGN_(7HA,_7HH,_7EA,_7EH)|2004": 18185,
+    "VOLVO|XC60|2008": 28229,
+    "VOLVO|XC60": 28229,
+    "VOLVO|XC60_(156)|2008": 28229,
+    "TOYOTA|COROLLA|2004": 18734,
+    "TOYOTA|COROLLA_(_E12_)|2004": 18734,
+    "KIA|MORNING|2011": 7067,
+    "KIA|MORNING": 7067,
+    "KIA|MORNING_(TA)|2011": 7067,
+    "VOLVO|XC90|2014": 107556,
+    "VOLVO|XC90": 107556,
+    "VOLVO|XC90_II_(256)|2014": 107556,
+    "BMW|2|2014": 117573,
+    "BMW|2": 117573,
+    "BMW|2_ACTIVE_TOURER_(F45)|2014": 117573,
+    "KIA|STONIC|2018": 132617,
+    "KIA|STONIC": 132617,
+    "KIA|STONIC_(YB)|2018": 132617,
+    "HONDA|ACCORD|2008": 29483,
+    "HONDA|ACCORD": 29483,
+    "HONDA|ACCORD_VIII_STASJONSVOGN_(CW)|2008": 29483,
+    "VW|GOLF|2008": 29992,
+    "VW|GOLF": 29992,
+    "VW|GOLF_VI_(5K1)|2008": 29992,
+    "KIA|SOUL|2019": 135339,
+    "KIA|SOUL": 135339,
+    "KIA|SOUL_III_(SK3)|2019": 135339,
+    "AUDI|ETRON|2019": 138779,
+    "AUDI|ETRON": 138779,
+    "AUDI|E-TRON_(GEN)|2019": 138779,
+    "OPEL|AMPERAE|2017": 126998,
+    "OPEL|AMPERAE": 126998,
+    "OPEL|AMPERA-E_(F17)|2017": 126998,
+    "MERCEDES-BENZ|EQC|2019": 136178,
+    "MERCEDES-BENZ|EQC": 136178,
+    "MERCEDES-BENZ|EQC_(N293)|2019": 136178,
+    "TESLA|MODEL|2018": 135951,
+    "TESLA|MODEL": 135951,
+    "TESLA|MODEL_3_(5YJ3)|2018": 135951,
+    "PEUGEOT|208|2019": 136533,
+    "PEUGEOT|208": 136533,
+    "PEUGEOT|208_II_(UB_,_UP_,_UW_,_UJ_)|2019": 136533,
+    "MG|MG|2019": 139640,
+    "MG|MG": 139640,
+    "MG|MG_ZS_SUV|2019": 139640,
+    "HYUNDAI|KAUAI|2018": 131061,
+    "HYUNDAI|KAUAI": 131061,
+    "HYUNDAI|KAUAI_(OS)|2018": 131061,
+    "FORD USA|MUSTANG|2023": 157624,
+    "FORD USA|MUSTANG": 157624,
+    "FORD USA|MUSTANG_MACH-E|2023": 157624,
+    "PEUGEOT|2008|2019": 137598,
+    "PEUGEOT|2008": 137598,
+    "PEUGEOT|2008_II_(UD_,_US_,_UY_,_UK_)|2019": 137598,
+    "MERCEDES-BENZ|EQA|2021": 143485,
+    "MERCEDES-BENZ|EQA": 143485,
+    "MERCEDES-BENZ|EQA_(H243)|2021": 143485,
+    "AUDI|ETRON|2018": 134328,
+    "AUDI|E-TRON_(GEN)|2018": 134328,
+    "TESLA|MODEL|2024": 800829,
+    "TESLA|MODEL_Y_(5YJY)|2024": 800829,
+    "MG (SAIC)|ZS|2021": 147006,
+    "MG (SAIC)|ZS": 147006,
+    "TESLA|MODEL|2020": 140113,
+    "TESLA|MODEL_3_(5YJ3)|2020": 140113,
+    "FORD USA|MUSTANG|2021": 146215,
+    "FORD USA|MUSTANG_MACH-E|2021": 146215,
+    "MERCEDES-BENZ|EQB|2021": 145522,
+    "MERCEDES-BENZ|EQB": 145522,
+    "MERCEDES-BENZ|EQB_(X243)|2021": 145522,
+    "BMW|IX|2021": 144687,
+    "BMW|IX": 144687,
+    "BMW|IX_(I20)|2021": 144687,
+    "VOLVO|XC40|2021": 144518,
+    "VOLVO|XC40": 144518,
+    "VOLVO|XC40_(536)|2021": 144518,
+    "RENAULT|ZOE|2016": 125941,
+    "RENAULT|ZOE": 125941,
+    "RENAULT|ZOE_(BFM_)|2016": 125941,
+    "NISSAN|LEAF|2010": 650,
+    "NISSAN|LEAF": 650,
+    "NISSAN|LEAF_(ZE0)|2010": 650,
+    "HYUNDAI|IONIQ|2016": 120520,
+    "HYUNDAI|IONIQ": 120520,
+    "HYUNDAI|IONIQ_(AE)|2016": 120520,
+    "VW|GOLF|2016": 126625,
+    "VW|GOLF_VII_(5G1,_BQ1,_BE1,_BE2)|2016": 126625,
+    "TESLA|MODEL|2016": 120372,
+    "TESLA|MODEL_X_(5YJX)|2016": 120372,
+    "HYUNDAI|ELANTRA|2001": 16286,
+    "HYUNDAI|ELANTRA": 16286,
+    "HYUNDAI|ELANTRA_LAVITA_(FC)|2001": 16286,
+    "MITSUBISHI|GRANDIS|2005": 18778,
+    "MITSUBISHI|GRANDIS": 18778,
+    "MITSUBISHI|GRANDIS_(NA_W)|2005": 18778,
+    "HYUNDAI|I20|2008": 30902,
+    "HYUNDAI|I20": 30902,
+    "HYUNDAI|I20_(PB,_PBT)|2008": 30902,
+    "MERCEDES-BENZ|SKLASSE|1998": 9599,
+    "MERCEDES-BENZ|SKLASSE": 9599,
+    "MERCEDES-BENZ|S-KLASSE_(W220)|1998": 9599,
+    "VOLVO|V40|2012": 55098,
+    "VOLVO|V40": 55098,
+    "VOLVO|V40_COMBI-COUPÉ_(525,_526)|2012": 55098,
+    "AUDI|Q7|2016": 120590,
+    "AUDI|Q7": 120590,
+    "AUDI|Q7_(4MB,_4MG)|2016": 120590,
+    "LEXUS|NX|2014": 124790,
+    "LEXUS|NX": 124790,
+    "LEXUS|NX_(_Z1_)|2014": 124790,
+    "VOLVO|EX30|2025": 801921,
+    "VOLVO|EX30": 801921,
+    "VOLVO|EX30_CROSS_COUNTRY|2025": 801921,
+    "TOYOTA|RAV|2006": 19296,
+    "TOYOTA|RAV_4_/_VANGUARD_III_(_A3_)|2006": 19296,
+    "AUDI|A5|2009": 33415,
+    "AUDI|A5": 33415,
+    "AUDI|A5_/_S5_SPORTBACK_(8TA)|2009": 33415,
+    "PEUGEOT|EXPERT|2007": 20059,
+    "PEUGEOT|EXPERT": 20059,
+    "PEUGEOT|EXPERT_KASSEVOGN_(VF3A_,_VF3U_,_VF3X_)|2007": 20059,
+    "VOLVO|V70|2009": 32853,
+    "VOLVO|V70": 32853,
+    "VOLVO|V70_III_(135)|2009": 32853,
+    "SAAB|95|1998": 9648,
+    "SAAB|95": 9648,
+    "SAAB|9-5_STASJONSVOGN_(YS3E)|1998": 9648,
+    "AUDI|A6|2006": 19474,
+    "AUDI|A6": 19474,
+    "AUDI|A6_ALLROAD_(4FH,_C6)|2006": 19474,
+    "SKODA|OCTAVIA|2004": 18481,
+    "SKODA|OCTAVIA_II_COMBI_(1Z5)|2004": 18481,
+    "VOLVO|V70|2011": 10250,
+    "VOLVO|V70_III_(135)|2011": 10250,
+    "MERCEDES-BENZ|SPRINTER|2009": 5521,
+    "MERCEDES-BENZ|SPRINTER": 5521,
+    "MERCEDES-BENZ|SPRINTER_3,5-T_BUSS_(906)|2009": 5521,
+    "VW|MULTIVAN|2009": 32271,
+    "VW|MULTIVAN": 32271,
+    "VW|MULTIVAN_MK_V_(7HM,_7HN,_7HF,_7EF,_7EM,_7EN)|2009": 32271,
+    "CITROËN|BERLINGO|2014": 112392,
+    "CITROËN|BERLINGO": 112392,
+    "CITROËN|BERLINGO_KASSEVOGN_(B9)|2014": 112392,
+    "VW|ID4|2020": 142253,
+    "VW|ID4": 142253,
+    "VW|ID.4|2020": 142253,
+    "MERCEDES-BENZ|EKLASSE|2002": 16594,
+    "MERCEDES-BENZ|EKLASSE": 16594,
+    "MERCEDES-BENZ|E-KLASSE_(W211)|2002": 16594,
+    "BMW|X5|2001": 13043,
+    "BMW|X5": 13043,
+    "BMW|X5_(E53)|2001": 13043,
+    "VW|MULTIVAN|2003": 17270,
+    "VW|MULTIVAN_MK_V_(7HM,_7HN,_7HF,_7EF,_7EM,_7EN)|2003": 17270,
+    "MAZDA|5|2005": 18541,
+    "MAZDA|5": 18541,
+    "MAZDA|5_(CR19)|2005": 18541,
+    "MERCEDES-BENZ|EKLASSE|2005": 18701,
+    "MERCEDES-BENZ|E-KLASSE_(W211)|2005": 18701,
+    "NISSAN|DUALIS|2007": 19887,
+    "NISSAN|DUALIS": 19887,
+    "NISSAN|DUALIS_I_(J10,_NJ10,_JJ10E)|2007": 19887,
+    "VOLVO|S60|2005": 19565,
+    "VOLVO|S60": 19565,
+    "VOLVO|S60_I_(384)|2005": 19565,
+    "FORD|FIESTA|2008": 28237,
+    "FORD|FIESTA": 28237,
+    "FORD|FIESTA_VI_(CB1,_CCN)|2008": 28237,
+    "VW|GOLF|2009": 30971,
+    "VW|GOLF_VI_(5K1)|2009": 30971,
+    "VOLVO|V60|2010": 6051,
+    "VOLVO|V60": 6051,
+    "VOLVO|V60_I_(155,_157)|2010": 6051,
+    "FORD|TRANSIT|2002": 16966,
+    "FORD|TRANSIT": 16966,
+    "FORD|TRANSIT_CONNECT_(P65_,_P70_,_P80_)|2002": 16966,
+    "MERCEDES-BENZ|EKLASSE|1995": 4692,
+    "MERCEDES-BENZ|E-KLASSE_(W210)|1995": 4692,
+    "AUDI|90|1988": 5065,
+    "AUDI|90": 5065,
+    "AUDI|90_(89,_89Q,_8A,_B3)|1988": 5065,
+    "MERCEDES-BENZ|124|1987": 15104,
+    "MERCEDES-BENZ|124": 15104,
+    "MERCEDES-BENZ|124_COUPÉ_(C124)|1987": 15104,
+    "AUDI|A4|2000": 15508,
+    "AUDI|A4_(8E2,_B6)|2000": 15508,
+    "VOLVO|V70|1995": 7257,
+    "VOLVO|V70_I_(875,_876)|1995": 7257,
+    "PEUGEOT|307|2002": 16612,
+    "PEUGEOT|307_SW_(3H)|2002": 16612,
+    "VW|BORA|1998": 13104,
+    "VW|BORA": 13104,
+    "VW|BORA_(1J2)|1998": 13104,
+    "TOYOTA|AVENSIS|2003": 17219,
+    "TOYOTA|AVENSIS": 17219,
+    "TOYOTA|AVENSIS_STASJONSVOGN_(_T25_)|2003": 17219,
+    "TOYOTA|HILUX|2006": 25451,
+    "TOYOTA|HILUX": 25451,
+    "TOYOTA|HILUX_VIGO_VII_PICK-UP_(_N1_,__N2_,__N3_)|2006": 25451,
+    "VW|CADDY|2015": 114332,
+    "VW|CADDY": 114332,
+    "VW|CADDY_IV_ESTATE_(SAB,_SAJ)|2015": 114332,
+    "VOLVO|XC60|2019": 134992,
+    "VOLVO|XC60_II_(246)|2019": 134992,
+    "VW|TIGUAN|2007": 23178,
+    "VW|TIGUAN": 23178,
+    "VW|TIGUAN_(5N_)|2007": 23178,
+    "NISSAN|ARMADA|2010": 34757,
+    "NISSAN|ARMADA": 34757,
+    "NISSAN|ARMADA_III_SUV_(R51)|2010": 34757,
+    "VW|MAGOTAN|2010": 359,
+    "VW|MAGOTAN": 359,
+    "VW|MAGOTAN_B7_VARIANT_(365)|2010": 359,
+    "VW|TIGUAN|2010": 33674,
+    "VW|TIGUAN_(5N_)|2010": 33674,
+    "FIAT|500|2010": 2723,
+    "FIAT|500": 2723,
+    "FIAT|500_(312_)|2010": 2723,
+    "VOLVO|S60|2011": 9737,
+    "VOLVO|S60_II_(134)|2011": 9737,
+    "FORD|BMAX|2012": 55105,
+    "FORD|BMAX": 55105,
+    "FORD|B-MAX_(JK)|2012": 55105,
+    "AUDI|A4|2008": 30007,
+    "AUDI|A4_AVANT_(8K5,_B8)|2008": 30007,
+    "BMW|1|2009": 58184,
+    "BMW|1": 58184,
+    "BMW|1_(E87)|2009": 58184,
+    "BMW|1|2007": 23429,
+    "BMW|1_COUPÉ_(E82)|2007": 23429,
+    "TOYOTA|RAV|2012": 58623,
+    "TOYOTA|RAV_4_IV_(_A4_)|2012": 58623,
+    "MINI|COUNTRYMAN|2010": 34926,
+    "MINI|COUNTRYMAN": 34926,
+    "MINI|COUNTRYMAN_(R60)|2010": 34926,
+    "MERCEDES-BENZ|GLAKLASSE|2013": 100474,
+    "MERCEDES-BENZ|GLAKLASSE": 100474,
+    "MERCEDES-BENZ|GLA-KLASSE_(X156)|2013": 100474,
+    "AUDI|Q5|2013": 100061,
+    "AUDI|Q5_(8RB)|2013": 100061,
+    "FORD|GRANADA|1979": 876,
+    "FORD|GRANADA": 876,
+    "FORD|GRANADA_(GU)|1979": 876,
+    "FIAT|UNO|1985": 2641,
+    "FIAT|UNO": 2641,
+    "FIAT|UNO_(146_)|1985": 2641,
+    "TOYOTA|CARINA|1994": 10821,
+    "TOYOTA|CARINA": 10821,
+    "TOYOTA|CARINA_E_SEDAN_(_T19_)|1994": 10821,
+    "AUDI|A3|1996": 5601,
+    "AUDI|A3": 5601,
+    "AUDI|A3_(8L1)|1996": 5601,
+    "FORD|MONDEO|2000": 15493,
+    "FORD|MONDEO": 15493,
+    "FORD|MONDEO_III_CLIPPER_(BWY)|2000": 15493,
+    "VOLVO|XC90|2005": 19990,
+    "VOLVO|XC90_I_(275)|2005": 19990,
+    "TOYOTA|AURIS|2007": 22467,
+    "TOYOTA|AURIS": 22467,
+    "TOYOTA|AURIS_(_E15_)|2007": 22467,
+    "PEUGEOT|5008|2009": 31737,
+    "PEUGEOT|5008": 31737,
+    "PEUGEOT|5008_(0U_,_0E_)|2009": 31737,
+    "TOYOTA|RAV|2008": 31139,
+    "TOYOTA|RAV_4_/_VANGUARD_III_(_A3_)|2008": 31139,
+    "VW|CARAVELLE|1996": 5962,
+    "VW|CARAVELLE_IV_BUSS_(70B,_70C,_7DB,_7DK,_70J,_70K,_7DC,_7DJ)|1996": 5962,
+    "MERCEDES-BENZ|EKLASSE|2017": 125170,
+    "MERCEDES-BENZ|E-KLASSE_(W213)|2017": 125170,
+    "MAZDA|2|2014": 109547,
+    "MAZDA|2": 109547,
+    "MAZDA|2_(DL,_DJ)|2014": 109547,
+    "TOYOTA|RAV|2020": 144429,
+    "TOYOTA|RAV_4_V_(_A5_,__H5_)|2020": 144429,
+    "SKODA|ECITIGO|2019": 140638,
+    "SKODA|ECITIGO": 140638,
+    "SKODA|E-CITIGO_(NE1)|2019": 140638,
+    "NISSAN|LEAF|2017": 128580,
+    "NISSAN|LEAF_(ZE1)|2017": 128580,
+    "AUDI|E-TRON_SPORTBACK_(GEA)|2019": 138780
+  },
+  "aliases": [
+    {
+      "key": "SKODA|SUPERB_II_STASJONSVOGN_(3T5)|2009",
+      "ktype": 32787
+    },
+    {
+      "key": "VOLVO|240_(P242,_P244)|1974",
+      "ktype": 6272
+    },
+    {
+      "key": "OPEL|GRANDLAND_X_(A18)|2019",
+      "ktype": 136486
+    },
+    {
+      "key": "PEUGEOT|307_CC_(3B)|2003",
+      "ktype": 18550
+    },
+    {
+      "key": "VW|CARAVELLE_V_BUSS_(7HB,_7HJ,_7EB,_7EJ,_7EF,_7EG,_7HF,_7EC)|2003",
+      "ktype": 17370
+    },
+    {
+      "key": "BMW|X1_(E84)|2009",
+      "ktype": 32114
+    },
+    {
+      "key": "FORD|FOCUS_II_(DA_,_HCP,_DP)|2004",
+      "ktype": 18378
+    },
+    {
+      "key": "BMW|3_TOURING_(E91)|2009",
+      "ktype": 34946
+    },
+    {
+      "key": "TOYOTA|LAND_CRUISER_(_J2_)|2008",
+      "ktype": 29493
+    },
+    {
+      "key": "BMW|X3_(E83)|2007",
+      "ktype": 25497
+    },
+    {
+      "key": "OPEL|COMBO_KASSEVOGN_/_STASJONSVOGN_(X12)|2012",
+      "ktype": 13931
+    },
+    {
+      "key": "MERCEDES-BENZ|B-KLASSE_(W246,_W242)|2011",
+      "ktype": 12171
+    },
+    {
+      "key": "SKODA|OCTAVIA_II_COMBI_(1Z5)|2011",
+      "ktype": 4819
+    },
+    {
+      "key": "AUDI|Q5_(8RB)|2012",
+      "ktype": 56108
+    },
+    {
+      "key": "AUDI|A4_ALLROAD_(8KH,_B8)|2011",
+      "ktype": 15997
+    },
+    {
+      "key": "MINI|MINI_(F56)|2013",
+      "ktype": 100572
+    },
+    {
+      "key": "VOLVO|340-360_(343,_345)|1983",
+      "ktype": 6328
+    },
+    {
+      "key": "NISSAN|CARAVAN_KASSEVOGN_(E24)|1988",
+      "ktype": 10649
+    },
+    {
+      "key": "VW|PASSAT_(3B2)|1996",
+      "ktype": 5729
+    },
+    {
+      "key": "TOYOTA|RAV_4_II_(_A2_)|2000",
+      "ktype": 14907
+    },
+    {
+      "key": "TOYOTA|COROLLA_(_E12_)|2001",
+      "ktype": 16373
+    },
+    {
+      "key": "VW|EUROVAN_V_KASSEVOGN_(7HA,_7HH,_7EA,_7EH)|2004",
+      "ktype": 18185
+    },
+    {
+      "key": "VOLVO|XC60_(156)|2008",
+      "ktype": 28229
+    },
+    {
+      "key": "TOYOTA|COROLLA_(_E12_)|2004",
+      "ktype": 18734
+    },
+    {
+      "key": "KIA|MORNING_(TA)|2011",
+      "ktype": 7067
+    },
+    {
+      "key": "VOLVO|XC90_II_(256)|2014",
+      "ktype": 107556
+    },
+    {
+      "key": "BMW|2_ACTIVE_TOURER_(F45)|2014",
+      "ktype": 117573
+    },
+    {
+      "key": "KIA|STONIC_(YB)|2018",
+      "ktype": 132617
+    },
+    {
+      "key": "HONDA|ACCORD_VIII_STASJONSVOGN_(CW)|2008",
+      "ktype": 29483
+    },
+    {
+      "key": "VW|GOLF_VI_(5K1)|2008",
+      "ktype": 29992
+    },
+    {
+      "key": "KIA|SOUL_III_(SK3)|2019",
+      "ktype": 135339
+    },
+    {
+      "key": "AUDI|E-TRON_(GEN)|2019",
+      "ktype": 138779
+    },
+    {
+      "key": "OPEL|AMPERA-E_(F17)|2017",
+      "ktype": 126998
+    },
+    {
+      "key": "MERCEDES-BENZ|EQC_(N293)|2019",
+      "ktype": 136178
+    },
+    {
+      "key": "TESLA|MODEL_3_(5YJ3)|2018",
+      "ktype": 135951
+    },
+    {
+      "key": "PEUGEOT|208_II_(UB_,_UP_,_UW_,_UJ_)|2019",
+      "ktype": 136533
+    },
+    {
+      "key": "MG|MG_ZS_SUV|2019",
+      "ktype": 139640
+    },
+    {
+      "key": "HYUNDAI|KAUAI_(OS)|2018",
+      "ktype": 131061
+    },
+    {
+      "key": "FORD USA|MUSTANG_MACH-E|2023",
+      "ktype": 157624
+    },
+    {
+      "key": "PEUGEOT|2008_II_(UD_,_US_,_UY_,_UK_)|2019",
+      "ktype": 137598
+    },
+    {
+      "key": "MERCEDES-BENZ|EQA_(H243)|2021",
+      "ktype": 143485
+    },
+    {
+      "key": "AUDI|E-TRON_(GEN)|2018",
+      "ktype": 134328
+    },
+    {
+      "key": "TESLA|MODEL_Y_(5YJY)|2024",
+      "ktype": 800829
+    },
+    {
+      "key": "TESLA|MODEL_3_(5YJ3)|2020",
+      "ktype": 140113
+    },
+    {
+      "key": "FORD USA|MUSTANG_MACH-E|2021",
+      "ktype": 146215
+    },
+    {
+      "key": "MERCEDES-BENZ|EQB_(X243)|2021",
+      "ktype": 145522
+    },
+    {
+      "key": "BMW|IX_(I20)|2021",
+      "ktype": 144687
+    },
+    {
+      "key": "VOLVO|XC40_(536)|2021",
+      "ktype": 144518
+    },
+    {
+      "key": "RENAULT|ZOE_(BFM_)|2016",
+      "ktype": 125941
+    },
+    {
+      "key": "NISSAN|LEAF_(ZE0)|2010",
+      "ktype": 650
+    },
+    {
+      "key": "HYUNDAI|IONIQ_(AE)|2016",
+      "ktype": 120520
+    },
+    {
+      "key": "VW|GOLF_VII_(5G1,_BQ1,_BE1,_BE2)|2016",
+      "ktype": 126625
+    },
+    {
+      "key": "TESLA|MODEL_X_(5YJX)|2016",
+      "ktype": 120372
+    },
+    {
+      "key": "HYUNDAI|ELANTRA_LAVITA_(FC)|2001",
+      "ktype": 16286
+    },
+    {
+      "key": "MITSUBISHI|GRANDIS_(NA_W)|2005",
+      "ktype": 18778
+    },
+    {
+      "key": "HYUNDAI|I20_(PB,_PBT)|2008",
+      "ktype": 30902
+    },
+    {
+      "key": "MERCEDES-BENZ|S-KLASSE_(W220)|1998",
+      "ktype": 9599
+    },
+    {
+      "key": "VOLVO|V40_COMBI-COUPÉ_(525,_526)|2012",
+      "ktype": 55098
+    },
+    {
+      "key": "AUDI|Q7_(4MB,_4MG)|2016",
+      "ktype": 120590
+    },
+    {
+      "key": "LEXUS|NX_(_Z1_)|2014",
+      "ktype": 124790
+    },
+    {
+      "key": "VOLVO|EX30_CROSS_COUNTRY|2025",
+      "ktype": 801921
+    },
+    {
+      "key": "TOYOTA|RAV_4_/_VANGUARD_III_(_A3_)|2006",
+      "ktype": 19296
+    },
+    {
+      "key": "AUDI|A5_/_S5_SPORTBACK_(8TA)|2009",
+      "ktype": 33415
+    },
+    {
+      "key": "PEUGEOT|EXPERT_KASSEVOGN_(VF3A_,_VF3U_,_VF3X_)|2007",
+      "ktype": 20059
+    },
+    {
+      "key": "VOLVO|V70_III_(135)|2009",
+      "ktype": 32853
+    },
+    {
+      "key": "SAAB|9-5_STASJONSVOGN_(YS3E)|1998",
+      "ktype": 9648
+    },
+    {
+      "key": "AUDI|A6_ALLROAD_(4FH,_C6)|2006",
+      "ktype": 19474
+    },
+    {
+      "key": "SKODA|OCTAVIA_II_COMBI_(1Z5)|2004",
+      "ktype": 18481
+    },
+    {
+      "key": "VOLVO|V70_III_(135)|2011",
+      "ktype": 10250
+    },
+    {
+      "key": "MERCEDES-BENZ|SPRINTER_3,5-T_BUSS_(906)|2009",
+      "ktype": 5521
+    },
+    {
+      "key": "VW|MULTIVAN_MK_V_(7HM,_7HN,_7HF,_7EF,_7EM,_7EN)|2009",
+      "ktype": 32271
+    },
+    {
+      "key": "CITROËN|BERLINGO_KASSEVOGN_(B9)|2014",
+      "ktype": 112392
+    },
+    {
+      "key": "VW|ID.4|2020",
+      "ktype": 142253
+    },
+    {
+      "key": "MERCEDES-BENZ|E-KLASSE_(W211)|2002",
+      "ktype": 16594
+    },
+    {
+      "key": "BMW|X5_(E53)|2001",
+      "ktype": 13043
+    },
+    {
+      "key": "VW|MULTIVAN_MK_V_(7HM,_7HN,_7HF,_7EF,_7EM,_7EN)|2003",
+      "ktype": 17270
+    },
+    {
+      "key": "MAZDA|5_(CR19)|2005",
+      "ktype": 18541
+    },
+    {
+      "key": "MERCEDES-BENZ|E-KLASSE_(W211)|2005",
+      "ktype": 18701
+    },
+    {
+      "key": "NISSAN|DUALIS_I_(J10,_NJ10,_JJ10E)|2007",
+      "ktype": 19887
+    },
+    {
+      "key": "VOLVO|S60_I_(384)|2005",
+      "ktype": 19565
+    },
+    {
+      "key": "FORD|FIESTA_VI_(CB1,_CCN)|2008",
+      "ktype": 28237
+    },
+    {
+      "key": "VW|GOLF_VI_(5K1)|2009",
+      "ktype": 30971
+    },
+    {
+      "key": "VOLVO|V60_I_(155,_157)|2010",
+      "ktype": 6051
+    },
+    {
+      "key": "FORD|TRANSIT_CONNECT_(P65_,_P70_,_P80_)|2002",
+      "ktype": 16966
+    },
+    {
+      "key": "MERCEDES-BENZ|E-KLASSE_(W210)|1995",
+      "ktype": 4692
+    },
+    {
+      "key": "AUDI|90_(89,_89Q,_8A,_B3)|1988",
+      "ktype": 5065
+    },
+    {
+      "key": "MERCEDES-BENZ|124_COUPÉ_(C124)|1987",
+      "ktype": 15104
+    },
+    {
+      "key": "AUDI|A4_(8E2,_B6)|2000",
+      "ktype": 15508
+    },
+    {
+      "key": "VOLVO|V70_I_(875,_876)|1995",
+      "ktype": 7257
+    },
+    {
+      "key": "PEUGEOT|307_SW_(3H)|2002",
+      "ktype": 16612
+    },
+    {
+      "key": "VW|BORA_(1J2)|1998",
+      "ktype": 13104
+    },
+    {
+      "key": "TOYOTA|AVENSIS_STASJONSVOGN_(_T25_)|2003",
+      "ktype": 17219
+    },
+    {
+      "key": "TOYOTA|HILUX_VIGO_VII_PICK-UP_(_N1_,__N2_,__N3_)|2006",
+      "ktype": 25451
+    },
+    {
+      "key": "VW|CADDY_IV_ESTATE_(SAB,_SAJ)|2015",
+      "ktype": 114332
+    },
+    {
+      "key": "VOLVO|XC60_II_(246)|2019",
+      "ktype": 134992
+    },
+    {
+      "key": "VW|TIGUAN_(5N_)|2007",
+      "ktype": 23178
+    },
+    {
+      "key": "NISSAN|ARMADA_III_SUV_(R51)|2010",
+      "ktype": 34757
+    },
+    {
+      "key": "VW|MAGOTAN_B7_VARIANT_(365)|2010",
+      "ktype": 359
+    },
+    {
+      "key": "VW|TIGUAN_(5N_)|2010",
+      "ktype": 33674
+    },
+    {
+      "key": "FIAT|500_(312_)|2010",
+      "ktype": 2723
+    },
+    {
+      "key": "VOLVO|S60_II_(134)|2011",
+      "ktype": 9737
+    },
+    {
+      "key": "FORD|B-MAX_(JK)|2012",
+      "ktype": 55105
+    },
+    {
+      "key": "AUDI|A4_AVANT_(8K5,_B8)|2008",
+      "ktype": 30007
+    },
+    {
+      "key": "BMW|1_(E87)|2009",
+      "ktype": 58184
+    },
+    {
+      "key": "BMW|1_COUPÉ_(E82)|2007",
+      "ktype": 23429
+    },
+    {
+      "key": "TOYOTA|RAV_4_IV_(_A4_)|2012",
+      "ktype": 58623
+    },
+    {
+      "key": "MINI|COUNTRYMAN_(R60)|2010",
+      "ktype": 34926
+    },
+    {
+      "key": "MERCEDES-BENZ|GLA-KLASSE_(X156)|2013",
+      "ktype": 100474
+    },
+    {
+      "key": "AUDI|Q5_(8RB)|2013",
+      "ktype": 100061
+    },
+    {
+      "key": "FORD|GRANADA_(GU)|1979",
+      "ktype": 876
+    },
+    {
+      "key": "FIAT|UNO_(146_)|1985",
+      "ktype": 2641
+    },
+    {
+      "key": "TOYOTA|CARINA_E_SEDAN_(_T19_)|1994",
+      "ktype": 10821
+    },
+    {
+      "key": "AUDI|A3_(8L1)|1996",
+      "ktype": 5601
+    },
+    {
+      "key": "FORD|MONDEO_III_CLIPPER_(BWY)|2000",
+      "ktype": 15493
+    },
+    {
+      "key": "VOLVO|XC90_I_(275)|2005",
+      "ktype": 19990
+    },
+    {
+      "key": "TOYOTA|AURIS_(_E15_)|2007",
+      "ktype": 22467
+    },
+    {
+      "key": "PEUGEOT|5008_(0U_,_0E_)|2009",
+      "ktype": 31737
+    },
+    {
+      "key": "TOYOTA|RAV_4_/_VANGUARD_III_(_A3_)|2008",
+      "ktype": 31139
+    },
+    {
+      "key": "VW|CARAVELLE_IV_BUSS_(70B,_70C,_7DB,_7DK,_70J,_70K,_7DC,_7DJ)|1996",
+      "ktype": 5962
+    },
+    {
+      "key": "MERCEDES-BENZ|E-KLASSE_(W213)|2017",
+      "ktype": 125170
+    },
+    {
+      "key": "MAZDA|2_(DL,_DJ)|2014",
+      "ktype": 109547
+    },
+    {
+      "key": "TOYOTA|RAV_4_V_(_A5_,__H5_)|2020",
+      "ktype": 144429
+    },
+    {
+      "key": "SKODA|E-CITIGO_(NE1)|2019",
+      "ktype": 140638
+    },
+    {
+      "key": "NISSAN|LEAF_(ZE1)|2017",
+      "ktype": 128580
+    },
+    {
+      "key": "AUDI|E-TRON_SPORTBACK_(GEA)|2019",
+      "ktype": 138780
+    }
+  ],
+  "by_ktype": {
+    "359": {
+      "brand": "VW",
+      "model": "MAGOTAN",
+      "year_from": 2010,
+      "year_to": 2013,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "650": {
+      "brand": "NISSAN",
+      "model": "LEAF",
+      "year_from": 2010,
+      "year_to": 2017,
+      "regnr_count": 3,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "876": {
+      "brand": "FORD",
+      "model": "GRANADA",
+      "year_from": 1979,
+      "year_to": 1985,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "2641": {
+      "brand": "FIAT",
+      "model": "UNO",
+      "year_from": 1985,
+      "year_to": 1989,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "2723": {
+      "brand": "FIAT",
+      "model": "500",
+      "year_from": 2010,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "4692": {
+      "brand": "MERCEDES-BENZ",
+      "model": "EKLASSE",
+      "year_from": 1995,
+      "year_to": 1997,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "4819": {
+      "brand": "SKODA",
+      "model": "OCTAVIA",
+      "year_from": 2011,
+      "year_to": 2013,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "5065": {
+      "brand": "AUDI",
+      "model": "90",
+      "year_from": 1988,
+      "year_to": 1991,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "5521": {
+      "brand": "MERCEDES-BENZ",
+      "model": "SPRINTER",
+      "year_from": 2009,
+      "year_to": 2018,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "5601": {
+      "brand": "AUDI",
+      "model": "A3",
+      "year_from": 1996,
+      "year_to": 2003,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "5729": {
+      "brand": "VW",
+      "model": "PASSAT",
+      "year_from": 1996,
+      "year_to": 2000,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "5962": {
+      "brand": "VW",
+      "model": "CARAVELLE",
+      "year_from": 1996,
+      "year_to": 2003,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "6051": {
+      "brand": "VOLVO",
+      "model": "V60",
+      "year_from": 2010,
+      "year_to": 2014,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "6272": {
+      "brand": "VOLVO",
+      "model": "240",
+      "year_from": 1974,
+      "year_to": 1976,
+      "regnr_count": 1,
+      "sources": [
+        "bootstrap"
+      ]
+    },
+    "6328": {
+      "brand": "VOLVO",
+      "model": "340360",
+      "year_from": 1983,
+      "year_to": 1984,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "7067": {
+      "brand": "KIA",
+      "model": "MORNING",
+      "year_from": 2011,
+      "year_to": 2017,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "7257": {
+      "brand": "VOLVO",
+      "model": "V70",
+      "year_from": 1995,
+      "year_to": 2000,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "9599": {
+      "brand": "MERCEDES-BENZ",
+      "model": "SKLASSE",
+      "year_from": 1998,
+      "year_to": 2005,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "9648": {
+      "brand": "SAAB",
+      "model": "95",
+      "year_from": 1998,
+      "year_to": 2009,
+      "regnr_count": 2,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "9737": {
+      "brand": "VOLVO",
+      "model": "S60",
+      "year_from": 2011,
+      "year_to": 2015,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "10250": {
+      "brand": "VOLVO",
+      "model": "V70",
+      "year_from": 2011,
+      "year_to": 2015,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "10649": {
+      "brand": "NISSAN",
+      "model": "CARAVAN",
+      "year_from": 1988,
+      "year_to": 1997,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "10821": {
+      "brand": "TOYOTA",
+      "model": "CARINA",
+      "year_from": 1994,
+      "year_to": 1997,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "12152": {
+      "brand": "THINK",
+      "model": "CITY",
+      "year_from": 2010,
+      "year_to": 0,
+      "regnr_count": 1,
+      "sources": [
+        "bootstrap"
+      ]
+    },
+    "12171": {
+      "brand": "MERCEDES-BENZ",
+      "model": "BKLASSE",
+      "year_from": 2011,
+      "year_to": 2018,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "13043": {
+      "brand": "BMW",
+      "model": "X5",
+      "year_from": 2001,
+      "year_to": 2003,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "13104": {
+      "brand": "VW",
+      "model": "BORA",
+      "year_from": 1998,
+      "year_to": 2002,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "13931": {
+      "brand": "OPEL",
+      "model": "COMBO",
+      "year_from": 2012,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "14907": {
+      "brand": "TOYOTA",
+      "model": "RAV",
+      "year_from": 2000,
+      "year_to": 2005,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "15104": {
+      "brand": "MERCEDES-BENZ",
+      "model": "124",
+      "year_from": 1987,
+      "year_to": 1992,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "15493": {
+      "brand": "FORD",
+      "model": "MONDEO",
+      "year_from": 2000,
+      "year_to": 2007,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "15508": {
+      "brand": "AUDI",
+      "model": "A4",
+      "year_from": 2000,
+      "year_to": 2002,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "15997": {
+      "brand": "AUDI",
+      "model": "A4",
+      "year_from": 2011,
+      "year_to": 2016,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "16286": {
+      "brand": "HYUNDAI",
+      "model": "ELANTRA",
+      "year_from": 2001,
+      "year_to": 2010,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "16373": {
+      "brand": "TOYOTA",
+      "model": "COROLLA",
+      "year_from": 2001,
+      "year_to": 2007,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "16594": {
+      "brand": "MERCEDES-BENZ",
+      "model": "EKLASSE",
+      "year_from": 2002,
+      "year_to": 2008,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "16612": {
+      "brand": "PEUGEOT",
+      "model": "307",
+      "year_from": 2002,
+      "year_to": 2008,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "16966": {
+      "brand": "FORD",
+      "model": "TRANSIT",
+      "year_from": 2002,
+      "year_to": 2013,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "17219": {
+      "brand": "TOYOTA",
+      "model": "AVENSIS",
+      "year_from": 2003,
+      "year_to": 2008,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "17270": {
+      "brand": "VW",
+      "model": "MULTIVAN",
+      "year_from": 2003,
+      "year_to": 2009,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "17370": {
+      "brand": "VW",
+      "model": "CARAVELLE",
+      "year_from": 2003,
+      "year_to": 2009,
+      "regnr_count": 2,
+      "sources": [
+        "bootstrap",
+        "discovered"
+      ]
+    },
+    "18185": {
+      "brand": "VW",
+      "model": "EUROVAN",
+      "year_from": 2004,
+      "year_to": 2009,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "18186": {
+      "brand": "VW",
+      "model": "EUROVAN",
+      "year_from": 2004,
+      "year_to": 2009,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "18378": {
+      "brand": "FORD",
+      "model": "FOCUS",
+      "year_from": 2004,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "18481": {
+      "brand": "SKODA",
+      "model": "OCTAVIA",
+      "year_from": 2004,
+      "year_to": 2010,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "18541": {
+      "brand": "MAZDA",
+      "model": "5",
+      "year_from": 2005,
+      "year_to": 2010,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "18550": {
+      "brand": "PEUGEOT",
+      "model": "307",
+      "year_from": 2003,
+      "year_to": 2009,
+      "regnr_count": 1,
+      "sources": [
+        "bootstrap"
+      ]
+    },
+    "18701": {
+      "brand": "MERCEDES-BENZ",
+      "model": "EKLASSE",
+      "year_from": 2005,
+      "year_to": 2008,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "18734": {
+      "brand": "TOYOTA",
+      "model": "COROLLA",
+      "year_from": 2004,
+      "year_to": 2007,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "18778": {
+      "brand": "MITSUBISHI",
+      "model": "GRANDIS",
+      "year_from": 2005,
+      "year_to": 2010,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "19296": {
+      "brand": "TOYOTA",
+      "model": "RAV",
+      "year_from": 2006,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "19474": {
+      "brand": "AUDI",
+      "model": "A6",
+      "year_from": 2006,
+      "year_to": 2008,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "19565": {
+      "brand": "VOLVO",
+      "model": "S60",
+      "year_from": 2005,
+      "year_to": 2010,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "19887": {
+      "brand": "NISSAN",
+      "model": "DUALIS",
+      "year_from": 2007,
+      "year_to": 2013,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "19990": {
+      "brand": "VOLVO",
+      "model": "XC90",
+      "year_from": 2005,
+      "year_to": 2010,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "20059": {
+      "brand": "PEUGEOT",
+      "model": "EXPERT",
+      "year_from": 2007,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "22467": {
+      "brand": "TOYOTA",
+      "model": "AURIS",
+      "year_from": 2007,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "23178": {
+      "brand": "VW",
+      "model": "TIGUAN",
+      "year_from": 2007,
+      "year_to": 2018,
+      "regnr_count": 2,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "23429": {
+      "brand": "BMW",
+      "model": "1",
+      "year_from": 2007,
+      "year_to": 2013,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "25451": {
+      "brand": "TOYOTA",
+      "model": "HILUX",
+      "year_from": 2006,
+      "year_to": 2015,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "25497": {
+      "brand": "BMW",
+      "model": "X3",
+      "year_from": 2007,
+      "year_to": 2008,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "28229": {
+      "brand": "VOLVO",
+      "model": "XC60",
+      "year_from": 2008,
+      "year_to": 2017,
+      "regnr_count": 3,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "28237": {
+      "brand": "FORD",
+      "model": "FIESTA",
+      "year_from": 2008,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "29483": {
+      "brand": "HONDA",
+      "model": "ACCORD",
+      "year_from": 2008,
+      "year_to": 2015,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "29493": {
+      "brand": "TOYOTA",
+      "model": "LAND",
+      "year_from": 2008,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "29992": {
+      "brand": "VW",
+      "model": "GOLF",
+      "year_from": 2008,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "30007": {
+      "brand": "AUDI",
+      "model": "A4",
+      "year_from": 2008,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "30902": {
+      "brand": "HYUNDAI",
+      "model": "I20",
+      "year_from": 2008,
+      "year_to": 2015,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "30971": {
+      "brand": "VW",
+      "model": "GOLF",
+      "year_from": 2009,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "31139": {
+      "brand": "TOYOTA",
+      "model": "RAV",
+      "year_from": 2008,
+      "year_to": 2013,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "31737": {
+      "brand": "PEUGEOT",
+      "model": "5008",
+      "year_from": 2009,
+      "year_to": 2017,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "32114": {
+      "brand": "BMW",
+      "model": "X1",
+      "year_from": 2009,
+      "year_to": 2015,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "32271": {
+      "brand": "VW",
+      "model": "MULTIVAN",
+      "year_from": 2009,
+      "year_to": 2015,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "32787": {
+      "brand": "SKODA",
+      "model": "SUPERB",
+      "year_from": 2009,
+      "year_to": 2015,
+      "regnr_count": 1,
+      "sources": [
+        "bootstrap"
+      ]
+    },
+    "32853": {
+      "brand": "VOLVO",
+      "model": "V70",
+      "year_from": 2009,
+      "year_to": 2010,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "33415": {
+      "brand": "AUDI",
+      "model": "A5",
+      "year_from": 2009,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "33674": {
+      "brand": "VW",
+      "model": "TIGUAN",
+      "year_from": 2010,
+      "year_to": 2018,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "34757": {
+      "brand": "NISSAN",
+      "model": "ARMADA",
+      "year_from": 2010,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "34926": {
+      "brand": "MINI",
+      "model": "COUNTRYMAN",
+      "year_from": 2010,
+      "year_to": 2016,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "34946": {
+      "brand": "BMW",
+      "model": "3",
+      "year_from": 2009,
+      "year_to": 2012,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "55098": {
+      "brand": "VOLVO",
+      "model": "V40",
+      "year_from": 2012,
+      "year_to": 2016,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "55105": {
+      "brand": "FORD",
+      "model": "BMAX",
+      "year_from": 2012,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "55134": {
+      "brand": "CITROËN",
+      "model": "AIRCROSS",
+      "year_from": 2012,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "56108": {
+      "brand": "AUDI",
+      "model": "Q5",
+      "year_from": 2012,
+      "year_to": 2017,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "58184": {
+      "brand": "BMW",
+      "model": "1",
+      "year_from": 2009,
+      "year_to": 2011,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "58623": {
+      "brand": "TOYOTA",
+      "model": "RAV",
+      "year_from": 2012,
+      "year_to": 2019,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "100061": {
+      "brand": "AUDI",
+      "model": "Q5",
+      "year_from": 2013,
+      "year_to": 2017,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "100474": {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLAKLASSE",
+      "year_from": 2013,
+      "year_to": 2019,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "100572": {
+      "brand": "MINI",
+      "model": "MINI",
+      "year_from": 2013,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "107556": {
+      "brand": "VOLVO",
+      "model": "XC90",
+      "year_from": 2014,
+      "year_to": 2016,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "109547": {
+      "brand": "MAZDA",
+      "model": "2",
+      "year_from": 2014,
+      "year_to": 2017,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "112392": {
+      "brand": "CITROËN",
+      "model": "BERLINGO",
+      "year_from": 2014,
+      "year_to": 2021,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "114332": {
+      "brand": "VW",
+      "model": "CADDY",
+      "year_from": 2015,
+      "year_to": 2020,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "117573": {
+      "brand": "BMW",
+      "model": "2",
+      "year_from": 2014,
+      "year_to": 2021,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "120372": {
+      "brand": "TESLA",
+      "model": "MODEL",
+      "year_from": 2016,
+      "year_to": null,
+      "regnr_count": 2,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "120520": {
+      "brand": "HYUNDAI",
+      "model": "IONIQ",
+      "year_from": 2016,
+      "year_to": 2019,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "120590": {
+      "brand": "AUDI",
+      "model": "Q7",
+      "year_from": 2016,
+      "year_to": 2019,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "124790": {
+      "brand": "LEXUS",
+      "model": "NX",
+      "year_from": 2014,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "125170": {
+      "brand": "MERCEDES-BENZ",
+      "model": "EKLASSE",
+      "year_from": 2017,
+      "year_to": 2023,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "125941": {
+      "brand": "RENAULT",
+      "model": "ZOE",
+      "year_from": 2016,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "126625": {
+      "brand": "VW",
+      "model": "GOLF",
+      "year_from": 2016,
+      "year_to": 2021,
+      "regnr_count": 5,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "126998": {
+      "brand": "OPEL",
+      "model": "AMPERAE",
+      "year_from": 2017,
+      "year_to": 2019,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "128580": {
+      "brand": "NISSAN",
+      "model": "LEAF",
+      "year_from": 2017,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "131061": {
+      "brand": "HYUNDAI",
+      "model": "KAUAI",
+      "year_from": 2018,
+      "year_to": 2023,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "132617": {
+      "brand": "KIA",
+      "model": "STONIC",
+      "year_from": 2018,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "134328": {
+      "brand": "AUDI",
+      "model": "ETRON",
+      "year_from": 2018,
+      "year_to": null,
+      "regnr_count": 5,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "134992": {
+      "brand": "VOLVO",
+      "model": "XC60",
+      "year_from": 2019,
+      "year_to": 2022,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "135339": {
+      "brand": "KIA",
+      "model": "SOUL",
+      "year_from": 2019,
+      "year_to": null,
+      "regnr_count": 2,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "135951": {
+      "brand": "TESLA",
+      "model": "MODEL",
+      "year_from": 2018,
+      "year_to": null,
+      "regnr_count": 2,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "135952": {
+      "brand": "TESLA",
+      "model": "MODEL",
+      "year_from": 2018,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "136178": {
+      "brand": "MERCEDES-BENZ",
+      "model": "EQC",
+      "year_from": 2019,
+      "year_to": 2023,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "136486": {
+      "brand": "OPEL",
+      "model": "GRANDLAND",
+      "year_from": 2019,
+      "year_to": 0,
+      "regnr_count": 1,
+      "sources": [
+        "bootstrap"
+      ]
+    },
+    "136533": {
+      "brand": "PEUGEOT",
+      "model": "208",
+      "year_from": 2019,
+      "year_to": null,
+      "regnr_count": 2,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "137598": {
+      "brand": "PEUGEOT",
+      "model": "2008",
+      "year_from": 2019,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "138779": {
+      "brand": "AUDI",
+      "model": "ETRON",
+      "year_from": 2019,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "138780": {
+      "brand": "AUDI",
+      "model": "ETRON",
+      "year_from": 2019,
+      "year_to": null,
+      "regnr_count": 2,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "139640": {
+      "brand": "MG",
+      "model": "MG",
+      "year_from": 2019,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "140113": {
+      "brand": "TESLA",
+      "model": "MODEL",
+      "year_from": 2020,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "140638": {
+      "brand": "SKODA",
+      "model": "ECITIGO",
+      "year_from": 2019,
+      "year_to": 2021,
+      "regnr_count": 2,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "142253": {
+      "brand": "VW",
+      "model": "ID4",
+      "year_from": 2020,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "143485": {
+      "brand": "MERCEDES-BENZ",
+      "model": "EQA",
+      "year_from": 2021,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "143873": {
+      "brand": "FORD USA",
+      "model": "MUSTANG",
+      "year_from": 2021,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "144429": {
+      "brand": "TOYOTA",
+      "model": "RAV",
+      "year_from": 2020,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "144518": {
+      "brand": "VOLVO",
+      "model": "XC40",
+      "year_from": 2021,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "144686": {
+      "brand": "BMW",
+      "model": "IX",
+      "year_from": 2021,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "144687": {
+      "brand": "BMW",
+      "model": "IX",
+      "year_from": 2021,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "145522": {
+      "brand": "MERCEDES-BENZ",
+      "model": "EQB",
+      "year_from": 2021,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "146215": {
+      "brand": "FORD USA",
+      "model": "MUSTANG",
+      "year_from": 2021,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "147006": {
+      "brand": "MG (SAIC)",
+      "model": "ZS",
+      "year_from": 2021,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "157624": {
+      "brand": "FORD USA",
+      "model": "MUSTANG",
+      "year_from": 2023,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "800829": {
+      "brand": "TESLA",
+      "model": "MODEL",
+      "year_from": 2024,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    },
+    "801921": {
+      "brand": "VOLVO",
+      "model": "EX30",
+      "year_from": 2025,
+      "year_to": null,
+      "regnr_count": 1,
+      "sources": [
+        "discovered"
+      ]
+    }
+  }
+}

@@ -1,5 +1,30 @@
-version: 1
+version: 2
 agent:
   extend: default
   name: autoglass-data
   system_prompt_path: ./autoglass-data-agent.md
+  metadata:
+    created: "2026-05-18"
+    updated: "2026-05-23"
+    owner: "Autoglass AS"
+    description: "Data Pipeline Engineer — scraper, merge, kvalitet, prefix4-cache"
+  triggers:
+    file_patterns:
+      - "api/scrapers/*"
+      - "data/*"
+      - "scripts/validate*"
+      - "scripts/*scrape*"
+    keywords:
+      - "scrape"
+      - "catalog"
+      - "merge"
+      - "eurocode"
+      - "prefix4"
+      - "glavista"
+      - "pilkington"
+  capabilities:
+    - run_scrapers
+    - merge_catalogs
+    - quality_gate
+    - build_prefix4
+  dependencies: []

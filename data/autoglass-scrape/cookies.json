@@ -1,7 +1,7 @@
 [
   {
     "name": "wordpress_sec_c4d6583a4ba33e8f0d0e0b193515efb4",
-    "value": "post66%7C1779469254%7CoOz1t3ZjHEIlPMWXyU1xzqb6riEMknCKMuAn23Wo0U5%7Cc8ee4b794c2e38bcd3c7b0d0660ddf8deaa060623d327b72dc3673a7360f1e20",
+    "value": "post66%7C1780016574%7CPMQtxxiWvf8zmHltfjDJyr11kqZwBieYFs6o1O8mvUB%7Ce12795d0872164bdd11cff4b904219d0c133c45e51da411625454f4ca8e666fe",
     "domain": "auto-glass.no",
     "path": "/wp-content/plugins",
     "expires": -1,
@@ -11,7 +11,7 @@
   },
   {
     "name": "wordpress_sec_c4d6583a4ba33e8f0d0e0b193515efb4",
-    "value": "post66%7C1779469254%7CoOz1t3ZjHEIlPMWXyU1xzqb6riEMknCKMuAn23Wo0U5%7Cc8ee4b794c2e38bcd3c7b0d0660ddf8deaa060623d327b72dc3673a7360f1e20",
+    "value": "post66%7C1780016574%7CPMQtxxiWvf8zmHltfjDJyr11kqZwBieYFs6o1O8mvUB%7Ce12795d0872164bdd11cff4b904219d0c133c45e51da411625454f4ca8e666fe",
     "domain": "auto-glass.no",
     "path": "/wp-admin",
     "expires": -1,
@@ -21,20 +21,20 @@
   },
   {
     "name": "_ga",
-    "value": "GA1.2.1279511858.1779296455",
+    "value": "GA1.2.1043993742.1779843773",
     "domain": ".auto-glass.no",
     "path": "/",
-    "expires": 1813856458.337777,
+    "expires": 1814403785.827375,
     "httpOnly": false,
     "secure": false,
     "sameSite": "Lax"
   },
   {
     "name": "_gid",
-    "value": "GA1.2.900682234.1779296455",
+    "value": "GA1.2.872573340.1779843773",
     "domain": ".auto-glass.no",
     "path": "/",
-    "expires": 1779382858,
+    "expires": 1779930185,
     "httpOnly": false,
     "secure": false,
     "sameSite": "Lax"
@@ -44,14 +44,14 @@
     "value": "1",
     "domain": ".auto-glass.no",
     "path": "/",
-    "expires": 1779296514,
+    "expires": 1779843832,
     "httpOnly": false,
     "secure": false,
     "sameSite": "Lax"
   },
   {
     "name": "wordpress_logged_in_c4d6583a4ba33e8f0d0e0b193515efb4",
-    "value": "post66%7C1779469254%7CoOz1t3ZjHEIlPMWXyU1xzqb6riEMknCKMuAn23Wo0U5%7C1527c199beef1d48e0882bf63ab18715db5c9d49cec5749295179654d1367b6a",
+    "value": "post66%7C1780016574%7CPMQtxxiWvf8zmHltfjDJyr11kqZwBieYFs6o1O8mvUB%7Ce08fa544c98ad905caaa7c5415724f753367b9ecc854eb57b5b5ed00afdfd068",
     "domain": "auto-glass.no",
     "path": "/",
     "expires": -1,
@@ -61,10 +61,10 @@
   },
   {
     "name": "_ga_X8QCNN7ZX9",
-    "value": "GS2.2.s1779296455$o1$g0$t1779296455$j60$l0$h0",
+    "value": "GS2.2.s1779843772$o1$g1$t1779843785$j47$l0$h0",
     "domain": ".auto-glass.no",
     "path": "/",
-    "expires": 1813856455.040242,
+    "expires": 1814403785.87098,
     "httpOnly": false,
     "secure": false,
     "sameSite": "Lax"

@@ -1,5 +1,35 @@
-version: 1
+version: 2
 agent:
   extend: default
   name: autoglass-worker
   system_prompt_path: ./autoglass-worker-agent.md
+  metadata:
+    created: '2026-05-18'
+    updated: '2026-05-23'
+    owner: Autoglass AS
+    description: Backend/API Engineer — Cloudflare Worker, API-endepunkter, KV, D1
+  triggers:
+    file_patterns:
+    - api/cf-worker/*
+    - api/cf-worker/src/*
+    - scripts/smoke-test*
+    - scripts/verify-kv*
+    keywords:
+    - worker
+    - api
+    - endpoint
+    - kv
+    - d1
+    - deploy
+    - wrangler
+    - exact_match
+    - scoreCandidate
+    - scoring
+    - multikriterie
+    - equipment
+  capabilities:
+  - deploy_worker
+  - verify_kv
+  - run_smoke_tests
+  - api_documentation
+  dependencies: []

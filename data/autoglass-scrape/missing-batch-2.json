@@ -1,0 +1,807 @@
+[
+  {
+    "brand": "USA CARS",
+    "model": "CHEVROLET",
+    "submodel": "CAMARO",
+    "yearRange": "2D COUPE",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "DS",
+    "model": "DS7",
+    "submodel": null,
+    "yearRange": "2017-2026",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/ds/ds7/2017-2026/"
+  },
+  {
+    "brand": "FIAT TRUCKS",
+    "model": "STRADA",
+    "submodel": null,
+    "yearRange": "2006-2012 (STRADA II)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/fiat-last/strada/2006-2012-strada-ii/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "SUPRA",
+    "submodel": null,
+    "yearRange": "1982-1994 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/supra/1982-1994-i/"
+  },
+  {
+    "brand": "NISSAN",
+    "model": "TEANA",
+    "submodel": null,
+    "yearRange": "2004-2008 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/nissan/teana/2004-2008-i/"
+  },
+  {
+    "brand": "HONDA",
+    "model": "PILOT",
+    "submodel": null,
+    "yearRange": "2016-2017 (III)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/honda/pilot/2016-2017-iii/"
+  },
+  {
+    "brand": "MG",
+    "model": "5",
+    "submodel": null,
+    "yearRange": "2014-2014 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/mg-autoglass/5-mg-autoglass/2014-2014-i/"
+  },
+  {
+    "brand": "PEUGEOT TRUCKS",
+    "model": "BOXER",
+    "submodel": null,
+    "yearRange": "2017- (III)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/peugeot-last/boxer/2017-iii/"
+  },
+  {
+    "brand": "VW",
+    "model": "PASSAT",
+    "submodel": "PASSAT 4-D.SEDAN",
+    "yearRange": "2010-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/vw/passat/passat-4-d-sedan/2010-passat-4-d-sedan/"
+  },
+  {
+    "brand": "VETERAN CARS (NOT USA)",
+    "model": "MORRIS",
+    "submodel": "MARINA",
+    "yearRange": "MARINA 2-D SEDAN",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "CAMRY",
+    "submodel": "4-D SEDAN",
+    "yearRange": "1987 - 1991",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/camry/camry-4-d-sedan/1987-1991-camry-4-d-sedan/"
+  },
+  {
+    "brand": "BMW",
+    "model": "X6",
+    "submodel": null,
+    "yearRange": "2017-2023 GT (G32)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bmw/x6/2017-2023-gt-g32/"
+  },
+  {
+    "brand": "OPEL",
+    "model": "MANTA",
+    "submodel": null,
+    "yearRange": "1971-1975 (A)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/opel/manta/1971-1975-a/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "CAMRY",
+    "submodel": "5-D.LIFTBACK",
+    "yearRange": "1983 - 1986",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/camry/camry-5-d-liftback/1983-1986-camry-5-d-liftback/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "VITARA",
+    "submodel": "GRAND VITARA XL7 5-D SUV",
+    "yearRange": "2002 -",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/vitara/grand-vitara-xl7-5-d-suv/2002-grand-vitara-xl7-5-d-suv/"
+  },
+  {
+    "brand": "NISSAN",
+    "model": "VERSA",
+    "submodel": null,
+    "yearRange": "2007-2016 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/nissan/versa/2007-2016-i/"
+  },
+  {
+    "brand": "BENTLEY",
+    "model": "TURBO R",
+    "submodel": null,
+    "yearRange": "2014-2014",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bentley-sideruter-bakruter/turbo-r/2014-2014/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CHEVROLET",
+    "submodel": "VAN",
+    "yearRange": "EXPRESS",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "LINCOLN",
+    "submodel": "CONTINENTAL",
+    "yearRange": "VII",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CHEVROLET",
+    "submodel": "COLORADO",
+    "yearRange": "2013-2014 (II)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/chevrolet/colorado/2013-2014-ii/"
+  },
+  {
+    "brand": "RENAULT",
+    "model": "ALASKAN",
+    "submodel": null,
+    "yearRange": "2017-2019",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/renault/alaskan/2017-2019/"
+  },
+  {
+    "brand": "ALFA ROMEO",
+    "model": "SPIDER",
+    "submodel": null,
+    "yearRange": "1983-1993 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/alfa-romeo/spider/1983-1993-i/"
+  },
+  {
+    "brand": "MAXUS",
+    "model": "e-Deliver 7",
+    "submodel": null,
+    "yearRange": "2024-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/maxus-autoglass/e-deliver-7/2024-e-deliver-7/"
+  },
+  {
+    "brand": "VETERAN CARS (NOT USA)",
+    "model": "MG",
+    "submodel": "MGA",
+    "yearRange": "MGA SPORT 2D CAB",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CHEVROLET",
+    "submodel": "GM TRUCKS",
+    "yearRange": "WHITE",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "ALTO",
+    "submodel": "3-D. C.C",
+    "yearRange": "1996-1999",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/alto/3-d-c-c-alto/1996-1999-3-d-c-c-alto/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "AVENSIS",
+    "submodel": "5-D ST.VOGN",
+    "yearRange": "2009 -",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/avensis/avensis-5-d-st-vogn/2009-avensis-5-d-st-vogn/"
+  },
+  {
+    "brand": "VETERAN CARS (NOT USA)",
+    "model": "MG",
+    "submodel": "A SPORT",
+    "yearRange": "A SPORT CAB",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "JIMNY",
+    "submodel": null,
+    "yearRange": "1999 -",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/jimny/1999-jimny/"
+  },
+  {
+    "brand": "LANCIA",
+    "model": "A-112",
+    "submodel": null,
+    "yearRange": "1976-1986",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/lancia/a-112/1976-1986-a-112/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "LINCOLN",
+    "submodel": "CONTINENTAL",
+    "yearRange": "X",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "DAIHATSU",
+    "model": "CUORE",
+    "submodel": null,
+    "yearRange": "2008-2013 (VII)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/daihatsu/cuore/2008-2013-vii/"
+  },
+  {
+    "brand": "LANCIA",
+    "model": "VOYAGER",
+    "submodel": null,
+    "yearRange": "2012-2016 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/lancia/1994-2002-806/2012-2016-i/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "BUICK",
+    "submodel": "REGAL",
+    "yearRange": "1988-1996 (III)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/buick/regal/1988-1996-iii/"
+  },
+  {
+    "brand": "CITROEN",
+    "model": "C3",
+    "submodel": "5-D C.C",
+    "yearRange": "2024- (IV)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/citroen/c3/5-d-c-c-c3/2024-iv/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "FORD",
+    "submodel": "FALCON",
+    "yearRange": "2D CAB+HT",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "ALTO",
+    "submodel": "5-D. C.C",
+    "yearRange": "2009 -",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/alto/5-d-c-c-alto/2009-5-d-c-c-alto/"
+  },
+  {
+    "brand": "AUDI",
+    "model": "E-TRON",
+    "submodel": null,
+    "yearRange": "2012-2012 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/audi/e-tron/2012-2018-i/"
+  },
+  {
+    "brand": "MORGAN",
+    "model": "PLUS 4 (II)",
+    "submodel": null,
+    "yearRange": "2020-2021 (IV)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/morgan/plus-4-ii/2020-2021-iv/"
+  },
+  {
+    "brand": "BMW",
+    "model": "2 SERIE",
+    "submodel": "U06",
+    "yearRange": "2022-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bmw/2-serie/u06/2022-u06/"
+  },
+  {
+    "brand": "BENTLEY",
+    "model": "CONTINENTAL",
+    "submodel": null,
+    "yearRange": "1984-2002 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bentley-sideruter-bakruter/continental/1984-2002-i/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "AVENSIS",
+    "submodel": "5-D ST.VOGN",
+    "yearRange": "2003 - 2008",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/avensis/avensis-5-d-st-vogn/2003-2008-avensis-5-d-st-vogn/"
+  },
+  {
+    "brand": "SUBARU",
+    "model": "JUSTY",
+    "submodel": "JUSTY 5-D.C.C",
+    "yearRange": "1984 - 1996",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/subaru/justy/justy-5-d-c-c/1984-1996/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CHRYSLER",
+    "submodel": "LEBARON",
+    "yearRange": "2D CAB",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "LINCOLN",
+    "submodel": "CONTINENTAL",
+    "yearRange": "Ny varegruppe",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "MOTORHOMES",
+    "model": "FRANKIA",
+    "submodel": "INTEGRAAL",
+    "yearRange": "500-800",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "NISSAN TRUCKS",
+    "model": "PRIMASTAR",
+    "submodel": null,
+    "yearRange": "2021-2024 (III)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/nissan-last-varebil/primastar/2021-2024-iii/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "GMC",
+    "submodel": "SIERRA",
+    "yearRange": "2021-2026 (GMTT1)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/gmc/sierra-gmc/2021-2026-gmtt1/"
+  },
+  {
+    "brand": "BMW",
+    "model": "i4",
+    "submodel": null,
+    "yearRange": "2022-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bmw/i-4/2022/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CHEVROLET",
+    "submodel": "IMPALA",
+    "yearRange": "2D CAB/HARDTOP",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "HONDA",
+    "model": "STREAM",
+    "submodel": null,
+    "yearRange": "2002-2003",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/honda/stream/2002-2003/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "BALENO",
+    "submodel": "5-D ST.VOGN",
+    "yearRange": "2016-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/baleno/5-d-st-vogn-baleno/2016-5-d-st-vogn-baleno/"
+  },
+  {
+    "brand": "AUDI",
+    "model": "Q5",
+    "submodel": null,
+    "yearRange": "2025-2026 (GU)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/audi/q5/3025-2026-gu/"
+  },
+  {
+    "brand": "MOTORHOMES",
+    "model": "RAPIDO MERCEDES/FIAT",
+    "submodel": "90DF SERIE",
+    "yearRange": "2011-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bobiler/rapido-mercedes-fiat/90df-serie/2011-90df-serie/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "LIANA",
+    "submodel": null,
+    "yearRange": "2006-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/liana/2006-liana/"
+  },
+  {
+    "brand": "ROLLS ROYCE",
+    "model": "SILVER SERAPH",
+    "submodel": null,
+    "yearRange": "1998-2002",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/rolls-royce/silver-seraph/1998-2002-silver-seraph/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "CARINA",
+    "submodel": "5-D ST.VOGN",
+    "yearRange": "1994 - 1997",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/carina/carina-5-d-st-vogn/1994-1997-carina-5-d-st-vogn/"
+  },
+  {
+    "brand": "ASTON MARTIN",
+    "model": "DBS",
+    "submodel": null,
+    "yearRange": "2008-2012 (II)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/aston-martin/dbs/2008-2012-ii/"
+  },
+  {
+    "brand": "BMW",
+    "model": "7 SERIE",
+    "submodel": "4-D SEDAN",
+    "yearRange": "2023- (G70)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bmw/7-serie/4-d-sedan-7-serie/2023-g70/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "WAGON R",
+    "submodel": null,
+    "yearRange": "2000 -",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/wagon-r/2000-wagon-r/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "SWIFT",
+    "submodel": "5-D. C.C.",
+    "yearRange": "1987 - 1989",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/swift/5-d-c-c-swift/1987-1989-5-d-c-c-swift/"
+  },
+  {
+    "brand": "PEUGEOT",
+    "model": "1007",
+    "submodel": null,
+    "yearRange": "2013-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/peugeot/1007/2013-1007/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "CAMRY",
+    "submodel": "4-D SEDAN",
+    "yearRange": "2018- (VIII)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/camry/camry-4-d-sedan/2018-viii-camry-4-d-sedan/"
+  },
+  {
+    "brand": "BMW",
+    "model": "1 SERIE",
+    "submodel": "5D",
+    "yearRange": "2019- (F52)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bmw/1-serie/5d/2019-f52/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "GMC",
+    "submodel": "CANYON 2-D",
+    "yearRange": "2015-2017 (II)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/gmc/canyon-2-d/2015-2017-ii/"
+  },
+  {
+    "brand": "NISSAN",
+    "model": "XTERRA",
+    "submodel": null,
+    "yearRange": "2000-2004 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/nissan/xterra/2000-2004-i/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "BUICK",
+    "submodel": "REGAL",
+    "yearRange": "1997-2004 (IV)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/buick/regal/1997-2004-iv/"
+  },
+  {
+    "brand": "MERCEDES",
+    "model": "T-CLASS",
+    "submodel": null,
+    "yearRange": "2022-2026",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/mercedes/t-class/2022-2026-t-class/"
+  },
+  {
+    "brand": "ROVER",
+    "model": "820",
+    "submodel": null,
+    "yearRange": "1987 - 1991",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/rover/820/1987-1991-820/"
+  },
+  {
+    "brand": "KIA",
+    "model": "RETONA",
+    "submodel": null,
+    "yearRange": "2000-2003",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/kia/retona/2000-2003-retona/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "DODGE",
+    "submodel": "DART",
+    "yearRange": "2D CAB+HT",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CADILLAC",
+    "submodel": "BLS",
+    "yearRange": "BLS 4-D SEDAN",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "FORD",
+    "submodel": "MUSTANG",
+    "yearRange": "COUPE",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "LEXUS",
+    "model": "ES",
+    "submodel": null,
+    "yearRange": "1990-1991 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/lexus/es/1990-1991-i/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "LINCOLN",
+    "submodel": "MKC",
+    "yearRange": "2015-2015",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/lincoln/mkc/2015-2015/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "CAMRY",
+    "submodel": "5-D ST.VOGN",
+    "yearRange": "1987 - 1991",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/camry/camry-5-d-st-vogn/1987-1991-camry-5-d-st-vogn/"
+  },
+  {
+    "brand": "MAZDA",
+    "model": "6e",
+    "submodel": null,
+    "yearRange": "2025-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/mazda/6e/2025-6e/"
+  },
+  {
+    "brand": "NISSAN TRUCKS",
+    "model": "PRIMASTAR",
+    "submodel": null,
+    "yearRange": "2015-2016 (II)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/nissan-last-varebil/primastar/2015-2016-ii/"
+  },
+  {
+    "brand": "PORSCHE",
+    "model": "924",
+    "submodel": null,
+    "yearRange": "1986 - 1991",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/porsche/924/1986-1991/"
+  },
+  {
+    "brand": "SAAB",
+    "model": "9-7",
+    "submodel": null,
+    "yearRange": "2005-2009",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/saab/9-7/2005-2009-9-7/"
+  },
+  {
+    "brand": "HONDA",
+    "model": "ZR-V",
+    "submodel": null,
+    "yearRange": "2023-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/honda/zr-v/2023-zr-v/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "FORD",
+    "submodel": "MUSTANG",
+    "yearRange": "2DR HARDTOP",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "VITARA",
+    "submodel": "5-D ST.VOGN",
+    "yearRange": "2015-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/vitara/5-d-st-vogn-vitara/2015-5-d-st-vogn-vitara/"
+  },
+  {
+    "brand": "MERCEDES",
+    "model": "SERIE W171",
+    "submodel": "SLK 2-D ROADSTER",
+    "yearRange": "2004 -",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/mercedes/serie-w171/slk-2-d-roadster/2004-slk-2-d-roadster/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "KIZASHI",
+    "submodel": null,
+    "yearRange": "2011-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/kizashi/2011-kizashi/"
+  },
+  {
+    "brand": "LEXUS",
+    "model": "LX",
+    "submodel": null,
+    "yearRange": "1996-1997 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/lexus/lx/1996-1997-i/"
+  },
+  {
+    "brand": "HONDA",
+    "model": "ODYSSEY",
+    "submodel": null,
+    "yearRange": "2010-2017 (IV)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/honda/odyssey/2010-2017-iv/"
+  },
+  {
+    "brand": "SAAB",
+    "model": "SONETT",
+    "submodel": null,
+    "yearRange": "1956-1957 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/saab/sonett/1956-1957-i/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "IGNIS",
+    "submodel": null,
+    "yearRange": "2003 -2008 ( II )",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/ignis/2003-2008-ii/"
+  },
+  {
+    "brand": "BENTLEY",
+    "model": "TURBO",
+    "submodel": null,
+    "yearRange": "1984-1998",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bentley-sideruter-bakruter/turbo/1984-1998-turbo/"
+  },
+  {
+    "brand": "JC INDIGO",
+    "model": "3000",
+    "submodel": null,
+    "yearRange": "1996-1999",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/jc-indigo/3000/1996-1999-3000/"
+  },
+  {
+    "brand": "ALFA ROMEO",
+    "model": "GUILETTA",
+    "submodel": "5D CC",
+    "yearRange": "2016- (III)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/alfa-romeo/guiletta/5d-cc/2016-iii-5d-cc/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CHEVROLET",
+    "submodel": "STARCRAFT",
+    "yearRange": "1993-1996",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/chevrolet/starcraft/1993-1996-starcraft/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "SWIFT",
+    "submodel": "5-D. C.C.",
+    "yearRange": "2010-2016 (V)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/swift/5-d-c-c-swift/2010-5-d-c-c-swift/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "CARINA",
+    "submodel": "4-D SEDAN",
+    "yearRange": "1982 - 1983",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/carina/carina-4-d-sedan/1982-1983-carina-4-d-sedan/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CHRYSLER",
+    "submodel": "200",
+    "yearRange": "2014-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/chrysler/200-chrysler/2014-200-chrysler/"
+  },
+  {
+    "brand": "USA CARS",
+    "model": "CADILLAC",
+    "submodel": "ESCALADE",
+    "yearRange": "1999-2000 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/usa-biler/cadillac/escalade/1999-2000-i/"
+  },
+  {
+    "brand": "FIAT TRUCKS",
+    "model": "STRADA",
+    "submodel": null,
+    "yearRange": "2013-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/fiat-last/strada/2013-strada/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "ALTO",
+    "submodel": "3-D. C.C",
+    "yearRange": "2000 -",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/alto/3-d-c-c-alto/2000-3-d-c-c-alto/"
+  },
+  {
+    "brand": "SUBARU",
+    "model": "FORESTER",
+    "submodel": null,
+    "yearRange": "2025-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/subaru/forester/2025-forester/"
+  },
+  {
+    "brand": "LEXUS",
+    "model": "GX",
+    "submodel": null,
+    "yearRange": "2003-2009 (I)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/lexus/gx/2003-2009-i/"
+  },
+  {
+    "brand": "ACURA",
+    "model": "ZDX",
+    "submodel": null,
+    "yearRange": "2010-2013",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/acura/zdx/2010-2013/"
+  },
+  {
+    "brand": "SUZUKI",
+    "model": "SWACE",
+    "submodel": null,
+    "yearRange": "2021-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/suzuki/swace/2021-swace/"
+  },
+  {
+    "brand": "SEAT",
+    "model": "CUPRA FORMENTOR",
+    "submodel": null,
+    "yearRange": "2020-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/seat/cupra-formentor/2020-cupra-formentor/"
+  },
+  {
+    "brand": "SSANGYONG",
+    "model": "MUSSO",
+    "submodel": null,
+    "yearRange": "2018-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/ssangyong/musso/2018-musso/"
+  },
+  {
+    "brand": "FORD TRUCKS",
+    "model": "TRANSIT",
+    "submodel": "TRANSIT",
+    "yearRange": "1978-1986 (III)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/ford-last/transit/transit-transit/1978-1986-iii/"
+  },
+  {
+    "brand": "MOTORHOMES",
+    "model": "DETHLEFFS",
+    "submodel": "PREMIUM GLOBETROTTER",
+    "yearRange": "1990-1996",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/bobiler/dethleffs/premium-globetrotter/1990-1996/"
+  },
+  {
+    "brand": "NISSAN",
+    "model": "TOWNSTAR (EL)",
+    "submodel": null,
+    "yearRange": "2022-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/nissan/townstar/2022-townstar/"
+  },
+  {
+    "brand": "SAAB",
+    "model": "9-3",
+    "submodel": "9-3 4-D SPORT SEDAN",
+    "yearRange": "2014- (III)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/saab/9-3/9-3-4-d-sport-sedan/2014-iii-9-3-4-d-sport-sedan/"
+  },
+  {
+    "brand": "PORSCHE",
+    "model": "356",
+    "submodel": null,
+    "yearRange": "1948-1965",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/porsche/356/1948-1965/"
+  },
+  {
+    "brand": "FORD",
+    "model": "TAUNUS",
+    "submodel": "SEDAN",
+    "yearRange": "1973-",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/ford/taunus/sedan-taunus/1973-sedan-taunus/"
+  },
+  {
+    "brand": "PORSCHE",
+    "model": "MACAN",
+    "submodel": null,
+    "yearRange": "2025- (II)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/porsche/macan-2014/2025-ii/"
+  },
+  {
+    "brand": "TOYOTA",
+    "model": "AVENSIS",
+    "submodel": "4-D SEDAN",
+    "yearRange": "2015- (III)",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/toyota/avensis/avensis-4-d-sedan/2015-iii-avensis-4-d-sedan/"
+  },
+  {
+    "brand": "VETERAN CARS (NOT USA)",
+    "model": "MORRIS",
+    "submodel": "MARINA",
+    "yearRange": "MARINA 5-D ST.VOGN",
+    "url": "https://auto-glass.no/min-konto/#"
+  },
+  {
+    "brand": "LOTUS",
+    "model": "ELAN - M100",
+    "submodel": null,
+    "yearRange": "1989 - 1995",
+    "url": "https://auto-glass.no/varer/nettbutikk/autoglass/lotus/elan-m100/1989-1995-elan-m100/"
+  }
+]

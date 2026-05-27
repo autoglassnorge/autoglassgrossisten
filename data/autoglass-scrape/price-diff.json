@@ -1,0 +1,418 @@
+{
+  "updatedAt": "2026-05-27T02:15:14.335Z",
+  "urlsScraped": 5,
+  "errors": 0,
+  "emptyUrls": 0,
+  "totalProducts": 27184,
+  "skusScraped": 27,
+  "changes": 0,
+  "unchanged": 34,
+  "newSkus": 0,
+  "missingSkus": 20708,
+  "priceUp": 0,
+  "priceDown": 0,
+  "changedProducts": [],
+  "newProducts": [],
+  "missingProducts": [
+    {
+      "sku": "10058CL",
+      "count": 3
+    },
+    {
+      "sku": "10059CL",
+      "count": 4
+    },
+    {
+      "sku": "10060CL",
+      "count": 3
+    },
+    {
+      "sku": "1006BB",
+      "count": 1
+    },
+    {
+      "sku": "10073CL",
+      "count": 2
+    },
+    {
+      "sku": "1007C",
+      "count": 1
+    },
+    {
+      "sku": "1007GB",
+      "count": 1
+    },
+    {
+      "sku": "10085GN",
+      "count": 1
+    },
+    {
+      "sku": "1009BZ",
+      "count": 1
+    },
+    {
+      "sku": "1009BZB",
+      "count": 1
+    },
+    {
+      "sku": "1017C",
+      "count": 1
+    },
+    {
+      "sku": "1017GN",
+      "count": 1
+    },
+    {
+      "sku": "1018BZ",
+      "count": 3
+    },
+    {
+      "sku": "1018C",
+      "count": 3
+    },
+    {
+      "sku": "1018GB",
+      "count": 3
+    },
+    {
+      "sku": "1022BL",
+      "count": 1
+    },
+    {
+      "sku": "1027C",
+      "count": 2
+    },
+    {
+      "sku": "1027GB",
+      "count": 2
+    },
+    {
+      "sku": "1035C",
+      "count": 2
+    },
+    {
+      "sku": "1035GB",
+      "count": 2
+    },
+    {
+      "sku": "1036C",
+      "count": 4
+    },
+    {
+      "sku": "1036GB",
+      "count": 4
+    },
+    {
+      "sku": "1037BB",
+      "count": 1
+    },
+    {
+      "sku": "1038BB",
+      "count": 1
+    },
+    {
+      "sku": "1039BB",
+      "count": 1
+    },
+    {
+      "sku": "1039BL",
+      "count": 1
+    },
+    {
+      "sku": "1041GB",
+      "count": 3
+    },
+    {
+      "sku": "1048BB",
+      "count": 1
+    },
+    {
+      "sku": "1048BL",
+      "count": 1
+    },
+    {
+      "sku": "1049BB",
+      "count": 2
+    },
+    {
+      "sku": "1049BB/A",
+      "count": 2
+    },
+    {
+      "sku": "1049BL/A",
+      "count": 2
+    },
+    {
+      "sku": "1054C",
+      "count": 3
+    },
+    {
+      "sku": "1054GB",
+      "count": 3
+    },
+    {
+      "sku": "1057BB",
+      "count": 2
+    },
+    {
+      "sku": "1057BL",
+      "count": 2
+    },
+    {
+      "sku": "1063C",
+      "count": 1
+    },
+    {
+      "sku": "1066BB",
+      "count": 1
+    },
+    {
+      "sku": "1067C",
+      "count": 1
+    },
+    {
+      "sku": "1067GB",
+      "count": 1
+    },
+    {
+      "sku": "1073C",
+      "count": 1
+    },
+    {
+      "sku": "1073GB",
+      "count": 1
+    },
+    {
+      "sku": "1085BZ",
+      "count": 1
+    },
+    {
+      "sku": "1085C",
+      "count": 1
+    },
+    {
+      "sku": "1087C",
+      "count": 6
+    },
+    {
+      "sku": "1087GB",
+      "count": 6
+    },
+    {
+      "sku": "1088C",
+      "count": 1
+    },
+    {
+      "sku": "1088GB",
+      "count": 1
+    },
+    {
+      "sku": "1092BB",
+      "count": 1
+    },
+    {
+      "sku": "1102C",
+      "count": 1
+    },
+    {
+      "sku": "1102GG",
+      "count": 1
+    },
+    {
+      "sku": "1104GN",
+      "count": 1
+    },
+    {
+      "sku": "1108BB",
+      "count": 1
+    },
+    {
+      "sku": "1109C",
+      "count": 1
+    },
+    {
+      "sku": "1109GB",
+      "count": 1
+    },
+    {
+      "sku": "1110C",
+      "count": 5
+    },
+    {
+      "sku": "1110GB",
+      "count": 5
+    },
+    {
+      "sku": "1113C",
+      "count": 1
+    },
+    {
+      "sku": "1113GB",
+      "count": 1
+    },
+    {
+      "sku": "1115BL",
+      "count": 2
+    },
+    {
+      "sku": "1118BZ",
+      "count": 5
+    },
+    {
+      "sku": "1118C",
+      "count": 5
+    },
+    {
+      "sku": "1118GB",
+      "count": 5
+    },
+    {
+      "sku": "1118GN",
+      "count": 5
+    },
+    {
+      "sku": "1129C",
+      "count": 1
+    },
+    {
+      "sku": "1129GG",
+      "count": 1
+    },
+    {
+      "sku": "1131BZB",
+      "count": 1
+    },
+    {
+      "sku": "1134GB",
+      "count": 1
+    },
+    {
+      "sku": "1140BB",
+      "count": 1
+    },
+    {
+      "sku": "1152BB",
+      "count": 1
+    },
+    {
+      "sku": "1152BL",
+      "count": 1
+    },
+    {
+      "sku": "1158BB",
+      "count": 1
+    },
+    {
+      "sku": "1159BB",
+      "count": 1
+    },
+    {
+      "sku": "1159C",
+      "count": 1
+    },
+    {
+      "sku": "1164BB",
+      "count": 1
+    },
+    {
+      "sku": "1164C",
+      "count": 1
+    },
+    {
+      "sku": "1168GG",
+      "count": 1
+    },
+    {
+      "sku": "1170C",
+      "count": 4
+    },
+    {
+      "sku": "1170GY",
+      "count": 4
+    },
+    {
+      "sku": "1181C",
+      "count": 1
+    },
+    {
+      "sku": "1181GB",
+      "count": 1
+    },
+    {
+      "sku": "1183C",
+      "count": 1
+    },
+    {
+      "sku": "1183GG",
+      "count": 1
+    },
+    {
+      "sku": "1183GN",
+      "count": 1
+    },
+    {
+      "sku": "1187GB",
+      "count": 1
+    },
+    {
+      "sku": "1190BZ",
+      "count": 3
+    },
+    {
+      "sku": "1190C",
+      "count": 3
+    },
+    {
+      "sku": "1190C2",
+      "count": 3
+    },
+    {
+      "sku": "1190GB",
+      "count": 3
+    },
+    {
+      "sku": "1190GBS",
+      "count": 3
+    },
+    {
+      "sku": "1199C",
+      "count": 1
+    },
+    {
+      "sku": "1199GB",
+      "count": 1
+    },
+    {
+      "sku": "1200BZ",
+      "count": 1
+    },
+    {
+      "sku": "1200C",
+      "count": 1
+    },
+    {
+      "sku": "1200GB",
+      "count": 1
+    },
+    {
+      "sku": "1204C",
+      "count": 1
+    },
+    {
+      "sku": "1204GB",
+      "count": 1
+    },
+    {
+      "sku": "12060C",
+      "count": 1
+    },
+    {
+      "sku": "1206GB",
+      "count": 1
+    },
+    {
+      "sku": "1208C",
+      "count": 1
+    }
+  ]
+}

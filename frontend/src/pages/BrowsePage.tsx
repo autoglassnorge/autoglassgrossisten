@@ -225,7 +225,7 @@ export default function BrowsePage() {
                     {typeCodeLabel(product.typeCodeRel) || product.typeCode || 'Ukjent'}
                   </Badge>
                   {product.sku && (
-                    <span className="text-[10px] font-mono text-gray-400">{product.sku}</span>
+                    <span className="text-xs font-mono text-gray-500">{product.sku}</span>
                   )}
                 </div>
                 

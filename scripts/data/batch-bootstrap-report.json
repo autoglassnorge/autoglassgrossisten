@@ -1,0 +1,1466 @@
+{
+  "generatedAt": "2026-05-21T20:21:28.544Z",
+  "totalCombos": 2882,
+  "coveredCount": 0,
+  "uncoveredCount": 2882,
+  "coveredPercent": "0.00",
+  "uncoveredPercent": "100.00",
+  "topUncoveredBrands": [
+    [
+      "toyota",
+      156
+    ],
+    [
+      "vw",
+      155
+    ],
+    [
+      "ford",
+      154
+    ],
+    [
+      "mercedes",
+      153
+    ],
+    [
+      "bmw",
+      148
+    ],
+    [
+      "hyundai",
+      130
+    ],
+    [
+      "audi",
+      127
+    ],
+    [
+      "kia",
+      127
+    ],
+    [
+      "renault",
+      95
+    ],
+    [
+      "mazda",
+      93
+    ],
+    [
+      "nissan",
+      88
+    ],
+    [
+      "peugeot",
+      81
+    ],
+    [
+      "honda",
+      75
+    ],
+    [
+      "volvo",
+      68
+    ],
+    [
+      "lexus",
+      66
+    ],
+    [
+      "citroen",
+      59
+    ],
+    [
+      "skoda",
+      57
+    ],
+    [
+      "vauxhall",
+      57
+    ],
+    [
+      "porsche",
+      53
+    ],
+    [
+      "fiat",
+      52
+    ],
+    [
+      "seat",
+      50
+    ],
+    [
+      "mitsubishi",
+      49
+    ],
+    [
+      "subaru",
+      45
+    ],
+    [
+      "jaguar",
+      41
+    ],
+    [
+      "range",
+      30
+    ],
+    [
+      "suzuki",
+      28
+    ],
+    [
+      "chevrolet",
+      27
+    ],
+    [
+      "opel",
+      24
+    ],
+    [
+      "opelvauxhall",
+      24
+    ],
+    [
+      "dacia",
+      24
+    ],
+    [
+      "jeep",
+      23
+    ],
+    [
+      "ssangyong",
+      22
+    ],
+    [
+      "gruzovyye_i_avtobusy",
+      21
+    ],
+    [
+      "alfa_romeo",
+      19
+    ],
+    [
+      "new",
+      18
+    ],
+    [
+      "land_rover",
+      15
+    ],
+    [
+      "infiniti",
+      15
+    ],
+    [
+      "chrysler",
+      14
+    ],
+    [
+      "isuzu",
+      13
+    ],
+    [
+      "smart",
+      12
+    ],
+    [
+      "vauxhallopel",
+      12
+    ],
+    [
+      "landrover",
+      11
+    ],
+    [
+      "maserati",
+      11
+    ],
+    [
+      "ford_trucks",
+      10
+    ],
+    [
+      "mg",
+      10
+    ],
+    [
+      "saab",
+      10
+    ],
+    [
+      "aston_martin",
+      10
+    ],
+    [
+      "avtostekla_dlya_legkovykh",
+      10
+    ],
+    [
+      "mercedes_trucks",
+      9
+    ],
+    [
+      "tesla",
+      9
+    ],
+    [
+      "iveco",
+      8
+    ],
+    [
+      "ford_usa",
+      8
+    ],
+    [
+      "man",
+      8
+    ],
+    [
+      "dodge",
+      8
+    ],
+    [
+      "lancia",
+      6
+    ],
+    [
+      "cadillac",
+      6
+    ],
+    [
+      "daewoo",
+      6
+    ],
+    [
+      "ferrari",
+      6
+    ],
+    [
+      "citroen_trucks",
+      5
+    ],
+    [
+      "usa_cars",
+      5
+    ],
+    [
+      "daf",
+      5
+    ],
+    [
+      "maxus",
+      5
+    ],
+    [
+      "daewoo_chevrolet",
+      5
+    ],
+    [
+      "scania",
+      5
+    ],
+    [
+      "vw_trucks",
+      4
+    ],
+    [
+      "toyota_trucks",
+      4
+    ],
+    [
+      "polestar",
+      4
+    ],
+    [
+      "fiat_trucks",
+      4
+    ],
+    [
+      "volvo_trucks",
+      4
+    ],
+    [
+      "cupra",
+      4
+    ],
+    [
+      "rover",
+      4
+    ],
+    [
+      "ldv",
+      4
+    ],
+    [
+      "renault_trucks",
+      3
+    ],
+    [
+      "fisker",
+      3
+    ],
+    [
+      "proton",
+      3
+    ],
+    [
+      "daihatsu",
+      3
+    ],
+    [
+      "lamborghini",
+      3
+    ],
+    [
+      "bentley",
+      2
+    ],
+    [
+      "ds",
+      2
+    ],
+    [
+      "scania_trucks",
+      2
+    ],
+    [
+      "volkswagen",
+      2
+    ],
+    [
+      "westfield",
+      2
+    ],
+    [
+      "actros",
+      2
+    ],
+    [
+      "hymer",
+      2
+    ],
+    [
+      "lotus",
+      2
+    ],
+    [
+      "buick",
+      2
+    ],
+    [
+      "holden",
+      2
+    ],
+    [
+      "dw01749",
+      2
+    ],
+    [
+      "mercury",
+      2
+    ],
+    [
+      "peugeot_trucks",
+      1
+    ],
+    [
+      "austin",
+      1
+    ],
+    [
+      "impreza",
+      1
+    ],
+    [
+      "kgm",
+      1
+    ],
+    [
+      "ineos",
+      1
+    ],
+    [
+      "mclaren",
+      1
+    ],
+    [
+      "mer",
+      1
+    ],
+    [
+      "5439asmv",
+      1
+    ],
+    [
+      "3572asghl",
+      1
+    ],
+    [
+      "3572asghr",
+      1
+    ],
+    [
+      "3572asmhl",
+      1
+    ],
+    [
+      "3572asmhr",
+      1
+    ],
+    [
+      "3750aksv1f",
+      1
+    ],
+    [
+      "5362ascs",
+      1
+    ],
+    [
+      "3750akcv1f",
+      1
+    ],
+    [
+      "7280akcms1f",
+      1
+    ],
+    [
+      "2459asgst",
+      1
+    ],
+    [
+      "2463asmt1d",
+      1
+    ],
+    [
+      "8400asmh",
+      1
+    ],
+    [
+      "8613asmht",
+      1
+    ],
+    [
+      "2467asdhb",
+      1
+    ],
+    [
+      "8406asmmt",
+      1
+    ],
+    [
+      "8406asmmt1h",
+      1
+    ],
+    [
+      "7044asmrl",
+      1
+    ],
+    [
+      "8406asgml",
+      1
+    ],
+    [
+      "2471asgct",
+      1
+    ],
+    [
+      "7042aksrs1f",
+      1
+    ],
+    [
+      "2471akccs1f",
+      1
+    ],
+    [
+      "2473asgrt",
+      1
+    ],
+    [
+      "6091asmr",
+      1
+    ],
+    [
+      "2474asght1h",
+      1
+    ],
+    [
+      "2478asgrt",
+      1
+    ],
+    [
+      "2482asgrt",
+      1
+    ],
+    [
+      "3771akcvs1f",
+      1
+    ],
+    [
+      "4448asgst",
+      1
+    ],
+    [
+      "4453asmh",
+      1
+    ],
+    [
+      "4165asgrt",
+      1
+    ],
+    [
+      "4165asmht",
+      1
+    ],
+    [
+      "2486asght",
+      1
+    ],
+    [
+      "2480asgrt",
+      1
+    ],
+    [
+      "2488asgrt",
+      1
+    ],
+    [
+      "3593asmhl",
+      1
+    ],
+    [
+      "3593asmhr",
+      1
+    ],
+    [
+      "2496asght",
+      1
+    ],
+    [
+      "5185akcts1g",
+      1
+    ],
+    [
+      "8385asmh",
+      1
+    ],
+    [
+      "2459ascs",
+      1
+    ],
+    [
+      "2465asmst",
+      1
+    ],
+    [
+      "8406asgmr",
+      1
+    ],
+    [
+      "is",
+      1
+    ],
+    [
+      "grand",
+      1
+    ],
+    [
+      "for",
+      1
+    ],
+    [
+      "octavia",
+      1
+    ],
+    [
+      "gmc",
+      1
+    ],
+    [
+      "lincoln",
+      1
+    ],
+    [
+      "levc",
+      1
+    ],
+    [
+      "dd08410rgtn",
+      1
+    ],
+    [
+      "dd10934",
+      1
+    ],
+    [
+      "dd10935",
+      1
+    ],
+    [
+      "dq08008",
+      1
+    ],
+    [
+      "dq08009",
+      1
+    ],
+    [
+      "dq09631",
+      1
+    ],
+    [
+      "dq09632",
+      1
+    ],
+    [
+      "dq09863",
+      1
+    ],
+    [
+      "dw00924",
+      1
+    ],
+    [
+      "dw01695",
+      1
+    ],
+    [
+      "dw01794",
+      1
+    ],
+    [
+      "dw01940",
+      1
+    ],
+    [
+      "dw01941",
+      1
+    ],
+    [
+      "dw01981",
+      1
+    ],
+    [
+      "dw01982",
+      1
+    ],
+    [
+      "dw02009",
+      1
+    ],
+    [
+      "dw02011",
+      1
+    ],
+    [
+      "dw02042",
+      1
+    ],
+    [
+      "dw02060",
+      1
+    ],
+    [
+      "dw02074",
+      1
+    ],
+    [
+      "great_wall",
+      1
+    ],
+    [
+      "fw02521",
+      1
+    ],
+    [
+      "fw03405",
+      1
+    ],
+    [
+      "fw03710",
+      1
+    ],
+    [
+      "sensor",
+      1
+    ],
+    [
+      "2743asmhl",
+      1
+    ],
+    [
+      "2743asmhr",
+      1
+    ],
+    [
+      "2765agacimovz",
+      1
+    ],
+    [
+      "3750agsvwz1c",
+      1
+    ],
+    [
+      "5399agacmvz2l",
+      1
+    ],
+    [
+      "5399agacmvz3l",
+      1
+    ],
+    [
+      "6094lgnp4fdw",
+      1
+    ],
+    [
+      "6744agsacmvz2f",
+      1
+    ],
+    [
+      "6744agsacmvz3f",
+      1
+    ],
+    [
+      "6744agsgyacmv2z",
+      1
+    ],
+    [
+      "6744agsgyacmv3z",
+      1
+    ],
+    [
+      "7296agacmv",
+      1
+    ],
+    [
+      "7296agamv6p",
+      1
+    ],
+    [
+      "7826agacvz1c",
+      1
+    ],
+    [
+      "8576agagymvz2b",
+      1
+    ],
+    [
+      "8641agacmvz1l",
+      1
+    ],
+    [
+      "8432agabcmv1l",
+      1
+    ],
+    [
+      "7620agacmvz1l",
+      1
+    ],
+    [
+      "7825agacmvz1b",
+      1
+    ],
+    [
+      "6094lypp4rdw",
+      1
+    ],
+    [
+      "6094rypp4rdw",
+      1
+    ],
+    [
+      "6574agacimovz",
+      1
+    ],
+    [
+      "6575agacimovz",
+      1
+    ],
+    [
+      "6743agsacmvz2f",
+      1
+    ],
+    [
+      "6743agsacmvz3f",
+      1
+    ],
+    [
+      "6743agsgyacmv2z",
+      1
+    ],
+    [
+      "6743agsgyacmv3z",
+      1
+    ],
+    [
+      "8644agacmvz1b",
+      1
+    ],
+    [
+      "8649agscmvz1l",
+      1
+    ],
+    [
+      "iveco_fiat_trucks",
+      1
+    ],
+    [
+      "nissan_trucks",
+      1
+    ],
+    [
+      "dfsk_seres",
+      1
+    ],
+    [
+      "mitsubishi_trucks",
+      1
+    ],
+    [
+      "rolls_royce",
+      1
+    ]
+  ],
+  "uncoveredSamples": [
+    {
+      "brand": "porsche",
+      "model": "911",
+      "year": 2012,
+      "catalogCount": 54
+    },
+    {
+      "brand": "ford_trucks",
+      "model": "transit",
+      "year": 2014,
+      "catalogCount": 48
+    },
+    {
+      "brand": "mercedes",
+      "model": "serie_w206_cklass",
+      "year": 2021,
+      "catalogCount": 44
+    },
+    {
+      "brand": "porsche",
+      "model": "cayenne_5d",
+      "year": 2018,
+      "catalogCount": 42
+    },
+    {
+      "brand": "mercedes",
+      "model": "serie_w167_gleklasse",
+      "year": 2019,
+      "catalogCount": 40
+    },
+    {
+      "brand": "opel",
+      "model": "vivaro",
+      "year": 2019,
+      "catalogCount": 37
+    },
+    {
+      "brand": "mercedes",
+      "model": "eqe_v295x294",
+      "year": 2022,
+      "catalogCount": 35
+    },
+    {
+      "brand": "ford",
+      "model": "b_max_mini_mpv",
+      "year": 2012,
+      "catalogCount": 34
+    },
+    {
+      "brand": "vw_trucks",
+      "model": "transporter",
+      "year": 2022,
+      "catalogCount": 32
+    },
+    {
+      "brand": "audi",
+      "model": "q4",
+      "year": 2021,
+      "catalogCount": 32
+    },
+    {
+      "brand": "vw",
+      "model": "caddy",
+      "year": 2021,
+      "catalogCount": 30
+    },
+    {
+      "brand": "mercedes",
+      "model": "eqs",
+      "year": 2022,
+      "catalogCount": 30
+    },
+    {
+      "brand": "porsche",
+      "model": "panamera",
+      "year": 2017,
+      "catalogCount": 30
+    },
+    {
+      "brand": "volvo",
+      "model": "xc_60",
+      "year": 2008,
+      "catalogCount": 29
+    },
+    {
+      "brand": "range",
+      "model": "rover_l405_r5",
+      "year": 2012,
+      "catalogCount": 28
+    },
+    {
+      "brand": "mercedes",
+      "model": "sprinter",
+      "year": 2018,
+      "catalogCount": 28
+    },
+    {
+      "brand": "toyota",
+      "model": "yaris",
+      "year": 2020,
+      "catalogCount": 26
+    },
+    {
+      "brand": "volvo",
+      "model": "xc60_5d_suv",
+      "year": 2017,
+      "catalogCount": 25
+    },
+    {
+      "brand": "mazda",
+      "model": "cx_5",
+      "year": 2012,
+      "catalogCount": 25
+    },
+    {
+      "brand": "porsche",
+      "model": "panamera",
+      "year": 2009,
+      "catalogCount": 25
+    },
+    {
+      "brand": "porsche",
+      "model": "cayenne_5d",
+      "year": 2011,
+      "catalogCount": 24
+    },
+    {
+      "brand": "opel",
+      "model": "vivaro",
+      "year": 2014,
+      "catalogCount": 24
+    },
+    {
+      "brand": "audi",
+      "model": "a4_est_5d",
+      "year": 2007,
+      "catalogCount": 23
+    },
+    {
+      "brand": "skoda",
+      "model": "enyaq",
+      "year": 2021,
+      "catalogCount": 23
+    },
+    {
+      "brand": "ford",
+      "model": "kuga",
+      "year": 2012,
+      "catalogCount": 22
+    },
+    {
+      "brand": "ford",
+      "model": "tourneo_connect",
+      "year": 2002,
+      "catalogCount": 22
+    },
+    {
+      "brand": "mercedes",
+      "model": "c_class_w_205_4d_sal",
+      "year": 2013,
+      "catalogCount": 22
+    },
+    {
+      "brand": "kia",
+      "model": "ceed",
+      "year": 2018,
+      "catalogCount": 22
+    },
+    {
+      "brand": "mercedes",
+      "model": "serie_w247_bklasse",
+      "year": 2018,
+      "catalogCount": 22
+    },
+    {
+      "brand": "volvo",
+      "model": "ex90",
+      "year": 2025,
+      "catalogCount": 22
+    },
+    {
+      "brand": "ford",
+      "model": "transit_custom",
+      "year": 2013,
+      "catalogCount": 21
+    },
+    {
+      "brand": "mitsubishi",
+      "model": "outlander",
+      "year": 2013,
+      "catalogCount": 21
+    },
+    {
+      "brand": "porsche",
+      "model": "taycan_el",
+      "year": 2021,
+      "catalogCount": 21
+    },
+    {
+      "brand": "audi",
+      "model": "a8",
+      "year": 2018,
+      "catalogCount": 21
+    },
+    {
+      "brand": "renault",
+      "model": "espace",
+      "year": 2015,
+      "catalogCount": 20
+    },
+    {
+      "brand": "range",
+      "model": "rover_velar_5d_suv_l560",
+      "year": 2016,
+      "catalogCount": 20
+    },
+    {
+      "brand": "audi",
+      "model": "a4",
+      "year": 2015,
+      "catalogCount": 20
+    },
+    {
+      "brand": "audi",
+      "model": "a4_5d_est",
+      "year": 2015,
+      "catalogCount": 20
+    },
+    {
+      "brand": "hyundai",
+      "model": "santa_fe",
+      "year": 2012,
+      "catalogCount": 20
+    },
+    {
+      "brand": "bmw",
+      "model": "5_serie",
+      "year": 2024,
+      "catalogCount": 20
+    },
+    {
+      "brand": "landrover",
+      "model": "range_rover",
+      "year": 2013,
+      "catalogCount": 20
+    },
+    {
+      "brand": "skoda",
+      "model": "elroq",
+      "year": 2025,
+      "catalogCount": 20
+    },
+    {
+      "brand": "land_rover",
+      "model": "defender_l663_3d5d_suv",
+      "year": 2020,
+      "catalogCount": 19
+    },
+    {
+      "brand": "audi",
+      "model": "a4_4d_sal",
+      "year": 2015,
+      "catalogCount": 19
+    },
+    {
+      "brand": "toyota",
+      "model": "rav_4",
+      "year": 2013,
+      "catalogCount": 19
+    },
+    {
+      "brand": "vw",
+      "model": "id4_suv",
+      "year": 2020,
+      "catalogCount": 19
+    },
+    {
+      "brand": "peugeot_trucks",
+      "model": "partner",
+      "year": 2008,
+      "catalogCount": 19
+    },
+    {
+      "brand": "toyota_trucks",
+      "model": "hilux",
+      "year": 2016,
+      "catalogCount": 19
+    },
+    {
+      "brand": "jaguar",
+      "model": "xe_x760_4d_sal",
+      "year": 2014,
+      "catalogCount": 18
+    },
+    {
+      "brand": "audi",
+      "model": "q5",
+      "year": 2008,
+      "catalogCount": 18
+    },
+    {
+      "brand": "vauxhall",
+      "model": "vivaro",
+      "year": 2014,
+      "catalogCount": 18
+    },
+    {
+      "brand": "ford",
+      "model": "fiesta_5d_hbk_b479",
+      "year": 2017,
+      "catalogCount": 18
+    },
+    {
+      "brand": "volvo",
+      "model": "v40_cross_countryv40",
+      "year": 2012,
+      "catalogCount": 18
+    },
+    {
+      "brand": "kia",
+      "model": "soul_05",
+      "year": 2014,
+      "catalogCount": 18
+    },
+    {
+      "brand": "hyundai",
+      "model": "ioniq",
+      "year": 2022,
+      "catalogCount": 18
+    },
+    {
+      "brand": "mercedes",
+      "model": "eqc",
+      "year": 2019,
+      "catalogCount": 18
+    },
+    {
+      "brand": "mercedes",
+      "model": "serie_c254x254_glc",
+      "year": 2023,
+      "catalogCount": 18
+    },
+    {
+      "brand": "jaguar",
+      "model": "f_pace_5d_suv_x761",
+      "year": 2016,
+      "catalogCount": 17
+    },
+    {
+      "brand": "jaguar",
+      "model": "e_pace_5d_suv",
+      "year": 2017,
+      "catalogCount": 17
+    },
+    {
+      "brand": "ford",
+      "model": "transit_courier_van",
+      "year": 2014,
+      "catalogCount": 17
+    },
+    {
+      "brand": "jeep",
+      "model": "renegade",
+      "year": 2014,
+      "catalogCount": 17
+    },
+    {
+      "brand": "audi",
+      "model": "a8",
+      "year": 2003,
+      "catalogCount": 17
+    },
+    {
+      "brand": "citroen_trucks",
+      "model": "jumper",
+      "year": 2006,
+      "catalogCount": 17
+    },
+    {
+      "brand": "mercedes",
+      "model": "serie_x253_glc",
+      "year": 2016,
+      "catalogCount": 17
+    },
+    {
+      "brand": "kia",
+      "model": "ev9",
+      "year": 2023,
+      "catalogCount": 17
+    },
+    {
+      "brand": "landrover",
+      "model": "defender",
+      "year": 2020,
+      "catalogCount": 17
+    },
+    {
+      "brand": "landrover",
+      "model": "range_rover",
+      "year": 2023,
+      "catalogCount": 17
+    },
+    {
+      "brand": "lexus",
+      "model": "ux",
+      "year": 2019,
+      "catalogCount": 17
+    },
+    {
+      "brand": "ford",
+      "model": "transit_2d4d_lowmedium_roof",
+      "year": 2014,
+      "catalogCount": 16
+    },
+    {
+      "brand": "kia",
+      "model": "sorento_5d_suv",
+      "year": 2015,
+      "catalogCount": 16
+    },
+    {
+      "brand": "citroen",
+      "model": "grand_c4_picasso_mpv",
+      "year": 2013,
+      "catalogCount": 16
+    },
+    {
+      "brand": "citroen",
+      "model": "c5_x",
+      "year": 2022,
+      "catalogCount": 16
+    },
+    {
+      "brand": "landrover",
+      "model": "range_rover",
+      "year": 2011,
+      "catalogCount": 16
+    },
+    {
+      "brand": "honda",
+      "model": "crv",
+      "year": 2018,
+      "catalogCount": 16
+    },
+    {
+      "brand": "mercedes",
+      "model": "serie_glb_x247",
+      "year": 2020,
+      "catalogCount": 16
+    },
+    {
+      "brand": "peugeot",
+      "model": "508",
+      "year": 2018,
+      "catalogCount": 16
+    },
+    {
+      "brand": "skoda",
+      "model": "fabia",
+      "year": 2022,
+      "catalogCount": 16
+    },
+    {
+      "brand": "audi",
+      "model": "q6",
+      "year": 2024,
+      "catalogCount": 16
+    },
+    {
+      "brand": "audi",
+      "model": "a6",
+      "year": 2025,
+      "catalogCount": 16
+    },
+    {
+      "brand": "bmw",
+      "model": "x5_f15_5d_suv",
+      "year": 2013,
+      "catalogCount": 15
+    },
+    {
+      "brand": "mazda",
+      "model": "3_hbk_sal",
+      "year": 2013,
+      "catalogCount": 15
+    },
+    {
+      "brand": "renault",
+      "model": "kadjar_5d_suv",
+      "year": 2015,
+      "catalogCount": 15
+    },
+    {
+      "brand": "vw",
+      "model": "touran_mpv",
+      "year": 2015,
+      "catalogCount": 15
+    },
+    {
+      "brand": "bmw",
+      "model": "3_series_gran_tourismo_5d_hbk",
+      "year": 2013,
+      "catalogCount": 15
+    },
+    {
+      "brand": "mercedes",
+      "model": "v_class_w447",
+      "year": 2014,
+      "catalogCount": 15
+    },
+    {
+      "brand": "toyota",
+      "model": "rav_4",
+      "year": 2019,
+      "catalogCount": 15
+    },
+    {
+      "brand": "subaru",
+      "model": "forester",
+      "year": 2019,
+      "catalogCount": 15
+    },
+    {
+      "brand": "honda",
+      "model": "crv_5d_suv",
+      "year": 2012,
+      "catalogCount": 15
+    },
+    {
+      "brand": "nissan",
+      "model": "qashqai",
+      "year": 2021,
+      "catalogCount": 15
+    },
+    {
+      "brand": "subaru",
+      "model": "outback",
+      "year": 2021,
+      "catalogCount": 15
+    },
+    {
+      "brand": "bmw",
+      "model": "7_serie",
+      "year": 2008,
+      "catalogCount": 15
+    },
+    {
+      "brand": "ford_trucks",
+      "model": "transit",
+      "year": 2024,
+      "catalogCount": 15
+    },
+    {
+      "brand": "hyundai",
+      "model": "kona",
+      "year": 2018,
+      "catalogCount": 15
+    },
+    {
+      "brand": "hyundai",
+      "model": "ioniq",
+      "year": 2025,
+      "catalogCount": 15
+    },
+    {
+      "brand": "kia",
+      "model": "niro_hybrid_20162022",
+      "year": 2022,
+      "catalogCount": 15
+    },
+    {
+      "brand": "mercedes",
+      "model": "glaeqa_h247",
+      "year": 2020,
+      "catalogCount": 15
+    },
+    {
+      "brand": "renault_trucks",
+      "model": "master",
+      "year": 2025,
+      "catalogCount": 15
+    },
+    {
+      "brand": "mercedes",
+      "model": "citan_w415420",
+      "year": 2022,
+      "catalogCount": 15
+    },
+    {
+      "brand": "skoda",
+      "model": "superb",
+      "year": 2024,
+      "catalogCount": 15
+    },
+    {
+      "brand": "subaru",
+      "model": "solterra",
+      "year": 2023,
+      "catalogCount": 15
+    }
+  ],
+  "knownMappings": [
+    {
+      "key": "skoda:superb_ii_stasjonsvogn_3t5:2009",
+      "ktype": 32787,
+      "source": "bovsoft",
+      "confidence": 0.95
+    },
+    {
+      "key": "think:city:2010",
+      "ktype": 12152,
+      "source": "bovsoft",
+      "confidence": 0.95
+    },
+    {
+      "key": "volvo:240_p242_p244:1974",
+      "ktype": 6272,
+      "source": "bovsoft",
+      "confidence": 0.95
+    },
+    {
+      "key": "opel:grandland_x_a18:2019",
+      "ktype": 136486,
+      "source": "bovsoft",
+      "confidence": 0.95
+    },
+    {
+      "key": "peugeot:307_cc_3b:2003",
+      "ktype": 18550,
+      "source": "bovsoft",
+      "confidence": 0.95
+    },
+    {
+      "key": "vw:caravelle_v_buss_7hb_7hj_7eb_7ej_7ef_7eg_7hf_7ec:2003",
+      "ktype": 17370,
+      "source": "bovsoft",
+      "confidence": 0.95
+    }
+  ]
+}

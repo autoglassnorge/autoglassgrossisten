@@ -22,6 +22,21 @@ database_id = "f79095b3-da80-43fe-8064-ff480e8a1b4b"
 #
 #    Fallback — Biluppgifter (Sverige):
 #    wrangler secret put BILUPPGIFTER_API_KEY
+#
+#    Vincario — VIN decode (vehicle enrichment, EU focus):
+#    https://vincario.com/api-docs/3.2/
+#    wrangler secret put VINCARIO_API_KEY
+#    wrangler secret put VINCARIO_SECRET_KEY
+#
+#    MACS VIS — EU/KType (monthly subscription):
+#    wrangler secret put MACS_VIS_API_KEY
+#
+#    AutoGlassMatch — US/NAGS ($1/lookup):
+#    wrangler secret put AGM_API_KEY
+
+# ── Workers AI (vision models for windshield analysis) ─────────
+[ai]
+binding = "AI"
 
 [vars]
 # Ingen hardkodede secrets her

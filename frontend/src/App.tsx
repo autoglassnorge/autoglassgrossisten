@@ -6,29 +6,34 @@ import CatalogPage from '@/pages/CatalogPage'
 import SearchPage from '@/pages/SearchPage'
 import AccountPage from '@/pages/AccountPage'
 import BrowsePage from '@/pages/BrowsePage'
+import VerktoyPage from '@/pages/VerktoyPage'
+import { I18nProvider } from '@/i18n/I18nProvider'
 
 function App() {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
-      <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/katalog" element={<CatalogPage />} />
-          <Route path="/bla" element={<BrowsePage />} />
-          <Route path="/sok" element={<SearchPage />} />
-          <Route path="/kasse" element={<AccountPage />} />
-          <Route path="*" element={
-            <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
-              <p className="text-gray-600 mb-6">Siden finnes ikke.</p>
-              <a href="/" className="text-autoglass-blue hover:underline">Gå til forsiden</a>
-            </div>
-          } />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <I18nProvider>
+      <div className="min-h-screen bg-background flex flex-col">
+        <Header />
+        <main className="flex-1">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/katalog" element={<CatalogPage />} />
+            <Route path="/bla" element={<BrowsePage />} />
+            <Route path="/verktoy" element={<VerktoyPage />} />
+            <Route path="/sok" element={<SearchPage />} />
+            <Route path="/kasse" element={<AccountPage />} />
+            <Route path="*" element={
+              <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
+                <p className="text-gray-600 mb-6">Siden finnes ikke.</p>
+                <a href="/" className="text-autoglass-blue hover:underline">Gå til forsiden</a>
+              </div>
+            } />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </I18nProvider>
   )
 }
 

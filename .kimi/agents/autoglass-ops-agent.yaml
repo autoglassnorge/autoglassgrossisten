@@ -1,5 +1,30 @@
-version: 1
+version: 2
 agent:
   extend: default
   name: autoglass-ops
   system_prompt_path: ./autoglass-ops-agent.md
+  metadata:
+    created: "2026-05-18"
+    updated: "2026-05-23"
+    owner: "Autoglass AS"
+    description: "DevOps/SRE Engineer — deploy, CI/CD, secrets, overvåking"
+  triggers:
+    file_patterns:
+      - ".github/workflows/*"
+      - "api/cf-worker/wrangler.toml"
+      - "scripts/sync-secrets*"
+      - "scripts/uptime*"
+    keywords:
+      - "deploy"
+      - "workflow"
+      - "secret"
+      - "github"
+      - "uptime"
+      - "ci/cd"
+      - "monitor"
+  capabilities:
+    - deploy_pipeline
+    - secret_sync
+    - uptime_check
+    - post_deploy_smoke
+  dependencies: []

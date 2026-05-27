@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Search, ShoppingCart, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/stores/cartStore';
-
 export function Header() {
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -25,6 +24,7 @@ export function Header() {
   const navLinks = [
     { label: 'Katalog', href: '/katalog' },
     { label: 'Bla', href: '/bla' },
+    { label: 'Verktøy/tilbehør', href: '/verktoy' },
     { label: 'Søk', href: '/sok' },
   ];
 

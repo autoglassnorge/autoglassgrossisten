@@ -1,0 +1,552 @@
+[
+  {
+    "title": "TESLA MODEL 3 4D SED 18-21 FR AKU SENS EL LDW GN #MAX%# OBS-",
+    "sku": "8104AGACIMVZ",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": 2021,
+    "category": "frontrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SED 24- FR AKU SENS EL LDW GN OBS-OBS#MAX%#",
+    "sku": "8104AGCCHIMVZ1L",
+    "price": null,
+    "yearFrom": 2024,
+    "yearTo": null,
+    "category": "frontrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SED 22- FR AKU SENS EL LDW GN OBS-OBS#MAX%#",
+    "sku": "8104AGCCHIMVZ96",
+    "price": null,
+    "yearFrom": 2022,
+    "yearTo": null,
+    "category": "frontrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SED 21- BAKRUTE ANT BREMSELYS LAM INNK GN",
+    "sku": "8104BGSGYSABKTZ1F",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- SUNROOF LAM PRIVACY",
+    "sku": "8104GZPS4PR",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "sunroof",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 23- REAR DOOR LAMINATED GN",
+    "sku": "8104LGAS4RDK",
+    "price": null,
+    "yearFrom": 2023,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- DØRRUTE FREMME LAM VS GN",
+    "sku": "8104LGSS4FDKW",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- SIDERUTE BAK VS INNK CROM GN",
+    "sku": "8104LGSS4RQZ",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "siderute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- SIDERUTE BAK HS INNK SVART GN",
+    "sku": "8104LGSS4RQZ1D",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "siderute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- DØRRUTE BAK VS SOTET",
+    "sku": "8104LYPS4RD",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 23- REAR DOOR LAMINATED PRIVACY",
+    "sku": "8104LYPS4RDK",
+    "price": null,
+    "yearFrom": 2023,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 23- REAR DOOR LAMINATED GN",
+    "sku": "8104RGAS4RDK",
+    "price": null,
+    "yearFrom": 2023,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- DØRRUTE FREMME LAM HS GN",
+    "sku": "8104RGSS4FDKW",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- SIDERUTE BAK HS INNK CROM GN",
+    "sku": "8104RGSS4RQZ",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "siderute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- SIDERUTE BAK HS INNK SVART GN",
+    "sku": "8104RGSS4RQZ1D",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "siderute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- DØRRUTE BAK HS SOTET",
+    "sku": "8104RYPS4RD",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 23- REAR DOOR LAMINATED PRIVACY",
+    "sku": "8104RYPS4RDK",
+    "price": null,
+    "yearFrom": 2023,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SED 18-20 BAKRUTE ANT BREMSELYS LAM INNK GN",
+    "sku": "9789BGSGYSABKTZ",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": 2020,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL 3 4D SEDAN 18- SUNROOF LAM PRIVACY",
+    "sku": "9789GZPS4PR",
+    "price": null,
+    "yearFrom": 2018,
+    "yearTo": null,
+    "category": "sunroof",
+    "brand": "TESLA",
+    "model": "MODEL 3"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 22- WS SENS EL LDW GN – 3 KABLER #MAX%#",
+    "sku": "8103AGCCHIMVZ",
+    "price": null,
+    "yearFrom": 2022,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y JUNIPER 5D SUV JUN25- WS SENS EL LDW GN #MAX%#",
+    "sku": "8103AGCCHIMVZ10",
+    "price": null,
+    "yearFrom": 2025,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV NOV21- WS SENS EL LDW GN-3 KABLER#MAX%#",
+    "sku": "8103AGCCHIMVZ1E",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 24- WS AKO SENS EL LDW GN #MAX%#",
+    "sku": "8103AGCCHIMVZ1L",
+    "price": null,
+    "yearFrom": 2024,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 23- WS AKU SENS EL LDW GN #MAX%#",
+    "sku": "8103AGCCHIMVZ1S",
+    "price": null,
+    "yearFrom": 2023,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- WS AKO SENSOR EL LDW GN #MAX%#",
+    "sku": "8103AGCCIMVZ",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- BACKLITE HEATED ANT PRIVACY",
+    "sku": "8103BYPRAB",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21-  SUNROOF LAM PRIVACY",
+    "sku": "8103GYQR5PRKZ",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "sunroof",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- DOORGLASS FRONT LEFT LAM GN",
+    "sku": "8103LGAR5FDKW",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- DOORGLASS REAR LEFT PRIVACY",
+    "sku": "8103LYPR5RD",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- SIDEGLASS REAR LEFT PRIVACY ENC",
+    "sku": "8103LYPR5RQZ",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- DOORGLASS REAR LAMINATED PRIVACY",
+    "sku": "8103LYQR5RDK",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- DOORGLASS FRONT RIGHT LAM GN",
+    "sku": "8103RGAR5FDKW",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- DOORGLASS REAR RIGHT PRIVACY",
+    "sku": "8103RYPR5RD",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- SIDEGLASS REAR RIGHT PRIVACY ENC",
+    "sku": "8103RYPR5RQZ",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL Y 5D SUV 21- DOORGLASS REAR LAMINATED PRIVACY",
+    "sku": "8103RYQR5RDK",
+    "price": null,
+    "yearFrom": 2021,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL Y"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV NOV16- FR+AKU+LDW+COAT+EL.+SENS #MAX%#",
+    "sku": "8102CGSGYCHMV1Z",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV NOV16- FR+AKU+LDW+COAT+EL.+SENS #MAX%#",
+    "sku": "8102CGSGYCHMVZ",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- BAKRUTE ANT SOTET AKTIV SPOILER",
+    "sku": "9752BYPRAWZ",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "bakrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "USE 9752BYPRAWZ",
+    "sku": "9752BYPRAWZ1K",
+    "price": null,
+    "yearFrom": null,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE BAK LAM VS SOTET",
+    "sku": "9752LBPR5RDKUW",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE FREMME VS GN",
+    "sku": "9752LGSR5FDW",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- VENTILRUTE FREMME VS GN ##@",
+    "sku": "9752LGSR5FVZ",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE BAK LAM VS SOTET",
+    "sku": "9752LYPR5RDKUW",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE BAK VS SOTET ØVRE",
+    "sku": "9752LYPR5RDU",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE BAK VS SOTET",
+    "sku": "9752LYPR5RDW",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- SIDERUTE BAK VS INNK SOTET ##@",
+    "sku": "9752LYPR5RQZ",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "siderute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- VENTILRUTE BAK VS SOTET ##@",
+    "sku": "9752LYPR5RVZ",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE BAK LAM HS SOTET",
+    "sku": "9752RBPR5RDKUW",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE FREMME HS GN",
+    "sku": "9752RGSR5FDW",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- VENTILRUTE FREMME HS GN ##@",
+    "sku": "9752RGSR5FVZ",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE BAK LAM HS SOTET",
+    "sku": "9752RYPR5RDKUW",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE BAK HS SOTET ØVRE",
+    "sku": "9752RYPR5RDU",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- DØRRUTE BAK HS SOTET",
+    "sku": "9752RYPR5RDW",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "dørrute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- SIDERUTE BAK HS INNK SOTET ##@",
+    "sku": "9752RYPR5RQZ",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "siderute",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  },
+  {
+    "title": "TESLA MODEL X 5D SUV 16- VENTILRUTE BAK HS SOTET ##@",
+    "sku": "9752RYPR5RVZ",
+    "price": null,
+    "yearFrom": 2016,
+    "yearTo": null,
+    "category": "annet",
+    "brand": "TESLA",
+    "model": "MODEL X"
+  }
+]

@@ -1,0 +1,38 @@
+version: 2
+agent:
+  extend: default
+  name: autoglass-ktype
+  system_prompt_path: ./autoglass-ktype-agent.md
+  metadata:
+    created: '2026-05-23'
+    updated: '2026-05-23'
+    owner: Autoglass AS
+    description: kType Specialist — Bovsoft, SVV, statistisk læring, D1 ktype_matches
+  triggers:
+    file_patterns:
+    - scripts/batch-bootstrap-ktype*
+    - scripts/test-bovsoft*
+    - api/cf-worker/src/index.ts
+    - api/cf-worker/migrations/*ktype*
+    keywords:
+    - ktype
+    - bovsoft
+    - regnr
+    - svv
+    - tecdoc
+    - statistical
+    - matching
+    - bootstrap
+    - exact_match
+    - confidence
+    - score
+    - candidate
+    - frontrute
+    - windshield
+    - glass matching
+  capabilities:
+  - bootstrap_ktype
+  - analyze_matching
+  - bovsoft_debug
+  - ktype_stats
+  dependencies: []

@@ -1,5 +1,29 @@
-version: 1
+version: 2
 agent:
   extend: default
   name: autoglass-architect
   system_prompt_path: ./autoglass-architect-agent.md
+  metadata:
+    created: "2026-05-18"
+    updated: "2026-05-23"
+    owner: "Autoglass AS"
+    description: "Lead Architect — ADR, refaktorering, planlegging, tverrgående beslutninger"
+  triggers:
+    file_patterns:
+      - "docs/adr/*"
+      - ".kimi/*.md"
+      - "AGENTS.md"
+    keywords:
+      - "adr"
+      - "refactor"
+      - "architecture"
+      - "plan"
+      - "decision"
+      - "arkitektur"
+      - "beslutning"
+  capabilities:
+    - write_adr
+    - review_changes
+    - detect_duplication
+    - refactor_planning
+  dependencies: []

@@ -1,0 +1,91 @@
+{
+  "seeded_at": "2026-05-21T19:45:40.093Z",
+  "source": "data/bovsoft-bootstrap-results.json",
+  "count": 6,
+  "rules": [
+    {
+      "normalized_key": "skoda:superb:2009",
+      "market": "EU",
+      "opening": "windshield",
+      "feature_signature": "default",
+      "ktype": 32787,
+      "kba": "skoda-superb-2009",
+      "oem_part_number": "43R-032787",
+      "eurocode": "E1-32787",
+      "confidence": 0.95,
+      "evidence_count": 1,
+      "active": 1,
+      "notes": "bovsoft_seed:BS12345:vin=TMBJE73T7B9015131"
+    },
+    {
+      "normalized_key": "think:city:2010",
+      "market": "EU",
+      "opening": "windshield",
+      "feature_signature": "default",
+      "ktype": 12152,
+      "kba": "think-city-2010",
+      "oem_part_number": "43R-012152",
+      "eurocode": "E1-12152",
+      "confidence": 0.95,
+      "evidence_count": 1,
+      "active": 1,
+      "notes": "bovsoft_seed:EL12345:vin=YYCFT26B38J005067"
+    },
+    {
+      "normalized_key": "volvo:240:1974",
+      "market": "EU",
+      "opening": "windshield",
+      "feature_signature": "default",
+      "ktype": 6272,
+      "kba": "volvo-240-1974",
+      "oem_part_number": "43R-006272",
+      "eurocode": "E1-06272",
+      "confidence": 0.95,
+      "evidence_count": 1,
+      "active": 1,
+      "notes": "bovsoft_seed:PA12345:vin=unknown"
+    },
+    {
+      "normalized_key": "opel:grandland:2019",
+      "market": "EU",
+      "opening": "windshield",
+      "feature_signature": "default",
+      "ktype": 136486,
+      "kba": "opel-grandland-2019",
+      "oem_part_number": "43R-136486",
+      "eurocode": "E1-136486",
+      "confidence": 0.95,
+      "evidence_count": 1,
+      "active": 1,
+      "notes": "bovsoft_seed:SD98765:vin=W0VZ45GB7MS073060"
+    },
+    {
+      "normalized_key": "peugeot:307:2003",
+      "market": "EU",
+      "opening": "windshield",
+      "feature_signature": "default",
+      "ktype": 18550,
+      "kba": "peugeot-307-2003",
+      "oem_part_number": "43R-018550",
+      "eurocode": "E1-18550",
+      "confidence": 0.95,
+      "evidence_count": 1,
+      "active": 1,
+      "notes": "bovsoft_seed:UX71699:vin=VF33BNFUC83502899"
+    },
+    {
+      "normalized_key": "vw:caravelle:2003",
+      "market": "EU",
+      "opening": "windshield",
+      "feature_signature": "default",
+      "ktype": 17370,
+      "kba": "vw-caravelle-2003",
+      "oem_part_number": "43R-017370",
+      "eurocode": "E1-17370",
+      "confidence": 0.95,
+      "evidence_count": 1,
+      "active": 1,
+      "notes": "bovsoft_seed:SU18018:vin=unknown"
+    }
+  ]
+}

@@ -39,6 +39,8 @@ export interface CatalogFilters {
   priceMin?: number;
   priceMax?: number;
   query?: string;
+  sort?: 'brand' | 'price' | 'year';
+  order?: 'asc' | 'desc';
 }
 
 export interface CatalogResponse {
@@ -62,6 +64,18 @@ export interface VehicleInfo {
   vin: string;
   k_type: number;
   submodel?: string | null;
+  effectiveEquipment?: {
+    rainSensor: boolean;
+    heated: boolean;
+    acoustic: boolean;
+    adas: boolean;
+    camera: boolean;
+    antenna: boolean;
+    hud: boolean;
+    source: string;
+    guessed?: boolean;
+    guessConfidence?: string;
+  };
 }
 
 export interface EquipmentFlags {
@@ -94,4 +108,7 @@ export interface SearchResult {
   // NEW: structured confidence + grouped results
   confidenceInfo?: ConfidenceInfo;
   resultsByType?: Record<string, Product[]>;
+
+  // NEW: top pick with score
+  top_pick?: Product & { _score: number };
 }
