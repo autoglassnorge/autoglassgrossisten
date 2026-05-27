@@ -2,6 +2,7 @@
 
 > Universelle regler for ALLE agenter i Autoglass AS-prosjektet.
 > Injiseres i hver agent-session før domene-spesifikke instruksjoner.
+> **Optimalisert for KIMI CLI v1.45.0** — max_steps_per_turn=750, show_thinking_stream, merge_all_available_skills.
 
 ---
 
@@ -22,10 +23,13 @@ Hvis Klarpakke-kontekst lekker inn — avvis den.
 |-----------|-----------|
 | Frontend | Statisk HTML/CSS/JS (7 sider, trespråklig) |
 | Backend | Cloudflare Worker (TypeScript) |
-| Lagring | Cloudflare KV (katalog), eventuelt D1 (fremtidig) |
+| Lagring | Cloudflare KV (katalog-metadata), D1 (SQLite) |
 | Deploy | Cloudflare (Worker + Pages), GitHub Actions |
-| Datakilder | SVV Enkeltoppslag, Biluppgifter TecDoc, Pilkington, Glavista, Euroglass.ru, Autoglass.ru |
+| Datakilder | SVV Enkeltoppslag, Biluppgifter TecDoc, Bovsoft REGNUM, Pilkington, Glavista, Euroglass.ru, Autoglass.ru, Nord Glass |
 | Node | v20 (se `.nvmrc`) |
+| D1 Tabeller | `glass_catalog`, `ktype_matches`, `glass_rules`, `search_results`, `vin_decode_cache`, `provider_calls` |
+| Matching | Layer 0 (kType exact) → Layer 1-4 (brand/model/year/equipment scoring) |
+| Learning | D1 `search_results` (VIN-prefix → equipment), `glass_rules` (brand:model:year → kType) |
 
 ---
 
@@ -82,6 +86,31 @@ Hvis Klarpakke-kontekst lekker inn — avvis den.
    - "Er denne endringen virkelig minimal?"
 4. **Post-change verify** — Ved >3 filer endret: kjør smoke-test
 
+## 🏛️ MemPalace-protokoll (ALLTID)
+
+**FØR du endrer >3 filer eller gjør arkitektur-endringer:**
+1. Kjør `search` i MemPalace for relatert kontekst
+2. Kjør `kg_query` for relevante entiteter
+3. Kjør `recent_context` for å se hva som ble gjort i forrige sesjon
+
+**ETTER signifikante oppgaver:**
+1. Kjør `kg_add` eller `kg_batch` for å lagre viktige fakta
+2. Kjør `write_diary` for å logge hva som ble gjort
+
+## 📝 Diary-protokoll (ALLTID)
+
+Hver agent skriver diary-entry etter signifikante oppgaver:
+```
+write_diary(agent="<agent-navn>", entry={
+  type: "FEAT|FIX|REF|DOC|OPT|SEC|ANALYSIS|AUTO",
+  task: "Kort beskrivelse",
+  status: "GO|NO-GO|WIP",
+  rating: 1-5,
+  files: N,
+  tags: ["tag1", "tag2"]
+})
+```
+
 ---
 
 ## 📝 Status Block (ALLTID på slutten)
@@ -107,6 +136,7 @@ Hver respons skal avsluttes med:
 | web-agent | frontend, HTML, CSS, JS, SEO | html, css, js, seo, i18n, lighthouse |
 | ops-agent | CI/CD, deploy, secrets, monitor | deploy, workflow, secret, github, uptime |
 | architect-agent | ADR, refaktorering, plan | adr, refactor, architecture, plan, decision |
+| ktype-agent | Bovsoft, SVV, kType, statistisk læring | ktype, bovsoft, regnr, tecdoc, matching, bootstrap |
 
 ---
 
@@ -114,14 +144,20 @@ Hver respons skal avsluttes med:
 
 | Fil | Hva den gjør | Les før endring |
 |-----|-------------|-----------------|
-| `api/cf-worker/src/index.ts` | Hoved-Worker, alle API-endepunkter | ALLTID ved API-endringer |
+| `api/cf-worker/src/index.ts` | Hoved-Worker, alle API-endepunkter, scoring, learning | ALLTID ved API-endringer |
+| `api/cf-worker/src/vin-glass-resolver.ts` | Hybrid VIN→Glass/KType resolver (vPIC, Vincario, MACS VIS) | Ved VIN/matching-endringer |
 | `api/cf-worker/wrangler.toml` | Worker-konfigurasjon, KV-binding | ALLTID ved infra-endringer |
+| `api/cf-worker/schema.sql` | D1 base schema | Ved database-endringer |
+| `data/catalog-prod.json` | Produksjonskatalog (39,458 records) | Ved katalog-endringer |
 | `api/scrapers/merge-catalogs.ts` | Katalog-merge-logikk | ALLTID ved data-endringer |
+| `scripts/batch-bovsoft-local.mjs` | Bovsoft batch runner (regnr→kType→eurocode) | Ved kType-bootstrap |
+| `scripts/apify-tecdoc-scraper.mjs` | TecDoc equipment criteria scrape | Ved TecDoc-beriking |
 | `js/main.js` | Frontend JS, API_BASE | ALLTID ved URL-endringer |
 | `.github/workflows/deploy.yml` | Deploy-pipeline | ALLTID ved CI/CD-endringer |
 | `AGENTS.md` | Prosjekt-regler | ALLTID |
+| `.kimi/PROJECT_STATE.md` | Single source of truth for AI-assistenter | ALLTID |
 
 ---
 
-**Sist oppdatert:** 2026-05-18
-**Versjon:** 1.0
+**Sist oppdatert:** 2026-05-27
+**Versjon:** 1.2 (+KIMI CLI v1.45.0 optimalisering)

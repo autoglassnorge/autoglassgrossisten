@@ -1,133 +1,135 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Search, Truck, Shield, Users, Package } from 'lucide-react';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Link } from 'react-router-dom';
+import { useI18n } from '@/i18n/I18nProvider';
+import { HeroSearch } from '@/components/home/HeroSearch';
+import { HeroVideo } from '@/components/home/HeroVideo';
+import { LiveStats } from '@/components/home/LiveStats';
+import { ProductCategories } from '@/components/home/ProductCategories';
+import { AdasSection } from '@/components/home/AdasSection';
+import { BrandWall } from '@/components/home/BrandWall';
+import { LogisticsMap } from '@/components/home/LogisticsMap';
+import { CtaBanner } from '@/components/home/CtaBanner';
+import { ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
-  const [regnr, setRegnr] = useState('');
-  const navigate = useNavigate();
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (regnr.trim()) {
-      navigate(`/sok?regnr=${encodeURIComponent(regnr.trim())}`);
-    }
-  };
-
-  const stats = [
-    { icon: Package, value: '130 000+', label: 'Ruter på lager' },
-    { icon: Users, value: '500+', label: 'Verksteder' },
-    { icon: Truck, value: 'Neste dag', label: 'Levering' },
-    { icon: Shield, value: '30+', label: 'Års erfaring' },
-  ];
+  const { t } = useI18n();
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative bg-gradient-to-br from-autoglass-blue to-autoglass-dark py-12 sm:py-20 px-4 text-white">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight lg:text-6xl">
-            Norges største bilglass-grossist
-          </h1>
-          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-blue-100">
-            130 000+ ruter. Levering neste dag. Vi sier ja der andre sier nei.
-          </p>
+    <div className="bg-carbon-950 text-white">
+      {/* ============================ HERO ============================ */}
+      <section className="relative overflow-hidden bg-carbon-950">
+        {/* Animated video background with CSS fallback */}
+        <HeroVideo />
 
-          {/* Regnr search */}
-          <form onSubmit={handleSearch} className="mt-6 sm:mt-8 mx-auto max-w-xl">
-            <div className="flex gap-2">
-              <Input
-                placeholder="Tast inn registreringsnummer..."
-                value={regnr}
-                onChange={(e) => setRegnr(e.target.value)}
-                className="h-14 flex-1 bg-white text-gray-900 placeholder:text-gray-400 text-base sm:text-lg"
-              />
-              <Button type="submit" size="lg" className="h-14 px-4 sm:px-8 gap-2 flex-shrink-0 min-w-[44px]">
-                <Search className="h-5 w-5" />
-                <span className="hidden sm:inline">Finn glass</span>
-              </Button>
+        {/* Top accent line */}
+        <div
+          className="absolute inset-x-0 top-0 h-px z-10"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(0,180,216,0.5), transparent)' }}
+        />
+
+        {/* Top meta-bar */}
+        <div className="relative z-10 border-b border-carbon-800/60 bg-carbon-950/40 backdrop-blur">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-carbon-500">
+            <div className="flex items-center gap-4">
+              <span className="hidden sm:inline">SYS · AUTOGLASS-WHOLESALE-v3</span>
+              <span className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-signal-green animate-pulse" />
+                <span className="text-signal-green">ONLINE</span>
+              </span>
             </div>
-          </form>
+            <div className="hidden md:flex items-center gap-4">
+              <span className="text-carbon-400">B2B · GROSSIST · NESTE-DAG-LEVERING</span>
+            </div>
+          </div>
+        </div>
 
-          {/* Quick links */}
-          <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-3">
-            <Link to="/katalog">
-              <Button
-                variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 min-h-[44px]"
+        {/* Hero content */}
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 sm:pt-24 sm:pb-32">
+          <div className="max-w-4xl">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-glass-cyan/30 bg-glass-cyan/5 mb-6">
+              <span className="h-1.5 w-1.5 rounded-full bg-glass-cyan animate-pulse-slow" />
+              <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-glass-cyan">
+                {t('hero.eyebrow')}
+              </span>
+            </div>
+
+            {/* Title */}
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05] drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
+              <span className="block">{t('hero.title.line1')}</span>
+              <span className="block text-glass-cyan">{t('hero.title.line2')}</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="mt-6 max-w-2xl text-base sm:text-lg text-carbon-200 leading-relaxed drop-shadow-[0_1px_12px_rgba(0,0,0,0.4)]">
+              {t('hero.subtitle')}
+            </p>
+
+            {/* Search */}
+            <div className="mt-10">
+              <HeroSearch />
+            </div>
+
+            {/* Secondary actions */}
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link
+                to="/katalog"
+                className="group inline-flex items-center gap-2 text-sm text-carbon-300 hover:text-glass-cyan transition-colors"
               >
-                Bla i katalog
-              </Button>
-            </Link>
-            <Link to="/katalog">
-              <Button
-                variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 min-h-[44px]"
+                <span>{t('hero.cta.catalog')}</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link
+                to="/bli-kunde"
+                className="group inline-flex items-center gap-2 text-sm text-carbon-300 hover:text-glass-cyan transition-colors"
               >
-                Frontruter
-              </Button>
-            </Link>
+                <span>{t('hero.cta.quote')}</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
           </div>
+
+          {/* Decorative corner brackets — blueprint feel */}
+          <CornerBracket className="absolute top-12 right-6 sm:right-10 hidden sm:block z-10" />
+          <CornerBracket className="absolute bottom-12 left-6 sm:left-10 rotate-180 hidden sm:block z-10" />
         </div>
+
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-b from-transparent to-carbon-900 pointer-events-none z-10" />
       </section>
 
-      {/* Stats */}
-      <section className="py-8 sm:py-12 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-4 sm:gap-8 md:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <stat.icon className="mx-auto h-6 w-6 sm:h-8 sm:w-8 text-autoglass-blue" />
-                <div className="mt-1 sm:mt-2 text-xl sm:text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-xs sm:text-sm text-gray-500">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ============================ LIVE STATS ============================ */}
+      <LiveStats />
 
-      {/* How it works */}
-      <section className="py-12 sm:py-16 bg-gray-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-8 sm:mb-12">Slik fungerer det</h2>
-          <div className="grid gap-6 sm:gap-8 md:grid-cols-3">
-            {[
-              { step: '1', title: 'Søk', desc: 'Tast inn registreringsnummer eller VIN — vi finner riktig glass på sekunder.' },
-              { step: '2', title: 'Tilbud', desc: 'Logg inn for din skreddersydde pris, eller be om tilbud som ny kunde.' },
-              { step: '3', title: 'Levering', desc: 'Bestill før 14:00 og få levert neste virkedag til verkstedet.' },
-            ].map((item) => (
-              <div key={item.step} className="text-center">
-                <div className="mx-auto flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-autoglass-blue text-white text-base sm:text-lg font-bold">
-                  {item.step}
-                </div>
-                <h3 className="mt-3 sm:mt-4 text-base sm:text-lg font-semibold text-gray-900">{item.title}</h3>
-                <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ============================ CATEGORIES ============================ */}
+      <ProductCategories />
 
-      {/* CTA */}
-      <section className="py-12 sm:py-16 bg-autoglass-blue text-white text-center">
-        <div className="mx-auto max-w-3xl px-4">
-          <h2 className="text-2xl sm:text-3xl font-bold">Klar for å finne riktig glass?</h2>
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base text-blue-100">Søk i katalogen eller bruk registreringsnummer for å finne eksakt match.</p>
-          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-            <Link to="/katalog">
-              <Button size="lg" className="bg-white text-autoglass-blue hover:bg-blue-50 min-h-[44px]">
-                Åpne katalog
-              </Button>
-            </Link>
-            <Link to="/sok">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 min-h-[44px]">
-                Søk med regnr
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ============================ ADAS ============================ */}
+      <AdasSection />
+
+      {/* ============================ LOGISTICS ============================ */}
+      <LogisticsMap />
+
+      {/* ============================ BRANDS ============================ */}
+      <BrandWall />
+
+      {/* ============================ CTA ============================ */}
+      <CtaBanner />
+    </div>
+  );
+}
+
+function CornerBracket({ className = '' }: { className?: string }) {
+  return (
+    <div className={`pointer-events-none ${className}`} aria-hidden>
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+        <path
+          d="M 2 18 L 2 2 L 18 2"
+          stroke="#00B4D8"
+          strokeWidth="1"
+          opacity="0.6"
+        />
+        <circle cx="2" cy="2" r="1.5" fill="#00B4D8" />
+      </svg>
     </div>
   );
 }

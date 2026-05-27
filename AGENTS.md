@@ -28,6 +28,7 @@ kimi glass-worker  # Cloudflare Worker — API, KV, deploy
 kimi glass-web     # Frontend — HTML, CSS, JS, SEO, i18n
 kimi glass-ops     # DevOps — CI/CD, secrets, monitor
 kimi glass-arch    # Lead architect — ADR, refaktorering, plan
+kimi glass-ktype   # kType specialist — Bovsoft, SVV, statistisk læring
 ```
 
 ### Agent-filer
@@ -38,9 +39,23 @@ kimi glass-arch    # Lead architect — ADR, refaktorering, plan
 | web-agent | `.kimi/agents/autoglass-web-agent.yaml` | `.md` | Frontend, SEO, i18n |
 | ops-agent | `.kimi/agents/autoglass-ops-agent.yaml` | `.md` | Deploy, CI/CD, monitor |
 | architect-agent | `.kimi/agents/autoglass-architect-agent.yaml` | `.md` | ADR, refaktorering |
+| ktype-agent | `.kimi/agents/autoglass-ktype-agent.yaml` | `.md` | Bovsoft, SVV, kType |
 
 ### Master System Prompt
 `./.kimi/KIMI-MASTER-SYSTEM.md` — universelle regler injisert i alle agent-sessioner.
+
+### MemPalace v3.5.0 (isolert fra Klarpakke)
+`./.kimi/mempalace/mcp-server.mjs` — prosjekt-spesifikk kunnskapshåndtering.
+- **KG:** `search`, `kg_query`, `kg_add`, `kg_batch` for prosjektkunnskap
+- **Diary:** `write_diary`, `read_diary` for session-logging
+- **Skills:** `.kimi/skills/autoglass/SKILL.md` — prosjektkunnskap for KIMI CLI v1.39.0+ discovery
+- **Isolasjon:** Ingen avhengighet til Klarpakke — all data ligger i `~/bilglass/.kimi/mempalace/`
+- **Output cap:** ~75K tegn per tool-resultat (KIMI CLI v1.32.0+ 100K cap kompatibel)
+
+### Prosjekt-config & Hooks
+`./.kimi/config.toml` — prosjekt-spesifikk KIMI-konfigurasjon.
+`./.kimi/hooks/session-start.sh` — leser blockers ved session-start.
+`./.kimi/hooks/session-end.sh` — git-diff + session-summary ved session-slutt.
 
 ---
 
@@ -48,8 +63,17 @@ kimi glass-arch    # Lead architect — ADR, refaktorering, plan
 
 ```
 ~/bilglass/
-├── .kimi/                  # Agent-infrastruktur (NYTT)
-│   ├── agents/             # 5 YAML+MD agent-par
+├── .kimi/                  # Agent-infrastruktur + MemPalace
+│   ├── agents/             # 6 YAML+MD agent-par (inkl. ktype)
+│   ├── mempalace/          # Isolert MemPalace MCP
+│   │   ├── mcp-server.mjs  # Zero-dep MCP-server (v3.5.0)
+│   │   ├── kg.json         # Knowledge graph
+│   │   └── data/           # Index cache + diary
+│   ├── skills/             # KIMI CLI v1.39.0+ skill discovery
+│   │   └── autoglass/      # Prosjektkunnskap-skill
+│   ├── hooks/              # Session start/end
+│   ├── mcp.json            # Prosjekt-spesifikk MCP-config
+│   ├── config.toml         # Prosjekt-spesifikk KIMI-config
 │   ├── KIMI-MASTER-SYSTEM.md
 │   └── commands.json       # CLI-aliaser
 ├── api/
@@ -175,10 +199,18 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 | 2026-05-19 | D1 `quote_requests` over e-post | Godkjent |
 | 2026-05-19 | localStorage for lagrede kjøretøy (MVP) | Godkjent |
 | 2026-05-21 | Daglig pris-sjekk fra auto-glass.no | Godkjent |
+| 2026-05-24 | Bovsoft kType-bootstrap over prefix4-matching | Godkjent |
 
 ---
 
 ## 🚨 Kjente Feil & Lærdommer
+
+### kType Bootstrap (2026-05-24)
+**Løsning:** Bovsoft API (`getktypefornumplatenorway`) med series-basert regnr-oppslag.
+**Resultat:** 132 unike ktyper oppdaget fra 153 norske regnr. 67 ktyper med 1,537 mappings i D1.
+**Dekning:** 498 produkter (1.26%) med direkte ktype i `glass_catalog`. 26 merker representert.
+**Verktøy:** `scripts/discover-regnr-by-series.mjs` + `scripts/process-discovered-regnr.mjs`.
+**Lærdom:** Prefix4-matching er for grov — mange ktyper matcher samme eurocode. Dedupe-script (hit_count-ratio > 0.5) nødvendig.
 
 ### loadCatalog-buggen (2026-05-18)
 **Feil:** `loadCatalog()` sjekket `catalog_records` (metadata-objekt) som om det var `GlassRecord[]`.
@@ -194,5 +226,5 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 
 ---
 
-**Sist oppdatert:** 2026-05-21  
-**Versjon:** 2.1 (+Pris-synkronisering)
+**Sist oppdatert:** 2026-05-27  
+**Versjon:** 2.3 (+KIMI CLI v1.45.0 & MemPalace v3.5.0)
