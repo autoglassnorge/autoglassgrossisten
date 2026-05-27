@@ -8,6 +8,7 @@ import { searchByRegnr, SearchError } from '@/api/glass';
 import { formatLayerLabel, formatConfidence } from '@/utils/formatters';
 
 import { VehicleCard } from '@/components/search/VehicleCard';
+import { CalibrationInfoPanel } from '@/components/search/CalibrationInfoPanel';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
 import { EquipmentVerifier } from '@/components/search/EquipmentVerifier';
 import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
@@ -157,6 +158,11 @@ export default function SearchPage() {
             equipment={data.equipment}
             regnr={data.regnr}
           />
+
+          {/* ADAS calibration requirements */}
+          {data.calibrationRequirements && data.calibrationRequirements.length > 0 && (
+            <CalibrationInfoPanel requirements={data.calibrationRequirements} />
+          )}
 
           {/* Confidence + Layer */}
           {data.confidenceInfo && (
