@@ -2834,6 +2834,18 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
         groundTruth: layer === -1,
       },
       resultsByType: groupByTypeCode(candidatesWithEquipment),
+      // Extract most common prefix4 values from candidates as hints for direct lookup
+      prefix4Hints: (() => {
+        const counts = new Map<string, number>();
+        candidatesWithEquipment.forEach((c: any) => {
+          const p = c.prefix4;
+          if (p) counts.set(p, (counts.get(p) || 0) + 1);
+        });
+        return Array.from(counts.entries())
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5)
+          .map(([prefix4, count]) => ({ prefix4, count }));
+      })(),
       sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
     },
   };
