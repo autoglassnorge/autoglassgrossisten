@@ -1501,7 +1501,8 @@ function scoreCandidate(
   vehicle: TecdocVehicle,
   vinInfo: ReturnType<typeof decodeVwTransporterBody>,
   bovsoftInfo?: BovsoftVehicle,
-  unifiedVin?: ReturnType<typeof decodeVin>
+  unifiedVin?: ReturnType<typeof decodeVin>,
+  dominantPrefix4?: string
 ): number {
   let score = 0;
 
@@ -1599,6 +1600,11 @@ function scoreCandidate(
 
   // Body / chassis compatibility (VIN + SVV data)
   score += scoreBodyCompatibility(c, vehicle, vinInfo);
+
+  // Prefix4 consensus bonus: if most candidates share a prefix4, boost matches
+  if (dominantPrefix4 && c.prefix4 === dominantPrefix4) {
+    score += 8; // Consensus boost
+  }
 
   return score;
 }
@@ -2633,9 +2639,14 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     }
   }
 
+  // Compute dominant prefix4 from candidates for consensus scoring
+  const prefix4Counts = new Map<string, number>();
+  candidates.forEach(c => { if (c.prefix4) prefix4Counts.set(c.prefix4, (prefix4Counts.get(c.prefix4) || 0) + 1); });
+  const dominantPrefix4 = Array.from(prefix4Counts.entries()).sort((a, b) => b[1] - a[1])[0]?.[0];
+
   // Score and sort (with body compatibility + equipment + kType verification)
   const scored = candidates
-    .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined, unifiedVin || undefined) }))
+    .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined, unifiedVin || undefined, dominantPrefix4) }))
     .sort((a, b) => b.score - a.score);
 
   // Optional category filter (e.g., ?regnr=SU18018&category=frontrute)
