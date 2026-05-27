@@ -1,5 +1,5 @@
 -- Auto-generert fra catalog-prod.json
--- Timestamp: 2026-05-27T18:29:08.167Z
+-- Timestamp: 2026-05-27T18:35:00.000Z
 -- Records: 18737
 
 DELETE FROM glass_catalog;
