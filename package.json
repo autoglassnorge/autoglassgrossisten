@@ -27,7 +27,19 @@
     "price:update:full": "node scripts/update-prices.mjs --full",
     "price:login": "node scripts/login-autoglass.mjs",
     "price:sync": "node scripts/sync-prices-to-catalog.mjs",
-    "price:pipeline": "node scripts/update-prices-full.mjs"
+    "price:pipeline": "node scripts/update-prices-full.mjs",
+    "scrape:finn-regnr": "node scripts/scrape-finn-regnr.mjs",
+    "scrape:finn-regnr:step1": "node scripts/scrape-finn-regnr.mjs --step=1",
+    "scrape:finn-regnr:step2": "node scripts/scrape-finn-regnr.mjs --step=2",
+    "scrape:finn-regnr:step3": "node scripts/scrape-finn-regnr.mjs --step=3",
+    "scrape:finn-regnr:test": "node scripts/scrape-finn-regnr.mjs --test",
+    "scrape:finn-regnr:reset": "node scripts/scrape-finn-regnr.mjs --reset",
+    "verify:finn-regnr": "node scripts/verify-finn-regnr.mjs",
+    "verify:finn-regnr:fast": "node scripts/verify-finn-regnr.mjs --delay=200",
+    "scrape:finn-targeted": "node scripts/scrape-finn-targeted.mjs",
+    "scrape:finn-targeted:test": "node scripts/scrape-finn-targeted.mjs --limit=10 --pages-per-query=1 --delay=300",
+    "generate:ktype-inserts": "node scripts/generate-ktype-inserts.mjs",
+    "verify:bovsoft": "node scripts/verify-with-bovsoft.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.19.41",

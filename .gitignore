@@ -41,3 +41,8 @@ data/wp-scrape/
 # CSC parsed data (PNG pages)
 data/csc-parsed/*.png
 
+
+# Finn.no scraper output
+data/finn-no-regnr/
+
+*.db

@@ -1,0 +1,4696 @@
+[
+  {
+    "brand": "Alfa Romeo",
+    "model": "Giulia",
+    "query": "Alfa Romeo Giulia",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Giulia"
+  },
+  {
+    "brand": "Alfa Romeo",
+    "model": "Stelvio",
+    "query": "Alfa Romeo Stelvio",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Stelvio"
+  },
+  {
+    "brand": "Alfa Romeo",
+    "model": "Tonale",
+    "query": "Alfa Romeo Tonale",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Tonale"
+  },
+  {
+    "brand": "Audi",
+    "model": "A1  (GB)",
+    "query": "Audi A1",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "A1"
+  },
+  {
+    "brand": "Audi",
+    "model": "A3 (8V)",
+    "query": "Audi A3",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "A3"
+  },
+  {
+    "brand": "Audi",
+    "model": "A3 (8V",
+    "query": "Audi A3 8V",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "A3 (8V"
+  },
+  {
+    "brand": "Audi",
+    "model": "A4 (8K)",
+    "query": "Audi A4",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "A4"
+  },
+  {
+    "brand": "Audi",
+    "model": "A5 (FU)",
+    "query": "Audi A5",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "A5"
+  },
+  {
+    "brand": "Audi",
+    "model": "A6 (4A)",
+    "query": "Audi A6",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "A6"
+  },
+  {
+    "brand": "Audi",
+    "model": "A6 e—tron (GH)",
+    "query": "Audi A6 e-tron",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "A6 e—tron"
+  },
+  {
+    "brand": "Audi",
+    "model": "A7 (FGC",
+    "query": "Audi A7",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "A7 (FGC"
+  },
+  {
+    "brand": "Audi",
+    "model": "A8 (4E)",
+    "query": "Audi A8",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "A8"
+  },
+  {
+    "brand": "Audi",
+    "model": "e-tron (GE)",
+    "query": "Audi e-tron",
+    "sensors": [
+      "front_camera",
+      "rear_radar",
+      "laser_sensor"
+    ],
+    "modelClean": "e-tron"
+  },
+  {
+    "brand": "Audi",
+    "model": "e-tron GT (F8)",
+    "query": "Audi e-tron GT",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "e-tron GT"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q2 (GA)",
+    "query": "Audi Q2",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Q2"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q3 (8U)",
+    "query": "Audi Q3",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Q3"
+  },
+  {
+    "brand": "Audi",
+    "model": "QA e-tron (FZ)",
+    "query": "Audi QA e-tron",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "QA e-tron"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q5 (8R)",
+    "query": "Audi Q5",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Q5"
+  },
+  {
+    "brand": "Audi",
+    "model": "O5(FY)",
+    "query": "Audi O5",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "O5"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q6 e—tron (GF)",
+    "query": "Audi Q6 e-tron",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Q6 e—tron"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q7 (ML)",
+    "query": "Audi Q7",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Q7"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q8 (4M)",
+    "query": "Audi Q8",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Q8"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q8 e—tron (GE)",
+    "query": "Audi Q8 e-tron",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Q8 e—tron"
+  },
+  {
+    "brand": "Audi",
+    "model": "TT (FV)",
+    "query": "Audi TT",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "TT"
+  },
+  {
+    "brand": "BMW",
+    "model": "1  Series (F40)",
+    "query": "BMW 1 Series",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "1  Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "1  Series/2 Series (F20/F21/F22)",
+    "query": "BMW 1 Series 2 Series",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "1  Series/2 Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "2 Series (F45/F46)",
+    "query": "BMW 2 Series",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "2 Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "2 Series Gran  Coupe (F4R)",
+    "query": "BMW 2 Series Gran Coupe",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "2 Series Gran  Coupe"
+  },
+  {
+    "brand": "BMW",
+    "model": "3 Series (F30/F31)",
+    "query": "BMW 3 Series",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "3 Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "3 Series GT (F34)",
+    "query": "BMW 3 Series GT",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "3 Series GT"
+  },
+  {
+    "brand": "BMW",
+    "model": "k Series (F32/F33/F3d)",
+    "query": "BMW k Series",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "k Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "4 Series (G23/G26)",
+    "query": "BMW 4 Series",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "4 Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series (E60/E61)",
+    "query": "BMW 5 Series",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "5 Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "'JSer+es(F90)",
+    "query": "BMW JSer es",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "'JSer+es"
+  },
+  {
+    "brand": "BMW",
+    "model": "5SerIesG30/G31)",
+    "query": "BMW 5SerIesG30 G31",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "5SerIesG30/G31)"
+  },
+  {
+    "brand": "BMW",
+    "model": "5Ser+es(G1)",
+    "query": "BMW 5Ser es",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "5Ser+es"
+  },
+  {
+    "brand": "BMW",
+    "model": "'JSer+esGT(F07)",
+    "query": "BMW JSer esGT",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "'JSer+esGT"
+  },
+  {
+    "brand": "BMW",
+    "model": "6 Series (E63/E64)",
+    "query": "BMW 6 Series",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "6 Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "6 Series Gran Coupé (F06)",
+    "query": "BMW 6 Series Gran Coup",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "6 Series Gran Coupé"
+  },
+  {
+    "brand": "BMW",
+    "model": "6 Series GT (G32)",
+    "query": "BMW 6 Series GT",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "6 Series GT"
+  },
+  {
+    "brand": "BMW",
+    "model": "7 Series (F01/F02)",
+    "query": "BMW 7 Series",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "7 Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "8 Series (F92)",
+    "query": "BMW 8 Series",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "8 Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "i3 (101 )",
+    "query": "BMW i3",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "i3"
+  },
+  {
+    "brand": "BMW",
+    "model": "i5 Gd0",
+    "query": "BMW i5 Gd0",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "i5 Gd0"
+  },
+  {
+    "brand": "BMW",
+    "model": "i8 (I 12)",
+    "query": "BMW i8",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "i8"
+  },
+  {
+    "brand": "BMW",
+    "model": "i8 Roadster (I15)",
+    "query": "BMW i8 Roadster",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "i8 Roadster"
+  },
+  {
+    "brand": "BMW",
+    "model": "iX (120)",
+    "query": "BMW iX",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "iX"
+  },
+  {
+    "brand": "BMW",
+    "model": "iX3 G08",
+    "query": "BMW iX3 G08",
+    "sensors": [
+      "front_camera",
+      "area_camera",
+      "front_radar"
+    ],
+    "modelClean": "iX3 G08"
+  },
+  {
+    "brand": "BMW",
+    "model": "X1  (F48)",
+    "query": "BMW X1",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "X1"
+  },
+  {
+    "brand": "BMW",
+    "model": "X2 (F39)",
+    "query": "BMW X2",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "X2"
+  },
+  {
+    "brand": "BMW",
+    "model": "X3 (F25)",
+    "query": "BMW X3",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "X3"
+  },
+  {
+    "brand": "BMW",
+    "model": "X4 (F26)",
+    "query": "BMW X4",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "X4"
+  },
+  {
+    "brand": "BMW",
+    "model": "y4 (G02)",
+    "query": "BMW y4",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "y4"
+  },
+  {
+    "brand": "BMW",
+    "model": "X5 (E70)",
+    "query": "BMW X5",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "X5"
+  },
+  {
+    "brand": "BMW",
+    "model": "X6 (E71/E72)",
+    "query": "BMW X6",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "X6"
+  },
+  {
+    "brand": "BMW",
+    "model": "X7 (G07)",
+    "query": "BMW X7",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "X7"
+  },
+  {
+    "brand": "BMW",
+    "model": "Zú (G29)",
+    "query": "BMW Z",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Zú"
+  },
+  {
+    "brand": "DAEWOO (CHEVROLET)",
+    "model": "Orlando",
+    "query": "DAEWOO CHEVROLET Orlando",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Orlando"
+  },
+  {
+    "brand": "Citroen",
+    "model": "Berlingo IV",
+    "query": "Citroen Berlingo IV",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Berlingo IV"
+  },
+  {
+    "brand": "Citroen",
+    "model": "C1",
+    "query": "Citroen C1",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "C1"
+  },
+  {
+    "brand": "Citroen",
+    "model": "C3 Aircross",
+    "query": "Citroen C3 Aircross",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "C3 Aircross"
+  },
+  {
+    "brand": "Citroen",
+    "model": "CL Cactus Il",
+    "query": "Citroen CL Cactus Il",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CL Cactus Il"
+  },
+  {
+    "brand": "Citroen",
+    "model": "CL III",
+    "query": "Citroen CL III",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CL III"
+  },
+  {
+    "brand": "Citroen",
+    "model": "CL Picasso",
+    "query": "Citroen CL Picasso",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CL Picasso"
+  },
+  {
+    "brand": "Citroen",
+    "model": "C5A+cross",
+    "query": "Citroen C5A cross",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "C5A+cross"
+  },
+  {
+    "brand": "Citroen",
+    "model": "CSX",
+    "query": "Citroen CSX",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "CSX"
+  },
+  {
+    "brand": "Citroen",
+    "model": "DS5",
+    "query": "Citroen DS5",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "DS5"
+  },
+  {
+    "brand": "Citroen",
+    "model": "Jumper",
+    "query": "Citroen Jumper",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Jumper"
+  },
+  {
+    "brand": "Cupra",
+    "model": "Born (K1 )",
+    "query": "Cupra Born",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Born"
+  },
+  {
+    "brand": "Cupra",
+    "model": "Formentor (KM)",
+    "query": "Cupra Formentor",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Formentor"
+  },
+  {
+    "brand": "Cupra",
+    "model": "Terramar (KP)",
+    "query": "Cupra Terramar",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Terramar"
+  },
+  {
+    "brand": "Dodge",
+    "model": "Charger",
+    "query": "Dodge Charger",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Charger"
+  },
+  {
+    "brand": "DS Automobiles",
+    "model": "DS3 Crossback",
+    "query": "DS Automobiles DS3 Crossback",
+    "sensors": [
+      "front_camera",
+      "area_camera"
+    ],
+    "modelClean": "DS3 Crossback"
+  },
+  {
+    "brand": "DS Automobiles",
+    "model": "DS3 Crossback e—Tense",
+    "query": "DS Automobiles DS3 Crossback e Tense",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "DS3 Crossback e—Tense"
+  },
+  {
+    "brand": "DS Automobiles",
+    "model": "DS7",
+    "query": "DS Automobiles DS7",
+    "sensors": [
+      "front_camera",
+      "area_camera"
+    ],
+    "modelClean": "DS7"
+  },
+  {
+    "brand": "DS Automobiles",
+    "model": "DSP II",
+    "query": "DS Automobiles DSP II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "DSP II"
+  },
+  {
+    "brand": "Fiat",
+    "model": "500 X",
+    "query": "Fiat 500 X",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "500 X"
+  },
+  {
+    "brand": "Fiat",
+    "model": "500e (332)",
+    "query": "Fiat 500e",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "500e"
+  },
+  {
+    "brand": "Fiat",
+    "model": "Ducato",
+    "query": "Fiat Ducato",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Ducato"
+  },
+  {
+    "brand": "Fiat",
+    "model": "Tipo",
+    "query": "Fiat Tipo",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Tipo"
+  },
+  {
+    "brand": "Ford",
+    "model": "C—Max",
+    "query": "Ford C Max",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "C—Max"
+  },
+  {
+    "brand": "Ford",
+    "model": "Ecosport",
+    "query": "Ford Ecosport",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Ecosport"
+  },
+  {
+    "brand": "Ford",
+    "model": "Fiesta",
+    "query": "Ford Fiesta",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Fiesta"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "query": "Ford Focus",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Focus"
+  },
+  {
+    "brand": "Ford",
+    "model": "Galaxy",
+    "query": "Ford Galaxy",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Galaxy"
+  },
+  {
+    "brand": "Ford",
+    "model": "Galaxy IV",
+    "query": "Ford Galaxy IV",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Galaxy IV"
+  },
+  {
+    "brand": "Ford",
+    "model": "Kuga II",
+    "query": "Ford Kuga II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Kuga II"
+  },
+  {
+    "brand": "Ford",
+    "model": "Kuga III",
+    "query": "Ford Kuga III",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Kuga III"
+  },
+  {
+    "brand": "Ford",
+    "model": "Mondeo",
+    "query": "Ford Mondeo",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Mondeo"
+  },
+  {
+    "brand": "Ford",
+    "model": "Mustang",
+    "query": "Ford Mustang",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Mustang"
+  },
+  {
+    "brand": "Ford",
+    "model": "Puma II",
+    "query": "Ford Puma II",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Puma II"
+  },
+  {
+    "brand": "Ford",
+    "model": "Ranger VI",
+    "query": "Ford Ranger VI",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Ranger VI"
+  },
+  {
+    "brand": "Ford",
+    "model": "S—Max",
+    "query": "Ford S Max",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "S—Max"
+  },
+  {
+    "brand": "Ford",
+    "model": "S—Max II",
+    "query": "Ford S Max II",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "S—Max II"
+  },
+  {
+    "brand": "Ford",
+    "model": "Tourneo Connect",
+    "query": "Ford Tourneo Connect",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Tourneo Connect"
+  },
+  {
+    "brand": "Ford",
+    "model": "Tourneo Connect IV",
+    "query": "Ford Tourneo Connect IV",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Tourneo Connect IV"
+  },
+  {
+    "brand": "Ford",
+    "model": "Transit",
+    "query": "Ford Transit",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Transit"
+  },
+  {
+    "brand": "Ford",
+    "model": "Transit Custom",
+    "query": "Ford Transit Custom",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Transit Custom"
+  },
+  {
+    "brand": "Honda",
+    "model": "Accord (LKAS)",
+    "query": "Honda Accord",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Accord"
+  },
+  {
+    "brand": "Honda",
+    "model": "Civic (LDW)",
+    "query": "Honda Civic",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Civic"
+  },
+  {
+    "brand": "Honda",
+    "model": "CR—V (LDW)",
+    "query": "Honda CR V",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CR—V"
+  },
+  {
+    "brand": "Honda",
+    "model": "HR—V (LDW)",
+    "query": "Honda HR V",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "HR—V"
+  },
+  {
+    "brand": "Honda",
+    "model": "Jazz (LDW)",
+    "query": "Honda Jazz",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Jazz"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "Grand Santa Fe",
+    "query": "Hyundai Grand Santa Fe",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Grand Santa Fe"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "H350",
+    "query": "Hyundai H350",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "H350"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "i10 (AC3)",
+    "query": "Hyundai i10",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "i10"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "i20",
+    "query": "Hyundai i20",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "i20"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "i30 (GD)",
+    "query": "Hyundai i30",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "i30"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "i40",
+    "query": "Hyundai i40",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "i40"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "loniq",
+    "query": "Hyundai loniq",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "loniq"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "loniq5 NE",
+    "query": "Hyundai loniq5 NE",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "loniq5 NE"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "Kona",
+    "query": "Hyundai Kona",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Kona"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "Santa Fe",
+    "query": "Hyundai Santa Fe",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Santa Fe"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "Tucson",
+    "query": "Hyundai Tucson",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Tucson"
+  },
+  {
+    "brand": "Jaguar",
+    "model": "E—Pace",
+    "query": "Jaguar E Pace",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "E—Pace"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Cherokee",
+    "query": "Jeep Cherokee",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Cherokee"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Compass (MP)",
+    "query": "Jeep Compass",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Compass"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Grand Chero kee",
+    "query": "Jeep Grand Chero kee",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Grand Chero kee"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Renegade",
+    "query": "Jeep Renegade",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Renegade"
+  },
+  {
+    "brand": "Kia",
+    "model": "Carens (RP)",
+    "query": "Kia Carens",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Carens"
+  },
+  {
+    "brand": "Kia",
+    "model": "Ceed (CD)",
+    "query": "Kia Ceed",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Ceed"
+  },
+  {
+    "brand": "Kia",
+    "model": "Niro (SG2)",
+    "query": "Kia Niro",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Niro"
+  },
+  {
+    "brand": "Kia",
+    "model": "Optima (TF)",
+    "query": "Kia Optima",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Optima"
+  },
+  {
+    "brand": "Kia",
+    "model": "Pro Ceed (CD)",
+    "query": "Kia Pro Ceed",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Pro Ceed"
+  },
+  {
+    "brand": "Kia",
+    "model": "Rio (YB)",
+    "query": "Kia Rio",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Rio"
+  },
+  {
+    "brand": "Kia",
+    "model": "Sorento",
+    "query": "Kia Sorento",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Sorento"
+  },
+  {
+    "brand": "Kia",
+    "model": "Soul (PS)",
+    "query": "Kia Soul",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Soul"
+  },
+  {
+    "brand": "Kia",
+    "model": "Stinger (CK)",
+    "query": "Kia Stinger",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Stinger"
+  },
+  {
+    "brand": "Kia",
+    "model": "Stonic (YB)",
+    "query": "Kia Stonic",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Stonic"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Defender (L663)",
+    "query": "LANDROVER Defender",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Defender"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Dicovery Sport",
+    "query": "LANDROVER Dicovery Sport",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Dicovery Sport"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Discovery",
+    "query": "LANDROVER Discovery",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Discovery"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Evoque (L551)",
+    "query": "LANDROVER Evoque",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Evoque"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Range Rover Evoque",
+    "query": "LANDROVER Range Rover Evoque",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Range Rover Evoque"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Range Rover Sport VI",
+    "query": "LANDROVER Range Rover Sport VI",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Range Rover Sport VI"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Range Rover VI",
+    "query": "LANDROVER Range Rover VI",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Range Rover VI"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Velar (L560)",
+    "query": "LANDROVER Velar",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Velar"
+  },
+  {
+    "brand": "LANDROVER",
+    "model": "Discovery Sport L550",
+    "query": "LANDROVER Discovery Sport L550",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Discovery Sport L550"
+  },
+  {
+    "brand": "Lexus",
+    "model": "#1,#2, IU, It6",
+    "query": "Lexus 1 2 IU It6",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "#1,#2, IU, It6"
+  },
+  {
+    "brand": "Lexus",
+    "model": "#1,#2, IU, Itb",
+    "query": "Lexus 1 2 IU Itb",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "#1,#2, IU, Itb"
+  },
+  {
+    "brand": "Mazda",
+    "model": "2 (DJ)",
+    "query": "Mazda 2",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "2"
+  },
+  {
+    "brand": "Mazda",
+    "model": "3 (BM)",
+    "query": "Mazda 3",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "3"
+  },
+  {
+    "brand": "Mazda",
+    "model": "6 (GJ)",
+    "query": "Mazda 6",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "6"
+  },
+  {
+    "brand": "Mazda",
+    "model": "BT—50 (TF)",
+    "query": "Mazda BT 50",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "BT—50"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX—3 (DK)",
+    "query": "Mazda CX 3",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "CX—3"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX—30 (DM)",
+    "query": "Mazda CX 30",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "CX—30"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX—5 (KE)",
+    "query": "Mazda CX 5",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CX—5"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX—60 (KH)",
+    "query": "Mazda CX 60",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CX—60"
+  },
+  {
+    "brand": "Mazda",
+    "model": "MX—30 (DR)",
+    "query": "Mazda MX 30",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "MX—30"
+  },
+  {
+    "brand": "Mazda",
+    "model": "MX—5 (ND)",
+    "query": "Mazda MX 5",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "MX—5"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "A—Class (BM 176)",
+    "query": "Mercedes A Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "A—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "AMG GT Coupe (BM290)",
+    "query": "Mercedes AMG GT Coupe",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "AMG GT Coupe"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "B—Class (BM24d)",
+    "query": "Mercedes B Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "B—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "Citan (BM420)",
+    "query": "Mercedes Citan",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Citan"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "C—Class (BM204)",
+    "query": "Mercedes C Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "C—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "C—Class (BM204) facelift",
+    "query": "Mercedes C Class facelift",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "C—Class facelift"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "C-Gass(BM20ó)",
+    "query": "Mercedes C-Gass",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "C-Gass"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "C—Class Coupé/Cabrio  (BM205)",
+    "query": "Mercedes C Class Coup Cabrio",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "C—Class Coupé/Cabrio"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CLA—Class (BM117)",
+    "query": "Mercedes CLA Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CLA—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CLE—Class (BM 23ó)",
+    "query": "Mercedes CLE Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CLE—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CL—Class (BM216)",
+    "query": "Mercedes CL Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CL—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CLS (BM257)",
+    "query": "Mercedes CLS",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CLS"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CLS—Class (BM218)",
+    "query": "Mercedes CLS Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "CLS—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "E—Class (BM212)",
+    "query": "Mercedes E Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "E—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "E—Class (BM213) facelift",
+    "query": "Mercedes E Class facelift",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "E—Class facelift"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "E—Class Coupe (BM207)",
+    "query": "Mercedes E Class Coupe",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "E—Class Coupe"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EOA—Class (BM243)",
+    "query": "Mercedes EOA Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "EOA—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQB—Class BM243",
+    "query": "Mercedes EQB Class BM243",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "EQB—Class BM243"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQC—Class (BM293)",
+    "query": "Mercedes EQC Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "EQC—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQE (BM295)",
+    "query": "Mercedes EQE",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "EQE"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQE SUV (BM29J)",
+    "query": "Mercedes EQE SUV",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "EQE SUV"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQS (BM297)",
+    "query": "Mercedes EQS",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "EQS"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQS—SUV (BM296)",
+    "query": "Mercedes EQS SUV",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "EQS—SUV"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "G—Class (BM4ó 3)",
+    "query": "Mercedes G Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "G—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLA—Class (BM15 ó)",
+    "query": "Mercedes GLA Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "GLA—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLB—Class (BM247)",
+    "query": "Mercedes GLB Class",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "GLB—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLC (BM253)",
+    "query": "Mercedes GLC",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "GLC"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLC—Class (BM254)",
+    "query": "Mercedes GLC Class",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "GLC—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLE (BM1óó)",
+    "query": "Mercedes GLE",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "GLE"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLE Coupe (BM292)",
+    "query": "Mercedes GLE Coupe",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "GLE Coupe"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLE/GLS—Class (BM1 ó7)",
+    "query": "Mercedes GLE GLS Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "GLE/GLS—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLK (BMX204) facelift",
+    "query": "Mercedes GLK facelift",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "GLK facelift"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GL—Class (BM1 óó)",
+    "query": "Mercedes GL Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "GL—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "ML—Class (BM 1 óó)",
+    "query": "Mercedes ML Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "ML—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "S—Class (BM221)",
+    "query": "Mercedes S Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "S—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "S—Class Coupe (BM217)",
+    "query": "Mercedes S Class Coupe",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "S—Class Coupe"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "SLK—Class (BM 172)",
+    "query": "Mercedes SLK Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "SLK—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "SL—Class (BM231)",
+    "query": "Mercedes SL Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "SL—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "Sprinter (BM90d)",
+    "query": "Mercedes Sprinter",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Sprinter"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "T—Class (BM420)",
+    "query": "Mercedes T Class",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "T—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "V—Class (BM447)",
+    "query": "Mercedes V Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "V—Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "X—Class (BM470)",
+    "query": "Mercedes X Class",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "X—Class"
+  },
+  {
+    "brand": "Mini",
+    "model": "M‹n+(F55/F56)",
+    "query": "Mini M n",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "M‹n+"
+  },
+  {
+    "brand": "Mini",
+    "model": "Mini Clubman (F54)",
+    "query": "Mini Mini Clubman",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Mini Clubman"
+  },
+  {
+    "brand": "Mini",
+    "model": "Mini Countryman (F60)",
+    "query": "Mini Mini Countryman",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Mini Countryman"
+  },
+  {
+    "brand": "Mitsubishi",
+    "model": "ASX",
+    "query": "Mitsubishi ASX",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "ASX"
+  },
+  {
+    "brand": "Mitsubishi",
+    "model": "Eclipse Cross",
+    "query": "Mitsubishi Eclipse Cross",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Eclipse Cross"
+  },
+  {
+    "brand": "Mitsubishi",
+    "model": "Eclipse Cross Hybrid",
+    "query": "Mitsubishi Eclipse Cross Hybrid",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Eclipse Cross Hybrid"
+  },
+  {
+    "brand": "Mitsubishi",
+    "model": "L200",
+    "query": "Mitsubishi L200",
+    "sensors": [
+      "front_camera",
+      "area_camera",
+      "rear_radar"
+    ],
+    "modelClean": "L200"
+  },
+  {
+    "brand": "Mitsubishi",
+    "model": "Outlander III",
+    "query": "Mitsubishi Outlander III",
+    "sensors": [
+      "front_camera",
+      "area_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Outlander III"
+  },
+  {
+    "brand": "Mitsubishi",
+    "model": "Outlander III Facelift",
+    "query": "Mitsubishi Outlander III Facelift",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Outlander III Facelift"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Micra",
+    "query": "Nissan Micra",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Micra"
+  },
+  {
+    "brand": "Nissan",
+    "model": "New Leaf",
+    "query": "Nissan New Leaf",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "New Leaf"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Qashqai",
+    "query": "Nissan Qashqai",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Qashqai"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Qashqai Facelift",
+    "query": "Nissan Qashqai Facelift",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Qashqai Facelift"
+  },
+  {
+    "brand": "Nissan",
+    "model": "X—Trail",
+    "query": "Nissan X Trail",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "X—Trail"
+  },
+  {
+    "brand": "Nissan",
+    "model": "X—Trail Facelift",
+    "query": "Nissan X Trail Facelift",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "X—Trail Facelift"
+  },
+  {
+    "brand": "Opel",
+    "model": "Ampera",
+    "query": "Opel Ampera",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Ampera"
+  },
+  {
+    "brand": "Opel",
+    "model": "Ampera E",
+    "query": "Opel Ampera E",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Ampera E"
+  },
+  {
+    "brand": "Opel",
+    "model": "Astra J",
+    "query": "Opel Astra J",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Astra J"
+  },
+  {
+    "brand": "Opel",
+    "model": "Astra K",
+    "query": "Opel Astra K",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Astra K"
+  },
+  {
+    "brand": "Opel",
+    "model": "Astra L",
+    "query": "Opel Astra L",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Astra L"
+  },
+  {
+    "brand": "Opel",
+    "model": "Cascada",
+    "query": "Opel Cascada",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Cascada"
+  },
+  {
+    "brand": "Opel",
+    "model": "Combo—E",
+    "query": "Opel Combo E",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Combo—E"
+  },
+  {
+    "brand": "Opel",
+    "model": "Corsa E",
+    "query": "Opel Corsa E",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Corsa E"
+  },
+  {
+    "brand": "Opel",
+    "model": "Corsa F",
+    "query": "Opel Corsa F",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Corsa F"
+  },
+  {
+    "brand": "Opel",
+    "model": "Crossland X",
+    "query": "Opel Crossland X",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Crossland X"
+  },
+  {
+    "brand": "Opel",
+    "model": "Grandland",
+    "query": "Opel Grandland",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Grandland"
+  },
+  {
+    "brand": "Opel",
+    "model": "Grandland X",
+    "query": "Opel Grandland X",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Grandland X"
+  },
+  {
+    "brand": "Opel",
+    "model": "Insignia A",
+    "query": "Opel Insignia A",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Insignia A"
+  },
+  {
+    "brand": "Opel",
+    "model": "Insignia B",
+    "query": "Opel Insignia B",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Insignia B"
+  },
+  {
+    "brand": "Opel",
+    "model": "Karl",
+    "query": "Opel Karl",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Karl"
+  },
+  {
+    "brand": "Opel",
+    "model": "Mokka",
+    "query": "Opel Mokka",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Mokka"
+  },
+  {
+    "brand": "Opel",
+    "model": "Mokka—B",
+    "query": "Opel Mokka B",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Mokka—B"
+  },
+  {
+    "brand": "Opel",
+    "model": "Vivaro C",
+    "query": "Opel Vivaro C",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Vivaro C"
+  },
+  {
+    "brand": "Opel",
+    "model": "Zafira Life",
+    "query": "Opel Zafira Life",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Zafira Life"
+  },
+  {
+    "brand": "Opel",
+    "model": "Zafira Tourer",
+    "query": "Opel Zafira Tourer",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Zafira Tourer"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "#1, IU,  Itb",
+    "query": "Peugeot 1 IU Itb",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "#1, IU,  Itb"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "2008 II",
+    "query": "Peugeot 2008 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "2008 II"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "208 II",
+    "query": "Peugeot 208 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "208 II"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "3008 II",
+    "query": "Peugeot 3008 II",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "3008 II"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "308 II",
+    "query": "Peugeot 308 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "308 II"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "308 III",
+    "query": "Peugeot 308 III",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "308 III"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "408 Il",
+    "query": "Peugeot 408 Il",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "408 Il"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "5008 II",
+    "query": "Peugeot 5008 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "5008 II"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "508 II",
+    "query": "Peugeot 508 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "508 II"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "Boxer",
+    "query": "Peugeot Boxer",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Boxer"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "Partner",
+    "query": "Peugeot Partner",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Partner"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "Rifter",
+    "query": "Peugeot Rifter",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Rifter"
+  },
+  {
+    "brand": "Polestar",
+    "model": "P2",
+    "query": "Polestar P2",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "P2"
+  },
+  {
+    "brand": "Porsche",
+    "model": "Boxster (981)",
+    "query": "Porsche Boxster",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Boxster"
+  },
+  {
+    "brand": "Porsche",
+    "model": "Cayenne (92A)",
+    "query": "Porsche Cayenne",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Cayenne"
+  },
+  {
+    "brand": "Porsche",
+    "model": "Cayman (981)",
+    "query": "Porsche Cayman",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Cayman"
+  },
+  {
+    "brand": "Porsche",
+    "model": "Cayman 718 (982)",
+    "query": "Porsche Cayman 718",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Cayman 718"
+  },
+  {
+    "brand": "Porsche",
+    "model": "Macan (95 B)",
+    "query": "Porsche Macan",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Macan"
+  },
+  {
+    "brand": "Porsche",
+    "model": "Macan Facelift (95B)",
+    "query": "Porsche Macan Facelift",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Macan Facelift"
+  },
+  {
+    "brand": "Porsche",
+    "model": "Panamera (970)",
+    "query": "Porsche Panamera",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Panamera"
+  },
+  {
+    "brand": "Porsche",
+    "model": "Taycan (Y1A)",
+    "query": "Porsche Taycan",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Taycan"
+  },
+  {
+    "brand": "Renault",
+    "model": "Arkana",
+    "query": "Renault Arkana",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Arkana"
+  },
+  {
+    "brand": "Renault",
+    "model": "Austral",
+    "query": "Renault Austral",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Austral"
+  },
+  {
+    "brand": "Renault",
+    "model": "Captur II",
+    "query": "Renault Captur II",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Captur II"
+  },
+  {
+    "brand": "Renault",
+    "model": "Clio V",
+    "query": "Renault Clio V",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Clio V"
+  },
+  {
+    "brand": "Renault",
+    "model": "Espace—V Facelift",
+    "query": "Renault Espace V Facelift",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Espace—V Facelift"
+  },
+  {
+    "brand": "Renault",
+    "model": "Kadjar",
+    "query": "Renault Kadjar",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Kadjar"
+  },
+  {
+    "brand": "Renault",
+    "model": "Kadjar Facelift",
+    "query": "Renault Kadjar Facelift",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Kadjar Facelift"
+  },
+  {
+    "brand": "Renault",
+    "model": "Kangoo III",
+    "query": "Renault Kangoo III",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Kangoo III"
+  },
+  {
+    "brand": "Renault",
+    "model": "Kangoo III e-Tech Electric",
+    "query": "Renault Kangoo III e-Tech Electric",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Kangoo III e-Tech Electric"
+  },
+  {
+    "brand": "Renault",
+    "model": "Koleos",
+    "query": "Renault Koleos",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Koleos"
+  },
+  {
+    "brand": "Renault",
+    "model": "Master",
+    "query": "Renault Master",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Master"
+  },
+  {
+    "brand": "Renault",
+    "model": "Megane e—Tech Electric",
+    "query": "Renault Megane e Tech Electric",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Megane e—Tech Electric"
+  },
+  {
+    "brand": "Renault",
+    "model": "Megane IlI",
+    "query": "Renault Megane IlI",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Megane IlI"
+  },
+  {
+    "brand": "Renault",
+    "model": "Megane IV Facelift",
+    "query": "Renault Megane IV Facelift",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Megane IV Facelift"
+  },
+  {
+    "brand": "Renault",
+    "model": "New Espace",
+    "query": "Renault New Espace",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "New Espace"
+  },
+  {
+    "brand": "Renault",
+    "model": "Scenic III",
+    "query": "Renault Scenic III",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Scenic III"
+  },
+  {
+    "brand": "Renault",
+    "model": "Talisman Facelift",
+    "query": "Renault Talisman Facelift",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Talisman Facelift"
+  },
+  {
+    "brand": "Renault",
+    "model": "Trafic-III",
+    "query": "Renault Trafic-III",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Trafic-III"
+  },
+  {
+    "brand": "Renault",
+    "model": "Twingo III",
+    "query": "Renault Twingo III",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Twingo III"
+  },
+  {
+    "brand": "Renault",
+    "model": "Zoe",
+    "query": "Renault Zoe",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Zoe"
+  },
+  {
+    "brand": "Seat",
+    "model": "Alhambra (71)",
+    "query": "Seat Alhambra",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Alhambra"
+  },
+  {
+    "brand": "Seat",
+    "model": "Arona (KJ)",
+    "query": "Seat Arona",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Arona"
+  },
+  {
+    "brand": "Seat",
+    "model": "lbiza (KJ)",
+    "query": "Seat lbiza",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "lbiza"
+  },
+  {
+    "brand": "Seat",
+    "model": "Leon (SF)",
+    "query": "Seat Leon",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Leon"
+  },
+  {
+    "brand": "Seat",
+    "model": "Mii electric (KE)",
+    "query": "Seat Mii electric",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Mii electric"
+  },
+  {
+    "brand": "Seat",
+    "model": "Tarraco(KN)",
+    "query": "Seat Tarraco",
+    "sensors": [
+      "front_camera",
+      "area_camera"
+    ],
+    "modelClean": "Tarraco"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Citigo E IV (NE)",
+    "query": "Skoda Citigo E IV",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Citigo E IV"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Elroq (PY)",
+    "query": "Skoda Elroq",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Elroq"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Enyaq (5A)",
+    "query": "Skoda Enyaq",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Enyaq"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Fabia (PJ)",
+    "query": "Skoda Fabia",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Fabia"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Kamiq (NW)",
+    "query": "Skoda Kamiq",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Kamiq"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Karoq (NU)",
+    "query": "Skoda Karoq",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Karoq"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Kodiaq (NS)",
+    "query": "Skoda Kodiaq",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Kodiaq"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Octavia (SE)",
+    "query": "Skoda Octavia",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Octavia"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Octavia Facelift (PV)",
+    "query": "Skoda Octavia Facelift",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Octavia Facelift"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Scala (NW)",
+    "query": "Skoda Scala",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Scala"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Superb (3V)",
+    "query": "Skoda Superb",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Superb"
+  },
+  {
+    "brand": "Smart",
+    "model": "ForFour",
+    "query": "Smart ForFour",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "ForFour"
+  },
+  {
+    "brand": "Smart",
+    "model": "ForTwo",
+    "query": "Smart ForTwo",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "ForTwo"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Crosstrek/I mpreza",
+    "query": "Subaru Crosstrek I mpreza",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Crosstrek/I mpreza"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Forester",
+    "query": "Subaru Forester",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Forester"
+  },
+  {
+    "brand": "Subaru",
+    "model": "lmpreza",
+    "query": "Subaru lmpreza",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "lmpreza"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Legacy/Outback",
+    "query": "Subaru Legacy Outback",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Legacy/Outback"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Outback (BT)",
+    "query": "Subaru Outback",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Outback"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Solterra",
+    "query": "Subaru Solterra",
+    "sensors": [
+      "front_camera",
+      "front_radar",
+      "rear_radar"
+    ],
+    "modelClean": "Solterra"
+  },
+  {
+    "brand": "Suzuki",
+    "model": "Jimny",
+    "query": "Suzuki Jimny",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Jimny"
+  },
+  {
+    "brand": "Suzuki",
+    "model": "S—Cross",
+    "query": "Suzuki S Cross",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "S—Cross"
+  },
+  {
+    "brand": "Suzuki",
+    "model": "Swace",
+    "query": "Suzuki Swace",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Swace"
+  },
+  {
+    "brand": "Suzuki",
+    "model": "Swift",
+    "query": "Suzuki Swift",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Swift"
+  },
+  {
+    "brand": "Suzuki",
+    "model": "Vitara",
+    "query": "Suzuki Vitara",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Vitara"
+  },
+  {
+    "brand": "Suzuki",
+    "model": "Vitara Hybrid",
+    "query": "Suzuki Vitara Hybrid",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Vitara Hybrid"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Auris",
+    "query": "Toyota Auris",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Auris"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Avensis",
+    "query": "Toyota Avensis",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Avensis"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Aygo",
+    "query": "Toyota Aygo",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Aygo"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Aygo X",
+    "query": "Toyota Aygo X",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Aygo X"
+  },
+  {
+    "brand": "Toyota",
+    "model": "bZ4X",
+    "query": "Toyota bZ4X",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "bZ4X"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Camry",
+    "query": "Toyota Camry",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Camry"
+  },
+  {
+    "brand": "Toyota",
+    "model": "C-HR",
+    "query": "Toyota C-HR",
+    "sensors": [
+      "front_camera",
+      "front_corner_radar"
+    ],
+    "modelClean": "C-HR"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "query": "Toyota Corolla",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Corolla"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla Cross",
+    "query": "Toyota Corolla Cross",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Corolla Cross"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla Hybrid",
+    "query": "Toyota Corolla Hybrid",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Corolla Hybrid"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla sedan",
+    "query": "Toyota Corolla sedan",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Corolla sedan"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Fortuner",
+    "query": "Toyota Fortuner",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Fortuner"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Hiace",
+    "query": "Toyota Hiace",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Hiace"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Highlander",
+    "query": "Toyota Highlander",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Highlander"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Hilux",
+    "query": "Toyota Hilux",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Hilux"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Land Cruiser",
+    "query": "Toyota Land Cruiser",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Land Cruiser"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Land Cruiser Prado",
+    "query": "Toyota Land Cruiser Prado",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Land Cruiser Prado"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Mirai",
+    "query": "Toyota Mirai",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Mirai"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Prius",
+    "query": "Toyota Prius",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Prius"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Prius PHV Plug—In Hybrid",
+    "query": "Toyota Prius PHV Plug In Hybrid",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Prius PHV Plug—In Hybrid"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Prius Plug—In Hybrid",
+    "query": "Toyota Prius Plug In Hybrid",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Prius Plug—In Hybrid"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Prius Plus",
+    "query": "Toyota Prius Plus",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Prius Plus"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Proace",
+    "query": "Toyota Proace",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Proace"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Proace Electric",
+    "query": "Toyota Proace Electric",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Proace Electric"
+  },
+  {
+    "brand": "Toyota",
+    "model": "RAV4",
+    "query": "Toyota RAV4",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "RAV4"
+  },
+  {
+    "brand": "Toyota",
+    "model": "RAV4 PHV Plug-In Hybrid",
+    "query": "Toyota RAV4 PHV Plug-In Hybrid",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "RAV4 PHV Plug-In Hybrid"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Part s",
+    "query": "Toyota Part s",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Part s"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Part s Cro ss",
+    "query": "Toyota Part s Cro ss",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Part s Cro ss"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Part s Cro ss Hybrid",
+    "query": "Toyota Part s Cro ss Hybrid",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Part s Cro ss Hybrid"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Yaris GR",
+    "query": "Toyota Yaris GR",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Yaris GR"
+  },
+  {
+    "brand": "Volvo",
+    "model": "Só0 II/V60",
+    "query": "Volvo S 0 II V60",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Só0 II/V60"
+  },
+  {
+    "brand": "Volvo",
+    "model": "S60 III",
+    "query": "Volvo S60 III",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "S60 III"
+  },
+  {
+    "brand": "Volvo",
+    "model": "Só0 III/Vó0 II",
+    "query": "Volvo S 0 III V 0 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Só0 III/Vó0 II"
+  },
+  {
+    "brand": "Volvo",
+    "model": "580 II/V70  III/XC70 III",
+    "query": "Volvo 580 II V70 III XC70 III",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "580 II/V70  III/XC70 III"
+  },
+  {
+    "brand": "Volvo",
+    "model": "S90",
+    "query": "Volvo S90",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "S90"
+  },
+  {
+    "brand": "Volvo",
+    "model": "V40",
+    "query": "Volvo V40",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "V40"
+  },
+  {
+    "brand": "Volvo",
+    "model": "V60 CC",
+    "query": "Volvo V60 CC",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "V60 CC"
+  },
+  {
+    "brand": "Volvo",
+    "model": "V60 II",
+    "query": "Volvo V60 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "V60 II"
+  },
+  {
+    "brand": "Volvo",
+    "model": "V90 CC",
+    "query": "Volvo V90 CC",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "V90 CC"
+  },
+  {
+    "brand": "Volvo",
+    "model": "V90 II",
+    "query": "Volvo V90 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "V90 II"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC40",
+    "query": "Volvo XC40",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "XC40"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC40 II",
+    "query": "Volvo XC40 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "XC40 II"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC60",
+    "query": "Volvo XC60",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "XC60"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XCó 0 II",
+    "query": "Volvo XC 0 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "XCó 0 II"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC60 II",
+    "query": "Volvo XC60 II",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "XC60 II"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC90",
+    "query": "Volvo XC90",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "XC90"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC40 Recharge Pure Electric",
+    "query": "Volvo XC40 Recharge Pure Electric",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "XC40 Recharge Pure Electric"
+  },
+  {
+    "brand": "VW",
+    "model": "Amaro k (TI )",
+    "query": "VW Amaro k",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Amaro k"
+  },
+  {
+    "brand": "VW",
+    "model": "Arteon (3H)",
+    "query": "VW Arteon",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Arteon"
+  },
+  {
+    "brand": "VW",
+    "model": "Caddy (SA)",
+    "query": "VW Caddy",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Caddy"
+  },
+  {
+    "brand": "VW",
+    "model": "CC (35)",
+    "query": "VW CC",
+    "sensors": [
+      "front_camera",
+      "rear_camera"
+    ],
+    "modelClean": "CC"
+  },
+  {
+    "brand": "VW",
+    "model": "Crafter (SY/SZ)",
+    "query": "VW Crafter",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Crafter"
+  },
+  {
+    "brand": "VW",
+    "model": "e—up! (BL)",
+    "query": "VW e up",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "e—up!"
+  },
+  {
+    "brand": "VW",
+    "model": "Golf 7 (SG/BA)",
+    "query": "VW Golf 7",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Golf 7"
+  },
+  {
+    "brand": "VW",
+    "model": "Golf 8 (CD)",
+    "query": "VW Golf 8",
+    "sensors": [
+      "front_camera",
+      "rear_camera"
+    ],
+    "modelClean": "Golf 8"
+  },
+  {
+    "brand": "VW",
+    "model": "Golf 8 Facelift (DA/DB)",
+    "query": "VW Golf 8 Facelift",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Golf 8 Facelift"
+  },
+  {
+    "brand": "VW",
+    "model": "ID.3 (E1)",
+    "query": "VW ID 3",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "ID.3"
+  },
+  {
+    "brand": "VW",
+    "model": "ID.4 (E2)",
+    "query": "VW ID 4",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "ID.4"
+  },
+  {
+    "brand": "VW",
+    "model": "ID.5 (E3)",
+    "query": "VW ID 5",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "ID.5"
+  },
+  {
+    "brand": "VW",
+    "model": "ID.7 (ED)",
+    "query": "VW ID 7",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "ID.7"
+  },
+  {
+    "brand": "VW",
+    "model": "ID.Buzz (EB)",
+    "query": "VW ID Buzz",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "ID.Buzz"
+  },
+  {
+    "brand": "VW",
+    "model": "Passat (36)",
+    "query": "VW Passat",
+    "sensors": [
+      "front_camera",
+      "rear_camera"
+    ],
+    "modelClean": "Passat"
+  },
+  {
+    "brand": "VW",
+    "model": "Phaeton (3D)",
+    "query": "VW Phaeton",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Phaeton"
+  },
+  {
+    "brand": "VW",
+    "model": "Polo (AE)",
+    "query": "VW Polo",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Polo"
+  },
+  {
+    "brand": "VW",
+    "model": "Sharan (7N)",
+    "query": "VW Sharan",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Sharan"
+  },
+  {
+    "brand": "VW",
+    "model": "T6.1",
+    "query": "VW T6 1",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "T6.1"
+  },
+  {
+    "brand": "VW",
+    "model": "T7 (ST)",
+    "query": "VW T7",
+    "sensors": [
+      "front_camera",
+      "rear_camera"
+    ],
+    "modelClean": "T7"
+  },
+  {
+    "brand": "VW",
+    "model": "Taigo (CS)",
+    "query": "VW Taigo",
+    "sensors": [
+      "front_camera",
+      "front_radar"
+    ],
+    "modelClean": "Taigo"
+  },
+  {
+    "brand": "VW",
+    "model": "Tayron (R4)",
+    "query": "VW Tayron",
+    "sensors": [
+      "front_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Tayron"
+  },
+  {
+    "brand": "VW",
+    "model": "T—Cross (C1)",
+    "query": "VW T Cross",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "T—Cross"
+  },
+  {
+    "brand": "VW",
+    "model": "Tiguan (5N)",
+    "query": "VW Tiguan",
+    "sensors": [
+      "front_camera",
+      "rear_camera"
+    ],
+    "modelClean": "Tiguan"
+  },
+  {
+    "brand": "VW",
+    "model": "Tiguan Allspace (BJ)",
+    "query": "VW Tiguan Allspace",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Tiguan Allspace"
+  },
+  {
+    "brand": "VW",
+    "model": "Touareg (7P)",
+    "query": "VW Touareg",
+    "sensors": [
+      "front_camera",
+      "rear_camera",
+      "front_radar"
+    ],
+    "modelClean": "Touareg"
+  },
+  {
+    "brand": "VW",
+    "model": "Touran (1T3)",
+    "query": "VW Touran",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "Touran"
+  },
+  {
+    "brand": "VW",
+    "model": "T—Roc (AI )",
+    "query": "VW T Roc",
+    "sensors": [
+      "front_camera"
+    ],
+    "modelClean": "T—Roc"
+  },
+  {
+    "brand": "VW",
+    "model": "Passat CC (35)",
+    "query": "VW Passat CC",
+    "sensors": [
+      "rear_camera",
+      "rear_radar"
+    ],
+    "modelClean": "Passat CC"
+  },
+  {
+    "brand": "VW",
+    "model": "TS (7E/7F)",
+    "query": "VW TS",
+    "sensors": [
+      "rear_camera"
+    ],
+    "modelClean": "TS"
+  },
+  {
+    "brand": "VW",
+    "model": "T6. T (SH)",
+    "query": "VW T6 T",
+    "sensors": [
+      "rear_camera"
+    ],
+    "modelClean": "T6. T"
+  },
+  {
+    "brand": "Audi",
+    "model": "AS(FU)",
+    "query": "Audi AS",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "AS"
+  },
+  {
+    "brand": "Audi",
+    "model": "Qó e—tron(SF)",
+    "query": "Audi Q e-tron",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "Qó e—tron"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q8e—Tron(GE)",
+    "query": "Audi Q8e Tron",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "Q8e—Tron"
+  },
+  {
+    "brand": "BMW",
+    "model": "1Series(F40)",
+    "query": "BMW 1Series",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "1Series"
+  },
+  {
+    "brand": "BMW",
+    "model": "8Series(GIO/G15/GI bJ",
+    "query": "BMW 8Series GIO G15 GI bJ",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "8Series(GIO/G15/GI bJ"
+  },
+  {
+    "brand": "BMW",
+    "model": "XC(G02)",
+    "query": "BMW XC",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "XC"
+  },
+  {
+    "brand": "Citroen",
+    "model": "C4Picasso Il",
+    "query": "Citroen C4Picasso Il",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "C4Picasso Il"
+  },
+  {
+    "brand": "Citroen",
+    "model": "CS Aircross",
+    "query": "Citroen CS Aircross",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "CS Aircross"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX-30(DM)",
+    "query": "Mazda CX-30",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "CX-30"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX-ó0 (KH)",
+    "query": "Mazda CX- 0",
+    "sensors": [
+      "area_camera",
+      "front_radar"
+    ],
+    "modelClean": "CX-ó0"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "E0A-Class(BM243)",
+    "query": "Mercedes E0A-Class",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "E0A-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQB-Class  BM243",
+    "query": "Mercedes EQB-Class BM243",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "EQB-Class  BM243"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLA-Class(BM247)",
+    "query": "Mercedes GLA-Class",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "GLA-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLB(BM247)",
+    "query": "Mercedes GLB",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "GLB"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLK-Class (BMX204)\nFacelift",
+    "query": "Mercedes GLK-Class Facelift",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "GLK-Class Facelift"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "S—ClassCoupe(BM217)",
+    "query": "Mercedes S ClassCoupe",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "S—ClassCoupe"
+  },
+  {
+    "brand": "Mitsubishi",
+    "model": "EclipssCross",
+    "query": "Mitsubishi EclipssCross",
+    "sensors": [
+      "area_camera",
+      "rear_radar"
+    ],
+    "modelClean": "EclipssCross"
+  },
+  {
+    "brand": "Opel",
+    "model": "GrandlandX",
+    "query": "Opel GrandlandX",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "GrandlandX"
+  },
+  {
+    "brand": "Opel",
+    "model": "lnsignia B",
+    "query": "Opel lnsignia B",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "lnsignia B"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "5008ll",
+    "query": "Peugeot 5008ll",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "5008ll"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "508ll",
+    "query": "Peugeot 508ll",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "508ll"
+  },
+  {
+    "brand": "Volvo",
+    "model": "S60lll/V60ll",
+    "query": "Volvo S60lll V60ll",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "S60lll/V60ll"
+  },
+  {
+    "brand": "Volvo",
+    "model": "S90ll",
+    "query": "Volvo S90ll",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "S90ll"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC60ll",
+    "query": "Volvo XC60ll",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "XC60ll"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC90ll",
+    "query": "Volvo XC90ll",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "XC90ll"
+  },
+  {
+    "brand": "VW",
+    "model": "TiguanAllspace(BW)",
+    "query": "VW TiguanAllspace",
+    "sensors": [
+      "area_camera"
+    ],
+    "modelClean": "TiguanAllspace"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q4 e—tron (FZ)",
+    "query": "Audi Q4 e-tron",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Q4 e—tron"
+  },
+  {
+    "brand": "Audi",
+    "model": "ù5(W)",
+    "query": "Audi 5",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "ù5"
+  },
+  {
+    "brand": "BMW",
+    "model": "2 Series Gran Coupé (F44)",
+    "query": "BMW 2 Series Gran Coup",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "2 Series Gran Coupé"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series GT (F07)",
+    "query": "BMW 5 Series GT",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "5 Series GT"
+  },
+  {
+    "brand": "BMW",
+    "model": "7Ser‹es\n(F01/F02/F03/F04)",
+    "query": "BMW 7Ser es",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "7Ser‹es"
+  },
+  {
+    "brand": "BMW",
+    "model": "XI (F48)",
+    "query": "BMW XI",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "XI"
+  },
+  {
+    "brand": "BMW",
+    "model": "Z1(G29)",
+    "query": "BMW Z1",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Z1"
+  },
+  {
+    "brand": "Citroen",
+    "model": "C4-III",
+    "query": "Citroen C4-III",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "C4-III"
+  },
+  {
+    "brand": "Citroen",
+    "model": "CCX",
+    "query": "Citroen CCX",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CCX"
+  },
+  {
+    "brand": "Citroen",
+    "model": "C4 Picasso Il",
+    "query": "Citroen C4 Picasso Il",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "C4 Picasso Il"
+  },
+  {
+    "brand": "Citroen",
+    "model": "SpaceTourer",
+    "query": "Citroen SpaceTourer",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "SpaceTourer"
+  },
+  {
+    "brand": "Cupra",
+    "model": "Tavascan (KR)",
+    "query": "Cupra Tavascan",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Tavascan"
+  },
+  {
+    "brand": "Dacia",
+    "model": "Jogger",
+    "query": "Dacia Jogger",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Jogger"
+  },
+  {
+    "brand": "Dacia",
+    "model": "Sandero—II I",
+    "query": "Dacia Sandero II I",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Sandero—II I"
+  },
+  {
+    "brand": "Dacia",
+    "model": "Spring",
+    "query": "Dacia Spring",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Spring"
+  },
+  {
+    "brand": "Fiat",
+    "model": "500X",
+    "query": "Fiat 500X",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "500X"
+  },
+  {
+    "brand": "Ford",
+    "model": "C-Max IV",
+    "query": "Ford C-Max IV",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "C-Max IV"
+  },
+  {
+    "brand": "Ford",
+    "model": "Edge II",
+    "query": "Ford Edge II",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Edge II"
+  },
+  {
+    "brand": "Ford",
+    "model": "Fiesta VIII",
+    "query": "Ford Fiesta VIII",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Fiesta VIII"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus VI",
+    "query": "Ford Focus VI",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Focus VI"
+  },
+  {
+    "brand": "Ford",
+    "model": "FocusV",
+    "query": "Ford FocusV",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "FocusV"
+  },
+  {
+    "brand": "Ford",
+    "model": "Kuga",
+    "query": "Ford Kuga",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Kuga"
+  },
+  {
+    "brand": "Ford",
+    "model": "Mustang VI",
+    "query": "Ford Mustang VI",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Mustang VI"
+  },
+  {
+    "brand": "Ford",
+    "model": "Ranger V",
+    "query": "Ford Ranger V",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Ranger V"
+  },
+  {
+    "brand": "Kia",
+    "model": "Picanto(JA)",
+    "query": "Kia Picanto",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Picanto"
+  },
+  {
+    "brand": "Lexus",
+    "model": "#l,#2",
+    "query": "Lexus l 2",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "#l,#2"
+  },
+  {
+    "brand": "Mazda",
+    "model": "ó (GJ)",
+    "query": "Mazda",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "ó"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX-3 (DK)",
+    "query": "Mazda CX-3",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CX-3"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX-5 (KE)",
+    "query": "Mazda CX-5",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CX-5"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX-80 (KL)",
+    "query": "Mazda CX-80",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CX-80"
+  },
+  {
+    "brand": "Mazda",
+    "model": "MX-30 (DR)",
+    "query": "Mazda MX-30",
+    "sensors": [
+      "front_radar",
+      "front_corner_radar"
+    ],
+    "modelClean": "MX-30"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "A-Class (BM17ó)",
+    "query": "Mercedes A-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "A-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "B-Class (BM2¢ó)",
+    "query": "Mercedes B-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "B-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "C-Class (BM20¢) facelift",
+    "query": "Mercedes C-Class facelift",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "C-Class facelift"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "C-Class (BM205)",
+    "query": "Mercedes C-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "C-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CLA-Class (BM117)",
+    "query": "Mercedes CLA-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CLA-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CLE-Class (BM23ó)",
+    "query": "Mercedes CLE-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CLE-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CLK-Class (BM209)",
+    "query": "Mercedes CLK-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CLK-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CL-Class (BM21 ó)",
+    "query": "Mercedes CL-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CL-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "CLS-Class (BM218)",
+    "query": "Mercedes CLS-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "CLS-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "E-Class  (BM211)",
+    "query": "Mercedes E-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "E-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "E-Class Coupe (BM207)",
+    "query": "Mercedes E-Class Coupe",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "E-Class Coupe"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EOA-Class(BM243)",
+    "query": "Mercedes EOA-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "EOA-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQB-Class(BM243)",
+    "query": "Mercedes EQB-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "EQB-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQC-Class(BM293)",
+    "query": "Mercedes EQC-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "EQC-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQS-SUV (BM29ó)",
+    "query": "Mercedes EQS-SUV",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "EQS-SUV"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "G-Class (BM4ó3)",
+    "query": "Mercedes G-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "G-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLA-Ctass(BM1bB)",
+    "query": "Mercedes GLA-Ctass",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "GLA-Ctass"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLB-Class (BM247)",
+    "query": "Mercedes GLB-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "GLB-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLC-Class (BM253)",
+    "query": "Mercedes GLC-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "GLC-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLE/GLS-Class (BMI 67)",
+    "query": "Mercedes GLE GLS-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "GLE/GLS-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLE-Class (BM292)",
+    "query": "Mercedes GLE-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "GLE-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GLK (BMX204)",
+    "query": "Mercedes GLK",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "GLK"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "GL-Class (BM164)",
+    "query": "Mercedes GL-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "GL-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "ML-Class (BMI d4)",
+    "query": "Mercedes ML-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "ML-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "R-Class (BM251)",
+    "query": "Mercedes R-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "R-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "S-Class (BM217)",
+    "query": "Mercedes S-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "S-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "SLK-Class (BM172)",
+    "query": "Mercedes SLK-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "SLK-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "SL-Class (BM230)",
+    "query": "Mercedes SL-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "SL-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "T-Class(BM420)",
+    "query": "Mercedes T-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "T-Class"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "X-Class(BM¢70)",
+    "query": "Mercedes X-Class",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "X-Class"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Navara",
+    "query": "Nissan Navara",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Navara"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Pulsar",
+    "query": "Nissan Pulsar",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Pulsar"
+  },
+  {
+    "brand": "Nissan",
+    "model": "X-Trail",
+    "query": "Nissan X-Trail",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "X-Trail"
+  },
+  {
+    "brand": "Nissan",
+    "model": "X-Trail Facelift",
+    "query": "Nissan X-Trail Facelift",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "X-Trail Facelift"
+  },
+  {
+    "brand": "Opel",
+    "model": "Zafira C",
+    "query": "Opel Zafira C",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Zafira C"
+  },
+  {
+    "brand": "Porsche",
+    "model": "#l,#2,#3,#4,#5,#ó",
+    "query": "Porsche l 2 3 4 5",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "#l,#2,#3,#4,#5,#ó"
+  },
+  {
+    "brand": "Renault",
+    "model": "Alaskan",
+    "query": "Renault Alaskan",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Alaskan"
+  },
+  {
+    "brand": "Renault",
+    "model": "Captur ll",
+    "query": "Renault Captur ll",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Captur ll"
+  },
+  {
+    "brand": "Renault",
+    "model": "Espace-V Facelift",
+    "query": "Renault Espace-V Facelift",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Espace-V Facelift"
+  },
+  {
+    "brand": "Renault",
+    "model": "Kangoo-III e-Tech Electric",
+    "query": "Renault Kangoo-III e-Tech Electric",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Kangoo-III e-Tech Electric"
+  },
+  {
+    "brand": "Renault",
+    "model": "Megane e-Tech Electric",
+    "query": "Renault Megane e-Tech Electric",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Megane e-Tech Electric"
+  },
+  {
+    "brand": "Seat",
+    "model": "Ateca (KH)",
+    "query": "Seat Ateca",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Ateca"
+  },
+  {
+    "brand": "Seat",
+    "model": "Toledo (KG)",
+    "query": "Seat Toledo",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Toledo"
+  },
+  {
+    "brand": "Skoda",
+    "model": "Ocava(bE)",
+    "query": "Skoda Ocava",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Ocava"
+  },
+  {
+    "brand": "VW",
+    "model": "Crafter (SZ/SY}",
+    "query": "VW Crafter SZ SY",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Crafter (SZ/SY}"
+  },
+  {
+    "brand": "VW",
+    "model": "Tó. T  (SH/SJ)",
+    "query": "VW T T",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "Tó. T"
+  },
+  {
+    "brand": "VW",
+    "model": "T-Cross (C1)",
+    "query": "VW T-Cross",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "T-Cross"
+  },
+  {
+    "brand": "VW",
+    "model": "T-Roc (DI)",
+    "query": "VW T-Roc",
+    "sensors": [
+      "front_radar"
+    ],
+    "modelClean": "T-Roc"
+  },
+  {
+    "brand": "Audi",
+    "model": "Aó e—tron (GH)",
+    "query": "Audi A e-tron",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Aó e—tron"
+  },
+  {
+    "brand": "Kia",
+    "model": "Pro Ceed JD)",
+    "query": "Kia Pro Ceed JD",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Pro Ceed JD)"
+  },
+  {
+    "brand": "Mazda",
+    "model": "CX—S0 (KH)",
+    "query": "Mazda CX S0",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "CX—S0"
+  },
+  {
+    "brand": "Mercedes",
+    "model": "EQA—Class (BM243)",
+    "query": "Mercedes EQA Class",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "EQA—Class"
+  },
+  {
+    "brand": "Peugeot",
+    "model": "308III",
+    "query": "Peugeot 308III",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "308III"
+  },
+  {
+    "brand": "Renault",
+    "model": "Kangoo—III e—Tech Electric",
+    "query": "Renault Kangoo III e Tech Electric",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Kangoo—III e—Tech Electric"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Crosstrek/lmpreza",
+    "query": "Subaru Crosstrek lmpreza",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Crosstrek/lmpreza"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Levorg",
+    "query": "Subaru Levorg",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Levorg"
+  },
+  {
+    "brand": "Suzuki",
+    "model": "Swift Sport",
+    "query": "Suzuki Swift Sport",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Swift Sport"
+  },
+  {
+    "brand": "Toyota",
+    "model": "statc",
+    "query": "Toyota statc",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "statc"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla GR",
+    "query": "Toyota Corolla GR",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Corolla GR"
+  },
+  {
+    "brand": "Toyota",
+    "model": "RAV4 Plug-In",
+    "query": "Toyota RAV4 Plug-In",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "RAV4 Plug-In"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Yaris",
+    "query": "Toyota Yaris",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Yaris"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Yaris Cross",
+    "query": "Toyota Yaris Cross",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Yaris Cross"
+  },
+  {
+    "brand": "VW",
+    "model": "Golf7",
+    "query": "VW Golf7",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "Golf7"
+  },
+  {
+    "brand": "VW",
+    "model": "T5 (7E/7F)",
+    "query": "VW T5",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "T5"
+  },
+  {
+    "brand": "VW",
+    "model": "T6 (SG/SF)",
+    "query": "VW T6",
+    "sensors": [
+      "rear_radar"
+    ],
+    "modelClean": "T6"
+  },
+  {
+    "brand": "Audi",
+    "model": "#l,#2,#3,#À,#5,#6",
+    "query": "Audi l 2 3 5 6",
+    "sensors": [
+      "laser_sensor"
+    ],
+    "modelClean": "#l,#2,#3,#À,#5,#6"
+  },
+  {
+    "brand": "Audi",
+    "model": "07 (úM)",
+    "query": "Audi 07",
+    "sensors": [
+      "laser_sensor"
+    ],
+    "modelClean": "07"
+  },
+  {
+    "brand": "Lexus",
+    "model": "#Ï , #2, #3, llei, ’5",
+    "query": "Lexus 2 3 llei 5",
+    "sensors": [
+      "front_corner_radar"
+    ],
+    "modelClean": "#Ï , #2, #3, llei, ’5"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Prius Plug-In Hybrid",
+    "query": "Toyota Prius Plug-In Hybrid",
+    "sensors": [
+      "front_corner_radar"
+    ],
+    "modelClean": "Prius Plug-In Hybrid"
+  }
+]
