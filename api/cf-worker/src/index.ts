@@ -1001,9 +1001,21 @@ async function searchCatalog(
     params.push(filters.priceMax);
   }
   if (filters.equipment && filters.equipment.length > 0) {
+    const EQUIPMENT_COL_MAP: Record<string, string> = {
+      adas: 'adas',
+      heated: 'heated',
+      rainsensor: 'rain_sensor',
+      rain_sensor: 'rain_sensor',
+      acoustic: 'acoustic',
+      antenna: 'antenna',
+      hud: 'hud',
+      camera: 'camera',
+      solar: 'solar',
+      tinted: 'tinted',
+    };
     for (const eq of filters.equipment) {
-      const col = eq.toLowerCase();
-      if (['adas','heated','rain_sensor','acoustic','antenna','hud','camera','solar','tinted'].includes(col)) {
+      const col = EQUIPMENT_COL_MAP[eq.toLowerCase()];
+      if (col) {
         sql += ` AND ${col} = 1`;
       }
     }
