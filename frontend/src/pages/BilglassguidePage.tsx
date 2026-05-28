@@ -224,12 +224,14 @@ export default function BilglassguidePage() {
                   className="group relative rounded-xl border border-slate-700 bg-slate-800/50 backdrop-blur-sm p-5 hover:bg-slate-800 transition-colors"
                 >
                   <div className="flex items-start gap-4">
-                    {/* Initials "logo" */}
-                    <div
-                      className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg text-white font-bold text-sm shadow-lg"
-                      style={{ backgroundColor: m.color }}
-                    >
-                      {m.initials}
+                    {/* Brand logo */}
+                    <div className="flex h-14 w-28 flex-shrink-0 items-center justify-center rounded-lg bg-white p-2 shadow-lg">
+                      <img
+                        src={m.logoPath}
+                        alt={`${m.name} logo`}
+                        className="max-h-full max-w-full object-contain"
+                        loading="lazy"
+                      />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1 flex-wrap">
