@@ -361,7 +361,7 @@ function errorResponse(message: string, status = 400): Response {
 // CACHE (KV)
 // ============================================================================
 
-const CACHE_VERSION = "2";
+const CACHE_VERSION = "3";
 
 async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
   const cached = await kv.get(key);
