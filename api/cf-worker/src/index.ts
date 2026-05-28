@@ -876,7 +876,7 @@ async function queryByBrandAndYear(
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 2000";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 10000";
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
 }
@@ -3020,6 +3020,10 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
   // === Layer 1-3: brand + model + year matching ===
   // Run UNLESS ground truth (Layer -1) already gave us a full set.
   // For kType (Layer 0), we CONTINUE here because kType = 1 glass, but vehicle = N glass.
+  // Debug counters (for API response)
+  let debugL1Total = 0, debugL1Compatible = 0, debugL1Model = 0;
+  let debugL3Total = 0, debugL3Compatible = 0, debugL3bTotal = 0, debugL3bCompatible = 0, debugL3bModel = 0;
+  let debugFuzzyCount = 0;
   if (layer !== -1) {
     let modelHint = vehicle.model.length >= 3 ? vehicle.model.toLowerCase() : undefined;
     let extraHints: string[] | undefined;
@@ -3041,9 +3045,12 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     const l1All = [...l1, ...l1Extra];
     const seen = new Set<string>();
     const l1Deduped = l1All.filter((r) => { if (seen.has(r.eurocode)) return false; seen.add(r.eurocode); return true; });
+    debugL1Total = l1Deduped.length;
 
     const l1Compatible = l1Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
     const l1Model = l1Compatible.filter((r) => modelMatches(vehicle.model, r.model, vehicle.make));
+    debugL1Compatible = l1Compatible.length;
+    debugL1Model = l1Model.length;
 
     if (l1Model.length > 0) {
       for (const c of l1Model) {
@@ -3087,8 +3094,11 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
         // Layer 3b: brand-only without modelHint, then filter with modelMatches
         // This catches cases where SVV model has suffixes not in catalog (e.g. "WRANGLER UNLIMITED" vs "WRANGLER")
         const l3b = await queryByBrandOnly(db, vehicle.make);
+        debugL3bTotal = l3b.length;
         const l3bCompatible = l3b.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
+        debugL3bCompatible = l3bCompatible.length;
         const l3bModel = l3bCompatible.filter((r) => modelMatches(vehicle.model, r.model, vehicle.make));
+        debugL3bModel = l3bModel.length;
         if (l3bModel.length > 0) {
           for (const c of l3bModel) {
             if (!candidateCodes.has(c.eurocode)) {
@@ -3117,6 +3127,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
   const hasEnoughResults = candidates.length >= 15;
   if (!hasEnoughResults || !hasWindshield) {
     const fuzzyResults = await queryFuzzyBrandYear(db, vehicle.make, vehicle.year, vehicle.model, 50);
+    debugFuzzyCount = fuzzyResults.length;
     for (const { record, score } of fuzzyResults) {
       if (!candidateCodes.has(record.eurocode)) {
         // Attach fuzzy score for downstream sorting
@@ -3447,6 +3458,18 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       confidence,
       layer,
       cache_hit: svvCacheHit,
+      _debug: {
+        l1Total: debugL1Total,
+        l1Compatible: debugL1Compatible,
+        l1Model: debugL1Model,
+        l3Total: debugL3Total,
+        l3Compatible: debugL3Compatible,
+        l3bTotal: debugL3bTotal,
+        l3bCompatible: debugL3bCompatible,
+        l3bModel: debugL3bModel,
+        fuzzyCount: debugFuzzyCount,
+        totalCandidatesBeforeScoring: candidates.length,
+      },
       confidenceInfo: {
         score: layer === -1 ? 100 : layer === 0 ? 95 : layer === 1 ? 85 : layer === 2 ? 65 : layer === 3 ? 45 : 25,
         label: confidence,
