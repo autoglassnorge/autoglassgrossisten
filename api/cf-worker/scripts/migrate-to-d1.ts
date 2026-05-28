@@ -38,6 +38,8 @@ interface GlassRecord {
   model: string | null;
   yearFrom: number | null;
   yearTo: number | null;
+  year_from: number | null;
+  year_to: number | null;
   adas: boolean;
   rainSensor: boolean;
   heated: boolean;
@@ -81,8 +83,8 @@ function recordToValues(r: GlassRecord): string {
     escapeSql(r.supplier),
     escapeSql(r.brand),
     escapeSql(r.model),
-    escapeSql(r.yearFrom),
-    escapeSql(r.yearTo),
+    escapeSql(r.year_from ?? r.yearFrom),
+    escapeSql(r.year_to ?? r.yearTo),
     escapeSql(r.adas),
     escapeSql(r.rainSensor),
     escapeSql(r.heated),
