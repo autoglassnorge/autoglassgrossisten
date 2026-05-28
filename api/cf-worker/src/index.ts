@@ -2653,6 +2653,10 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
 
   const vehicle: TecdocVehicle = svvResult.vehicle;
 
+  // Normalize make to match D1 catalog brand names (e.g. VOLKSWAGEN → VW)
+  // Must happen BEFORE any D1 queries that use vehicle.make
+  vehicle.make = normalizeBrand(vehicle.make);
+
   // 2. Check ground_truth database FIRST (layer -1: verified mapping)
   const db = env.GLASS_CATALOG_D1;
   let groundTruth: GroundTruthRecord | null = null;
