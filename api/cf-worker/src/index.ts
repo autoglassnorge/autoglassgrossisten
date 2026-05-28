@@ -553,11 +553,14 @@ async function getCachedBovsoftVehicle(kv: KVNamespace, regnr: string): Promise<
 // ============================================================================
 
 /** Cache SVV vehicle data in KV for 24 hours */
-async function cacheSvvVehicle(kv: KVNamespace, regnr: string, vehicle: TecdocVehicle): Promise<void> {
+async function cacheSvvVehicle(kv: KVNamespace, regnr: string, vehicle: TecdocVehicle): Promise<boolean> {
   try {
     await kv.put(`svv:regnr:${regnr.toUpperCase()}`, JSON.stringify(vehicle), { expirationTtl: 86400 });
+    return true;
   } catch (e) {
-    console.warn(`SVV KV cache write failed for ${regnr}: ${e instanceof Error ? e.message : String(e)}`);
+    const msg = e instanceof Error ? e.message : String(e);
+    console.warn(`SVV KV cache write failed for ${regnr}: ${msg}`);
+    return false;
   }
 }
 
@@ -2560,6 +2563,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
   try {
   // 1. Lookup vehicle via SVV — typed result so we can distinguish auth vs not-found vs upstream
   let svvCacheHit = false;
+  let svvCacheWrite = false;
   let svvResult: SvvFetchResult;
   const cachedVehicle = await getCachedSvvVehicle(env.GLASS_CATALOG, regnr);
   if (cachedVehicle) {
@@ -2568,7 +2572,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
   } else {
     svvResult = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
     if (svvResult.status === "ok") {
-      await cacheSvvVehicle(env.GLASS_CATALOG, regnr, svvResult.vehicle);
+      svvCacheWrite = await cacheSvvVehicle(env.GLASS_CATALOG, regnr, svvResult.vehicle);
     }
   }
   let source = "svv.enkeltoppslag";
@@ -3173,6 +3177,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       confidence,
       layer,
       cache_hit: svvCacheHit,
+      cache_write: svvCacheWrite,
       confidenceInfo: {
         score: layer === -1 ? 100 : layer === 0 ? 95 : layer === 1 ? 85 : layer === 2 ? 65 : layer === 3 ? 45 : 25,
         label: confidence,
