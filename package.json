@@ -47,6 +47,7 @@
     "csv-stringify": "^6.7.0",
     "node-html-parser": "^7.1.0",
     "playwright": "^1.60.0",
+    "simple-icons": "^16.21.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 interface BrandInfo {
   name: string;
@@ -54,7 +54,34 @@ function getBrandInitials(name: string): string {
     .slice(0, 2);
 }
 
+// Logo map loaded once
+let logoMapCache: Record<string, string> | null = null;
+
+function useLogoMap() {
+  const [map, setMap] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (logoMapCache) {
+      setMap(logoMapCache);
+      return;
+    }
+    fetch('/brands/brand-logo-map.json')
+      .then((r) => r.json())
+      .then((data) => {
+        logoMapCache = data;
+        setMap(data);
+      })
+      .catch(() => {
+        logoMapCache = {};
+        setMap({});
+      });
+  }, []);
+
+  return map;
+}
+
 export function BrandGrid({ brands, selectedBrand, onSelect }: BrandGridProps) {
+  const logoMap = useLogoMap();
   const sorted = useMemo(() => {
     return [...brands].sort((a, b) => a.name.localeCompare(b.name));
   }, [brands]);
@@ -64,6 +91,7 @@ export function BrandGrid({ brands, selectedBrand, onSelect }: BrandGridProps) {
       {sorted.map((brand) => {
         const color = getBrandColor(brand.name);
         const isSelected = selectedBrand === brand.name;
+        const logoFile = logoMap[brand.name];
 
         return (
           <button
@@ -80,16 +108,33 @@ export function BrandGrid({ brands, selectedBrand, onSelect }: BrandGridProps) {
               }
             `}
           >
-            {/* Initial badge */}
-            <div
-              className={`
-                flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center
-                rounded-full text-lg sm:text-xl font-bold
-                transition-transform group-hover:scale-105
-                ${isSelected ? color.accent + ' text-white' : color.bg + ' ' + color.text}
-              `}
-            >
-              {getBrandInitials(brand.name)}
+            {/* Logo or Initial badge */}
+            <div className="relative h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center">
+              {logoFile ? (
+                <img
+                  src={`/brands/${logoFile}`}
+                  alt={brand.name}
+                  className="h-full w-full object-contain transition-transform group-hover:scale-105"
+                  onError={(e) => {
+                    // Hide broken image, show initials
+                    e.currentTarget.style.display = 'none';
+                  }}
+                  loading="lazy"
+                />
+              ) : null}
+              {/* Initials fallback — shown when no logo or on error */}
+              {!logoFile && (
+                <div
+                  className={`
+                    absolute inset-0 flex items-center justify-center
+                    rounded-full text-lg sm:text-xl font-bold
+                    transition-transform group-hover:scale-105
+                    ${isSelected ? color.accent + ' text-white' : color.bg + ' ' + color.text}
+                  `}
+                >
+                  {getBrandInitials(brand.name)}
+                </div>
+              )}
             </div>
 
             {/* Brand name */}
