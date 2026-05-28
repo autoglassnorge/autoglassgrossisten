@@ -1,4 +1,5 @@
 import { ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, Paperclip, Target } from 'lucide-react';
+import { GlassVisualizer } from './GlassVisualizer';
 
 function MatchScoreBadge({ score }: { score: number }) {
   // Normalize score to 0-100%
@@ -68,8 +69,8 @@ export function ProductCard({ product, onDetail }: ProductCardProps) {
             onError={() => setImgError(true)}
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-gray-400 text-sm">
-            Ingen bilde
+          <div className="h-full w-full p-3">
+            <GlassVisualizer product={product} className="h-full w-full" />
           </div>
         )}
 
