@@ -2797,35 +2797,46 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
 
   // Find matching glass in D1 (db already declared above)
   const candidates: GlassRecord[] = [];
+  const candidateCodes = new Set<string>(); // dedupe across all layers
   let layer = 4;
   let confidence: string = "none";
 
   // === Layer -1: Ground truth from auto-glass.no ===
+  // Ground truth is a full vehicle match — if we have it, trust it exclusively
   if (gtCandidates.length > 0) {
     candidates.push(...gtCandidates);
+    gtCandidates.forEach((c) => candidateCodes.add(c.eurocode));
     layer = -1;
     confidence = "exact";
   }
 
   // === Layer 0: kType exact match (statistical learning) ===
-  if (candidates.length === 0 && vehicle.k_type > 0) {
+  // kType identifies ONE specific glass, but a vehicle has MANY glass parts.
+  // We add kType matches, then continue to Layer 1-3 to find ALL glass for this model/year.
+  if (layer !== -1 && vehicle.k_type > 0) {
     // First: direct kType lookup in catalog (if ktype column is populated)
     const ktypeDirect = await queryByKtype(db, vehicle.k_type);
+    for (const c of ktypeDirect) {
+      if (!candidateCodes.has(c.eurocode)) {
+        candidates.push(c);
+        candidateCodes.add(c.eurocode);
+      }
+    }
     if (ktypeDirect.length > 0) {
-      candidates.push(...ktypeDirect);
       layer = 0;
       confidence = "exact";
     }
 
     // Second: statistical mapping from learned data — only trust if seen enough times
-    if (candidates.length === 0) {
+    if (ktypeDirect.length === 0) {
       const ktypeMappings = await queryKtypeMapping(db, vehicle.k_type);
       if (ktypeMappings.length > 0) {
         const topMapping = ktypeMappings[0];
         if (topMapping.frequency >= KTYPE_CONFIDENCE_THRESHOLD) {
           const mappedRecord = await queryByEurocode(db, topMapping.eurocode);
-          if (mappedRecord) {
+          if (mappedRecord && !candidateCodes.has(mappedRecord.eurocode)) {
             candidates.push(mappedRecord);
+            candidateCodes.add(mappedRecord.eurocode);
             layer = 0;
             // 'exact' only when overwhelming evidence (10+ hits); 'high' otherwise
             confidence = topMapping.frequency >= 10 ? "exact" : "high";
@@ -2837,7 +2848,9 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
   }
 
   // === Layer 1-3: brand + model + year matching ===
-  if (candidates.length === 0) {
+  // Run UNLESS ground truth (Layer -1) already gave us a full set.
+  // For kType (Layer 0), we CONTINUE here because kType = 1 glass, but vehicle = N glass.
+  if (layer !== -1) {
     let modelHint = vehicle.model.length >= 3 ? vehicle.model.toLowerCase() : undefined;
     let extraHints: string[] | undefined;
     if (vehicle.make.toLowerCase().includes("volkswagen")) {
@@ -2863,13 +2876,22 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
     const l1Model = l1Compatible.filter((r) => modelMatches(vehicle.model, r.model, vehicle.make));
 
     if (l1Model.length > 0) {
-      candidates.push(...l1Model);
-      layer = 1;
-      confidence = "high";
+      for (const c of l1Model) {
+        if (!candidateCodes.has(c.eurocode)) {
+          candidates.push(c);
+          candidateCodes.add(c.eurocode);
+        }
+      }
+      // Only bump layer down if we haven't already found something better
+      if (layer > 1) { layer = 1; confidence = "high"; }
     } else if (l1Compatible.length > 0) {
-      candidates.push(...l1Compatible);
-      layer = 2;
-      confidence = "medium";
+      for (const c of l1Compatible) {
+        if (!candidateCodes.has(c.eurocode)) {
+          candidates.push(c);
+          candidateCodes.add(c.eurocode);
+        }
+      }
+      if (layer > 2) { layer = 2; confidence = "medium"; }
     } else {
       const l3 = await queryByBrandOnly(db, vehicle.make, modelHint);
       let l3Extra: GlassRecord[] = [];
@@ -2884,9 +2906,13 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       const l3Deduped = l3All.filter((r) => { if (seen3.has(r.eurocode)) return false; seen3.add(r.eurocode); return true; });
       const l3Compatible = l3Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
       if (l3Compatible.length > 0) {
-        candidates.push(...l3Compatible);
-        layer = 3;
-        confidence = "medium";
+        for (const c of l3Compatible) {
+          if (!candidateCodes.has(c.eurocode)) {
+            candidates.push(c);
+            candidateCodes.add(c.eurocode);
+          }
+        }
+        if (layer > 3) { layer = 3; confidence = "medium"; }
       } else {
         // Layer 3b: brand-only without modelHint, then filter with modelMatches
         // This catches cases where SVV model has suffixes not in catalog (e.g. "WRANGLER UNLIMITED" vs "WRANGLER")
@@ -2894,13 +2920,21 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
         const l3bCompatible = l3b.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
         const l3bModel = l3bCompatible.filter((r) => modelMatches(vehicle.model, r.model, vehicle.make));
         if (l3bModel.length > 0) {
-          candidates.push(...l3bModel);
-          layer = 3;
-          confidence = "medium";
+          for (const c of l3bModel) {
+            if (!candidateCodes.has(c.eurocode)) {
+              candidates.push(c);
+              candidateCodes.add(c.eurocode);
+            }
+          }
+          if (layer > 3) { layer = 3; confidence = "medium"; }
         } else if (l3bCompatible.length > 0) {
-          candidates.push(...l3bCompatible);
-          layer = 3;
-          confidence = "low";
+          for (const c of l3bCompatible) {
+            if (!candidateCodes.has(c.eurocode)) {
+              candidates.push(c);
+              candidateCodes.add(c.eurocode);
+            }
+          }
+          if (layer > 3) { layer = 3; confidence = "low"; }
         }
       }
     }
