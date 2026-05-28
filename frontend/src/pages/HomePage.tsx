@@ -5,7 +5,6 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroSearch } from '@/components/home/HeroSearch';
 import { HeroVideo } from '@/components/home/HeroVideo';
 import { LiveStats } from '@/components/home/LiveStats';
-import { TrustStrip } from '@/components/home/TrustStrip';
 import { ProductCategories } from '@/components/home/ProductCategories';
 import { AdasSection } from '@/components/home/AdasSection';
 import { LogisticsMap } from '@/components/home/LogisticsMap';
@@ -143,9 +142,6 @@ export default function HomePage() {
         {/* Bottom fade */}
         <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-b from-transparent to-carbon-900 pointer-events-none z-10" />
       </section>
-
-      {/* ============================ TRUST STRIP ============================ */}
-      <TrustStrip />
 
       {/* ============================ LIVE STATS ============================ */}
       <LiveStats />
