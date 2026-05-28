@@ -361,7 +361,7 @@ function errorResponse(message: string, status = 400): Response {
 // CACHE (KV)
 // ============================================================================
 
-const CACHE_VERSION = "4";
+const CACHE_VERSION = "5";
 
 async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
   const cached = await kv.get(key);
@@ -916,7 +916,7 @@ async function queryByKtype(db: D1Database, ktype: number): Promise<GlassRecord[
  * before we trust it as 'exact'. Prevents single misclassifications from
  * permanently poisoning the cache.
  */
-const KTYPE_CONFIDENCE_THRESHOLD = 3;
+const KTYPE_CONFIDENCE_THRESHOLD = 5;
 
 /**
  * Query statistical ktype→eurocode mapping from learned data.
@@ -3242,11 +3242,17 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
         if (topMapping.frequency >= KTYPE_CONFIDENCE_THRESHOLD) {
           const mappedRecord = await queryByEurocode(db, topMapping.eurocode);
           if (mappedRecord && !candidateCodes.has(mappedRecord.eurocode)) {
-            candidates.push(mappedRecord);
-            candidateCodes.add(mappedRecord.eurocode);
-            layer = 0;
-            // 'exact' only when overwhelming evidence (10+ hits); 'high' otherwise
-            confidence = topMapping.frequency >= 10 ? "exact" : "high";
+            // Validate: mapped record must match vehicle brand and year
+            const brands = getBrandAliases(vehicle.make);
+            const brandMatch = brands.some(b => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
+            const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
+            if (brandMatch && yearMatch) {
+              candidates.push(mappedRecord);
+              candidateCodes.add(mappedRecord.eurocode);
+              layer = 0;
+              // 'exact' only when overwhelming evidence (10+ hits); 'high' otherwise
+              confidence = topMapping.frequency >= 10 ? "exact" : "high";
+            }
           }
         }
         // Below threshold — don't poison the result, let Layer 1-4 handle it
