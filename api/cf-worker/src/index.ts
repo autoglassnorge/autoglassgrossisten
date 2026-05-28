@@ -361,7 +361,7 @@ function errorResponse(message: string, status = 400): Response {
 // CACHE (KV)
 // ============================================================================
 
-const CACHE_VERSION = "3";
+const CACHE_VERSION = "4";
 
 async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
   const cached = await kv.get(key);
@@ -2207,6 +2207,234 @@ function expectedGeneration(brand: string, model: string, year: number): string 
     if (year <= 2020) return "5E";
     return "NX";
   }
+  // VW Golf
+  if (key.includes("volkswagen") && key.includes("golf")) {
+    if (year <= 1991) return "Mk1";
+    if (year <= 1997) return "Mk2";
+    if (year <= 2003) return "Mk3";
+    if (year <= 2008) return "Mk4";
+    if (year <= 2012) return "Mk5";
+    if (year <= 2019) return "Mk6/Mk7";
+    return "Mk8";
+  }
+  // VW Polo
+  if (key.includes("volkswagen") && key.includes("polo")) {
+    if (year <= 1994) return "86C";
+    if (year <= 1999) return "6N";
+    if (year <= 2001) return "6N2";
+    if (year <= 2005) return "9N";
+    if (year <= 2009) return "9N3";
+    if (year <= 2017) return "6R/6C";
+    return "AW";
+  }
+  // VW Passat
+  if (key.includes("volkswagen") && key.includes("passat")) {
+    if (year <= 1980) return "B1";
+    if (year <= 1988) return "B2";
+    if (year <= 1993) return "B3";
+    if (year <= 1996) return "B4";
+    if (year <= 2000) return "B5";
+    if (year <= 2005) return "B5.5";
+    if (year <= 2010) return "B6";
+    if (year <= 2014) return "B7";
+    return "B8";
+  }
+  // Toyota Corolla
+  if (key.includes("toyota") && key.includes("corolla")) {
+    if (year <= 1983) return "E30";
+    if (year <= 1987) return "E80";
+    if (year <= 1991) return "E90";
+    if (year <= 1997) return "E100";
+    if (year <= 2000) return "E110";
+    if (year <= 2006) return "E120";
+    if (year <= 2013) return "E140";
+    if (year <= 2018) return "E170";
+    return "E210";
+  }
+  // Toyota Yaris
+  if (key.includes("toyota") && key.includes("yaris")) {
+    if (year <= 2005) return "P1";
+    if (year <= 2011) return "P9";
+    if (year <= 2020) return "XP13";
+    return "XP21";
+  }
+  // Toyota Avensis
+  if (key.includes("toyota") && key.includes("avensis")) {
+    if (year <= 2003) return "T220";
+    if (year <= 2009) return "T250";
+    if (year <= 2018) return "T270";
+    return null;
+  }
+  // Ford Mondeo
+  if (key.includes("ford") && key.includes("mondeo")) {
+    if (year <= 1996) return "Mk1";
+    if (year <= 2000) return "Mk2";
+    if (year <= 2007) return "Mk3";
+    if (year <= 2014) return "Mk4";
+    return "Mk5";
+  }
+  // Ford Fiesta
+  if (key.includes("ford") && key.includes("fiesta")) {
+    if (year <= 1983) return "Mk1";
+    if (year <= 1989) return "Mk2";
+    if (year <= 1995) return "Mk3";
+    if (year <= 1999) return "Mk4";
+    if (year <= 2002) return "Mk5";
+    if (year <= 2008) return "Mk6";
+    if (year <= 2017) return "Mk7";
+    return "Mk8";
+  }
+  // Opel Astra
+  if (key.includes("opel") && key.includes("astra")) {
+    if (year <= 1991) return "F";
+    if (year <= 1998) return "G";
+    if (year <= 2004) return "H";
+    if (year <= 2009) return "J";
+    if (year <= 2021) return "K";
+    return "L";
+  }
+  // Opel Corsa
+  if (key.includes("opel") && key.includes("corsa")) {
+    if (year <= 1993) return "A";
+    if (year <= 2000) return "B";
+    if (year <= 2006) return "C";
+    if (year <= 2014) return "D";
+    if (year <= 2019) return "E";
+    return "F";
+  }
+  // Renault Clio
+  if (key.includes("renault") && key.includes("clio")) {
+    if (year <= 1998) return "I";
+    if (year <= 2005) return "II";
+    if (year <= 2012) return "III";
+    if (year <= 2019) return "IV";
+    return "V";
+  }
+  // Renault Megane
+  if (key.includes("renault") && key.includes("megane")) {
+    if (year <= 2002) return "I";
+    if (year <= 2008) return "II";
+    if (year <= 2015) return "III";
+    if (year <= 2021) return "IV";
+    return "V";
+  }
+  // Peugeot 307
+  if (key.includes("peugeot") && key.includes("307")) {
+    if (year <= 2008) return "307";
+    return null;
+  }
+  // Peugeot 308
+  if (key.includes("peugeot") && key.includes("308")) {
+    if (year <= 2013) return "T7";
+    if (year <= 2021) return "T9";
+    return "P5";
+  }
+  // Peugeot 208
+  if (key.includes("peugeot") && key.includes("208")) {
+    if (year <= 2019) return "I";
+    return "II";
+  }
+  // Honda Civic
+  if (key.includes("honda") && key.includes("civic")) {
+    if (year <= 1983) return "SB/SA";
+    if (year <= 1987) return "AG/AH";
+    if (year <= 1991) return "EC/ED/EE/EF";
+    if (year <= 1995) return "EG/EH/EJ";
+    if (year <= 2000) return "EK";
+    if (year <= 2005) return "EP/EU/EM";
+    if (year <= 2011) return "FN/FK";
+    if (year <= 2016) return "FB/FG";
+    return "FK/FL";
+  }
+  // Honda CR-V
+  if (key.includes("honda") && key.includes("cr-v")) {
+    if (year <= 2001) return "RD";
+    if (year <= 2006) return "RD4";
+    if (year <= 2012) return "RE";
+    if (year <= 2016) return "RM";
+    return "RW";
+  }
+  // Citroen C4
+  if (key.includes("citroen") && key.includes("c4")) {
+    if (year <= 2010) return "I";
+    if (year <= 2020) return "II";
+    return "III";
+  }
+  // Citroen C3
+  if (key.includes("citroen") && key.includes("c3")) {
+    if (year <= 2009) return "I";
+    if (year <= 2016) return "II";
+    return "III";
+  }
+  // Hyundai i30
+  if (key.includes("hyundai") && key.includes("i30")) {
+    if (year <= 2011) return "FD";
+    if (year <= 2017) return "GD";
+    if (year <= 2023) return "PD";
+    return "BN7";
+  }
+  // Hyundai i20
+  if (key.includes("hyundai") && key.includes("i20")) {
+    if (year <= 2014) return "PB";
+    if (year <= 2020) return "GB";
+    return "BC3";
+  }
+  // Nissan Micra
+  if (key.includes("nissan") && key.includes("micra")) {
+    if (year <= 1992) return "K10";
+    if (year <= 2002) return "K11";
+    if (year <= 2010) return "K12";
+    if (year <= 2016) return "K13";
+    return "K14";
+  }
+  // Nissan X-Trail
+  if (key.includes("nissan") && key.includes("x-trail")) {
+    if (year <= 2007) return "T30";
+    if (year <= 2013) return "T31";
+    if (year <= 2021) return "T32";
+    return "T33";
+  }
+  // Skoda Fabia
+  if (key.includes("skoda") && key.includes("fabia")) {
+    if (year <= 2007) return "6Y";
+    if (year <= 2014) return "5J";
+    if (year <= 2021) return "NJ";
+    return "PJ";
+  }
+  // Seat Leon
+  if (key.includes("seat") && key.includes("leon")) {
+    if (year <= 2005) return "1M";
+    if (year <= 2012) return "1P";
+    if (year <= 2020) return "5F";
+    return "KL";
+  }
+  // Mercedes A-Class
+  if (key.includes("mercedes") && key.includes("a")) {
+    if (year <= 1997) return "W168";
+    if (year <= 2012) return "W169";
+    if (year <= 2018) return "W176";
+    return "W177";
+  }
+  // BMW 1-series
+  if (key.includes("bmw") && (key.includes("1") || key.includes("en"))) {
+    if (year <= 2011) return "E87";
+    if (year <= 2019) return "F20";
+    return "F40";
+  }
+  // Audi A6
+  if (key.includes("audi") && key.includes("6")) {
+    if (year <= 1997) return "C4";
+    if (year <= 2004) return "C5";
+    if (year <= 2011) return "C6";
+    if (year <= 2018) return "C7";
+    return "C8";
+  }
+  // Volvo S60/V60
+  if (key.includes("volvo") && key.includes("60")) {
+    if (year <= 2009) return "P2";
+    if (year <= 2018) return "P3";
+    return "SPA";
+  }
   return null;
 }
 
@@ -2567,6 +2795,15 @@ function modelMatches(vehicleModel: string, recordModel: string | null, vehicleM
       const vmGen = vm.match(/\b(t[456])\b/);
       const rmGen = rm.match(/\b(t[456])\b/);
       if (!vmGen || !rmGen || vmGen[1] === rmGen[1]) return true;
+    }
+  }
+
+  // Peugeot/Citroen variant handling (e.g. "307 -SW 4D STV" vs "307")
+  if (make.includes("peugeot") || make.includes("citroen")) {
+    const baseModel = vm.match(/^(\d{2,4})/);
+    const rBaseModel = rm.match(/^(\d{2,4})/);
+    if (baseModel && rBaseModel && baseModel[1] === rBaseModel[1]) {
+      return true;
     }
   }
 
