@@ -18,7 +18,7 @@ const Y = "\x1b[33m";
 const RESET = "\x1b[0m";
 
 const TEST_REGNRS = [
-  { regnr: "SU18018", expectedMake: "VOLKSWAGEN" },
+  { regnr: "SU18018", expectedMake: "VW" },
 ];
 
 let passed = 0;

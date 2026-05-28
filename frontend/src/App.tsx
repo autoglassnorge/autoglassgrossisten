@@ -7,6 +7,7 @@ import SearchPage from '@/pages/SearchPage'
 import AccountPage from '@/pages/AccountPage'
 import BrowsePage from '@/pages/BrowsePage'
 import BilglassguidePage from '@/pages/BilglassguidePage'
+import FrontrutePage from '@/pages/bilglassguide/FrontrutePage'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/katalog" element={<CatalogPage />} />
           <Route path="/bla" element={<BrowsePage />} />
           <Route path="/bilglassguide" element={<BilglassguidePage />} />
+          <Route path="/bilglassguide/frontrute" element={<FrontrutePage />} />
           <Route path="/sok" element={<SearchPage />} />
           <Route path="/kasse" element={<AccountPage />} />
           <Route path="*" element={
