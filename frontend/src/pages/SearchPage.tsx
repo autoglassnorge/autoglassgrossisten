@@ -8,6 +8,7 @@ import { searchByRegnr, SearchError } from '@/api/glass';
 import { formatLayerLabel, formatConfidence } from '@/utils/formatters';
 
 import { VehicleCard } from '@/components/search/VehicleCard';
+import { KtypeInfoBadge } from '@/components/search/KtypeInfoBadge';
 import { CalibrationInfoPanel } from '@/components/search/CalibrationInfoPanel';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
 import { EquipmentVerifier } from '@/components/search/EquipmentVerifier';
@@ -158,6 +159,11 @@ export default function SearchPage() {
             equipment={data.equipment}
             regnr={data.regnr}
           />
+
+          {/* kType enrichment (subtle — internal reference) */}
+          {data.ktypeInfo && (
+            <KtypeInfoBadge ktypeInfo={data.ktypeInfo} />
+          )}
 
           {/* ADAS calibration requirements */}
           {data.calibrationRequirements && data.calibrationRequirements.length > 0 && (

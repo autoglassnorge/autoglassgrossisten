@@ -7,7 +7,7 @@
  * Hella Gutmann CSC list, prioritizing models with the most sensors.
  *
  * Usage:
- *   node scripts/scrape-finn-targeted.mjs [--limit=N] [--delay=MS] [--pages-per-query=N]
+ *   node scripts/scrape-finn-targeted.mjs [--limit=N] [--delay=MS] [--pages-per-query=N] [--resume]
  *
  * Strategy:
  *   1. Read Hella Gutmann brand+model list
@@ -17,7 +17,7 @@
  *   5. Deduplicate and output
  */
 
-import { readFileSync, writeFileSync, existsSync, appendFileSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, appendFileSync, mkdirSync, renameSync } from "fs";
 import { resolve } from "path";
 
 const OUTPUT_DIR = resolve(process.cwd(), "data", "finn-no-regnr");
@@ -29,6 +29,7 @@ const DEFAULT_CONFIG = {
   limit: 200,              // Max brand+model queries to run
   pagesPerQuery: 3,        // Pages to scrape per query (3 × 50 = 150 ads)
   requestDelayMs: 500,
+  requestTimeoutMs: 25000, // Hard per-request deadline (must be < 30s to beat fetch stalls)
   batchSize: 50,
   maxRetries: 3,
   userAgent: "AutoglassAS-B2B-Scraper/1.0 (+https://auto-glass.no; contact@auto-glass.no)",
@@ -40,7 +41,9 @@ function parseArgs() {
   for (const arg of args) {
     if (arg.startsWith("--limit=")) opts.limit = parseInt(arg.split("=")[1], 10);
     if (arg.startsWith("--pages-per-query=")) opts.pagesPerQuery = parseInt(arg.split("=")[1], 10);
-    if (arg.startsWith("--delay=")) opts.delay = parseInt(arg.split("=")[1], 10);
+    if (arg.startsWith("--delay=")) opts.requestDelayMs = parseInt(arg.split("=")[1], 10);
+    if (arg.startsWith("--timeout=")) opts.requestTimeoutMs = parseInt(arg.split("=")[1], 10);
+    if (arg === "--resume") opts.resume = true;
   }
   return opts;
 }
@@ -49,12 +52,28 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function fetchWithRetry(url, config, retries = 3) {
-  for (let i = 0; i < retries; i++) {
+/**
+ * Race fetch against a hard timer promise.
+ * Even if fetch ignores AbortSignal, the timer WILL reject.
+ */
+function hardTimeout(ms, label) {
+  return new Promise((_, reject) => {
+    const timer = setTimeout(() => {
+      reject(new Error(`HARD TIMEOUT after ${ms}ms (${label})`));
+    }, ms);
+    // Prevent timer from keeping process alive if everything else finishes
+    if (timer.unref) timer.unref();
+  });
+}
+
+async function fetchWithRetry(url, config, retries = null) {
+  const maxRetries = retries ?? config.maxRetries ?? 3;
+  const timeoutMs = config.requestTimeoutMs ?? 25000;
+
+  for (let i = 0; i < maxRetries; i++) {
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 30000);
-      const res = await fetch(url, {
+      const fetchPromise = fetch(url, {
         headers: {
           "User-Agent": config.userAgent,
           "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -62,21 +81,34 @@ async function fetchWithRetry(url, config, retries = 3) {
         },
         signal: controller.signal,
       });
-      clearTimeout(timeout);
+
+      // Start abort timer so fetch gets a signal, but ALSO race against a hard timer
+      const abortTimer = setTimeout(() => controller.abort(), timeoutMs);
+      if (abortTimer.unref) abortTimer.unref();
+
+      const res = await Promise.race([
+        fetchPromise,
+        hardTimeout(timeoutMs + 2000, url), // hard deadline slightly after abort
+      ]);
+
+      clearTimeout(abortTimer);
 
       if (res.status === 429) {
-        console.warn(`   ⚠️  HTTP 429 — waiting 60s...`);
+        process.stdout.write(`   ⚠️  HTTP 429 — waiting 60s...\n`);
         await sleep(60_000);
         continue;
       }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.text();
     } catch (e) {
-      if (i === retries - 1) throw e;
-      await sleep(config.requestDelayMs * (i + 1));
+      const isLast = i === maxRetries - 1;
+      if (isLast) throw e;
+      const backoff = config.requestDelayMs * (i + 1);
+      process.stdout.write(`   ⚠️  fetch error (attempt ${i + 1}/${maxRetries}): ${e.message} — backing off ${backoff}ms\n`);
+      await sleep(backoff);
     }
   }
-  throw new Error("Max retries");
+  throw new Error("Max retries exceeded");
 }
 
 function parseSearchPage(html, query) {
@@ -142,14 +174,24 @@ async function main() {
   // Sort by sensor count (descending)
   queries.sort((a, b) => b.sensors.length - a.sensors.length);
 
-  // Load checkpoint
+  // Determine start position
   let startIdx = 0;
   let totalRegnr = 0;
-  if (existsSync(CHECKPOINT_FILE)) {
-    const cp = JSON.parse(readFileSync(CHECKPOINT_FILE, "utf-8"));
-    startIdx = cp.lastQueryIndex || 0;
-    totalRegnr = cp.totalRegnr || 0;
-    console.log(`🔄 Resuming from query ${startIdx} (${totalRegnr} regnr so far)\n`);
+  const shouldResume = config.resume && existsSync(CHECKPOINT_FILE);
+
+  if (shouldResume) {
+    try {
+      const cp = JSON.parse(readFileSync(CHECKPOINT_FILE, "utf-8"));
+      startIdx = cp.lastQueryIndex || 0;
+      totalRegnr = cp.totalRegnr || 0;
+      console.log(`🔄 Resuming from query ${startIdx} (${totalRegnr} regnr so far)\n`);
+    } catch (e) {
+      console.warn(`⚠️  Failed to read checkpoint, starting from scratch: ${e.message}\n`);
+      startIdx = 0;
+      totalRegnr = 0;
+    }
+  } else if (config.resume) {
+    console.log(`⚠️  --resume requested but no checkpoint found. Starting from scratch.\n`);
   }
 
   const queriesToRun = queries.slice(startIdx, startIdx + config.limit);
@@ -159,6 +201,7 @@ async function main() {
   console.log(`   Queries: ${queriesToRun.length} (from ${startIdx} to ${startIdx + queriesToRun.length})`);
   console.log(`   Pages per query: ${config.pagesPerQuery}`);
   console.log(`   Delay: ${config.requestDelayMs}ms`);
+  console.log(`   Timeout: ${config.requestTimeoutMs}ms`);
   console.log(`   Est. ads: ~${queriesToRun.length * config.pagesPerQuery * 40}`);
   console.log("");
 
@@ -167,13 +210,25 @@ async function main() {
   let batch = [];
   const startTime = Date.now();
 
+  // Helper to persist batch and checkpoint atomically-ish
+  function flushBatchAndCheckpoint(queryIndex, isDone = false) {
+    if (batch.length > 0) {
+      appendFileSync(RESULTS_FILE, batch.map((r) => JSON.stringify(r)).join("\n") + "\n");
+      batch = [];
+    }
+    saveCheckpoint(queryIndex, totalRegnr, isDone);
+  }
+
   for (let qi = 0; qi < queriesToRun.length; qi++) {
     const q = queriesToRun[qi];
     const globalIdx = startIdx + qi;
 
-    console.log(`[${globalIdx + 1}/${queries.length}] ${q.query} (${q.sensors.length} sensors)`);
+    process.stdout.write(`[${globalIdx + 1}/${queries.length}] ${q.query} (${q.sensors.length} sensors)`);
 
     // Search multiple pages for this query
+    let queryAdsScanned = 0;
+    let queryRegnrFound = 0;
+
     for (let page = 1; page <= config.pagesPerQuery; page++) {
       const url = `https://www.finn.no/mobility/search/car?q=${encodeURIComponent(q.query)}&registration_class=1&page=${page}`;
 
@@ -183,10 +238,12 @@ async function main() {
 
         if (ads.length === 0) {
           if (page === 1) {
-            console.log(`   No results for this query`);
+            process.stdout.write(` — no results`);
           }
           break; // No more pages
         }
+
+        queryAdsScanned += ads.length;
 
         // Scrape each ad page for regnr
         for (const ad of ads) {
@@ -210,40 +267,39 @@ async function main() {
                 scrapedAt: new Date().toISOString(),
               });
               totalRegnr++;
+              queryRegnrFound++;
             }
-          } catch {
+          } catch (e) {
             // Skip failed ad pages
           }
 
           await sleep(config.requestDelayMs);
         }
 
-        // Flush batch
+        // Flush batch when it reaches batchSize
         if (batch.length >= config.batchSize) {
           appendFileSync(RESULTS_FILE, batch.map((r) => JSON.stringify(r)).join("\n") + "\n");
           batch = [];
-          saveCheckpoint(globalIdx + 1, totalRegnr);
         }
 
       } catch (e) {
-        console.warn(`   Error on page ${page}: ${e.message}`);
+        process.stdout.write(` — page ${page} error: ${e.message}`);
       }
 
       await sleep(config.requestDelayMs);
     }
 
-    // Progress
-    const pct = (((qi + 1) / queriesToRun.length) * 100).toFixed(0);
+    // Save checkpoint after EVERY query completes
+    flushBatchAndCheckpoint(globalIdx + 1);
+
+    // Progress line (overwrite-friendly or newline)
+    const pct = (((qi + 1) / queriesToRun.length) * 100).toFixed(1);
     const elapsed = ((Date.now() - startTime) / 1000 / 60).toFixed(1);
-    console.log(`   → ${pct}% | ${totalRegnr} unique regnr | ${elapsed}min`);
+    process.stdout.write(` → ${pct}% | ${totalRegnr} unique regnr | ${elapsed}min | +${queryRegnrFound} this query (${queryAdsScanned} ads scanned)\n`);
   }
 
   // Final flush
-  if (batch.length > 0) {
-    appendFileSync(RESULTS_FILE, batch.map((r) => JSON.stringify(r)).join("\n") + "\n");
-  }
-
-  saveCheckpoint(startIdx + queriesToRun.length, totalRegnr, true);
+  flushBatchAndCheckpoint(startIdx + queriesToRun.length, true);
 
   // Generate report
   const report = {
@@ -262,7 +318,15 @@ async function main() {
 }
 
 function saveCheckpoint(lastQueryIndex, totalRegnr, done = false) {
-  writeFileSync(CHECKPOINT_FILE, JSON.stringify({ lastQueryIndex, totalRegnr, done }, null, 2));
+  const tmp = CHECKPOINT_FILE + ".tmp";
+  const payload = JSON.stringify({ lastQueryIndex, totalRegnr, done, at: new Date().toISOString() }, null, 2);
+  writeFileSync(tmp, payload);
+  // Atomic-ish rename
+  try {
+    renameSync(tmp, CHECKPOINT_FILE);
+  } catch {
+    writeFileSync(CHECKPOINT_FILE, payload);
+  }
 }
 
 function countByBrand(file) {
@@ -283,6 +347,6 @@ function countByBrand(file) {
 }
 
 main().catch((e) => {
-  console.error("❌ Fatal error:", e.message);
+  console.error("\n❌ Fatal error:", e.message);
   process.exit(1);
 });

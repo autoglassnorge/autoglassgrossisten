@@ -104,6 +104,16 @@ export interface CalibrationRequirement {
   notes: string | null;
 }
 
+export interface KtypeInfo {
+  ktype: number;
+  brand: string;
+  model: string;
+  yearFrom: number;
+  yearTo: number;
+  body?: string | null;
+  source: string;
+}
+
 export interface SearchResult {
   vehicle: VehicleInfo;
   candidates: Product[];
@@ -112,6 +122,9 @@ export interface SearchResult {
   equipment?: EquipmentFlags;
   regnr?: string;
   calibrationRequirements?: CalibrationRequirement[];
+
+  // NEW: kType enrichment from Bovsoft/Finn.no
+  ktypeInfo?: KtypeInfo;
 
   // NEW: structured confidence + grouped results
   confidenceInfo?: ConfidenceInfo;

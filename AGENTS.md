@@ -90,6 +90,9 @@ kimi glass-ktype   # kType specialist — Bovsoft, SVV, statistisk læring
 ├── data/
 │   ├── catalog-prod.json        # 37 581 unike eurokoder (produksjon)
 │   ├── ktype-prefix4-cache.json # brand:model:year → prefix4
+│   ├── csc-parsed/
+│   │   └── finn-search-queries.json  # 503 søke-spørringer (Hella Gutmann)
+│   ├── finn-no-regnr/           # Scraper-output (Finn.no annonser)
 │   └── scrapers/                # NDJSON checkpoint + produkter
 ├── docs/                   # Dokumentasjon (NYTT)
 │   ├── adr/                # Arkitektur-beslutninger
@@ -115,6 +118,13 @@ kimi glass-ktype   # kType specialist — Bovsoft, SVV, statistisk læring
 npm run scrape:glavista
 npm run scrape:pilkington
 npm run scrape:pilkington:v2:loop
+npm run scrape:finn-targeted       # Målrettet Finn.no scraper (Hella Gutmann)
+npm run scrape:finn-targeted:test  # Test-modus (10 spørringer)
+
+# kType-pipeline
+npm run verify:bovsoft             # Verifiser regnr mot Bovsoft API
+npm run generate:ktype-inserts     # Generer D1 SQL inserts
+node scripts/bootstrap-bovsoft-v2.mjs  # Forbedret Bovsoft bootstrap
 
 # Pris-oppdatering
 npm run price:check                  # Dry-run pris-sjekk
@@ -151,12 +161,26 @@ regnr → SVV Enkeltoppslag → kjøretøy-data (merke, modell, år)
                     ↓
             VIN → OEM-flagg (ADAS, regnsensor, etc.)
                     ↓
+        ktype_registry (D1) ← Bovsoft API
+                    ↓
         brand:model:year → prefix4-cache
                     ↓
             prefix4 → kandidater fra master-katalog
                     ↓
     4-lags matching + flagg-scoring → resultat
 ```
+
+### kType-pipeline
+
+```
+Finn.no → Bovsoft → ktype_registry → Worker API → Frontend
+```
+
+- **Finn.no:** Målrettet scraping av Hella Gutmann-annonser (`scrape:finn-targeted`)
+- **Bovsoft:** Regnr-verifisering og kType-oppslag (`verify:bovsoft`)
+- **ktype_registry:** D1-tabell for kType → kjøretøy-mapping
+- **Worker API:** Oppslag mot `ktype_registry` før prefix4-fallback
+- **Frontend:** viser kType-spesifikk matching der tilgjengelig
 
 ---
 
@@ -227,4 +251,4 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 ---
 
 **Sist oppdatert:** 2026-05-27  
-**Versjon:** 2.3 (+KIMI CLI v1.45.0 & MemPalace v3.5.0)
+**Versjon:** 2.4 (+Finn.no/Bovsoft kType-pipeline)
