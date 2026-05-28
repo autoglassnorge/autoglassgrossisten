@@ -3552,13 +3552,13 @@ export default {
         const cacheKeyParams: Record<string, string> = { regnr };
         if (categoryFilter) cacheKeyParams.category = categoryFilter;
         // Cache hit — always 200 (we only cache successful lookups)
-        const cache = await getCache<unknown>(env.GLASS_CATALOG, cacheKey("glass", cacheKeyParams));
+        const cache = await getCache<unknown>(env.GLASS_CATALOG, cacheKey("glass-v2", cacheKeyParams));
         if (cache) return jsonResponse(cache);
 
         const result = await searchByRegnr(regnr, env, categoryFilter || undefined);
         // Only cache successful 200 responses; never cache errors (auth/upstream/not_found)
         if (result.httpStatus === 200) {
-          await setCache(env.GLASS_CATALOG, cacheKey("glass", cacheKeyParams), result.body, 300);
+          await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", cacheKeyParams), result.body, 300);
         }
         const extraHeaders: Record<string, string> = {};
         if (result.retryAfter) extraHeaders["Retry-After"] = String(result.retryAfter);
@@ -3566,22 +3566,22 @@ export default {
       }
 
       if (prefix4) {
-        const cache = await getCache(env.GLASS_CATALOG, cacheKey("glass", { prefix4 }));
+        const cache = await getCache(env.GLASS_CATALOG, cacheKey("glass-v2", { prefix4 }));
         if (cache) return jsonResponse(cache);
 
         const results = await queryByPrefix4(env.GLASS_CATALOG_D1, prefix4);
         const data = { query: { prefix4 }, count: results.length, results: results.map(normalizeRecord) };
-        await setCache(env.GLASS_CATALOG, cacheKey("glass", { prefix4 }), data, 3600);
+        await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", { prefix4 }), data, 3600);
         return jsonResponse(data);
       }
 
       if (eurocode) {
-        const cache = await getCache(env.GLASS_CATALOG, cacheKey("glass", { eurocode }));
+        const cache = await getCache(env.GLASS_CATALOG, cacheKey("glass-v2", { eurocode }));
         if (cache) return jsonResponse(cache);
 
         const result = await queryByEurocode(env.GLASS_CATALOG_D1, eurocode);
         const data = { query: { eurocode }, count: result ? 1 : 0, results: result ? [normalizeRecord(result)] : [] };
-        await setCache(env.GLASS_CATALOG, cacheKey("glass", { eurocode }), data, 3600);
+        await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", { eurocode }), data, 3600);
         return jsonResponse(data);
       }
 
