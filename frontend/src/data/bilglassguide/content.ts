@@ -89,5 +89,28 @@ export const ARTICLES: ArticleMeta[] = [
     publishedAt: '2025-05-28',
     modifiedAt: '2025-05-28',
   },
-  // Foundation for expansion — add more articles here
+  {
+    slug: 'frontrute-adas-kamera',
+    title: 'Frontrute med ADAS-kamera — optisk sone og kalibrering',
+    description: 'Alt du trenger å vite om frontruter med ADAS-kamera: optisk sone, monteringsvinkel, ECE R43, kalibrering og konsekvensen av feil glassvalg.',
+    category: 'frontrute',
+    publishedAt: '2025-05-28',
+    modifiedAt: '2025-05-28',
+  },
+  {
+    slug: 'kalibrering-etter-ruteskift',
+    title: 'Kalibrering etter ruteskift — hvorfor og hvordan',
+    description: 'Alt du trenger å vite om ADAS-kalibrering etter ruteskift: statisk vs dynamisk, CSC-verktøy, target-plate og konsekvenser av å utelate kalibrering.',
+    category: 'adas',
+    publishedAt: '2025-05-28',
+    modifiedAt: '2025-05-28',
+  },
+  {
+    slug: 'oem-vs-aftermarket',
+    title: 'OEM vs aftermarket bilglass — hva er forskjellen?',
+    description: 'Faktisk sammenligning av OEM, OEE og aftermarket bilglass: produsenter, sertifisering, kvalitetsforskjeller og når OEM er obligatorisk.',
+    category: 'produsenter',
+    publishedAt: '2025-05-28',
+    modifiedAt: '2025-05-28',
+  },
 ];

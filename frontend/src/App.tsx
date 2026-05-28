@@ -8,6 +8,9 @@ import AccountPage from '@/pages/AccountPage'
 import BrowsePage from '@/pages/BrowsePage'
 import BilglassguidePage from '@/pages/BilglassguidePage'
 import FrontrutePage from '@/pages/bilglassguide/FrontrutePage'
+import AdasKameraPage from '@/pages/bilglassguide/AdasKameraPage'
+import KalibreringPage from '@/pages/bilglassguide/KalibreringPage'
+import OemAftermarketPage from '@/pages/bilglassguide/OemAftermarketPage'
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
           <Route path="/bla" element={<BrowsePage />} />
           <Route path="/bilglassguide" element={<BilglassguidePage />} />
           <Route path="/bilglassguide/frontrute" element={<FrontrutePage />} />
+          <Route path="/bilglassguide/frontrute-adas-kamera" element={<AdasKameraPage />} />
+          <Route path="/bilglassguide/kalibrering-etter-ruteskift" element={<KalibreringPage />} />
+          <Route path="/bilglassguide/oem-vs-aftermarket" element={<OemAftermarketPage />} />
           <Route path="/sok" element={<SearchPage />} />
           <Route path="/kasse" element={<AccountPage />} />
           <Route path="*" element={
