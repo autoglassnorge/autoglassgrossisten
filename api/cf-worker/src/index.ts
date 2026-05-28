@@ -876,7 +876,7 @@ async function queryByBrandAndYear(
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 500";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 2000";
   const { results } = await db.prepare(sql).bind(...params).all();
   return (results || []) as unknown as GlassRecord[];
 }
