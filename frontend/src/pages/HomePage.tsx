@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/i18n/I18nProvider';
+import { PageMeta } from '@/components/seo/PageMeta';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroSearch } from '@/components/home/HeroSearch';
 import { HeroVideo } from '@/components/home/HeroVideo';
 import { LiveStats } from '@/components/home/LiveStats';
@@ -14,6 +16,47 @@ export default function HomePage() {
   const { t } = useI18n();
 
   return (
+    <>
+      <PageMeta
+        title="Autoglass AS — B2B grossist av bilglass i Norge"
+        description="Norges største grossist av bilglass. 37 500+ produkter, neste-dag-levering, ADAS-kompatibilitet og OEM-kvalitet. Søk med registreringsnummer."
+        canonicalPath="/"
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'Organization',
+              '@id': 'https://autoglass-frontend.pages.dev/#organization',
+              name: 'Autoglass AS',
+              url: 'https://autoglass-frontend.pages.dev/',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://autoglass-frontend.pages.dev/logo.png',
+              },
+              description: 'Norges største B2B-grossist av bilglass.',
+              sameAs: [],
+            },
+            {
+              '@type': 'WebSite',
+              '@id': 'https://autoglass-frontend.pages.dev/#website',
+              url: 'https://autoglass-frontend.pages.dev/',
+              name: 'Autoglass AS',
+              publisher: { '@id': 'https://autoglass-frontend.pages.dev/#organization' },
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: {
+                  '@type': 'EntryPoint',
+                  urlTemplate: 'https://autoglass-frontend.pages.dev/sok?regnr={search_term_string}',
+                },
+                'query-input': 'required name=search_term_string',
+              },
+            },
+          ],
+        }}
+      />
+
     <div className="bg-carbon-950 text-white">
       {/* ============================ HERO ============================ */}
       <section className="relative overflow-hidden bg-carbon-950">
@@ -115,6 +158,7 @@ export default function HomePage() {
       {/* ============================ CTA ============================ */}
       <CtaBanner />
     </div>
+    </>
   );
 }
 
