@@ -107,7 +107,7 @@ export function FilterPanel({ filters, availableFilters, onChange }: FilterPanel
       </AccordionSection>
 
       {/* Equipment */}
-      <AccordionSection title="Utstyr">
+      <AccordionSection title="Utstyr" defaultOpen>
         <div className="space-y-1.5">
           {EQUIPMENT_OPTIONS.map((opt) => (
             <label key={opt.key} className="flex items-center gap-2.5 text-sm cursor-pointer">
@@ -131,7 +131,7 @@ export function FilterPanel({ filters, availableFilters, onChange }: FilterPanel
       </AccordionSection>
 
       {/* Brand */}
-      <AccordionSection title="Merke">
+      <AccordionSection title="Merke" defaultOpen>
         <div className="max-h-48 overflow-y-auto space-y-1 pr-2">
           {availableFilters.brands.map((brand) => (
             <label key={brand} className="flex items-center gap-2.5 text-sm cursor-pointer">
@@ -155,7 +155,7 @@ export function FilterPanel({ filters, availableFilters, onChange }: FilterPanel
       </AccordionSection>
 
       {/* Year */}
-      <AccordionSection title="Årsmodell">
+      <AccordionSection title="Årsmodell" defaultOpen>
         <div className="flex items-center gap-2">
           <input
             type="number"
@@ -176,7 +176,7 @@ export function FilterPanel({ filters, availableFilters, onChange }: FilterPanel
       </AccordionSection>
 
       {/* Price Range */}
-      <AccordionSection title="Pris">
+      <AccordionSection title="Pris" defaultOpen>
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm text-gray-600">
             <span>{priceMin.toLocaleString('no-NO')} kr</span>
@@ -211,7 +211,7 @@ export function FilterPanel({ filters, availableFilters, onChange }: FilterPanel
       </AccordionSection>
 
       {/* Stock Status */}
-      <AccordionSection title="Lagerstatus">
+      <AccordionSection title="Lagerstatus" defaultOpen>
         <label className="flex items-center gap-2.5 text-sm cursor-pointer">
           <input
             type="checkbox"
