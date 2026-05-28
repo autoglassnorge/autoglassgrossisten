@@ -86,6 +86,19 @@ interface GlassRecord {
   nagsCodes?: string[];
 }
 
+interface VehicleFingerprint {
+  id: number;
+  make: string;
+  type_code: string;
+  year_from: number | null;
+  year_to: number | null;
+  model_hint: string | null;
+  models: string;
+  engine_codes: string | null;
+  fuel_codes: string | null;
+  sample_count: number;
+}
+
 /** Generate a clean, standardized title from catalog record data */
 function generateTitle(r: GlassRecord): string {
   const parts: string[] = [];
@@ -666,6 +679,27 @@ async function queryByEurocode(db: D1Database, eurocode: string): Promise<GlassR
     .bind(eurocode)
     .first();
   return result as unknown as GlassRecord | null;
+}
+
+/** Query vehicle fingerprint from D1 for typeCode-based model/generation matching */
+async function queryVehicleFingerprint(db: D1Database, make: string, typeCode: string, year: number): Promise<VehicleFingerprint | null> {
+  if (!typeCode || typeCode.trim() === "") return null;
+  try {
+    const result = await db
+      .prepare(`
+        SELECT * FROM vehicle_fingerprints
+        WHERE make = ? AND type_code = ?
+          AND (year_from IS NULL OR year_from <= ?)
+          AND (year_to IS NULL OR year_to >= ?)
+        ORDER BY sample_count DESC
+        LIMIT 1
+      `)
+      .bind(make, typeCode, year, year)
+      .first();
+    return result as unknown as VehicleFingerprint | null;
+  } catch {
+    return null;
+  }
 }
 
 /** Normalize SVV/API brand names to D1 catalog brand names */
@@ -1930,6 +1964,29 @@ function scoreCandidate(
     }
   }
 
+  // Fingerprint-based model/generation scoring
+  const fp = (vehicle as any)._fingerprint as VehicleFingerprint | undefined;
+  if (fp && fp.model_hint) {
+    const fpModel = fp.model_hint.toLowerCase();
+    const desc = (c.description + " " + (c.model || "")).toLowerCase();
+    // Bonus if catalog record mentions the fingerprint's specific model
+    if (desc.includes(fpModel)) {
+      score += 15;
+    }
+    // Bonus if model hint is in the record's model field
+    if (c.model && c.model.toLowerCase().includes(fpModel)) {
+      score += 10;
+    }
+    // Bonus for generation match (e.g. typeCode G20 = BMW 3-series F30/G20 generation)
+    const fpModels = JSON.parse(fp.models || "[]") as string[];
+    for (const m of fpModels) {
+      if (m && desc.includes(m.toLowerCase())) {
+        score += 8;
+        break;
+      }
+    }
+  }
+
   // VIN model year verification (works for ALL makes)
   if (unifiedVin?.modelYear && c.year_from) {
     const vinYear = unifiedVin.modelYear;
@@ -2652,13 +2709,26 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
   }
 
   const vehicle: TecdocVehicle = svvResult.vehicle;
+  const db = env.GLASS_CATALOG_D1;
 
   // Normalize make to match D1 catalog brand names (e.g. VOLKSWAGEN → VW)
   // Must happen BEFORE any D1 queries that use vehicle.make
   vehicle.make = normalizeBrand(vehicle.make);
 
+  // 1b. Look up vehicle fingerprint from SVV typeCode for better model/generation matching
+  let fingerprint: VehicleFingerprint | null = null;
+  try {
+    fingerprint = await queryVehicleFingerprint(db, vehicle.make, vehicle.typeCode || "", vehicle.year);
+    if (fingerprint) {
+      console.log(`[Fingerprint] ${regnr}: ${vehicle.make} typeCode=${vehicle.typeCode} → ${fingerprint.model_hint} (${fingerprint.year_from}-${fingerprint.year_to})`);
+      // Enrich vehicle with fingerprint data for use in scoring/matching
+      (vehicle as any)._fingerprint = fingerprint;
+    }
+  } catch {
+    // vehicle_fingerprints table might not exist yet — silently continue
+  }
+
   // 2. Check ground_truth database FIRST (layer -1: verified mapping)
-  const db = env.GLASS_CATALOG_D1;
   let groundTruth: GroundTruthRecord | null = null;
   let gtCandidates: GlassRecord[] = [];
   try {

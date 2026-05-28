@@ -1,0 +1,5769 @@
+{
+  "generatedAt": "2026-05-28T02:53:29.975Z",
+  "mappings": [
+    {
+      "make": "ALFA ROMEO",
+      "typeCode": "932",
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "models": [
+        "156 BERLINA"
+      ],
+      "modelHint": "156 BERLINA"
+    },
+    {
+      "make": "ALFA ROMEO",
+      "typeCode": "939",
+      "yearFrom": 2007,
+      "yearTo": 2007,
+      "models": [
+        "159 SPORTWAGON"
+      ],
+      "modelHint": "159 SPORTWAGON"
+    },
+    {
+      "make": "ALFA ROMEO",
+      "typeCode": "940",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "ALFA GIULIETTA"
+      ],
+      "modelHint": "ALFA GIULIETTA"
+    },
+    {
+      "make": "ALFA ROMEO",
+      "typeCode": "949",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "STELVIO"
+      ],
+      "modelHint": "STELVIO"
+    },
+    {
+      "make": "ALFA ROMEO",
+      "typeCode": "955",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "MITO"
+      ],
+      "modelHint": "MITO"
+    },
+    {
+      "make": "ALPINA",
+      "typeCode": "Alpina F 30",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "BMW ALPINA B4 BITURBI CAB"
+      ],
+      "modelHint": "BMW ALPINA B4 BITURBI CAB"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "-",
+      "yearFrom": 2000,
+      "yearTo": 2000,
+      "models": [
+        "A8"
+      ],
+      "modelHint": "A8"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "4E",
+      "yearFrom": 2012,
+      "yearTo": 2014,
+      "models": [
+        "S8",
+        "A8"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "4F",
+      "yearFrom": 2005,
+      "yearTo": 2009,
+      "models": [
+        "AUDI A6, S6",
+        "A6",
+        "AUDI A6 ALLROAD QUATTRO",
+        "AUDI A6"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "4G",
+      "yearFrom": 2013,
+      "yearTo": 2017,
+      "models": [
+        "A7 SPORTBACK",
+        "A6 AVANT",
+        "AUDI A6",
+        "A6 ALLROAD QUATTRO"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "4L",
+      "yearFrom": 2013,
+      "yearTo": 2018,
+      "models": [
+        "Q7 E-TRON",
+        "AUDI Q7",
+        "Q7"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8E",
+      "yearFrom": 2005,
+      "yearTo": 2007,
+      "models": [
+        "AUDI A4, S4",
+        "AUDI A4"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8H",
+      "yearFrom": 2004,
+      "yearTo": 2006,
+      "models": [
+        "AUDI A4 CABRIOLET",
+        "A4"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8J",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "TT RS"
+      ],
+      "modelHint": "TT RS"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8P",
+      "yearFrom": 2007,
+      "yearTo": 2012,
+      "models": [
+        "AUDI A3",
+        "AUDI A3 CABRIOLET"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8R",
+      "yearFrom": 2010,
+      "yearTo": 2016,
+      "models": [
+        "Q5",
+        "AUDI Q5"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8R2",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "AUDI Q5 HYBRID"
+      ],
+      "modelHint": "AUDI Q5 HYBRID"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8U",
+      "yearFrom": 2013,
+      "yearTo": 2013,
+      "models": [
+        "Q3"
+      ],
+      "modelHint": "Q3"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8V",
+      "yearFrom": 2014,
+      "yearTo": 2017,
+      "models": [
+        "A3 SPORTBACK",
+        "RS 3 SPORTBACK",
+        "A3 SPORTBACK E-TRON"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8X",
+      "yearFrom": 2012,
+      "yearTo": 2015,
+      "models": [
+        "A1 SPORTBACK",
+        "AUDI A1"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "8Z",
+      "yearFrom": 2005,
+      "yearTo": 2005,
+      "models": [
+        "A2"
+      ],
+      "modelHint": "A2"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "AUDI 100 LS",
+      "yearFrom": 1975,
+      "yearTo": 1975,
+      "models": [
+        "AUDI 100 LS"
+      ],
+      "modelHint": "AUDI 100 LS"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "B5",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "A4 S4"
+      ],
+      "modelHint": "A4 S4"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "B8",
+      "yearFrom": 2008,
+      "yearTo": 2019,
+      "models": [
+        "AUDI A4",
+        "AUDI A4 ALLROAD QUATTRO",
+        "A5 SPORTBACK",
+        "A4 ALLROAD QUATTRO",
+        "A4 AVANT",
+        "AUDI A5",
+        "A4",
+        "A5"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "F2",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "RS 6 AVANT"
+      ],
+      "modelHint": "RS 6 AVANT"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "F8",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "A8"
+      ],
+      "modelHint": "A8"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "FW",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "models": [
+        "E TRON GT"
+      ],
+      "modelHint": "E TRON GT"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "FY",
+      "yearFrom": 2018,
+      "yearTo": 2019,
+      "models": [
+        "Q5"
+      ],
+      "modelHint": "Q5"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "FZ",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "models": [
+        "Q4 50 E TRON",
+        "Q4 55 E-TRON",
+        "Q4 SPORTBACK 50 E TRON",
+        "Q4 45 E-TRON",
+        "Q4 45 E TRON",
+        "Q4 SPORTBACK 55 E-TRON",
+        "Q4 40 E TRON",
+        "Q4 50 E-TRON"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "GA",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "Q2"
+      ],
+      "modelHint": "Q2"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "GE",
+      "yearFrom": 2019,
+      "yearTo": 2026,
+      "models": [
+        "E-TRON",
+        "AUDI E-TRON",
+        "E-TRON 55",
+        "E TRON 55",
+        "E-TRON SPORTBACK 50",
+        "Q8 SPORTBACK 55 E TRON",
+        "E-TRON SPORTBACK 55",
+        "SQ8 E-TRON",
+        "Q8 55 E TRON",
+        "E-TRON 50",
+        "Q8 50 E TRON"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "GF",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "Q6 SUV E-TRON QUATTRO"
+      ],
+      "modelHint": "Q6 SUV E-TRON QUATTRO"
+    },
+    {
+      "make": "AUDI",
+      "typeCode": "GH",
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "models": [
+        "A6 SB E-TRON QUATTRO",
+        "A6 AV E-TRON QUATTRO",
+        "S6 AV E-TRON"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "-",
+      "yearFrom": 1992,
+      "yearTo": 2002,
+      "models": [
+        "320 CI CAB",
+        "635 CSI",
+        "Z 3"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "182",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "120D"
+      ],
+      "modelHint": "120D"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "187",
+      "yearFrom": 2010,
+      "yearTo": 2013,
+      "models": [
+        "120D",
+        "118D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "1K2",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "116I"
+      ],
+      "modelHint": "116I"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "1K4",
+      "yearFrom": 2012,
+      "yearTo": 2017,
+      "models": [
+        "116I",
+        "116D",
+        "M140I"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "206 EB",
+      "yearFrom": 1985,
+      "yearTo": 1985,
+      "models": [
+        "320 I"
+      ],
+      "modelHint": "320 I"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "346L",
+      "yearFrom": 2003,
+      "yearTo": 2021,
+      "models": [
+        "320D",
+        "328 I"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "346R",
+      "yearFrom": 2000,
+      "yearTo": 2000,
+      "models": [
+        "323 I"
+      ],
+      "modelHint": "323 I"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "390L",
+      "yearFrom": 2005,
+      "yearTo": 2009,
+      "models": [
+        "316I",
+        "318D",
+        "320I",
+        "320D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "392C",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "320I"
+      ],
+      "modelHint": "320I"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "3B",
+      "yearFrom": 2003,
+      "yearTo": 2003,
+      "models": [
+        "325IA CAB"
+      ],
+      "modelHint": "325IA CAB"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "3K",
+      "yearFrom": 2012,
+      "yearTo": 2018,
+      "models": [
+        "320D XDRIVE",
+        "316D",
+        "320D",
+        "318I",
+        "318D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "3L",
+      "yearFrom": 2012,
+      "yearTo": 2021,
+      "models": [
+        "330E IPERFORMANCE",
+        "316D",
+        "330D XDRIVE",
+        "320I XDRIVE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "530DA",
+      "yearFrom": 2000,
+      "yearTo": 2000,
+      "models": [
+        "-"
+      ],
+      "modelHint": "-"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "560L",
+      "yearFrom": 2005,
+      "yearTo": 2011,
+      "models": [
+        "525D",
+        "520D",
+        "525I"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "5K",
+      "yearFrom": 2012,
+      "yearTo": 2018,
+      "models": [
+        "525D XDRIVE",
+        "M 550D XDRIVE",
+        "520D",
+        "520D XDRIVE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "5L",
+      "yearFrom": 2013,
+      "yearTo": 2015,
+      "models": [
+        "520D XDRIVE",
+        "520D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "663C",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "645 CI"
+      ],
+      "modelHint": "645 CI"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "7/G",
+      "yearFrom": 2012,
+      "yearTo": 2023,
+      "models": [
+        "735 I",
+        "750 IAL"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "765",
+      "yearFrom": 2002,
+      "yearTo": 2002,
+      "models": [
+        "745I"
+      ],
+      "modelHint": "745I"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "7L",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "730D XDRIVE"
+      ],
+      "modelHint": "730D XDRIVE"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "BMWi-1",
+      "yearFrom": 2014,
+      "yearTo": 2016,
+      "models": [
+        "I3"
+      ],
+      "modelHint": "I3"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "BMWi-N",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "models": [
+        "IX XDRIVE40",
+        "IX XDRIVE60",
+        "IX XDRIVE50"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "F10",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "M5"
+      ],
+      "modelHint": "M5"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "F1X",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "models": [
+        "X1 XDRIVE25E"
+      ],
+      "modelHint": "X1 XDRIVE25E"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "F2AT",
+      "yearFrom": 2018,
+      "yearTo": 2020,
+      "models": [
+        "225XE IPERFORMANCE"
+      ],
+      "modelHint": "225XE IPERFORMANCE"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "F2X",
+      "yearFrom": 2018,
+      "yearTo": 2021,
+      "models": [
+        "X2 XDRIVE20D",
+        "X2 XDRIVE25E"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G234M",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "M3 COMPETITION"
+      ],
+      "modelHint": "M3 COMPETITION"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G2M",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "M2"
+      ],
+      "modelHint": "M2"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G3K",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "models": [
+        "330E XDRIVE"
+      ],
+      "modelHint": "330E XDRIVE"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G3L",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "330E"
+      ],
+      "modelHint": "330E"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G3X",
+      "yearFrom": 2019,
+      "yearTo": 2021,
+      "models": [
+        "X3 XDRIVE30E",
+        "X3 XDRIVE20D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G3XE",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "models": [
+        "IX3"
+      ],
+      "modelHint": "IX3"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G4C",
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "models": [
+        "I4 M60 XDRIVE",
+        "I4 M50",
+        "I4 M50 XDRIVE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G5K",
+      "yearFrom": 2018,
+      "yearTo": 2021,
+      "models": [
+        "530D XDRIVE",
+        "530E XDRIVE",
+        "540D XDRIVE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G5L",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "530E IPERFORMANCE",
+        "530E XDRIVE IPERFORMANCE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G5X",
+      "yearFrom": 2019,
+      "yearTo": 2024,
+      "models": [
+        "X5 XDRIVE45E",
+        "X5 XDRIVE50E",
+        "X5 XDRIVE30D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G6E",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "I5 XDRIVE40"
+      ],
+      "modelHint": "I5 XDRIVE40"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G7L",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "I7 XDRIVE60"
+      ],
+      "modelHint": "I7 XDRIVE60"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "G7X",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "X7 XDRIVE30D"
+      ],
+      "modelHint": "X7 XDRIVE30D"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "GT",
+      "yearFrom": 2014,
+      "yearTo": 2014,
+      "models": [
+        "530D XDRIVE"
+      ],
+      "modelHint": "530D XDRIVE"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "M3",
+      "yearFrom": 2019,
+      "yearTo": 2022,
+      "models": [
+        "M2 COMPETITION",
+        "M2"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "M346",
+      "yearFrom": 2013,
+      "yearTo": 2013,
+      "models": [
+        "M3"
+      ],
+      "modelHint": "M3"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "M390",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "M 3"
+      ],
+      "modelHint": "M 3"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "M5/M6",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "M6"
+      ],
+      "modelHint": "M6"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "M7X",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "X5 M"
+      ],
+      "modelHint": "X5 M"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "U1X",
+      "yearFrom": 2022,
+      "yearTo": 2026,
+      "models": [
+        "IX1 XDRIVE30",
+        "X1 XDRIVE25E"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "U2AT",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "modelHint": "225E XDRIVE ACTIVE TOURER"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "U2X",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "models": [
+        "IX2 XDRIVE30"
+      ],
+      "modelHint": "IX2 XDRIVE30"
+    },
+    {
+      "make": "BMW",
+      "typeCode": "UKL-L",
+      "yearFrom": 2015,
+      "yearTo": 2017,
+      "models": [
+        "218D ACTIVE TOURER",
+        "225XE ACTIVE TOURER",
+        "218I ACTIVE TOURER"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "X1",
+      "yearFrom": 2010,
+      "yearTo": 2012,
+      "models": [
+        "X1 XDRIVE18D",
+        "X1 SDRIVE 18D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "X3",
+      "yearFrom": 2011,
+      "yearTo": 2016,
+      "models": [
+        "X3 XDRIVE20D",
+        "X4 XDRIVE30D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "X5",
+      "yearFrom": 2013,
+      "yearTo": 2017,
+      "models": [
+        "X5 XDRIVE30D",
+        "X5 XDRIVE40E",
+        "X5 XDRIVE40E IPERFORMANCE",
+        "X5 XDRIVE25D",
+        "X5 XDRIVE40D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "X53",
+      "yearFrom": 2002,
+      "yearTo": 2004,
+      "models": [
+        "X5 3.0D",
+        "X5 4.4I"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "X70",
+      "yearFrom": 2010,
+      "yearTo": 2012,
+      "models": [
+        "X5 3.0D",
+        "X5 XDRIVE30D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW",
+      "typeCode": "X83",
+      "yearFrom": 2004,
+      "yearTo": 2010,
+      "models": [
+        "X3 XDRIVE20D",
+        "X3 2.0D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BMW I",
+      "typeCode": "BMWi-1",
+      "yearFrom": 2016,
+      "yearTo": 2022,
+      "models": [
+        "I3",
+        "I3S"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BYD",
+      "typeCode": "EKE",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "models": [
+        "SEAL AWD"
+      ],
+      "modelHint": "SEAL AWD"
+    },
+    {
+      "make": "BYD",
+      "typeCode": "EM2E",
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "models": [
+        "BYD DOLPHIN"
+      ],
+      "modelHint": "BYD DOLPHIN"
+    },
+    {
+      "make": "BYD",
+      "typeCode": "EM2E-1",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "DOLPHIN"
+      ],
+      "modelHint": "DOLPHIN"
+    },
+    {
+      "make": "BYD",
+      "typeCode": "HC",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "HAN"
+      ],
+      "modelHint": "HAN"
+    },
+    {
+      "make": "BYD",
+      "typeCode": "SA3",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "SEAL U"
+      ],
+      "modelHint": "SEAL U"
+    },
+    {
+      "make": "BYD",
+      "typeCode": "SC2E",
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "models": [
+        "ATTO 3 EVO",
+        "ATTO 3"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BYD",
+      "typeCode": "STE",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "models": [
+        "TANG",
+        "BYD TANG"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "BYD",
+      "typeCode": "UK",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "SEALION"
+      ],
+      "modelHint": "SEALION"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "0",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "C4 CACTUS"
+      ],
+      "modelHint": "C4 CACTUS"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "1",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "C-ZERO"
+      ],
+      "modelHint": "C-ZERO"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "2",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "C3 AIRCROSS"
+      ],
+      "modelHint": "C3 AIRCROSS"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "3",
+      "yearFrom": 2013,
+      "yearTo": 2017,
+      "models": [
+        "C4 PICASSO"
+      ],
+      "modelHint": "C4 PICASSO"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "A",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "models": [
+        "C5 AIRCROSS"
+      ],
+      "modelHint": "C5 AIRCROSS"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "B",
+      "yearFrom": 2012,
+      "yearTo": 2025,
+      "models": [
+        "E-C4",
+        "C4 AIRCROSS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "C",
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "models": [
+        "E-C3"
+      ],
+      "modelHint": "E-C3"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "D XFX",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "C5"
+      ],
+      "modelHint": "C5"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "KF",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "5"
+      ],
+      "modelHint": "5"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "L*****",
+      "yearFrom": 2007,
+      "yearTo": 2007,
+      "models": [
+        "C4"
+      ],
+      "modelHint": "C4"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "N",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "C5 X"
+      ],
+      "modelHint": "C5 X"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "S",
+      "yearFrom": 2012,
+      "yearTo": 2016,
+      "models": [
+        "C3",
+        "DS 3"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "S*****",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "C3"
+      ],
+      "modelHint": "C3"
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "V",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "models": [
+        "JUMPY SPACETOURER",
+        "SPACETOURER"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "CITROEN",
+      "typeCode": "VF7N2L900",
+      "yearFrom": 1996,
+      "yearTo": 1996,
+      "models": [
+        "ZX 1.4 I"
+      ],
+      "modelHint": "ZX 1.4 I"
+    },
+    {
+      "make": "CUPRA",
+      "typeCode": "K1",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "models": [
+        "BORN",
+        "BORN 150 KW 58/62 KWH"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "CUPRA",
+      "typeCode": "KR",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "TAVASCAN"
+      ],
+      "modelHint": "TAVASCAN"
+    },
+    {
+      "make": "DACIA",
+      "typeCode": "SD",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "DUSTER"
+      ],
+      "modelHint": "DUSTER"
+    },
+    {
+      "make": "DS",
+      "typeCode": "F",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "DS4"
+      ],
+      "modelHint": "DS4"
+    },
+    {
+      "make": "DS",
+      "typeCode": "J",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "models": [
+        "DS 7 CROSSBACK",
+        "DS7"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "DS",
+      "typeCode": "K",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "DS 5"
+      ],
+      "modelHint": "DS 5"
+    },
+    {
+      "make": "DS",
+      "typeCode": "U",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "DS3 CROSSBACK"
+      ],
+      "modelHint": "DS3 CROSSBACK"
+    },
+    {
+      "make": "FIAT",
+      "typeCode": "-",
+      "yearFrom": 2018,
+      "yearTo": 2019,
+      "models": [
+        "500 ELECTRIC",
+        "500E"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "FIAT",
+      "typeCode": "169",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "PANDA"
+      ],
+      "modelHint": "PANDA"
+    },
+    {
+      "make": "FIAT",
+      "typeCode": "280",
+      "yearFrom": 2013,
+      "yearTo": 2013,
+      "models": [
+        "HOBBY 550 AK"
+      ],
+      "modelHint": "HOBBY 550 AK"
+    },
+    {
+      "make": "FIAT",
+      "typeCode": "312",
+      "yearFrom": 2008,
+      "yearTo": 2009,
+      "models": [
+        "500"
+      ],
+      "modelHint": "500"
+    },
+    {
+      "make": "FIAT",
+      "typeCode": "FA1",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "models": [
+        "500"
+      ],
+      "modelHint": "500"
+    },
+    {
+      "make": "FIAT",
+      "typeCode": "FH1",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "600"
+      ],
+      "modelHint": "600"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "-",
+      "yearFrom": 2000,
+      "yearTo": 2000,
+      "models": [
+        "TORINO"
+      ],
+      "modelHint": "TORINO"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "????????????",
+      "yearFrom": 1981,
+      "yearTo": 1981,
+      "models": [
+        "CAPRI 2.0"
+      ],
+      "modelHint": "CAPRI 2.0"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "2 DØRS",
+      "yearFrom": 1975,
+      "yearTo": 1975,
+      "models": [
+        "MUSTANG MACH 1"
+      ],
+      "modelHint": "MUSTANG MACH 1"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "2AW 8F12",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "RANGER  WILDTRACK"
+      ],
+      "modelHint": "RANGER  WILDTRACK"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "4 T. 4 X 4 JEEP",
+      "yearFrom": 1984,
+      "yearTo": 1984,
+      "models": [
+        "1"
+      ],
+      "modelHint": "1"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "BA7",
+      "yearFrom": 2010,
+      "yearTo": 2018,
+      "models": [
+        "MONDEO"
+      ],
+      "modelHint": "MONDEO"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "BAC",
+      "yearFrom": 1985,
+      "yearTo": 1985,
+      "models": [
+        "SIERRA 2.0 I S"
+      ],
+      "modelHint": "SIERRA 2.0 I S"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "BED",
+      "yearFrom": 1986,
+      "yearTo": 1986,
+      "models": [
+        "SIERRA 2.0 I S"
+      ],
+      "modelHint": "SIERRA 2.0 I S"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "DA3",
+      "yearFrom": 2007,
+      "yearTo": 2010,
+      "models": [
+        "FOCUS"
+      ],
+      "modelHint": "FOCUS"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "DEH",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "FOCUS"
+      ],
+      "modelHint": "FOCUS"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "DFK",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "models": [
+        "KUGA"
+      ],
+      "modelHint": "KUGA"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "DM2",
+      "yearFrom": 2007,
+      "yearTo": 2024,
+      "models": [
+        "KUGA",
+        "FOCUS C-MAX"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "FORD",
+      "typeCode": "DRP",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "models": [
+        "CAPRI",
+        "EXPLORER"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "FORD",
+      "typeCode": "DXA",
+      "yearFrom": 2011,
+      "yearTo": 2018,
+      "models": [
+        "C-MAX",
+        "GRAND C-MAX"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "FORD",
+      "typeCode": "DYB",
+      "yearFrom": 2011,
+      "yearTo": 2017,
+      "models": [
+        "FOCUS"
+      ],
+      "modelHint": "FOCUS"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "F-150",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "F-150 LIGHTNING"
+      ],
+      "modelHint": "F-150 LIGHTNING"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "FAC",
+      "yearFrom": 2013,
+      "yearTo": 2013,
+      "models": [
+        "TRANSIT"
+      ],
+      "modelHint": "TRANSIT"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "GGFL",
+      "yearFrom": 1972,
+      "yearTo": 1972,
+      "models": [
+        "GRANADA 2300"
+      ],
+      "modelHint": "GRANADA 2300"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "J2K",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "models": [
+        "PUMA"
+      ],
+      "modelHint": "PUMA"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "JA8",
+      "yearFrom": 2009,
+      "yearTo": 2016,
+      "models": [
+        "FIESTA"
+      ],
+      "modelHint": "FIESTA"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "JH1",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "FIESTA"
+      ],
+      "modelHint": "FIESTA"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "JHH",
+      "yearFrom": 2017,
+      "yearTo": 2018,
+      "models": [
+        "FIESTA"
+      ],
+      "modelHint": "FIESTA"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "LSBK",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "MUSTANG MACH-E"
+      ],
+      "modelHint": "MUSTANG MACH-E"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "LSK",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "models": [
+        "MUSTANG MACH-E"
+      ],
+      "modelHint": "MUSTANG MACH-E"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "LTD. 7.3 D",
+      "yearFrom": 2001,
+      "yearTo": 2001,
+      "models": [
+        "EXCURISON 4X4 LIMITED"
+      ],
+      "modelHint": "EXCURISON 4X4 LIMITED"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "Mustang",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "MUSTANG GT"
+      ],
+      "modelHint": "MUSTANG GT"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "PJ2",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "TOURNEO CONNECT"
+      ],
+      "modelHint": "TOURNEO CONNECT"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "TRUCK",
+      "yearFrom": 1990,
+      "yearTo": 1990,
+      "models": [
+        "PICKUP"
+      ],
+      "modelHint": "PICKUP"
+    },
+    {
+      "make": "FORD",
+      "typeCode": "WA6",
+      "yearFrom": 2009,
+      "yearTo": 2018,
+      "models": [
+        "S-MAX",
+        "GALAXY"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "FORD",
+      "typeCode": "WUJ",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "models": [
+        "EXPLORER"
+      ],
+      "modelHint": "EXPLORER"
+    },
+    {
+      "make": "FORD-CNG-TECHNIK",
+      "typeCode": "BA7-HEV",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "MONDEO HYBRID"
+      ],
+      "modelHint": "MONDEO HYBRID"
+    },
+    {
+      "make": "FORD-CNG-TECHNIK",
+      "typeCode": "DYB-BEV",
+      "yearFrom": 2014,
+      "yearTo": 2014,
+      "models": [
+        "FOCUS ELECTRIC"
+      ],
+      "modelHint": "FOCUS ELECTRIC"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "AP1",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "S2000"
+      ],
+      "modelHint": "S2000"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "EJ9",
+      "yearFrom": 1999,
+      "yearTo": 1999,
+      "models": [
+        "CIVIC"
+      ],
+      "modelHint": "CIVIC"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "FC",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "CIVIC 4DR"
+      ],
+      "modelHint": "CIVIC 4DR"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "FK1",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "CIVIC"
+      ],
+      "modelHint": "CIVIC"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "FK2",
+      "yearFrom": 2006,
+      "yearTo": 2009,
+      "models": [
+        "CIVIC"
+      ],
+      "modelHint": "CIVIC"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "GE6",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "JAZZ"
+      ],
+      "modelHint": "JAZZ"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "GG2",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "JAZZ"
+      ],
+      "modelHint": "JAZZ"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "GG3",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "JAZZ"
+      ],
+      "modelHint": "JAZZ"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "GH4",
+      "yearFrom": 2004,
+      "yearTo": 2004,
+      "models": [
+        "HR-V"
+      ],
+      "modelHint": "HR-V"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "GK",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "JAZZ"
+      ],
+      "modelHint": "JAZZ"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "GP1",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "JAZZ HYBRID"
+      ],
+      "modelHint": "JAZZ HYBRID"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "MB8",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "CIVIC AERODECK"
+      ],
+      "modelHint": "CIVIC AERODECK"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "RD8",
+      "yearFrom": 2002,
+      "yearTo": 2006,
+      "models": [
+        "CR-V"
+      ],
+      "modelHint": "CR-V"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "RE5",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "CR-V"
+      ],
+      "modelHint": "CR-V"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "RE6",
+      "yearFrom": 2007,
+      "yearTo": 2016,
+      "models": [
+        "HONDA CR-V",
+        "CR-V"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "RU",
+      "yearFrom": 2016,
+      "yearTo": 2017,
+      "models": [
+        "HR-V"
+      ],
+      "modelHint": "HR-V"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "RV",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "HR-V"
+      ],
+      "modelHint": "HR-V"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "RW",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "CR-V"
+      ],
+      "modelHint": "CR-V"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "ZC",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "HONDA E"
+      ],
+      "modelHint": "HONDA E"
+    },
+    {
+      "make": "HONDA",
+      "typeCode": "ZE2",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "INSIGHT"
+      ],
+      "modelHint": "INSIGHT"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "AE",
+      "yearFrom": 2017,
+      "yearTo": 2021,
+      "models": [
+        "IONIQ"
+      ],
+      "modelHint": "IONIQ"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "CE",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "IONIQ6"
+      ],
+      "modelHint": "IONIQ6"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "CM",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "SANTA FE"
+      ],
+      "modelHint": "SANTA FE"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "DM",
+      "yearFrom": 2013,
+      "yearTo": 2013,
+      "models": [
+        "SANTA FE"
+      ],
+      "modelHint": "SANTA FE"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "EL",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "IX35"
+      ],
+      "modelHint": "IX35"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "ELH",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "IX35"
+      ],
+      "modelHint": "IX35"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "GB",
+      "yearFrom": 2015,
+      "yearTo": 2017,
+      "models": [
+        "I20, I20 ACTIVE",
+        "I20"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "GDH",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "I 30"
+      ],
+      "modelHint": "I 30"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "IA",
+      "yearFrom": 2014,
+      "yearTo": 2014,
+      "models": [
+        "I10"
+      ],
+      "modelHint": "I10"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "JC",
+      "yearFrom": 2014,
+      "yearTo": 2014,
+      "models": [
+        "IX20"
+      ],
+      "modelHint": "IX20"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "KMHSH81WP",
+      "yearFrom": 2007,
+      "yearTo": 2008,
+      "models": [
+        "SANTA FE"
+      ],
+      "modelHint": "SANTA FE"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "LC",
+      "yearFrom": 2003,
+      "yearTo": 2003,
+      "models": [
+        "ACCENT"
+      ],
+      "modelHint": "ACCENT"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "NE",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "models": [
+        "IONIQ5"
+      ],
+      "modelHint": "IONIQ5"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "NX4e",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "TUCSON"
+      ],
+      "modelHint": "TUCSON"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "OS",
+      "yearFrom": 2018,
+      "yearTo": 2020,
+      "models": [
+        "KONA",
+        "KONA, KAUAI"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "OSE",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "models": [
+        "KONA"
+      ],
+      "modelHint": "KONA"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "PBT",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "I20"
+      ],
+      "modelHint": "I20"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "PDE",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "I 30"
+      ],
+      "modelHint": "I 30"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "SX2E",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "KONA"
+      ],
+      "modelHint": "KONA"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "TLE",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "TUCSON,IX35"
+      ],
+      "modelHint": "TUCSON,IX35"
+    },
+    {
+      "make": "HYUNDAI",
+      "typeCode": "VF",
+      "yearFrom": 2013,
+      "yearTo": 2013,
+      "models": [
+        "I40"
+      ],
+      "modelHint": "I40"
+    },
+    {
+      "make": "JAGUAR",
+      "typeCode": "CC9",
+      "yearFrom": 2008,
+      "yearTo": 2013,
+      "models": [
+        "JAGUAR XF",
+        "XF",
+        "3.0 D LUXURY",
+        "2.7D PREMIUM LUXURY"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "JAGUAR",
+      "typeCode": "DF",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "E-PACE"
+      ],
+      "modelHint": "E-PACE"
+    },
+    {
+      "make": "JAGUAR",
+      "typeCode": "DH",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "models": [
+        "I-PACE",
+        "JAGUAR I-PACE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "JAGUAR",
+      "typeCode": "JA",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "JAGUAR XE"
+      ],
+      "modelHint": "JAGUAR XE"
+    },
+    {
+      "make": "JAGUAR",
+      "typeCode": "JAE",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "JAGUAR XE SV PROJECT 8"
+      ],
+      "modelHint": "JAGUAR XE SV PROJECT 8"
+    },
+    {
+      "make": "JAGUAR",
+      "typeCode": "NNA",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "3.0 V6 D PORTFOLIO"
+      ],
+      "modelHint": "3.0 V6 D PORTFOLIO"
+    },
+    {
+      "make": "JAGUAR LAND ROVER LIMITED",
+      "typeCode": "JA",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "JAGUAR XE"
+      ],
+      "modelHint": "JAGUAR XE"
+    },
+    {
+      "make": "JAGUAR LAND ROVER LIMITED",
+      "typeCode": "LA",
+      "yearFrom": 2014,
+      "yearTo": 2014,
+      "models": [
+        "DISCOVERY"
+      ],
+      "modelHint": "DISCOVERY"
+    },
+    {
+      "make": "JAGUAR LAND ROVER LIMITED",
+      "typeCode": "LW",
+      "yearFrom": 2014,
+      "yearTo": 2014,
+      "models": [
+        "RANGE ROVER SPORT"
+      ],
+      "modelHint": "RANGE ROVER SPORT"
+    },
+    {
+      "make": "JEEP",
+      "typeCode": "-",
+      "yearFrom": 1987,
+      "yearTo": 1987,
+      "models": [
+        "WRANGLER"
+      ],
+      "modelHint": "WRANGLER"
+    },
+    {
+      "make": "JEEP",
+      "typeCode": "1J4FJN8M",
+      "yearFrom": 1995,
+      "yearTo": 1995,
+      "models": [
+        "CHEROKEE 2.5L TURBOD"
+      ],
+      "modelHint": "CHEROKEE 2.5L TURBOD"
+    },
+    {
+      "make": "JEEP",
+      "typeCode": "1J4FYA9S4RP",
+      "yearFrom": 1994,
+      "yearTo": 1994,
+      "models": [
+        "WRANGLER  4.0L"
+      ],
+      "modelHint": "WRANGLER  4.0L"
+    },
+    {
+      "make": "JEEP",
+      "typeCode": "1J4GWB8N",
+      "yearFrom": 1999,
+      "yearTo": 1999,
+      "models": [
+        "GRAND CHEROKEE"
+      ],
+      "modelHint": "GRAND CHEROKEE"
+    },
+    {
+      "make": "JEEP",
+      "typeCode": "1J4GZB8Z",
+      "yearFrom": 1999,
+      "yearTo": 1999,
+      "models": [
+        "GRAND CHEROKEE LX V8"
+      ],
+      "modelHint": "GRAND CHEROKEE LX V8"
+    },
+    {
+      "make": "JEEP",
+      "typeCode": "FH1",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "AVENGER"
+      ],
+      "modelHint": "AVENGER"
+    },
+    {
+      "make": "JEEP",
+      "typeCode": "MP",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "models": [
+        "COMPASS"
+      ],
+      "modelHint": "COMPASS"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "CD",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "CEED"
+      ],
+      "modelHint": "CEED"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "CV",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "models": [
+        "EV6"
+      ],
+      "modelHint": "EV6"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "DE",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "models": [
+        "NIRO"
+      ],
+      "modelHint": "NIRO"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "ED",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "ED"
+      ],
+      "modelHint": "ED"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "JA",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "PICANTO"
+      ],
+      "modelHint": "PICANTO"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "JD",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "CEE'D"
+      ],
+      "modelHint": "CEE'D"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "JF",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "OPTIMA"
+      ],
+      "modelHint": "OPTIMA"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "MV1",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "models": [
+        "EV9"
+      ],
+      "modelHint": "EV9"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "NQ5e",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "SPORTAGE"
+      ],
+      "modelHint": "SPORTAGE"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "PSEV",
+      "yearFrom": 2015,
+      "yearTo": 2018,
+      "models": [
+        "SOUL"
+      ],
+      "modelHint": "SOUL"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "QLE",
+      "yearFrom": 2016,
+      "yearTo": 2019,
+      "models": [
+        "SPORTAGE"
+      ],
+      "modelHint": "SPORTAGE"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "SK3",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "models": [
+        "SOUL"
+      ],
+      "modelHint": "SOUL"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "TA",
+      "yearFrom": 2012,
+      "yearTo": 2014,
+      "models": [
+        "PICANTO",
+        "PICANTO, MORNING"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "KIA",
+      "typeCode": "UB",
+      "yearFrom": 2012,
+      "yearTo": 2017,
+      "models": [
+        "RIO"
+      ],
+      "modelHint": "RIO"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "YN",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "VENGA"
+      ],
+      "modelHint": "VENGA"
+    },
+    {
+      "make": "KIA",
+      "typeCode": "YNS",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "VENGA"
+      ],
+      "modelHint": "VENGA"
+    },
+    {
+      "make": "LAND ROVER",
+      "typeCode": "LC",
+      "yearFrom": 2017,
+      "yearTo": 2022,
+      "models": [
+        "DISCOVERY SPORT"
+      ],
+      "modelHint": "DISCOVERY SPORT"
+    },
+    {
+      "make": "LAND ROVER",
+      "typeCode": "LE",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "DEFENDER"
+      ],
+      "modelHint": "DEFENDER"
+    },
+    {
+      "make": "LAND ROVER",
+      "typeCode": "LF",
+      "yearFrom": 2007,
+      "yearTo": 2007,
+      "models": [
+        "FREELANDER 2"
+      ],
+      "modelHint": "FREELANDER 2"
+    },
+    {
+      "make": "LAND ROVER",
+      "typeCode": "LM",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "RANGE ROVER"
+      ],
+      "modelHint": "RANGE ROVER"
+    },
+    {
+      "make": "LAND ROVER",
+      "typeCode": "LV",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "RANGE ROVER EVOQUE"
+      ],
+      "modelHint": "RANGE ROVER EVOQUE"
+    },
+    {
+      "make": "LAND ROVER",
+      "typeCode": "LY",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "RANGE ROVER VELAR"
+      ],
+      "modelHint": "RANGE ROVER VELAR"
+    },
+    {
+      "make": "LAND ROVER",
+      "typeCode": "LZ",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "RANGE ROVER EVOQUE"
+      ],
+      "modelHint": "RANGE ROVER EVOQUE"
+    },
+    {
+      "make": "LEXUS",
+      "typeCode": "AZ1",
+      "yearFrom": 2018,
+      "yearTo": 2019,
+      "models": [
+        "NX300H",
+        "LEXUS NX300H"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "LEXUS",
+      "typeCode": "AZ2(M)",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "NX450H+"
+      ],
+      "modelHint": "NX450H+"
+    },
+    {
+      "make": "LEXUS",
+      "typeCode": "EBM1(M)",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "LEXUS RZ300E"
+      ],
+      "modelHint": "LEXUS RZ300E"
+    },
+    {
+      "make": "LEXUS",
+      "typeCode": "EZA1(EU,M)",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "LEXUS UX300E",
+        "UX300E"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "LEXUS",
+      "typeCode": "HF4(A)",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "LS600H"
+      ],
+      "modelHint": "LS600H"
+    },
+    {
+      "make": "LEXUS",
+      "typeCode": "XC1(EU,M)",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "RC300H"
+      ],
+      "modelHint": "RC300H"
+    },
+    {
+      "make": "LEXUS",
+      "typeCode": "ZA1(EU,M)",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "models": [
+        "LEXUS UX250H",
+        "UX250H"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "-",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "323 FASTBACK"
+      ],
+      "modelHint": "323 FASTBACK"
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "BJ",
+      "yearFrom": 2002,
+      "yearTo": 2002,
+      "models": [
+        "323"
+      ],
+      "modelHint": "323"
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "BK",
+      "yearFrom": 2007,
+      "yearTo": 2007,
+      "models": [
+        "3"
+      ],
+      "modelHint": "3"
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "BL",
+      "yearFrom": 2009,
+      "yearTo": 2017,
+      "models": [
+        "MAZDA 3",
+        "MAZDA3",
+        "3"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "CW",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "MAZDA 5"
+      ],
+      "modelHint": "MAZDA 5"
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "DE",
+      "yearFrom": 2009,
+      "yearTo": 2014,
+      "models": [
+        "2",
+        "MAZDA 2"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "DJ1",
+      "yearFrom": 2015,
+      "yearTo": 2017,
+      "models": [
+        "MAZDA CX-3",
+        "MAZDA2"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "DM",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "models": [
+        "MAZDA CX-30"
+      ],
+      "modelHint": "MAZDA CX-30"
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "DR",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "models": [
+        "MAZDA MX-30"
+      ],
+      "modelHint": "MAZDA MX-30"
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "GH",
+      "yearFrom": 2010,
+      "yearTo": 2017,
+      "models": [
+        "MAZDA6",
+        "MAZDA CX-5",
+        "6"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "GN",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "MAZDA 6E"
+      ],
+      "modelHint": "MAZDA 6E"
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "KE",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "-",
+        "CX-5"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MAZDA",
+      "typeCode": "ND",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "MAZDA MX-5"
+      ],
+      "modelHint": "MAZDA MX-5"
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "typeCode": "197",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "AMG GT S"
+      ],
+      "modelHint": "AMG GT S"
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "typeCode": "212",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "E 63 AMG"
+      ],
+      "modelHint": "E 63 AMG"
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "typeCode": "212 K AMG",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "E63 AMG 4MATIC"
+      ],
+      "modelHint": "E63 AMG 4MATIC"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "-",
+      "yearFrom": 1988,
+      "yearTo": 2002,
+      "models": [
+        "230 CE",
+        "380 SE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "123 003",
+      "yearFrom": 1982,
+      "yearTo": 1982,
+      "models": [
+        "BINZ AMBULANSE 2000"
+      ],
+      "modelHint": "BINZ AMBULANSE 2000"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "129",
+      "yearFrom": 2003,
+      "yearTo": 2003,
+      "models": [
+        "300 SL"
+      ],
+      "modelHint": "300 SL"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "163",
+      "yearFrom": 2001,
+      "yearTo": 2001,
+      "models": [
+        "ML 270 CDI"
+      ],
+      "modelHint": "ML 270 CDI"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "164 G",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "GL320 CDI 4MATIC"
+      ],
+      "modelHint": "GL320 CDI 4MATIC"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "166",
+      "yearFrom": 2013,
+      "yearTo": 2017,
+      "models": [
+        "ML 350 BLUETEC 4MATIC",
+        "GLE 500 E 4MATIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "170",
+      "yearFrom": 2003,
+      "yearTo": 2003,
+      "models": [
+        "SLK 200 KOMPRESSOR"
+      ],
+      "modelHint": "SLK 200 KOMPRESSOR"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "176",
+      "yearFrom": 2014,
+      "yearTo": 2014,
+      "models": [
+        "A 180"
+      ],
+      "modelHint": "A 180"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "203",
+      "yearFrom": 2001,
+      "yearTo": 2006,
+      "models": [
+        "C 180",
+        "C 180 KOMPRESSOR"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "203 K",
+      "yearFrom": 2005,
+      "yearTo": 2005,
+      "models": [
+        "C 200 CDI"
+      ],
+      "modelHint": "C 200 CDI"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "204",
+      "yearFrom": 2008,
+      "yearTo": 2018,
+      "models": [
+        "C 200 CDI",
+        "C 220 CDI",
+        "C 180",
+        "C 180 CDI",
+        "C 220 D 4MATIC",
+        "C 200 4MATIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "204 K",
+      "yearFrom": 2009,
+      "yearTo": 2020,
+      "models": [
+        "C 350 E",
+        "C 220 CDI",
+        "C 200 CDI",
+        "C 220 D 4MATIC",
+        "C 300 DE",
+        "C 180"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "204 X",
+      "yearFrom": 2011,
+      "yearTo": 2022,
+      "models": [
+        "GLC 350 E 4MATIC",
+        "EQC 400 4MATIC",
+        "GLC 250 D 4MATIC",
+        "GLK 220 CDI 4MATIC",
+        "GLC 300 E 4MATIC",
+        "GLC 220 D 4MATIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "208",
+      "yearFrom": 2000,
+      "yearTo": 2024,
+      "models": [
+        "CLK 320",
+        "-"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "209",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "CLK 220 CDI"
+      ],
+      "modelHint": "CLK 220 CDI"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "210",
+      "yearFrom": 2004,
+      "yearTo": 2023,
+      "models": [
+        "E 220 CDI",
+        "E 320"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "211",
+      "yearFrom": 2004,
+      "yearTo": 2008,
+      "models": [
+        "E 220 CDI",
+        "E 200 KOMPRESSOR",
+        "E 200 CDI"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "212",
+      "yearFrom": 2009,
+      "yearTo": 2017,
+      "models": [
+        "E 200 CDI",
+        "E 220 CDI",
+        "E 220 D 4MATIC",
+        "E 220 D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "212 K",
+      "yearFrom": 2011,
+      "yearTo": 2014,
+      "models": [
+        "E 200 CDI",
+        "E 220 CDI",
+        "E 250 CDI 4MATIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "215",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "CL 500"
+      ],
+      "modelHint": "CL 500"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "218",
+      "yearFrom": 2012,
+      "yearTo": 2014,
+      "models": [
+        "CLS 250 CDI",
+        "CLS 220 BLUETEC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "220",
+      "yearFrom": 2002,
+      "yearTo": 2019,
+      "models": [
+        "S 500",
+        "S 320"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "221",
+      "yearFrom": 2007,
+      "yearTo": 2018,
+      "models": [
+        "S 320 CDI 4MATIC",
+        "S 400 HYBRID"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "240GD",
+      "yearFrom": 2004,
+      "yearTo": 2004,
+      "models": [
+        "240D"
+      ],
+      "modelHint": "240D"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "245",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "B 150"
+      ],
+      "modelHint": "B 150"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "245 G",
+      "yearFrom": 2013,
+      "yearTo": 2018,
+      "models": [
+        "B 250 E",
+        "GLA 200 CDI 4MATIC",
+        "GLA 45 AMG 4MATIC",
+        "GLA 180",
+        "CLA 180",
+        "A 160 CDI",
+        "B 180 CDI",
+        "B 220 4MATIC",
+        "GLA 220 CDI 4MATIC",
+        "A 180"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "246",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "B 200",
+        "B 180"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "463a",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "G 400 D"
+      ],
+      "modelHint": "G 400 D"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "639",
+      "yearFrom": 2005,
+      "yearTo": 2009,
+      "models": [
+        "VIANO CDI 2.2",
+        "VIANO CDI 3.0",
+        "VITO 109 CDI",
+        "VITO 111 CDI"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "639/2",
+      "yearFrom": 2013,
+      "yearTo": 2024,
+      "models": [
+        "VITO TOURER",
+        "EQV",
+        "VITO",
+        "V-KLASSE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "C",
+      "yearFrom": 2000,
+      "yearTo": 2000,
+      "models": [
+        "211 CDI"
+      ],
+      "modelHint": "211 CDI"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "E2EQEW",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "AMG EQE 53 4MATIC+",
+        "AMG EQE 43 4MATIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "E2EQEX",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "EQE 500 4MATIC"
+      ],
+      "modelHint": "EQE 500 4MATIC"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "E2EQSW",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "EQS 450 4MATIC"
+      ],
+      "modelHint": "EQS 450 4MATIC"
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "F2A",
+      "yearFrom": 2018,
+      "yearTo": 2020,
+      "models": [
+        "A 250 E",
+        "A 200"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "F2B",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "models": [
+        "EQA 250",
+        "EQB 250+",
+        "EQA 350 4MATIC",
+        "EQA 300 4MATIC",
+        "EQB 300 4MATIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "F2CLA",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "models": [
+        "CLA 250 E",
+        "CLA 180"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "H1GLE",
+      "yearFrom": 2019,
+      "yearTo": 2025,
+      "models": [
+        "GLE 350 DE 4MATIC",
+        "GLE 400 D 4MATIC",
+        "GLS 450 D 4MATIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "R1ES",
+      "yearFrom": 2016,
+      "yearTo": 2020,
+      "models": [
+        "E 400 D 4 MATIC",
+        "E 300 DE",
+        "E 220 D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "typeCode": "WDB9066331",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "315/37 KA BU"
+      ],
+      "modelHint": "315/37 KA BU"
+    },
+    {
+      "make": "MG",
+      "typeCode": "AS3A",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "MG HS"
+      ],
+      "modelHint": "MG HS"
+    },
+    {
+      "make": "MG",
+      "typeCode": "EC3A",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "MG CYBERSTER"
+      ],
+      "modelHint": "MG CYBERSTER"
+    },
+    {
+      "make": "MG",
+      "typeCode": "EP21",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "models": [
+        "MG MARVEL R ELECTRIC"
+      ],
+      "modelHint": "MG MARVEL R ELECTRIC"
+    },
+    {
+      "make": "MG",
+      "typeCode": "EP22-L",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "models": [
+        "MG MG 5 ELECTRIC",
+        "MG5 ELECTRIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MG",
+      "typeCode": "RD",
+      "yearFrom": 1998,
+      "yearTo": 1998,
+      "models": [
+        "MGF"
+      ],
+      "modelHint": "MGF"
+    },
+    {
+      "make": "MG",
+      "typeCode": "S12L",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "IM 6"
+      ],
+      "modelHint": "IM 6"
+    },
+    {
+      "make": "MG",
+      "typeCode": "SEH3",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "models": [
+        "MG MG 4 ELECTRIC",
+        "MG4 ELECTRIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MG",
+      "typeCode": "ZS1",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "models": [
+        "MG ZS EV"
+      ],
+      "modelHint": "MG ZS EV"
+    },
+    {
+      "make": "MINI",
+      "typeCode": "FML4",
+      "yearFrom": 2017,
+      "yearTo": 2019,
+      "models": [
+        "COOPER"
+      ],
+      "modelHint": "COOPER"
+    },
+    {
+      "make": "MINI",
+      "typeCode": "FMX",
+      "yearFrom": 2018,
+      "yearTo": 2023,
+      "models": [
+        "COUNTRYMAN COOPER SE ALL4"
+      ],
+      "modelHint": "COUNTRYMAN COOPER SE ALL4"
+    },
+    {
+      "make": "MINI",
+      "typeCode": "MINI-N",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "COOPER S"
+      ],
+      "modelHint": "COOPER S"
+    },
+    {
+      "make": "MINI",
+      "typeCode": "UKL-L",
+      "yearFrom": 2012,
+      "yearTo": 2016,
+      "models": [
+        "ONE",
+        "COOPER D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MINI",
+      "typeCode": "UKL/X",
+      "yearFrom": 2011,
+      "yearTo": 2014,
+      "models": [
+        "COOPER D COUNTRYMAN ALL4",
+        "COOPER SD ALL4"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "typeCode": "CS0",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "LANCER"
+      ],
+      "modelHint": "LANCER"
+    },
+    {
+      "make": "MITSUBISHI",
+      "typeCode": "CW0",
+      "yearFrom": 2010,
+      "yearTo": 2021,
+      "models": [
+        "MITSUBISHI OUTLANDER",
+        "OUTLANDER"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "typeCode": "GA0",
+      "yearFrom": 2010,
+      "yearTo": 2014,
+      "models": [
+        "ASX",
+        "MITSUBISHI ASX"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "typeCode": "HA0",
+      "yearFrom": 2013,
+      "yearTo": 2016,
+      "models": [
+        "MITSUBISHI I-MIEV",
+        "I-MIEV"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "MITSUBISHI",
+      "typeCode": "V20",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "PAJERO"
+      ],
+      "modelHint": "PAJERO"
+    },
+    {
+      "make": "MITSUBISHI",
+      "typeCode": "V98WLYXZL6",
+      "yearFrom": 2007,
+      "yearTo": 2007,
+      "models": [
+        "PAJERO"
+      ],
+      "modelHint": "PAJERO"
+    },
+    {
+      "make": "MITSUBISHI",
+      "typeCode": "Z30",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "MITSUBISHI COLT"
+      ],
+      "modelHint": "MITSUBISHI COLT"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "-",
+      "yearFrom": 2016,
+      "yearTo": 2019,
+      "models": [
+        "LEAF"
+      ],
+      "modelHint": "LEAF"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "C13",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "NISSAN PULSAR"
+      ],
+      "modelHint": "NISSAN PULSAR"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "F15",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "NISSAN JUKE"
+      ],
+      "modelHint": "NISSAN JUKE"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "FE0E",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "models": [
+        "NISSAN ARIYA"
+      ],
+      "modelHint": "NISSAN ARIYA"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "J10",
+      "yearFrom": 2009,
+      "yearTo": 2011,
+      "models": [
+        "NISSAN QASHQAI",
+        "NISSAN QASHQAI+2"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "J11",
+      "yearFrom": 2014,
+      "yearTo": 2017,
+      "models": [
+        "NISSAN QASHQAI"
+      ],
+      "modelHint": "NISSAN QASHQAI"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "J12",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "models": [
+        "NISSAN QASHQAI"
+      ],
+      "modelHint": "NISSAN QASHQAI"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "JN1TESY61",
+      "yearFrom": 2000,
+      "yearTo": 2000,
+      "models": [
+        "PATROL GR 3.0 DI"
+      ],
+      "modelHint": "PATROL GR 3.0 DI"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "K12",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "NISSAN MICRA"
+      ],
+      "modelHint": "NISSAN MICRA"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "K13",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "NISSAN MICRA"
+      ],
+      "modelHint": "NISSAN MICRA"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "T30",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "X-TRAIL"
+      ],
+      "modelHint": "X-TRAIL"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "T31",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "NISSAN X-TRAIL      NISSANNENV"
+      ],
+      "modelHint": "NISSAN X-TRAIL      NISSANNENV"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "T32",
+      "yearFrom": 2015,
+      "yearTo": 2018,
+      "models": [
+        "NISSAN X-TRAIL"
+      ],
+      "modelHint": "NISSAN X-TRAIL"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "VSKJVWR51",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "NISSAN PATHFINDER   NISSANNENV"
+      ],
+      "modelHint": "NISSAN PATHFINDER   NISSANNENV"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "Y61",
+      "yearFrom": 1998,
+      "yearTo": 1998,
+      "models": [
+        "PATROL GR"
+      ],
+      "modelHint": "PATROL GR"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "Z51",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "NISSAN MURANO"
+      ],
+      "modelHint": "NISSAN MURANO"
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "ZE0",
+      "yearFrom": 2012,
+      "yearTo": 2017,
+      "models": [
+        "NISSAN LEAF",
+        "NISSAN LEAF 30KWH"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "NISSAN",
+      "typeCode": "ZE1",
+      "yearFrom": 2018,
+      "yearTo": 2024,
+      "models": [
+        "NISSAN LEAF 40KWH",
+        "NISSAN LEAF 62KWH"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "-",
+      "yearFrom": 1970,
+      "yearTo": 1970,
+      "models": [
+        "KADETT 31216"
+      ],
+      "modelHint": "KADETT 31216"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "0G-A",
+      "yearFrom": 2011,
+      "yearTo": 2015,
+      "models": [
+        "INSIGNIA SPORTS TOURER SW"
+      ],
+      "modelHint": "INSIGNIA SPORTS TOURER SW"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "A-H",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "ASTRA"
+      ],
+      "modelHint": "ASTRA"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "A-H/C",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "ASTRA CABRIO"
+      ],
+      "modelHint": "ASTRA CABRIO"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "ASCONA-B",
+      "yearFrom": 1978,
+      "yearTo": 1978,
+      "models": [
+        "ASCONA 1.9 S AUT"
+      ],
+      "modelHint": "ASCONA 1.9 S AUT"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "B-K",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "ASTRA SPORTS TOURER+"
+      ],
+      "modelHint": "ASTRA SPORTS TOURER+"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "C",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "FRONTERA"
+      ],
+      "modelHint": "FRONTERA"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "F",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "models": [
+        "ASTRA"
+      ],
+      "modelHint": "ASTRA"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "J-A",
+      "yearFrom": 2014,
+      "yearTo": 2016,
+      "models": [
+        "MOKKA"
+      ],
+      "modelHint": "MOKKA"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "K",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "GRANDLAND"
+      ],
+      "modelHint": "GRANDLAND"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "L-A",
+      "yearFrom": 2007,
+      "yearTo": 2007,
+      "models": [
+        "ANTARA"
+      ],
+      "modelHint": "ANTARA"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "P-J",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "ASTRA"
+      ],
+      "modelHint": "ASTRA"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "P-J/SW",
+      "yearFrom": 2011,
+      "yearTo": 2016,
+      "models": [
+        "ZAFIRA TOURER",
+        "ASTRA SPORTS TOURER"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "P7 Monocab C",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "CROSSLAND X"
+      ],
+      "modelHint": "CROSSLAND X"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "P7 MONOCAB C",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "CROSSLAND"
+      ],
+      "modelHint": "CROSSLAND"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "S-D",
+      "yearFrom": 2011,
+      "yearTo": 2015,
+      "models": [
+        "CORSA-E",
+        "CORSA"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "S-D MONOCAB B",
+      "yearFrom": 2010,
+      "yearTo": 2011,
+      "models": [
+        "MERIVA"
+      ],
+      "modelHint": "MERIVA"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "U",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "models": [
+        "MOKKA",
+        "CORSA"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "X01MONOCAB",
+      "yearFrom": 2003,
+      "yearTo": 2003,
+      "models": [
+        "MERIVA-A"
+      ],
+      "modelHint": "MERIVA-A"
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "Z",
+      "yearFrom": 2018,
+      "yearTo": 2022,
+      "models": [
+        "GRANDLAND X",
+        "GRANDLAND"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "OPEL",
+      "typeCode": "Z-B",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "INSIGNIA GRAND SPORT"
+      ],
+      "modelHint": "INSIGNIA GRAND SPORT"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "0*****",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "5008"
+      ],
+      "modelHint": "5008"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "0U",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "3008"
+      ],
+      "modelHint": "3008"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "1",
+      "yearFrom": 2011,
+      "yearTo": 2012,
+      "models": [
+        "ION"
+      ],
+      "modelHint": "ION"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "2*NFU*",
+      "yearFrom": 2002,
+      "yearTo": 2004,
+      "models": [
+        "206"
+      ],
+      "modelHint": "206"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "4*****",
+      "yearFrom": 2008,
+      "yearTo": 2009,
+      "models": [
+        "308"
+      ],
+      "modelHint": "308"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "8",
+      "yearFrom": 2011,
+      "yearTo": 2017,
+      "models": [
+        "508"
+      ],
+      "modelHint": "508"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "B02",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "304-CABRIOLET"
+      ],
+      "modelHint": "304-CABRIOLET"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "C",
+      "yearFrom": 2014,
+      "yearTo": 2018,
+      "models": [
+        "2008"
+      ],
+      "modelHint": "2008"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "E",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "models": [
+        "E-RIFTER"
+      ],
+      "modelHint": "E-RIFTER"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "F",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "models": [
+        "508",
+        "308"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "K",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "models": [
+        "3008",
+        "5008"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "L",
+      "yearFrom": 2014,
+      "yearTo": 2016,
+      "models": [
+        "308"
+      ],
+      "modelHint": "308"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "M",
+      "yearFrom": 2017,
+      "yearTo": 2022,
+      "models": [
+        "3008",
+        "5008"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "P",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "108"
+      ],
+      "modelHint": "108"
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "U",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "models": [
+        "208",
+        "2008"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PEUGEOT",
+      "typeCode": "VF3EBRHRH",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "807 HDI"
+      ],
+      "modelHint": "807 HDI"
+    },
+    {
+      "make": "POLESTAR",
+      "typeCode": "4",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "POLESTAR 4"
+      ],
+      "modelHint": "POLESTAR 4"
+    },
+    {
+      "make": "POLESTAR",
+      "typeCode": "V",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "models": [
+        "POLESTAR 2"
+      ],
+      "modelHint": "POLESTAR 2"
+    },
+    {
+      "make": "POLESTAR",
+      "typeCode": "Y",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "POLESTAR 3"
+      ],
+      "modelHint": "POLESTAR 3"
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "-",
+      "yearFrom": 2000,
+      "yearTo": 2011,
+      "models": [
+        "BOXSTER"
+      ],
+      "modelHint": "BOXSTER"
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "92A",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "CAYENNE TURBO"
+      ],
+      "modelHint": "CAYENNE TURBO"
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "95B",
+      "yearFrom": 2014,
+      "yearTo": 2020,
+      "models": [
+        "MACAN TURBO"
+      ],
+      "modelHint": "MACAN TURBO"
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "970",
+      "yearFrom": 2011,
+      "yearTo": 2015,
+      "models": [
+        "PANAMERA S E-HYBRID",
+        "PANAMERA 4S"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "971",
+      "yearFrom": 2017,
+      "yearTo": 2018,
+      "models": [
+        "PANAMERA 4S",
+        "PANAMERA 4 E-HYBRID"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "986",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "BOXSTER S"
+      ],
+      "modelHint": "BOXSTER S"
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "987",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "987"
+      ],
+      "modelHint": "987"
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "992",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "models": [
+        "911 CARRERA 4 GTS",
+        "911 GT3"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "997",
+      "yearFrom": 2007,
+      "yearTo": 2007,
+      "models": [
+        "911"
+      ],
+      "modelHint": "911"
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "9YA",
+      "yearFrom": 2018,
+      "yearTo": 2024,
+      "models": [
+        "CAYENNE TURBO",
+        "CAYENNE E-HYBRID"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "XA",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "models": [
+        "MACAN TURBO",
+        "MACAN 4"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "PORSCHE",
+      "typeCode": "Y1A",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "models": [
+        "TAYCAN 4",
+        "TAYCAN",
+        "TAYCAN TURBO",
+        "TAYCAN TURBO S",
+        "TAYCAN 4S"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "AG",
+      "yearFrom": 2016,
+      "yearTo": 2022,
+      "models": [
+        "ZOE"
+      ],
+      "modelHint": "ZOE"
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "M",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "MEGANE"
+      ],
+      "modelHint": "MEGANE"
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "P01",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "RENAULT 5 E-TECH ELECTRIC"
+      ],
+      "modelHint": "RENAULT 5 E-TECH ELECTRIC"
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "R",
+      "yearFrom": 2013,
+      "yearTo": 2018,
+      "models": [
+        "CAPTUR",
+        "CLIO"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "RCB",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "models": [
+        "MEGANE E-TECH ELECTRIC",
+        "SCENIC E-TECH ELECTRIC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "RFB",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "MEGANE E-TECH PLUG-IN HYBRID"
+      ],
+      "modelHint": "MEGANE E-TECH PLUG-IN HYBRID"
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "RFE",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "KADJAR"
+      ],
+      "modelHint": "KADJAR"
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "RJB",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "CAPTUR (E-TECH PLUG-IN HYBRID)"
+      ],
+      "modelHint": "CAPTUR (E-TECH PLUG-IN HYBRID)"
+    },
+    {
+      "make": "RENAULT",
+      "typeCode": "Z",
+      "yearFrom": 2012,
+      "yearTo": 2013,
+      "models": [
+        "MEGANE"
+      ],
+      "modelHint": "MEGANE"
+    },
+    {
+      "make": "ROVER",
+      "typeCode": "SALLHAMV2AA",
+      "yearFrom": 1982,
+      "yearTo": 1982,
+      "models": [
+        "RANGE ROVER"
+      ],
+      "modelHint": "RANGE ROVER"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "1Z",
+      "yearFrom": 2005,
+      "yearTo": 2011,
+      "models": [
+        "OCTAVIA"
+      ],
+      "modelHint": "OCTAVIA"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "3T",
+      "yearFrom": 2010,
+      "yearTo": 2023,
+      "models": [
+        "SUPERB"
+      ],
+      "modelHint": "SUPERB"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "5E",
+      "yearFrom": 2013,
+      "yearTo": 2020,
+      "models": [
+        "OCTAVIA"
+      ],
+      "modelHint": "OCTAVIA"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "5J",
+      "yearFrom": 2007,
+      "yearTo": 2018,
+      "models": [
+        "FABIA",
+        "ROOMSTER"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "5L",
+      "yearFrom": 2012,
+      "yearTo": 2014,
+      "models": [
+        "YETI"
+      ],
+      "modelHint": "YETI"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "NH",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "RAPID"
+      ],
+      "modelHint": "RAPID"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "NS",
+      "yearFrom": 2017,
+      "yearTo": 2023,
+      "models": [
+        "KODIAQ"
+      ],
+      "modelHint": "KODIAQ"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "NU",
+      "yearFrom": 2017,
+      "yearTo": 2019,
+      "models": [
+        "KAROQ"
+      ],
+      "modelHint": "KAROQ"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "NX",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "models": [
+        "OCTAVIA",
+        "OCTAVIA RS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "NY",
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "models": [
+        "ENYAQ 60",
+        "ENYAQ 85X",
+        "ENYAQ 80X",
+        "ENYAQ RS",
+        "ENYAQ 80",
+        "ELROQ 50",
+        "ELROQ RS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "PS",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "KODIAQ"
+      ],
+      "modelHint": "KODIAQ"
+    },
+    {
+      "make": "SKODA",
+      "typeCode": "AA",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "CITIGO"
+      ],
+      "modelHint": "CITIGO"
+    },
+    {
+      "make": "SSANGYONG",
+      "typeCode": "KPTG0B1FS",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "REXTON RX270 XDI"
+      ],
+      "modelHint": "REXTON RX270 XDI"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "B6",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "OUTBACK"
+      ],
+      "modelHint": "OUTBACK"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "BL/BP",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "LEGACY"
+      ],
+      "modelHint": "LEGACY"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "BM/BR",
+      "yearFrom": 2010,
+      "yearTo": 2010,
+      "models": [
+        "LEGACY"
+      ],
+      "modelHint": "LEGACY"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "EAM1S(M)",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "models": [
+        "SOLTERRA"
+      ],
+      "modelHint": "SOLTERRA"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "G4",
+      "yearFrom": 2013,
+      "yearTo": 2016,
+      "models": [
+        "XV"
+      ],
+      "modelHint": "XV"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "G5",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "XV"
+      ],
+      "modelHint": "XV"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "SG",
+      "yearFrom": 2002,
+      "yearTo": 2006,
+      "models": [
+        "FORESTER"
+      ],
+      "modelHint": "FORESTER"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "SH",
+      "yearFrom": 2009,
+      "yearTo": 2012,
+      "models": [
+        "FORESTER"
+      ],
+      "modelHint": "FORESTER"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "SJ",
+      "yearFrom": 2014,
+      "yearTo": 2016,
+      "models": [
+        "FORESTER"
+      ],
+      "modelHint": "FORESTER"
+    },
+    {
+      "make": "SUBARU",
+      "typeCode": "V1",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "LEVORG"
+      ],
+      "modelHint": "LEVORG"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "AP",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "E VITARA"
+      ],
+      "modelHint": "E VITARA"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "AZ",
+      "yearFrom": 2017,
+      "yearTo": 2021,
+      "models": [
+        "SWIFT"
+      ],
+      "modelHint": "SWIFT"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "ER",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "LIANA"
+      ],
+      "modelHint": "LIANA"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "ET",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "VITARA"
+      ],
+      "modelHint": "VITARA"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "EY",
+      "yearFrom": 2006,
+      "yearTo": 2011,
+      "models": [
+        "SX4"
+      ],
+      "modelHint": "SX4"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "EZ",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "SWIFT"
+      ],
+      "modelHint": "SWIFT"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "FZ",
+      "yearFrom": 2011,
+      "yearTo": 2013,
+      "models": [
+        "SWIFT"
+      ],
+      "modelHint": "SWIFT"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "JT",
+      "yearFrom": 2006,
+      "yearTo": 2008,
+      "models": [
+        "GRAND VITARA"
+      ],
+      "modelHint": "GRAND VITARA"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "JY",
+      "yearFrom": 2015,
+      "yearTo": 2016,
+      "models": [
+        "SX4 S-CROSS",
+        "S-CROSS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "LY",
+      "yearFrom": 2016,
+      "yearTo": 2021,
+      "models": [
+        "VITARA"
+      ],
+      "modelHint": "VITARA"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "MF",
+      "yearFrom": 2017,
+      "yearTo": 2017,
+      "models": [
+        "IGNIS"
+      ],
+      "modelHint": "IGNIS"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "NZ",
+      "yearFrom": 2015,
+      "yearTo": 2015,
+      "models": [
+        "SWIFT"
+      ],
+      "modelHint": "SWIFT"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "UZ",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "SWIFT"
+      ],
+      "modelHint": "SWIFT"
+    },
+    {
+      "make": "SUZUKI",
+      "typeCode": "XA5P(S)(EU,M)",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "ACROSS"
+      ],
+      "modelHint": "ACROSS"
+    },
+    {
+      "make": "TESLA",
+      "typeCode": "002",
+      "yearFrom": 2017,
+      "yearTo": 2019,
+      "models": [
+        "MODEL X",
+        "MODEL S"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TESLA",
+      "typeCode": "003",
+      "yearFrom": 2019,
+      "yearTo": 2026,
+      "models": [
+        "MODEL Y",
+        "MODEL 3"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TESLA",
+      "typeCode": "004",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "models": [
+        "MODEL X",
+        "MODEL S"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TESLA",
+      "typeCode": "005",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "MODEL Y"
+      ],
+      "modelHint": "MODEL Y"
+    },
+    {
+      "make": "TESLA MOTORS",
+      "typeCode": "002",
+      "yearFrom": 2014,
+      "yearTo": 2017,
+      "models": [
+        "MODEL S",
+        "MODEL X"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "A2",
+      "yearFrom": 2000,
+      "yearTo": 2003,
+      "models": [
+        "RAV4"
+      ],
+      "modelHint": "RAV4"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "AB1",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "AYGO"
+      ],
+      "modelHint": "AYGO"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "AJ1(A)",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "IQ"
+      ],
+      "modelHint": "IQ"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "AX1T(EU,M)",
+      "yearFrom": 2018,
+      "yearTo": 2023,
+      "models": [
+        "C-HR",
+        "TOYOTA C-HR"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "BP",
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "models": [
+        "URBAN CRUISER"
+      ],
+      "modelHint": "URBAN CRUISER"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "E12J",
+      "yearFrom": 2004,
+      "yearTo": 2004,
+      "models": [
+        "COROLLA"
+      ],
+      "modelHint": "COROLLA"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "E12U",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "COROLLA"
+      ],
+      "modelHint": "COROLLA"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "E15EJ(A)",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "COROLLA"
+      ],
+      "modelHint": "COROLLA"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "E15ES(A)",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "COROLLA"
+      ],
+      "modelHint": "COROLLA"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "E15UT(A)",
+      "yearFrom": 2007,
+      "yearTo": 2010,
+      "models": [
+        "AURIS"
+      ],
+      "modelHint": "AURIS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "E15UT(A)MS1",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "AURIS"
+      ],
+      "modelHint": "AURIS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "EAM1(M)",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "models": [
+        "TOYOTA BZ4X",
+        "BZ4X"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "HE15U(a)",
+      "yearFrom": 2013,
+      "yearTo": 2019,
+      "models": [
+        "TOYOTA AURIS",
+        "AURIS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "HW2",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "PRIUS"
+      ],
+      "modelHint": "PRIUS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "J12(EU)",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "LAND CRUISER (120SERIES)"
+      ],
+      "modelHint": "LAND CRUISER (120SERIES)"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "J15TN",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "TOYOTA LAND CRUISER(150 SERIES)"
+      ],
+      "modelHint": "TOYOTA LAND CRUISER(150 SERIES)"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "JTSC",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "models": [
+        "TOYOTA SUPRA"
+      ],
+      "modelHint": "TOYOTA SUPRA"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "KDJ120L-GKAEYW",
+      "yearFrom": 2005,
+      "yearTo": 2007,
+      "models": [
+        "LAND CRUISER",
+        "LAND CRUISER D4D"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "KDJ120L-GKFEYW",
+      "yearFrom": 2008,
+      "yearTo": 2008,
+      "models": [
+        "LAND CRUISER"
+      ],
+      "modelHint": "LAND CRUISER"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "KDJ120L-GKPEYW",
+      "yearFrom": 2004,
+      "yearTo": 2004,
+      "models": [
+        "LAND CRUISER"
+      ],
+      "modelHint": "LAND CRUISER"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "KDJ150L-GKAEYW",
+      "yearFrom": 2010,
+      "yearTo": 2013,
+      "models": [
+        "LAND CRUISER LC5A"
+      ],
+      "modelHint": "LAND CRUISER LC5A"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "KUN25L-CRMSHW",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "HILUX 4WD"
+      ],
+      "modelHint": "HILUX 4WD"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "KZN130L-GKMSXW",
+      "yearFrom": 1994,
+      "yearTo": 1994,
+      "models": [
+        "4 RUNNER 3.0 TURBO-D"
+      ],
+      "modelHint": "4 RUNNER 3.0 TURBO-D"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "P1F",
+      "yearFrom": 2004,
+      "yearTo": 2004,
+      "models": [
+        "YARIS"
+      ],
+      "modelHint": "YARIS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "T25",
+      "yearFrom": 2005,
+      "yearTo": 2007,
+      "models": [
+        "AVENSIS"
+      ],
+      "modelHint": "AVENSIS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "T27",
+      "yearFrom": 2009,
+      "yearTo": 2016,
+      "models": [
+        "AVENSIS",
+        "TOYOTA AVENSIS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "TA40L-AEKDSW",
+      "yearFrom": 1980,
+      "yearTo": 1980,
+      "models": [
+        "CARINA"
+      ],
+      "modelHint": "CARINA"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "V",
+      "yearFrom": 2017,
+      "yearTo": 2024,
+      "models": [
+        "PROACE"
+      ],
+      "modelHint": "PROACE"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XA3(a)",
+      "yearFrom": 2014,
+      "yearTo": 2015,
+      "models": [
+        "RA4A 4WD",
+        "RAV4"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XA3(A)",
+      "yearFrom": 2007,
+      "yearTo": 2011,
+      "models": [
+        "RAV4"
+      ],
+      "modelHint": "RAV4"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XA4(EU,M)",
+      "yearFrom": 2016,
+      "yearTo": 2018,
+      "models": [
+        "RAV4"
+      ],
+      "modelHint": "RAV4"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XA5(EU,M)",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "TOYOTA RAV4"
+      ],
+      "modelHint": "TOYOTA RAV4"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XA5P(EU,M)",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "models": [
+        "RAV4",
+        "TOYOTA RAV4"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XG1TJ(JP,M)",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "models": [
+        "TOYOTA COROLLA"
+      ],
+      "modelHint": "TOYOTA COROLLA"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XP11(A)",
+      "yearFrom": 2009,
+      "yearTo": 2010,
+      "models": [
+        "TOYOTA URBAN CRUISER",
+        "URBAN CRUISER"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XP12(A)",
+      "yearFrom": 2011,
+      "yearTo": 2011,
+      "models": [
+        "VERSO-S"
+      ],
+      "modelHint": "VERSO-S"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XP13M(a)",
+      "yearFrom": 2013,
+      "yearTo": 2019,
+      "models": [
+        "TOYOTA YARIS HYBRID",
+        "YARIS HYBRID",
+        "YARIS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XP13M(A)",
+      "yearFrom": 2013,
+      "yearTo": 2013,
+      "models": [
+        "YARIS",
+        "TOYOTA YARIS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XP9F(A)",
+      "yearFrom": 2007,
+      "yearTo": 2010,
+      "models": [
+        "YARIS"
+      ],
+      "modelHint": "YARIS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XPA1F(EU,M)",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "models": [
+        "TOYOTA YARIS",
+        "YARIS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XPA1G(EU,M)",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "models": [
+        "GR YARIS",
+        "TOYOTA GR YARIS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XPB1F(M)",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "models": [
+        "TOYOTA YARIS CROSS",
+        "YARIS CROSS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XV7(EU,M)",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "CAMRY"
+      ],
+      "modelHint": "CAMRY"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XW3(a)",
+      "yearFrom": 2016,
+      "yearTo": 2016,
+      "models": [
+        "PRIUS PLUS"
+      ],
+      "modelHint": "PRIUS PLUS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XW3(A)",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "PRIUS"
+      ],
+      "modelHint": "PRIUS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XW4(A)",
+      "yearFrom": 2013,
+      "yearTo": 2013,
+      "models": [
+        "TOYOTA PRIUS PLUS"
+      ],
+      "modelHint": "TOYOTA PRIUS PLUS"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XW5(EU,M)",
+      "yearFrom": 2017,
+      "yearTo": 2021,
+      "models": [
+        "TOYOTA PRIUS",
+        "PRIUS"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "XW5P(EU,M)",
+      "yearFrom": 2018,
+      "yearTo": 2018,
+      "models": [
+        "PRIUS PHV"
+      ],
+      "modelHint": "PRIUS PHV"
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "ZE1HE(EU,M)",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "models": [
+        "COROLLA",
+        "TOYOTA COROLLA"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "TOYOTA",
+      "typeCode": "ZN",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "86"
+      ],
+      "modelHint": "86"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "-",
+      "yearFrom": 1986,
+      "yearTo": 2019,
+      "models": [
+        "GOLF CABRIOLET",
+        "E-GOLF",
+        "TRANSPORTER 253"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "16",
+      "yearFrom": 2012,
+      "yearTo": 2014,
+      "models": [
+        "BEETLE"
+      ],
+      "modelHint": "BEETLE"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "19E-G",
+      "yearFrom": 1987,
+      "yearTo": 1987,
+      "models": [
+        "GOLF CL"
+      ],
+      "modelHint": "GOLF CL"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "1F",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "EOS"
+      ],
+      "modelHint": "EOS"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "1J",
+      "yearFrom": 1999,
+      "yearTo": 2002,
+      "models": [
+        "GOLF"
+      ],
+      "modelHint": "GOLF"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "1K",
+      "yearFrom": 2010,
+      "yearTo": 2012,
+      "models": [
+        "GOLF"
+      ],
+      "modelHint": "GOLF"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "1KM",
+      "yearFrom": 2007,
+      "yearTo": 2007,
+      "models": [
+        "JETTA"
+      ],
+      "modelHint": "JETTA"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "1KP",
+      "yearFrom": 2009,
+      "yearTo": 2013,
+      "models": [
+        "GOLF PLUS",
+        "GOLF"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "1T",
+      "yearFrom": 2004,
+      "yearTo": 2018,
+      "models": [
+        "TOURAN"
+      ],
+      "modelHint": "TOURAN"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "253",
+      "yearFrom": 1986,
+      "yearTo": 1986,
+      "models": [
+        "TRANSPORTER"
+      ],
+      "modelHint": "TRANSPORTER"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "26 - 16",
+      "yearFrom": 1979,
+      "yearTo": 1979,
+      "models": [
+        "VW"
+      ],
+      "modelHint": "VW"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "2EC2",
+      "yearFrom": 2014,
+      "yearTo": 2014,
+      "models": [
+        "CRAFTER"
+      ],
+      "modelHint": "CRAFTER"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "2K",
+      "yearFrom": 2010,
+      "yearTo": 2020,
+      "models": [
+        "CADDY"
+      ],
+      "modelHint": "CADDY"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "3B",
+      "yearFrom": 1999,
+      "yearTo": 1999,
+      "models": [
+        "PASSAT"
+      ],
+      "modelHint": "PASSAT"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "3C",
+      "yearFrom": 2007,
+      "yearTo": 2023,
+      "models": [
+        "PASSAT"
+      ],
+      "modelHint": "PASSAT"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "3CC",
+      "yearFrom": 2009,
+      "yearTo": 2009,
+      "models": [
+        "PASSAT CC"
+      ],
+      "modelHint": "PASSAT CC"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "5N",
+      "yearFrom": 2009,
+      "yearTo": 2021,
+      "models": [
+        "TIGUAN"
+      ],
+      "modelHint": "TIGUAN"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "6R",
+      "yearFrom": 2011,
+      "yearTo": 2016,
+      "models": [
+        "POLO"
+      ],
+      "modelHint": "POLO"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "7DB",
+      "yearFrom": 1998,
+      "yearTo": 2003,
+      "models": [
+        "MULTIVAN",
+        "CARAVELLE TDI"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "7HC",
+      "yearFrom": 2017,
+      "yearTo": 2021,
+      "models": [
+        "KOMBI"
+      ],
+      "modelHint": "KOMBI"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "7L",
+      "yearFrom": 2006,
+      "yearTo": 2007,
+      "models": [
+        "TOUAREG"
+      ],
+      "modelHint": "TOUAREG"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "7N",
+      "yearFrom": 2011,
+      "yearTo": 2012,
+      "models": [
+        "SHARAN"
+      ],
+      "modelHint": "SHARAN"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "7P",
+      "yearFrom": 2012,
+      "yearTo": 2012,
+      "models": [
+        "TOUAREG"
+      ],
+      "modelHint": "TOUAREG"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "9N",
+      "yearFrom": 2006,
+      "yearTo": 2007,
+      "models": [
+        "POLO"
+      ],
+      "modelHint": "POLO"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "A1",
+      "yearFrom": 2017,
+      "yearTo": 2023,
+      "models": [
+        "T-ROC",
+        "T ROC"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "AU",
+      "yearFrom": 2013,
+      "yearTo": 2020,
+      "models": [
+        "GOLF"
+      ],
+      "modelHint": "GOLF"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "AUV",
+      "yearFrom": 2014,
+      "yearTo": 2017,
+      "models": [
+        "GOLF SPORTSVAN"
+      ],
+      "modelHint": "GOLF SPORTSVAN"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "AW",
+      "yearFrom": 2019,
+      "yearTo": 2022,
+      "models": [
+        "POLO"
+      ],
+      "modelHint": "POLO"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "CD",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "models": [
+        "GOLF"
+      ],
+      "modelHint": "GOLF"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "E1",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "models": [
+        "ID.3 PRO 150 KW",
+        "ID.3 PURE 125 KW",
+        "ID.3 PRO S 150 KW",
+        "ID.3 PURE 110 KW"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "E2",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "models": [
+        "ID.4 PRO 150 KW",
+        "ID.4 GTX 220 KW",
+        "ID.5 PRO 150 KW",
+        "ID.5 GTX 220 KW",
+        "ID.4 PURE 109 KW",
+        "ID.4 PRO 4MOTION 210KW",
+        "ID.4 GTX 250KW"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "EB",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "ID. BUZZ GTX LR 250 KW",
+        "ID. BUZZ GTX KR 250 KW"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "ED",
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "models": [
+        "ID.7 TOURER GTX",
+        "ID.7 PRO 210KW"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "SK",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "models": [
+        "CADDY"
+      ],
+      "modelHint": "CADDY"
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "typeCode": "AA",
+      "yearFrom": 2012,
+      "yearTo": 2021,
+      "models": [
+        "UP!"
+      ],
+      "modelHint": "UP!"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "1",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "ES90"
+      ],
+      "modelHint": "ES90"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "14412?? A",
+      "yearFrom": 1974,
+      "yearTo": 1974,
+      "models": [
+        "144"
+      ],
+      "modelHint": "144"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "1441341 ?",
+      "yearFrom": 1968,
+      "yearTo": 1968,
+      "models": [
+        "144"
+      ],
+      "modelHint": "144"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "2",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "models": [
+        "EX30 CROSS COUNTRY",
+        "EX30"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "240 GLE",
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "models": [
+        ""
+      ],
+      "modelHint": ""
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "A",
+      "yearFrom": 2006,
+      "yearTo": 2006,
+      "models": [
+        "S80"
+      ],
+      "modelHint": "S80"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "B",
+      "yearFrom": 2009,
+      "yearTo": 2015,
+      "models": [
+        "V70",
+        "XC70"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "C",
+      "yearFrom": 2005,
+      "yearTo": 2008,
+      "models": [
+        "XC90"
+      ],
+      "modelHint": "XC90"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "D",
+      "yearFrom": 2010,
+      "yearTo": 2019,
+      "models": [
+        "XC60"
+      ],
+      "modelHint": "XC60"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "F",
+      "yearFrom": 2011,
+      "yearTo": 2016,
+      "models": [
+        "V60",
+        "S60",
+        "V60 CROSS COUNTRY"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "G",
+      "yearFrom": 2015,
+      "yearTo": 2020,
+      "models": [
+        "V60 TWIN ENGINE",
+        "V60 PLUG IN HYBRID"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "L",
+      "yearFrom": 1999,
+      "yearTo": 2024,
+      "models": [
+        "XC90",
+        "XC90 T8 TWIN ENGINE",
+        "S 70"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "M",
+      "yearFrom": 2004,
+      "yearTo": 2017,
+      "models": [
+        "S40",
+        "V50",
+        "C30",
+        "V40",
+        "V40 CROSS COUNTRY"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "P",
+      "yearFrom": 2016,
+      "yearTo": 2023,
+      "models": [
+        "V90",
+        "V90 T8 TWIN ENGINE",
+        "S90",
+        "V90 CROSS COUNTRY"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "R",
+      "yearFrom": 2001,
+      "yearTo": 2001,
+      "models": [
+        "S60"
+      ],
+      "modelHint": "S60"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "S",
+      "yearFrom": 2003,
+      "yearTo": 2007,
+      "models": [
+        "V70",
+        "XC70",
+        "V 70"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "T",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "models": [
+        "EX90"
+      ],
+      "modelHint": "EX90"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "U",
+      "yearFrom": 2017,
+      "yearTo": 2024,
+      "models": [
+        "XC60",
+        "XC60 T8 TWIN ENGINE"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "X",
+      "yearFrom": 2018,
+      "yearTo": 2025,
+      "models": [
+        "C40",
+        "XC40",
+        "EX40",
+        "EC40"
+      ],
+      "modelHint": null
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "YV124481???",
+      "yearFrom": 2019,
+      "yearTo": 2019,
+      "models": [
+        "240 GLE"
+      ],
+      "modelHint": "240 GLE"
+    },
+    {
+      "make": "VOLVO",
+      "typeCode": "Z",
+      "yearFrom": 2019,
+      "yearTo": 2022,
+      "models": [
+        "V60",
+        "V60 T8 TWIN ENGINE",
+        "V60 CROSS COUNTRY",
+        "S60 T8 TWIN ENGINE"
+      ],
+      "modelHint": null
+    }
+  ]
+}
