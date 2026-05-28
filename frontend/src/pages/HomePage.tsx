@@ -5,7 +5,6 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroSearch } from '@/components/home/HeroSearch';
 import { HeroVideo } from '@/components/home/HeroVideo';
 import { LiveStats } from '@/components/home/LiveStats';
-import { ProductCategories } from '@/components/home/ProductCategories';
 import { AdasSection } from '@/components/home/AdasSection';
 import { LogisticsMap } from '@/components/home/LogisticsMap';
 import { CtaBanner } from '@/components/home/CtaBanner';
@@ -145,9 +144,6 @@ export default function HomePage() {
 
       {/* ============================ LIVE STATS ============================ */}
       <LiveStats />
-
-      {/* ============================ CATEGORIES ============================ */}
-      <ProductCategories />
 
       {/* ============================ ADAS ============================ */}
       <AdasSection />
