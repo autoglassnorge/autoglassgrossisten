@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Search, Loader2, AlertTriangle, Car, Wrench } from 'lucide-react';
+import { PageMeta } from '@/components/seo/PageMeta';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { searchByRegnr, SearchError } from '@/api/glass';
@@ -99,6 +100,12 @@ export default function SearchPage() {
   }, [selectedType, selectedCategory, baseProducts]);
 
   return (
+    <>
+      <PageMeta
+        title="Søk med registreringsnummer — finn riktig bilglass"
+        description="Søk med registreringsnummer eller VIN for å finne eksakt bilglass som passer din bil. Med ADAS-kompatibilitet, regnsensor og kalibrering."
+        canonicalPath="/sok"
+      />
     <div className="mx-auto max-w-5xl px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
       <h1 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">Søk med registreringsnummer</h1>
       <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-8">Tast inn bilens registreringsnummer for å finne riktig glass.</p>
@@ -309,5 +316,6 @@ export default function SearchPage() {
         </div>
       )}
     </div>
+    </>
   );
 }

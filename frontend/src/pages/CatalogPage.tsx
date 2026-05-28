@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Search, Loader2, SlidersHorizontal } from 'lucide-react';
+import { PageMeta } from '@/components/seo/PageMeta';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { ProductGrid } from '@/components/catalog/ProductGrid';
@@ -44,6 +45,12 @@ export default function CatalogPage() {
   const hasMore = data?.hasMore ?? false;
 
   return (
+    <>
+      <PageMeta
+        title="Katalog — bilglass og tilbehør"
+        description="Bla i katalogen med 37 500+ bilglass-produkter. Frontruter, bakruter, dørruter, sideruter, ADAS-glass og tilbehør."
+        canonicalPath="/katalog"
+      />
     <div className="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
       <div className="mb-4 sm:mb-8">
         <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Katalog</h1>
@@ -155,5 +162,6 @@ export default function CatalogPage() {
         </div>
       </BottomSheet>
     </div>
+    </>
   );
 }

@@ -5,6 +5,7 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroSearch } from '@/components/home/HeroSearch';
 import { HeroVideo } from '@/components/home/HeroVideo';
 import { LiveStats } from '@/components/home/LiveStats';
+import { TrustStrip } from '@/components/home/TrustStrip';
 import { ProductCategories } from '@/components/home/ProductCategories';
 import { AdasSection } from '@/components/home/AdasSection';
 import { BrandWall } from '@/components/home/BrandWall';
@@ -21,6 +22,9 @@ export default function HomePage() {
         title="Autoglass AS — B2B grossist av bilglass i Norge"
         description="Norges største grossist av bilglass. 37 500+ produkter, neste-dag-levering, ADAS-kompatibilitet og OEM-kvalitet. Søk med registreringsnummer."
         canonicalPath="/"
+        ogImage="https://autoglass-frontend.pages.dev/logo.png"
+        ogType="website"
+        twitterCard="summary_large_image"
       />
       <JsonLd
         data={{
@@ -139,6 +143,9 @@ export default function HomePage() {
         {/* Bottom fade */}
         <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-b from-transparent to-carbon-900 pointer-events-none z-10" />
       </section>
+
+      {/* ============================ TRUST STRIP ============================ */}
+      <TrustStrip />
 
       {/* ============================ LIVE STATS ============================ */}
       <LiveStats />

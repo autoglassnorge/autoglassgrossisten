@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Loader2, Car, Package } from 'lucide-react';
+import { PageMeta } from '@/components/seo/PageMeta';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { BrandGrid } from '@/components/browse/BrandGrid';
@@ -140,13 +141,25 @@ export default function BrowsePage() {
 
   if (loadingBrands) {
     return (
+      <>
+        <PageMeta
+          title="Bla i katalogen — merke og modell"
+          description="Finn bilglass etter merke, modell og årsmodell. 37 500+ produkter på lager."
+          canonicalPath="/bla"
+        />
       <div className="mx-auto max-w-7xl px-3 py-20 flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-autoglass-blue" />
       </div>
-    );
+    </>);
   }
 
   return (
+    <>
+      <PageMeta
+        title="Bla i katalogen — merke og modell"
+        description="Finn bilglass etter merke, modell og årsmodell. 37 500+ produkter på lager."
+        canonicalPath="/bla"
+      />
     <div className="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2">
@@ -281,5 +294,6 @@ export default function BrowsePage() {
         </div>
       )}
     </div>
+    </>
   );
 }
