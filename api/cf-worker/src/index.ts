@@ -973,8 +973,8 @@ async function searchCatalog(
   offset = 0,
   limit = 100
 ): Promise<GlassRecord[]> {
-  let sql = "SELECT * FROM glass_catalog WHERE (eurocode LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)";
-  const params: (string | number)[] = [`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`];
+  let sql = "SELECT * FROM glass_catalog WHERE (eurocode LIKE ? OR article_number LIKE ? OR scan_number LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)";
+  const params: (string | number)[] = [`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`];
 
   if (filters.brand) {
     sql += " AND brand = ?";
