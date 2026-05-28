@@ -11,7 +11,6 @@ import {
 import {
   CATEGORY_CARDS,
   POPULAR_TOPICS,
-  MANUFACTURERS,
   FAQS,
 } from '@/data/bilglassguide/content';
 
@@ -159,6 +158,26 @@ export default function BilglassguidePage() {
           </div>
         </section>
 
+        {/* ========== PRODUSENTER ========== */}
+        <section className="py-12 sm:py-16 bg-slate-50">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+              Bilglassprodusenter
+            </h2>
+            <p className="text-gray-600 mb-8 max-w-2xl leading-relaxed">
+              Vi forholder oss utelukkende til anerkjente produsenter med dokumentert kvalitet.
+              Se mer om OEM vs aftermarket og hvordan vi velger leverandører.
+            </p>
+            <Link
+              to="/bilglassguide/oem-vs-aftermarket"
+              className="inline-flex items-center gap-2 text-autoglass-blue hover:underline font-medium"
+            >
+              Les om OEM vs aftermarket
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </section>
+
         {/* ========== HVORFOR TEKNISK KOMPLISERT ========== */}
         <section className="py-12 sm:py-16 bg-slate-50">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -184,70 +203,6 @@ export default function BilglassguidePage() {
                   <AlertTriangle className="h-5 w-5 text-amber-500 mb-2" />
                   <h4 className="font-semibold text-gray-900 text-sm">{item.label}</h4>
                   <p className="text-sm text-gray-500 mt-1">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ========== PRODUSENTER ========== */}
-        <section className="py-12 sm:py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                Våre produsenter og partnere
-              </h2>
-              <p className="text-slate-400 max-w-xl mx-auto">
-                Vi forholder oss utelukkende til anerkjente produsenter med dokumentert kvalitet.
-                OEM for originalkvalitet. OEE for verdi. PUR for monteringssystemer.
-              </p>
-            </div>
-
-            {/* Badges legend */}
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {[
-                { label: 'OEM', desc: 'Original Equipment Manufacturer', color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
-                { label: 'OEE', desc: 'Original Equipment Equivalent', color: 'bg-blue-500/20 text-blue-300 border-blue-500/30' },
-                { label: 'PUR', desc: 'Polyurethane / Lim', color: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
-              ].map((b) => (
-                <div key={b.label} className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs ${b.color}`}>
-                  <span className="font-bold">{b.label}</span>
-                  <span className="opacity-70">{b.desc}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {MANUFACTURERS.map((m) => (
-                <div
-                  key={m.name}
-                  className="group relative rounded-xl border border-slate-700 bg-slate-800/50 backdrop-blur-sm p-5 hover:bg-slate-800 transition-colors"
-                >
-                  <div className="flex items-start gap-4">
-                    {/* Brand logo */}
-                    <div className="flex h-14 w-28 flex-shrink-0 items-center justify-center rounded-lg bg-white p-2 shadow-lg">
-                      <img
-                        src={m.logoPath}
-                        alt={`${m.name} logo`}
-                        className="max-h-full max-w-full object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <h3 className="font-bold text-white text-sm">{m.name}</h3>
-                        <span className={`inline-flex rounded px-1.5 py-0.5 text-[10px] font-bold ${
-                          m.badge === 'OEM' ? 'bg-emerald-500/20 text-emerald-300' :
-                          m.badge === 'OEE' ? 'bg-blue-500/20 text-blue-300' :
-                          'bg-amber-500/20 text-amber-300'
-                        }`}>
-                          {m.badge}
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-400 mb-1">{m.origin}</p>
-                      <p className="text-sm text-slate-300 leading-relaxed">{m.desc}</p>
-                    </div>
-                  </div>
                 </div>
               ))}
             </div>

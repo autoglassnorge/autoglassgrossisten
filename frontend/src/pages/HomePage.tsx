@@ -8,10 +8,10 @@ import { LiveStats } from '@/components/home/LiveStats';
 import { TrustStrip } from '@/components/home/TrustStrip';
 import { ProductCategories } from '@/components/home/ProductCategories';
 import { AdasSection } from '@/components/home/AdasSection';
-import { BrandWall } from '@/components/home/BrandWall';
 import { LogisticsMap } from '@/components/home/LogisticsMap';
 import { CtaBanner } from '@/components/home/CtaBanner';
 import { ArrowRight } from 'lucide-react';
+import { MANUFACTURERS } from '@/data/bilglassguide/content';
 
 export default function HomePage() {
   const { t } = useI18n();
@@ -159,8 +159,67 @@ export default function HomePage() {
       {/* ============================ LOGISTICS ============================ */}
       <LogisticsMap />
 
-      {/* ============================ BRANDS ============================ */}
-      <BrandWall />
+      {/* ============================ MANUFACTURERS ============================ */}
+      <section className="relative bg-carbon-950 py-20 sm:py-24 border-t border-carbon-800">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-glass-cyan mb-3">
+              ↓ Leverandører vi fører
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              OEM og kvalitets-OEE fra etablerte produsenter
+            </h2>
+          </div>
+
+          {/* Badge legend */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            {[
+              { label: 'OEM', desc: 'Original Equipment Manufacturer', color: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/25' },
+              { label: 'OEE', desc: 'Original Equipment Equivalent', color: 'bg-blue-500/15 text-blue-300 border-blue-500/25' },
+              { label: 'PUR', desc: 'Polyurethane / Lim', color: 'bg-amber-500/15 text-amber-300 border-amber-500/25' },
+            ].map((b) => (
+              <div key={b.label} className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs ${b.color}`}>
+                <span className="font-bold font-mono">{b.label}</span>
+                <span className="opacity-70 hidden sm:inline">{b.desc}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {MANUFACTURERS.map((m) => (
+              <div
+                key={m.name}
+                className="group relative rounded-xl border border-carbon-700 bg-carbon-900/60 p-5 hover:bg-carbon-850 transition-colors"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex h-14 w-28 flex-shrink-0 items-center justify-center rounded-lg bg-white p-2 shadow-lg">
+                    <img
+                      src={m.logoPath}
+                      alt={`${m.name} logo`}
+                      className="max-h-full max-w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h3 className="font-bold text-white text-sm">{m.name}</h3>
+                      <span className={`inline-flex rounded px-1.5 py-0.5 text-[10px] font-bold font-mono ${
+                        m.badge === 'OEM' ? 'bg-emerald-500/20 text-emerald-300' :
+                        m.badge === 'OEE' ? 'bg-blue-500/20 text-blue-300' :
+                        'bg-amber-500/20 text-amber-300'
+                      }`}>
+                        {m.badge}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-carbon-400 mb-1">{m.origin}</p>
+                    <p className="text-sm text-carbon-300 leading-relaxed">{m.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ============================ CTA ============================ */}
       <CtaBanner />
