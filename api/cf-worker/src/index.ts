@@ -549,6 +549,30 @@ async function getCachedBovsoftVehicle(kv: KVNamespace, regnr: string): Promise<
 }
 
 // ============================================================================
+// SVV CACHE (KV)
+// ============================================================================
+
+/** Cache SVV vehicle data in KV for 24 hours */
+async function cacheSvvVehicle(kv: KVNamespace, regnr: string, vehicle: TecdocVehicle): Promise<void> {
+  try {
+    await kv.put(`svv:regnr:${regnr.toUpperCase()}`, JSON.stringify(vehicle), { expirationTtl: 86400 });
+  } catch (e) {
+    console.warn(`SVV KV cache write failed for ${regnr}: ${e instanceof Error ? e.message : String(e)}`);
+  }
+}
+
+/** Get cached SVV vehicle data from KV */
+async function getCachedSvvVehicle(kv: KVNamespace, regnr: string): Promise<TecdocVehicle | null> {
+  const cached = await kv.get(`svv:regnr:${regnr.toUpperCase()}`);
+  if (!cached) return null;
+  try {
+    return JSON.parse(cached) as TecdocVehicle;
+  } catch {
+    return null;
+  }
+}
+
+// ============================================================================
 // FACTORY EQUIPMENT LOOKUP (Biluppgitter)
 // ============================================================================
 
@@ -2535,7 +2559,18 @@ type SearchResult = {
 async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): Promise<SearchResult> {
   try {
   // 1. Lookup vehicle via SVV — typed result so we can distinguish auth vs not-found vs upstream
-  const svvResult = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
+  let svvCacheHit = false;
+  let svvResult: SvvFetchResult;
+  const cachedVehicle = await getCachedSvvVehicle(env.GLASS_CATALOG, regnr);
+  if (cachedVehicle) {
+    svvResult = { status: "ok", vehicle: cachedVehicle };
+    svvCacheHit = true;
+  } else {
+    svvResult = await fetchSvvEnkeltoppslag(regnr, env.SVV_API_KEY);
+    if (svvResult.status === "ok") {
+      await cacheSvvVehicle(env.GLASS_CATALOG, regnr, svvResult.vehicle);
+    }
+  }
   let source = "svv.enkeltoppslag";
 
   if (svvResult.status !== "ok") {
@@ -3137,6 +3172,7 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
       top_pick: topPick,
       confidence,
       layer,
+      cache_hit: svvCacheHit,
       confidenceInfo: {
         score: layer === -1 ? 100 : layer === 0 ? 95 : layer === 1 ? 85 : layer === 2 ? 65 : layer === 3 ? 45 : 25,
         label: confidence,
