@@ -23,7 +23,7 @@ export function Header() {
   };
 
   const navLinks = [
-    { label: 'Bla', href: '/bla' },
+    { label: 'Katalog', href: '/bla' },
     { label: 'Bilglassguide', href: '/bilglassguide' },
     { label: 'Søk', href: '/sok' },
   ];
