@@ -1,4 +1,4 @@
-import { Package, Truck, Shield, Clock, Factory } from 'lucide-react';
+import { Truck, Shield, Clock, Factory } from 'lucide-react';
 
 /* ========================================================================
    TrustStrip — operative trust-signaler rett under hero
@@ -6,7 +6,6 @@ import { Package, Truck, Shield, Clock, Factory } from 'lucide-react';
    ======================================================================== */
 
 const TRUST_ITEMS = [
-  { icon: Package, label: '37 500+', sub: 'produkter på lager' },
   { icon: Truck, label: 'Neste dag', sub: 'levering i Norge' },
   { icon: Shield, label: 'OEM · OEE', sub: 'originalkvalitet' },
   { icon: Clock, label: '30+ år', sub: 'bransjeerfaring' },
