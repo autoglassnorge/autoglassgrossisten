@@ -100,7 +100,7 @@ export default function HomePage() {
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05] drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[4.5rem] xl:text-7xl font-bold tracking-tight text-white leading-[1.08] drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
               <span className="block">{t('hero.title.line1')}</span>
               <span className="block text-glass-cyan">{t('hero.title.line2')}</span>
             </h1>

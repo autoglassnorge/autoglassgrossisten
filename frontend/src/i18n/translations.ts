@@ -23,8 +23,8 @@ export const translations: Record<Lang, Dict> = {
     'nav.contact': 'Kontakt',
 
     'hero.eyebrow': 'TOTALLEVERANDØR · BILGLASS · NESTE-DAG-LEVERING',
-    'hero.title.line1': 'Hele sortimentet.',
-    'hero.title.line2': 'Levert neste dag.',
+    'hero.title.line1': 'Levert neste dag.',
+    'hero.title.line2': 'Størst utvalg av bilglass i Europa.',
     'hero.subtitle': 'Frittstående totalleverandør av bilglass til verksteder, forhandlere og forsikring. 130 000+ ruter på lager — frontruter, sideruter, bakruter, ADAS-kalibreringsglass, lim og forbruksvarer.',
     'hero.search.placeholder': 'Reg.nr, VIN eller OEM-nummer',
     'hero.search.button': 'Finn glass',
@@ -97,8 +97,8 @@ export const translations: Record<Lang, Dict> = {
     'nav.contact': 'Kontakt',
 
     'hero.eyebrow': 'HELHETSLEVERANTÖR · BILGLAS · LEVERANS NÄSTA DAG',
-    'hero.title.line1': 'Hela sortimentet.',
-    'hero.title.line2': 'Levererat nästa dag.',
+    'hero.title.line1': 'Levererat nästa dag.',
+    'hero.title.line2': 'Störst utbud av bilglas i Europa.',
     'hero.subtitle': 'Fristående helhetsleverantör av bilglas till verkstäder, återförsäljare och försäkringsbolag. 130 000+ rutor i lager — vindrutor, sidorutor, bakrutor, ADAS-kalibreringsglas, lim och förbrukningsvaror.',
     'hero.search.placeholder': 'Reg.nr, VIN eller OEM-nummer',
     'hero.search.button': 'Hitta glas',
@@ -171,8 +171,8 @@ export const translations: Record<Lang, Dict> = {
     'nav.contact': 'Contact',
 
     'hero.eyebrow': 'FULL-LINE WHOLESALER · AUTOMOTIVE GLASS · NEXT-DAY DELIVERY',
-    'hero.title.line1': 'The full catalog.',
-    'hero.title.line2': 'Delivered next day.',
+    'hero.title.line1': 'Delivered next day.',
+    'hero.title.line2': 'Largest selection of automotive glass in Europe.',
     'hero.subtitle': 'Independent full-line supplier of automotive glass to workshops, dealers and insurers. 130,000+ SKUs in stock — windshields, side and rear glass, ADAS-ready units, urethanes and consumables.',
     'hero.search.placeholder': 'Plate, VIN or OEM number',
     'hero.search.button': 'Find glass',
