@@ -2620,6 +2620,102 @@ function yearCompatible(record: GlassRecord, vehicleYear: number, vehicleMake: s
   return true;
 }
 
+// ============================================================================
+// FUZZY MODEL MATCHING (Layer 1b — fallback for partial/no matches)
+// ============================================================================
+
+function tokenizeModel(s: string): string[] {
+  return s.toLowerCase().split(/[^a-z0-9]+/).filter(t => t.length >= 2);
+}
+
+/** Jaro-Winkler similarity (0-1) — good for short strings like model names */
+function jaroWinkler(s1: string, s2: string): number {
+  if (s1 === s2) return 1;
+  const len1 = s1.length, len2 = s2.length;
+  if (len1 === 0 || len2 === 0) return 0;
+  const matchDistance = Math.floor(Math.max(len1, len2) / 2) - 1;
+  const s1Matches = new Array(len1).fill(false);
+  const s2Matches = new Array(len2).fill(false);
+  let matches = 0, transpositions = 0;
+  for (let i = 0; i < len1; i++) {
+    const start = Math.max(0, i - matchDistance);
+    const end = Math.min(i + matchDistance + 1, len2);
+    for (let j = start; j < end; j++) {
+      if (s2Matches[j] || s1[i] !== s2[j]) continue;
+      s1Matches[i] = true;
+      s2Matches[j] = true;
+      matches++;
+      break;
+    }
+  }
+  if (matches === 0) return 0;
+  let k = 0;
+  for (let i = 0; i < len1; i++) {
+    if (!s1Matches[i]) continue;
+    while (!s2Matches[k]) k++;
+    if (s1[i] !== s2[k]) transpositions++;
+    k++;
+  }
+  const jaro = ((matches / len1) + (matches / len2) + ((matches - transpositions / 2) / matches)) / 3;
+  let prefixLen = 0;
+  for (let i = 0; i < Math.min(4, len1, len2); i++) {
+    if (s1[i] === s2[i]) prefixLen++;
+    else break;
+  }
+  return jaro + prefixLen * 0.1 * (1 - jaro);
+}
+
+/** Fuzzy model score combining token overlap + Jaro-Winkler */
+function fuzzyModelScore(vehicleModel: string, recordModel: string | null): number {
+  if (!recordModel) return 0;
+  const vm = vehicleModel.toLowerCase().trim();
+  const rm = recordModel.toLowerCase().trim();
+
+  // Exact substring match = highest score
+  if (vm.includes(rm) || rm.includes(vm)) return 1.0;
+
+  // Token overlap
+  const vTokens = tokenizeModel(vm);
+  const rTokens = tokenizeModel(rm);
+  const common = rTokens.filter(t => vTokens.includes(t));
+  const overlapScore = common.length / Math.max(vTokens.length, rTokens.length);
+
+  // Jaro-Winkler on full strings
+  const jwScore = jaroWinkler(vm, rm);
+
+  // Weighted combination
+  return overlapScore * 0.6 + jwScore * 0.4;
+}
+
+/**
+ * Fuzzy brand+year search — when strict model matching returns too few results.
+ * Searches all products for brand+year, scores by fuzzy model match, returns top N.
+ */
+async function queryFuzzyBrandYear(
+  db: D1Database,
+  brand: string,
+  year: number,
+  vehicleModel: string,
+  limit: number = 50
+): Promise<Array<{ record: GlassRecord; score: number }>> {
+  const brands = getBrandAliases(brand);
+  const placeholders = brands.map(() => '?').join(',');
+  const sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?) ORDER BY year_from DESC NULLS LAST LIMIT 1000`;
+  const { results } = await db.prepare(sql).bind(...brands, year, year).all();
+  const records = (results || []) as unknown as GlassRecord[];
+
+  const scored = records.map(r => ({
+    record: r,
+    score: fuzzyModelScore(vehicleModel, r.model),
+  }));
+
+  // Sort by score descending, filter out very poor matches
+  return scored
+    .filter(s => s.score > 0.15)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit);
+}
+
 function inferGenerationFromYearRange(brand: string, model: string, from: number, to: number): string | null {
   const key = `${brand} ${model}`.toLowerCase();
   if (key.includes("volkswagen") && key.includes("transporter")) {
@@ -3011,6 +3107,28 @@ async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): 
           if (layer > 3) { layer = 3; confidence = "low"; }
         }
       }
+    }
+  }
+
+  // === Layer 5: Fuzzy Brand+Year fallback ===
+  // When strict matching yields too few results OR missing key categories (e.g. no windshield),
+  // do a broad brand+year search and score with fuzzy model matching.
+  const hasWindshield = candidates.some(c => c.category === 'frontrute');
+  const hasEnoughResults = candidates.length >= 15;
+  if (!hasEnoughResults || !hasWindshield) {
+    const fuzzyResults = await queryFuzzyBrandYear(db, vehicle.make, vehicle.year, vehicle.model, 50);
+    for (const { record, score } of fuzzyResults) {
+      if (!candidateCodes.has(record.eurocode)) {
+        // Attach fuzzy score for downstream sorting
+        (record as any)._fuzzyScore = score;
+        candidates.push(record);
+        candidateCodes.add(record.eurocode);
+      }
+    }
+    // Only bump to fuzzy layer if we haven't found something better
+    if (layer > 3 && fuzzyResults.length > 0) {
+      layer = 3;
+      confidence = "low";
     }
   }
 
