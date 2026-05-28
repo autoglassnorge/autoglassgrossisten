@@ -1,4 +1,32 @@
-import { ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, Paperclip } from 'lucide-react';
+import { ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, Paperclip, Target } from 'lucide-react';
+
+function MatchScoreBadge({ score }: { score: number }) {
+  // Normalize score to 0-100%
+  const pct = Math.min(100, Math.max(0, Math.round(score)));
+  let colorClass = '';
+  let label = '';
+
+  if (pct >= 80) {
+    colorClass = 'bg-emerald-500 text-white';
+    label = 'Eksakt';
+  } else if (pct >= 50) {
+    colorClass = 'bg-green-500 text-white';
+    label = 'God';
+  } else if (pct >= 25) {
+    colorClass = 'bg-amber-500 text-white';
+    label = 'Middels';
+  } else {
+    colorClass = 'bg-red-500 text-white';
+    label = 'Lav';
+  }
+
+  return (
+    <div className={`inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[10px] font-bold ${colorClass}`}>
+      <Target className="h-3 w-3" />
+      {pct}% {label}
+    </div>
+  );
+}
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
@@ -55,8 +83,11 @@ export function ProductCard({ product, onDetail }: ProductCardProps) {
           </div>
         )}
 
-        {/* Type code badge */}
+        {/* Type code badge + match score */}
         <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
+          {product._score !== undefined && (
+            <MatchScoreBadge score={product._score} />
+          )}
           <Badge className="bg-white/90 text-gray-800 text-[10px] sm:text-xs">
             {typeCodeShort(product.typeCode || product.category)}
           </Badge>

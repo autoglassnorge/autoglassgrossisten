@@ -13,6 +13,7 @@ import { CalibrationInfoPanel } from '@/components/search/CalibrationInfoPanel';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
 import { EquipmentVerifier } from '@/components/search/EquipmentVerifier';
 import { AccessorySuggestions } from '@/components/search/AccessorySuggestions';
+import { GlassCategoryFilter } from '@/components/search/GlassCategoryFilter';
 import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
 import { ProductCard } from '@/components/catalog/ProductCard';
 import { ProductDetail } from '@/components/catalog/ProductDetail';
@@ -24,6 +25,7 @@ export default function SearchPage() {
   const [regnr, setRegnr] = useState(initialRegnr);
   const [activeRegnr, setActiveRegnr] = useState(initialRegnr);
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [equipmentFiltered, setEquipmentFiltered] = useState<Product[] | null>(null);
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
 
@@ -41,6 +43,7 @@ export default function SearchPage() {
   // Reset type filter when search changes
   useEffect(() => {
     setSelectedType(null);
+    setSelectedCategory(null);
     setEquipmentFiltered(null);
   }, [activeRegnr]);
 
@@ -61,14 +64,39 @@ export default function SearchPage() {
   const isUpstreamError = errorStatus === 503;
   const isInternalError = errorStatus === 500;
 
-  // Filtered products (type + equipment)
-  const baseProducts = equipmentFiltered ?? candidates;
+  // Sort candidates: windshield first, then by score descending
+  const CATEGORY_RANK: Record<string, number> = {
+    frontrute: 1,
+    bakrute: 2,
+    'dørrute-frem': 3,
+    'dørrute-bak': 4,
+    siderute: 5,
+    ventilrute: 6,
+    annet: 99,
+  };
+
+  const sortedCandidates = useMemo(() => {
+    return [...candidates].sort((a, b) => {
+      const rankA = CATEGORY_RANK[a.category?.toLowerCase() || 'annet'] || 99;
+      const rankB = CATEGORY_RANK[b.category?.toLowerCase() || 'annet'] || 99;
+      if (rankA !== rankB) return rankA - rankB;
+      // Within same category, sort by score descending
+      return (b._score || 0) - (a._score || 0);
+    });
+  }, [candidates]);
+
+  // Filtered products (type + equipment + category)
+  const baseProducts = equipmentFiltered ?? sortedCandidates;
   const filteredProducts = useMemo(() => {
+    let result = baseProducts;
     if (selectedType) {
-      return baseProducts.filter(p => (p.typeCode || 'Ukjent') === selectedType);
+      result = result.filter(p => (p.typeCode || 'Ukjent') === selectedType);
     }
-    return baseProducts;
-  }, [selectedType, baseProducts]);
+    if (selectedCategory) {
+      result = result.filter(p => (p.category?.toLowerCase() || 'annet') === selectedCategory);
+    }
+    return result;
+  }, [selectedType, selectedCategory, baseProducts]);
 
   return (
     <div className="mx-auto max-w-5xl px-3 py-4 sm:px-6 sm:py-8 lg:px-8">
@@ -201,6 +229,15 @@ export default function SearchPage() {
             <AccessorySuggestions typeCode={selectedType} />
           )}
 
+          {/* Glass category filter — primary navigation */}
+          {candidates.length > 0 && (
+            <GlassCategoryFilter
+              products={sortedCandidates}
+              activeCategory={selectedCategory}
+              onSelect={setSelectedCategory}
+            />
+          )}
+
           {/* Type code tabs */}
           {candidates.length > 0 && (
             <TypeCodeTabs
@@ -215,6 +252,7 @@ export default function SearchPage() {
             <div>
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">
                 {filteredProducts.length} resultat{filteredProducts.length !== 1 ? 'er' : ''}
+                {selectedCategory ? ` · ${selectedCategory}` : ''}
                 {selectedType ? ` · ${selectedType}` : ''}
               </h3>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

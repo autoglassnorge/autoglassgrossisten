@@ -39,6 +39,7 @@ export interface Product {
     klipsType?: string | null;
   };
   sourceUrl: string;
+  _score?: number; // Matching score from backend (0-100+)
 }
 
 export interface CatalogFilters {
