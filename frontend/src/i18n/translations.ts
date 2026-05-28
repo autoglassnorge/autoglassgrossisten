@@ -35,7 +35,7 @@ export const translations: Record<Lang, Dict> = {
     'hero.cta.quote': 'Be om tilbud',
 
     'stats.title': 'Drift i sanntid',
-    'stats.skus': 'SKU-er på lager',
+    'stats.skus': 'glass på lager',
     'stats.brands': 'Merkevarer',
     'stats.delivery': 'Leveringstid Norden',
     'stats.experience': 'Års bransjeerfaring',
@@ -109,7 +109,7 @@ export const translations: Record<Lang, Dict> = {
     'hero.cta.quote': 'Begär offert',
 
     'stats.title': 'Drift i realtid',
-    'stats.skus': 'SKU:er i lager',
+    'stats.skus': 'glas i lager',
     'stats.brands': 'Varumärken',
     'stats.delivery': 'Leveranstid Norden',
     'stats.experience': 'Års branscherfarenhet',
@@ -183,7 +183,7 @@ export const translations: Record<Lang, Dict> = {
     'hero.cta.quote': 'Request quote',
 
     'stats.title': 'Live operations',
-    'stats.skus': 'SKUs in stock',
+    'stats.skus': 'glass units in stock',
     'stats.brands': 'Brands carried',
     'stats.delivery': 'Nordic lead time',
     'stats.experience': 'Years in business',
