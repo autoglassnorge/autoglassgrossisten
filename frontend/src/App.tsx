@@ -6,6 +6,7 @@ import CatalogPage from '@/pages/CatalogPage'
 import SearchPage from '@/pages/SearchPage'
 import AccountPage from '@/pages/AccountPage'
 import BrowsePage from '@/pages/BrowsePage'
+import BilglassguidePage from '@/pages/BilglassguidePage'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/katalog" element={<CatalogPage />} />
           <Route path="/bla" element={<BrowsePage />} />
+          <Route path="/bilglassguide" element={<BilglassguidePage />} />
           <Route path="/sok" element={<SearchPage />} />
           <Route path="/kasse" element={<AccountPage />} />
           <Route path="*" element={
