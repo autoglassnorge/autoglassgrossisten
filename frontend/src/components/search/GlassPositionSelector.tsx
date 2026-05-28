@@ -422,7 +422,7 @@ export function GlassPositionSelector({ products, onFilter }: GlassPositionSelec
                     className="flex-shrink-0 flex items-center gap-1.5 bg-slate-50 rounded-lg px-2.5 py-1.5 border border-slate-100"
                   >
                     <span className={`inline-block w-2.5 h-2.5 rounded-full ${color.tailwindColor}`} />
-                    <span className="text-[10px] font-mono text-gray-600">{p.eurocode}</span>
+                    <span className="text-[10px] font-mono font-bold text-gray-800">{p.eurocode}</span>
                     <span className="text-[10px] text-gray-500">{color.label}</span>
                   </div>
                 );

@@ -63,8 +63,9 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <div className="flex items-center gap-2 min-w-0">
-            <Badge variant="outline" className="font-mono text-xs flex-shrink-0">
-              {product.eurocode}
+            <Badge variant="outline" className="font-mono text-xs flex-shrink-0 gap-1">
+              <span className="text-[9px] font-medium text-gray-500 uppercase tracking-wider">Eurokode</span>
+              <span className="font-bold text-gray-800">{product.eurocode}</span>
             </Badge>
             <span className="text-xs text-gray-400 flex-shrink-0">
               {typeCodeLabel(product.typeCode || product.category)}

@@ -103,8 +103,11 @@ export function ProductCard({ product, onDetail }: ProductCardProps) {
       {/* Content */}
       <CardContent className="flex-1 pt-3 px-3 sm:px-4">
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-[10px] sm:text-xs font-mono text-gray-400">
-            {product.eurocode}
+          <span className="inline-flex items-center rounded bg-slate-100 border border-slate-200 px-1.5 py-0.5">
+            <span className="text-[9px] font-medium text-slate-500 uppercase tracking-wider mr-1">Eurokode</span>
+            <span className="text-[11px] sm:text-sm font-mono font-bold text-slate-800">
+              {product.eurocode}
+            </span>
           </span>
           {product.position && (
             <span
