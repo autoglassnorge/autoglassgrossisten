@@ -79,3 +79,40 @@ CREATE TABLE IF NOT EXISTS rate_limits (
   expires_at DATETIME
 );
 CREATE INDEX IF NOT EXISTS idx_ktype_matches_last_seen ON ktype_matches(last_seen DESC);
+
+-- Statistical learning: user feedback (GDPR-safe, no regnr stored)
+-- ----------------------------------------------------------------------
+-- Tracks which products users view/add to cart for each search.
+-- Used to weight ktype_matches and improve scoreCandidate over time.
+CREATE TABLE IF NOT EXISTS search_feedback (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  regnr_hash TEXT NOT NULL,        -- SHA-256 of regnr (GDPR-safe)
+  ktype INTEGER,
+  eurocode TEXT NOT NULL,
+  layer INTEGER,
+  score INTEGER,
+  action TEXT,                      -- 'view', 'cart', 'order'
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_feedback_ktype_eurocode ON search_feedback(ktype, eurocode);
+CREATE INDEX IF NOT EXISTS idx_feedback_regnr ON search_feedback(regnr_hash);
+CREATE INDEX IF NOT EXISTS idx_feedback_created ON search_feedback(created_at DESC);
+
+-- Statistical learning: make/model/year -> ktype mapping rules
+-- ----------------------------------------------------------------------
+-- Learned from Bovsoft API and validated by search feedback.
+-- normalized_key format: "make:model:year"
+CREATE TABLE IF NOT EXISTS glass_rules (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  normalized_key TEXT NOT NULL,
+  ktype INTEGER NOT NULL,
+  confidence REAL NOT NULL DEFAULT 0.75,
+  evidence_count INTEGER NOT NULL DEFAULT 1,
+  active INTEGER NOT NULL DEFAULT 1,
+  source TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_glass_rules_key ON glass_rules(normalized_key);
+CREATE INDEX IF NOT EXISTS idx_glass_rules_ktype ON glass_rules(ktype);
+CREATE INDEX IF NOT EXISTS idx_glass_rules_active ON glass_rules(active);

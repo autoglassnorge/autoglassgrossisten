@@ -35,20 +35,58 @@ import type { Product } from '@/types/api';
 import { formatPrice, typeCodeShort, positionColor } from '@/utils/formatters';
 import { useCartStore } from '@/stores/cartStore';
 import { useState } from 'react';
+import { logFeedback } from '@/api/glass';
+
+interface SearchContext {
+  regnr: string;
+  kType?: number;
+  layer?: number;
+  score?: number;
+}
 
 interface ProductCardProps {
   product: Product;
   onDetail?: (product: Product) => void;
+  searchContext?: SearchContext;
 }
 
 function useInCart(eurocode: string) {
   return useCartStore((s) => s.items.some((i) => i.product.eurocode === eurocode));
 }
 
-export function ProductCard({ product, onDetail }: ProductCardProps) {
+export function ProductCard({ product, onDetail, searchContext }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
   const inCart = useInCart(product.eurocode);
   const [imgError, setImgError] = useState(false);
+
+  const handleDetail = () => {
+    if (searchContext) {
+      logFeedback({
+        regnr: searchContext.regnr,
+        eurocode: product.eurocode,
+        ktype: searchContext.kType,
+        layer: searchContext.layer,
+        score: product._score,
+        action: 'view',
+      }).catch(() => {}); // fire-and-forget
+    }
+    onDetail?.(product);
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (searchContext) {
+      logFeedback({
+        regnr: searchContext.regnr,
+        eurocode: product.eurocode,
+        ktype: searchContext.kType,
+        layer: searchContext.layer,
+        score: product._score,
+        action: 'cart',
+      }).catch(() => {}); // fire-and-forget
+    }
+    addItem(product);
+  };
 
   const stockDot = product.stockStatus > 0 ? 'bg-green-500' : 'bg-amber-500';
   const stockText = product.stockStatus > 0 ? `${product.stockStatus} på lager` : 'Bestillingsvare';
@@ -56,7 +94,7 @@ export function ProductCard({ product, onDetail }: ProductCardProps) {
   return (
     <Card
       className="group flex flex-col h-full overflow-hidden cursor-pointer"
-      onClick={() => onDetail?.(product)}
+      onClick={handleDetail}
     >
       {/* Image */}
       <div className="relative aspect-[16/10] bg-gray-100 overflow-hidden">
@@ -221,10 +259,7 @@ export function ProductCard({ product, onDetail }: ProductCardProps) {
         <Button
           size="sm"
           variant={inCart ? 'secondary' : 'default'}
-          onClick={(e) => {
-            e.stopPropagation();
-            addItem(product);
-          }}
+          onClick={handleAddToCart}
           className="gap-1 min-h-[44px] px-3 sm:px-4 flex-shrink-0"
         >
           {inCart ? <Check className="h-4 w-4" /> : <ShoppingCart className="h-4 w-4" />}

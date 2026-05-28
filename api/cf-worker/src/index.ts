@@ -361,7 +361,7 @@ function errorResponse(message: string, status = 400): Response {
 // CACHE (KV)
 // ============================================================================
 
-const CACHE_VERSION = "5";
+const CACHE_VERSION = "6";
 
 async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
   const cached = await kv.get(key);
@@ -1923,20 +1923,24 @@ function scoreCandidate(
   const recordFlags = inferRecordEquipment(c);
 
   // Equipment matching (high weight when we know vehicle equipment)
-  if (flags.adas && recordFlags.adas) score += 15;
-  if (flags.rainSensor && recordFlags.rainSensor) score += 12;
+  // ADAS and camera are most critical — wrong glass = recalibration needed
+  if (flags.adas && recordFlags.adas) score += 20;
+  if (flags.camera && recordFlags.camera) score += 18;
+  if (flags.rainSensor && recordFlags.rainSensor) score += 14;
   if (flags.heated && recordFlags.heated) score += 10;
-  if (flags.acoustic && recordFlags.acoustic) score += 8;
-  if (flags.antenna && recordFlags.antenna) score += 8;
   if (flags.hud && recordFlags.hud) score += 10;
-  if (flags.camera && recordFlags.camera) score += 12;
+  if (flags.acoustic && recordFlags.acoustic) score += 8;
+  if (flags.antenna && recordFlags.antenna) score += 6;
+  if (flags.shade && recordFlags.shade) score += 4;
 
   // Penalize if record has equipment the vehicle doesn't have
-  if (!flags.adas && recordFlags.adas) score -= 5;
-  if (!flags.hud && recordFlags.hud) score -= 3;
-  if (!flags.camera && recordFlags.camera) score -= 4;
+  // These penalties are smaller than bonuses to avoid over-penalizing
+  if (!flags.adas && recordFlags.adas) score -= 8;
+  if (!flags.camera && recordFlags.camera) score -= 6;
+  if (!flags.hud && recordFlags.hud) score -= 4;
   if (!flags.rainSensor && recordFlags.rainSensor) score -= 3;
   if (!flags.heated && recordFlags.heated) score -= 2;
+  if (!flags.acoustic && recordFlags.acoustic) score -= 1;
 
   // Category scoring: no bias — all glass types are equally important
   // Users want to find ALL types (front, rear, door, side) for a given vehicle
@@ -2082,24 +2086,108 @@ function parseYearRangeFromDescription(desc: string | null): { from: number | nu
 
 function parseGenerationFromDescription(desc: string | null): string | null {
   if (!desc) return null;
-  // VW: T1-T6
+  const d = desc.toLowerCase();
+
+  // VW Golf: GOLF I-VIII (before T-check, more specific)
+  const vwGolf = desc.match(/\bGOLF\s+([IVX]+)\b/i);
+  if (vwGolf) {
+    const roman = vwGolf[1].toUpperCase();
+    const map: Record<string, string> = { I: "Mk1", II: "Mk2", III: "Mk3", IV: "Mk4", V: "Mk5", VI: "Mk6", VII: "Mk7", VIII: "Mk8" };
+    if (map[roman]) return map[roman];
+  }
+  // VW: T1-T6 (Transporter)
   const vw = desc.match(/\b(T[1-6])\b/i);
   if (vw) return vw[1].toUpperCase();
-  // BMW: E30, E36, E46, E90, F30, G20
-  const bmw = desc.match(/\b(E30|E36|E46|E90|F30|G20)\b/i);
-  if (bmw) return bmw[1].toUpperCase();
-  // Mercedes: W201, W202, W203, W204, W205, W206
-  const merc = desc.match(/\b(W20[1-6])\b/i);
-  if (merc) return merc[1].toUpperCase();
-  // Audi: B8, B9, 8V, 8Y
-  const audi = desc.match(/\b(B[89]|8[VY])\b/i);
-  if (audi) return audi[1].toUpperCase();
-  // Ford Focus: MK3, MK4
-  const ford = desc.match(/\b(MK\s*[34])\b/i);
-  if (ford) return ford[1].toUpperCase();
-  // Volvo: P3, SPA
-  const volvo = desc.match(/\b(P3|SPA)\b/i);
-  if (volvo) return volvo[1].toUpperCase();
+
+  // BMW 3-series: E30, E36, E46, E90, F30, G20
+  const bmw3 = desc.match(/\b(E30|E36|E46|E90|F30|G20)\b/i);
+  if (bmw3 && d.includes("bmw") && (d.includes("3") || d.includes("tre"))) return bmw3[1].toUpperCase();
+  // BMW 5-series: E34, E39, E60, F10, G30
+  const bmw5 = desc.match(/\b(E34|E39|E60|F10|G30)\b/i);
+  if (bmw5 && d.includes("bmw") && (d.includes("5") || d.includes("fem"))) return bmw5[1].toUpperCase();
+  // BMW 1-series: E87, F20, F40
+  const bmw1 = desc.match(/\b(E87|F20|F40)\b/i);
+  if (bmw1 && d.includes("bmw") && (d.includes("1") || d.includes("en"))) return bmw1[1].toUpperCase();
+  // BMW X-series: E53, E70, E71, F15, F16, G01, G02, G05, G06, G07
+  const bmwX = desc.match(/\b(E53|E70|E71|F15|F16|G01|G02|G05|G06|G07)\b/i);
+  if (bmwX && d.includes("bmw")) return bmwX[1].toUpperCase();
+  // BMW 7-series: E32, E38, E65, F01, F02, G11, G12
+  const bmw7 = desc.match(/\b(E32|E38|E65|F01|F02|G11|G12)\b/i);
+  if (bmw7 && d.includes("bmw") && (d.includes("7") || d.includes("syv"))) return bmw7[1].toUpperCase();
+
+  // Mercedes C-Class: W201, W202, W203, W204, W205, W206
+  const mercC = desc.match(/\b(W20[1-6])\b/i);
+  if (mercC && d.includes("mercedes") && (d.includes("c") || d.includes("190"))) return mercC[1].toUpperCase();
+  // Mercedes E-Class: W124, W210, W211, W212, W213
+  const mercE = desc.match(/\b(W124|W21[0-3])\b/i);
+  if (mercE && d.includes("mercedes") && (d.includes("e") || d.includes("klasse"))) return mercE[1].toUpperCase();
+  // Mercedes A-Class: W168, W169, W176, W177
+  const mercA = desc.match(/\b(W1[67][689])\b/i);
+  if (mercA && d.includes("mercedes") && d.includes("a")) return mercA[1].toUpperCase();
+  // Mercedes S-Class: W116, W126, W140, W220, W221, W222, W223
+  const mercS = desc.match(/\b(W116|W126|W140|W22[0-3])\b/i);
+  if (mercS && d.includes("mercedes") && (d.includes("s") || d.includes("sel"))) return mercS[1].toUpperCase();
+
+  // Audi A3: 8L, 8P, 8V, 8Y
+  const audiA3 = desc.match(/\b(8[LPVY])\b/i);
+  if (audiA3 && d.includes("audi") && d.includes("3")) return audiA3[1].toUpperCase();
+  // Audi A4: B5, B6, B7, B8, B9
+  const audiA4 = desc.match(/\b(B[5-9])\b/i);
+  if (audiA4 && d.includes("audi") && d.includes("4")) return audiA4[1].toUpperCase();
+  // Audi A6: C4, C5, C6, C7, C8
+  const audiA6 = desc.match(/\b(C[4-8])\b/i);
+  if (audiA6 && d.includes("audi") && d.includes("6")) return audiA6[1].toUpperCase();
+
+  // Ford Focus: MK1-MK4
+  const fordFocus = desc.match(/\b(MK\s*[1-4])\b/i);
+  if (fordFocus && d.includes("ford") && d.includes("focus")) return fordFocus[1].toUpperCase().replace(/\s/g, "");
+  // Ford Fiesta: MK5-MK8
+  const fordFiesta = desc.match(/\b(MK\s*[5-8])\b/i);
+  if (fordFiesta && d.includes("ford") && d.includes("fiesta")) return fordFiesta[1].toUpperCase().replace(/\s/g, "");
+  // Ford Mondeo: MK1-MK5
+  const fordMondeo = desc.match(/\b(MK\s*[1-5])\b/i);
+  if (fordMondeo && d.includes("ford") && d.includes("mondeo")) return fordMondeo[1].toUpperCase().replace(/\s/g, "");
+
+  // Volvo V70: P80, P2, P3
+  const volvoV70 = desc.match(/\b(P80|P2|P3)\b/i);
+  if (volvoV70 && d.includes("volvo") && d.includes("70")) return volvoV70[1].toUpperCase();
+  // Volvo XC60/XC90: P2, P3, SPA
+  const volvoXC = desc.match(/\b(P2|P3|SPA)\b/i);
+  if (volvoXC && d.includes("volvo") && (d.includes("xc") || d.includes("60") || d.includes("90"))) return volvoXC[1].toUpperCase();
+  // Volvo S60/V60: P2, P3, SPA
+  const volvoS60 = desc.match(/\b(P2|P3|SPA)\b/i);
+  if (volvoS60 && d.includes("volvo") && d.includes("60")) return volvoS60[1].toUpperCase();
+
+  // Nissan Qashqai: J10, J11, J12
+  const nissanQ = desc.match(/\b(J1[0-2])\b/i);
+  if (nissanQ && d.includes("nissan") && d.includes("qashqai")) return nissanQ[1].toUpperCase();
+  // Nissan Micra: K10-K14
+  const nissanMicra = desc.match(/\b(K1[0-4])\b/i);
+  if (nissanMicra && d.includes("nissan") && d.includes("micra")) return nissanMicra[1].toUpperCase();
+  // Nissan X-Trail: T30-T33
+  const nissanX = desc.match(/\b(T3[0-3])\b/i);
+  if (nissanX && d.includes("nissan") && d.includes("x-trail")) return nissanX[1].toUpperCase();
+
+  // Mazda 3: BK, BL, BM, BP
+  const mazda3 = desc.match(/\b(BK|BL|BM|BP)\b/i);
+  if (mazda3 && d.includes("mazda") && d.includes("3")) return mazda3[1].toUpperCase();
+
+  // Skoda Octavia: 1U, 1Z, 5E, NX
+  const skodaOct = desc.match(/\b(1U|1Z|5E|NX)\b/i);
+  if (skodaOct && d.includes("skoda") && d.includes("octavia")) return skodaOct[1].toUpperCase();
+
+  // Seat Leon: 1M, 1P, 5F, KL
+  const seatLeon = desc.match(/\b(1M|1P|5F|KL)\b/i);
+  if (seatLeon && d.includes("seat") && d.includes("leon")) return seatLeon[1].toUpperCase();
+
+  // Honda Civic: EU, FL, FN, FK, FB
+  const hondaCivic = desc.match(/\b(EU|FL|FN|FK|FB)\b/i);
+  if (hondaCivic && d.includes("honda") && d.includes("civic")) return hondaCivic[1].toUpperCase();
+
+  // Hyundai i30: FD, GD, PD
+  const hyundaiI30 = desc.match(/\b(FD|GD|PD)\b/i);
+  if (hyundaiI30 && d.includes("hyundai") && d.includes("i30")) return hyundaiI30[1].toUpperCase();
+
   // Generic: MK I, MK II, GENERATION 1
   const generic = desc.match(/\b(MK\s*[IVX]+|SERIES\s+[A-Z]\d*|GENERATION\s+\d+)\b/i);
   if (generic) return generic[1].toUpperCase();
@@ -2513,12 +2601,25 @@ function decodeAudiVin(vin: string): { model: string; generation: string; body: 
   const wmi = vin.slice(0, 3).toUpperCase();
   if (!wmi.startsWith("WA")) return null;
   const modelCode = vin.slice(3, 7).toUpperCase();
-  // Audi A4 B8: 8K2, 8K5
-  // Audi A4 B9: 8W2, 8W5
+  // Audi A3: 8L, 8P, 8V, 8Y
+  if (modelCode.startsWith("8L")) return { model: "A3", generation: "8L", body: "hatch" };
+  if (modelCode.startsWith("8P")) return { model: "A3", generation: "8P", body: "hatch" };
+  if (modelCode.startsWith("8V")) return { model: "A3", generation: "8V", body: "hatch" };
+  if (modelCode.startsWith("8Y")) return { model: "A3", generation: "8Y", body: "hatch" };
+  // Audi A4: B5 (8D), B6 (8E), B7 (8E), B8 (8K), B9 (8W)
+  if (modelCode.startsWith("8D")) return { model: "A4", generation: "B5", body: "sedan" };
+  if (modelCode.startsWith("8E")) return { model: "A4", generation: "B6/B7", body: "sedan" };
   if (modelCode.startsWith("8K")) return { model: "A4", generation: "B8", body: "sedan" };
   if (modelCode.startsWith("8W")) return { model: "A4", generation: "B9", body: "sedan" };
-  // Audi A3 8V
-  if (modelCode.startsWith("8V")) return { model: "A3", generation: "8V", body: "hatch" };
+  // Audi A6: C4 (4A), C5 (4B), C6 (4F), C7 (4G), C8 (4K)
+  if (modelCode.startsWith("4A")) return { model: "A6", generation: "C4", body: "sedan" };
+  if (modelCode.startsWith("4B")) return { model: "A6", generation: "C5", body: "sedan" };
+  if (modelCode.startsWith("4F")) return { model: "A6", generation: "C6", body: "sedan" };
+  if (modelCode.startsWith("4G")) return { model: "A6", generation: "C7", body: "sedan" };
+  if (modelCode.startsWith("4K")) return { model: "A6", generation: "C8", body: "sedan" };
+  // Audi Q5: 8R (FY)
+  if (modelCode.startsWith("8R")) return { model: "Q5", generation: "8R", body: "suv" };
+  if (modelCode.startsWith("FY")) return { model: "Q5", generation: "FY", body: "suv" };
   return { model: "unknown", generation: "unknown", body: "sedan" };
 }
 
@@ -2526,12 +2627,17 @@ function decodeAudiVin(vin: string): { model: string; generation: string; body: 
 function decodeFordVin(vin: string): { model: string; generation: string; body: string } | null {
   if (!vin || vin.length < 7) return null;
   const wmi = vin.slice(0, 3).toUpperCase();
-  if (wmi !== "WF0" && wmi !== "1FT" && wmi !== "3FA") return null;
+  if (wmi !== "WF0" && wmi !== "1FT" && wmi !== "3FA" && wmi !== "MAJ" && wmi !== "ML1") return null;
   const modelCode = vin.slice(5, 7).toUpperCase();
-  // Ford Focus Mk3: P1
-  // Ford Focus Mk4: H1
-  if (modelCode === "P1") return { model: "Focus", generation: "Mk3", body: "hatch" };
-  if (modelCode === "H1") return { model: "Focus", generation: "Mk4", body: "hatch" };
+  // Ford Focus: Mk3 (P1, CB8), Mk4 (H1, CEW)
+  if (modelCode === "P1" || modelCode.startsWith("CB")) return { model: "Focus", generation: "Mk3", body: "hatch" };
+  if (modelCode === "H1" || modelCode.startsWith("CE")) return { model: "Focus", generation: "Mk4", body: "hatch" };
+  // Ford Fiesta: Mk7 (JA8), Mk8 (JH1)
+  if (modelCode.startsWith("JA")) return { model: "Fiesta", generation: "Mk7", body: "hatch" };
+  if (modelCode.startsWith("JH")) return { model: "Fiesta", generation: "Mk8", body: "hatch" };
+  // Ford Mondeo: Mk4 (BA7), Mk5 (CD391)
+  if (modelCode.startsWith("BA")) return { model: "Mondeo", generation: "Mk4", body: "sedan" };
+  if (modelCode.startsWith("CD")) return { model: "Mondeo", generation: "Mk5", body: "sedan" };
   return { model: "unknown", generation: "unknown", body: "sedan" };
 }
 
@@ -2539,14 +2645,19 @@ function decodeFordVin(vin: string): { model: string; generation: string; body: 
 function decodeHyundaiVin(vin: string): { model: string; generation: string; body: string } | null {
   if (!vin || vin.length < 6) return null;
   const wmi = vin.slice(0, 3).toUpperCase();
-  // Hyundai WMI: KMx, MEx, NLx, TMA
+  // Hyundai WMI: KMx, MEx, NLx, TMA, XWB
   // Kia WMI: KNx, MEx, NLx
-  if (!wmi.startsWith("KM") && !wmi.startsWith("KN") && !wmi.startsWith("ME") && !wmi.startsWith("NL") && !wmi.startsWith("TMA")) return null;
+  if (!wmi.startsWith("KM") && !wmi.startsWith("KN") && !wmi.startsWith("ME") && !wmi.startsWith("NL") && !wmi.startsWith("TMA") && !wmi.startsWith("XWB")) return null;
   const modelCode = vin.slice(3, 5).toUpperCase();
-  // Hyundai i30 GD = HDE
-  // Hyundai i30 PD = PDE
-  if (modelCode === "HD") return { model: "i30", generation: "GD", body: "hatch" };
+  // Hyundai i30: FD, GD, PD
+  if (modelCode === "FD") return { model: "i30", generation: "FD", body: "hatch" };
+  if (modelCode === "HD" || modelCode === "GD") return { model: "i30", generation: "GD", body: "hatch" };
   if (modelCode === "PD") return { model: "i30", generation: "PD", body: "hatch" };
+  // Hyundai i20: PB, GB, BC3
+  if (modelCode === "PB") return { model: "i20", generation: "PB", body: "hatch" };
+  if (modelCode === "GB") return { model: "i20", generation: "GB", body: "hatch" };
+  // Hyundai Tucson: JM, TL, NX4
+  if (modelCode === "TL") return { model: "Tucson", generation: "TL", body: "suv" };
   return { model: "unknown", generation: "unknown", body: "hatch" };
 }
 
@@ -3989,6 +4100,62 @@ export default {
     // ── VIN Lookup Status: GET /api/vin-lookup/status ──────────────────────
     if (path === "/api/vin-lookup/status" && request.method === "GET") {
       return handleVinLookupStatus(request, env);
+    }
+
+    // ── Feedback: POST /api/feedback ───────────────────────────────────────
+    // GDPR-safe: regnr hashed with SHA-256 before storage
+    if (path === "/api/feedback" && request.method === "POST") {
+      try {
+        const body = await request.json() as {
+          regnr?: string;
+          eurocode?: string;
+          ktype?: number;
+          layer?: number;
+          score?: number;
+          action?: "view" | "cart" | "order";
+        };
+        if (!body.regnr || !body.eurocode) {
+          return errorResponse("Mangler påkrevde felt: regnr, eurocode");
+        }
+        // Hash regnr for GDPR compliance
+        const encoder = new TextEncoder();
+        const data = encoder.encode(body.regnr.trim().toUpperCase());
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const regnrHash = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+
+        const db = env.GLASS_CATALOG_D1;
+        await db.prepare(
+          `INSERT INTO search_feedback (regnr_hash, ktype, eurocode, layer, score, action)
+           VALUES (?, ?, ?, ?, ?, ?)`
+        ).bind(
+          regnrHash,
+          body.ktype || null,
+          body.eurocode.toUpperCase(),
+          body.layer || null,
+          body.score || null,
+          body.action || "view"
+        ).run();
+
+        // Increment ktype_matches if ktype is known (fire-and-forget)
+        if (body.ktype) {
+          try {
+            await db.prepare(
+              `INSERT INTO ktype_matches (ktype, eurocode, hit_count, first_seen, last_seen)
+               VALUES (?, ?, 1, datetime('now'), datetime('now'))
+               ON CONFLICT(ktype, eurocode) DO UPDATE SET
+                 hit_count = hit_count + 1,
+                 last_seen = datetime('now')`
+            ).bind(body.ktype, body.eurocode.toUpperCase()).run();
+          } catch {
+            // Silently ignore ktype_matches errors
+          }
+        }
+
+        return jsonResponse({ success: true });
+      } catch (e) {
+        return errorResponse("Kunne ikke lagre feedback: " + (e as Error).message, 500);
+      }
     }
 
     // ── Admin: GET /api/admin/quotes ───────────────────────────────────────

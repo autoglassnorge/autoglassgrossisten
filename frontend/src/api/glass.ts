@@ -25,3 +25,18 @@ export async function searchByRegnr(regnr: string): Promise<SearchResult> {
   }
   return res.json();
 }
+
+export async function logFeedback(params: {
+  regnr: string;
+  eurocode: string;
+  ktype?: number;
+  layer?: number;
+  score?: number;
+  action: "view" | "cart" | "order";
+}): Promise<void> {
+  await fetch(`${API_BASE}/api/feedback`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(params),
+  });
+}

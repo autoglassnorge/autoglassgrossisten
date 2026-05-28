@@ -264,7 +264,17 @@ export default function SearchPage() {
               </h3>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredProducts.map((product) => (
-                  <ProductCard key={product.eurocode} product={product} onDetail={setDetailProduct} />
+                  <ProductCard
+                    key={product.eurocode}
+                    product={product}
+                    onDetail={setDetailProduct}
+                    searchContext={data?.regnr ? {
+                      regnr: data.regnr,
+                      kType: vehicle?.k_type,
+                      layer: data?.layer,
+                      score: product._score,
+                    } : undefined}
+                  />
                 ))}
               </div>
             </div>
