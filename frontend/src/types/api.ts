@@ -49,6 +49,8 @@ export interface CatalogFilters {
   priceMin?: number;
   priceMax?: number;
   query?: string;
+  equipment?: string[];
+  inStock?: boolean;
 }
 
 export interface CatalogResponse {

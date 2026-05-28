@@ -394,6 +394,14 @@ function normalizeCatalogSearchParams(url: URL): Record<string, string> {
   if (yearMin) out.yearMin = yearMin;
   const yearMax = url.searchParams.get("yearMax");
   if (yearMax) out.yearMax = yearMax;
+  const priceMin = url.searchParams.get("price_min");
+  if (priceMin) out.price_min = priceMin;
+  const priceMax = url.searchParams.get("price_max");
+  if (priceMax) out.price_max = priceMax;
+  const equipment = url.searchParams.get("equipment")?.trim().toLowerCase();
+  if (equipment) out.equipment = equipment;
+  const inStock = url.searchParams.get("in_stock");
+  if (inStock) out.in_stock = inStock;
   out.page = String(parseInt(url.searchParams.get("page") || "1", 10));
   out.per_page = String(parseInt(url.searchParams.get("per_page") || "48", 10));
   return out;
@@ -952,7 +960,16 @@ async function getCategoriesWithCount(db: D1Database): Promise<Array<{ category:
 async function searchCatalog(
   db: D1Database,
   q: string,
-  filters: { brand?: string; category?: string; yearMin?: number; yearMax?: number },
+  filters: {
+    brand?: string;
+    category?: string;
+    yearMin?: number;
+    yearMax?: number;
+    priceMin?: number;
+    priceMax?: number;
+    equipment?: string[];
+    inStock?: boolean;
+  },
   offset = 0,
   limit = 100
 ): Promise<GlassRecord[]> {
@@ -974,6 +991,25 @@ async function searchCatalog(
   if (filters.yearMax !== undefined) {
     sql += " AND (year_from IS NULL OR year_from <= ?)";
     params.push(filters.yearMax);
+  }
+  if (filters.priceMin !== undefined) {
+    sql += " AND (price IS NULL OR price >= ?)";
+    params.push(filters.priceMin);
+  }
+  if (filters.priceMax !== undefined) {
+    sql += " AND (price IS NULL OR price <= ?)";
+    params.push(filters.priceMax);
+  }
+  if (filters.equipment && filters.equipment.length > 0) {
+    for (const eq of filters.equipment) {
+      const col = eq.toLowerCase();
+      if (['adas','heated','rain_sensor','acoustic','antenna','hud','camera','solar','tinted'].includes(col)) {
+        sql += ` AND ${col} = 1`;
+      }
+    }
+  }
+  if (filters.inStock) {
+    sql += " AND (stock_status IS NOT NULL AND stock_status > 0)";
   }
   sql += " LIMIT ? OFFSET ?";
   params.push(limit, offset);
@@ -3337,6 +3373,10 @@ export default {
       const category = url.searchParams.get("category") || undefined;
       const yearMin = url.searchParams.get("yearMin") ? parseInt(url.searchParams.get("yearMin")!, 10) : undefined;
       const yearMax = url.searchParams.get("yearMax") ? parseInt(url.searchParams.get("yearMax")!, 10) : undefined;
+      const priceMin = url.searchParams.get("price_min") ? parseInt(url.searchParams.get("price_min")!, 10) : undefined;
+      const priceMax = url.searchParams.get("price_max") ? parseInt(url.searchParams.get("price_max")!, 10) : undefined;
+      const equipment = url.searchParams.get("equipment")?.split(",").filter(Boolean);
+      const inStock = url.searchParams.get("in_stock") === "1";
       const page = parseInt(url.searchParams.get("page") || "1", 10);
       const perPage = Math.min(parseInt(url.searchParams.get("per_page") || "48", 10), 100);
 
@@ -3353,7 +3393,7 @@ export default {
       }
 
       const offset = (page - 1) * perPage;
-      const results = await searchCatalog(env.GLASS_CATALOG_D1, q, { brand, category, yearMin, yearMax }, offset, perPage + 1);
+      const results = await searchCatalog(env.GLASS_CATALOG_D1, q, { brand, category, yearMin, yearMax, priceMin, priceMax, equipment, inStock }, offset, perPage + 1);
       const hasMore = results.length > perPage;
       const sliced = hasMore ? results.slice(0, perPage) : results;
       const responseBody = {
@@ -3375,6 +3415,27 @@ export default {
         "X-Cache-Status": "MISS",
         "X-Cache-Key": cacheKeyStr,
       });
+    }
+
+    // ── Catalog: /api/catalog/bulk-lookup ──────────────────────────────────
+    if (path === "/api/catalog/bulk-lookup") {
+      const codesParam = url.searchParams.get("codes") || "";
+      const codes = codesParam.split(",").map((c) => c.trim().toUpperCase()).filter(Boolean);
+      if (codes.length === 0) {
+        return errorResponse("Mangler codes parameter");
+      }
+      if (codes.length > 50) {
+        return errorResponse("Maks 50 eurokoder per forespørsel");
+      }
+
+      const placeholders = codes.map(() => "?").join(",");
+      const sql = `SELECT * FROM glass_catalog WHERE eurocode IN (${placeholders})`;
+      const { results } = await env.GLASS_CATALOG_D1.prepare(sql).bind(...codes).all();
+      const found = ((results || []) as unknown as GlassRecord[]).map(normalizeRecord);
+      const foundCodes = new Set(found.map((r: any) => r.eurocode));
+      const notFound = codes.filter((c) => !foundCodes.has(c));
+
+      return jsonResponse({ found, notFound, count: found.length });
     }
 
     // ── Auth: /api/me ──────────────────────────────────────────────────────

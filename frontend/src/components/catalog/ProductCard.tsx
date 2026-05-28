@@ -9,13 +9,14 @@ import { useState } from 'react';
 
 interface ProductCardProps {
   product: Product;
+  onDetail?: (product: Product) => void;
 }
 
 function useInCart(eurocode: string) {
   return useCartStore((s) => s.items.some((i) => i.product.eurocode === eurocode));
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onDetail }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
   const inCart = useInCart(product.eurocode);
   const [imgError, setImgError] = useState(false);
@@ -24,7 +25,10 @@ export function ProductCard({ product }: ProductCardProps) {
   const stockText = product.stockStatus > 0 ? `${product.stockStatus} på lager` : 'Bestillingsvare';
 
   return (
-    <Card className="group flex flex-col h-full overflow-hidden">
+    <Card
+      className="group flex flex-col h-full overflow-hidden cursor-pointer"
+      onClick={() => onDetail?.(product)}
+    >
       {/* Image */}
       <div className="relative aspect-[16/10] bg-gray-100 overflow-hidden">
         {!imgError && product.imageUrl ? (
@@ -182,7 +186,10 @@ export function ProductCard({ product }: ProductCardProps) {
         <Button
           size="sm"
           variant={inCart ? 'secondary' : 'default'}
-          onClick={() => addItem(product)}
+          onClick={(e) => {
+            e.stopPropagation();
+            addItem(product);
+          }}
           className="gap-1 min-h-[44px] px-3 sm:px-4 flex-shrink-0"
         >
           {inCart ? <Check className="h-4 w-4" /> : <ShoppingCart className="h-4 w-4" />}

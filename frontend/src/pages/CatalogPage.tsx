@@ -4,17 +4,20 @@ import { Search, Loader2, SlidersHorizontal } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { ProductGrid } from '@/components/catalog/ProductGrid';
+import { ProductDetail } from '@/components/catalog/ProductDetail';
+import { QuickOrderBar } from '@/components/catalog/QuickOrderBar';
 import { FilterPanel } from '@/components/catalog/FilterPanel';
 import { BottomSheet } from '@/components/search/BottomSheet';
 import { fetchCatalog } from '@/api/catalog';
 import { useDebounce } from '@/hooks/useDebounce';
-import type { CatalogFilters } from '@/types/api';
+import type { CatalogFilters, Product } from '@/types/api';
 
 export default function CatalogPage() {
   const [filters, setFilters] = useState<CatalogFilters>({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOpen, setFilterOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const [detailProduct, setDetailProduct] = useState<Product | null>(null);
   const debouncedSearch = useDebounce(searchQuery, 300);
 
   const { data, isLoading } = useQuery({
@@ -95,7 +98,7 @@ export default function CatalogPage() {
             </div>
           ) : (
             <>
-              <ProductGrid products={products} />
+              <ProductGrid products={products} onDetail={setDetailProduct} />
               {hasMore && (
                 <div className="mt-6 flex justify-center">
                   <Button
@@ -116,6 +119,24 @@ export default function CatalogPage() {
           )}
         </div>
       </div>
+
+      {/* Product detail modal */}
+      <ProductDetail product={detailProduct} onClose={() => setDetailProduct(null)} />
+
+      {/* Quick Order */}
+      <QuickOrderBar
+        onLookup={async (codes) => {
+          const API_BASE = import.meta.env.VITE_API_URL ?? '';
+          const res = await fetch(
+            `${API_BASE}/api/catalog/bulk-lookup?codes=${codes.join(',')}`
+          );
+          const data = await res.json();
+          return {
+            found: data.found || [],
+            notFound: data.notFound || [],
+          };
+        }}
+      />
 
       {/* Mobile filter bottom sheet */}
       <BottomSheet open={filterOpen} onClose={() => setFilterOpen(false)} title="Filter">

@@ -12,8 +12,10 @@ import { KtypeInfoBadge } from '@/components/search/KtypeInfoBadge';
 import { CalibrationInfoPanel } from '@/components/search/CalibrationInfoPanel';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
 import { EquipmentVerifier } from '@/components/search/EquipmentVerifier';
+import { AccessorySuggestions } from '@/components/search/AccessorySuggestions';
 import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
 import { ProductCard } from '@/components/catalog/ProductCard';
+import { ProductDetail } from '@/components/catalog/ProductDetail';
 import type { Product } from '@/types/api';
 
 export default function SearchPage() {
@@ -23,6 +25,7 @@ export default function SearchPage() {
   const [activeRegnr, setActiveRegnr] = useState(initialRegnr);
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [equipmentFiltered, setEquipmentFiltered] = useState<Product[] | null>(null);
+  const [detailProduct, setDetailProduct] = useState<Product | null>(null);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['search', activeRegnr],
@@ -193,6 +196,11 @@ export default function SearchPage() {
             />
           )}
 
+          {/* Accessory suggestions */}
+          {selectedType && candidates.some((p) => (p.typeCode || 'Ukjent') === selectedType) && (
+            <AccessorySuggestions typeCode={selectedType} />
+          )}
+
           {/* Type code tabs */}
           {candidates.length > 0 && (
             <TypeCodeTabs
@@ -211,7 +219,7 @@ export default function SearchPage() {
               </h3>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredProducts.map((product) => (
-                  <ProductCard key={product.eurocode} product={product} />
+                  <ProductCard key={product.eurocode} product={product} onDetail={setDetailProduct} />
                 ))}
               </div>
             </div>
@@ -244,6 +252,9 @@ export default function SearchPage() {
           </div>
         </div>
       )}
+
+      {/* Product detail modal */}
+      <ProductDetail product={detailProduct} onClose={() => setDetailProduct(null)} />
 
       {data && candidates.length === 0 && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-6 text-center">

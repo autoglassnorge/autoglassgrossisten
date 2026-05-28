@@ -1,7 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Loader2, Car, ChevronRight, Package } from 'lucide-react';
+import { Loader2, Car, Package } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { BrandGrid } from '@/components/browse/BrandGrid';
+import { ModelCards } from '@/components/browse/ModelCards';
+import { YearTimeline } from '@/components/browse/YearTimeline';
 
 interface BrowseProduct {
   title: string;
@@ -81,9 +84,22 @@ export default function BrowsePage() {
     setSelectedYear('');
   }, [selectedModel]);
 
-  const models = useMemo(() => {
+  // Build model info with product counts and year ranges
+  const modelInfos = useMemo(() => {
     if (!brandData) return [];
-    return Object.keys(brandData.models).sort();
+    return Object.entries(brandData.models).map(([name, yearData]) => {
+      const years = Object.keys(yearData);
+      const allProducts = years.flatMap(y => yearData[y]?.products || []);
+      const yearNums = years.map(y => parseInt(y, 10)).filter(n => !isNaN(n));
+      const yearRange = yearNums.length > 0
+        ? `${Math.min(...yearNums)}–${Math.max(...yearNums)}`
+        : '';
+      return {
+        name,
+        productCount: allProducts.length,
+        yearRange,
+      };
+    }).sort((a, b) => a.name.localeCompare(b.name));
   }, [brandData]);
 
   const years = useMemo(() => {
@@ -142,73 +158,83 @@ export default function BrowsePage() {
         </p>
       </div>
 
-      {/* Breadcrumb / Selection Flow */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {/* Brand Select */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Merke</label>
-            <select
-              value={selectedBrand}
-              onChange={(e) => setSelectedBrand(e.target.value)}
-              className="w-full h-12 rounded-lg border border-gray-300 bg-white px-3 text-base focus:border-autoglass-blue focus:ring-1 focus:ring-autoglass-blue"
-            >
-              <option value="">Velg merke...</option>
-              {brands.map(b => (
-                <option key={b.name} value={b.name}>
-                  {b.name} ({b.productCount})
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Model Select */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Modell</label>
-            <select
-              value={selectedModel}
-              onChange={(e) => setSelectedModel(e.target.value)}
-              disabled={!selectedBrand || loading}
-              className="w-full h-12 rounded-lg border border-gray-300 bg-white px-3 text-base focus:border-autoglass-blue focus:ring-1 focus:ring-autoglass-blue disabled:bg-gray-100 disabled:text-gray-400"
-            >
-              <option value="">{selectedBrand ? 'Velg modell...' : 'Velg merke først'}</option>
-              {models.map(m => (
-                <option key={m} value={m}>{m}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Year Select */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Årsmodell</label>
-            <select
-              value={selectedYear}
-              onChange={(e) => setSelectedYear(e.target.value)}
-              disabled={!selectedModel}
-              className="w-full h-12 rounded-lg border border-gray-300 bg-white px-3 text-base focus:border-autoglass-blue focus:ring-1 focus:ring-autoglass-blue disabled:bg-gray-100 disabled:text-gray-400"
-            >
-              <option value="">{selectedModel ? 'Velg år...' : 'Velg modell først'}</option>
-              {years.map(y => (
-                <option key={y} value={y}>{y}</option>
-              ))}
-            </select>
-          </div>
+      {/* STEP 1: Brand Grid */}
+      {!selectedBrand && (
+        <div className="space-y-4">
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+            Velg merke
+          </h2>
+          <BrandGrid
+            brands={brands}
+            selectedBrand={selectedBrand}
+            onSelect={setSelectedBrand}
+          />
         </div>
+      )}
 
-        {loading && (
-          <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Laster modeller...
-          </div>
-        )}
-      </div>
+      {/* STEP 2: Model Cards */}
+      {selectedBrand && !selectedModel && (
+        <div className="space-y-4">
+          {loading ? (
+            <div className="flex items-center gap-2 text-sm text-gray-500 py-8">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Laster modeller...
+            </div>
+          ) : (
+            <ModelCards
+              brand={selectedBrand}
+              models={modelInfos}
+              selectedModel={selectedModel}
+              onSelect={setSelectedModel}
+              onBack={() => setSelectedBrand('')}
+            />
+          )}
+        </div>
+      )}
 
-      {/* Products */}
+      {/* STEP 3: Year Timeline */}
+      {selectedBrand && selectedModel && !selectedYear && (
+        <div className="space-y-4">
+          {loading ? (
+            <div className="flex items-center gap-2 text-sm text-gray-500 py-8">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Laster årsmodeller...
+            </div>
+          ) : (
+            <YearTimeline
+              brand={selectedBrand}
+              model={selectedModel}
+              years={years}
+              selectedYear={selectedYear}
+              onSelect={setSelectedYear}
+              onBack={() => setSelectedModel('')}
+            />
+          )}
+        </div>
+      )}
+
+      {/* STEP 4: Products */}
       {selectedYear && currentProducts.length > 0 && (
-        <div>
-          <div className="mb-4 flex items-center gap-2 text-sm text-gray-500">
-            <ChevronRight className="h-4 w-4" />
-            {selectedBrand} &gt; {selectedModel} &gt; {selectedYear}
+        <div className="space-y-4">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setSelectedBrand('')}
+              className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              {selectedBrand}
+            </button>
+            <span className="text-gray-300">/</span>
+            <button
+              type="button"
+              onClick={() => setSelectedModel('')}
+              className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+            >
+              {selectedModel}
+            </button>
+            <span className="text-gray-300">/</span>
+            <span className="text-sm font-medium text-gray-900">{selectedYear}</span>
             <Badge variant="outline" className="ml-2">
               {currentProducts.length} produkt{currentProducts.length > 1 ? 'er' : ''}
             </Badge>
