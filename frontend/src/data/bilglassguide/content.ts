@@ -20,6 +20,9 @@ export interface Manufacturer {
   name: string;
   desc: string;
   origin: string;
+  badge: 'OEM' | 'OEE' | 'PUR';
+  initials: string;
+  color: string;
 }
 
 export interface FaqItem {
@@ -49,10 +52,15 @@ export const POPULAR_TOPICS: PopularTopic[] = [
 ];
 
 export const MANUFACTURERS: Manufacturer[] = [
-  { name: 'AGC', desc: 'Verdens største bilglassprodusent. Japansk teknologileder med fabrikker i Europa.', origin: 'Japan / Europa' },
-  { name: 'Pilkington', desc: 'Britiske Pilkington er pioner innen laminert bilglass og leverer OEM til premium-merker.', origin: 'Storbritannia' },
-  { name: 'Saint-Gobain Sekurit', desc: 'Fransk konsern som produserer Sekurit-glass for de fleste europeiske bilmerker.', origin: 'Frankrike' },
-  { name: 'Fuyao', desc: 'Kinesisk produsent som vokser raskt i Europa med konkurransedyktig kvalitet og pris.', origin: 'Kina / Europa' },
+  { name: 'Pilkington', desc: 'Britisk pioner innen laminert bilglass. Leverer OEM til premium-europeiske merker.', origin: 'Storbritannia', badge: 'OEM', initials: 'PI', color: '#1e3a5f' },
+  { name: 'Saint-Gobain Sekurit', desc: 'Verdens største OEM-leverandør i Europa. Sekurit-brandet er standard på de fleste europeiske biler.', origin: 'Frankrike', badge: 'OEM', initials: 'SG', color: '#c41e3a' },
+  { name: 'AGC', desc: 'Verdens største bilglassprodusent. Japansk teknologileder med fabrikker over hele Europa.', origin: 'Japan / Europa', badge: 'OEM', initials: 'AG', color: '#0066b3' },
+  { name: 'Guardian', desc: 'Amerikansk produsent med sterk posisjon i Nord-Amerika og voksende europeisk tilstedeværelse.', origin: 'USA', badge: 'OEM', initials: 'GU', color: '#004d40' },
+  { name: 'Fuyao', desc: 'Kinesisk produsent som vokser raskt i Europa med konkurransedyktig OEM-kvalitet og pris.', origin: 'Kina / Europa', badge: 'OEM', initials: 'FU', color: '#b71c1c' },
+  { name: 'Xinyi', desc: 'Kinesisk produsent og raskt voksende aktør i global bilglass med fokus på OEM-kontrakter.', origin: 'Kina', badge: 'OEM', initials: 'XY', color: '#1565c0' },
+  { name: 'NordGlass', desc: 'Nordisk produsent med solid posisjon i Skandinavia. OEE-kvalitet til konkurransedyktig pris.', origin: 'Norden', badge: 'OEE', initials: 'NG', color: '#2e7d32' },
+  { name: 'Sika', desc: 'Ledende leverandør av strukturelle lim og klebere til bilglassmontering (PUR-basert).', origin: 'Sveits', badge: 'PUR', initials: 'SK', color: '#f9a825' },
+  { name: 'Precision', desc: 'Spesialist på høypresisjonsbilglass og avanserte lamineringsteknologier for premium-segmentet.', origin: 'Europa', badge: 'OEM', initials: 'PR', color: '#6a1b9a' },
 ];
 
 export const FAQS: FaqItem[] = [
