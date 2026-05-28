@@ -118,7 +118,7 @@ export default function HomePage() {
             {/* Secondary actions */}
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link
-                to="/katalog"
+                to="/bla"
                 className="group inline-flex items-center gap-2 text-sm text-carbon-300 hover:text-glass-cyan transition-colors"
               >
                 <span>{t('hero.cta.catalog')}</span>

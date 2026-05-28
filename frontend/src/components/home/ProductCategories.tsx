@@ -11,11 +11,11 @@ interface Category {
 }
 
 const CATEGORIES: Category[] = [
-  { id: 'ws', titleKey: 'categories.windshield', descKey: 'categories.windshield.desc', href: '/katalog?type=windshield', badge: 'OEM · OEE' },
-  { id: 'adas', titleKey: 'categories.adas', descKey: 'categories.adas.desc', href: '/katalog?type=adas', badge: 'ADAS' },
-  { id: 'side', titleKey: 'categories.side', descKey: 'categories.side.desc', href: '/katalog?type=side' },
-  { id: 'rear', titleKey: 'categories.rear', descKey: 'categories.rear.desc', href: '/katalog?type=rear' },
-  { id: 'adh', titleKey: 'categories.adhesive', descKey: 'categories.adhesive.desc', href: '/katalog?type=adhesive', badge: 'AGRSS' },
+  { id: 'ws', titleKey: 'categories.windshield', descKey: 'categories.windshield.desc', href: '/bla?type=windshield', badge: 'OEM · OEE' },
+  { id: 'adas', titleKey: 'categories.adas', descKey: 'categories.adas.desc', href: '/bla?type=adas', badge: 'ADAS' },
+  { id: 'side', titleKey: 'categories.side', descKey: 'categories.side.desc', href: '/bla?type=side' },
+  { id: 'rear', titleKey: 'categories.rear', descKey: 'categories.rear.desc', href: '/bla?type=rear' },
+  { id: 'adh', titleKey: 'categories.adhesive', descKey: 'categories.adhesive.desc', href: '/bla?type=adhesive', badge: 'AGRSS' },
   { id: 'tools', titleKey: 'categories.tools', descKey: 'categories.tools.desc', href: '/verktoy' },
 ];
 

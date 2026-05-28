@@ -168,10 +168,10 @@ export default function SearchPage() {
 
           {/* Fallback options */}
           <div className="mt-4 flex flex-col sm:flex-row gap-2">
-            <a href="/katalog">
+            <a href="/bla">
               <Button variant="outline" className="w-full sm:w-auto gap-2">
                 <Car className="h-4 w-4" />
-                Søk i katalogen
+                Bla i katalogen
               </Button>
             </a>
             <button
@@ -308,9 +308,9 @@ export default function SearchPage() {
           <p className="text-sm text-amber-700 mt-1">
             Vi fant kjøretøyet, men har ingen registrerte glass som passer. Prøv å søke i katalogen manuelt.
           </p>
-          <a href="/katalog">
+          <a href="/bla">
             <Button variant="outline" className="mt-4">
-              Åpne katalog
+              Bla i katalogen
             </Button>
           </a>
         </div>

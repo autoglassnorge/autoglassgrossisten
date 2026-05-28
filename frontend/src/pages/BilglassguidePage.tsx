@@ -248,7 +248,7 @@ export default function BilglassguidePage() {
                   Søk med reg.nr.
                 </Button>
               </Link>
-              <Link to="/katalog">
+              <Link to="/bla">
                 <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
                   Bla i katalogen
                 </Button>

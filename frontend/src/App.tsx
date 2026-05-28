@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import HomePage from '@/pages/HomePage'
-import CatalogPage from '@/pages/CatalogPage'
 import SearchPage from '@/pages/SearchPage'
 import AccountPage from '@/pages/AccountPage'
 import BrowsePage from '@/pages/BrowsePage'
@@ -24,7 +23,6 @@ function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/katalog" element={<CatalogPage />} />
           <Route path="/bla" element={<BrowsePage />} />
           <Route path="/bilglassguide" element={<BilglassguidePage />} />
           <Route path="/bilglassguide/frontrute" element={<FrontrutePage />} />
