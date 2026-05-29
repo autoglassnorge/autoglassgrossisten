@@ -104,7 +104,6 @@ CREATE TABLE IF NOT EXISTS search_feedback (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_feedback_ktype_eurocode ON search_feedback(ktype, eurocode);
-CREATE INDEX IF NOT EXISTS idx_feedback_regnr ON search_feedback(regnr_hash);
 CREATE INDEX IF NOT EXISTS idx_feedback_created ON search_feedback(created_at DESC);
 
 -- Statistical learning: make/model/year -> ktype mapping rules
@@ -182,7 +181,6 @@ CREATE TABLE IF NOT EXISTS search_history (
   created_at TEXT DEFAULT CURRENT_TIMESTAMP,
   updated_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
-CREATE INDEX IF NOT EXISTS idx_search_regnr_hash ON search_history(regnr_hash);
 CREATE INDEX IF NOT EXISTS idx_search_make_model ON search_history(make, model);
 CREATE INDEX IF NOT EXISTS idx_search_vin_prefix ON search_history(vin_prefix);
 CREATE INDEX IF NOT EXISTS idx_search_generation ON search_history(generation);
@@ -223,7 +221,6 @@ CREATE TABLE IF NOT EXISTS ground_truth (
   source_url TEXT,
   confidence REAL NOT NULL DEFAULT 1.0
 );
-CREATE INDEX IF NOT EXISTS idx_gt_regnr_hash ON ground_truth(regnr_hash);
 CREATE INDEX IF NOT EXISTS idx_gt_make_model_year ON ground_truth(make, model, year);
 CREATE INDEX IF NOT EXISTS idx_gt_vin_prefix ON ground_truth(vin_prefix);
 CREATE INDEX IF NOT EXISTS idx_gt_equipment ON ground_truth(make, model, year, adas, rain_sensor, heated, acoustic, antenna, hud, camera);
