@@ -42,6 +42,7 @@ function info(msg) { console.log(`  ${C}ℹ${RESET} ${msg}`); }
 /* ── Hovedlogikk ───────────────────────────────────────────── */
 
 function validate() {
+  const start = Date.now();
   console.log(`\n🔍 Katalog-kvalitets-gate`);
   console.log(`   Fil: ${CATALOG_PATH}${RESET}`);
   console.log(`   Avvik-grense: ${(DEVIATION_THRESHOLD * 100).toFixed(0)}%\n`);
@@ -207,22 +208,31 @@ function validate() {
   }
 
   // Oppsummering
+  const elapsed = Date.now() - start;
   console.log("\n" + "═".repeat(50));
   if (blocks > 0) {
     console.log(`${R}❌ BLOCK: ${blocks} gate(s) feilet${RESET}`);
     console.log(`${Y}⚠️  Warnings: ${warnings}${RESET}`);
-    console.log(`${R}→ Katalog skal IKKE lastes opp til KV${RESET}\n`);
+    console.log(`${R}→ Katalog skal IKKE lastes opp til KV${RESET}`);
+    console.log(`   Tid: ${elapsed}ms\n`);
     return { pass: false, blocks, warnings };
   } else if (warnings > 0) {
     console.log(`${Y}⚠️  PASS med ${warnings} warning(s)${RESET}`);
-    console.log(`${G}→ Katalog kan lastes opp til KV${RESET}\n`);
+    console.log(`${G}→ Katalog kan lastes opp til KV${RESET}`);
+    console.log(`   Tid: ${elapsed}ms\n`);
     return { pass: true, blocks, warnings };
   } else {
     console.log(`${G}✅ PASS: Alle gates OK${RESET}`);
-    console.log(`${G}→ Katalog kan lastes opp til KV${RESET}\n`);
+    console.log(`${G}→ Katalog kan lastes opp til KV${RESET}`);
+    console.log(`   Tid: ${elapsed}ms\n`);
     return { pass: true, blocks, warnings };
   }
 }
 
-const result = validate();
-process.exit(result.pass ? 0 : 1);
+try {
+  const result = validate();
+  process.exit(result.pass ? 0 : 1);
+} catch (e) {
+  console.error(`\n${R}❌ Uventet feil under validering:${RESET}`, e.message);
+  process.exit(1);
+}

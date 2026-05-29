@@ -6,7 +6,7 @@
  *
  * Kjøring:
  *   UNIMICRO_CLIENT_ID=xxx UNIMICRO_CLIENT_SECRET=xxx \
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' export-catalog.ts
+ *   npx tsx export-catalog.ts
  *
  * Output: data/unimicro-catalog.json
  */
@@ -562,7 +562,7 @@ async function main() {
   );
 
   console.log(`\n💾 Lagret til: ${CONFIG.OUTPUT_PATH}`);
-  console.log("   Klar for upload-catalog-to-kv.ts eller glass-lookup.ts");
+  console.log("   Klar for npm run worker:upload eller glass-lookup.ts");
 }
 
 main().catch((err) => {

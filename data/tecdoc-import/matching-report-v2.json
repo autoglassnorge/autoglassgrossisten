@@ -1,0 +1,393 @@
+{
+  "total_catalog": 18737,
+  "matched": 9342,
+  "unmatched": 9395,
+  "multi_match": 9239,
+  "ktype_registry_entries": 784,
+  "glass_rules_entries": 972,
+  "catalog_updates": 9342,
+  "sample_matches": [
+    {
+      "eurocode": "10025C",
+      "ktype": 4742,
+      "brand": "FIAT",
+      "model": "PANDA",
+      "year_from": 1983,
+      "year_to": 2003,
+      "confidence": "possible",
+      "match_count": 29,
+      "tecdoc_model": "PANDA (141_)"
+    },
+    {
+      "eurocode": "10025GN",
+      "ktype": 4742,
+      "brand": "FIAT",
+      "model": "PANDA",
+      "year_from": 1983,
+      "year_to": 2003,
+      "confidence": "possible",
+      "match_count": 29,
+      "tecdoc_model": "PANDA (141_)"
+    },
+    {
+      "eurocode": "10030BZ",
+      "ktype": 11041,
+      "brand": "FIAT TRUCKS",
+      "model": "DUCATO",
+      "year_from": 1981,
+      "year_to": 1994,
+      "confidence": "possible",
+      "match_count": 101,
+      "tecdoc_model": "DUCATO Box (280_)"
+    },
+    {
+      "eurocode": "10030CL",
+      "ktype": 15813,
+      "brand": "DAIHATSU",
+      "model": "CUORE",
+      "year_from": 1996,
+      "year_to": 2003,
+      "confidence": "possible",
+      "match_count": 16,
+      "tecdoc_model": "CUORE V (L7_)"
+    },
+    {
+      "eurocode": "10031CL",
+      "ktype": 11041,
+      "brand": "FIAT TRUCKS",
+      "model": "DUCATO",
+      "year_from": 1981,
+      "year_to": 1994,
+      "confidence": "possible",
+      "match_count": 101,
+      "tecdoc_model": "DUCATO Box (280_)"
+    },
+    {
+      "eurocode": "10073CL",
+      "ktype": 5341,
+      "brand": "FORD TRUCKS",
+      "model": "TRANSIT TRANSIT",
+      "year_from": 1986,
+      "year_to": 1994,
+      "confidence": "possible",
+      "match_count": 76,
+      "tecdoc_model": "TRANSIT Bus (T_ _)"
+    },
+    {
+      "eurocode": "1017C",
+      "ktype": 3968,
+      "brand": "ALFA ROMEO",
+      "model": "ALFETTA",
+      "year_from": 1975,
+      "year_to": 1984,
+      "confidence": "possible",
+      "match_count": 15,
+      "tecdoc_model": "ALFETTA (116_)"
+    },
+    {
+      "eurocode": "1017GN",
+      "ktype": 3968,
+      "brand": "ALFA ROMEO",
+      "model": "ALFETTA",
+      "year_from": 1975,
+      "year_to": 1984,
+      "confidence": "possible",
+      "match_count": 15,
+      "tecdoc_model": "ALFETTA (116_)"
+    },
+    {
+      "eurocode": "1018BZ",
+      "ktype": 1185,
+      "brand": "SAAB",
+      "model": "900 900 3-D.C.C",
+      "year_from": 1979,
+      "year_to": 1993,
+      "confidence": "possible",
+      "match_count": 18,
+      "tecdoc_model": "900 I Convertible"
+    },
+    {
+      "eurocode": "1018C",
+      "ktype": 1185,
+      "brand": "SAAB",
+      "model": "900 900 3-D.C.C",
+      "year_from": 1979,
+      "year_to": 1993,
+      "confidence": "possible",
+      "match_count": 18,
+      "tecdoc_model": "900 I Convertible"
+    },
+    {
+      "eurocode": "1018GB",
+      "ktype": 1185,
+      "brand": "SAAB",
+      "model": "900 900 3-D.C.C",
+      "year_from": 1979,
+      "year_to": 1993,
+      "confidence": "possible",
+      "match_count": 18,
+      "tecdoc_model": "900 I Convertible"
+    },
+    {
+      "eurocode": "1037BB",
+      "ktype": 2094,
+      "brand": "MAZDA",
+      "model": "RX-7",
+      "year_from": 1979,
+      "year_to": 1985,
+      "confidence": "possible",
+      "match_count": 10,
+      "tecdoc_model": "RX-7 I (SA)"
+    },
+    {
+      "eurocode": "1039BB",
+      "ktype": 66913,
+      "brand": "MAZDA",
+      "model": "626 626 2-D COUPE",
+      "year_from": 1984,
+      "year_to": 1987,
+      "confidence": "possible",
+      "match_count": 15,
+      "tecdoc_model": "626 I Coupe"
+    },
+    {
+      "eurocode": "1039BL",
+      "ktype": 66913,
+      "brand": "MAZDA",
+      "model": "626 626 2-D COUPE",
+      "year_from": 1984,
+      "year_to": 1987,
+      "confidence": "possible",
+      "match_count": 15,
+      "tecdoc_model": "626 I Coupe"
+    },
+    {
+      "eurocode": "1054C",
+      "ktype": 6098,
+      "brand": "CITROEN",
+      "model": "VISA",
+      "year_from": 1978,
+      "year_to": 1987,
+      "confidence": "possible",
+      "match_count": 15,
+      "tecdoc_model": "VISA"
+    },
+    {
+      "eurocode": "1054GB",
+      "ktype": 6098,
+      "brand": "CITROEN",
+      "model": "VISA",
+      "year_from": 1978,
+      "year_to": 1987,
+      "confidence": "possible",
+      "match_count": 15,
+      "tecdoc_model": "VISA"
+    },
+    {
+      "eurocode": "1073C",
+      "ktype": 14742,
+      "brand": "VW TRUCKS",
+      "model": "TRANSPORTER",
+      "year_from": 1980,
+      "year_to": 1990,
+      "confidence": "possible",
+      "match_count": 79,
+      "tecdoc_model": "TRANSPORTER T3 Bus"
+    },
+    {
+      "eurocode": "1073GB",
+      "ktype": 14742,
+      "brand": "VW TRUCKS",
+      "model": "TRANSPORTER",
+      "year_from": 1980,
+      "year_to": 1990,
+      "confidence": "possible",
+      "match_count": 79,
+      "tecdoc_model": "TRANSPORTER T3 Bus"
+    },
+    {
+      "eurocode": "1085BZ",
+      "ktype": 5372,
+      "brand": "PEUGEOT",
+      "model": "505",
+      "year_from": 1979,
+      "year_to": 1990,
+      "confidence": "possible",
+      "match_count": 50,
+      "tecdoc_model": "505 (551A)"
+    },
+    {
+      "eurocode": "1085C",
+      "ktype": 5372,
+      "brand": "PEUGEOT",
+      "model": "505",
+      "year_from": 1979,
+      "year_to": 1990,
+      "confidence": "possible",
+      "match_count": 50,
+      "tecdoc_model": "505 (551A)"
+    }
+  ],
+  "unmatched_sample": [
+    {
+      "eurocode": "10041GN",
+      "brand": "MERCEDES",
+      "model": "GELANDEWAGEN",
+      "yf": 1981,
+      "yt": 2006,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10041YP",
+      "brand": "MERCEDES",
+      "model": "GELANDEWAGEN",
+      "yf": 1981,
+      "yt": 2006,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10042GN",
+      "brand": "MERCEDES",
+      "model": "GELANDEWAGEN",
+      "yf": 1981,
+      "yt": 2006,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10043GN",
+      "brand": "MERCEDES",
+      "model": "GELANDEWAGEN",
+      "yf": 1981,
+      "yt": 2006,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10043YP",
+      "brand": "MERCEDES",
+      "model": "GELANDEWAGEN",
+      "yf": 1981,
+      "yt": 2006,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10044GN",
+      "brand": "MERCEDES",
+      "model": "GELANDEWAGEN",
+      "yf": 1981,
+      "yt": 2006,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10044GN2",
+      "brand": "MERCEDES",
+      "model": "GELANDEWAGEN",
+      "yf": 1981,
+      "yt": 2006,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10044YP",
+      "brand": "MERCEDES",
+      "model": "GELANDEWAGEN",
+      "yf": 1981,
+      "yt": 2006,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "1004BL",
+      "brand": "NISSAN",
+      "model": "160J",
+      "yf": 1978,
+      "yt": 1981,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10058CL",
+      "brand": "VOLVO TRUCKS",
+      "model": "N SERIE LASTEVOGN",
+      "yf": 1984,
+      "yt": null,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10059CL",
+      "brand": "MERCEDES TRUCKS",
+      "model": "1013-2632 HYTTENR. 381",
+      "yf": 1973,
+      "yt": 1998,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "10060CL",
+      "brand": "MERCEDES TRUCKS",
+      "model": "1013-2632 HYTTENR. 381",
+      "yf": 1973,
+      "yt": 1998,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "1006BB",
+      "brand": "TOYOTA",
+      "model": "CELICA 3DD CC",
+      "yf": 1978,
+      "yt": 1981,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "1007C",
+      "brand": "LADA / TOGLIATTI",
+      "model": "NIVA 2121 4WD",
+      "yf": 1975,
+      "yt": null,
+      "reason": "no_brand"
+    },
+    {
+      "eurocode": "1007GB",
+      "brand": "LADA / TOGLIATTI",
+      "model": "NIVA 2121 4WD",
+      "yf": 1975,
+      "yt": null,
+      "reason": "no_brand"
+    },
+    {
+      "eurocode": "10085GN",
+      "brand": "VOLVO TRUCKS",
+      "model": "FH LASTEVOGN",
+      "yf": 1994,
+      "yt": null,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "1009BZ",
+      "brand": "ALFA ROMEO",
+      "model": "GUILETTA 4D SED",
+      "yf": 1978,
+      "yt": 1985,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "1009BZB",
+      "brand": "ALFA ROMEO",
+      "model": "GUILETTA 4D SED",
+      "yf": 1978,
+      "yt": 1985,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "1022BL",
+      "brand": "HONDA",
+      "model": "ACCORD 4-D.SEDAN",
+      "yf": 1978,
+      "yt": 1981,
+      "reason": "no_model_year"
+    },
+    {
+      "eurocode": "1027C",
+      "brand": "FIAT TRUCKS",
+      "model": "DAILY DAILY KASSEVOGN",
+      "yf": 1978,
+      "yt": 1999,
+      "reason": "no_model_year"
+    }
+  ]
+}

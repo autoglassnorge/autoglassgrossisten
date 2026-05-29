@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
+<script>(function(){var t=localStorage.getItem('ag-theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&d))document.documentElement.setAttribute('data-theme','dark');})();</script>
 <meta charset="UTF-8">
   <link rel="icon" href="images/favicon.png" sizes="32x32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,9 @@
 <meta name="description" content="Nyheter og oppdateringer fra Autoglass AS.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://auto-glass.no/no/aktuelt">
+<link rel="preconnect" href="https://autoglass-glass-sok.autoglassnorge.workers.dev">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
@@ -118,6 +122,8 @@
 </footer>
 
 <script src="js/i18n.js"></script>
+<script src="js/utils.js"></script>
 <script src="js/main.js"></script>
+<script>if('serviceWorker'in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
 </body>
 </html>

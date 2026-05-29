@@ -8,7 +8,7 @@
  * slik at upload-scriptet alltid vet hvilken fil som er gjeldende.
  *
  * Kjøring:
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/merge-catalogs.ts
+ *   npx tsx api/scrapers/merge-catalogs.ts
  */
 
 import * as fs from "fs";
@@ -85,8 +85,14 @@ function loadCatalog(filePath: string): CatalogFile | null {
   }
 }
 
+function formatMem(bytes: number): string {
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+}
+
 function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): GlassRecord[] {
-  const byEurocode = new Map<string, GlassRecord>();
+  // Pre-size Map heuristisk basert på total antall records
+  const totalHint = sources.reduce((sum, s) => sum + s.catalog.records.length, 0);
+  const byEurocode = new Map<string, GlassRecord>(/* no pre-size API in std Map */);
   const sourceStats: Record<string, { added: number; merged: number }> = {};
 
   // Sorter etter prioritet (høyest først)
@@ -95,9 +101,17 @@ function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): Gl
   for (const { catalog, priority } of sources) {
     let added = 0;
     let merged = 0;
+    const records = catalog.records;
+    const total = records.length;
+    const mergeStart = Date.now();
 
-    for (const record of catalog.records) {
-      const code = record.eurocode.toUpperCase().trim();
+    for (let i = 0; i < total; i++) {
+      const record = records[i];
+      if (i > 0 && i % 5000 === 0) {
+        process.stdout.write(`\r   ${catalog.meta.source}: ${i.toLocaleString("nb-NO")}/${total.toLocaleString("nb-NO")} processed`);
+      }
+
+      const code = record.eurocode?.toUpperCase().trim();
       if (!code) continue;
 
       const existing = byEurocode.get(code);
@@ -106,13 +120,39 @@ function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): Gl
         byEurocode.set(code, { ...record, nagsCodes: record.nagsCodes || [] });
         added++;
       } else if (priority > 1) {
-        // Høyere prioritet — slå sammen felter
+        // Merge OEMs — bruk Set kun når det finnes nye verdier å legge til
+        let oemNumbers = existing.oemNumbers;
+        if (record.oemNumbers.length > 0) {
+          const oemSet = new Set(oemNumbers);
+          let changed = false;
+          for (const oem of record.oemNumbers) {
+            if (!oemSet.has(oem)) { oemSet.add(oem); changed = true; }
+          }
+          if (changed) oemNumbers = Array.from(oemSet);
+        }
+
+        let nagsCodes = existing.nagsCodes || [];
+        const incomingNags = record.nagsCodes || [];
+        if (incomingNags.length > 0) {
+          const nagsSet = new Set(nagsCodes);
+          let changed = false;
+          for (const nags of incomingNags) {
+            if (!nagsSet.has(nags)) { nagsSet.add(nags); changed = true; }
+          }
+          if (changed) nagsCodes = Array.from(nagsSet);
+        }
+
+        let source = existing.source;
+        if (!source.includes(record.source)) {
+          source = `${source},${record.source}`;
+        }
+
         const mergedRecord: GlassRecord = {
           ...existing,
           price: record.price ?? existing.price,
           stockStatus: record.stockStatus || existing.stockStatus,
           warehouseLocation: record.warehouseLocation || existing.warehouseLocation,
-          oemNumbers: Array.from(new Set([...existing.oemNumbers, ...record.oemNumbers])),
+          oemNumbers,
           description:
             (record.description || "").length > (existing.description || "").length
               ? record.description
@@ -128,8 +168,8 @@ function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): Gl
           camera: existing.camera || record.camera,
           laneAssist: existing.laneAssist || record.laneAssist,
           // Kombiner NAGS-koder
-          nagsCodes: Array.from(new Set([...(existing.nagsCodes || []), ...(record.nagsCodes || [])])),
-          source: Array.from(new Set([...existing.source.split(","), record.source])).join(","),
+          nagsCodes,
+          source,
           lastUpdated: new Date().toISOString(),
         };
         byEurocode.set(code, mergedRecord);
@@ -137,8 +177,10 @@ function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): Gl
       }
     }
 
+    const mergeMs = Date.now() - mergeStart;
+    process.stdout.write(`\r   ${catalog.meta.source}: ${total.toLocaleString("nb-NO")}/${total.toLocaleString("nb-NO")} processed (${mergeMs}ms)\n`);
     sourceStats[catalog.meta.source] = { added, merged };
-    console.log(`   ${catalog.meta.source}: ${added} nye, ${merged} oppdatert`);
+    console.log(`      → ${added} nye, ${merged} oppdatert`);
   }
 
   return Array.from(byEurocode.values());
@@ -147,8 +189,11 @@ function mergeRecords(sources: { catalog: CatalogFile; priority: number }[]): Gl
 /* ── Main ──────────────────────────────────────────────────── */
 
 function main() {
+  const totalStart = Date.now();
   console.log("🔀 Merge Catalog Sources → catalog-prod.json");
   console.log("=============================================\n");
+
+  const memBefore = process.memoryUsage();
 
   const sources: { catalog: CatalogFile; priority: number }[] = [];
 
@@ -168,18 +213,24 @@ function main() {
   }
 
   console.log("\n🔄 Merging...");
+  const start = Date.now();
   const merged = mergeRecords(sources);
+  const mergeMs = Date.now() - start;
 
   // Kategori-fordeling
-  const catCounts = merged.reduce((acc, r) => {
-    acc[r.category] = (acc[r.category] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const catCounts: Record<string, number> = {};
+  for (const r of merged) {
+    catCounts[r.category] = (catCounts[r.category] || 0) + 1;
+  }
+
+  const memAfter = process.memoryUsage();
 
   console.log(`\n📊 Resultat:`);
-  console.log(`   Totalt unike eurokoder: ${merged.length}`);
+  console.log(`   Totalt unike eurokoder: ${merged.length.toLocaleString("nb-NO")}`);
+  console.log(`   Merge-tid: ${(mergeMs / 1000).toFixed(2)}s`);
+  console.log(`   Minne: heap ${formatMem(memBefore.heapUsed)} → ${formatMem(memAfter.heapUsed)} (+${formatMem(memAfter.heapUsed - memBefore.heapUsed)})`);
   for (const [cat, count] of Object.entries(catCounts).sort((a, b) => b[1] - a[1])) {
-    console.log(`   ${cat}: ${count}`);
+    console.log(`   ${cat}: ${count.toLocaleString("nb-NO")}`);
   }
 
   // Sørg for at output-mappe finnes
@@ -199,11 +250,19 @@ function main() {
     records: merged,
   };
 
+  const writeStart = Date.now();
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(output, null, 2));
-
+  const totalMs = Date.now() - totalStart;
   console.log(`\n💾 Produksjons-katalog lagret til: ${OUTPUT_FILE}`);
+  console.log(`   Write-tid: ${(Date.now() - writeStart).toFixed(0)}ms`);
+  console.log(`   Total tid: ${(totalMs / 1000).toFixed(2)}s`);
   console.log(`   Version: ${now}`);
   console.log(`   Neste steg: npm run worker:upload`);
 }
 
-main();
+try {
+  main();
+} catch (e) {
+  console.error("❌ Merge feilet:", (e as Error).message);
+  process.exit(1);
+}

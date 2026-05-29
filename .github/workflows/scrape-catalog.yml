@@ -25,32 +25,32 @@ jobs:
 
       # ── 1. Pilkington scraping ────────────────────────────────
       - name: Scrape Pilkington
-        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/pilkington-scraper.ts
+        run: npx tsx api/scrapers/pilkington-scraper.ts
         timeout-minutes: 30
         continue-on-error: true
         id: pilkington
 
       # ── 2. Glavista scraping ──────────────────────────────────
       - name: Scrape Glavista
-        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/glavista-scraper.ts
+        run: npx tsx api/scrapers/glavista-scraper.ts
         timeout-minutes: 30
         continue-on-error: true
         id: glavista
 
       # ── 3. Merge kataloger ────────────────────────────────────
       - name: Merge catalogs
-        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/merge-catalogs.ts
+        run: npx tsx api/scrapers/merge-catalogs.ts
         id: merge
 
       # ── 4. Bygg prefix4-cache ─────────────────────────────────
       - name: Build prefix4 cache
-        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/build-prefix4-cache.ts
+        run: npx tsx api/scrapers/build-prefix4-cache.ts
         continue-on-error: true
         id: prefix4
 
       # ── 5. Upload til KV ──────────────────────────────────────
       - name: Upload catalog to KV
-        run: npx ts-node --compiler-options '{"module":"CommonJS"}' api/cf-worker/scripts/upload-catalog.ts
+        run: node scripts/upload-catalog.mjs
         env:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

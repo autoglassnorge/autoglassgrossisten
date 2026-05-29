@@ -24,6 +24,11 @@
       "alias": "glass-arch",
       "command": "kimi --agent-file .kimi/agents/autoglass-architect-agent.yaml",
       "description": "Architect agent — ADR, refaktorering, plan"
+    },
+    {
+      "alias": "glass-ktype",
+      "command": "kimi --agent-file .kimi/agents/autoglass-ktype-agent.yaml",
+      "description": "kType agent — Bovsoft, TecDoc, Biluppgifter, D1 enrichment"
     }
   ]
 }

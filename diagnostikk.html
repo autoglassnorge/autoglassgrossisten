@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
+<script>(function(){var t=localStorage.getItem('ag-theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&d))document.documentElement.setAttribute('data-theme','dark');})();</script>
 <meta charset="UTF-8">
 <link rel="icon" href="images/favicon.png" sizes="32x32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -191,5 +192,6 @@ async function runTest() {
 
 checkAll();
 </script>
+<script>if('serviceWorker'in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
 </body>
 </html>

@@ -1,0 +1,231 @@
+{
+  "total_catalog": 18737,
+  "matched": 5316,
+  "unmatched": 13421,
+  "multi_match": 5276,
+  "ktype_registry_entries": 483,
+  "glass_rules_entries": 547,
+  "catalog_updates": 5316,
+  "sample_matches": [
+    {
+      "eurocode": "10025C",
+      "ktype": 4742,
+      "brand": "FIAT",
+      "model": "PANDA",
+      "year_from": 1983,
+      "year_to": 2003,
+      "confidence": "probable",
+      "match_count": 29,
+      "tecdoc_model": "PANDA (141_)"
+    },
+    {
+      "eurocode": "10025GN",
+      "ktype": 4742,
+      "brand": "FIAT",
+      "model": "PANDA",
+      "year_from": 1983,
+      "year_to": 2003,
+      "confidence": "probable",
+      "match_count": 29,
+      "tecdoc_model": "PANDA (141_)"
+    },
+    {
+      "eurocode": "10030CL",
+      "ktype": 15813,
+      "brand": "DAIHATSU",
+      "model": "CUORE",
+      "year_from": 1996,
+      "year_to": 2003,
+      "confidence": "probable",
+      "match_count": 16,
+      "tecdoc_model": "CUORE V (L7_)"
+    },
+    {
+      "eurocode": "1017C",
+      "ktype": 3968,
+      "brand": "ALFA ROMEO",
+      "model": "ALFETTA",
+      "year_from": 1975,
+      "year_to": 1984,
+      "confidence": "probable",
+      "match_count": 15,
+      "tecdoc_model": "ALFETTA (116_)"
+    },
+    {
+      "eurocode": "1017GN",
+      "ktype": 3968,
+      "brand": "ALFA ROMEO",
+      "model": "ALFETTA",
+      "year_from": 1975,
+      "year_to": 1984,
+      "confidence": "probable",
+      "match_count": 15,
+      "tecdoc_model": "ALFETTA (116_)"
+    },
+    {
+      "eurocode": "1037BB",
+      "ktype": 2094,
+      "brand": "MAZDA",
+      "model": "RX-7",
+      "year_from": 1979,
+      "year_to": 1985,
+      "confidence": "probable",
+      "match_count": 8,
+      "tecdoc_model": "RX-7 I (SA)"
+    },
+    {
+      "eurocode": "1054C",
+      "ktype": 6098,
+      "brand": "CITROEN",
+      "model": "VISA",
+      "year_from": 1978,
+      "year_to": 1987,
+      "confidence": "probable",
+      "match_count": 15,
+      "tecdoc_model": "VISA"
+    },
+    {
+      "eurocode": "1054GB",
+      "ktype": 6098,
+      "brand": "CITROEN",
+      "model": "VISA",
+      "year_from": 1978,
+      "year_to": 1987,
+      "confidence": "probable",
+      "match_count": 15,
+      "tecdoc_model": "VISA"
+    },
+    {
+      "eurocode": "1085BZ",
+      "ktype": 5372,
+      "brand": "PEUGEOT",
+      "model": "505",
+      "year_from": 1979,
+      "year_to": 1990,
+      "confidence": "probable",
+      "match_count": 50,
+      "tecdoc_model": "505 (551A)"
+    },
+    {
+      "eurocode": "1085C",
+      "ktype": 5372,
+      "brand": "PEUGEOT",
+      "model": "505",
+      "year_from": 1979,
+      "year_to": 1990,
+      "confidence": "probable",
+      "match_count": 50,
+      "tecdoc_model": "505 (551A)"
+    },
+    {
+      "eurocode": "1088C",
+      "ktype": 770,
+      "brand": "OPEL",
+      "model": "KADETT D",
+      "year_from": 1980,
+      "year_to": 1984,
+      "confidence": "probable",
+      "match_count": 23,
+      "tecdoc_model": "KADETT D (31_-34_, 41_-44_)"
+    },
+    {
+      "eurocode": "1088GB",
+      "ktype": 770,
+      "brand": "OPEL",
+      "model": "KADETT D",
+      "year_from": 1980,
+      "year_to": 1984,
+      "confidence": "probable",
+      "match_count": 23,
+      "tecdoc_model": "KADETT D (31_-34_, 41_-44_)"
+    },
+    {
+      "eurocode": "1104GN",
+      "ktype": 3817,
+      "brand": "ALFA ROMEO",
+      "model": "ALFASUD",
+      "year_from": 1972,
+      "year_to": 1984,
+      "confidence": "probable",
+      "match_count": 23,
+      "tecdoc_model": "ALFASUD (901_)"
+    },
+    {
+      "eurocode": "1106C",
+      "ktype": 4742,
+      "brand": "FIAT",
+      "model": "PANDA",
+      "year_from": 1983,
+      "year_to": 2003,
+      "confidence": "probable",
+      "match_count": 29,
+      "tecdoc_model": "PANDA (141_)"
+    },
+    {
+      "eurocode": "1106GB",
+      "ktype": 4742,
+      "brand": "FIAT",
+      "model": "PANDA",
+      "year_from": 1983,
+      "year_to": 2003,
+      "confidence": "probable",
+      "match_count": 29,
+      "tecdoc_model": "PANDA (141_)"
+    },
+    {
+      "eurocode": "1170C",
+      "ktype": 3281,
+      "brand": "VW",
+      "model": "DERBY",
+      "year_from": 1981,
+      "year_to": 1990,
+      "confidence": "probable",
+      "match_count": 10,
+      "tecdoc_model": "DERBY (86C, 80)"
+    },
+    {
+      "eurocode": "1170GY",
+      "ktype": 3281,
+      "brand": "VW",
+      "model": "DERBY",
+      "year_from": 1981,
+      "year_to": 1990,
+      "confidence": "probable",
+      "match_count": 10,
+      "tecdoc_model": "DERBY (86C, 80)"
+    },
+    {
+      "eurocode": "1187GB",
+      "ktype": 2559,
+      "brand": "VW",
+      "model": "SCIROCCO",
+      "year_from": 1982,
+      "year_to": 1988,
+      "confidence": "probable",
+      "match_count": 16,
+      "tecdoc_model": "SCIROCCO (53B)"
+    },
+    {
+      "eurocode": "1200BZ",
+      "ktype": 6254,
+      "brand": "FORD",
+      "model": "GRANADA",
+      "year_from": 1982,
+      "year_to": 1985,
+      "confidence": "probable",
+      "match_count": 24,
+      "tecdoc_model": "GRANADA (GU)"
+    },
+    {
+      "eurocode": "1200C",
+      "ktype": 6254,
+      "brand": "FORD",
+      "model": "GRANADA",
+      "year_from": 1982,
+      "year_to": 1985,
+      "confidence": "probable",
+      "match_count": 24,
+      "tecdoc_model": "GRANADA (GU)"
+    }
+  ]
+}

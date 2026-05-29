@@ -74,7 +74,7 @@ async function main() {
   // Step 3: Upload to KV (optional — only if --upload flag)
   if (args.includes('--upload')) {
     console.log('\n☁️  Uploading catalog to KV...');
-    await run('api/cf-worker/scripts/upload-catalog.ts');
+    await run('scripts/upload-catalog.mjs');
   }
 
   const duration = ((Date.now() - startTime) / 1000).toFixed(1);

@@ -7,7 +7,7 @@
  *   3. HTML entity decoding i model
  *
  * Kjøring:
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/enrich-catalog.ts
+ *   npx tsx api/scrapers/enrich-catalog.ts
  */
 
 import * as fs from "fs";

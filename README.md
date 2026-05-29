@@ -51,7 +51,7 @@ bilglass/
 │   │   └── glass-lookup.ts     # regnr → Biluppgifter → eurokode
 │   ├── cf-worker/
 │   │   ├── src/index.ts        # Cloudflare Worker API
-│   │   ├── scripts/upload-catalog-to-kv.ts
+│   │   └── scripts/               # (upload-catalog.mjs flyttet til scripts/)
 │   │   ├── wrangler.toml
 │   │   └── package.json
 │   └── scrapers/
@@ -152,7 +152,7 @@ npx wrangler secret put BILUPPGIFTER_API_KEY
 export CLOUDFLARE_API_TOKEN="din-token"
 export CLOUDFLARE_ACCOUNT_ID="din-account-id"
 export GLASS_KV_NAMESPACE_ID="namespace-id-fra-steg-1"
-npx ts-node scripts/upload-catalog-to-kv.ts ../../data/mock-katalog.json
+node scripts/upload-catalog.mjs
 
 # 4. Deploy worker
 npx wrangler deploy

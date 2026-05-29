@@ -1,8 +1,43 @@
 /* ============================================================
-   Autoglass AS — Glass Search Component (reusable)
+   Autoglass AS — Glass Search Component (optimized)
    ============================================================ */
 
-const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';  // Cloudflare Worker API
+const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
+
+/* ==========================================================================
+   DEDUPLICATION & IN-MEMORY CACHE
+   ========================================================================== */
+
+const _pendingSearches = new Map();
+const _imageObserverCleanups = new WeakMap();
+
+function _cacheKey(query, type) {
+  return `${query}:${type || ''}`;
+}
+
+/* ==========================================================================
+   TEMPLATE HELPERS
+   ========================================================================== */
+
+function tplError(msg) {
+  return `<p class="no-result">${msg}</p>`;
+}
+
+function tplLoading() {
+  return `<p class="loading">Søker…</p>`;
+}
+
+function tplNetworkError(err) {
+  const isBlocked = err?.message?.includes('blocked') || err?.message?.includes('Failed to fetch');
+  if (isBlocked) {
+    return '🔒 Forespørselen ble blokkert. Sannsynlig årsak:<br>• Ad-blocker (uBlock, AdGuard)<br>• Brave Shields / Firefox Strict<br>• Bedriftsnettverk/VPN<br><br><strong>Løsning:</strong> Slå av ad-blocker for denne siden, eller prøv i inkognito-vindu.';
+  }
+  return 'Nettverksfeil. Sjekk tilkoblingen og prøv igjen.';
+}
+
+/* ==========================================================================
+   GLASS SEARCH CLASS
+   ========================================================================== */
 
 class GlassSearch {
   constructor(options = {}) {
@@ -13,14 +48,17 @@ class GlassSearch {
     this.resultsSelector = options.resultsSelector || '.glass-search-results';
     this.typeSelector = options.typeSelector || 'input[name="glass-type"]';
     this.onResult = options.onResult || null;
-    this.mode = options.mode || 'full'; // 'full' | 'compact' | 'inline'
+    this.mode = options.mode || 'full';
     this.showImages = options.showImages !== false;
     this.showNags = options.showNags !== false;
     this.showPrice = options.showPrice !== false;
     this.limit = options.limit || 10;
 
-    this.inputEl = this.container.querySelector(this.inputSelector);
-    this.resultsEl = this.container.querySelector(this.resultsSelector);
+    this.inputEl = this.container?.querySelector(this.inputSelector);
+    this.resultsEl = this.container?.querySelector(this.resultsSelector);
+
+    this._abortController = null;
+    this._debounceMs = this.mode === 'inline' ? 300 : 400;
 
     this.init();
   }
@@ -28,19 +66,16 @@ class GlassSearch {
   init() {
     if (!this.inputEl) return;
 
-    // Enter key
+    const debouncedSearch = debounce(() => this.search(), this._debounceMs);
+
     this.inputEl.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') this.search();
+      if (e.key === 'Enter') {
+        this._abortController?.abort();
+        this.search();
+      }
     });
 
-    // Optional: debounced live search
-    if (this.mode === 'inline') {
-      let debounce;
-      this.inputEl.addEventListener('input', () => {
-        clearTimeout(debounce);
-        debounce = setTimeout(() => this.search(), 400);
-      });
-    }
+    this.inputEl.addEventListener('input', debouncedSearch);
 
     // Type pills
     this.container.querySelectorAll('.type-pill input').forEach(radio => {
@@ -60,38 +95,89 @@ class GlassSearch {
     const query = (queryOverride || this.inputEl.value).trim().toUpperCase();
     if (!query) return;
 
-    this.setLoading(true);
+    // Cancel previous in-flight request
+    if (this._abortController) {
+      this._abortController.abort();
+      this._abortController = null;
+    }
 
     const type = this.getSelectedType();
+    const key = _cacheKey(query, type);
+
+    // 1. Check localStorage cache (TTL 1h)
+    const cached = Cache.get(key, 3600000);
+    if (cached) {
+      this._finalizeRender(cached);
+      return;
+    }
+
+    // 2. Deduplication — reuse pending promise
+    if (_pendingSearches.has(key)) {
+      try {
+        const data = await _pendingSearches.get(key);
+        this._finalizeRender(data);
+      } catch (e) {
+        if (e.name !== 'AbortError') {
+          this.renderError(tplNetworkError(e));
+        }
+      }
+      return;
+    }
+
+    this.setLoading(true);
+
+    this._abortController = new AbortController();
+    const { signal } = this._abortController;
+
     const typeParam = type ? `&category=${encodeURIComponent(type)}` : '';
     const url = `${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}${typeParam}`;
-    console.log('[GlassSearch] Fetching:', url);
+
+    const promise = this._executeFetch(url, signal, query, type);
+    _pendingSearches.set(key, promise);
 
     try {
-      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
-      console.log('[GlassSearch] Response status:', res.status);
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: 'Kunne ikke søke. Prøv igjen.' }));
-        console.error('[GlassSearch] API error:', err);
-        this.renderError(err.error || 'Kunne ikke søke. Prøv igjen.');
-        return;
-      }
-
-      const data = await res.json();
-      console.log('[GlassSearch] Response data:', { error: data.error, candidates: data.candidates?.length, vehicle: data.vehicle?.regnr });
-      this.render(data);
-      if (this.onResult) this.onResult(data);
+      const data = await promise;
+      this._finalizeRender(data);
     } catch (e) {
+      if (e.name === 'AbortError') return;
       console.error('[GlassSearch] Fetch error:', e);
-      const isBlocked = e.message?.includes('blocked') || e.message?.includes('Failed to fetch');
-      const msg = isBlocked
-        ? '🔒 Forespørselen ble blokkert. Sannsynlig årsak:<br>• Ad-blocker (uBlock, AdGuard)<br>• Brave Shields / Firefox Strict<br>• Bedriftsnettverk/VPN<br><br><strong>Løsning:</strong> Slå av ad-blocker for denne siden, eller prøv i inkognito-vindu.'
-        : 'Nettverksfeil. Sjekk tilkoblingen og prøv igjen.';
-      this.renderError(msg);
+      this.renderError(tplNetworkError(e));
     } finally {
+      _pendingSearches.delete(key);
       this.setLoading(false);
+      this._abortController = null;
     }
+  }
+
+  async _executeFetch(url, signal, query, type) {
+    console.log('[GlassSearch] Fetching:', url);
+    const res = await fetch(url, {
+      headers: { 'Accept': 'application/json' },
+      signal,
+    });
+    console.log('[GlassSearch] Response status:', res.status);
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ error: 'Kunne ikke søke. Prøv igjen.' }));
+      console.error('[GlassSearch] API error:', err);
+      throw new Error(err.error || 'Kunne ikke søke. Prøv igjen.');
+    }
+
+    const data = await res.json();
+    console.log('[GlassSearch] Response data:', {
+      error: data.error,
+      candidates: data.candidates?.length,
+      vehicle: data.vehicle?.regnr,
+    });
+
+    // Cache successful response
+    Cache.set(_cacheKey(query, type), data);
+    return data;
+  }
+
+  _finalizeRender(data) {
+    this.render(data);
+    if (this.onResult) this.onResult(data);
   }
 
   setLoading(isLoading) {
@@ -101,27 +187,25 @@ class GlassSearch {
       btn.textContent = isLoading ? 'Søker…' : 'Søk';
     }
     if (isLoading && this.resultsEl) {
-      this.resultsEl.innerHTML = `<p class="loading">Søker…</p>`;
+      this.resultsEl.innerHTML = tplLoading();
     }
   }
 
   renderError(msg) {
     if (!this.resultsEl) return;
-    this.resultsEl.innerHTML = `<p class="no-result">${msg}</p>`;
+    this.resultsEl.innerHTML = tplError(msg);
   }
 
   render(data) {
     if (!this.resultsEl) return;
 
     if (data.error || !data.candidates || data.candidates.length === 0) {
-      this.resultsEl.innerHTML = `<p class="no-result">Ingen treff. Prøv et annet registreringsnummer.</p>`;
+      this.resultsEl.innerHTML = tplError('Ingen treff. Prøv et annet registreringsnummer.');
       return;
     }
 
     const v = data.vehicle || {};
     const flags = data.flags || {};
-    const layerLabels = ['Eksakt match', 'Merke + modell + år', 'Merke + modell', 'Merke', 'Prefix4'];
-    const layerLabel = layerLabels[(data.layer || 1) - 1] || 'Statistisk match';
 
     // Store last search vehicle for quote modal
     if (v.regnr) {
@@ -136,7 +220,6 @@ class GlassSearch {
 
     let html = '';
 
-    // Vehicle banner (only in full mode)
     if (this.mode === 'full') {
       html += this.renderVehicleBanner(v, flags);
     }
@@ -145,12 +228,28 @@ class GlassSearch {
 
     const candidates = data.candidates.slice(0, this.limit);
     candidates.forEach((c, idx) => {
-      html += this.renderCard(c, idx, data.confidence, layerLabel);
+      html += this.renderCard(c, idx, data.confidence, data.layer);
     });
 
     html += '</div>';
     this.resultsEl.innerHTML = html;
+
+    // Lazy-load images via IntersectionObserver
+    this._initLazyImages();
   }
+
+  _initLazyImages() {
+    // Clean up previous observer for this container
+    const prevCleanup = _imageObserverCleanups.get(this.resultsEl);
+    if (prevCleanup) prevCleanup();
+
+    const cleanup = createLazyImageObserver(this.resultsEl);
+    _imageObserverCleanups.set(this.resultsEl, cleanup);
+  }
+
+  /* ----------------------------------------------------------------------
+     RENDER HELPERS
+     ---------------------------------------------------------------------- */
 
   renderVehicleBanner(v, flags) {
     const flagHtml = [
@@ -164,19 +263,38 @@ class GlassSearch {
 
     return `
       <div class="vehicle-banner">
-        <h3>🚗 ${v.make || '?'} ${v.model || '?'} ${v.year ? '(' + v.year + ')' : ''}</h3>
-        <p class="meta">Reg.nr: ${v.regnr || '-'} · VIN: ${(v.vin || '-').slice(0, 8)}…${(v.vin || '-').slice(-4)} · kType: ${v.kType || '-'}</p>
+        <h3>🚗 ${escapeHtml(v.make) || '?'} ${escapeHtml(v.model) || '?'} ${v.year ? '(' + v.year + ')' : ''}</h3>
+        <p class="meta">Reg.nr: ${escapeHtml(v.regnr) || '-'} · VIN: ${escapeHtml((v.vin || '-').slice(0, 8))}…${escapeHtml((v.vin || '-').slice(-4))} · kType: ${escapeHtml(v.kType) || '-'}</p>
         <div class="flags">${flagHtml}</div>
       </div>
     `;
   }
 
-  renderCard(c, idx, confidence, layerLabel) {
+  renderCard(c, idx, confidence, layer) {
     const isTop = idx === 0;
     const confClass = confidence || 'medium';
-    const confLabel = confClass === 'exact' ? 'Bekreftet originalrute' : confClass === 'high' ? 'Høy konfidens' : confClass === 'medium' ? 'Middels konfidens' : 'Lav konfidens';
+    const layerLabels = ['Eksakt match', 'Merke + modell + år', 'Merke + modell', 'Merke', 'Prefix4'];
+    const layerLabel = layerLabels[(layer || 1) - 1] || 'Statistisk match';
+    const confLabel = confClass === 'exact' ? 'Bekreftet originalrute'
+      : confClass === 'high' ? 'Høy konfidens'
+      : confClass === 'medium' ? 'Middels konfidens'
+      : 'Lav konfidens';
 
-    const flagTags = [
+    const flagTags = this._buildFlagTags(c);
+    const imageHtml = this._buildImageHtml(c);
+    const nagsHtml = this._buildNagsHtml(c);
+    const priceHtml = this._buildPriceHtml(c);
+    const stockHtml = this._buildStockHtml(c);
+    const compact = this.mode === 'compact' || this.mode === 'inline';
+
+    if (compact) {
+      return this._renderCompactCard(c, idx, flagTags, imageHtml, nagsHtml, priceHtml, stockHtml);
+    }
+    return this._renderFullCard(c, idx, layerLabel, flagTags, imageHtml, nagsHtml, priceHtml, stockHtml, isTop, confClass, confLabel);
+  }
+
+  _buildFlagTags(c) {
+    return [
       c.adas && 'ADAS',
       c.rainSensor && 'Regnsensor',
       c.heated && 'Oppvarmet',
@@ -187,54 +305,77 @@ class GlassSearch {
       c.camera && 'Kamera',
       c.laneAssist && 'Filskifteass.',
     ].filter(Boolean);
+  }
 
-    const imageHtml = this.showImages && c.imageUrl
-      ? `<img src="${c.imageUrl}" alt="${c.eurocode}" class="result-image" loading="lazy" onerror="this.style.display='none'">`
+  _buildImageHtml(c) {
+    if (!this.showImages || !c.imageUrl) return '';
+    // Use data-src for IO lazy loading; native loading="lazy" as fallback
+    return `<img data-src="${escapeHtml(c.imageUrl)}" alt="${escapeHtml(c.eurocode)}" class="result-image" loading="lazy" onerror="this.style.display='none'">`;
+  }
+
+  _buildNagsHtml(c) {
+    if (!this.showNags || !c.nagsCodes || c.nagsCodes.length === 0) return '';
+    const visible = c.nagsCodes.slice(0, 5).join(', ');
+    const more = c.nagsCodes.length > 5 ? ' +' + (c.nagsCodes.length - 5) + ' flere' : '';
+    return `<div class="nags-badge">🇺🇸 NAGS: ${escapeHtml(visible)}${escapeHtml(more)}</div>`;
+  }
+
+  _buildPriceHtml(c) {
+    if (!this.showPrice) return '';
+    const price = c.price ? c.price.toLocaleString('no-NO') + ' kr' : 'Pris på forespørsel';
+    return `<span class="price">${escapeHtml(price)}</span>`;
+  }
+
+  _buildStockHtml(c) {
+    const inStock = c.stockStatus > 0;
+    const text = inStock ? c.stockStatus + ' på lager' : 'Bestillingsvare';
+    return `<span class="stock ${inStock ? '' : 'out'}">${escapeHtml(text)}</span>`;
+  }
+
+  _renderCompactCard(c, idx, flagTags, imageHtml, nagsHtml, priceHtml, stockHtml) {
+    const isTop = idx === 0;
+    const flagsRow = flagTags.length > 0
+      ? `<div class="flags">${flagTags.map(f => `<span class="flag on">${escapeHtml(f)}</span>`).join('')}</div>`
       : '';
 
-    const nagsHtml = this.showNags && c.nagsCodes && c.nagsCodes.length > 0
-      ? `<div class="nags-badge">🇺🇸 NAGS: ${c.nagsCodes.slice(0, 5).join(', ')}${c.nagsCodes.length > 5 ? ' +' + (c.nagsCodes.length - 5) + ' flere' : ''}</div>`
-      : '';
-
-    const priceHtml = this.showPrice
-      ? `<span class="price">${c.price ? c.price.toLocaleString('no-NO') + ' kr' : 'Pris på forespørsel'}</span>`
-      : '';
-
-    const stockHtml = `<span class="stock ${c.stockStatus > 0 ? '' : 'out'}">${c.stockStatus > 0 ? c.stockStatus + ' på lager' : 'Bestillingsvare'}</span>`;
-
-    const compact = this.mode === 'compact' || this.mode === 'inline';
-
-    if (compact) {
-      return `
-        <div class="result-item ${isTop ? 'top-match' : ''}">
-          <div class="result-row">
-            ${imageHtml}
-            <div class="result-body">
-              <div class="eurocode">${c.eurocode}</div>
-              <p class="desc">${c.description || ''}</p>
-              <p class="meta">${c.brand || '?'} ${c.model || ''} ${c.yearFrom ? c.yearFrom + (c.yearTo ? '–' + c.yearTo : '–') : ''}</p>
-              ${nagsHtml}
-            </div>
-            <div class="result-actions">
-              ${priceHtml}
-              ${stockHtml}
-              <button class="btn-primary btn-sm">Be om pris</button>
-            </div>
-          </div>
-          ${flagTags.length > 0 ? `<div class="flags">${flagTags.map(f => `<span class="flag on">${f}</span>`).join('')}</div>` : ''}
-        </div>
-      `;
-    }
-
-    // Full mode
     return `
       <div class="result-item ${isTop ? 'top-match' : ''}">
-        ${isTop ? `<div class="top-badge">⭐ Mest sannsynlig riktig — ${confLabel}</div>` : ''}
+        <div class="result-row">
+          ${imageHtml}
+          <div class="result-body">
+            <div class="eurocode">${escapeHtml(c.eurocode)}</div>
+            <p class="desc">${escapeHtml(c.description) || ''}</p>
+            <p class="meta">${escapeHtml(c.brand) || '?'} ${escapeHtml(c.model) || ''} ${c.yearFrom ? c.yearFrom + (c.yearTo ? '–' + c.yearTo : '–') : ''}</p>
+            ${nagsHtml}
+          </div>
+          <div class="result-actions">
+            ${priceHtml}
+            ${stockHtml}
+            <button class="btn-primary btn-sm">Be om pris</button>
+          </div>
+        </div>
+        ${flagsRow}
+      </div>
+    `;
+  }
+
+  _renderFullCard(c, idx, layerLabel, flagTags, imageHtml, nagsHtml, priceHtml, stockHtml, isTop, confClass, confLabel) {
+    const topBadge = isTop ? `<div class="top-badge">⭐ Mest sannsynlig riktig — ${escapeHtml(confLabel)}</div>` : '';
+    const yearRange = c.yearFrom ? c.yearFrom + (c.yearTo ? '–' + c.yearTo : '–') : '';
+    const meta = `${escapeHtml(c.brand) || '?'} ${escapeHtml(c.model) || ''} ${yearRange} · ${escapeHtml(layerLabel)}`;
+    const flagsRow = flagTags.map(f => `<span class="flag on">${escapeHtml(f)}</span>`).join('');
+
+    const veh = window.__lastSearchVehicle || {};
+    const equipJson = JSON.stringify(veh.factoryEquipment || {}).replace(/"/g, '&quot;');
+
+    return `
+      <div class="result-item ${isTop ? 'top-match' : ''}">
+        ${topBadge}
         <div class="header">
           <div>
-            <div class="eurocode">${c.eurocode}</div>
-            <p style="font-size:14px;color:var(--color-text-secondary);margin-top:4px">${c.description || ''}</p>
-            <p style="font-size:12px;color:var(--color-text-muted);margin-top:2px">${c.brand || '?'} ${c.model || ''} ${c.yearFrom ? c.yearFrom + (c.yearTo ? '–' + c.yearTo : '–') : ''} · ${layerLabel}</p>
+            <div class="eurocode">${escapeHtml(c.eurocode)}</div>
+            <p style="font-size:14px;color:var(--color-text-secondary);margin-top:4px">${escapeHtml(c.description) || ''}</p>
+            <p style="font-size:12px;color:var(--color-text-muted);margin-top:2px">${meta}</p>
           </div>
           <span class="confidence ${confClass}">${confClass.toUpperCase()}</span>
         </div>
@@ -243,13 +384,11 @@ class GlassSearch {
           ${priceHtml}
           ${stockHtml}
         </div>
-        <div class="flags">
-          ${flagTags.map(f => `<span class="flag on">${f}</span>`).join('')}
-        </div>
+        <div class="flags">${flagsRow}</div>
         ${nagsHtml}
         <div style="display:flex;gap:12px;margin-top:16px">
-          <button class="btn-primary" style="padding:10px 20px;font-size:13px" onclick="openQuoteModal('${c.eurocode}', '${(c.brand || '').replace(/'/g, "\\'")}', '${(c.model || '').replace(/'/g, "\\'")}', ${JSON.stringify((window.__lastSearchVehicle || {}).factoryEquipment || {}).replace(/"/g, '&quot;')})">Be om pris</button>
-          <button class="btn-secondary" style="padding:10px 20px;font-size:13px" onclick="saveVehicleFromSearch('${c.eurocode}', '${(c.brand || '').replace(/'/g, "\\'")}', '${(c.model || '').replace(/'/g, "\\'")}')">Lagre kjøretøy</button>
+          <button class="btn-primary" style="padding:10px 20px;font-size:13px" onclick="openQuoteModal('${escapeHtml(c.eurocode)}', '${escapeHtml(c.brand || '').replace(/'/g, "\\'")}', '${escapeHtml(c.model || '').replace(/'/g, "\\'")}', '${equipJson}')">Be om pris</button>
+          <button class="btn-secondary" style="padding:10px 20px;font-size:13px" onclick="saveVehicleFromSearch('${escapeHtml(c.eurocode)}', '${escapeHtml(c.brand || '').replace(/'/g, "\\'")}', '${escapeHtml(c.model || '').replace(/'/g, "\\'")}')">Lagre kjøretøy</button>
         </div>
       </div>
     `;
@@ -266,81 +405,148 @@ class GlassSearch {
   }
 }
 
-// ============================================================================
-// QUOTE MODAL
-// ============================================================================
+/* ==========================================================================
+   QUOTE MODAL — Reusable DOM
+   ========================================================================== */
 
-function openQuoteModal(eurocode, brand, model, vehicleEquipment) {
-  const existing = document.getElementById('quote-modal');
-  if (existing) existing.remove();
+const QuoteModal = {
+  _backdrop: null,
+  _content: null,
+  _initialized: false,
 
-  // Equipment checklist
-  const eq = vehicleEquipment || {};
-  const checklistHtml = eq.source && eq.source !== 'none' ? `
-    <div style="margin-bottom:16px;padding:14px;background:var(--color-surface-alt);border-radius:var(--radius-sm);border:1px solid var(--color-border)">
-      <p style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary)">✅ Bekreft utstyr (fra fabrikkdata)</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px">
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Regnsensor: ${eq.rainSensor ? 'Ja' : 'Nei'}</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Varme: ${eq.heated ? 'Ja' : 'Nei'}</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Akustisk: ${eq.acoustic ? 'Ja' : 'Nei'}</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> ADAS: ${eq.adas ? 'Ja' : 'Nei'}</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Kamera: ${eq.camera ? 'Ja' : 'Nei'}</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" checked disabled> Antenne: ${eq.antenna ? 'Ja' : 'Nei'}</label>
+  _init() {
+    if (this._initialized) return;
+
+    const backdrop = document.createElement('div');
+    backdrop.id = 'quote-modal';
+    backdrop.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;padding:20px';
+    backdrop.innerHTML = `
+      <div id="quote-modal-content" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:32px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
+        <div id="quote-modal-header"></div>
+        <div id="quote-modal-body"></div>
+        <form id="quote-form">
+          <div class="form-group" style="margin-bottom:14px">
+            <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">E-post *</label>
+            <input type="email" id="quote-email" required style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary)">
+          </div>
+          <div class="form-group" style="margin-bottom:14px">
+            <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">Antall</label>
+            <input type="number" id="quote-qty" value="1" min="1" style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary)">
+          </div>
+          <div class="form-group" style="margin-bottom:20px">
+            <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">Beskjed (valgfritt)</label>
+            <textarea id="quote-msg" rows="3" style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary);resize:vertical"></textarea>
+          </div>
+          <div style="display:flex;gap:10px">
+            <button type="submit" class="btn-primary" style="flex:1">Send forespørsel</button>
+            <button type="button" class="btn-secondary" id="quote-cancel">Avbryt</button>
+          </div>
+        </form>
+        <div id="quote-status" style="margin-top:16px;font-size:14px;text-align:center;display:none"></div>
       </div>
-      <p style="font-size:11px;color:var(--color-text-muted);margin-top:6px">Kilde: ${eq.source === 'bovsoft' ? 'Bovsoft REGNUM' : eq.source === 'biluppgifter' ? 'Biluppgifter' : 'Ukjent'}</p>
-    </div>
-  ` : `
-    <div style="margin-bottom:16px;padding:14px;background:rgba(217,119,6,0.08);border-radius:var(--radius-sm);border:1px solid var(--color-warning)">
-      <p style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--color-warning)">⚠️ Sjekk utstyr manuelt</p>
-      <p style="font-size:12px;color:var(--color-text-secondary)">Vi har ikke fabrikkdata for dette kjøretøyet. Bekreft at følgende stemmer:</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px;margin-top:8px">
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-rain"> Regnsensor</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-heat"> Varme</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-acoustic"> Akustisk</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-adas"> ADAS</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-camera"> Kamera</label>
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chk-antenna"> Antenne</label>
-      </div>
-    </div>
-  `;
+    `;
 
-  const modal = document.createElement('div');
-  modal.id = 'quote-modal';
-  modal.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;padding:20px';
-  modal.innerHTML = `
-    <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:32px;max-width:460px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.4)">
+    backdrop.addEventListener('click', (e) => {
+      if (e.target === backdrop) this.close();
+    });
+
+    backdrop.querySelector('#quote-cancel').addEventListener('click', () => this.close());
+    backdrop.querySelector('#quote-form').addEventListener('submit', (e) => this._onSubmit(e));
+
+    document.body.appendChild(backdrop);
+    this._backdrop = backdrop;
+    this._content = backdrop.querySelector('#quote-modal-content');
+    this._initialized = true;
+  },
+
+  open(eurocode, brand, model, vehicleEquipment) {
+    this._init();
+
+    const eq = vehicleEquipment || {};
+    const hasEq = eq.source && eq.source !== 'none';
+
+    const headerHtml = `
       <h3 style="font-size:20px;margin-bottom:4px">Be om pris</h3>
-      <p style="color:var(--color-text-secondary);font-size:14px;margin-bottom:20px">${eurocode}${brand ? ' — ' + brand + ' ' + model : ''}</p>
-      ${checklistHtml}
-      <form id="quote-form">
-        <div class="form-group" style="margin-bottom:14px">
-          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">E-post *</label>
-          <input type="email" id="quote-email" required style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary)"
-            value="${(typeof currentUser !== 'undefined' && currentUser?.email) || ''}">
-        </div>
-        <div class="form-group" style="margin-bottom:14px">
-          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">Antall</label>
-          <input type="number" id="quote-qty" value="1" min="1" style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary)">
-        </div>
-        <div class="form-group" style="margin-bottom:20px">
-          <label style="display:block;font-size:13px;margin-bottom:6px;color:var(--color-text-secondary)">Beskjed (valgfritt)</label>
-          <textarea id="quote-msg" rows="3" style="width:100%;padding:12px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);font-size:14px;background:var(--color-surface-alt);color:var(--color-text-primary);resize:vertical"></textarea>
-        </div>
-        <div style="display:flex;gap:10px">
-          <button type="submit" class="btn-primary" style="flex:1">Send forespørsel</button>
-          <button type="button" class="btn-secondary" onclick="document.getElementById('quote-modal').remove()">Avbryt</button>
-        </div>
-      </form>
-      <div id="quote-status" style="margin-top:16px;font-size:14px;text-align:center;display:none"></div>
-    </div>
-  `;
-  document.body.appendChild(modal);
+      <p style="color:var(--color-text-secondary);font-size:14px;margin-bottom:20px">${escapeHtml(eurocode)}${brand ? ' — ' + escapeHtml(brand) + ' ' + escapeHtml(model) : ''}</p>
+    `;
 
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) modal.remove();
-  });
+    const bodyHtml = hasEq ? this._tplEquipmentConfirmed(eq) : this._tplEquipmentManual();
 
-  document.getElementById('quote-form').addEventListener('submit', async (e) => {
+    this._backdrop.querySelector('#quote-modal-header').innerHTML = headerHtml;
+    this._backdrop.querySelector('#quote-modal-body').innerHTML = bodyHtml;
+
+    // Pre-fill email if known
+    const emailInput = this._backdrop.querySelector('#quote-email');
+    emailInput.value = (typeof currentUser !== 'undefined' && currentUser?.email) || '';
+
+    // Reset form state
+    const status = this._backdrop.querySelector('#quote-status');
+    const btn = this._backdrop.querySelector('button[type="submit"]');
+    status.style.display = 'none';
+    status.innerHTML = '';
+    btn.disabled = false;
+    btn.textContent = 'Send forespørsel';
+    this._backdrop.querySelector('#quote-form').reset();
+    emailInput.value = (typeof currentUser !== 'undefined' && currentUser?.email) || '';
+
+    this._backdrop.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Store current context for submit handler
+    this._currentEurocode = eurocode;
+  },
+
+  close() {
+    if (!this._backdrop) return;
+    this._backdrop.style.display = 'none';
+    document.body.style.overflow = '';
+  },
+
+  _tplEquipmentConfirmed(eq) {
+    const items = [
+      { label: 'Regnsensor', val: eq.rainSensor },
+      { label: 'Varme', val: eq.heated },
+      { label: 'Akustisk', val: eq.acoustic },
+      { label: 'ADAS', val: eq.adas },
+      { label: 'Kamera', val: eq.camera },
+      { label: 'Antenne', val: eq.antenna },
+    ].map(item => `
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+        <input type="checkbox" checked disabled> ${escapeHtml(item.label)}: ${item.val ? 'Ja' : 'Nei'}
+      </label>
+    `).join('');
+
+    const sourceLabel = eq.source === 'bovsoft' ? 'Bovsoft REGNUM'
+      : eq.source === 'biluppgifter' ? 'Biluppgifter'
+      : 'Ukjent';
+
+    return `
+      <div style="margin-bottom:16px;padding:14px;background:var(--color-surface-alt);border-radius:var(--radius-sm);border:1px solid var(--color-border)">
+        <p style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--color-text-primary)">✅ Bekreft utstyr (fra fabrikkdata)</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px">${items}</div>
+        <p style="font-size:11px;color:var(--color-text-muted);margin-top:6px">Kilde: ${escapeHtml(sourceLabel)}</p>
+      </div>
+    `;
+  },
+
+  _tplEquipmentManual() {
+    const items = ['Regnsensor', 'Varme', 'Akustisk', 'ADAS', 'Kamera', 'Antenne'];
+    const inputs = items.map((label, i) => `
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+        <input type="checkbox" id="chk-${i}"> ${escapeHtml(label)}
+      </label>
+    `).join('');
+
+    return `
+      <div style="margin-bottom:16px;padding:14px;background:rgba(217,119,6,0.08);border-radius:var(--radius-sm);border:1px solid var(--color-warning)">
+        <p style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--color-warning)">⚠️ Sjekk utstyr manuelt</p>
+        <p style="font-size:12px;color:var(--color-text-secondary)">Vi har ikke fabrikkdata for dette kjøretøyet. Bekreft at følgende stemmer:</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px;margin-top:8px">${inputs}</div>
+      </div>
+    `;
+  },
+
+  async _onSubmit(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button[type="submit"]');
     const status = document.getElementById('quote-status');
@@ -351,26 +557,31 @@ function openQuoteModal(eurocode, brand, model, vehicleEquipment) {
     status.style.display = 'none';
 
     const lastSearch = window.__lastSearchVehicle || {};
+    const payload = {
+      email: document.getElementById('quote-email').value,
+      eurocode: this._currentEurocode,
+      regnr: lastSearch.regnr || '',
+      quantity: parseInt(document.getElementById('quote-qty').value, 10) || 1,
+      message: document.getElementById('quote-msg').value,
+    };
 
     try {
-      const res = await fetch('https://autoglass-glass-sok.autoglassnorge.workers.dev/api/quote-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: document.getElementById('quote-email').value,
-          eurocode: eurocode,
-          regnr: lastSearch.regnr || '',
-          quantity: parseInt(document.getElementById('quote-qty').value, 10) || 1,
-          message: document.getElementById('quote-msg').value,
-        }),
-      });
-      const data = await res.json();
-      if (data.success) {
+      const result = await retryWithBackoff(async () => {
+        const res = await fetch(`${API_BASE}/api/quote-request`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      }, { maxRetries: 2, baseDelay: 800 });
+
+      if (result.success) {
         status.innerHTML = '<span style="color:var(--color-success)">✅ Forespørsel sendt! Vi kontakter deg innen 24 timer.</span>';
         btn.textContent = 'Sendt!';
-        setTimeout(() => modal.remove(), 2500);
+        setTimeout(() => this.close(), 2500);
       } else {
-        status.innerHTML = '<span style="color:var(--color-error)">❌ ' + (data.error || 'Noe gikk galt') + '</span>';
+        status.innerHTML = '<span style="color:var(--color-error)">❌ ' + escapeHtml(result.error || 'Noe gikk galt') + '</span>';
         btn.disabled = false;
         btn.textContent = originalText;
       }
@@ -380,12 +591,20 @@ function openQuoteModal(eurocode, brand, model, vehicleEquipment) {
       btn.textContent = originalText;
     }
     status.style.display = 'block';
-  });
+  },
+};
+
+function openQuoteModal(eurocode, brand, model, vehicleEquipment) {
+  let eq = vehicleEquipment;
+  if (typeof eq === 'string') {
+    try { eq = JSON.parse(eq); } catch { eq = {}; }
+  }
+  QuoteModal.open(eurocode, brand, model, eq);
 }
 
-// ============================================================================
-// SAVE VEHICLE
-// ============================================================================
+/* ==========================================================================
+   SAVE VEHICLE
+   ========================================================================== */
 
 function saveVehicleFromSearch(eurocode, brand, model) {
   if (typeof currentUser === 'undefined' || !currentUser) {
@@ -408,10 +627,13 @@ function saveVehicleFromSearch(eurocode, brand, model) {
   alert('🚗 ' + vehicle.make + ' ' + vehicle.model + ' (' + vehicle.regnr + ') lagret!');
 }
 
-// Auto-init any data-glass-search elements
+/* ==========================================================================
+   AUTO-INIT
+   ========================================================================== */
+
 function initGlassSearch() {
   document.querySelectorAll('[data-glass-search]').forEach(el => {
-    if (el._glassSearch) return; // Already initialized
+    if (el._glassSearch) return;
     const options = {
       container: el,
       inputSelector: el.dataset.input || '.glass-search-input',

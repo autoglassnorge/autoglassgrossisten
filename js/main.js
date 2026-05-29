@@ -1,8 +1,11 @@
 /* ============================================================
-   Autoglass AS — Main JavaScript
+   Autoglass AS — Main JavaScript (optimized)
    ============================================================ */
 
 // --- Theme Toggle ---
+// NOTE: To prevent FOUC, theme initialization is done via inline <script>
+// in <head> of each HTML page (see index.html etc). This function is kept
+// for toggle interactions only.
 function initTheme() {
   const saved = localStorage.getItem('ag-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -36,7 +39,7 @@ function initReveal() {
         entry.target.classList.add('visible');
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
@@ -65,7 +68,7 @@ function animateStats() {
         observer.unobserve(el);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.3 });
 
   stats.forEach(s => observer.observe(s));
 }
@@ -78,6 +81,8 @@ function initLangSwitcher() {
 }
 
 // --- Form handling ---
+// NOTE: These are demo/simulation handlers. Wire to real endpoints
+// by replacing the setTimeout with actual fetch() calls.
 function initForms() {
   document.querySelectorAll('form[data-form]').forEach(form => {
     form.addEventListener('submit', (e) => {
@@ -105,7 +110,11 @@ function initForms() {
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initReveal();
-  animateStats();
   initLangSwitcher();
   initForms();
+
+  // Defer heavy / non-critical work
+  onIdle(() => {
+    animateStats();
+  });
 });

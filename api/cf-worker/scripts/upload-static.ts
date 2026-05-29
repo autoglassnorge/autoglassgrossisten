@@ -6,7 +6,7 @@
  *
  * Usage:
  *   CF_API_TOKEN=xxx CF_ACCOUNT_ID=xxx KV_NAMESPACE_ID=xxx \
- *     npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/upload-static.ts
+ *     npx tsx scripts/upload-static.ts
  */
 
 import * as fs from "fs";

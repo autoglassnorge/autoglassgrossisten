@@ -4,8 +4,8 @@
  * Flyt: regnr → Biluppgifter TecDoc → kType → prefix4 → eurokode
  *
  * Kjøring:
- *   BILUPPGIFTER_API_KEY=xxx npx ts-node glass-lookup.ts --regnr=AB12345
- *   BILUPPGIFTER_API_KEY=xxx npx ts-node glass-lookup.ts --vin=WVWZZZ...
+ *   BILUPPGIFTER_API_KEY=xxx npx tsx glass-lookup.ts --regnr=AB12345
+ *   BILUPPGIFTER_API_KEY=xxx npx tsx glass-lookup.ts --vin=WVWZZZ...
  */
 
 import * as fs from "fs";
@@ -386,8 +386,8 @@ async function main() {
 
   if (regnrIdx === -1 && vinIdx === -1) {
     console.log("Bruk:");
-    console.log("  npx ts-node glass-lookup.ts --regnr=AB12345");
-    console.log("  npx ts-node glass-lookup.ts --vin=WVWZZZ...");
+    console.log("  npx tsx glass-lookup.ts --regnr=AB12345");
+    console.log("  npx tsx glass-lookup.ts --vin=WVWZZZ...");
     process.exit(0);
   }
 

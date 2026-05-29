@@ -12,7 +12,7 @@
  *   - data/nags-modern-seed.json (web research)
  *
  * Kjøring:
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/merge-nags.ts
+ *   npx tsx api/scrapers/merge-nags.ts
  */
 
 import * as fs from "fs";

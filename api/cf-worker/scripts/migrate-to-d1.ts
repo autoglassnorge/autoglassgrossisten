@@ -4,7 +4,7 @@
  * Genererer en SQL-fil med INSERTs som kan kjøres via wrangler CLI.
  *
  * Steg 1: Generer SQL
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/migrate-to-d1.ts
+ *   npx tsx scripts/migrate-to-d1.ts
  *
  * Steg 2: Opprett D1-database (hvis ikke eksisterer)
  *   npx wrangler d1 create glass-catalog-db

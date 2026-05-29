@@ -10,7 +10,7 @@
  *
  * Kjøring:
  *   cd ~/bilglass
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/glavista-scraper.ts
+ *   npx tsx api/scrapers/glavista-scraper.ts
  *
  * Output: data/glavista-catalog.json
  */

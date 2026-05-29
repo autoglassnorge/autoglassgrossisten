@@ -8,7 +8,7 @@
  * eksisterende NAGS-format i data/nags-*.json
  *
  * Kjøring:
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/parse-mygrant-pdfs.ts
+ *   npx tsx api/scrapers/parse-mygrant-pdfs.ts
  */
 
 import * as fs from "fs";

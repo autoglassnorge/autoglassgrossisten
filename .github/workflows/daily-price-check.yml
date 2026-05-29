@@ -86,7 +86,7 @@ jobs:
       - name: Last opp oppdatert katalog til KV
         if: steps.check_changes.outputs.has_changes == 'true'
         run: |
-          npx ts-node --compiler-options '{"module":"CommonJS","types":["node"]}' api/cf-worker/scripts/upload-catalog.ts
+          node scripts/upload-catalog.mjs
         env:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

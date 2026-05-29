@@ -54,16 +54,25 @@ interface Prefix4Cache {
   entries: Record<string, Prefix4Entry[]>;  // key: "BRAND:MODEL:YEAR"
 }
 
+function formatMem(bytes: number): string {
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+}
+
 // ─── Load catalog sources ───────────────────────────────────────
 function loadCatalogs(): CatalogProduct[] {
   const products: CatalogProduct[] = [];
 
-  // Load mock catalog
-  const mockPath = path.join(DATA_DIR, "mock-katalog.json");
-  if (fs.existsSync(mockPath)) {
-    const mock = JSON.parse(fs.readFileSync(mockPath, "utf-8"));
-    const mockRecords = mock.records || [];
-    for (const p of mockRecords) {
+  const sources = [
+    { path: path.join(DATA_DIR, "mock-katalog.json"), name: "Mock" },
+    { path: path.join(DATA_DIR, "glavista-catalog.json"), name: "Glavista" },
+    { path: path.join(DATA_DIR, "scrapers", "pilkington-products.json"), name: "Pilkington" },
+  ];
+
+  for (const src of sources) {
+    if (!fs.existsSync(src.path)) continue;
+    const data = JSON.parse(fs.readFileSync(src.path, "utf-8"));
+    const records = Array.isArray(data) ? data : (data.records || []);
+    for (const p of records) {
       products.push({
         eurocode: p.eurocode,
         brand: p.brand,
@@ -73,42 +82,7 @@ function loadCatalogs(): CatalogProduct[] {
         flags: p.flags,
       });
     }
-    console.log(`   📄 Mock: ${mockRecords.length} produkter`);
-  }
-
-  // Load Glavista
-  const glavistaPath = path.join(DATA_DIR, "glavista-catalog.json");
-  if (fs.existsSync(glavistaPath)) {
-    const g = JSON.parse(fs.readFileSync(glavistaPath, "utf-8"));
-    const glavistaRecords = g.records || [];
-    for (const p of glavistaRecords) {
-      products.push({
-        eurocode: p.eurocode,
-        brand: p.brand,
-        model: p.model,
-        yearFrom: p.yearFrom,
-        yearTo: p.yearTo,
-        flags: p.flags,
-      });
-    }
-    console.log(`   📄 Glavista: ${glavistaRecords.length} produkter`);
-  }
-
-  // Load Pilkington
-  const pilkPath = path.join(DATA_DIR, "scrapers", "pilkington-products.json");
-  if (fs.existsSync(pilkPath)) {
-    const p = JSON.parse(fs.readFileSync(pilkPath, "utf-8"));
-    for (const prod of p) {
-      products.push({
-        eurocode: prod.eurocode,
-        brand: prod.brand,
-        model: prod.model,
-        yearFrom: prod.yearFrom,
-        yearTo: prod.yearTo,
-        flags: prod.flags,
-      });
-    }
-    console.log(`   📄 Pilkington: ${p.length} produkter`);
+    console.log(`   📄 ${src.name}: ${records.length.toLocaleString("no")} produkter`);
   }
 
   return products;
@@ -131,15 +105,20 @@ function normalizeBrand(brand: string): string {
 // ─── Build statistical prefix4 map ──────────────────────────────
 function buildStatisticalMap(products: CatalogProduct[]): Map<string, Map<string, number>> {
   const map = new Map<string, Map<string, number>>();
+  const total = products.length;
 
-  for (const p of products) {
+  for (let i = 0; i < total; i++) {
+    const p = products[i];
+    if (i > 0 && i % 5000 === 0) {
+      process.stdout.write(`\r   Bygger mapping... ${i.toLocaleString("no")}/${total.toLocaleString("no")}`);
+    }
+
     if (!p.eurocode || p.eurocode.length < 4) continue;
     const prefix4 = p.eurocode.slice(0, 4);
     const brand = normalizeBrand(p.brand || "UNKNOWN");
     const model = (p.model || "").toUpperCase().trim();
     const yearFrom = p.yearFrom || 0;
 
-    // Key: "BRAND:MODEL:YEARFROM" or "BRAND:MODEL" or "BRAND:YEARFROM"
     const keys: string[] = [];
     if (brand && model && yearFrom) {
       keys.push(`${brand}:${model}:${yearFrom}`);
@@ -152,20 +131,31 @@ function buildStatisticalMap(products: CatalogProduct[]): Map<string, Map<string
     }
 
     for (const key of keys) {
-      if (!map.has(key)) map.set(key, new Map());
-      const prefixes = map.get(key)!;
+      let prefixes = map.get(key);
+      if (!prefixes) {
+        prefixes = new Map<string, number>();
+        map.set(key, prefixes);
+      }
       prefixes.set(prefix4, (prefixes.get(prefix4) || 0) + 1);
     }
   }
 
+  process.stdout.write(`\r   Bygger mapping... ${total.toLocaleString("no")}/${total.toLocaleString("no")}\n`);
   return map;
 }
 
 // ─── Build cache entries ────────────────────────────────────────
 function buildCache(statMap: Map<string, Map<string, number>>): Prefix4Cache {
   const entries: Record<string, Prefix4Entry[]> = {};
+  const statEntries = Array.from(statMap.entries());
+  const total = statEntries.length;
 
-  for (const [key, prefixes] of Array.from(statMap.entries())) {
+  for (let i = 0; i < total; i++) {
+    const [key, prefixes] = statEntries[i];
+    if (i > 0 && i % 1000 === 0) {
+      process.stdout.write(`\r   Bygger cache... ${i.toLocaleString("no")}/${total.toLocaleString("no")}`);
+    }
+
     const sorted = Array.from(prefixes.entries())
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5); // Top 5 prefix4 per key
@@ -185,10 +175,12 @@ function buildCache(statMap: Map<string, Map<string, number>>): Prefix4Cache {
     }));
   }
 
+  process.stdout.write(`\r   Bygger cache... ${total.toLocaleString("no")}/${total.toLocaleString("no")}\n`);
+
   return {
     version: "1.0",
     generatedAt: new Date().toISOString(),
-    totalEntries: Object.keys(entries).length,
+    totalEntries: statEntries.length,
     entries,
   };
 }
@@ -202,14 +194,16 @@ async function validateWithApi(cache: Prefix4Cache): Promise<void> {
 
   console.log("\n🔍 Validerer med Biluppgifter API (demo-modus)...");
   // TODO: Implement real validation using known test regnr
-  // For now, just mark the concept
   console.log("   (krever kjente regnr for hver kType — implementeres senere)");
 }
 
 // ─── Main ───────────────────────────────────────────────────────
 async function main() {
+  const totalStart = Date.now();
   console.log("🔧 kType → prefix4 Auto-Cache Builder");
   console.log("=====================================\n");
+
+  const memBefore = process.memoryUsage();
 
   // Load all catalog sources
   console.log("📂 Laster kataloger...");
@@ -223,7 +217,10 @@ async function main() {
 
   // Build statistical map
   console.log("📊 Bygger statistisk prefix4-mapping...");
+  const buildStart = Date.now();
   const statMap = buildStatisticalMap(products);
+  const buildMs = Date.now() - buildStart;
+  console.log(`   Ferdig på ${(buildMs / 1000).toFixed(2)}s — ${statMap.size.toLocaleString("no")} unike nøkler\n`);
 
   // Show top mappings
   console.log("   Topp mappings:");
@@ -239,19 +236,28 @@ async function main() {
 
   // Build cache
   console.log("\n💾 Bygger cache...");
+  const cacheStart = Date.now();
   const cache = buildCache(statMap);
+  const cacheMs = Date.now() - cacheStart;
+  console.log(`   Ferdig på ${(cacheMs / 1000).toFixed(2)}s`);
 
   // Validate
   await validateWithApi(cache);
 
   // Save
   fs.mkdirSync(DATA_DIR, { recursive: true });
+  const writeStart = Date.now();
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(cache, null, 1));
+  const writeMs = Date.now() - writeStart;
+  const totalMs = Date.now() - totalStart;
+  const memAfter = process.memoryUsage();
 
-  // Stats
-  console.log("\n📊 Cache-statistikk:");
+  console.log(`\n📊 Cache-statistikk:`);
   console.log(`   Totale nøkler: ${cache.totalEntries.toLocaleString("no")}`);
   console.log(`   Lagret: ${OUTPUT_PATH}`);
+  console.log(`   Write-tid: ${writeMs}ms`);
+  console.log(`   Total tid: ${(totalMs / 1000).toFixed(2)}s`);
+  console.log(`   Minne: heap ${formatMem(memBefore.heapUsed)} → ${formatMem(memAfter.heapUsed)} (+${formatMem(memAfter.heapUsed - memBefore.heapUsed)})`);
   console.log(`\n✅ Ferdig!`);
 }
 

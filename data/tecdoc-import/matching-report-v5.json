@@ -1,0 +1,59 @@
+{
+  "total_catalog": 18737,
+  "matched": 11294,
+  "unmatched": 7443,
+  "multi_match": 11176,
+  "improvement": 1952,
+  "sample_matches": [
+    {
+      "eurocode": "10025C",
+      "ktype": 4742,
+      "match_count": 29
+    },
+    {
+      "eurocode": "10025GN",
+      "ktype": 4742,
+      "match_count": 29
+    },
+    {
+      "eurocode": "10030BZ",
+      "ktype": 11041,
+      "match_count": 101
+    },
+    {
+      "eurocode": "10030CL",
+      "ktype": 15813,
+      "match_count": 16
+    },
+    {
+      "eurocode": "10031CL",
+      "ktype": 11041,
+      "match_count": 101
+    },
+    {
+      "eurocode": "10041GN",
+      "ktype": 750,
+      "match_count": 76
+    },
+    {
+      "eurocode": "10041YP",
+      "ktype": 750,
+      "match_count": 76
+    },
+    {
+      "eurocode": "10042GN",
+      "ktype": 750,
+      "match_count": 76
+    },
+    {
+      "eurocode": "10043GN",
+      "ktype": 750,
+      "match_count": 76
+    },
+    {
+      "eurocode": "10043YP",
+      "ktype": 750,
+      "match_count": 76
+    }
+  ]
+}

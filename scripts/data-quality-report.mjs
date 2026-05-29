@@ -19,16 +19,40 @@ const CATALOG_PATH = process.argv[2] && !process.argv[2].startsWith("--")
 const OUT_ARG = process.argv.find((a) => a.startsWith("--output="));
 const OUTPUT_PATH = OUT_ARG ? OUT_ARG.split("=")[1] : null;
 
+/* ── Farger ────────────────────────────────────────────────── */
+const R = "\x1b[31m";
+const G = "\x1b[32m";
+const Y = "\x1b[33m";
+const C = "\x1b[36m";
+const RESET = "\x1b[0m";
+
+function ok(msg) { console.log(`  ${G}✓${RESET} ${msg}`); }
+function fail(msg) { console.log(`  ${R}✗${RESET} ${msg}`); }
+function warn(msg) { console.log(`  ${Y}⚠${RESET} ${msg}`); }
+function info(msg) { console.log(`  ${C}ℹ${RESET} ${msg}`); }
+
 function generateReport() {
+  const start = Date.now();
+  console.log(`\n📊 Data-kvalitetsrapport`);
+  console.log(`   Fil: ${C}${CATALOG_PATH}${RESET}\n`);
+
   if (!fs.existsSync(CATALOG_PATH)) {
-    console.error(`❌ Katalog ikke funnet: ${CATALOG_PATH}`);
+    fail(`Katalog ikke funnet: ${CATALOG_PATH}`);
     process.exit(1);
   }
+  ok("Katalog-fil finnes");
 
-  const catalog = JSON.parse(fs.readFileSync(CATALOG_PATH, "utf-8"));
+  let catalog;
+  try {
+    catalog = JSON.parse(fs.readFileSync(CATALOG_PATH, "utf-8"));
+  } catch (e) {
+    fail(`Ugyldig JSON: ${e.message}`);
+    process.exit(1);
+  }
+  ok("Gyldig JSON");
+
   const records = catalog.records || [];
   const meta = catalog.meta || {};
-
   const now = new Date().toISOString();
 
   // Statistikk
@@ -184,10 +208,19 @@ ${topSuppliers.map(([s, c]) => `| ${s} | ${c.toLocaleString("nb-NO")} |`).join("
 
   if (OUTPUT_PATH) {
     fs.writeFileSync(OUTPUT_PATH, report);
-    console.log(`💾 Rapport lagret til: ${OUTPUT_PATH}`);
+    ok(`Rapport lagret til: ${OUTPUT_PATH}`);
   } else {
     console.log(report);
   }
+
+  const elapsed = Date.now() - start;
+  console.log(`\n${G}✅ Rapport generert på ${elapsed}ms${RESET}\n`);
 }
 
-generateReport();
+try {
+  generateReport();
+  process.exit(0);
+} catch (e) {
+  console.error(`\n${R}❌ Rapport-generering feilet:${RESET}`, e.message);
+  process.exit(1);
+}

@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "upload": "npx ts-node scripts/upload-catalog-to-kv.ts"
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20231218.0",

@@ -14,9 +14,9 @@
 | Repo path | `/Users/taj/bilglass` |
 | Stack | Cloudflare Worker + D1 + KV + Pages |
 | Owner | Tom Arne Jensen (post@klarpakke.no) |
-| Last updated | 2026-05-27 12:34 CEST |
+| Last updated | 2026-05-28 21:40 CEST |
 | Last updated by | kimi-cli |
-| Worker version | v2.3+ (feature-preserving merge, D1-imports kjørt) |
+| Worker version | v2.3+ (TecDoc 1Q2019 kType enrichment, 60.3% coverage) |
 
 ---
 
@@ -31,10 +31,12 @@
 - **Target SLA:** 100% eksakt frontrute-matching (samme glass som fabrikkoriginal)
 - **Learning engine:** D1 `glass_rules` + `search_results` (VIN-prefix → equipment læring)
 - **Nord Glass:** 9,524 rader importert til D1 staging (OK: 8,629, REVIEW: 888, HOLD: 7)
-- **kType coverage:** 761 `ktype_matches` rader, 609 `glass_catalog` med kType (1.54% av 39,458), 33 unike kTypes
-- **Bovsoft:** Port 150 (gratis, regnr→kType). Port 100 (betalt, produktkatalog) — ikke kostnadseffektiv
+- **kType coverage:** 11,294 `glass_catalog` med kType (**60.3%** av 18,737), 907 `ktype_registry`, 1,248 `glass_rules`
+- **kType source hierarchy:** TecDoc 1Q2019 dump (primary fallback) → Biluppgifter.se (recommended) → Bovsoft (333 remaining)
+- **TecDoc 1Q2019:** GitHub `tecdocSQL/tecdocdatabase1Q2019` — 69,871 kType mappings parsed from manufacturers+models+passengercars CSVs
+- **Bovsoft:** 118 verified results, 333 remaining searches (~$0.12/search). Port 150 (gratis, regnr→kType)
+- **Biluppgifter.se:** API-nøkkel placeholder (`din_biluppgifter_nokkell_her`). Unused `GET /api/v1/tecdoc/regno/{regnr}?country_code=NO` endpoint returns `tecdoc_id` (kType)
 - **Apify TecDoc:** Script klart (`scripts/apify-tecdoc-scraper.mjs`), venter på `APIFY_TOKEN` (~$14 én gang)
-- **Biluppgifter.se:** API-nøkkel utløpt. Time 24. mai for fornyelse.
 
 ---
 
@@ -42,9 +44,11 @@
 
 | Prio | Blocker | Status |
 |---|---|---|
-| P2 | `glass_catalog.ktype` er 1.54% populert — Layer 0 trigger for 33 kTypes | Pågår |
+| P1 | **Remote deploy:** `data/tecdoc-import/remote-deploy-v5.sql` venter på `CLOUDFLARE_API_TOKEN` | Åpen |
+| P1 | **Biluppgifter.se:** API-nøkkel mangler — ubrukt `tecdoc/regno` endpoint som gir kType direkte | Åpen |
+| P2 | `glass_catalog.ktype` er **60.3%** populert — TecDoc 1Q2019 gir solid fallback | ✅ Lokal D1 |
+| P2 | Bovsoft: 333 remaining searches — strategisk bruk på high-value unmatched models | Åpen |
 | P2 | Ingen overvåkning av kType-læringskurven | Ikke startet |
-| P2 | Biluppgitter.se API-nøkkel utløpt — ingen equipment-data | Åpen |
 | P3 | Ingen `exact_match` flagg i API-respons | Planlagt |
 
 > Historiske blockers (✅): SVV 401, Bovsoft 403, glass_variants duplikater, MAX-merge for boolske felt, ktype_matches GDPR, Bovsoft logging.
@@ -67,6 +71,19 @@
 ---
 
 ## Recent activity
+
+### 2026-05-28 (Kimi CLI session — TecDoc 1Q2019 kType enrichment v5)
+- **Analysert:** `tecdocSQL/tecdocdatabase1Q2019` — piratkopiert TecDoc 1Q2019 DVD-dump (~100 GB, English only)
+- **Lastet ned:** `manufacturers.csv` + `models.csv` + `passengercars.csv` (~8 MB) → 69,871 kType mappings
+- **Matching pipeline v5:** Fuzzy brand+model+year matching med aliases (GELANDEWAGEN→G-KLASSE, GUILETTA→GIULIETTA)
+- **Resultat:** 11,294 `glass_catalog` records med kType (**60.3%** dekning) — opp fra 609 (1.54%)
+- **D1 lokal:** 907 `ktype_registry` + 1,248 `glass_rules` + 11,294 `glass_catalog.ktype`
+- **SQL generert:** `data/tecdoc-import/remote-deploy-v5.sql` (klar for `--remote` deploy)
+- **OEM-matching:** Ikke mulig — kun 149 OEM-numre i enriched-katalog (0 i produksjon)
+- **SVV-scraping:** Hjelper ikke med kType — SVV returnerer ikke kType, og vi har allerede 3,122 unike regnr
+- **Anbefaling:** Biluppgifter.se `tecdoc/regno` som primær kilde, Bovsoft strategisk (333 søk), remote deploy nå
+- **Schema oppdatert:** `schema.sql` + `ktype_registry`-tabell opprettet i lokal D1
+- **MemPalace:** 18 nye KG-fakta lagt til
 
 ### 2026-05-19 (Kimi CLI session)
 - Implementerte Alternativ C: Statistisk læring

@@ -4,7 +4,7 @@
  * Kjør etter D1-migrering er fullført og Worker er deployet med D1-støtte.
  *
  * Kjøring:
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/benchmark-d1.ts
+ *   npx tsx scripts/benchmark-d1.ts
  *
  * Dette scriptet tester 10 representative søk og sammenligner
  * responstid mellom KV (full catalog load) og D1 (indeksert query).

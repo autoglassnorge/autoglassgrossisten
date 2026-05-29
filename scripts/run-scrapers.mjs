@@ -80,7 +80,7 @@ function runScraper(scraper) {
 
   try {
     execSync(
-      `npx ts-node --transpile-only --compiler-options '{"module":"CommonJS"}' ${scraper.script}`,
+      `npx tsx ${scraper.script}`,
       {
         cwd: process.cwd(),
         stdio: "inherit",
@@ -141,7 +141,7 @@ async function main() {
     log("\n🔀 Kjører merge...");
     try {
       execSync(
-        `npx ts-node --transpile-only --compiler-options '{"module":"CommonJS"}' api/scrapers/merge-catalogs.ts`,
+        `npx tsx api/scrapers/merge-catalogs.ts`,
         { cwd: process.cwd(), stdio: "inherit" }
       );
       ok("Merge fullført");
@@ -149,7 +149,7 @@ async function main() {
       // Build prefix4
       log("\n🔢 Bygger prefix4-cache...");
       execSync(
-        `npx ts-node --transpile-only --compiler-options '{"module":"CommonJS"}' api/scrapers/build-prefix4-cache.ts`,
+        `npx tsx api/scrapers/build-prefix4-cache.ts`,
         { cwd: process.cwd(), stdio: "inherit" }
       );
       ok("Prefix4-cache bygget");

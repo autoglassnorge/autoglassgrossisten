@@ -1,0 +1,55 @@
+/**
+ * Handler for /api/glass — regnr, prefix4, eurocode lookups.
+ */
+
+import type { Env } from "../types";
+import { jsonResponse, errorResponse } from "../lib/cors";
+import { getCache, setCache, cacheKey } from "../lib/cache";
+import { queryByPrefix4, queryByEurocode } from "../lib/db";
+import { normalizeRecord } from "../lib/normalize";
+import { searchByRegnr } from "./search";
+
+export async function handleGlass(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const regnr = url.searchParams.get("regnr");
+  const prefix4 = url.searchParams.get("prefix4");
+  const eurocode = url.searchParams.get("eurocode");
+
+  if (regnr) {
+    const categoryFilter = url.searchParams.get("category") || undefined;
+    const cacheKeyParams: Record<string, string> = { regnr };
+    if (categoryFilter) cacheKeyParams.category = categoryFilter;
+    const cached = await getCache<unknown>(env.GLASS_CATALOG, cacheKey("glass-v2", cacheKeyParams));
+    if (cached) return jsonResponse(cached);
+
+    const result = await searchByRegnr(regnr, env, categoryFilter || undefined);
+    if (result.httpStatus === 200) {
+      await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", cacheKeyParams), result.body, 300);
+    }
+    const extraHeaders: Record<string, string> = {};
+    if (result.retryAfter) extraHeaders["Retry-After"] = String(result.retryAfter);
+    return jsonResponse(result.body, result.httpStatus, extraHeaders);
+  }
+
+  if (prefix4) {
+    const cached = await getCache(env.GLASS_CATALOG, cacheKey("glass-v2", { prefix4 }));
+    if (cached) return jsonResponse(cached);
+
+    const results = await queryByPrefix4(env.GLASS_CATALOG_D1, prefix4);
+    const data = { query: { prefix4 }, count: results.length, results: results.map(normalizeRecord) };
+    await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", { prefix4 }), data, 3600);
+    return jsonResponse(data);
+  }
+
+  if (eurocode) {
+    const cached = await getCache(env.GLASS_CATALOG, cacheKey("glass-v2", { eurocode }));
+    if (cached) return jsonResponse(cached);
+
+    const result = await queryByEurocode(env.GLASS_CATALOG_D1, eurocode);
+    const data = { query: { eurocode }, count: result ? 1 : 0, results: result ? [normalizeRecord(result)] : [] };
+    await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", { eurocode }), data, 3600);
+    return jsonResponse(data);
+  }
+
+  return errorResponse("Mangler parameter: regnr, prefix4 eller eurocode");
+}

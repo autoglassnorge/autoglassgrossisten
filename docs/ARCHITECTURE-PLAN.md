@@ -50,7 +50,7 @@ git commit -m "refactor: slett legacy catalog-filer, bruk catalog-prod.json"
 
 ### 1.3 Robusthet i upload-scripts
 
-| Endring | `upload-static.ts` | `upload-catalog.ts` |
+| Endring | `upload-static.ts` | `scripts/upload-catalog.mjs` |
 |---------|-------------------|---------------------|
 | Retry med exponential backoff (3 forsøk) | ✅ | ✅ |
 | Timeout på fetch (30s via AbortController) | ✅ | ✅ |

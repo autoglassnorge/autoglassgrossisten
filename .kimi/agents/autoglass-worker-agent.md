@@ -23,7 +23,7 @@ Du eier alle API-endepunkter og infrastruktur-koden:
 
 1. `api/cf-worker/src/index.ts` — Hoved-Worker, alle endepunkter
 2. `api/cf-worker/wrangler.toml` — Worker-konfigurasjon
-3. `api/cf-worker/scripts/upload-catalog.ts` — KV-upload
+3. `scripts/upload-catalog.mjs` — KV-upload
 4. `scripts/smoke-test.mjs` — Smoke-test suite
 5. `scripts/verify-kv.mjs` — KV-konsistens-sjekk
 6. `docs/api.md` — API-dokumentasjon

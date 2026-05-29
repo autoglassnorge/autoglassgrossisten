@@ -10,7 +10,7 @@
  *   4. Lagre: kTypeCache[kType] = { prefix4, brand, model, year, confidence }
  *
  * Kjøring:
- *   BILUPPGIFTER_API_KEY=xxx npx ts-node --compiler-options '{"module":"CommonJS"}' api/scrapers/build-ktype-cache.ts
+ *   BILUPPGIFTER_API_KEY=xxx npx tsx api/scrapers/build-ktype-cache.ts
  */
 
 import * as fs from "fs";
