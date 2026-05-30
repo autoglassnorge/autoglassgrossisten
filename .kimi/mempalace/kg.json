@@ -1,0 +1,403 @@
+{
+  "deploy_pipeline": [
+    {
+      "predicate": "uses_tool",
+      "object": "wrangler_cli_oauth",
+      "validFrom": "2026-05-29T23:47:00Z"
+    },
+    {
+      "predicate": "replaced",
+      "object": "cloudflare_api_token_auth",
+      "validFrom": "2026-05-29T23:47:00Z"
+    },
+    {
+      "predicate": "script",
+      "object": "scripts/deploy-full-wrangler.mjs",
+      "validFrom": "2026-05-29T23:47:00Z"
+    },
+    {
+      "predicate": "command",
+      "object": "npm run deploy:full",
+      "validFrom": "2026-05-29T23:47:00Z"
+    },
+    {
+      "predicate": "v17_deploy_status",
+      "object": "deployed_to_cloudflare",
+      "validFrom": "2026-05-30T04:10:29Z"
+    },
+    {
+      "predicate": "worker_url",
+      "object": "https://autoglass-glass-sok.autoglassnorge.workers.dev",
+      "validFrom": "2026-05-30T04:10:29Z"
+    },
+    {
+      "predicate": "version_id",
+      "object": "3286caca-b25d-4331-a407-775fdde9e640",
+      "validFrom": "2026-05-30T04:10:29Z"
+    },
+    {
+      "predicate": "bundle_size",
+      "object": "174KB_40KB_gzip",
+      "validFrom": "2026-05-30T04:10:29Z"
+    },
+    {
+      "predicate": "smoke_test",
+      "object": "health_ok, regnr_ok, prefix4_eurocode_known_issue",
+      "validFrom": "2026-05-30T04:10:29Z"
+    }
+  ],
+  "catalog": [
+    {
+      "predicate": "total_records",
+      "object": "33215",
+      "validFrom": "2026-05-29T23:43:00Z"
+    },
+    {
+      "predicate": "sources",
+      "object": "Pilkington IRL, Glavista, Pilkington Finland 2017 + Glavista",
+      "validFrom": "2026-05-29T23:43:00Z"
+    },
+    {
+      "predicate": "categories",
+      "object": "frontrute=7818, annet=22297, bakrute=49, dorglass=3047, sideglass=4",
+      "validFrom": "2026-05-29T23:43:00Z"
+    }
+  ],
+  "tecdoc_integration": [
+    {
+      "predicate": "status",
+      "object": "layer_0.5_fallback_deployed",
+      "validFrom": "2026-05-29T23:32:00Z"
+    },
+    {
+      "predicate": "table",
+      "object": "tecdoc_ktype_registry",
+      "validFrom": "2026-05-29T23:32:00Z"
+    },
+    {
+      "predicate": "records",
+      "object": "908 mappings (412 unique kTypes, collision <= 5)",
+      "validFrom": "2026-05-29T23:32:00Z"
+    },
+    {
+      "predicate": "source",
+      "object": "tecdoc_1q2019_v5_post_cleanup",
+      "validFrom": "2026-05-29T23:32:00Z"
+    },
+    {
+      "predicate": "file",
+      "object": "data/tecdoc-import/tecdoc-ktype-registry-safe.sql",
+      "validFrom": "2026-05-29T23:32:00Z"
+    },
+    {
+      "predicate": "v17_status",
+      "object": "d1_resolver_deployed_as_layer_1.5",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "d1_rows",
+      "object": "69870_tecdoc_1q2019_passengercars",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "d1_total",
+      "object": "907_existing + 69870_new = 70777_total",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "source",
+      "object": "scripts/generate-tecdoc-ktype-registry-sql.mjs",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "worker_file",
+      "object": "api/cf-worker/src/vin-glass-resolver.ts",
+      "validFrom": "2026-05-30T03:47:26Z"
+    }
+  ],
+  "d1_database": [
+    {
+      "predicate": "table_count",
+      "object": "21 tables",
+      "validFrom": "2026-05-29T23:55:00Z"
+    },
+    {
+      "predicate": "size",
+      "object": "23.58 MB",
+      "validFrom": "2026-05-29T23:55:00Z"
+    },
+    {
+      "predicate": "glass_catalog_records",
+      "object": "33215",
+      "validFrom": "2026-05-29T23:55:00Z"
+    }
+  ],
+  "worker": [
+    {
+      "predicate": "url",
+      "object": "https://autoglass-glass-sok.autoglassnorge.workers.dev",
+      "validFrom": "2026-05-29T23:48:00Z"
+    },
+    {
+      "predicate": "version",
+      "object": "2.3",
+      "validFrom": "2026-05-29T23:48:00Z"
+    }
+  ],
+  "kv_storage": [
+    {
+      "predicate": "namespace_id",
+      "object": "15099e572e51423dafb723996c01c668",
+      "validFrom": "2026-05-29T23:50:00Z"
+    },
+    {
+      "predicate": "entries",
+      "object": "70 (metadata + prefix4_cache + 67 chunks + chunk_count)",
+      "validFrom": "2026-05-29T23:50:00Z"
+    }
+  ],
+  "wrangler_auth": [
+    {
+      "predicate": "account",
+      "object": "autoglassnorge@gmail.com (2266e975a1d0ff5356bba1af884a2773)",
+      "validFrom": "2026-05-29T23:47:00Z"
+    },
+    {
+      "predicate": "config_path",
+      "object": "~/Library/Preferences/.wrangler/config/",
+      "validFrom": "2026-05-29T23:47:00Z"
+    }
+  ],
+  "autodoc_probe": [
+    {
+      "predicate": "status",
+      "object": "blocked_by_cloudflare",
+      "validFrom": "2026-05-30T00:00:00Z"
+    },
+    {
+      "predicate": "domains_tested",
+      "object": "autodoc.eu, autodoc.de, autodoc.co.uk, autodoc.no",
+      "validFrom": "2026-05-30T00:00:00Z"
+    },
+    {
+      "predicate": "result",
+      "object": "all_domains_return_403_or_challenge",
+      "validFrom": "2026-05-30T00:00:00Z"
+    },
+    {
+      "predicate": "conclusion",
+      "object": "not_viable_for_free_scraping",
+      "validFrom": "2026-05-30T00:00:00Z"
+    },
+    {
+      "predicate": "date",
+      "object": "2026-05-30",
+      "validFrom": "2026-05-30T00:00:00Z"
+    }
+  ],
+  "tecdoc_resolver_prototype": [
+    {
+      "predicate": "status",
+      "object": "v17_d1_resolver_deployed",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "approach",
+      "object": "d1_sql_query_with_scoring_not_inline_json",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "scoring",
+      "object": "brand_0.10 + chassis_0.40 + containment_0.35 + token_0.20 + centrality_0.10 - penalty_0.05",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "confidence",
+      "object": "0.60 + score*0.30, capped_at_0.90",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "threshold",
+      "object": "THRESHOLD_TECDOC=0.75",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "year_cutoff",
+      "object": "2019_for_year_to_0",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "test_results",
+      "object": "6/7_pass: Audi_A4_B8, VW_Golf_VII, BMW_3_F30, Mercedes_E_W213, Ford_Mustang, Nissan_Qashqai_J11. Fail: Toyota_Corolla_2015_edge_case",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "bundle_size",
+      "object": "174KB_40KB_gzip",
+      "validFrom": "2026-05-30T03:47:26Z"
+    }
+  ],
+  "v17_plan": [
+    {
+      "predicate": "status",
+      "object": "completed",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "implementation",
+      "object": "resolveTecDocFromD1_in_vin-glass-resolver.ts",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "fallback_order",
+      "object": "glass_rules(0.85) -> tecdoc_d1(0.75) -> paid_apis(0.60)",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "caching",
+      "object": "tecdoc_hits_cached_in_glass_rules_for_future_free_lookups",
+      "validFrom": "2026-05-30T03:47:26Z"
+    },
+    {
+      "predicate": "brand_mappings_added",
+      "object": "MERCE, TOYOT, NISSA, PEUGE, CHEVR, HOLDE, FORDA",
+      "validFrom": "2026-05-30T03:47:26Z"
+    }
+  ],
+  "infrastructure": [
+    {
+      "predicate": "nodejs_version",
+      "object": "v22.22.1",
+      "validFrom": "2026-05-30T04:18:50Z"
+    },
+    {
+      "predicate": "nodejs_previous",
+      "object": "v20.19.2",
+      "validFrom": "2026-05-30T04:18:50Z"
+    },
+    {
+      "predicate": "wrangler_version",
+      "object": "v4.95.0",
+      "validFrom": "2026-05-30T04:18:50Z"
+    },
+    {
+      "predicate": "wrangler_previous",
+      "object": "v4.86.0",
+      "validFrom": "2026-05-30T04:18:50Z"
+    },
+    {
+      "predicate": "nvmrc_updated",
+      "object": "22",
+      "validFrom": "2026-05-30T04:18:50Z"
+    },
+    {
+      "predicate": "agents_md_updated",
+      "object": "nodejs_v22",
+      "validFrom": "2026-05-30T04:18:50Z"
+    },
+    {
+      "predicate": "wrangler_deployed",
+      "object": "v4.95.0_fa119576",
+      "validFrom": "2026-05-30T04:37:10Z"
+    },
+    {
+      "predicate": "bundle_size",
+      "object": "175KB_40KB_gzip",
+      "validFrom": "2026-05-30T04:37:10Z"
+    }
+  ],
+  "v17_deployment": [
+    {
+      "predicate": "status",
+      "object": "deployed_with_pending_fix",
+      "validFrom": "2026-05-30T04:37:10Z"
+    },
+    {
+      "predicate": "version_id",
+      "object": "fa119576-b5cb-4250-90a3-4180be6486da",
+      "validFrom": "2026-05-30T04:37:10Z"
+    },
+    {
+      "predicate": "pending_bug",
+      "object": "fixed_enrichAsync_updates_glass_resolution_requests",
+      "validFrom": "2026-05-30T04:37:10Z"
+    },
+    {
+      "predicate": "glass_rules_tecdoc",
+      "object": "1568_of_1637_entries_from_tecdoc",
+      "validFrom": "2026-05-30T04:37:10Z"
+    },
+    {
+      "predicate": "test_result",
+      "object": "request_171_mazda_6_resolved_to_needs_review_in_3s",
+      "validFrom": "2026-05-30T04:37:10Z"
+    },
+    {
+      "predicate": "d1_indexes",
+      "object": "0015_ktype_registry_source_brand_year + brand_model + source",
+      "validFrom": "2026-05-30T04:41:15Z"
+    },
+    {
+      "predicate": "d1_size",
+      "object": "44MB",
+      "validFrom": "2026-05-30T04:41:15Z"
+    },
+    {
+      "predicate": "pages_deploy",
+      "object": "dist_to_autoglass-frontend",
+      "validFrom": "2026-05-30T04:41:15Z"
+    },
+    {
+      "predicate": "pages_url",
+      "object": "https://54a0b6ec.autoglass-frontend.pages.dev",
+      "validFrom": "2026-05-30T04:41:15Z"
+    },
+    {
+      "predicate": "source_column",
+      "object": "added_to_glass_rules_d1",
+      "validFrom": "2026-05-30T04:46:53Z"
+    },
+    {
+      "predicate": "upsertGlassRule",
+      "object": "updated_to_include_source",
+      "validFrom": "2026-05-30T04:46:53Z"
+    },
+    {
+      "predicate": "version_id",
+      "object": "9384b59f-1728-4ae2-a0f2-fa24f3ae78fe",
+      "validFrom": "2026-05-30T04:46:53Z"
+    },
+    {
+      "predicate": "version_id",
+      "object": "bf0d2c59-b935-4cea-96dc-cd6814d04d71",
+      "validFrom": "2026-05-30T04:52:05Z"
+    },
+    {
+      "predicate": "year_to_inference",
+      "object": "family_based_sibling_lookup",
+      "validFrom": "2026-05-30T04:52:05Z"
+    },
+    {
+      "predicate": "wrangler_skills",
+      "object": "build-agent build-mcp workers wrangler",
+      "validFrom": "2026-05-30T04:52:05Z"
+    }
+  ],
+  "pages": [
+    {
+      "predicate": "project",
+      "object": "autoglass-frontend",
+      "validFrom": "2026-05-30T04:41:15Z"
+    },
+    {
+      "predicate": "domains",
+      "object": "autoglass-frontend.pages.dev, autoglass.finnbilglass.no",
+      "validFrom": "2026-05-30T04:41:15Z"
+    },
+    {
+      "predicate": "last_deploy",
+      "object": "2026-05-30T04:41:15Z",
+      "validFrom": "2026-05-30T04:41:15Z"
+    }
+  ]
+}
