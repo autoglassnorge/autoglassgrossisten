@@ -44,7 +44,7 @@ export default {
       }
       try {
         const bovUrl = `http://ns3115634.ip-54-38-179.eu:150/bovsoft.regnum.run?id=${encodeURIComponent(env.BOVSOFT_CLIENT_ID)}&seccode=${encodeURIComponent(env.BOVSOFT_SECCODE)}&nameservice=getktypefornumplatenorway&regnum=${encodeURIComponent(regnr)}&contenttype=JSON`;
-        const res = await fetch(bovUrl, { method: "GET" }, 15000);
+        const res = await fetch(bovUrl, { method: "GET" });
         const text = await res.text();
         let data: Record<string, unknown> = {};
         try { data = JSON.parse(text); } catch { /* non-JSON */ }

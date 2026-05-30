@@ -646,10 +646,19 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       };
     });
 
-    const topPick = candidatesWithEquipment[0] || null;
+    // Prefer frontrute as top pick when no category filter specified
+    let topPick = candidatesWithEquipment[0] || null;
+    if (!categoryFilter) {
+      const windshieldPick = candidatesWithEquipment.find((c) =>
+        (c.category?.toLowerCase() || inferTypeCodeFromRecord(c as unknown as GlassRecord)) === "frontrute"
+      );
+      if (windshieldPick) {
+        topPick = windshieldPick;
+      }
+    }
 
     // Determine confidence level
-    const topCandidate = candidatesWithEquipment[0];
+    const topCandidate = topPick || candidatesWithEquipment[0];
     if (factoryEquipment && topCandidate && confidence !== "exact") {
       const topEq = topCandidate._equipment || inferRecordEquipment(topCandidate);
       const allMatch =
