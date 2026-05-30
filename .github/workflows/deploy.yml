@@ -223,8 +223,8 @@ jobs:
 
       - name: Katalog.html stegvis søk sjekk
         run: |
-          # Cache-buster for å unngå CDN-cached gammel versjon
-          curl -sf "https://autoglass-frontend.pages.dev/katalog.html?v=$GITHUB_RUN_ID" | grep -q "renderStepwiseResults" || exit 1
+          # Pages redirecter /katalog.html → /katalog (308). Bruk -L for å følge redirect.
+          curl -sfL "https://autoglass-frontend.pages.dev/katalog.html?v=$GITHUB_RUN_ID" | grep -q "renderStepwiseResults" || exit 1
           echo "✅ Katalog.html med stegvis glass-søk er deployet"
 
       - name: API proxy via Pages sjekk
