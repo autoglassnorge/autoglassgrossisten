@@ -211,8 +211,8 @@ jobs:
     steps:
       - name: Health check (Worker API)
         run: |
-          echo "⏳ Venter 30s på deploy-propagation..."
-          sleep 30
+          echo "⏳ Venter 60s på deploy-propagation..."
+          sleep 60
           curl -sf https://autoglass-glass-sok.autoglassnorge.workers.dev/api/health | jq -e '.status == "ok"' || exit 1
           echo "✅ Worker API OK"
 
@@ -223,7 +223,8 @@ jobs:
 
       - name: Katalog.html stegvis søk sjekk
         run: |
-          curl -sf https://autoglass-frontend.pages.dev/katalog.html | grep -q "renderStepwiseResults" || exit 1
+          # Cache-buster for å unngå CDN-cached gammel versjon
+          curl -sf "https://autoglass-frontend.pages.dev/katalog.html?v=$GITHUB_RUN_ID" | grep -q "renderStepwiseResults" || exit 1
           echo "✅ Katalog.html med stegvis glass-søk er deployet"
 
       - name: API proxy via Pages sjekk
