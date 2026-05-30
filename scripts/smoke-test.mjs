@@ -52,8 +52,14 @@ async function main() {
   for (const { regnr, expectedMake } of TEST_REGNRS.slice(0, 2)) {
     await test(`Regnr ${regnr}`, async () => {
       const res = await fetch(`${BASE_URL}/api/glass?regnr=${regnr}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
+      // Accept SVV upstream errors (temporary outage) — verify correct error format
+      if (data.code?.startsWith("svv_")) {
+        if (res.status !== 503) throw new Error(`Expected 503 for SVV error, got ${res.status}`);
+        if (!data.retryAfter) throw new Error("Mangler retryAfter header");
+        return; // OK — SVV is temporarily down
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       if (data.error) throw new Error(`error=${data.error}`);
       if (!data.vehicle?.regnr) throw new Error("Mangler vehicle");
       if (expectedMake && data.vehicle.make !== expectedMake) {
@@ -66,8 +72,8 @@ async function main() {
   }
 
   // 3. Prefix4-oppslag (merk: kan være tregt pga full katalog-lasting)
-  await test("Prefix4 1802", async () => {
-    const res = await fetch(`${BASE_URL}/api/glass?prefix4=1802`);
+  await test("Prefix4 DW01", async () => {
+    const res = await fetch(`${BASE_URL}/api/glass?prefix4=DW01`);
     if (res.status === 503) {
       throw new Error("HTTP 503 (CPU limit — kjent issue med stor katalog)");
     }
@@ -77,8 +83,8 @@ async function main() {
   });
 
   // 4. Eurocode-oppslag (merk: kan være tregt pga full katalog-lasting)
-  await test("Eurocode 1802GYEL", async () => {
-    const res = await fetch(`${BASE_URL}/api/glass?eurocode=1802GYEL`);
+  await test("Eurocode DW01AGNCMV", async () => {
+    const res = await fetch(`${BASE_URL}/api/glass?eurocode=DW01AGNCMV`);
     if (res.status === 503) {
       throw new Error("HTTP 503 (CPU limit — kjent issue med stor katalog)");
     }
