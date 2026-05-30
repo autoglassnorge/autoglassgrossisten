@@ -19,7 +19,7 @@ export function ProductGrid({ products, onDetail }: ProductGridProps) {
   return (
     <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => (
-        <ProductCard key={product.eurocode} product={product} onDetail={onDetail} />
+        <ProductCard key={product.id} product={product} onDetail={onDetail} />
       ))}
     </div>
   );

@@ -50,20 +50,20 @@ interface ProductCardProps {
   searchContext?: SearchContext;
 }
 
-function useInCart(eurocode: string) {
-  return useCartStore((s) => s.items.some((i) => i.product.eurocode === eurocode));
+function useInCart(id: number) {
+  return useCartStore((s) => s.items.some((i) => i.product.id === id));
 }
 
 export function ProductCard({ product, onDetail, searchContext }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
-  const inCart = useInCart(product.eurocode);
+  const inCart = useInCart(product.id);
   const [imgError, setImgError] = useState(false);
 
   const handleDetail = () => {
     if (searchContext) {
       logFeedback({
         regnr: searchContext.regnr,
-        eurocode: product.eurocode,
+        eurocode: product.eurocode || product.articleNumber,
         ktype: searchContext.kType,
         layer: searchContext.layer,
         score: product._score,
@@ -78,7 +78,7 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
     if (searchContext) {
       logFeedback({
         regnr: searchContext.regnr,
-        eurocode: product.eurocode,
+        eurocode: product.eurocode || product.articleNumber,
         ktype: searchContext.kType,
         layer: searchContext.layer,
         score: product._score,
@@ -142,9 +142,11 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
       <CardContent className="flex-1 pt-3 px-3 sm:px-4">
         <div className="flex items-center gap-2 mb-1">
           <span className="inline-flex items-center rounded bg-slate-100 border border-slate-200 px-1.5 py-0.5">
-            <span className="text-[9px] font-medium text-slate-500 uppercase tracking-wider mr-1">Eurokode</span>
+            <span className="text-[9px] font-medium text-slate-500 uppercase tracking-wider mr-1">
+              {product.eurocode ? 'Eurokode' : 'Varenr'}
+            </span>
             <span className="text-[11px] sm:text-sm font-mono font-bold text-slate-800">
-              {product.eurocode}
+              {product.eurocode || product.articleNumber}
             </span>
           </span>
           {product.position && (

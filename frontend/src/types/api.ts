@@ -1,6 +1,7 @@
 // Product / Glass record from backend
 export interface Product {
-  eurocode: string;
+  id: number;
+  eurocode: string | null;
   brand: string;
   model: string;
   title: string;
@@ -10,6 +11,7 @@ export interface Product {
   category: string;
   yearFrom: number | null;
   yearTo: number | null;
+  articleNumber: string;
   price: number;
   stockStatus: number;
   imageUrl: string;

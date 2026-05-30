@@ -29,6 +29,11 @@
       "alias": "glass-ktype",
       "command": "kimi --agent-file .kimi/agents/autoglass-ktype-agent.yaml",
       "description": "kType agent — Bovsoft, TecDoc, Biluppgifter, D1 enrichment"
+    },
+    {
+      "alias": "glass-orchestrator",
+      "command": "kimi --agent-file .kimi/agents/autoglass-orchestrator.yaml",
+      "description": "Orchestrator — task-routing, Superpowers-prosess, verifikasjons-gate. Start ALLTID her ved usikkerhet."
     }
   ]
 }

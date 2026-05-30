@@ -8,7 +8,7 @@ interface CartItem {
 }
 
 interface CartWarning {
-  eurocode: string;
+  id: number;
   message: string;
   type: 'list' | 'klips';
 }
@@ -17,10 +17,10 @@ interface CartState {
   items: CartItem[];
   warnings: CartWarning[];
   addItem: (product: Product) => void;
-  removeItem: (eurocode: string) => void;
-  updateQuantity: (eurocode: string, quantity: number) => void;
+  removeItem: (id: number) => void;
+  updateQuantity: (id: number, quantity: number) => void;
   clear: () => void;
-  dismissWarning: (eurocode: string) => void;
+  dismissWarning: (id: number) => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -31,10 +31,10 @@ export const useCartStore = create<CartState>()(
 
       addItem: (product) => {
         set((state) => {
-          const existing = state.items.find((i) => i.product.eurocode === product.eurocode);
+          const existing = state.items.find((i) => i.product.id === product.id);
           const next = existing
             ? state.items.map((i) =>
-                i.product.eurocode === product.eurocode
+                i.product.id === product.id
                   ? { ...i, quantity: i.quantity + 1 }
                   : i
               )
@@ -42,16 +42,16 @@ export const useCartStore = create<CartState>()(
 
           // Generate warning if product requires lister/klips
           const warnings: CartWarning[] = [];
-          if (product.properties?.listRequired && !state.warnings.find(w => w.eurocode === product.eurocode && w.type === 'list')) {
+          if (product.properties?.listRequired && !state.warnings.find(w => w.id === product.id && w.type === 'list')) {
             warnings.push({
-              eurocode: product.eurocode,
+              id: product.id,
               message: 'Dette glasset krever lister som bestilles separat',
               type: 'list',
             });
           }
-          if (product.properties?.klipsRequired && !state.warnings.find(w => w.eurocode === product.eurocode && w.type === 'klips')) {
+          if (product.properties?.klipsRequired && !state.warnings.find(w => w.id === product.id && w.type === 'klips')) {
             warnings.push({
-              eurocode: product.eurocode,
+              id: product.id,
               message: 'Dette glasset krever klips som bestilles separat',
               type: 'klips',
             });
@@ -61,25 +61,25 @@ export const useCartStore = create<CartState>()(
         });
       },
 
-      removeItem: (eurocode) => {
+      removeItem: (id) => {
         set((state) => ({
-          items: state.items.filter((i) => i.product.eurocode !== eurocode),
-          warnings: state.warnings.filter((w) => w.eurocode !== eurocode),
+          items: state.items.filter((i) => i.product.id !== id),
+          warnings: state.warnings.filter((w) => w.id !== id),
         }));
       },
-      dismissWarning: (eurocode) => {
+      dismissWarning: (id) => {
         set((state) => ({
-          warnings: state.warnings.filter((w) => w.eurocode !== eurocode),
+          warnings: state.warnings.filter((w) => w.id !== id),
         }));
       },
 
-      updateQuantity: (eurocode, quantity) => {
+      updateQuantity: (id, quantity) => {
         set((state) => ({
           items:
             quantity <= 0
-              ? state.items.filter((i) => i.product.eurocode !== eurocode)
+              ? state.items.filter((i) => i.product.id !== id)
               : state.items.map((i) =>
-                  i.product.eurocode === eurocode ? { ...i, quantity } : i
+                  i.product.id === id ? { ...i, quantity } : i
                 ),
         }));
       },

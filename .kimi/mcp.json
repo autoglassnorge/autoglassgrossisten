@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": "2.0-kimi-code",
-    "description": "Autoglass AS prosjekt-spesifikk MCP-konfigurasjon. Inkluderer MemPalace (lokal) + Perplexity + Filesystem + GitHub (globale wrappers)."
+    "description": "Autoglass AS prosjekt-spesifikk MCP-konfigurasjon. Alle servere er selvstendige — ingen avhengighet til Klarpakke. Inkluderer MemPalace (lokal) + Perplexity + Filesystem + GitHub + Autoglass (custom)."
   },
   "mcpServers": {
     "mempalace": {
@@ -12,7 +12,7 @@
     "perplexity": {
       "description": "Perplexity MCP — AI-søk og research via Perplexity Sonar",
       "command": "node",
-      "args": ["/Users/taj/klarpakke/scripts/run-perplexity-mcp.mjs"],
+      "args": ["/Users/taj/bilglass/.kimi/mcp-wrappers/run-perplexity-mcp.mjs"],
       "env": {
         "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
       }
@@ -20,12 +20,17 @@
     "filesystem": {
       "description": "Filesystem MCP — filoperasjoner i bilglass-prosjektet",
       "command": "node",
-      "args": ["/Users/taj/klarpakke/scripts/run-filesystem-mcp.mjs"]
+      "args": ["/Users/taj/bilglass/.kimi/mcp-wrappers/run-filesystem-mcp.mjs"]
     },
     "github": {
       "description": "GitHub MCP — repo, issues, pull requests",
       "command": "node",
-      "args": ["/Users/taj/klarpakke/scripts/run-github-mcp.mjs"]
+      "args": ["/Users/taj/bilglass/.kimi/mcp-wrappers/run-github-mcp.mjs"]
+    },
+    "autoglass": {
+      "description": "Autoglass MCP — prosjekt-spesifikke verktøy: deploy_status, smoke_test, catalog_quality, ktype_coverage, ground_truth, price_sync",
+      "command": "node",
+      "args": ["/Users/taj/bilglass/.kimi/mcp/autoglass-mcp.mjs"]
     }
   }
 }

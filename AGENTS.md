@@ -23,12 +23,13 @@ Autoglass AS bruker **KIMI CLI-agenter** for domene-spesialisering.
 
 ### CLI-aliaser
 ```bash
-kimi glass-data    # Data pipeline — scraper, merge, kvalitet
-kimi glass-worker  # Cloudflare Worker — API, KV, deploy
-kimi glass-web     # Frontend — HTML, CSS, JS, SEO, i18n
-kimi glass-ops     # DevOps — CI/CD, secrets, monitor
-kimi glass-arch    # Lead architect — ADR, refaktorering, plan
-kimi glass-ktype   # kType specialist — Bovsoft, SVV, statistisk læring
+kimi glass-data        # Data pipeline — scraper, merge, kvalitet
+kimi glass-worker      # Cloudflare Worker — API, KV, deploy
+kimi glass-web         # Frontend — HTML, CSS, JS, SEO, i18n
+kimi glass-ops         # DevOps — CI/CD, secrets, monitor
+kimi glass-arch        # Lead architect — ADR, refaktorering, plan
+kimi glass-ktype       # kType specialist — Bovsoft, SVV, statistisk læring
+kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasjon (start ALLTID her)
 ```
 
 ### Agent-filer
@@ -40,6 +41,7 @@ kimi glass-ktype   # kType specialist — Bovsoft, SVV, statistisk læring
 | ops-agent | `.kimi/agents/autoglass-ops-agent.yaml` | `.md` | Deploy, CI/CD, monitor |
 | architect-agent | `.kimi/agents/autoglass-architect-agent.yaml` | `.md` | ADR, refaktorering |
 | ktype-agent | `.kimi/agents/autoglass-ktype-agent.yaml` | `.md` | Bovsoft, SVV, kType |
+| **orchestrator-agent** | `.kimi/agents/autoglass-orchestrator.yaml` | `.md` | **Task-routing, Superpowers-prosess, verifikasjon** |
 
 ### Master System Prompt
 `./.kimi/KIMI-MASTER-SYSTEM.md` — universelle regler injisert i alle agent-sessioner.
@@ -52,10 +54,51 @@ kimi glass-ktype   # kType specialist — Bovsoft, SVV, statistisk læring
 - **Isolasjon:** Ingen avhengighet til Klarpakke — all data ligger i `~/bilglass/.kimi/mempalace/`
 - **Output cap:** ~75K tegn per tool-resultat (KIMI CLI v1.32.0+ 100K cap kompatibel)
 
-### Prosjekt-config & Hooks
+### MCP-verktøy (Autoglass — selvstendige)
+`./.kimi/mcp/autoglass-mcp.mjs` — prosjekt-spesifikke verktøy for agentene.
+| Verktøy | Hva det gjør |
+|---|---|
+| `deploy_status` | Sjekk Worker, KV, D1, Pages status |
+| `run_smoke_test` | Kjør smoke-test suite |
+| `catalog_quality` | Valider catalog-prod.json mot kvalitets-gate |
+| `ktype_coverage` | Rapporter kType-dekning fra D1 |
+| `search_ground_truth` | Test regnr mot alle matching-lag |
+| `price_sync_status` | Siste pris-synkronisering |
+
+**MCP-servere (alle selvstendige, ingen Klarpakke):**
+- `mempalace` — prosjektkunnskap
+- `perplexity` — AI-research
+- `filesystem` — filoperasjoner
+- `github` — repo/PR/issues
+- `autoglass` — prosjekt-spesifikke verktøy
+
+### Prosjekt-config & Hooks v2.0
 `./.kimi/config.toml` — prosjekt-spesifikk KIMI-konfigurasjon.
-`./.kimi/hooks/session-start.sh` — leser blockers ved session-start.
-`./.kimi/hooks/session-end.sh` — git-diff + session-summary ved session-slutt.
+
+**Session-start (`./.kimi/hooks/session-start.sh`):**
+- Aktive blockers fra PROJECT_STATE.md
+- Siste session-summary
+- D1 lokale metrikker (glass_catalog, ktype_registry, etc.)
+- Katalog-status (størrelse, sist endret)
+- Åpne PRs (hvis gh CLI er tilgjengelig)
+
+**Session-end (`./.kimi/hooks/session-end.sh`):**
+- Git diff + session summary
+- **Auto-smoke-test** hvis Worker-filer ble endret
+- **Auto-kvalitets-gate** hvis data-filer ble endret
+- **Auto-diary** via MemPalace
+- Oppsummering av verifikasjons-resultater
+
+### Superpowers Skill-auto-activation
+| Oppgavetype | Auto-aktiver |
+|---|---|
+| Bug, crash, feil | `systematic-debugging` |
+| Før deploy, "ferdig" | `verification-before-completion` |
+| Feature >3 filer | `writing-plans` + `subagent-driven-development` |
+| >1 uavhengig oppgave | `dispatching-parallel-agents` |
+| Ny kode, bugfix | `test-driven-development` |
+| Klar for merge | `finishing-a-development-branch` |
+| Uklare krav | `brainstorming` |
 
 ---
 

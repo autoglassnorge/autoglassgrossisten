@@ -49,18 +49,28 @@
   "catalog": [
     {
       "predicate": "total_records",
-      "object": "33215",
-      "validFrom": "2026-05-29T23:43:00Z"
+      "object": "27184",
+      "validFrom": "2026-05-30T16:51:00Z"
     },
     {
       "predicate": "sources",
-      "object": "Pilkington IRL, Glavista, Pilkington Finland 2017 + Glavista",
-      "validFrom": "2026-05-29T23:43:00Z"
+      "object": "auto-glass.no",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "with_eurocode",
+      "object": "11554",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "without_eurocode",
+      "object": "15630",
+      "validFrom": "2026-05-30T16:51:00Z"
     },
     {
       "predicate": "categories",
-      "object": "frontrute=7818, annet=22297, bakrute=49, dorglass=3047, sideglass=4",
-      "validFrom": "2026-05-29T23:43:00Z"
+      "object": "frontrute=3478, bakrute=2768, dorglass=4216, sideglass=4866, annet=11856",
+      "validFrom": "2026-05-30T16:51:00Z"
     }
   ],
   "tecdoc_integration": [
@@ -396,8 +406,178 @@
     },
     {
       "predicate": "last_deploy",
-      "object": "2026-05-30T04:41:15Z",
-      "validFrom": "2026-05-30T04:41:15Z"
+      "object": "2026-05-30T17:06:00Z",
+      "validFrom": "2026-05-30T17:06:00Z"
+    }
+  ],
+  "d1_migration_2026_05_30": [
+    {
+      "predicate": "action",
+      "object": "migrated_glass_catalog_to_autoglass_no_master",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "old_records",
+      "object": "33215_pilkington_glavista_euroglass",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "new_records",
+      "object": "27184_autoglass_no_1to1",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "with_eurocode",
+      "object": "11554",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "without_eurocode",
+      "object": "15630",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "price_coverage",
+      "object": "100_percent",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "brands",
+      "object": "87_unique",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "schema_change",
+      "object": "supplier_sku_not_null_eurocode_nullable",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "source_csv",
+      "object": "data/autoglass-scrape/products-autoglass-no.csv",
+      "validFrom": "2026-05-30T16:51:00Z"
+    },
+    {
+      "predicate": "backup",
+      "object": "data/catalog-prod-full-backup-20260530-172100.json",
+      "validFrom": "2026-05-30T16:51:00Z"
+    }
+  ],
+  "frontend_fixes_2026_05_30": [
+    {
+      "predicate": "action",
+      "object": "typescript_fixes_for_nullable_eurocode",
+      "validFrom": "2026-05-30T16:55:00Z"
+    },
+    {
+      "predicate": "product_type_changes",
+      "object": "id_number_eurocode_nullable_articleNumber_string",
+      "validFrom": "2026-05-30T16:55:00Z"
+    },
+    {
+      "predicate": "react_keys",
+      "object": "changed_from_eurocode_to_id",
+      "validFrom": "2026-05-30T16:55:00Z"
+    },
+    {
+      "predicate": "cart_store",
+      "object": "uses_id_instead_of_eurocode",
+      "validFrom": "2026-05-30T16:55:00Z"
+    },
+    {
+      "predicate": "display_fallback",
+      "object": "eurocode_or_articleNumber_with_varenr_label",
+      "validFrom": "2026-05-30T16:55:00Z"
+    },
+    {
+      "predicate": "build_status",
+      "object": "passes_tsc_and_vite",
+      "validFrom": "2026-05-30T16:55:00Z"
+    },
+    {
+      "predicate": "deploy_url",
+      "object": "https://9abf03c7.autoglass-frontend.pages.dev",
+      "validFrom": "2026-05-30T17:06:00Z"
+    }
+  ],
+  "autoglass_no_access": [
+    {
+      "predicate": "status",
+      "object": "product_pages_require_login",
+      "validFrom": "2026-05-30T17:10:00Z"
+    },
+    {
+      "predicate": "login_attempt_1",
+      "object": "post@alfadrift.no_surpomp24_failed",
+      "validFrom": "2026-05-30T17:10:00Z"
+    },
+    {
+      "predicate": "login_attempt_2",
+      "object": "post@alfa-glass.no_surpomp24_failed_ugyldig_brukernavn",
+      "validFrom": "2026-05-30T17:10:00Z"
+    },
+    {
+      "predicate": "category_pages",
+      "object": "public_but_show_zero_products_without_login",
+      "validFrom": "2026-05-30T17:10:00Z"
+    },
+    {
+      "predicate": "impact",
+      "object": "cannot_scrape_eurocodes_from_product_pages",
+      "validFrom": "2026-05-30T17:10:00Z"
+    }
+  ],
+  "api_keys_status": [
+    {
+      "predicate": "biluppgifter",
+      "object": "invalid_or_expired_token",
+      "validFrom": "2026-05-30T17:10:00Z"
+    },
+    {
+      "predicate": "bovsoft",
+      "object": "key_not_found_in_env_local",
+      "validFrom": "2026-05-30T17:10:00Z"
+    },
+    {
+      "predicate": "svv",
+      "object": "configured_and_working",
+      "validFrom": "2026-05-30T17:06:00Z"
+    }
+  ],
+  "eurocode_strategy": [
+    {
+      "predicate": "gap",
+      "object": "15630_of_27184_products_missing_eurocode",
+      "validFrom": "2026-05-30T17:15:00Z"
+    },
+    {
+      "predicate": "existing_with_eurocode",
+      "object": "11554_from_sku_regex_match",
+      "validFrom": "2026-05-30T17:15:00Z"
+    },
+    {
+      "predicate": "backup_catalog",
+      "object": "33215_records_all_with_eurocode_but_zero_sku_overlap",
+      "validFrom": "2026-05-30T17:15:00Z"
+    },
+    {
+      "predicate": "pilkington_catalog",
+      "object": "33344_records_with_eurocodes_different_product_set",
+      "validFrom": "2026-05-30T17:15:00Z"
+    },
+    {
+      "predicate": "tecdoc_limitation",
+      "object": "articles_linkages_has_supplier_skus_not_eurocodes",
+      "validFrom": "2026-05-30T17:15:00Z"
+    },
+    {
+      "predicate": "ktype_approach",
+      "object": "possible_but_needs_equipment_data_for_disambiguation",
+      "validFrom": "2026-05-30T17:20:00Z"
+    },
+    {
+      "predicate": "blocker",
+      "object": "need_valid_autoglass_no_login_or_alternative_eurocode_source",
+      "validFrom": "2026-05-30T17:20:00Z"
     }
   ]
 }

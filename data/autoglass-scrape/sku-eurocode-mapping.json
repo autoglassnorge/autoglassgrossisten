@@ -1,0 +1,128 @@
+{
+  "21129BL": {
+    "eurocode": "5978LBLV5RV",
+    "score": 0.62,
+    "csvTitle": "NISSAN PRAIRIE M11 89 DØRRUTE FREMME",
+    "catDesc": "NISSAN PRAIRIE M11 89-;LRV BL"
+  },
+  "21831GN": {
+    "eurocode": "5641BGNH",
+    "score": 0.61,
+    "csvTitle": "MITSUBISHI COLT 3D CC 92-   BAKRUTE EL+GN",
+    "catDesc": "MITSUBISHI COLT 3D CC 92-95;BL GN"
+  },
+  "2262GY": {
+    "eurocode": "5650BGNR",
+    "score": 0.62,
+    "csvTitle": "MITSUBISHI PAJERO SPORT 99 FR+GY",
+    "catDesc": "MITSUBISHI PAJERO SPORT 99; BL GN"
+  },
+  "23207GN": {
+    "eurocode": "5648LGNS4RV",
+    "score": 0.64,
+    "csvTitle": "MITSUBISHI LANCER 96-    VENTILRUTE+GN",
+    "catDesc": "MITSUBISHI LANCER 96-;LRV GN"
+  },
+  "23208GN": {
+    "eurocode": "5648LGNS4RV",
+    "score": 0.64,
+    "csvTitle": "MITSUBISHI LANCER 96-    VENTILRUTE+GN",
+    "catDesc": "MITSUBISHI LANCER 96-;LRV GN"
+  },
+  "23249GN": {
+    "eurocode": "5339LGNT2RQO",
+    "score": 0.6,
+    "csvTitle": "MERCEDES W170 SLK 2D ROADSTER 96- SIDERUTE+GN",
+    "catDesc": "MERCEDES SLK ROADSTER W170 96-04-;LRQ GN O"
+  },
+  "23250GN": {
+    "eurocode": "5339LGNT2RQO",
+    "score": 0.6,
+    "csvTitle": "MERCEDES W170 SLK 2D ROADSTER 96- SIDERUTE+GN",
+    "catDesc": "MERCEDES SLK ROADSTER W170 96-04-;LRQ GN O"
+  },
+  "23465GN": {
+    "eurocode": "3961AGN",
+    "score": 0.62,
+    "csvTitle": "HONDA PRELUDE 97 DØRRUTE+GN",
+    "catDesc": "HONDA PRELUDE 97-01-;WS GN"
+  },
+  "23466GN": {
+    "eurocode": "3961AGN",
+    "score": 0.62,
+    "csvTitle": "HONDA PRELUDE 97 DØRRUTE+GN",
+    "catDesc": "HONDA PRELUDE 97-01-;WS GN"
+  },
+  "24389GN": {
+    "eurocode": "5157AGN",
+    "score": 0.63,
+    "csvTitle": "MAZDA DEMIO  98-  VENTILRUTE+GN",
+    "catDesc": "MAZDA DEMIO 98-;WS GN"
+  },
+  "24390GN": {
+    "eurocode": "5157AGN",
+    "score": 0.63,
+    "csvTitle": "MAZDA DEMIO  98-  VENTILRUTE+GN",
+    "catDesc": "MAZDA DEMIO 98-;WS GN"
+  },
+  "24391GN": {
+    "eurocode": "5157AGN",
+    "score": 0.63,
+    "csvTitle": "MAZDA DEMIO 98-    SIDERUTE+GN",
+    "catDesc": "MAZDA DEMIO 98-;WS GN"
+  },
+  "24392GN": {
+    "eurocode": "5157AGN",
+    "score": 0.63,
+    "csvTitle": "MAZDA DEMIO 98-   SIDERUTE+GN @",
+    "catDesc": "MAZDA DEMIO 98-;WS GN"
+  },
+  "25489GN": {
+    "eurocode": "4404RGNV3FD",
+    "score": 0.64,
+    "csvTitle": "KIA PREGIO 96- DØRRUTE  GN",
+    "catDesc": "KIA PREGIO 96-; RFD GN"
+  },
+  "25490GN": {
+    "eurocode": "4404RGNV3FD",
+    "score": 0.64,
+    "csvTitle": "KIA PREGIO 96- DØRRUTE  GN",
+    "catDesc": "KIA PREGIO 96-; RFD GN"
+  },
+  "26347GN": {
+    "eurocode": "8577LGSV5FD",
+    "score": 0.65,
+    "csvTitle": "VW TOURAN 5D MPV 03 VENTILRUTE+GN",
+    "catDesc": "VW TOURAN MPV 03-;LFD GN SOLAR"
+  },
+  "26348GN": {
+    "eurocode": "8577LGSV5FD",
+    "score": 0.65,
+    "csvTitle": "VW TOURAN 5D MPV 03 VENTILRUTE+GN",
+    "catDesc": "VW TOURAN MPV 03-;LFD GN SOLAR"
+  },
+  "27101GNA": {
+    "eurocode": "2732BGSHA",
+    "score": 0.6,
+    "csvTitle": "CITROEN C4 5D CC 04-    BAKRUTE GN+SOLAR-+ANT",
+    "catDesc": "CITROEN C4 5D 09/04-;BL GN SOLAR ANT"
+  },
+  "28747GN": {
+    "eurocode": "8381LGSH5FDW",
+    "score": 0.66,
+    "csvTitle": "TOYOTA URBAN CRUISER 5D HBK 2009-  VENTILRUTE+GN",
+    "catDesc": "TOYOTA URBAN CRUISER 5D HBK 2009-;LFD GN S"
+  },
+  "28748GN": {
+    "eurocode": "8381LGSH5FDW",
+    "score": 0.66,
+    "csvTitle": "TOYOTA URBAN CRUISER 5D HBK 2009-  VENTILRUTE+GN",
+    "catDesc": "TOYOTA URBAN CRUISER 5D HBK 2009-;LFD GN S"
+  },
+  "5505AGACJMVZ96": {
+    "eurocode": "5505AGAACJMVZ1L",
+    "score": 0.62,
+    "csvTitle": "MERCEDES GLB-EQB 5D SUV 22  WS ACO SENS LDW ANT GN",
+    "catDesc": "MERCEDES GLB 5D SUV 2019; WS GN ACO ANT CA"
+  }
+}

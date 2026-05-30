@@ -44,8 +44,8 @@ export function QuickOrderBar({ onLookup }: QuickOrderBarProps) {
   }, [results, addItem]);
 
   const alreadyInCart = useMemo(() => {
-    const cartCodes = new Set(cartItems.map((i) => i.product.eurocode));
-    return results?.found.filter((p) => cartCodes.has(p.eurocode)) ?? [];
+    const cartIds = new Set(cartItems.map((i) => i.product.id));
+    return results?.found.filter((p) => cartIds.has(p.id)) ?? [];
   }, [results, cartItems]);
 
   if (!isOpen) {
@@ -107,10 +107,10 @@ export function QuickOrderBar({ onLookup }: QuickOrderBarProps) {
                   <div className="mt-1 flex flex-wrap gap-1">
                     {results.found.map((p) => (
                       <span
-                        key={p.eurocode}
+                        key={p.id}
                         className="inline-flex items-center gap-1 rounded bg-green-100 px-2 py-0.5 text-xs text-green-800"
                       >
-                        {p.eurocode}
+                        {p.eurocode || p.articleNumber}
                       </span>
                     ))}
                   </div>

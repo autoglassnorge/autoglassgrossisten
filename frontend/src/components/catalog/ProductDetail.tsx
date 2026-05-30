@@ -15,7 +15,7 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
   const [imgError, setImgError] = useState(false);
   const [imgZoomed, setImgZoomed] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
-  const inCart = useCartStore((s) => s.items.some((i) => i.product.eurocode === product?.eurocode));
+  const inCart = useCartStore((s) => s.items.some((i) => i.product.id === product?.id));
 
   // Close on Escape
   useEffect(() => {
@@ -64,8 +64,10 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
         <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <div className="flex items-center gap-2 min-w-0">
             <Badge variant="outline" className="font-mono text-xs flex-shrink-0 gap-1">
-              <span className="text-[9px] font-medium text-gray-500 uppercase tracking-wider">Eurokode</span>
-              <span className="font-bold text-gray-800">{product.eurocode}</span>
+              <span className="text-[9px] font-medium text-gray-500 uppercase tracking-wider">
+                {product.eurocode ? 'Eurokode' : 'Varenr'}
+              </span>
+              <span className="font-bold text-gray-800">{product.eurocode || product.articleNumber}</span>
             </Badge>
             <span className="text-xs text-gray-400 flex-shrink-0">
               {typeCodeLabel(product.typeCode || product.category)}

@@ -1,9 +1,9 @@
 ---
 name: autoglass
-version: 1.1.0
-description: Autoglass AS B2B bilglass-grossist — prosjektkunnskap, stack, regler, og verktøy.
+version: 1.2.0
+description: Autoglass AS B2B bilglass-grossist — prosjektkunnskap, stack, regler, verktøy, og Superpowers-prosessdisiplin.
 author: Autoglass AS
-tags: [autoglass, bilglass, b2b, cloudflare, worker, scraper, tecdoc, wrangler]
+tags: [autoglass, bilglass, b2b, cloudflare, worker, scraper, tecdoc, wrangler, superpowers]
 ---
 
 # Autoglass AS — Prosjektkunnskap
@@ -104,14 +104,56 @@ cd api/cf-worker && wrangler deploy
 
 ## KIMI CLI aliases
 
-| Alias | Agent | Domene |
-|-------|-------|--------|
-| `kimi glass-data` | data-agent | Scraper, katalog, merge |
-| `kimi glass-worker` | worker-agent | Worker, API, KV, deploy |
-| `kimi glass-web` | web-agent | Frontend, SEO, i18n |
-| `kimi glass-ops` | ops-agent | CI/CD, secrets, monitor |
-| `kimi glass-arch` | architect-agent | ADR, refaktorering, plan |
-| `kimi glass-ktype` | ktype-agent | Bovsoft, SVV, TecDoc, matching |
+| Alias | Agent | Domene | Når å bruke |
+|-------|-------|--------|-------------|
+| `kimi glass-data` | data-agent | Scraper, katalog, merge | Data-endringer, scraping, merge |
+| `kimi glass-worker` | worker-agent | Worker, API, KV, deploy | API-endringer, KV, D1 |
+| `kimi glass-web` | web-agent | Frontend, SEO, i18n | HTML, CSS, JS, design |
+| `kimi glass-ops` | ops-agent | CI/CD, secrets, monitor | Deploy, workflows, secrets |
+| `kimi glass-arch` | architect-agent | ADR, refaktorering, plan | >3 filer, nye integrasjoner |
+| `kimi glass-ktype` | ktype-agent | Bovsoft, SVV, TecDoc, matching | kType-mapping, D1-enrichment |
+| `kimi glass-orchestrator` | **orchestrator-agent** | **Task-routing, Superpowers-prosess, verifikasjon** | **UKLAR oppgave, >1 domene, debugging, deploy** |
+
+> **Regel:** Start ALLTID med `kimi glass-orchestrator` hvis du er usikker på hvilken agent som er riktig.
+
+## Superpowers Skill-auto-activation
+
+| Oppgavetype | Auto-aktiver Superpowers Skill | Hvorfor |
+|---|---|---|
+| Bug, crash, feil, "fungerer ikke" | `systematic-debugging` | Root cause før fiks, alltid |
+| Før deploy, "ferdig", PR | `verification-before-completion` | Evidence before claims |
+| Feature >3 filer, ny integrasjon | `writing-plans` + `subagent-driven-development` | Plan først, så eksekvering med review |
+| >1 uavhengig oppgave | `dispatching-parallel-agents` | Parallell utvikling |
+| Ny kode, bugfix | `test-driven-development` | Red-green-refactor |
+| Klar for merge | `finishing-a-development-branch` | Structured completion |
+| Uklare krav | `brainstorming` | Utforsk før bygg |
+
+## MCP-verktøy (Autoglass)
+
+| Verktøy | Hva det gjør | Når å bruke |
+|---|---|---|
+| `deploy_status` | Sjekk Worker, KV, D1, Pages | Før deploy, ved mistanke om outage |
+| `run_smoke_test` | Kjør smoke-test suite | Etter deploy, ved API-endringer |
+| `catalog_quality` | Valider catalog-prod.json | Før KV-upload, ved data-endringer |
+| `ktype_coverage` | Rapporter kType-dekning | Ved kType-arbeid, månedlig sjekk |
+| `search_ground_truth` | Test regnr mot alle lag | Ved matching-bugs, validering |
+| `price_sync_status` | Siste pris-synkronisering | Ved pris-arbeid |
+
+## Hooks v2.0
+
+### Session-start (`./.kimi/hooks/session-start.sh`)
+- Viser aktive blockers fra PROJECT_STATE.md
+- Viser siste session-summary
+- Viser D1 lokale metrikker (glass_catalog, ktype_registry, etc.)
+- Viser katalog-status (størrelse, sist endret)
+- Viser åpne PRs (hvis gh CLI er tilgjengelig)
+
+### Session-end (`./.kimi/hooks/session-end.sh`)
+- Git diff + session summary
+- **Auto-smoke-test** hvis Worker-filer ble endret
+- **Auto-kvalitets-gate** hvis data-filer ble endret
+- **Auto-diary** via MemPalace
+- Oppsummering av verifikasjons-resultater
 
 ## Viktige filer
 

@@ -41,7 +41,7 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
     const cached = await getCache<unknown>(env.GLASS_CATALOG, compressionCacheKey);
     if (cached) return jsonResponse(cached);
 
-    const result = await searchByRegnr(regnr, env, categoryFilter || undefined);
+    const result = await searchByRegnr(regnr, env, categoryFilter);
 
     // Apply compression to successful responses
     let responseBody = result.body;
@@ -67,22 +67,36 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
   }
 
   if (prefix4) {
-    const cached = await getCache(env.GLASS_CATALOG, cacheKey("glass-v2", { prefix4 }));
+    const compressionCacheKey = cacheKey("glass-v2", {
+      prefix4,
+      _fields: fieldsParam || "default",
+    });
+    const cached = await getCache<unknown>(env.GLASS_CATALOG, compressionCacheKey);
     if (cached) return jsonResponse(cached);
 
     const results = await queryByPrefix4(env.GLASS_CATALOG_D1, prefix4);
-    const data = { query: { prefix4 }, count: results.length, results: results.map(normalizeRecord) };
-    await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", { prefix4 }), data, 3600);
+    const data = compressSearchResponse(
+      { query: { prefix4 }, count: results.length, results: results.map(normalizeRecord) },
+      { fields, maxCandidates: 50 }
+    );
+    await setCache(env.GLASS_CATALOG, compressionCacheKey, data, 3600);
     return jsonResponse(data);
   }
 
   if (eurocode) {
-    const cached = await getCache(env.GLASS_CATALOG, cacheKey("glass-v2", { eurocode }));
+    const compressionCacheKey = cacheKey("glass-v2", {
+      eurocode,
+      _fields: fieldsParam || "default",
+    });
+    const cached = await getCache<unknown>(env.GLASS_CATALOG, compressionCacheKey);
     if (cached) return jsonResponse(cached);
 
     const result = await queryByEurocode(env.GLASS_CATALOG_D1, eurocode);
-    const data = { query: { eurocode }, count: result ? 1 : 0, results: result ? [normalizeRecord(result)] : [] };
-    await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", { eurocode }), data, 3600);
+    const data = compressSearchResponse(
+      { query: { eurocode }, count: result ? 1 : 0, results: result ? [normalizeRecord(result)] : [] },
+      { fields, maxCandidates: 10 }
+    );
+    await setCache(env.GLASS_CATALOG, compressionCacheKey, data, 3600);
     return jsonResponse(data);
   }
 

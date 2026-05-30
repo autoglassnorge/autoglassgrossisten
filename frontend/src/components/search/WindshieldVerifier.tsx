@@ -259,7 +259,7 @@ export function WindshieldVerifier({ products, onFilter }: Props) {
                     <div className="mt-2 flex items-center gap-2">
                       <Check className="h-4 w-4 text-green-600" />
                       <span className="text-sm font-bold font-mono text-gray-900">
-                        {bestMatch.product.eurocode}
+                        {bestMatch.product.eurocode || bestMatch.product.articleNumber}
                       </span>
                       <span className="text-xs text-gray-500">
                         {bestMatch.product.description?.slice(0, 60)}...

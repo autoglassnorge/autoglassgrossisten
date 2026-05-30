@@ -55,6 +55,19 @@ export async function queryByEurocode(db: D1Database, eurocode: string): Promise
   }
 }
 
+export async function queryBySupplierSku(db: D1Database, sku: string): Promise<GlassRecord | null> {
+  try {
+    const result = await db
+      .prepare("SELECT * FROM glass_catalog WHERE supplier_sku = ? COLLATE NOCASE")
+      .bind(sku)
+      .first();
+    return result as unknown as GlassRecord | null;
+  } catch (e) {
+    console.error(`queryBySupplierSku failed: ${e instanceof Error ? e.message : String(e)}`);
+    return null;
+  }
+}
+
 export async function queryByKtype(db: D1Database, ktype: number): Promise<GlassRecord[]> {
   try {
     const { results } = await db
@@ -278,7 +291,7 @@ export async function searchCatalog(
   offset = 0,
   limit = 100
 ): Promise<GlassRecord[]> {
-  let sql = "SELECT * FROM glass_catalog WHERE (eurocode LIKE ? OR article_number LIKE ? OR scan_number LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)";
+  let sql = "SELECT * FROM glass_catalog WHERE (supplier_sku LIKE ? OR eurocode LIKE ? OR article_number LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)";
   const params: (string | number)[] = [`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`];
 
   if (filters.brand) {
