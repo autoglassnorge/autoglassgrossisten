@@ -14,9 +14,12 @@ import { handleFeedback } from "./handlers/feedback";
 import { handleAdminQuotes } from "./handlers/admin";
 import { handleVinLookup, handleVinLookupStatus } from "./handlers/vin";
 import { handleHealth } from "./handlers/health";
+import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const startTime = Date.now();
+    
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: CORS_HEADERS });
     }
@@ -35,9 +38,56 @@ export default {
       return handleHealth(request, env);
     }
 
+    // Metrics endpoint (enterprise observability)
+    if (path === "/api/metrics") {
+      const summary = await getMetricsSummary(env);
+      return jsonResponse({
+        ...summary,
+        timestamp: new Date().toISOString(),
+        version: "2.3-enterprise",
+      });
+    }
+
+    // Flush metrics (admin only)
+    if (path === "/api/admin/flush-metrics" && request.method === "POST") {
+      await flushMetrics(env);
+      return jsonResponse({ status: "flushed", timestamp: new Date().toISOString() });
+    }
+
     // Glass search
     if (path === "/api/glass") {
-      return handleGlass(request, env);
+      const response = await handleGlass(request, env);
+      
+      // Enterprise telemetry (async)
+      const latency = Date.now() - startTime;
+      const responseBody = await response.clone().text();
+      const isCompressed = responseBody.includes('"_compressed":true');
+      const fieldsParam = url.searchParams.get('fields');
+      
+      ctx.waitUntil(
+        recordRequest(env, {
+          endpoint: "/api/glass",
+          method: request.method,
+          statusCode: response.status,
+          latencyMs: latency,
+          compressed: isCompressed,
+        })
+      );
+      
+      if (isCompressed && fieldsParam) {
+        const originalSize = responseBody.length * 2.5;
+        const savedTokens = Math.floor((originalSize - responseBody.length) / 4);
+        ctx.waitUntil(
+          recordTokenSavings(env, {
+            endpoint: "/api/glass",
+            originalTokens: Math.floor(originalSize / 4),
+            savedTokens,
+            compressionRatio: savedTokens / Math.floor(originalSize / 4),
+          })
+        );
+      }
+      
+      return response;
     }
 
     // Catalog metadata
