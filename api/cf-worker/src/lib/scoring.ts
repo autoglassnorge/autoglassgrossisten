@@ -167,9 +167,11 @@ export function scoreCandidate(
   if (!flags.heated && recordFlags.heated) score -= 2;
   if (!flags.acoustic && recordFlags.acoustic) score -= 1;
 
-  // Category scoring
+  // Category scoring — boost windshields, penalize unknown/annet
   const cat = c.category?.toLowerCase() || detectCategoryFromDescription(c.description);
-  if (cat === "annet" || cat === "unknown" || !cat) {
+  if (cat === "frontrute") {
+    score += 10;
+  } else if (cat === "annet" || cat === "unknown" || !cat) {
     score -= 5;
   }
 

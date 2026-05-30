@@ -369,9 +369,9 @@ export function scoreBodyCompatibility(
       });
 
       if (hasMatch) {
-        score += 25; // Strong bonus for body type match
+        score += 30; // Strong bonus for body type match
       } else if (hasOpposite) {
-        score -= 35; // Heavy penalty for body type mismatch (e.g., cabriolet vs sedan)
+        score -= 50; // Heavy penalty for body type mismatch (e.g., cabriolet vs sedan)
       }
     }
   }
