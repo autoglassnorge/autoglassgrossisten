@@ -1,0 +1,105 @@
+[
+  {
+    "scores": {
+      "url": "https://autoglass-frontend.pages.dev/",
+      "performance": 85,
+      "accessibility": 91,
+      "bestPractices": 88,
+      "seo": 92,
+      "lcp": 3123.6769999999997,
+      "fid": 16,
+      "cls": 0.018988999999999995,
+      "tbt": 0,
+      "fcp": 3123.6769999999997,
+      "si": 4526.236991999975
+    },
+    "opportunities": [
+      {
+        "title": "Initial server response time was short",
+        "savings": 15,
+        "score": 1
+      }
+    ]
+  },
+  {
+    "scores": {
+      "url": "https://autoglass-frontend.pages.dev/katalog.html",
+      "performance": 87,
+      "accessibility": 93,
+      "bestPractices": 88,
+      "seo": 83,
+      "lcp": 3131.4234999999994,
+      "fid": 16,
+      "cls": 0,
+      "tbt": 0,
+      "fcp": 3131.4234999999994,
+      "si": 3131.4234999999994
+    },
+    "opportunities": [
+      {
+        "title": "Avoid multiple page redirects",
+        "savings": 799.685,
+        "score": 0
+      },
+      {
+        "title": "Initial server response time was short",
+        "savings": 28,
+        "score": 1
+      }
+    ]
+  },
+  {
+    "scores": {
+      "url": "https://autoglass-frontend.pages.dev/frontruter.html",
+      "performance": 87,
+      "accessibility": 69,
+      "bestPractices": 92,
+      "seo": 92,
+      "lcp": 3120.0280000000002,
+      "fid": 16,
+      "cls": 0,
+      "tbt": 0,
+      "fcp": 3120.0280000000002,
+      "si": 3284.6486560004596
+    },
+    "opportunities": [
+      {
+        "title": "Avoid multiple page redirects",
+        "savings": 780.462,
+        "score": 0
+      },
+      {
+        "title": "Initial server response time was short",
+        "savings": 30,
+        "score": 1
+      }
+    ]
+  },
+  {
+    "scores": {
+      "url": "https://autoglass-frontend.pages.dev/bli-kunde.html",
+      "performance": 88,
+      "accessibility": 63,
+      "bestPractices": 88,
+      "seo": 92,
+      "lcp": 3076.775,
+      "fid": 16,
+      "cls": 0,
+      "tbt": 0,
+      "fcp": 3076.775,
+      "si": 3197.4648460003928
+    },
+    "opportunities": [
+      {
+        "title": "Avoid multiple page redirects",
+        "savings": 793.0805,
+        "score": 0
+      },
+      {
+        "title": "Initial server response time was short",
+        "savings": 32,
+        "score": 1
+      }
+    ]
+  }
+]

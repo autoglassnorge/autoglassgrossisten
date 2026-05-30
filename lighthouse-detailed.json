@@ -1,0 +1,409 @@
+[
+  {
+    "name": "frontruter",
+    "url": "https://autoglass-frontend.pages.dev/frontruter.html",
+    "a11yFails": [],
+    "a11yFailsAll": [
+      {
+        "id": "first-contentful-paint",
+        "title": "First Contentful Paint",
+        "score": 0.44
+      },
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.73
+      },
+      {
+        "id": "speed-index",
+        "title": "Speed Index",
+        "score": 0.91
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Browser errors were logged to the console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.95
+      },
+      {
+        "id": "redirects",
+        "title": "Avoid multiple page redirects",
+        "score": 0
+      },
+      {
+        "id": "image-aspect-ratio",
+        "title": "Displays images with incorrect aspect ratio",
+        "score": 0
+      },
+      {
+        "id": "unsized-images",
+        "title": "Image elements do not have explicit `width` and `height`",
+        "score": 0.5
+      },
+      {
+        "id": "button-name",
+        "title": "Buttons do not have an accessible name",
+        "score": 0
+      },
+      {
+        "id": "color-contrast",
+        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0
+      },
+      {
+        "id": "heading-order",
+        "title": "Heading elements are not in a sequentially-descending order",
+        "score": 0
+      },
+      {
+        "id": "landmark-one-main",
+        "title": "Document does not have a main landmark.",
+        "score": 0
+      },
+      {
+        "id": "select-name",
+        "title": "Select elements do not have associated label elements.",
+        "score": 0
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt is not valid",
+        "score": 0
+      },
+      {
+        "id": "document-latency-insight",
+        "title": "Document request latency",
+        "score": 0
+      },
+      {
+        "id": "lcp-discovery-insight",
+        "title": "LCP request discovery",
+        "score": 0
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Render-blocking requests",
+        "score": 0
+      }
+    ],
+    "seoFails": [],
+    "redirectAudit": {
+      "id": "redirects",
+      "title": "Avoid multiple page redirects",
+      "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+      "score": 0,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 785.794,
+      "numericUnit": "millisecond",
+      "displayValue": "Est savings of 790 ms",
+      "metricSavings": {
+        "LCP": 800,
+        "FCP": 800
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Time Spent"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://autoglass-frontend.pages.dev/frontruter.html",
+            "wastedMs": 785.794
+          },
+          {
+            "url": "https://autoglass-frontend.pages.dev/frontruter",
+            "wastedMs": 0
+          }
+        ],
+        "overallSavingsMs": 785.794
+      },
+      "guidanceLevel": 2
+    }
+  },
+  {
+    "name": "bli-kunde",
+    "url": "https://autoglass-frontend.pages.dev/bli-kunde.html",
+    "a11yFails": [],
+    "a11yFailsAll": [
+      {
+        "id": "first-contentful-paint",
+        "title": "First Contentful Paint",
+        "score": 0.45
+      },
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.74
+      },
+      {
+        "id": "speed-index",
+        "title": "Speed Index",
+        "score": 0.91
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Browser errors were logged to the console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.95
+      },
+      {
+        "id": "redirects",
+        "title": "Avoid multiple page redirects",
+        "score": 0
+      },
+      {
+        "id": "image-aspect-ratio",
+        "title": "Displays images with incorrect aspect ratio",
+        "score": 0
+      },
+      {
+        "id": "image-size-responsive",
+        "title": "Serves images with low resolution",
+        "score": 0
+      },
+      {
+        "id": "unsized-images",
+        "title": "Image elements do not have explicit `width` and `height`",
+        "score": 0.5
+      },
+      {
+        "id": "button-name",
+        "title": "Buttons do not have an accessible name",
+        "score": 0
+      },
+      {
+        "id": "color-contrast",
+        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0
+      },
+      {
+        "id": "label",
+        "title": "Form elements do not have associated labels",
+        "score": 0
+      },
+      {
+        "id": "landmark-one-main",
+        "title": "Document does not have a main landmark.",
+        "score": 0
+      },
+      {
+        "id": "select-name",
+        "title": "Select elements do not have associated label elements.",
+        "score": 0
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt is not valid",
+        "score": 0
+      },
+      {
+        "id": "document-latency-insight",
+        "title": "Document request latency",
+        "score": 0
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Render-blocking requests",
+        "score": 0
+      }
+    ],
+    "seoFails": [],
+    "redirectAudit": {
+      "id": "redirects",
+      "title": "Avoid multiple page redirects",
+      "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+      "score": 0,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 775.949,
+      "numericUnit": "millisecond",
+      "displayValue": "Est savings of 780 ms",
+      "metricSavings": {
+        "LCP": 800,
+        "FCP": 800
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Time Spent"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://autoglass-frontend.pages.dev/bli-kunde.html",
+            "wastedMs": 775.949
+          },
+          {
+            "url": "https://autoglass-frontend.pages.dev/bli-kunde",
+            "wastedMs": 0
+          }
+        ],
+        "overallSavingsMs": 775.949
+      },
+      "guidanceLevel": 2
+    }
+  },
+  {
+    "name": "katalog",
+    "url": "https://autoglass-frontend.pages.dev/katalog.html",
+    "a11yFails": [],
+    "a11yFailsAll": [
+      {
+        "id": "first-contentful-paint",
+        "title": "First Contentful Paint",
+        "score": 0.44
+      },
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.73
+      },
+      {
+        "id": "speed-index",
+        "title": "Speed Index",
+        "score": 0.92
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Browser errors were logged to the console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.95
+      },
+      {
+        "id": "redirects",
+        "title": "Avoid multiple page redirects",
+        "score": 0
+      },
+      {
+        "id": "image-aspect-ratio",
+        "title": "Displays images with incorrect aspect ratio",
+        "score": 0
+      },
+      {
+        "id": "image-size-responsive",
+        "title": "Serves images with low resolution",
+        "score": 0
+      },
+      {
+        "id": "unsized-images",
+        "title": "Image elements do not have explicit `width` and `height`",
+        "score": 0.5
+      },
+      {
+        "id": "color-contrast",
+        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0
+      },
+      {
+        "id": "heading-order",
+        "title": "Heading elements are not in a sequentially-descending order",
+        "score": 0
+      },
+      {
+        "id": "meta-description",
+        "title": "Document does not have a meta description",
+        "score": 0
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt is not valid",
+        "score": 0
+      },
+      {
+        "id": "document-latency-insight",
+        "title": "Document request latency",
+        "score": 0
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Render-blocking requests",
+        "score": 0
+      }
+    ],
+    "seoFails": [],
+    "redirectAudit": {
+      "id": "redirects",
+      "title": "Avoid multiple page redirects",
+      "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
+      "score": 0,
+      "scoreDisplayMode": "metricSavings",
+      "numericValue": 792.741,
+      "numericUnit": "millisecond",
+      "displayValue": "Est savings of 790 ms",
+      "metricSavings": {
+        "LCP": 800,
+        "FCP": 800
+      },
+      "details": {
+        "type": "opportunity",
+        "headings": [
+          {
+            "key": "url",
+            "valueType": "url",
+            "label": "URL"
+          },
+          {
+            "key": "wastedMs",
+            "valueType": "timespanMs",
+            "label": "Time Spent"
+          }
+        ],
+        "items": [
+          {
+            "url": "https://autoglass-frontend.pages.dev/katalog.html",
+            "wastedMs": 792.741
+          },
+          {
+            "url": "https://autoglass-frontend.pages.dev/katalog",
+            "wastedMs": 0
+          }
+        ],
+        "overallSavingsMs": 792.741
+      },
+      "guidanceLevel": 2
+    }
+  }
+]

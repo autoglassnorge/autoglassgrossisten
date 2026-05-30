@@ -31,7 +31,7 @@
 <style>
 .stats-bar { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:16px; margin-bottom:32px; }
 .stat-pill { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:20px; text-align:center; }
-.stat-pill .val { font-size:28px; font-weight:700; color:var(--color-accent); }
+.stat-pill .val { font-size:28px; font-weight:700; color:var(--color-text-primary); }
 .stat-pill .lbl { font-size:13px; color:var(--color-text-secondary); margin-top:4px; }
 .filters-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; align-items:center; }
 .filters-row input, .filters-row select { padding:12px 16px; border:1.5px solid var(--color-border); border-radius:var(--radius-md); background:var(--color-surface); color:var(--color-text-primary); font-size:14px; }
@@ -40,7 +40,7 @@
 .windshield-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:16px; }
 .ws-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:20px; transition:transform .15s, border-color .15s; }
 .ws-card:hover { transform:translateY(-2px); border-color:var(--color-accent); }
-.ws-card .eurocode { font-family:monospace; font-size:18px; font-weight:700; color:var(--color-accent); margin-bottom:4px; }
+.ws-card .eurocode { font-family:monospace; font-size:18px; font-weight:700; color:var(--color-text-primary); margin-bottom:4px; }
 .ws-card .desc { font-size:14px; color:var(--color-text-secondary); margin-bottom:10px; line-height:1.5; }
 .ws-card .meta { font-size:12px; color:var(--color-text-muted); margin-bottom:12px; }
 .ws-card .flags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
@@ -63,7 +63,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html"><img src="images/logo.png" alt="Autoglass AS" class="logo-img" height="40"></a>
+    <a href="index.html"><img src="images/logo.png" alt="Autoglass AS" class="logo-img" width="160" height="40"></a>
     <nav class="nav-links">
       <a href="index.html" data-i18n="nav.home">Hjem</a>
       <a href="frontruter.html" class="active">Frontruter</a>
@@ -78,18 +78,20 @@
     </nav>
     <div class="header-actions">
       <div class="lang-switcher">
-        <button data-lang="no" class="active">NO</button>
-        <button data-lang="sv">SV</button>
-        <button data-lang="en">EN</button>
+        <button data-lang="no" class="active" aria-label="Norsk">NO</button>
+        <button data-lang="sv" aria-label="Svenska">SV</button>
+        <button data-lang="en" aria-label="English">EN</button>
       </div>
-      <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Bytt mellom lyst og mørkt tema">🌓</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Åpne mobilmeny">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
 
 <div class="mobile-nav">
-  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <button class="close" onclick="toggleMobileMenu()" aria-label="Lukk meny">&times;</button>
   <a href="index.html">Hjem</a>
   <a href="frontruter.html">Frontruter</a>
   <a href="produkter.html">Produkter</a>
@@ -323,17 +325,17 @@ function renderPagination(current, total) {
   let html = '';
 
   // Prev
-  html += `<button ${current === 1 ? 'disabled' : ''} onclick="loadPage(${current - 1})">← Forrige</button>`;
+  html += `<button ${current === 1 ? 'disabled' : ''} onclick="loadPage(${current - 1})" aria-label="Forrige side">← Forrige</button>`;
 
   // Pages
   const startPage = Math.max(1, current - 2);
   const endPage = Math.min(total, current + 2);
   for (let i = startPage; i <= endPage; i++) {
-    html += `<button class="${i === current ? 'active' : ''}" onclick="loadPage(${i})">${i}</button>`;
+    html += `<button class="${i === current ? 'active' : ''}" onclick="loadPage(${i})" aria-label="Gå til side ${i}"${i === current ? ' aria-current="page"' : ''}>${i}</button>`;
   }
 
   // Next
-  html += `<button ${current === total ? 'disabled' : ''} onclick="loadPage(${current + 1})">Neste →</button>`;
+  html += `<button ${current === total ? 'disabled' : ''} onclick="loadPage(${current + 1})" aria-label="Neste side">Neste →</button>`;
 
   el.innerHTML = html;
 }

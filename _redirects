@@ -16,5 +16,20 @@
 /sidekurv             /produkter              301
 /kasse                /produkter              301
 
+# Disable Pretty URLs redirects (explicit 200 to avoid .html → extensionless 308)
+/index.html           /index.html             200
+/katalog.html         /katalog.html           200
+/frontruter.html      /frontruter.html        200
+/bli-kunde.html       /bli-kunde.html         200
+/produkter.html       /produkter.html         200
+/aktuelt.html         /aktuelt.html           200
+/om-oss.html          /om-oss.html            200
+/kontakt.html         /kontakt.html           200
+/diagnostikk.html     /diagnostikk.html       200
+/vilkar.html          /vilkar.html            200
+/personvern.html      /personvern.html        200
+/vin-sok.html         /vin-sok.html           200
+/kundeportal.html     /kundeportal.html       200
+
 # API passthrough
 /api/*                https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 200

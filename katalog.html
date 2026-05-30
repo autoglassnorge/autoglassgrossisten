@@ -6,44 +6,52 @@
 <link rel="icon" href="images/favicon.png" sizes="32x32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Autoglass AS — Produktkatalog</title>
+  <meta name="description" content="Bla i Norges største bilglasskatalog. 33 000+ produkter fra Pilkington, Glavista og Euroglass. Søk på regnr, merke eller eurokode.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://auto-glass.no/katalog">
+  <meta property="og:title" content="Autoglass AS — Produktkatalog">
+  <meta property="og:description" content="33 000+ bilglassprodukter. Søk på regnr, merke eller eurokode.">
+  <meta property="og:url" content="https://auto-glass.no/katalog">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Autoglass AS">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
 <style>
   body { padding: 0; }
   .catalog-wrap { padding: 24px 0 60px; }
-  h1 { font-size: 26px; margin-bottom: 6px; color: var(--color-accent); }
+  h1 { font-size: 26px; margin-bottom: 6px; color: var(--color-text-primary); }
   .subtitle { color: var(--color-text-secondary); margin-bottom: 20px; font-size: 14px; }
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px; }
   .stat-card { background: var(--color-surface-alt); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); text-align: center; }
-  .stat-value { font-size: 22px; font-weight: 700; color: var(--color-accent); }
+  .stat-value { font-size: 22px; font-weight: 700; color: var(--color-text-primary); }
   .stat-label { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
   .mode-tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid var(--color-border); }
   .mode-tab { padding: 12px 24px; background: transparent; border: none; color: var(--color-text-secondary); font-size: 15px; cursor: pointer; font-weight: 500; border-bottom: 3px solid transparent; margin-bottom: -2px; }
   .mode-tab:hover { color: var(--color-text-primary); }
-  .mode-tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+  .mode-tab.active { color: var(--color-text-primary); border-bottom-color: var(--color-text-primary); }
   .mode-panel { display: none; }
   .mode-panel.active { display: block; }
   .search-box { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px; }
-  .search-box h2 { font-size: 18px; margin-bottom: 12px; color: var(--color-accent); }
+  .search-box h2 { font-size: 18px; margin-bottom: 12px; color: var(--color-text-primary); }
   .search-box p { color: var(--color-text-secondary); font-size: 13px; margin-bottom: 16px; }
   .regnr-input { display: flex; gap: 12px; max-width: 500px; }
   .regnr-input input { flex: 1; padding: 14px 18px; border-radius: 10px; border: 2px solid var(--color-border); background: var(--color-surface); color: var(--color-text-primary); font-size: 18px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-  .regnr-input input:focus { outline: none; border-color: var(--color-accent); }
+  .regnr-input input:focus { outline: none; border-color: var(--color-text-primary); }
   .btn-primary { padding: 14px 28px; border-radius: 10px; border: none; background: var(--color-accent); color: var(--color-primary-900); font-size: 16px; font-weight: 700; cursor: pointer; }
   .btn-primary:hover { background: var(--color-accent-hover); }
   .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
   .vehicle-result { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 20px; margin-top: 20px; }
-  .vehicle-result h3 { font-size: 20px; color: var(--color-accent); margin-bottom: 8px; }
+  .vehicle-result h3 { font-size: 20px; color: var(--color-text-primary); margin-bottom: 8px; }
   .vehicle-meta { color: var(--color-text-secondary); font-size: 13px; margin-bottom: 12px; }
   .vehicle-flags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
   .vflag { padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; }
   .vflag-on { background: #166534; color: #86efac; }
   .vflag-off { background: #451a03; color: #fdba74; }
   .candidate-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px; }
-  .candidate-card.top { border-color: var(--color-accent); }
+  .candidate-card.top { border-color: var(--color-text-primary); }
   .candidate-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-  .candidate-eurocode { font-family: monospace; font-size: 18px; font-weight: 700; color: var(--color-accent); }
+  .candidate-eurocode { font-family: monospace; font-size: 18px; font-weight: 700; color: var(--color-text-primary); }
   .candidate-conf { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
   .conf-high { background: #166534; color: #86efac; }
   .conf-medium { background: #854d0e; color: #fde047; }
@@ -57,13 +65,13 @@
   .filters select { min-width: 160px; }
   .flag-filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
   .flag-filters label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; color: var(--color-text-secondary); }
-  .flag-filters input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-accent); }
+  .flag-filters input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-text-primary); }
   table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  th { text-align: left; padding: 10px; background: var(--color-surface-alt); color: var(--color-accent); font-weight: 600; position: sticky; top: 0; cursor: pointer; border-bottom: 2px solid var(--color-border); font-size: 11px; text-transform: uppercase; }
+  th { text-align: left; padding: 10px; background: var(--color-surface-alt); color: var(--color-text-primary); font-weight: 600; position: sticky; top: 0; cursor: pointer; border-bottom: 2px solid var(--color-border); font-size: 11px; text-transform: uppercase; }
   th:hover { background: var(--color-border); }
   td { padding: 8px 10px; border-bottom: 1px solid var(--color-surface-alt); }
   tr:hover td { background: var(--color-surface-alt); }
-  .eurocode { font-family: monospace; font-weight: 600; color: var(--color-accent); font-size: 13px; }
+  .eurocode { font-family: monospace; font-weight: 600; color: var(--color-text-primary); font-size: 13px; }
   .brand { color: #2563eb; font-weight: 500; }
   .flag { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; margin-right: 3px; }
   .flag-adas { background: #dc2626; color: white; }
@@ -83,15 +91,15 @@
   /* ── Stegvis glass-valg ── */
   .glass-part-tabs { display: flex; gap: 6px; margin: 20px 0 16px; flex-wrap: wrap; }
   .glass-part-tab { padding: 10px 18px; border-radius: 10px; border: 2px solid var(--color-border); background: var(--color-surface); color: var(--color-text-secondary); font-size: 14px; font-weight: 600; cursor: pointer; transition: all .15s; }
-  .glass-part-tab:hover { border-color: var(--color-accent); color: var(--color-text-primary); }
-  .glass-part-tab.active { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-primary-900); }
+  .glass-part-tab:hover { border-color: var(--color-text-primary); color: var(--color-text-primary); }
+  .glass-part-tab.active { background: var(--color-accent); border-color: var(--color-text-primary); color: var(--color-primary-900); }
   .glass-part-tab .count { font-size: 11px; opacity: .7; margin-left: 4px; }
 
   .equipment-filter-box { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 16px; }
-  .equipment-filter-box h4 { font-size: 14px; margin-bottom: 10px; color: var(--color-accent); }
+  .equipment-filter-box h4 { font-size: 14px; margin-bottom: 10px; color: var(--color-text-primary); }
   .equipment-filters { display: flex; gap: 16px; flex-wrap: wrap; }
   .equipment-filters label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; color: var(--color-text-secondary); }
-  .equipment-filters input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-accent); }
+  .equipment-filters input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-text-primary); }
 
   .confidence-wrap { margin-bottom: 10px; }
   .confidence-bar-bg { height: 6px; background: var(--color-surface-alt); border-radius: 3px; overflow: hidden; }
@@ -105,7 +113,7 @@
   .confidence-text.low { color: #ef4444; }
 
   .candidate-card { position: relative; }
-  .candidate-card .eurocode-big { font-family: monospace; font-size: 22px; font-weight: 700; color: var(--color-accent); letter-spacing: .5px; }
+  .candidate-card .eurocode-big { font-family: monospace; font-size: 22px; font-weight: 700; color: var(--color-text-primary); letter-spacing: .5px; }
   .candidate-card .match-pct { position: absolute; top: 16px; right: 16px; font-size: 20px; font-weight: 800; }
   .candidate-card .match-pct.high { color: #22c55e; }
   .candidate-card .match-pct.medium { color: #f59e0b; }
@@ -133,7 +141,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html"><img src="images/logo.png" alt="Autoglass AS" class="logo-img" height="40"></a>
+    <a href="index.html"><img src="images/logo.png" alt="Autoglass AS" class="logo-img" width="160" height="40"></a>
     <nav class="nav-links">
       <a href="index.html" data-i18n="nav.home">Hjem</a>
       <a href="frontruter.html">Frontruter</a>

@@ -1,0 +1,1 @@
+Homepage LCP: 0ms, Load: 1142ms

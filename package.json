@@ -45,9 +45,13 @@
     "verify:bovsoft": "node scripts/verify-with-bovsoft.mjs"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@types/node": "^20.19.41",
+    "allure-playwright": "^3.9.0",
+    "chrome-launcher": "^1.2.1",
     "csv-parse": "^6.2.1",
     "csv-stringify": "^6.7.0",
+    "lighthouse": "^13.3.0",
     "node-html-parser": "^7.1.0",
     "playwright": "^1.60.0",
     "simple-icons": "^16.21.0",
