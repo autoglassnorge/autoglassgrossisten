@@ -78,3 +78,20 @@ data/tecdoc-import/d1-chunks-gr/
 
 # Worker test data
 data/tecdoc-import/.last-sync
+api/cf-worker/data/
+
+# TecDoc source CSVs (additional/linkage tables — keep manufacturers.csv, models.csv, passengercars.csv)
+data/tecdoc-import/article_accessory_list_parents.csv
+data/tecdoc-import/article_accessory_lists.csv
+data/tecdoc-import/commercialvehicles_axles.csv
+data/tecdoc-import/commercialvehicles_link_cvm.csv
+data/tecdoc-import/commercialvehicles_link_engines.csv
+data/tecdoc-import/passengercars_link_engines.csv
+
+# TecDoc metadata / intermediate JSON
+data/tecdoc-import/tecdoc-ktype-registry-metadata.json
+
+# Intermediate matcher scripts (v6-v14 kept in git history, v15+ is current)
+scripts/match-v[6-9]-*.mjs
+scripts/match-v1[0-4]-*.mjs
+data/tecdoc-import/match-v*-*.mjs
