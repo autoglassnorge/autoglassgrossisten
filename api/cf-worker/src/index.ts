@@ -35,6 +35,33 @@ export default {
       return handleHealth(request, env);
     }
 
+    // Diagnostic: Bovsoft API test (no creds exposed)
+    if (path === "/api/debug/bovsoft" && request.method === "GET") {
+      const regnr = url.searchParams.get("regnr") || "UX71699";
+      const hasCreds = !!(env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET");
+      if (!hasCreds) {
+        return jsonResponse({ configured: false, error: "Bovsoft credentials not configured" });
+      }
+      try {
+        const bovUrl = `http://54.38.179.43:150/bovsoft.regnum.run?id=${encodeURIComponent(env.BOVSOFT_CLIENT_ID)}&seccode=${encodeURIComponent(env.BOVSOFT_SECCODE)}&nameservice=getktypefornumplatenorway&regnum=${encodeURIComponent(regnr)}&contenttype=JSON`;
+        const res = await fetch(bovUrl, { method: "GET" }, 15000);
+        const text = await res.text();
+        let data: Record<string, unknown> = {};
+        try { data = JSON.parse(text); } catch { /* non-JSON */ }
+        return jsonResponse({
+          configured: true,
+          httpStatus: res.status,
+          bovsoftStatus: data.status,
+          bovsoftStatusText: data.statusText,
+          hasDataCar: !!((data.data as Record<string, unknown> | undefined)?.datacar as Array<unknown> | undefined)?.[0],
+          freeRequests: data.countFREERequests,
+          rawPreview: text.slice(0, 500),
+        });
+      } catch (e) {
+        return jsonResponse({ configured: true, error: e instanceof Error ? e.message : String(e) });
+      }
+    }
+
     // Glass search
     if (path === "/api/glass") {
       return handleGlass(request, env);

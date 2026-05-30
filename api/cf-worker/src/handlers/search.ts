@@ -142,12 +142,17 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
 
     // 3b. Bovsoft kType
     let bovsoftVehicle: BovsoftVehicle | null = null;
+    let bovsoftError: string | null = null;
     if (!resolvedKtype) {
       bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
       if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
-        bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
-        if (bovsoftVehicle) {
-          await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
+        try {
+          bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
+          if (bovsoftVehicle) {
+            await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
+          }
+        } catch (e) {
+          bovsoftError = e instanceof Error ? e.message : String(e);
         }
       }
       if (bovsoftVehicle && bovsoftVehicle.ktype > 0) {
