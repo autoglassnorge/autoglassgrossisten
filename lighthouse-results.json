@@ -2,21 +2,21 @@
   {
     "scores": {
       "url": "https://autoglass-frontend.pages.dev/",
-      "performance": 85,
+      "performance": 88,
       "accessibility": 91,
       "bestPractices": 88,
       "seo": 92,
-      "lcp": 3123.6769999999997,
+      "lcp": 3040.357,
       "fid": 16,
-      "cls": 0.018988999999999995,
+      "cls": 0.023622,
       "tbt": 0,
-      "fcp": 3123.6769999999997,
-      "si": 4526.236991999975
+      "fcp": 3040.357,
+      "si": 3080.093266000483
     },
     "opportunities": [
       {
         "title": "Initial server response time was short",
-        "savings": 15,
+        "savings": 17,
         "score": 1
       }
     ]
@@ -27,23 +27,23 @@
       "performance": 87,
       "accessibility": 93,
       "bestPractices": 88,
-      "seo": 83,
-      "lcp": 3131.4234999999994,
+      "seo": 92,
+      "lcp": 3186.584,
       "fid": 16,
       "cls": 0,
       "tbt": 0,
-      "fcp": 3131.4234999999994,
-      "si": 3131.4234999999994
+      "fcp": 3186.584,
+      "si": 3186.584
     },
     "opportunities": [
       {
         "title": "Avoid multiple page redirects",
-        "savings": 799.685,
+        "savings": 796.1514999999999,
         "score": 0
       },
       {
         "title": "Initial server response time was short",
-        "savings": 28,
+        "savings": 90,
         "score": 1
       }
     ]
@@ -51,26 +51,26 @@
   {
     "scores": {
       "url": "https://autoglass-frontend.pages.dev/frontruter.html",
-      "performance": 87,
-      "accessibility": 69,
+      "performance": 84,
+      "accessibility": 85,
       "bestPractices": 92,
       "seo": 92,
-      "lcp": 3120.0280000000002,
+      "lcp": 3176.8985000000002,
       "fid": 16,
       "cls": 0,
       "tbt": 0,
-      "fcp": 3120.0280000000002,
-      "si": 3284.6486560004596
+      "fcp": 3176.8985000000002,
+      "si": 4716.897648000206
     },
     "opportunities": [
       {
         "title": "Avoid multiple page redirects",
-        "savings": 780.462,
+        "savings": 797.44,
         "score": 0
       },
       {
         "title": "Initial server response time was short",
-        "savings": 30,
+        "savings": 76,
         "score": 1
       }
     ]
@@ -78,26 +78,26 @@
   {
     "scores": {
       "url": "https://autoglass-frontend.pages.dev/bli-kunde.html",
-      "performance": 88,
-      "accessibility": 63,
+      "performance": 86,
+      "accessibility": 80,
       "bestPractices": 88,
       "seo": 92,
-      "lcp": 3076.775,
+      "lcp": 3236.387,
       "fid": 16,
       "cls": 0,
       "tbt": 0,
-      "fcp": 3076.775,
-      "si": 3197.4648460003928
+      "fcp": 3236.387,
+      "si": 3276.142212000229
     },
     "opportunities": [
       {
         "title": "Avoid multiple page redirects",
-        "savings": 793.0805,
+        "savings": 846.588,
         "score": 0
       },
       {
         "title": "Initial server response time was short",
-        "savings": 32,
+        "savings": 17,
         "score": 1
       }
     ]

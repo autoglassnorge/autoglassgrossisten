@@ -3,6 +3,11 @@
 <head>
 <script>(function(){var t=localStorage.getItem('ag-theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&d))document.documentElement.setAttribute('data-theme','dark');})();</script>
 <meta charset="UTF-8">
+  <link rel="preconnect" href="https://autoglass-glass-sok.autoglassnorge.workers.dev">
+  <link rel="dns-prefetch" href="https://autoglass-glass-sok.autoglassnorge.workers.dev">
+  <link rel="preload" href="css/tokens.css" as="style">
+  <link rel="preload" href="css/base.css" as="style">
+  <link rel="preload" href="css/components.css" as="style">
   <link rel="icon" href="images/favicon.png" sizes="32x32">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bli kunde — Autoglass AS | Kom i gang i dag</title>
@@ -79,6 +84,7 @@
   <a href="om-oss.html">Om oss</a><a href="kontakt.html">Kontakt</a>
 </div>
 
+<main>
 <section class="section" style="padding-top:120px">
   <div class="container">
     <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto">
@@ -92,19 +98,19 @@
         <h2 style="font-size:24px;margin-bottom:20px">🇳🇴🇩🇰🇸🇪 Norsk / Skandinavisk verksted</h2>
         <form data-form>
           <div class="form-row">
-            <div class="form-group"><label>Firmanavn</label><input type="text" required></div>
-            <div class="form-group"><label>Org.nr.</label><input type="text" placeholder="999 999 999 MVA" required></div>
+            <div class="form-group"><label for="company-no">Firmanavn</label><input type="text" id="company-no" required></div>
+            <div class="form-group"><label for="orgno">Org.nr.</label><input type="text" id="orgno" placeholder="999 999 999 MVA" required></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Kontaktperson</label><input type="text" required></div>
-            <div class="form-group"><label>E-post</label><input type="email" required></div>
+            <div class="form-group"><label for="contact-no">Kontaktperson</label><input type="text" id="contact-no" required></div>
+            <div class="form-group"><label for="email-no">E-post</label><input type="email" id="email-no" required></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Telefon</label><input type="tel" required></div>
-            <div class="form-group"><label>Postnr / Sted</label><input type="text" required></div>
+            <div class="form-group"><label for="phone-no">Telefon</label><input type="tel" id="phone-no" required></div>
+            <div class="form-group"><label for="zip-no">Postnr / Sted</label><input type="text" id="zip-no" required></div>
           </div>
-          <div class="form-group"><label>Leveringsadresse</label><input type="text" required></div>
-          <div class="form-group"><label>Forventet volum (ruter/mnd)</label><select><option>1-10</option><option>10-50</option><option>50-100</option><option>100+</option></select></div>
+          <div class="form-group"><label for="address-no">Leveringsadresse</label><input type="text" id="address-no" required></div>
+          <div class="form-group"><label for="volume-no">Forventet volum (ruter/mnd)</label><select id="volume-no"><option>1-10</option><option>10-50</option><option>50-100</option><option>100+</option></select></div>
           <button type="submit" class="btn-primary" style="width:100%;margin-top:8px">Send søknad</button>
         </form>
       </div>
@@ -113,15 +119,15 @@
         <h2 style="font-size:24px;margin-bottom:20px">🇪🇺 Internasjonal grossist</h2>
         <form data-form>
           <div class="form-row">
-            <div class="form-group"><label>Firmanavn</label><input type="text" required></div>
-            <div class="form-group"><label>Land</label><input type="text" required></div>
+            <div class="form-group"><label for="company-no">Firmanavn</label><input type="text" id="company-no" required></div>
+            <div class="form-group"><label for="country-int">Land</label><input type="text" id="country-int" required></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label>Kontaktperson</label><input type="text" required></div>
-            <div class="form-group"><label>E-post</label><input type="email" required></div>
+            <div class="form-group"><label for="contact-no">Kontaktperson</label><input type="text" id="contact-no" required></div>
+            <div class="form-group"><label for="email-no">E-post</label><input type="email" id="email-no" required></div>
           </div>
-          <div class="form-group"><label>Forventet årlig volum</label><select><option>< 1 000 ruter</option><option>1 000 - 5 000</option><option>5 000 - 20 000</option><option>20 000+</option></select></div>
-          <div class="form-group"><label>Melding / Spørsmål</label><textarea rows="4"></textarea></div>
+          <div class="form-group"><label for="volume-int">Forventet årlig volum</label><select id="volume-int"><option>< 1 000 ruter</option><option>1 000 - 5 000</option><option>5 000 - 20 000</option><option>20 000+</option></select></div>
+          <div class="form-group"><label for="message-int">Melding / Spørsmål</label><textarea id="message-int" rows="4"></textarea></div>
           <button type="submit" class="btn-primary" style="width:100%;margin-top:8px">Be om tilbud</button>
         </form>
       </div>
@@ -138,6 +144,7 @@
   </div>
 </section>
 
+</main>
 <footer class="site-footer">
   <div class="container">
     <div><h4>Autoglass AS</h4><p style="font-size:14px">Norges ledende bilglass-grossist</p></div>

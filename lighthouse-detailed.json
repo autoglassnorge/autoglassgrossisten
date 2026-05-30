@@ -7,17 +7,17 @@
       {
         "id": "first-contentful-paint",
         "title": "First Contentful Paint",
-        "score": 0.44
+        "score": 0.43
       },
       {
         "id": "largest-contentful-paint",
         "title": "Largest Contentful Paint",
-        "score": 0.73
+        "score": 0.72
       },
       {
         "id": "speed-index",
         "title": "Speed Index",
-        "score": 0.91
+        "score": 0.9
       },
       {
         "id": "errors-in-console",
@@ -27,7 +27,7 @@
       {
         "id": "interactive",
         "title": "Time to Interactive",
-        "score": 0.95
+        "score": 0.94
       },
       {
         "id": "redirects",
@@ -37,16 +37,6 @@
       {
         "id": "image-aspect-ratio",
         "title": "Displays images with incorrect aspect ratio",
-        "score": 0
-      },
-      {
-        "id": "unsized-images",
-        "title": "Image elements do not have explicit `width` and `height`",
-        "score": 0.5
-      },
-      {
-        "id": "button-name",
-        "title": "Buttons do not have an accessible name",
         "score": 0
       },
       {
@@ -102,7 +92,7 @@
       "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
       "score": 0,
       "scoreDisplayMode": "metricSavings",
-      "numericValue": 785.794,
+      "numericValue": 789.2835,
       "numericUnit": "millisecond",
       "displayValue": "Est savings of 790 ms",
       "metricSavings": {
@@ -126,14 +116,14 @@
         "items": [
           {
             "url": "https://autoglass-frontend.pages.dev/frontruter.html",
-            "wastedMs": 785.794
+            "wastedMs": 789.2835
           },
           {
             "url": "https://autoglass-frontend.pages.dev/frontruter",
             "wastedMs": 0
           }
         ],
-        "overallSavingsMs": 785.794
+        "overallSavingsMs": 789.2835
       },
       "guidanceLevel": 2
     }
@@ -146,12 +136,12 @@
       {
         "id": "first-contentful-paint",
         "title": "First Contentful Paint",
-        "score": 0.45
+        "score": 0.47
       },
       {
         "id": "largest-contentful-paint",
         "title": "Largest Contentful Paint",
-        "score": 0.74
+        "score": 0.76
       },
       {
         "id": "speed-index",
@@ -181,16 +171,6 @@
       {
         "id": "image-size-responsive",
         "title": "Serves images with low resolution",
-        "score": 0
-      },
-      {
-        "id": "unsized-images",
-        "title": "Image elements do not have explicit `width` and `height`",
-        "score": 0.5
-      },
-      {
-        "id": "button-name",
-        "title": "Buttons do not have an accessible name",
         "score": 0
       },
       {
@@ -241,7 +221,7 @@
       "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
       "score": 0,
       "scoreDisplayMode": "metricSavings",
-      "numericValue": 775.949,
+      "numericValue": 776.442,
       "numericUnit": "millisecond",
       "displayValue": "Est savings of 780 ms",
       "metricSavings": {
@@ -265,14 +245,14 @@
         "items": [
           {
             "url": "https://autoglass-frontend.pages.dev/bli-kunde.html",
-            "wastedMs": 775.949
+            "wastedMs": 776.442
           },
           {
             "url": "https://autoglass-frontend.pages.dev/bli-kunde",
             "wastedMs": 0
           }
         ],
-        "overallSavingsMs": 775.949
+        "overallSavingsMs": 776.442
       },
       "guidanceLevel": 2
     }
@@ -285,17 +265,17 @@
       {
         "id": "first-contentful-paint",
         "title": "First Contentful Paint",
-        "score": 0.44
+        "score": 0.42
       },
       {
         "id": "largest-contentful-paint",
         "title": "Largest Contentful Paint",
-        "score": 0.73
+        "score": 0.71
       },
       {
         "id": "speed-index",
         "title": "Speed Index",
-        "score": 0.92
+        "score": 0.91
       },
       {
         "id": "errors-in-console",
@@ -305,7 +285,7 @@
       {
         "id": "interactive",
         "title": "Time to Interactive",
-        "score": 0.95
+        "score": 0.94
       },
       {
         "id": "redirects",
@@ -323,11 +303,6 @@
         "score": 0
       },
       {
-        "id": "unsized-images",
-        "title": "Image elements do not have explicit `width` and `height`",
-        "score": 0.5
-      },
-      {
         "id": "color-contrast",
         "title": "Background and foreground colors do not have a sufficient contrast ratio.",
         "score": 0
@@ -335,11 +310,6 @@
       {
         "id": "heading-order",
         "title": "Heading elements are not in a sequentially-descending order",
-        "score": 0
-      },
-      {
-        "id": "meta-description",
-        "title": "Document does not have a meta description",
         "score": 0
       },
       {
@@ -370,12 +340,12 @@
       "description": "Redirects introduce additional delays before the page can be loaded. [Learn how to avoid page redirects](https://developer.chrome.com/docs/lighthouse/performance/redirects/).",
       "score": 0,
       "scoreDisplayMode": "metricSavings",
-      "numericValue": 792.741,
+      "numericValue": 853.966,
       "numericUnit": "millisecond",
-      "displayValue": "Est savings of 790 ms",
+      "displayValue": "Est savings of 850 ms",
       "metricSavings": {
-        "LCP": 800,
-        "FCP": 800
+        "LCP": 850,
+        "FCP": 850
       },
       "details": {
         "type": "opportunity",
@@ -394,14 +364,14 @@
         "items": [
           {
             "url": "https://autoglass-frontend.pages.dev/katalog.html",
-            "wastedMs": 792.741
+            "wastedMs": 853.966
           },
           {
             "url": "https://autoglass-frontend.pages.dev/katalog",
             "wastedMs": 0
           }
         ],
-        "overallSavingsMs": 792.741
+        "overallSavingsMs": 853.966
       },
       "guidanceLevel": 2
     }

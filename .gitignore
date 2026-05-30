@@ -95,3 +95,11 @@ data/tecdoc-import/tecdoc-ktype-registry-metadata.json
 scripts/match-v[6-9]-*.mjs
 scripts/match-v1[0-4]-*.mjs
 data/tecdoc-import/match-v*-*.mjs
+
+# Test artefacts
+allure-results/
+allure-report/
+test-results/
+lighthouse-results.json
+lighthouse-detailed.json
+e2e/
