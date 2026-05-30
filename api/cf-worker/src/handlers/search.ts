@@ -142,16 +142,11 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
 
     // 3b. Bovsoft kType — ALWAYS fetch for body type info even if kType already known
     let bovsoftVehicle: BovsoftVehicle | null = null;
-    let bovsoftError: string | null = null;
     bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
     if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
-      try {
-        bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
-        if (bovsoftVehicle) {
-          await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
-        }
-      } catch (e) {
-        bovsoftError = e instanceof Error ? e.message : String(e);
+      bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
+      if (bovsoftVehicle) {
+        await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
       }
     }
     // Use Bovsoft kType if we don't have one yet, OR if it matches our existing kType (higher confidence)
@@ -792,9 +787,6 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           fuzzyCount: debugFuzzyCount,
           totalCandidatesBeforeScoring: candidates.length,
           tecdocFallback: ktypeSource === "tecdoc_fallback",
-          bovsoftConfigured: !!(env.BOVSOFT_CLIENT_ID && env.BOVSOFT_CLIENT_ID !== "NOT_SET"),
-          bovsoftFetched: !!bovsoftVehicle,
-          bovsoftError: bovsoftError,
         },
         confidenceInfo: {
           score: layer === -1 ? 100 : layer === 0 ? 95 : layer === 1 ? 85 : layer === 2 ? 65 : layer === 3 ? 45 : 25,
