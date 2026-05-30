@@ -8,6 +8,11 @@ import { getCache, setCache, cacheKey } from "../lib/cache";
 import { queryByPrefix4, queryByEurocode } from "../lib/db";
 import { normalizeRecord } from "../lib/normalize";
 import { searchByRegnr } from "./search";
+import {
+  compressSearchResponse,
+  parseFieldsParam,
+  type CompressOptions,
+} from "../lib/response-compressor";
 
 export async function handleGlass(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
@@ -15,20 +20,50 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
   const prefix4 = url.searchParams.get("prefix4");
   const eurocode = url.searchParams.get("eurocode");
 
+  // Parse compression options from query params
+  const fieldsParam = url.searchParams.get("fields");
+  const fields = parseFieldsParam(fieldsParam);
+  const debugParam = url.searchParams.get("debug");
+  const isDevelopment = env.ENVIRONMENT === "development";
+  const includeDebug = debugParam === "true" || (debugParam !== "false" && isDevelopment);
+
   if (regnr) {
     const categoryFilter = url.searchParams.get("category") || undefined;
     const cacheKeyParams: Record<string, string> = { regnr };
     if (categoryFilter) cacheKeyParams.category = categoryFilter;
-    const cached = await getCache<unknown>(env.GLASS_CATALOG, cacheKey("glass-v2", cacheKeyParams));
+
+    // Cache key should include fields param for proper cache isolation
+    const compressionCacheKey = cacheKey("glass-v2", {
+      ...cacheKeyParams,
+      _fields: fieldsParam || "default",
+    });
+
+    const cached = await getCache<unknown>(env.GLASS_CATALOG, compressionCacheKey);
     if (cached) return jsonResponse(cached);
 
     const result = await searchByRegnr(regnr, env, categoryFilter || undefined);
+
+    // Apply compression to successful responses
+    let responseBody = result.body;
+    if (result.httpStatus === 200 && typeof result.body === "object" && result.body !== null) {
+      const compressOptions: CompressOptions = {
+        includeDebug,
+        includeEquipmentDetails: debugParam === "true",
+        maxCandidates: 20,
+        fields,
+      };
+      responseBody = compressSearchResponse(
+        result.body as Record<string, unknown>,
+        compressOptions
+      );
+    }
+
     if (result.httpStatus === 200) {
-      await setCache(env.GLASS_CATALOG, cacheKey("glass-v2", cacheKeyParams), result.body, 300);
+      await setCache(env.GLASS_CATALOG, compressionCacheKey, responseBody, 300);
     }
     const extraHeaders: Record<string, string> = {};
     if (result.retryAfter) extraHeaders["Retry-After"] = String(result.retryAfter);
-    return jsonResponse(result.body, result.httpStatus, extraHeaders);
+    return jsonResponse(responseBody, result.httpStatus, extraHeaders);
   }
 
   if (prefix4) {

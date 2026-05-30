@@ -14,17 +14,20 @@ export interface Env {
   VINCARIO_SECRET_KEY?: string;
   MACS_VIS_API_KEY?: string;
   AGM_API_KEY?: string;
+  ENVIRONMENT?: "development" | "production";
 }
 
 export interface GlassRecord {
   id: number;
-  eurocode: string;
+  supplier_sku: string;
+  eurocode: string | null;
   article_number: string | null;
   scan_number: string | null;
   category: string;
   supplier: string | null;
   brand: string;
   model: string | null;
+  submodel: string | null;
   year_from: number | null;
   year_to: number | null;
   prefix4: string;
@@ -52,6 +55,7 @@ export interface GlassRecord {
   image_url: string | null;
   pdf_url: string | null;
   source: string;
+  source_url: string | null;
   nags_codes: string | null;
   brand_original: string | null;
   ktype: number | null;

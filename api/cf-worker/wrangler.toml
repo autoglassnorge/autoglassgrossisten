@@ -25,3 +25,4 @@ database_id = "f79095b3-da80-43fe-8064-ff480e8a1b4b"
 
 [vars]
 # Ingen hardkodede secrets her
+ENVIRONMENT = "production"
