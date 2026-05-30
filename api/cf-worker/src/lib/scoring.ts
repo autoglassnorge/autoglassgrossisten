@@ -273,30 +273,9 @@ export function modelMatches(vehicleModel: string, recordModel: string | null, v
   if (!recordModel || recordModel.trim() === "") return false;
   const vm = vehicleModel.toLowerCase().trim();
   const rm = recordModel.toLowerCase().trim();
+  if (vm.includes(rm) || rm.includes(vm)) return true;
 
   const make = (vehicleMake || "").toLowerCase();
-
-  // Peugeot/Citroen: check body type mismatch BEFORE substring match
-  // "307 CC" should NOT match "307" (different body types)
-  if (make.includes("peugeot") || make.includes("citroen")) {
-    const vmBase = vm.match(/^(\d{2,4})/);
-    const rmBase = rm.match(/^(\d{2,4})/);
-    if (vmBase && rmBase && vmBase[1] === rmBase[1]) {
-      const BODY_VARIANTS = ["cc", "cab", "cabriolet", "convertible", "sw", "estate", "stasjons", "gt", "picasso", "cactus", "cross", "sport"];
-      const vmHasBodyVariant = BODY_VARIANTS.some((v) => vm.includes(v));
-      const rmHasBodyVariant = BODY_VARIANTS.some((v) => rm.includes(v));
-      if (vmHasBodyVariant && !rmHasBodyVariant) return false;
-      if (!vmHasBodyVariant && rmHasBodyVariant) return false;
-      if (vmHasBodyVariant && rmHasBodyVariant) {
-        const vmVariant = BODY_VARIANTS.find((v) => vm.includes(v));
-        const rmVariant = BODY_VARIANTS.find((v) => rm.includes(v));
-        if (vmVariant !== rmVariant) return false;
-      }
-      // Same base model, same body variant status → allow substring match below
-    }
-  }
-
-  if (vm.includes(rm) || rm.includes(vm)) return true;
   if (make.includes("volkswagen")) {
     const vwModels = ["transporter", "multivan", "caravelle", "california"];
     const vmIsVw = vwModels.some((m) => vm.includes(m));
