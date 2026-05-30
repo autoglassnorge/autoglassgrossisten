@@ -14,16 +14,16 @@
 | Repo path | `/Users/taj/bilglass` |
 | Stack | Cloudflare Worker + D1 + KV + Pages |
 | Owner | Tom Arne Jensen (post@klarpakke.no) |
-| Last updated | 2026-05-28 21:40 CEST |
+| Last updated | 2026-05-30 10:30 CEST |
 | Last updated by | kimi-cli |
-| Worker version | v2.3+ (TecDoc 1Q2019 kType enrichment, 60.3% coverage) |
+| Worker version | v2.4 (TecDoc fallback Layer 0.5, collision-gated, 80k+ kType registry) |
 
 ---
 
 ## Architecture decisions (locked)
 
-- **Matching strategy:** Layer 0 = kType exact match → Layer 1-4 = brand/model/year/equipment scoring
-- **kType source:** Bovsoft REGNUM API (`http://54.38.179.43:150/bovsoft.regnum.run`)
+- **Matching strategy:** Layer -1 = ground_truth → Layer 0 = kType exact match → Layer 0.5 = TecDoc fallback (collision-gated) → Layer 1-4 = brand/model/year/equipment scoring
+- **kType source hierarchy:** Bovsoft REGNUM API (primary) → TecDoc 1Q2019 (collision-gated fallback) → Biluppgifter.se (future)
 - **Vehicle lookup:** SVV Enkeltoppslag (primary) + Bovsoft (cross-validation + kType)
 - **Statistical learning:** D1 table `ktype_matches` records every successful regnr→ktype→eurocode hit
 - **Cache:** KV stores Bovsoft responses 30 days, keyed by `bovsoft:<regnr>`
@@ -31,8 +31,7 @@
 - **Target SLA:** 100% eksakt frontrute-matching (samme glass som fabrikkoriginal)
 - **Learning engine:** D1 `glass_rules` + `search_results` (VIN-prefix → equipment læring)
 - **Nord Glass:** 9,524 rader importert til D1 staging (OK: 8,629, REVIEW: 888, HOLD: 7)
-- **kType coverage:** 11,294 `glass_catalog` med kType (**60.3%** av 18,737), 907 `ktype_registry`, 1,248 `glass_rules`
-- **kType source hierarchy:** TecDoc 1Q2019 dump (primary fallback) → Biluppgifter.se (recommended) → Bovsoft (333 remaining)
+- **kType coverage:** D1 remote: `ktype_registry` **80,115** rader, `tecdoc_ktype_registry` **908** rader, `glass_rules` **1,639** rader, `glass_catalog` **33,215** rader
 - **TecDoc 1Q2019:** GitHub `tecdocSQL/tecdocdatabase1Q2019` — 69,871 kType mappings parsed from manufacturers+models+passengercars CSVs
 - **Bovsoft:** 118 verified results, 333 remaining searches (~$0.12/search). Port 150 (gratis, regnr→kType)
 - **Biluppgifter.se:** API-nøkkel placeholder (`din_biluppgifter_nokkell_her`). Unused `GET /api/v1/tecdoc/regno/{regnr}?country_code=NO` endpoint returns `tecdoc_id` (kType)
@@ -44,14 +43,12 @@
 
 | Prio | Blocker | Status |
 |---|---|---|
-| P1 | **Remote deploy:** `data/tecdoc-import/remote-deploy-v5.sql` venter på `CLOUDFLARE_API_TOKEN` | Åpen |
 | P1 | **Biluppgifter.se:** API-nøkkel mangler — ubrukt `tecdoc/regno` endpoint som gir kType direkte | Åpen |
-| P2 | `glass_catalog.ktype` er **60.3%** populert — TecDoc 1Q2019 gir solid fallback | ✅ Lokal D1 |
 | P2 | Bovsoft: 333 remaining searches — strategisk bruk på high-value unmatched models | Åpen |
 | P2 | Ingen overvåkning av kType-læringskurven | Ikke startet |
 | P3 | Ingen `exact_match` flagg i API-respons | Planlagt |
 
-> Historiske blockers (✅): SVV 401, Bovsoft 403, glass_variants duplikater, MAX-merge for boolske felt, ktype_matches GDPR, Bovsoft logging.
+> Historiske blockers (✅): SVV 401, Bovsoft 403, glass_variants duplikater, MAX-merge for boolske felt, ktype_matches GDPR, Bovsoft logging, **Remote deploy** (D1 data er nå på plass).
 
 ---
 
@@ -62,7 +59,6 @@
 - Ingen rate limiting på Worker-endepunkter
 - `vehicle.k_type = 0` som default — magisk verdi, bør være `null`
 - Ingen Sentry/observability i Worker
-- `.nvmrc` = v20, men Wrangler 4.86.0+ krever Node v22+ — inkonsistent, kan føre til skjulte feil ved wrangler-kall utenfor cf-worker/
 - `scoreCandidate()` bruker magiske poengverdier (15, 12, 10, etc.) uten dokumentasjon — vanskelig å debugge
 - Ingen `exact_match: boolean` i API-respons — frontend vet ikke om den kan stole på resultatet
 - VAG-biler (3,638 records) har ingen PR-kode-dekoding — kunne utelukket mange feilaktige kandidater
@@ -71,6 +67,23 @@
 ---
 
 ## Recent activity
+
+### 2026-05-30 (Kimi CLI — Git cleanup, PROJECT_STATE sync, MemPalace wing-fix)
+- **Git cleanup:** Commited 48 endringer i 3 commits + .gitignore-oppdatering
+  - Commit 1: Worker-kildekode (TecDoc fallback, collision gating, VIN resolver, scripts)
+  - Commit 2: tecdoc-import v5 SQL-artefakter
+  - Commit 3: Manglende scripts, kg.json, autodoc-probe tools
+- **.gitignore:** Lagt til MemPalace cache, autodoc-probe, genererte CSV-chunks, intermediate matchers (v6-v14)
+- **PROJECT_STATE.md:** Oppdatert med faktisk D1-status (80k+ ktype_registry, 908 tecdoc_ktype_registry)
+- **Blocker-status:** Fjernet "Remote deploy" — D1-data er verifisert på plass i produksjon
+
+### 2026-05-29 (Kimi CLI — kType-beriking v5 + KIMI CODE modernisering)
+- **kType-beriking via tecdocSQL/tecdocdatabase1Q2019:** 80,115 ktype_registry-rader i D1 remote
+- **TecDoc fallback (Layer 0.5):** Collision-gated med `collision_group_size <= 5` — unik+lav-kollisjon kTypes gir `exact` confidence
+- **New source files:** `tecdoc-resolver.ts`, `queryTecdocByKtype()`, `queryTecdocKtypeByVehicle()`
+- **KIMI CODE modernisering:** `install-and-migrate.sh`, hooks, agent-YAML v2, SKILL.md
+- **ADR:** `docs/adr/2026-05-29-tecdoc-integration-analysis.md`
+- **Deploy:** Worker deployet 29. mai 22:38 (commit `8789e9a`)
 
 ### 2026-05-28 (Kimi CLI session — TecDoc 1Q2019 kType enrichment v5)
 - **Analysert:** `tecdocSQL/tecdocdatabase1Q2019` — piratkopiert TecDoc 1Q2019 DVD-dump (~100 GB, English only)
@@ -111,7 +124,7 @@
   - `solar=7` (fra 4 — flere sanne verdier bevart)
   - `cam=1`, `adas=1` (stabilt)
 - **Lanseringsrisiko redusert:** Fra "kritisk" (duplikat-volum) til "moderat" (feature-integritet nå monoton, men input-datakvalitet avhenger fortsatt av scraper/parser).
-- **Node/Wrangler-inkonsistens notert:** `.nvmrc` = v20, Wrangler krever v22+. Ikke løst ennå — påvirker kun wrangler-kall utenfor `api/cf-worker/` (der npx wrangler fungerer via lokal installasjon).
+- **Node/Wrangler-inkonsistens notert:** `.nvmrc` = v20, Wrangler krever v22+. **Fikset 30. mai** — `.nvmrc` = v22.
 
 ### 2026-05-19 22:10 (Perplexity Computer — v2.2 hardening LEVERT)
 - **Worker v2.2:** `src/index.ts` 1449 → 1602 linjer, TypeScript kompilerer rent (exit 0)
@@ -177,6 +190,7 @@
 - v2.2 hardening: SVV 401→503, GDPR ktype_matches, Bovsoft logging, KTYPE_CONFIDENCE_THRESHOLD=3
 - v2.1: Bovsoft-integrasjon, kType-parsing, utvidet VIN-dekoding
 - KIMI+MemPalace modernisering (YAML v2 agenter, hooks, KG)
+- **v2.4:** TecDoc fallback Layer 0.5, collision gating, remote D1 data sync, git cleanup
 
 ---
 
@@ -202,13 +216,17 @@
 
 ```
 api/cf-worker/
-├── src/index.ts                          # Worker v2.3 (deployet)
+├── src/index.ts                          # Worker v2.4 (deployet)
+├── src/handlers/search.ts                # Layer 0.5 TecDoc fallback
+├── src/lib/db.ts                         # D1 queries (incl. TecDoc)
+├── src/lib/tecdoc-resolver.ts            # TecDoc kType collision gating
 ├── src/providers/svv.ts                  # Ekstrahert SVV-klient (discriminated union)
 ├── schema.sql                            # D1 base schema
 ├── migrations/
 │   ├── 0002_add_ktype.sql                # Kimi's migration
 │   ├── 0003_fix_ktype_matches.sql        # GDPR-fiks (regnr fjernet)
-│   └── 0009_glass_variant_features.sql   # Sensor/fitment + evidence-tabell
+│   ├── 0009_glass_variant_features.sql   # Sensor/fitment + evidence-tabell
+│   └── 0015_ktype_registry_optimizations.sql  # Performance indexes
 ├── wrangler.toml                         # Cloudflare config
 └── package.json
 
@@ -220,11 +238,16 @@ scripts/
 ├── validate-regnr-svv.mjs                # SVV-validering av regnr
 ├── prioritize-regnr-for-bovsoft.mjs      # Rangerer regnr for Bovsoft
 ├── test-bovsoft.mjs                      # Test Bovsoft endpoint manuelt
-└── apply-d1-migration.mjs                # Kjør D1-migreringer via wrangler
+├── apply-d1-migration.mjs                # Kjør D1-migreringer via wrangler
+├── build-tecdoc-index.mjs                # Bygg TecDoc inverted index
+├── build-tecdoc-ktype-registry.mjs       # Bygg kType registry fra TecDoc CSV
+├── parse-tecdoc-v2.mjs                   # Parse TecDoc 1Q2019 dump
+└── match-v16-final.mjs                   # Ultimate matcher (fuzzy brand+model+year)
 
 docs/adr/
 ├── 2026-05-19-ktype-statistical-learning.md
-└── 2026-05-22-glass-variant-features.md   # Sensor/fitment-schema ADR
+├── 2026-05-22-glass-variant-features.md   # Sensor/fitment-schema ADR
+└── 2026-05-29-tecdoc-integration-analysis.md  # TecDoc 1Q2019 integration
 
 .kimi/
 └── PROJECT_STATE.md                      # DENNE FILEN
