@@ -785,6 +785,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           tecdocFallback: ktypeSource === "tecdoc_fallback",
           bovsoftConfigured: !!(env.BOVSOFT_CLIENT_ID && env.BOVSOFT_CLIENT_ID !== "NOT_SET"),
           bovsoftFetched: !!bovsoftVehicle,
+          bovsoftError: bovsoftError,
         },
         confidenceInfo: {
           score: layer === -1 ? 100 : layer === 0 ? 95 : layer === 1 ? 85 : layer === 2 ? 65 : layer === 3 ? 45 : 25,
