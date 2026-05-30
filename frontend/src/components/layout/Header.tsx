@@ -28,6 +28,8 @@ export function Header() {
     { label: 'Søk', href: '/sok' },
   ];
 
+  const authLink = { label: 'Logg inn', href: '/kundeportal.html' };
+
   return (
     <>
       <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
@@ -72,6 +74,9 @@ export function Header() {
                 )}
               </Button>
             </Link>
+            <a href={authLink.href}>
+              <Button variant="default" size="sm" className="min-h-[44px]">{authLink.label}</Button>
+            </a>
           </nav>
 
           {/* Mobile actions */}
@@ -119,6 +124,9 @@ export function Header() {
                 <Button variant="ghost" className="w-full justify-start min-h-[44px]">{link.label}</Button>
               </Link>
             ))}
+            <a href={authLink.href} className="block" onClick={() => setMobileOpen(false)}>
+              <Button variant="default" className="w-full justify-start min-h-[44px]">{authLink.label}</Button>
+            </a>
           </div>
         )}
       </header>
