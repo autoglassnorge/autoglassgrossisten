@@ -13,7 +13,8 @@ export async function fetchBovsoftVehicle(
   if (!clientId || !secCode || clientId === "NOT_SET") return null;
 
   try {
-    const url = `http://54.38.179.43:150/bovsoft.regnum.run?id=${encodeURIComponent(clientId)}&seccode=${encodeURIComponent(secCode)}&nameservice=getktypefornumplatenorway&regnum=${encodeURIComponent(regno)}&contenttype=JSON`;
+    // Use domain name instead of IP — Cloudflare Workers blocks direct IP access on non-standard ports
+    const url = `http://ns3115634.ip-54-38-179.eu:150/bovsoft.regnum.run?id=${encodeURIComponent(clientId)}&seccode=${encodeURIComponent(secCode)}&nameservice=getktypefornumplatenorway&regnum=${encodeURIComponent(regno)}&contenttype=JSON`;
     const res = await fetchWithTimeout(url, { method: "GET" }, 15000);
 
     if (!res.ok) {
