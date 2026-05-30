@@ -336,11 +336,14 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
         }
       }
 
-      const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year, modelHint);
+      // Extract body type hint from Bovsoft for better filtering
+      const bodyHint = bovsoftVehicle?.body || undefined;
+
+      const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year, modelHint, undefined, bodyHint);
       let l1Extra: GlassRecord[] = [];
       if (extraHints) {
         for (const hint of extraHints) {
-          const extra = await queryByBrandAndYear(db, vehicle.make, vehicle.year, hint);
+          const extra = await queryByBrandAndYear(db, vehicle.make, vehicle.year, hint, undefined, bodyHint);
           l1Extra.push(...extra);
         }
       }
@@ -442,7 +445,8 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
     // Decode VIN for all supported makes
     const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
     const unifiedVin = vehicle.vin ? decodeVin(vehicle.vin, vehicle.length) : null;
-    const svvBody = inferBodyFromSvvData(vehicle);
+    // Pass Bovsoft body type (most accurate) to SVV body inference
+    const svvBody = inferBodyFromSvvData(vehicle, bovsoftVehicle?.body || undefined);
 
     // Fetch equipment from Biluppgitter
     let factoryEquipment: {

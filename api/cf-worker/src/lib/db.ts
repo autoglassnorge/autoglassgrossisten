@@ -77,7 +77,8 @@ export async function queryByBrandAndYear(
   brand: string,
   year: number,
   modelHint?: string,
-  prefix4?: string
+  prefix4?: string,
+  _bodyHint?: string
 ): Promise<GlassRecord[]> {
   const brands = getBrandAliases(brand);
   const placeholders = brands.map(() => "?").join(",");
@@ -91,6 +92,8 @@ export async function queryByBrandAndYear(
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
+  // Note: _bodyHint is used by scoreBodyCompatibility() for post-query scoring,
+  // not for SQL filtering (D1 SQLite lacks expressive ORDER BY CASE).
   sql += " ORDER BY year_from DESC NULLS LAST LIMIT 10000";
   try {
     const { results } = await db.prepare(sql).bind(...params).all();

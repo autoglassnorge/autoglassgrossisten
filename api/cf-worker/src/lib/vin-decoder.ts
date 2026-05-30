@@ -252,8 +252,16 @@ export function decodeVin(vin: string, lengthMm?: number): { make: string; gener
 }
 
 /** Infer body variant from SVV data (length, seats, GVWR) */
-export function inferBodyFromSvvData(vehicle: TecdocVehicle): { wheelbase?: string; bodyType?: string; variant?: string } {
-  const result: { wheelbase?: string; bodyType?: string; variant?: string } = {};
+export function inferBodyFromSvvData(
+  vehicle: TecdocVehicle,
+  bovsoftBody?: string
+): { wheelbase?: string; bodyType?: string; variant?: string; bovsoftBody?: string } {
+  const result: { wheelbase?: string; bodyType?: string; variant?: string; bovsoftBody?: string } = {};
+
+  // Use Bovsoft body data when available (most accurate)
+  if (bovsoftBody) {
+    result.bovsoftBody = bovsoftBody.toLowerCase();
+  }
 
   if (vehicle.length && vehicle.length > 1000) {
     if (vehicle.length >= 5100) result.wheelbase = "lwb";
@@ -278,12 +286,97 @@ export function inferBodyFromSvvData(vehicle: TecdocVehicle): { wheelbase?: stri
 export function scoreBodyCompatibility(
   record: GlassRecord,
   vehicle: TecdocVehicle,
-  vinInfo: ReturnType<typeof decodeVwTransporterBody>
+  vinInfo: ReturnType<typeof decodeVwTransporterBody>,
+  bovsoftBody?: string
 ): number {
   let score = 0;
   const desc = (record.description + " " + (record.model || "")).toLowerCase();
-  const svvBody = inferBodyFromSvvData(vehicle);
+  const svvBody = inferBodyFromSvvData(vehicle, bovsoftBody);
 
+  // === Body type keyword maps ===
+  const BODY_KEYWORDS: Record<string, string[]> = {
+    cabriolet: ["cabriolet", "convertible", "cab", "cc", "open", "softtop", "hardtop"],
+    suv:       ["suv", "jeep", "4x4", "cross", "offroad"],
+    wagon:     ["wagon", "estate", "stasjons", "touring", "sw", "kombi"],
+    sedan:     ["sedan", "saloon", "4d", "4-d", "4 door", "4-door"],
+    hatch:     ["hatch", "hatchback", "3d", "3-d", "5d", "5-d", "3 door", "5 door", "3-door", "5-door"],
+    van:       ["van", "kasse", "box", "delivery"],
+    coupe:     ["coupe", "2d", "2-d", "2 door", "2-door", "gt"],
+    pickup:    ["pickup", "double cab", "doble cab", "crew", "flatbed"],
+    mpv:       ["mpv", "minivan", "multivan", "caravelle", "sharan", "galaxy"],
+  };
+
+  // Detect body types in description
+  function detectBodyInDescription(d: string): string[] {
+    const found: string[] = [];
+    for (const [body, keywords] of Object.entries(BODY_KEYWORDS)) {
+      if (keywords.some((k) => d.includes(k))) found.push(body);
+    }
+    return found;
+  }
+
+  const recordBodies = detectBodyInDescription(desc);
+
+  // === Bovsoft body type matching (highest priority) ===
+  if (svvBody.bovsoftBody) {
+    const bovBody = svvBody.bovsoftBody;
+    // English category names → keywords (also handle Norwegian Bovsoft spellings)
+    const bovBodyMap: Record<string, string[]> = {
+      cabriolet: ["cabriolet", "convertible", "cab", "cc", "kabriolet"],
+      sedan:     ["sedan", "saloon"],
+      wagon:     ["wagon", "estate", "stasjons", "stasjonsvogn", "touring", "sw", "kombi"],
+      hatchback: ["hatch", "hatchback"],
+      suv:       ["suv", "jeep", "4x4", "cross"],
+      van:       ["van", "varebil", "kasse", "box"],
+      coupe:     ["coupe", "gt"],
+      pickup:    ["pickup", "double cab", "crew"],
+      mpv:       ["mpv", "minivan", "multivan"],
+    };
+
+    // Normalize Norwegian Bovsoft body spellings
+    const bovBodyNormalized = bovBody
+      .replace(/kabriolet/g, "cabriolet")
+      .replace(/stasjonsvogn/g, "stasjons")
+      .replace(/varebil/g, "van")
+      .replace(/kombi/g, "kombi");
+
+    // Find matching body category
+    let bovBodyCategory: string | null = null;
+    for (const [category, keywords] of Object.entries(bovBodyMap)) {
+      if (keywords.some((k) => bovBodyNormalized.includes(k))) {
+        bovBodyCategory = category;
+        break;
+      }
+    }
+
+    if (bovBodyCategory) {
+      const matchingKeywords = bovBodyMap[bovBodyCategory] || [];
+      const hasMatch = matchingKeywords.some((k) => recordBodies.includes(k) || desc.includes(k));
+      const hasOpposite = recordBodies.length > 0 && recordBodies.some((rb) => {
+        const oppositeMap: Record<string, string[]> = {
+          cabriolet: ["sedan", "hatch", "suv", "wagon", "van", "mpv"],
+          sedan:     ["cabriolet", "hatch", "suv", "wagon", "van", "mpv", "coupe"],
+          hatchback: ["cabriolet", "sedan", "suv", "wagon", "van", "mpv"],
+          suv:       ["cabriolet", "sedan", "hatchback", "wagon", "van", "mpv"],
+          wagon:     ["cabriolet", "sedan", "hatchback", "suv", "van", "mpv"],
+          van:       ["cabriolet", "sedan", "hatchback", "suv", "wagon", "coupe", "mpv"],
+          coupe:     ["sedan", "hatchback", "suv", "wagon", "van", "mpv"],
+          pickup:    ["sedan", "hatchback", "suv", "wagon", "van", "mpv"],
+          mpv:       ["cabriolet", "sedan", "hatchback", "suv", "wagon", "van"],
+        };
+        const opposites = oppositeMap[bovBodyCategory] || [];
+        return opposites.includes(rb);
+      });
+
+      if (hasMatch) {
+        score += 25; // Strong bonus for body type match
+      } else if (hasOpposite) {
+        score -= 35; // Heavy penalty for body type mismatch (e.g., cabriolet vs sedan)
+      }
+    }
+  }
+
+  // === Wheelbase matching ===
   if (svvBody.wheelbase || vinInfo?.wheelbase) {
     const wb = svvBody.wheelbase || vinInfo?.wheelbase;
     if (wb === "lwb") {
@@ -295,6 +388,7 @@ export function scoreBodyCompatibility(
     }
   }
 
+  // === SVV-derived body type matching ===
   if (svvBody.bodyType) {
     if (svvBody.bodyType === "van" && (desc.includes("van") || desc.includes("kasse"))) score += 10;
     if (svvBody.bodyType === "passenger" && (desc.includes("multivan") || desc.includes("caravelle"))) score += 10;
