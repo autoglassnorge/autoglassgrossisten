@@ -71,7 +71,7 @@ data/tecdoc-import/matching-report-v[0-9]*.json
 data/tecdoc-import/unmatched-v[0-9]*.json
 data/tecdoc-import/tecdoc-parsed-v*.json
 data/tecdoc-import/tecdoc-ktype-mapping*.json
-data/tecdoc-import/tecdoc-ktype-registry-safe.sql
+
 data/tecdoc-import/d1-chunks/
 data/tecdoc-import/d1-chunks-v*/
 data/tecdoc-import/d1-chunks-gr/
