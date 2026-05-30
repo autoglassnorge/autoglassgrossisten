@@ -1,59 +1,59 @@
 {
-  "total_catalog": 18737,
-  "matched": 11294,
-  "unmatched": 7443,
-  "multi_match": 11176,
-  "improvement": 1952,
+  "total_catalog": 33215,
+  "matched": 5761,
+  "unmatched": 27454,
+  "multi_match": 5621,
+  "improvement": -3581,
   "sample_matches": [
     {
-      "eurocode": "10025C",
-      "ktype": 4742,
-      "match_count": 29
+      "eurocode": "2048AGACMVZ",
+      "ktype": 65283,
+      "match_count": 30
     },
     {
-      "eurocode": "10025GN",
-      "ktype": 4742,
-      "match_count": 29
+      "eurocode": "2048AGCCMVZ",
+      "ktype": 65283,
+      "match_count": 30
     },
     {
-      "eurocode": "10030BZ",
-      "ktype": 11041,
-      "match_count": 101
+      "eurocode": "2459AGSCMUV7P",
+      "ktype": 37332,
+      "match_count": 65
     },
     {
-      "eurocode": "10030CL",
-      "ktype": 15813,
-      "match_count": 16
+      "eurocode": "2459AGSMUV6P",
+      "ktype": 37332,
+      "match_count": 65
     },
     {
-      "eurocode": "10031CL",
-      "ktype": 11041,
-      "match_count": 101
+      "eurocode": "2467AGNCMV3P",
+      "ktype": 45780,
+      "match_count": 23
     },
     {
-      "eurocode": "10041GN",
-      "ktype": 750,
-      "match_count": 76
+      "eurocode": "2471AGSCMUV3P",
+      "ktype": 46011,
+      "match_count": 108
     },
     {
-      "eurocode": "10041YP",
-      "ktype": 750,
-      "match_count": 76
+      "eurocode": "2471AGSMUV2P",
+      "ktype": 46011,
+      "match_count": 108
     },
     {
-      "eurocode": "10042GN",
-      "ktype": 750,
-      "match_count": 76
+      "eurocode": "2473AGCCMUV1P",
+      "ktype": 47934,
+      "match_count": 25
     },
     {
-      "eurocode": "10043GN",
-      "ktype": 750,
-      "match_count": 76
+      "eurocode": "2473AGCCMV1P",
+      "ktype": 47934,
+      "match_count": 25
     },
     {
-      "eurocode": "10043YP",
-      "ktype": 750,
-      "match_count": 76
+      "eurocode": "2477AGACMVZ",
+      "ktype": 50601,
+      "match_count": 21
     }
   ]
 }
