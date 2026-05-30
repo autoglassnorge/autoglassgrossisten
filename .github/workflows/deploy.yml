@@ -121,6 +121,23 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      # ── Synkroniser TecDoc kType Registry (alltid idempotent) ───
+      - name: Oppdater TecDoc kType Registry
+        working-directory: api/cf-worker
+        run: |
+          echo "🔄 Oppdaterer tecdoc_ktype_registry (idempotent)..."
+          wrangler d1 execute glass-catalog-db --file=../../data/tecdoc-import/tecdoc-ktype-registry-safe.sql --remote --yes
+          COUNT=$(wrangler d1 execute glass-catalog-db --command="SELECT COUNT(*) as count FROM tecdoc_ktype_registry" --remote --yes --json | jq -r '.[0].results[0].count')
+          echo "📊 tecdoc_ktype_registry: $COUNT mappings"
+          if [ "$COUNT" -lt 800 ]; then
+            echo "❌ For få mappings: $COUNT (forventet 908)"
+            exit 1
+          fi
+          echo "✅ TecDoc kType Registry OK"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
   # ── 3. Deploy frontend til Cloudflare Pages ───────────────────
   deploy-frontend:
     runs-on: ubuntu-latest
@@ -138,6 +155,45 @@ jobs:
       - name: Bygg React/Vite-frontend
         working-directory: frontend
         run: npm run build
+
+      - name: Merge statiske sider + React-app
+        run: |
+          echo "📄 Kopierer statiske HTML-sider til frontend/dist/..."
+          # Behold React-appens index.html som react.html for SPA-routing
+          mv frontend/dist/index.html frontend/dist/react.html
+          # Kopier alle rot-HTML-filer (inkludert index.html som blir hovedsiden)
+          cp *.html frontend/dist/
+          cp -r css js images frontend/dist/
+          echo "✅ Statiske filer kopiert"
+
+      - name: Merge _redirects (API + React-ruter + WordPress + fallback)
+        run: |
+          echo "🔄 Bygger kombinert _redirects..."
+          cat <<'EOF' > frontend/dist/_redirects
+          # API passthrough (302 — CORS-compatible proxy til Worker)
+          /api/*                https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 302
+
+          # React-app ruter (SPA rewrite — URL i browser endres ikke)
+          /sok                  /react.html             200
+          /bla                  /react.html             200
+          /kasse                /react.html             200
+          /bilglassguide/*      /react.html             200
+
+          # WordPress redirects (fra rot-mappe)
+          /vilkar-betingelser   /vilkar                 301
+          /kundeservice         /kontakt                301
+          /min-konto            /kundeportal            301
+          /kontakt-oss          /kontakt                301
+          /shop                 /produkter              301
+          /produkt/*            /produkter              301
+          /kategori/*           /produkter              301
+          /sidekurv             /produkter              301
+
+          # SPA fallback for statiske sider (og React catch-all)
+          /* /index.html 200
+          EOF
+          echo "✅ _redirects ferdig:"
+          cat frontend/dist/_redirects
 
       - name: Deploy til Cloudflare Pages
         run: |
@@ -164,6 +220,16 @@ jobs:
         run: |
           curl -sf https://autoglass-frontend.pages.dev/ | grep -q "autoglass\|react\|<div id=\"root\">" || exit 1
           echo "✅ Pages static serving OK"
+
+      - name: Katalog.html stegvis søk sjekk
+        run: |
+          curl -sf https://autoglass-frontend.pages.dev/katalog.html | grep -q "renderStepwiseResults" || exit 1
+          echo "✅ Katalog.html med stegvis glass-søk er deployet"
+
+      - name: API proxy via Pages sjekk
+        run: |
+          curl -sfL https://autoglass-frontend.pages.dev/api/health | jq -e '.status == "ok"' || exit 1
+          echo "✅ API proxy via Pages fungerer"
 
       - name: API catalog smoke test
         run: |

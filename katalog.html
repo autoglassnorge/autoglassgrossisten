@@ -80,6 +80,42 @@
   .loading { text-align: center; padding: 40px; color: var(--color-text-secondary); }
   .empty-state { text-align: center; padding: 60px 20px; color: var(--color-text-muted); }
   .empty-state h3 { color: var(--color-text-secondary); margin-bottom: 8px; }
+  /* ── Stegvis glass-valg ── */
+  .glass-part-tabs { display: flex; gap: 6px; margin: 20px 0 16px; flex-wrap: wrap; }
+  .glass-part-tab { padding: 10px 18px; border-radius: 10px; border: 2px solid var(--color-border); background: var(--color-surface); color: var(--color-text-secondary); font-size: 14px; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .glass-part-tab:hover { border-color: var(--color-accent); color: var(--color-text-primary); }
+  .glass-part-tab.active { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-primary-900); }
+  .glass-part-tab .count { font-size: 11px; opacity: .7; margin-left: 4px; }
+
+  .equipment-filter-box { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 16px; }
+  .equipment-filter-box h4 { font-size: 14px; margin-bottom: 10px; color: var(--color-accent); }
+  .equipment-filters { display: flex; gap: 16px; flex-wrap: wrap; }
+  .equipment-filters label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 13px; color: var(--color-text-secondary); }
+  .equipment-filters input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--color-accent); }
+
+  .confidence-wrap { margin-bottom: 10px; }
+  .confidence-bar-bg { height: 6px; background: var(--color-surface-alt); border-radius: 3px; overflow: hidden; }
+  .confidence-bar-fill { height: 100%; border-radius: 3px; transition: width .4s ease; }
+  .confidence-bar-fill.high { background: #22c55e; }
+  .confidence-bar-fill.medium { background: #f59e0b; }
+  .confidence-bar-fill.low { background: #ef4444; }
+  .confidence-text { font-size: 12px; font-weight: 700; margin-top: 4px; }
+  .confidence-text.high { color: #22c55e; }
+  .confidence-text.medium { color: #f59e0b; }
+  .confidence-text.low { color: #ef4444; }
+
+  .candidate-card { position: relative; }
+  .candidate-card .eurocode-big { font-family: monospace; font-size: 22px; font-weight: 700; color: var(--color-accent); letter-spacing: .5px; }
+  .candidate-card .match-pct { position: absolute; top: 16px; right: 16px; font-size: 20px; font-weight: 800; }
+  .candidate-card .match-pct.high { color: #22c55e; }
+  .candidate-card .match-pct.medium { color: #f59e0b; }
+  .candidate-card .match-pct.low { color: #ef4444; }
+
+  .cat-panel { display: none; }
+  .cat-panel.active { display: block; }
+  .no-candidates { text-align: center; padding: 40px 20px; color: var(--color-text-muted); }
+  .no-candidates h4 { color: var(--color-text-secondary); margin-bottom: 6px; }
+
   @media (max-width: 768px) { 
     h1 { font-size: 20px; } 
     table { font-size: 10px; } 
@@ -87,6 +123,9 @@
     .image-thumb { width: 35px; height: 25px; } 
     .regnr-input { flex-direction: column; }
     .regnr-input input { font-size: 16px; }
+    .glass-part-tab { padding: 8px 12px; font-size: 13px; }
+    .candidate-card .match-pct { font-size: 16px; top: 12px; right: 12px; }
+    .candidate-card .eurocode-big { font-size: 18px; }
   }
 </style>
 </head>
@@ -208,6 +247,20 @@ let searchDebounce;
 let brandsLoaded = false;
 let catsLoaded = false;
 
+// ── Stegvis glass-søk tilstand ──
+let lastSearchData = null;
+let currentGlassCategory = 'frontrute';
+
+const CAT_LABELS = {
+  frontrute: 'Frontrute',
+  bakrute: 'Bakrute',
+  sideglass: 'Siderute',
+  dorglass: 'Dørrute',
+  annet: 'Annet',
+  unknown: 'Ukjent'
+};
+const CAT_ORDER = ['frontrute','bakrute','sideglass','dorglass','annet','unknown'];
+
 // === INIT ===
 loadStats();
 
@@ -265,74 +318,237 @@ function setMode(mode) {
   }
 }
 
-// === REGNR SØK ===
+// === REGNR SØK — stegvis med kategorier, prosent & utstyr-filter ===
 async function searchRegnr() {
   const input = document.getElementById('regnrInput');
   const btn = document.getElementById('regnrBtn');
   const result = document.getElementById('regnrResult');
   const regnr = input.value.trim().toUpperCase();
   if (!regnr) return;
-  
+
   btn.disabled = true;
   btn.textContent = 'Søker...';
   result.innerHTML = '<div class="loading">Søker etter ' + regnr + '...</div>';
-  
+  currentGlassCategory = 'frontrute';
+
   try {
     const res = await fetch(API_BASE + '/api/glass?regnr=' + encodeURIComponent(regnr));
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    
+
     if (data.error) {
       result.innerHTML = '<div class="error-msg">❌ ' + data.error + '<br><br>Prøv et annet registreringsnummer, eller bytt til "Bla i katalog" for å søke manuelt.</div>';
       return;
     }
-    
-    const v = data.vehicle || {};
-    const flags = data.flags || {};
-    const candidates = data.candidates || [];
-    
-    let html = '<div class="vehicle-result">';
-    html += '<h3>🚗 ' + (v.make || '?') + ' ' + (v.model || '?') + (v.year ? ' (' + v.year + ')' : '') + '</h3>';
-    html += '<div class="vehicle-meta">Reg.nr: ' + (v.regnr || '-') + ' · VIN: ' + ((v.vin || '-').slice(0,8) + '...' + (v.vin || '-').slice(-4)) + '</div>';
-    html += '<div class="vehicle-flags">';
-    html += '<span class="vflag ' + (flags.adas ? 'vflag-on' : 'vflag-off') + '">ADAS ' + (flags.adas ? '✓' : '✗') + '</span>';
-    html += '<span class="vflag ' + (flags.rainSensor ? 'vflag-on' : 'vflag-off') + '">Regnsensor ' + (flags.rainSensor ? '✓' : '✗') + '</span>';
-    html += '<span class="vflag ' + (flags.heated ? 'vflag-on' : 'vflag-off') + '">Oppvarmet ' + (flags.heated ? '✓' : '✗') + '</span>';
-    html += '<span class="vflag ' + (flags.acoustic ? 'vflag-on' : 'vflag-off') + '">Akustisk ' + (flags.acoustic ? '✓' : '✗') + '</span>';
-    html += '</div>';
-    
-    if (candidates.length === 0) {
-      html += '<p style="color:#94a3b8;margin-top:12px;">Ingen glass-kandidater funnet. Prøv å søke i katalogen manuelt.</p>';
-    } else {
-      html += '<h4 style="margin:16px 0 12px;color:#fbbf24;font-size:16px;">🎯 ' + candidates.length + ' anbefalt' + (candidates.length > 1 ? 'e glass' : ' glass') + '</h4>';
-      candidates.forEach((c, i) => {
-        const confClass = i === 0 ? 'conf-high' : 'conf-medium';
-        const confLabel = i === 0 ? '⭐ Beste match' : 'Match';
-        const img = c.image_url ? '<img src="' + c.image_url + '" class="candidate-img" loading="lazy" onerror="this.style.display=\'none\'">' : '';
-        const cflags = [];
-        if (c.adas) cflags.push('<span class="flag flag-adas">ADAS</span>');
-        if (c.rain_sensor) cflags.push('<span class="flag flag-rain">Regn</span>');
-        if (c.heated) cflags.push('<span class="flag flag-heat">Varme</span>');
-        html += '<div class="candidate-card ' + (i === 0 ? 'top' : '') + '">';
-        html += '<div class="candidate-header">';
-        html += '<div><div class="candidate-eurocode">' + c.eurocode + '</div><div class="candidate-desc">' + (c.description || '') + '</div></div>';
-        html += '<span class="candidate-conf ' + confClass + '">' + confLabel + '</span>';
-        html += '</div>';
-        html += '<div class="candidate-meta">' + (c.brand || '?') + ' ' + (c.model || '') + ' · ' + (c.year_from || '') + ' · ' + (c.supplier || '') + '</div>';
-        html += cflags.join('');
-        html += img;
-        html += '</div>';
-      });
-    }
-    
-    html += '</div>';
-    result.innerHTML = html;
+
+    lastSearchData = data;
+    result.innerHTML = renderVehicleCard(data);
+    renderStepwiseResults();
   } catch (e) {
     result.innerHTML = '<div class="error-msg">❌ Nettverksfeil: ' + e.message + '<br><br>Sannsynlig årsak: Ad-blocker blokkerer API-kall.<br>Løsning: Slå av ad-blocker for denne siden, eller prøv i inkognito-vindu.</div>';
   } finally {
     btn.disabled = false;
     btn.textContent = 'Søk';
   }
+}
+
+/** Kjøretøy-info-kort (topp) */
+function renderVehicleCard(data) {
+  const v = data.vehicle || {};
+  const flags = v.effectiveEquipment || {};
+  const ci = data.confidenceInfo || {};
+  let html = '<div class="vehicle-result">';
+  html += '<h3>🚗 ' + (v.make || '?') + ' ' + (v.model || '?') + (v.year ? ' (' + v.year + ')' : '') + '</h3>';
+  html += '<div class="vehicle-meta">Reg.nr: ' + (v.regnr || '-') + ' · VIN: ' + ((v.vin || '-').slice(0,8) + '...' + (v.vin || '-').slice(-4)) + '</div>';
+  html += '<div class="vehicle-flags">';
+  html += '<span class="vflag ' + (flags.adas ? 'vflag-on' : 'vflag-off') + '">ADAS ' + (flags.adas ? '✓' : '✗') + '</span>';
+  html += '<span class="vflag ' + (flags.rainSensor ? 'vflag-on' : 'vflag-off') + '">Regnsensor ' + (flags.rainSensor ? '✓' : '✗') + '</span>';
+  html += '<span class="vflag ' + (flags.heated ? 'vflag-on' : 'vflag-off') + '">Oppvarmet ' + (flags.heated ? '✓' : '✗') + '</span>';
+  html += '<span class="vflag ' + (flags.acoustic ? 'vflag-on' : 'vflag-off') + '">Akustisk ' + (flags.acoustic ? '✓' : '✗') + '</span>';
+  html += '<span class="vflag ' + (flags.hud ? 'vflag-on' : 'vflag-off') + '">HUD ' + (flags.hud ? '✓' : '✗') + '</span>';
+  html += '<span class="vflag ' + (flags.camera ? 'vflag-on' : 'vflag-off') + '">Kamera ' + (flags.camera ? '✓' : '✗') + '</span>';
+  html += '</div>';
+  if (ci.score) {
+    const pct = ci.score;
+    const cls = pct >= 80 ? 'high' : pct >= 50 ? 'medium' : 'low';
+    html += '<div class="confidence-wrap" style="margin-top:12px;">';
+    html += '<div class="confidence-bar-bg"><div class="confidence-bar-fill ' + cls + '" style="width:' + pct + '%"></div></div>';
+    html += '<div class="confidence-text ' + cls + '">Generell treffsikkerhet: ' + pct + '% — ' + (ci.reasons ? ci.reasons[0] : '') + '</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+/** Utstyr-filterboksen */
+function renderEquipmentFilters() {
+  let html = '<div class="equipment-filter-box">';
+  html += '<h4>🎛️ Filtrer på utstyr (kryss av hvis usikker)</h4>';
+  html += '<div class="equipment-filters">';
+  html += '<label><input type="checkbox" id="ef-adas" onchange="onEquipmentFilterChange()"> ADAS / LDW</label>';
+  html += '<label><input type="checkbox" id="ef-hud" onchange="onEquipmentFilterChange()"> HUD</label>';
+  html += '<label><input type="checkbox" id="ef-camera" onchange="onEquipmentFilterChange()"> Kamera</label>';
+  html += '<label><input type="checkbox" id="ef-rain" onchange="onEquipmentFilterChange()"> Regnsensor</label>';
+  html += '<label><input type="checkbox" id="ef-heated" onchange="onEquipmentFilterChange()"> Oppvarmet</label>';
+  html += '<label><input type="checkbox" id="ef-acoustic" onchange="onEquipmentFilterChange()"> Akustisk</label>';
+  html += '</div></div>';
+  return html;
+}
+
+/** Kategori-faner */
+function renderCategoryTabs(grouped) {
+  let html = '<div class="glass-part-tabs">';
+  for (const cat of CAT_ORDER) {
+    const list = grouped[cat] || [];
+    if (list.length === 0) continue;
+    const active = cat === currentGlassCategory ? 'active' : '';
+    html += '<button class="glass-part-tab ' + active + '" onclick="setGlassCategory(\'' + cat + '\')">' + CAT_LABELS[cat] + '<span class="count">' + list.length + '</span></button>';
+  }
+  html += '</div>';
+  return html;
+}
+
+/** Bygg kategori-panels */
+function renderCategoryPanels(grouped, maxScoreOverall, confidenceScore) {
+  let html = '';
+  for (const cat of CAT_ORDER) {
+    const list = grouped[cat] || [];
+    if (list.length === 0) continue;
+    const active = cat === currentGlassCategory ? 'active' : '';
+    html += '<div class="cat-panel ' + active + '" id="cat-panel-' + cat + '">';
+    html += renderCandidateList(list, maxScoreOverall, confidenceScore);
+    html += '</div>';
+  }
+  return html;
+}
+
+/** Rendre liste med kandidater for én kategori */
+function renderCandidateList(candidates, maxScoreOverall, confidenceScore) {
+  if (!candidates.length) return '<div class="no-candidates"><h4>Ingen treff</h4><p>Prøv å fjerne noen utstyr-filtre.</p></div>';
+  let html = '';
+  candidates.forEach((c, i) => {
+    const rawScore = c._score || 0;
+    // Normaliser til prosent: bruk maxScoreOverall som 100%, skaler med confidenceScore
+    const relative = maxScoreOverall > 0 ? rawScore / maxScoreOverall : 0;
+    const base = confidenceScore || 75;
+    let pct = Math.round(base * (0.4 + 0.6 * relative));
+    pct = Math.max(5, Math.min(99, pct));
+    const pctCls = pct >= 80 ? 'high' : pct >= 55 ? 'medium' : 'low';
+
+    const img = c.image_url ? '<img src="' + c.image_url + '" class="candidate-img" loading="lazy" onerror="this.style.display=\'none\'">' : '';
+    const eq = c._equipment || {};
+    const cflags = [];
+    if (eq.adas || c.adas) cflags.push('<span class="flag flag-adas">ADAS</span>');
+    if (eq.camera || c.camera) cflags.push('<span class="flag">Kamera</span>');
+    if (eq.hud || c.hud) cflags.push('<span class="flag">HUD</span>');
+    if (eq.rainSensor || c.rain_sensor) cflags.push('<span class="flag flag-rain">Regn</span>');
+    if (eq.heated || c.heated) cflags.push('<span class="flag flag-heat">Varme</span>');
+    if (eq.acoustic || c.acoustic) cflags.push('<span class="flag">Akustisk</span>');
+    if (eq.antenna || c.antenna) cflags.push('<span class="flag">Antenne</span>');
+    if (eq.shade || c.shade) cflags.push('<span class="flag">Solskjerm</span>');
+
+    html += '<div class="candidate-card ' + (i === 0 ? 'top' : '') + '">';
+    html += '<span class="match-pct ' + pctCls + '">' + pct + '%</span>';
+    html += '<div class="candidate-header">';
+    html += '<div><div class="eurocode-big">' + c.eurocode + '</div><div class="candidate-desc">' + (c.description || '') + '</div></div>';
+    html += '</div>';
+    html += '<div class="candidate-meta">' + (c.brand || '?') + ' ' + (c.model || '') + ' · ' + (c.year_from || '') + (c.year_to ? '–' + c.year_to : '') + ' · ' + (c.supplier || '-') + '</div>';
+    if (cflags.length) html += '<div style="margin-top:8px;">' + cflags.join('') + '</div>';
+    if (c.nagsCodes && c.nagsCodes.length) html += '<div style="margin-top:6px;font-size:11px;color:var(--color-text-muted)">NAGS: ' + c.nagsCodes.join(', ') + '</div>';
+    html += img;
+    html += '</div>';
+  });
+  return html;
+}
+
+/** Hoved-render for stegvis resultat */
+function renderStepwiseResults() {
+  if (!lastSearchData) return;
+  const data = lastSearchData;
+  const candidates = data.candidates || [];
+  const ci = data.confidenceInfo || {};
+  const result = document.getElementById('regnrResult');
+
+  if (candidates.length === 0) {
+    result.innerHTML = renderVehicleCard(data) + '<div class="vehicle-result" style="margin-top:12px;"><p style="color:#94a3b8;">Ingen glass-kandidater funnet. Prøv å søke i katalogen manuelt.</p></div>';
+    return;
+  }
+
+  // Les aktive utstyr-filtre
+  const ef = {
+    adas: document.getElementById('ef-adas')?.checked,
+    hud: document.getElementById('ef-hud')?.checked,
+    camera: document.getElementById('ef-camera')?.checked,
+    rainSensor: document.getElementById('ef-rain')?.checked,
+    heated: document.getElementById('ef-heated')?.checked,
+    acoustic: document.getElementById('ef-acoustic')?.checked,
+  };
+  const anyFilter = Object.values(ef).some(Boolean);
+
+  // Filtrer kandidater
+  let filtered = candidates;
+  if (anyFilter) {
+    filtered = candidates.filter(c => {
+      const eq = c._equipment || {};
+      if (ef.adas && !eq.adas && !c.adas) return false;
+      if (ef.hud && !eq.hud && !c.hud) return false;
+      if (ef.camera && !eq.camera && !c.camera) return false;
+      if (ef.rainSensor && !eq.rainSensor && !c.rain_sensor) return false;
+      if (ef.heated && !eq.heated && !c.heated) return false;
+      if (ef.acoustic && !eq.acoustic && !c.acoustic) return false;
+      return true;
+    });
+  }
+
+  // Grupper etter kategori
+  const grouped = {};
+  for (const cat of CAT_ORDER) grouped[cat] = [];
+  for (const c of filtered) {
+    const cat = (c.category || 'unknown').toLowerCase().trim();
+    const key = CAT_ORDER.includes(cat) ? cat : 'unknown';
+    grouped[key].push(c);
+  }
+  // Sorter hver gruppe etter _score synkende
+  for (const cat of CAT_ORDER) {
+    grouped[cat].sort((a, b) => (b._score || 0) - (a._score || 0));
+  }
+
+  // Finn maks score for normalisering
+  const maxScoreOverall = Math.max(...filtered.map(c => c._score || 0), 1);
+
+  // Bygg HTML
+  let html = renderVehicleCard(data);
+  html += renderEquipmentFilters();
+  html += '<div id="stepwiseResults">';
+  html += renderCategoryTabs(grouped);
+  html += renderCategoryPanels(grouped, maxScoreOverall, ci.score || 75);
+  html += '</div>';
+
+  result.innerHTML = html;
+
+  // Gjenopprett checkbox-tilstand
+  if (anyFilter) {
+    if (ef.adas) document.getElementById('ef-adas').checked = true;
+    if (ef.hud) document.getElementById('ef-hud').checked = true;
+    if (ef.camera) document.getElementById('ef-camera').checked = true;
+    if (ef.rainSensor) document.getElementById('ef-rain').checked = true;
+    if (ef.heated) document.getElementById('ef-heated').checked = true;
+    if (ef.acoustic) document.getElementById('ef-acoustic').checked = true;
+  }
+}
+
+/** Bytt aktiv glass-kategori */
+function setGlassCategory(cat) {
+  currentGlassCategory = cat;
+  document.querySelectorAll('.glass-part-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cat-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('cat-panel-' + cat)?.classList.add('active');
+}
+
+/** Kalles når utstyr-filter endres */
+function onEquipmentFilterChange() {
+  renderStepwiseResults();
 }
 
 document.getElementById('regnrInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') searchRegnr(); });

@@ -395,3 +395,27 @@ CREATE TABLE IF NOT EXISTS vehicle_fingerprints (
 );
 CREATE INDEX IF NOT EXISTS idx_vehicle_fp_make_type ON vehicle_fingerprints(make, type_code);
 CREATE INDEX IF NOT EXISTS idx_vf_make_typecode_year ON vehicle_fingerprints(make, type_code, year_from, year_to);
+
+-- TecDoc kType Registry with Collision Gating (Option C)
+-- ---------------------------------------------------------------------------
+-- Populated from post-cleanup v5 matching with collision_group_size <= 5.
+-- Excludes high-collision kTypes to prevent wrong-glass dispatch.
+-- Used by Worker Layer 0.5 as fallback below Bovsoft.
+CREATE TABLE IF NOT EXISTS tecdoc_ktype_registry (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  eurocode TEXT NOT NULL,
+  ktype INTEGER NOT NULL,
+  tecdoc_brand TEXT,
+  tecdoc_model TEXT,
+  tecdoc_year_from INTEGER,
+  tecdoc_year_to INTEGER,
+  collision_group_size INTEGER NOT NULL,
+  collision_rank INTEGER NOT NULL,
+  confidence_tag TEXT,
+  source TEXT DEFAULT 'tecdoc_1q2019_v5_post_cleanup',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_tecdoc_ktype ON tecdoc_ktype_registry(ktype);
+CREATE INDEX IF NOT EXISTS idx_tecdoc_eurocode ON tecdoc_ktype_registry(eurocode);
+CREATE INDEX IF NOT EXISTS idx_tecdoc_confidence ON tecdoc_ktype_registry(confidence_tag);
+CREATE INDEX IF NOT EXISTS idx_tecdoc_brand_model ON tecdoc_ktype_registry(tecdoc_brand, tecdoc_model);

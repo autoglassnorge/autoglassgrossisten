@@ -5,7 +5,7 @@
 **Stack:** Vanilla JS, Cloudflare Workers, Biluppgifter API, TecDoc  
 **Data:** 37 581+ Pilkington/Glavista/Euroglass/Autoglass produkter, regnr→glass matching  
 **Status:** Produksjon (Worker + Pages + KV deployet)  
-**Node:** v20 (se `.nvmrc`)
+**Node:** v22 (se `.nvmrc`)
 
 ---
 
@@ -143,6 +143,10 @@ cd api/cf-worker && wrangler dev     # Lokal utvikling
 npm run worker:deploy                # Deploy til Cloudflare
 npm run worker:upload                # Last opp katalog til KV
 
+# Full deploy (D1 schema + TecDoc data + Worker)
+node scripts/deploy-full.mjs         # One-shot full deploy
+source scripts/wrangler-with-env.sh  # Load API token from .env.local
+
 # Verifisering
 node scripts/validate-catalog.mjs    # Kvalitets-gate
 node scripts/data-quality-report.mjs # Data-rapport
@@ -157,15 +161,13 @@ node scripts/verify-kv.mjs           # KV-konsistens
 ```
 regnr → SVV Enkeltoppslag → kjøretøy-data (merke, modell, år)
                     ↓
-        Biluppgifter TecDoc → kType (fallback)
+        ground_truth (Layer -1) ← verifiserte mappings
                     ↓
-            VIN → OEM-flagg (ADAS, regnsensor, etc.)
+        kType exact match (Layer 0) ← Bovsoft / glass_rules
                     ↓
-        ktype_registry (D1) ← Bovsoft API
+        TecDoc fallback (Layer 0.5) ← collision-gated (412 kTypes)
                     ↓
-        brand:model:year → prefix4-cache
-                    ↓
-            prefix4 → kandidater fra master-katalog
+        brand:model:year (Layer 1-3) ← prefix4 + fuzzy scoring
                     ↓
     4-lags matching + flagg-scoring → resultat
 ```

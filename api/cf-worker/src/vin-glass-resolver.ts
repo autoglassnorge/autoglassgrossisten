@@ -5,6 +5,7 @@
  * Lag:
  *   1. Gratis: D1 cache → vPIC fallback
  *   2. Intern: D1 glass_rules (statistisk læring)
+ *   2.5: TecDoc D1: brand+model+year → kType (69k entries, ~60-85% confidence)
  *   3. Betalt fallback:
  *      3a. Vincario (EU VIN-decode, vehicle enrichment) — freemium
  *      3b. MACS VIS (EU/KType) — krever egen nøkkel
@@ -100,6 +101,7 @@ interface VinDecodeCache {
 }
 
 import { decodeVinVincario, type VincarioConfig } from './providers/vincario';
+import { normalizeBrand, getBrandAliases } from './lib/brand';
 
 // ---------------------------------------------------------------------------
 // RapidAPI Autoways — PERMANENTLY REMOVED (HTTP 404, 2026-05-21)
@@ -113,6 +115,7 @@ import { decodeVinVincario, type VincarioConfig } from './providers/vincario';
 // ---------------------------------------------------------------------------
 const THRESHOLD_ACCEPT = 0.90;
 const THRESHOLD_RULES = 0.85;
+const THRESHOLD_TECDOC = 0.75;  // Lag 1.5 — D1-based TecDoc resolver
 const THRESHOLD_PAID = 0.60;
 
 // ---------------------------------------------------------------------------
@@ -191,6 +194,31 @@ export async function resolveGlass(req: ResolveGlassRequest): Promise<ResolveGla
         if (rule.confidence < THRESHOLD_ACCEPT) {
           await incrementRuleEvidence(db, rule.id);
         }
+        return buildResponse(requestId, 'resolved', path, false, match);
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // LAG 1.5: TecDoc D1 resolver (brand+model+year → kType)
+    // -----------------------------------------------------------------------
+    if (mode !== 'paid_only' && trustedMake && trustedModel) {
+      const tecdocMatch = await resolveTecDocFromD1(db, trustedMake, trustedModel, trustedYear);
+      if (tecdocMatch && tecdocMatch.confidence >= THRESHOLD_TECDOC) {
+        path.push('tecdoc_d1');
+        const match: GlassMatch = {
+          ktype: tecdocMatch.ktype,
+          confidence: tecdocMatch.confidence,
+          source: 'tecdoc_d1',
+        };
+        // Cache for future lookups
+        await upsertGlassRule(db, {
+          normalizedKey,
+          market,
+          opening,
+          featureSig,
+          match,
+        });
+        await resolveRequest(db, requestId, match, path, false, 0);
         return buildResponse(requestId, 'resolved', path, false, match);
       }
     }
@@ -391,6 +419,174 @@ async function lookupRules(
   `).bind(normalizedKey, market, opening, featureSig).all<GlassRuleRow>();
 
   return results?.[0] ?? null;
+}
+
+// ---------------------------------------------------------------------------
+// LAG 1.5: TecDoc D1 resolver
+// ---------------------------------------------------------------------------
+
+interface TecDocRow {
+  ktype: number;
+  brand: string;
+  model: string;
+  year_from: number | null;
+  year_to: number | null;
+}
+
+function extractChassisCodes(text: string): string[] {
+  const codes: string[] = [];
+  // E90, W204, B8, F30, C6, 5G1, 8K2
+  const m1 = text.match(/\b([A-Z]\d{1,3}[A-Z]?)\b/g);
+  if (m1) codes.push(...m1);
+  // VW-style: 5G1, 8K2, 1K1
+  const m2 = text.match(/\b(\d[A-Z]\d{1,2})\b/g);
+  if (m2) codes.push(...m2);
+  // Roman numerals: VII, VIII, VI, IV
+  const m3 = text.match(/\b(V?I{1,3}|IV|VI{1,3}|IX|X{1,3})\b/gi);
+  if (m3) codes.push(...m3.map((r) => r.toUpperCase()));
+  return codes;
+}
+
+async function resolveTecDocFromD1(
+  db: D1Database,
+  make: string,
+  model: string,
+  year: number | null
+): Promise<{ ktype: number; confidence: number } | null> {
+  if (!make || !model) return null;
+
+  const normBrand = normalizeBrand(make);
+  const aliases = getBrandAliases(make);
+  const aliasParams = aliases.slice(0, 10);
+  while (aliasParams.length < 10) aliasParams.push(aliasParams[0]);
+
+  const yearClause = year && year > 1900
+    ? "AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to = 0 OR year_to >= ?)"
+    : "";
+  const sql = `
+    SELECT ktype, brand, model, year_from, year_to
+    FROM ktype_registry
+    WHERE source = 'tecdoc_1q2019'
+      AND brand IN (${aliasParams.map(() => "?").join(", ")})
+      ${yearClause}
+  `;
+
+  const stmt = db.prepare(sql);
+  const bindVals = year && year > 1900
+    ? [...aliasParams, year + 1, year - 1]
+    : aliasParams;
+  const { results } = await stmt.bind(...bindVals).all<TecDocRow>();
+
+  if (!results || results.length === 0) return null;
+
+  // Build family year map: for rows with year_to=0, infer from siblings
+  // Family = text before first '(' (e.g. "AUDI A4 " from "AUDI A4 (8K2, B8)")
+  const familyYearMap = new Map<string, number>();
+  for (const row of results) {
+    if (row.year_to && row.year_to > 0) {
+      const parenIdx = row.model.indexOf("(");
+      const family = parenIdx > 0
+        ? row.brand + ":" + row.model.slice(0, parenIdx).trim()
+        : row.brand + ":" + row.model;
+      const current = familyYearMap.get(family) || 0;
+      if (row.year_to > current) {
+        familyYearMap.set(family, row.year_to);
+      }
+    }
+  }
+
+  const queryNorm = model.toUpperCase().replace(/[^A-Z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+  const queryTokens = new Set(queryNorm.split(/\s+/).filter((t) => t.length >= 1));
+  const queryChassis = new Set(extractChassisCodes(model));
+
+  let bestKtype = 0;
+  let bestScore = 0;
+
+  for (const row of results) {
+    const rowNorm = row.model.toUpperCase().replace(/[^A-Z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+    const rowTokens = new Set(rowNorm.split(/\s+/).filter((t) => t.length >= 1));
+    const rowChassis = new Set(extractChassisCodes(row.model));
+
+    if (rowTokens.size === 0) continue;
+
+    let score = 0;
+
+    // Brand match (already guaranteed by SQL, but score it)
+    score += 0.10;
+
+    // Chassis code match — highest signal
+    if (queryChassis.size > 0 && rowChassis.size > 0) {
+      let commonChassis = 0;
+      for (const c of queryChassis) {
+        if (rowChassis.has(c)) commonChassis++;
+      }
+      if (commonChassis > 0) {
+        score += 0.40;
+      }
+    }
+
+    // Model containment — strong signal for exact model names
+    if (queryNorm.length >= 2 && rowNorm.includes(queryNorm)) {
+      score += 0.35;
+    } else if (rowNorm.length >= 2 && queryNorm.includes(rowNorm)) {
+      score += 0.25;
+    }
+
+    // Token overlap — moderate signal
+    let common = 0;
+    for (const t of queryTokens) {
+      if (rowTokens.has(t)) common++;
+    }
+    const tokenScore = queryTokens.size <= 2
+      ? common / queryTokens.size
+      : common / Math.max(queryTokens.size, rowTokens.size);
+    if (tokenScore >= 0.5) {
+      score += 0.20;
+    } else if (tokenScore >= 0.3) {
+      score += 0.10;
+    } else if (tokenScore > 0) {
+      score += 0.05;
+    }
+
+    // Year centrality bonus — prefer entries where year is closer to midpoint of range
+    if (year && year > 1900 && row.year_from) {
+      // Infer effective year_to from siblings in same model family
+      let effectiveYearTo: number;
+      if (row.year_to && row.year_to > 0) {
+        effectiveYearTo = row.year_to;
+      } else {
+        const parenIdx = row.model.indexOf("(");
+        const family = parenIdx > 0
+          ? row.brand + ":" + row.model.slice(0, parenIdx).trim()
+          : row.brand + ":" + row.model;
+        effectiveYearTo = familyYearMap.get(family) || 2019;
+      }
+      const mid = (row.year_from + effectiveYearTo) / 2;
+      const range = effectiveYearTo - row.year_from + 1;
+      const dist = Math.abs(year - mid);
+      const normDist = range > 0 ? Math.min(1, dist / (range / 2)) : 0;
+      score += 0.10 * (1 - normDist);
+    }
+
+    // Penalty for specialty body types when query doesn't specify one
+    const specialtyBodies = /\b(Convertible|Cabriolet|Roadster|Spider|Spyder)\b/i;
+    if (specialtyBodies.test(row.model) && !specialtyBodies.test(model)) {
+      score -= 0.05;
+    }
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestKtype = row.ktype;
+    }
+  }
+
+  // Thresholds
+  if (bestScore < 0.35) return null;
+
+  // Confidence mapping: 0.60–0.90 based on score
+  const confidence = Math.min(0.90, 0.60 + bestScore * 0.30);
+
+  return { ktype: bestKtype, confidence };
 }
 
 // ---------------------------------------------------------------------------
@@ -719,8 +915,8 @@ export async function upsertGlassRule(
   await db.prepare(`
     INSERT INTO glass_rules
       (normalized_key, market, opening, feature_signature, ktype, kba, nags,
-       oem_part_number, eurocode, confidence, evidence_count, active, updated_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1, CURRENT_TIMESTAMP)
+       oem_part_number, eurocode, confidence, source, evidence_count, active, updated_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1, CURRENT_TIMESTAMP)
     ON CONFLICT(normalized_key, market, opening, feature_signature) DO UPDATE SET
       ktype = COALESCE(excluded.ktype, glass_rules.ktype),
       kba = COALESCE(excluded.kba, glass_rules.kba),
@@ -728,6 +924,7 @@ export async function upsertGlassRule(
       oem_part_number = COALESCE(excluded.oem_part_number, glass_rules.oem_part_number),
       eurocode = COALESCE(excluded.eurocode, glass_rules.eurocode),
       confidence = MAX(excluded.confidence, glass_rules.confidence),
+      source = COALESCE(excluded.source, glass_rules.source),
       evidence_count = glass_rules.evidence_count + 1,
       last_verified_at = CURRENT_TIMESTAMP,
       updated_at = CURRENT_TIMESTAMP,
@@ -739,7 +936,8 @@ export async function upsertGlassRule(
     match.nags ?? null,
     match.oemPartNumber ?? null,
     match.eurocode ?? null,
-    match.confidence
+    match.confidence,
+    match.source
   ).run();
 }
 

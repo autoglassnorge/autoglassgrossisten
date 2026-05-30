@@ -311,8 +311,13 @@ async function enrichAsync(
       }
     }
 
-    // If resolved, upsert into glass_rules for future caching
+    // Update resolution request status
+    const resolutionPath = JSON.stringify(result.resolutionPath || []);
+    const paidLookupUsed = result.paidLookupUsed ? 1 : 0;
+    const providerCost = result.providerCost ?? null;
+
     if (result.status === "resolved" && result.match?.ktype) {
+      // Cache hit — upsert glass_rules + mark request resolved
       const normalizedKey = [
         vehicleMake.toLowerCase().trim().replace(/\s+/g, "_"),
         vehicleModel.toLowerCase().trim().replace(/\s+/g, "_"),
@@ -330,9 +335,64 @@ async function enrichAsync(
           source: result.match.source,
         },
       });
+
+      await db
+        .prepare(
+          `UPDATE glass_resolution_requests
+           SET status = 'resolved',
+               resolution_path = ?,
+               paid_lookup_used = ?,
+               provider_cost = ?,
+               resolved_at = datetime('now')
+           WHERE id = ?`
+        )
+        .bind(resolutionPath, paidLookupUsed, providerCost, requestId)
+        .run();
+    } else if (result.status === "needs_review") {
+      await db
+        .prepare(
+          `UPDATE glass_resolution_requests
+           SET status = 'needs_review',
+               resolution_path = ?,
+               paid_lookup_used = ?,
+               provider_cost = ?,
+               resolved_at = datetime('now')
+           WHERE id = ?`
+        )
+        .bind(resolutionPath, paidLookupUsed, providerCost, requestId)
+        .run();
+    } else {
+      // no_match or other terminal state
+      await db
+        .prepare(
+          `UPDATE glass_resolution_requests
+           SET status = ?,
+               resolution_path = ?,
+               paid_lookup_used = ?,
+               provider_cost = ?,
+               resolved_at = datetime('now')
+           WHERE id = ?`
+        )
+        .bind(result.status || "failed", resolutionPath, paidLookupUsed, providerCost, requestId)
+        .run();
     }
   } catch (err) {
     console.error(`[enrichAsync] requestId=${requestId} failed:`, err);
+    // Mark request as failed on exception
+    try {
+      await db
+        .prepare(
+          `UPDATE glass_resolution_requests
+           SET status = 'failed',
+               resolution_path = ?,
+               resolved_at = datetime('now')
+           WHERE id = ?`
+        )
+        .bind(JSON.stringify(["svv", "enrich_error"]), requestId)
+        .run();
+    } catch {
+      // Best-effort: ignore secondary failure
+    }
   }
 }
 

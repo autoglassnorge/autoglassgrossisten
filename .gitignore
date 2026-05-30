@@ -46,3 +46,35 @@ data/csc-parsed/*.png
 data/finn-no-regnr/
 
 *.db
+
+# MemPalace generated data
+.kimi/diary.jsonl
+.kimi/mempalace/data/
+
+# Autodoc probe output (screenshots, HTML, captures)
+data/autodoc-probe/
+
+# Generated catalog cleanups
+data/catalog-prod-cleaned.json
+
+# TecDoc import: split CSV chunks and intermediate generated SQL
+data/tecdoc-import/article_*.csv.*
+data/tecdoc-import/remote-deploy*.sql
+data/tecdoc-import/glass-catalog-updates-v[0-9]*.sql
+data/tecdoc-import/glass-catalog-updates-v[0-9]*-*.sql
+data/tecdoc-import/glass-rules-inserts-v[0-9]*.sql
+data/tecdoc-import/glass-rules-inserts-v[0-9]*-*.sql
+data/tecdoc-import/ktype-registry-inserts-v[0-9]*.sql
+data/tecdoc-import/ktype-registry-inserts-v[0-9]*-*.sql
+data/tecdoc-import/ktype-registry-v[0-9]*.sql
+data/tecdoc-import/matching-report-v[0-9]*.json
+data/tecdoc-import/unmatched-v[0-9]*.json
+data/tecdoc-import/tecdoc-parsed-v*.json
+data/tecdoc-import/tecdoc-ktype-mapping*.json
+data/tecdoc-import/tecdoc-ktype-registry-safe.sql
+data/tecdoc-import/d1-chunks/
+data/tecdoc-import/d1-chunks-v*/
+data/tecdoc-import/d1-chunks-gr/
+
+# Worker test data
+data/tecdoc-import/.last-sync

@@ -618,6 +618,100 @@ export async function queryByBrandModelYear(
 }
 
 // ---------------------------------------------------------------------------
+// TecDoc kType Registry (Option C — Collision Gated Fallback)
+// ---------------------------------------------------------------------------
+
+export interface TecdocKtypeRegistryEntry {
+  eurocode: string;
+  ktype: number;
+  tecdocBrand: string | null;
+  tecdocModel: string | null;
+  tecdocYearFrom: number | null;
+  tecdocYearTo: number | null;
+  collisionGroupSize: number;
+  collisionRank: number;
+  confidenceTag: string;
+}
+
+/**
+ * Query TecDoc kType mappings with collision gating.
+ * Only returns eurocodes for kTypes with collision_group_size <= maxCollisionSize.
+ * Default maxCollisionSize = 5 (safe set: unique + low collision).
+ */
+export async function queryTecdocByKtype(
+  db: D1Database,
+  ktype: number,
+  maxCollisionSize = 5
+): Promise<TecdocKtypeRegistryEntry[]> {
+  try {
+    const { results } = await db
+      .prepare(`
+        SELECT eurocode, ktype, tecdoc_brand, tecdoc_model, tecdoc_year_from, tecdoc_year_to,
+               collision_group_size, collision_rank, confidence_tag
+        FROM tecdoc_ktype_registry
+        WHERE ktype = ? AND collision_group_size <= ?
+        ORDER BY collision_rank ASC
+        LIMIT 10
+      `)
+      .bind(ktype, maxCollisionSize)
+      .all();
+    return ((results || []) as any[]).map((r) => ({
+      eurocode: r.eurocode,
+      ktype: r.ktype,
+      tecdocBrand: r.tecdoc_brand,
+      tecdocModel: r.tecdoc_model,
+      tecdocYearFrom: r.tecdoc_year_from,
+      tecdocYearTo: r.tecdoc_year_to,
+      collisionGroupSize: r.collision_group_size,
+      collisionRank: r.collision_rank,
+      confidenceTag: r.confidence_tag,
+    }));
+  } catch (e) {
+    console.error(`queryTecdocByKtype failed: ${e instanceof Error ? e.message : String(e)}`);
+    return [];
+  }
+}
+
+/**
+ * Resolve kType from TecDoc registry using make+model+year.
+ * Returns unique/low-collision kTypes only (collision_group_size <= maxCollisionSize).
+ */
+export async function queryTecdocKtypeByVehicle(
+  db: D1Database,
+  make: string,
+  model: string,
+  year: number,
+  maxCollisionSize = 5
+): Promise<Array<{ ktype: number; tecdocBrand: string | null; tecdocModel: string | null; confidenceTag: string; collisionGroupSize: number }>> {
+  try {
+    const { results } = await db
+      .prepare(`
+        SELECT DISTINCT ktype, tecdoc_brand, tecdoc_model, confidence_tag, collision_group_size
+        FROM tecdoc_ktype_registry
+        WHERE tecdoc_brand = ? COLLATE NOCASE
+          AND (tecdoc_model LIKE ? COLLATE NOCASE OR tecdoc_model LIKE ? COLLATE NOCASE)
+          AND (tecdoc_year_from IS NULL OR tecdoc_year_from <= ?)
+          AND (tecdoc_year_to IS NULL OR tecdoc_year_to >= ?)
+          AND collision_group_size <= ?
+        ORDER BY collision_group_size ASC, collision_rank ASC
+        LIMIT 5
+      `)
+      .bind(make, `%${model}%`, `%${model.split(/\s+/).slice(0, 2).join(" ")}%`, year, year, maxCollisionSize)
+      .all();
+    return ((results || []) as any[]).map((r) => ({
+      ktype: r.ktype,
+      tecdocBrand: r.tecdoc_brand,
+      tecdocModel: r.tecdoc_model,
+      confidenceTag: r.confidence_tag,
+      collisionGroupSize: r.collision_group_size,
+    }));
+  } catch (e) {
+    console.error(`queryTecdocKtypeByVehicle failed: ${e instanceof Error ? e.message : String(e)}`);
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 

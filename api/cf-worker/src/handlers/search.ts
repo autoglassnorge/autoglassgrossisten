@@ -21,6 +21,8 @@ import {
   queryGroundTruth,
   queryGroundTruthByVehicle,
   queryFuzzyBrandYear,
+  queryTecdocByKtype,
+  queryTecdocKtypeByVehicle,
   KTYPE_CONFIDENCE_THRESHOLD,
 } from "../lib/db";
 import { fetchBiluppgifterEquipment, inferRecordEquipment, detectFlagsFromOem } from "../lib/equipment";
@@ -284,6 +286,38 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
             }
           }
         }
+      }
+    }
+
+    // === Layer 0.5: TecDoc fallback (collision-gated) ===
+    if (layer !== -1 && layer > 0) {
+      try {
+        const tecdocKtypes = await queryTecdocKtypeByVehicle(db, vehicle.make, vehicle.model, vehicle.year, 5);
+        if (tecdocKtypes.length === 1) {
+          // Unique/low-collision TecDoc match — treat as high-confidence fallback
+          const tecdocMatch = tecdocKtypes[0];
+          vehicle.k_type = tecdocMatch.ktype;
+          ktypeSource = "tecdoc_fallback";
+          console.log(`[kType] TecDoc fallback for ${regnr}: kType=${tecdocMatch.ktype}, brand=${tecdocMatch.tecdocBrand}, model=${tecdocMatch.tecdocModel}, conf=${tecdocMatch.confidenceTag}`);
+
+          // Re-run Layer 0 with the resolved kType
+          const ktypeDirect = await queryByKtype(db, vehicle.k_type);
+          for (const c of ktypeDirect) {
+            if (!candidateCodes.has(c.eurocode)) {
+              candidates.push(c);
+              candidateCodes.add(c.eurocode);
+            }
+          }
+          if (ktypeDirect.length > 0) {
+            layer = 0;
+            confidence = "exact";
+          }
+        } else if (tecdocKtypes.length > 1) {
+          // Multiple TecDoc matches — do not auto-resolve, but log for telemetry
+          console.log(`[kType] TecDoc ambiguous for ${regnr}: ${tecdocKtypes.length} matches (${tecdocKtypes.map(t => t.ktype).join(", ")})`);
+        }
+      } catch {
+        // tecdoc_ktype_registry might not exist yet — silently continue
       }
     }
 
@@ -735,6 +769,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           l3bModel: debugL3bModel,
           fuzzyCount: debugFuzzyCount,
           totalCandidatesBeforeScoring: candidates.length,
+          tecdocFallback: ktypeSource === "tecdoc_fallback",
         },
         confidenceInfo: {
           score: layer === -1 ? 100 : layer === 0 ? 95 : layer === 1 ? 85 : layer === 2 ? 65 : layer === 3 ? 45 : 25,
@@ -742,7 +777,9 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           reasons: layer === -1
             ? ["Verifisert i ground truth database (auto-glass.no)"]
             : layer === 0
-              ? ["Eksakt match på kType fra TecDoc"]
+              ? ktypeSource === "tecdoc_fallback"
+                ? ["Eksakt match på kType fra TecDoc (fallback-data)"]
+                : ["Eksakt match på kType fra TecDoc"]
               : layer === 1
                 ? ["Match på merke, modell og årsmodell"]
                 : layer === 2
@@ -772,7 +809,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           vehicle.year
         ),
         ktypeInfo: ktypeRegistryInfo,
-        sources: [source, bovsoftVehicle ? "bovsoft" : "none", effectiveEquipment.source],
+        sources: [source, bovsoftVehicle ? "bovsoft" : ktypeSource === "tecdoc_fallback" ? "tecdoc_fallback" : "none", effectiveEquipment.source],
       },
     };
   } catch (e) {
