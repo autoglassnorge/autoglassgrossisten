@@ -140,24 +140,28 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       // glass_rules table might not exist yet
     }
 
-    // 3b. Bovsoft kType
+    // 3b. Bovsoft kType — ALWAYS fetch for body type info even if kType already known
     let bovsoftVehicle: BovsoftVehicle | null = null;
     let bovsoftError: string | null = null;
-    if (!resolvedKtype) {
-      bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
-      if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
-        try {
-          bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
-          if (bovsoftVehicle) {
-            await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
-          }
-        } catch (e) {
-          bovsoftError = e instanceof Error ? e.message : String(e);
+    bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
+    if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
+      try {
+        bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
+        if (bovsoftVehicle) {
+          await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
         }
+      } catch (e) {
+        bovsoftError = e instanceof Error ? e.message : String(e);
       }
-      if (bovsoftVehicle && bovsoftVehicle.ktype > 0) {
+    }
+    // Use Bovsoft kType if we don't have one yet, OR if it matches our existing kType (higher confidence)
+    if (bovsoftVehicle && bovsoftVehicle.ktype > 0) {
+      if (!resolvedKtype) {
         resolvedKtype = bovsoftVehicle.ktype;
         ktypeSource = "bovsoft";
+      } else if (resolvedKtype === bovsoftVehicle.ktype) {
+        // Bovsoft confirms our existing kType — upgrade confidence
+        ktypeSource = ktypeSource === "glass_rules" ? "glass_rules+bovsoft" : ktypeSource;
       }
     }
 
