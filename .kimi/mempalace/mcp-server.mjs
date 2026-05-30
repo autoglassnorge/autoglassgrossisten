@@ -48,6 +48,7 @@ import {
 import { resolve, join, dirname, relative, basename } from 'path';
 import { fileURLToPath } from 'url';
 import { gzipSync, gunzipSync } from 'zlib';
+import { queryCache } from './lib/query-cache.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -1646,29 +1647,69 @@ class MempalaceMCP {
   callTool(name, args) {
     switch (name) {
       case 'search': {
+        // Check query cache first
+        const cacheKey = queryCache.makeKey('search', args);
+        const cached = queryCache.get(cacheKey);
+        if (cached) {
+          log('info', `Query cache hit for: ${args.query}`);
+          return cached;
+        }
+
         const results = searchDocs(args.query, { room: args.room, limit: args.limit, since: args.since });
         const payload = {
           query: args.query,
           hits: results.length,
+          cached: false,
           results: results.map(r => ({
             ...r,
             snippet: r.snippet.slice(0, CONFIG.maxResultChars)
           }))
         };
-        return JSON.parse(truncateOutput(JSON.stringify(payload), CONFIG.maxToolOutputChars));
+        const result = JSON.parse(truncateOutput(JSON.stringify(payload), CONFIG.maxToolOutputChars));
+        
+        // Cache successful search results
+        if (result && result.hits !== undefined) {
+          queryCache.set(cacheKey, result);
+        }
+        
+        return result;
       }
 
       case 'semantic_search': {
+        // Check query cache first
+        const cacheKey = queryCache.makeKey('semantic_search', args);
+        const cached = queryCache.get(cacheKey);
+        if (cached) {
+          log('info', `Query cache hit for semantic_search: ${args.concept}`);
+          return cached;
+        }
+
         const results = semanticSearch(args.concept, { room: args.room, limit: args.limit || 5 });
-        const payload = { concept: args.concept, hits: results.length, results };
-        return JSON.parse(truncateOutput(JSON.stringify(payload), CONFIG.maxToolOutputChars));
+        const payload = { concept: args.concept, hits: results.length, cached: false, results };
+        const result = JSON.parse(truncateOutput(JSON.stringify(payload), CONFIG.maxToolOutputChars));
+        
+        // Cache successful results
+        if (result && result.hits !== undefined) {
+          queryCache.set(cacheKey, result);
+        }
+        
+        return result;
       }
 
       case 'recent_context': {
+        // Check query cache first
+        const cacheKey = queryCache.makeKey('recent_context', args);
+        const cached = queryCache.get(cacheKey);
+        if (cached) {
+          log('info', `Query cache hit for recent_context: ${args.hours || 24}h`);
+          return cached;
+        }
+
         const docs = recentContext(args.hours || 24, args.room);
         const payload = {
           hours: args.hours || 24,
           hits: docs.length,
+          cached: false,
           results: docs.map(d => ({
             id: d.id,
             path: d.path,
@@ -1677,7 +1718,14 @@ class MempalaceMCP {
             preview: d.content.slice(0, 300)
           }))
         };
-        return JSON.parse(truncateOutput(JSON.stringify(payload), CONFIG.maxToolOutputChars));
+        const result = JSON.parse(truncateOutput(JSON.stringify(payload), CONFIG.maxToolOutputChars));
+        
+        // Cache successful results
+        if (result && result.hits !== undefined) {
+          queryCache.set(cacheKey, result);
+        }
+        
+        return result;
       }
 
       case 'kg_query': {
@@ -1725,7 +1773,8 @@ class MempalaceMCP {
           rooms: CONFIG.indexPaths.map(p => p.label),
           criticalRooms: CONFIG.criticalRooms,
           maxToolOutputChars: CONFIG.maxToolOutputChars,
-          kimiCliCompatibility: 'v1.45.0'
+          kimiCliCompatibility: 'v1.45.0',
+          queryCache: queryCache.getStats()
         };
 
       case 'get_room_info': {
