@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Search, Loader2, AlertTriangle, Car, Wrench } from 'lucide-react';
+import { Skeleton } from '@/components/ui/Skeleton';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
@@ -111,18 +112,52 @@ export default function SearchPage() {
       <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-8">Tast inn bilens registreringsnummer for å finne riktig glass.</p>
 
       <form onSubmit={handleSearch} className="flex gap-2 mb-4 sm:mb-8">
+        <label htmlFor="regnr-input" className="sr-only">
+          Registreringsnummer
+        </label>
         <Input
+          id="regnr-input"
           placeholder="AB12345"
           value={regnr}
           onChange={(e) => setRegnr(e.target.value)}
           className="h-14 flex-1 text-lg uppercase"
           maxLength={8}
+          aria-describedby="regnr-help"
         />
-        <Button type="submit" size="lg" className="h-14 px-4 sm:px-6 gap-2 flex-shrink-0" disabled={isLoading}>
+        <Button
+          type="submit"
+          size="lg"
+          className="h-14 px-4 sm:px-6 gap-2 flex-shrink-0"
+          disabled={isLoading}
+          aria-label="Søk etter bilglass"
+        >
           {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Search className="h-5 w-5" />}
           <span className="hidden sm:inline">Søk</span>
         </Button>
+        <span id="regnr-help" className="sr-only">
+          Skriv inn bilens registreringsnummer for å finne riktig glass
+        </span>
       </form>
+
+      {/* Loading skeleton */}
+      {isLoading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <Skeleton className="h-32 w-full" />
+              <div className="p-4 space-y-3">
+                <Skeleton className="h-4 w-20" />
+                <Skeleton className="h-5 w-full" />
+                <Skeleton className="h-4 w-3/4" />
+                <div className="flex justify-between items-center pt-2">
+                  <Skeleton className="h-6 w-24" />
+                  <Skeleton className="h-10 w-28" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Error states */}
       {error && (

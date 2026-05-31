@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { Camera, X, Check, Eye, EyeOff, HelpCircle, ChevronDown, ChevronUp, Scan, AlertTriangle } from 'lucide-react';
 import type { Product } from '@/types/api';
+import { extractFeaturesExtended } from '@/lib/extractFeatures';
 
 interface Props {
   products: Product[];
@@ -57,20 +58,12 @@ const FEATURE_CHECKS: FeatureCheck[] = [
   },
 ];
 
-function extractFeatures(product: Product): Record<string, boolean> {
-  const d = (product.description || '').toUpperCase();
-  return {
-    hud: d.includes('HUD'),
-    sensor: d.includes('SENS') || d.includes('RSN'),
-    kamera: d.includes('LDW') || d.includes('ADAS') || d.includes('CITY'),
-    varme: d.includes('ELM') || d.includes('+EL') || d.includes('EL ') || d.includes('VARM'),
-    antenne: d.includes('ANT') || d.includes('AG') || d.includes('GNAG'),
-    akustisk: d.includes('AKU') || d.includes('AKUST'),
-  };
+function getProductFeatures(product: Product): Record<string, boolean> {
+  return extractFeaturesExtended(product.description) as unknown as Record<string, boolean>;
 }
 
 function scoreProduct(product: Product, answers: Record<string, boolean | null>): number {
-  const pf = extractFeatures(product);
+  const pf = getProductFeatures(product);
   let score = 0;
   let checked = 0;
   for (const [key, answer] of Object.entries(answers)) {
@@ -121,7 +114,7 @@ export function WindshieldVerifier({ products, onFilter }: Props) {
   const matchedCount = products.filter(p => {
     for (const [key, answer] of Object.entries(answers)) {
       if (answer === null) continue;
-      const has = extractFeatures(p)[key] || false;
+      const has = getProductFeatures(p)[key] || false;
       if (answer === true && !has) return false;
       if (answer === false && has) return false;
     }

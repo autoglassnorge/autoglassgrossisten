@@ -1,6 +1,17 @@
 import { ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, Paperclip, Target } from 'lucide-react';
 import { GlassVisualizer } from './GlassVisualizer';
+import { Card, CardContent, CardFooter } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/ui/Button';
+import type { Product } from '@/types/api';
+import { formatPrice, typeCodeShort, positionColor } from '@/utils/formatters';
+import { useCartStore } from '@/stores/cartStore';
+import { useState } from 'react';
+import { logFeedback } from '@/api/glass';
 
+/**
+ * Badge component displaying product match score
+ */
 function MatchScoreBadge({ score }: { score: number }) {
   // Normalize score to 0-100%
   const pct = Math.min(100, Math.max(0, Math.round(score)));
@@ -28,14 +39,6 @@ function MatchScoreBadge({ score }: { score: number }) {
     </div>
   );
 }
-import { Card, CardContent, CardFooter } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
-import type { Product } from '@/types/api';
-import { formatPrice, typeCodeShort, positionColor } from '@/utils/formatters';
-import { useCartStore } from '@/stores/cartStore';
-import { useState } from 'react';
-import { logFeedback } from '@/api/glass';
 
 interface SearchContext {
   regnr: string;
@@ -104,6 +107,7 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
             alt={product.title}
             className="h-full w-full object-cover transition-transform group-hover:scale-105"
             loading="lazy"
+            decoding="async"
             onError={() => setImgError(true)}
           />
         ) : (
@@ -263,9 +267,10 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
           variant={inCart ? 'secondary' : 'default'}
           onClick={handleAddToCart}
           className="gap-1 min-h-[44px] px-3 sm:px-4 flex-shrink-0"
+          aria-label={inCart ? 'Lagt i handlekurv' : 'Legg i handlekurv'}
         >
           {inCart ? <Check className="h-4 w-4" /> : <ShoppingCart className="h-4 w-4" />}
-          <span className="hidden sm:inline">{inCart ? 'Lagt til' : 'Legg til'}</span>
+          <span className="hidden sm:inline">{inCart ? 'Lagt til' : 'Legg i handlekurv'}</span>
         </Button>
       </CardFooter>
     </Card>

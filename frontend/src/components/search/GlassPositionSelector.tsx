@@ -342,6 +342,11 @@ export function GlassPositionSelector({ products, onFilter }: GlassPositionSelec
                         : -16
                   : 0;
 
+                // Calculate touch target center point from path bounds
+                const pathBounds = getPathBounds(pos.path);
+                const touchTargetCx = pathBounds.cx;
+                const touchTargetCy = pathBounds.cy;
+
                 return (
                   <g
                     key={pos.id}
@@ -353,7 +358,26 @@ export function GlassPositionSelector({ products, onFilter }: GlassPositionSelec
                     onMouseEnter={() => hasProducts && setHoveredId(pos.id)}
                     onMouseLeave={() => setHoveredId(null)}
                     onClick={() => hasProducts && handlePosClick(pos.id)}
+                    role="button"
+                    tabIndex={hasProducts ? 0 : -1}
+                    aria-label={pos.label}
+                    onKeyDown={(e) => {
+                      if (hasProducts && (e.key === 'Enter' || e.key === ' ')) {
+                        e.preventDefault();
+                        handlePosClick(pos.id);
+                      }
+                    }}
                   >
+                    {/* Invisible touch target for 44x44px minimum */}
+                    {hasProducts && (
+                      <circle
+                        cx={touchTargetCx}
+                        cy={touchTargetCy}
+                        r={22}
+                        fill="transparent"
+                        style={{ pointerEvents: 'all' }}
+                      />
+                    )}
                     <path
                       d={pos.path}
                       fill={glassFill(pos, count, isHovered, isActive)}
@@ -363,6 +387,7 @@ export function GlassPositionSelector({ products, onFilter }: GlassPositionSelec
                       style={{
                         filter: isHovered || isActive ? 'url(#glow)' : 'none',
                         transition: 'all 0.25s ease',
+                        pointerEvents: hasProducts ? 'none' : 'auto',
                       }}
                     />
                     {/* Product count badge */}
@@ -471,6 +496,33 @@ export function GlassPositionSelector({ products, onFilter }: GlassPositionSelec
 /* ------------------------------------------------------------------
    UTILS
    ------------------------------------------------------------------ */
+
+/** Calculate approximate center and bounds from SVG path for touch targets */
+function getPathBounds(path: string): { cx: number; cy: number } {
+  // Extract all numbers from the path
+  const numbers = path.match(/-?\d+\.?\d*/g)?.map(Number) || [];
+  if (numbers.length < 2) return { cx: 100, cy: 100 };
+
+  // Take every pair as x,y coordinates
+  const xs: number[] = [];
+  const ys: number[] = [];
+  for (let i = 0; i < numbers.length; i += 2) {
+    xs.push(numbers[i]);
+    if (i + 1 < numbers.length) {
+      ys.push(numbers[i + 1]);
+    }
+  }
+
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+
+  return {
+    cx: (minX + maxX) / 2,
+    cy: (minY + maxY) / 2,
+  };
+}
 
 export function matchesPosition(product: Product, position: GlassPosition): boolean {
   const tc = (product.typeCode || product.category || '').toUpperCase();

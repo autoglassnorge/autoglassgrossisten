@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { Camera, X, Loader2, Scan, Sparkles, Check, AlertTriangle } from 'lucide-react';
 import type { Product } from '@/types/api';
+import { extractFeatures, extractColor } from '@/lib/extractFeatures';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
 
@@ -21,31 +22,11 @@ interface Props {
   onFilter: (filtered: Product[]) => void;
 }
 
-function extractFeatures(product: Product): Record<string, boolean> {
-  const d = (product.description || '').toUpperCase();
-  return {
-    hud: d.includes('HUD'),
-    rainSensor: d.includes('SENS') || d.includes('RSN'),
-    camera: d.includes('LDW') || d.includes('ADAS') || d.includes('CITY'),
-    heated: d.includes('ELM') || d.includes('+EL') || d.includes('EL ') || d.includes('VARM'),
-    antenna: d.includes('ANT') || d.includes('AG') || d.includes('GNAG'),
-    acoustic: d.includes('AKU') || d.includes('AKUST'),
-  };
-}
-
-function extractColor(product: Product): string | null {
-  const d = (product.description || '').toUpperCase();
-  if (d.includes('GN')) return 'green';
-  if (d.includes('BL')) return 'blue';
-  if (d.includes('GY')) return 'gray';
-  if (d.includes('YP') || d.includes('SOTE')) return 'tinted';
-  if (d.includes('CL')) return 'clear';
-  return null;
-}
+// Note: extractFeatures and extractColor now imported from @/lib/extractFeatures
 
 function scoreProduct(product: Product, analysis: AIAnalysis): number {
-  const pf = extractFeatures(product);
-  const pc = extractColor(product);
+  const pf = extractFeatures(product.description);
+  const pc = extractColor(product.description);
   let score = 0;
 
   // Feature matching

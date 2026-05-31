@@ -1,0 +1,11 @@
+{
+  "name": "Autoglass AS - B2B Grossist",
+  "short_name": "Autoglass",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00B4D8",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}

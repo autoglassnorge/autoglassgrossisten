@@ -1,26 +1,10 @@
 import { Star, Check, AlertCircle, HelpCircle } from 'lucide-react';
-import type { Product, VehicleInfo } from '@/types/api';
+import type { Product, VehicleInfo, EquipmentFlags } from '@/types/api';
+import { extractEquipment } from '@/lib/extractFeatures';
 
 interface Props {
   products: Product[];
   vehicle: VehicleInfo;
-}
-
-/**
- * Extract equipment features from product description
- */
-function extractEquipment(description: string): Record<string, boolean> {
-  const d = description.toUpperCase();
-  return {
-    adas: d.includes('ADAS') || d.includes('KAMERA') || d.includes('LDW') || d.includes('CITY'),
-    rainSensor: d.includes('SENSOR') || d.includes('RSN') || d.includes('REGN'),
-    heated: d.includes('ELM') || d.includes('VARM') || d.includes('EL ') || d.includes('+EL'),
-    acoustic: d.includes('AKU') || d.includes('AKUST'),
-    antenna: d.includes('ANT') || d.includes('AG') || d.includes('GNAG'),
-    hud: d.includes('HUD'),
-    camera: d.includes('KAMERA') || d.includes('CAM'),
-    coated: d.includes('COAT') || d.includes('CS'),
-  };
 }
 
 /**
@@ -53,7 +37,7 @@ export function calculateMatchScore(
 
   // Check each feature
   for (const [key, label] of Object.entries(featureLabels)) {
-    const vehicleHas = (eq as unknown as Record<string, boolean>)[key] || false;
+    const vehicleHas = eq[key as keyof EquipmentFlags] ?? false;
     const productHas = pe[key] || false;
 
     if (vehicleHas && productHas) {

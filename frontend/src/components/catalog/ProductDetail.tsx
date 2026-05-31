@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { X, ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, Package, ZoomIn } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -15,7 +15,13 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
   const [imgError, setImgError] = useState(false);
   const [imgZoomed, setImgZoomed] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
-  const inCart = useCartStore((s) => s.items.some((i) => i.product.id === product?.id));
+  
+  // Select cart items and compute inCart with useMemo for stable reference
+  const cartItems = useCartStore((s) => s.items);
+  const inCart = useMemo(
+    () => cartItems.some((i) => i.product.id === product?.id),
+    [cartItems, product?.id]
+  );
 
   // Close on Escape
   useEffect(() => {

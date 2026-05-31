@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass-frontend.pages.dev/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://autoglass-frontend.pages.dev/?lang=sv"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://autoglass-frontend.pages.dev/?lang=en"/>
+  </url>
+
+  <!-- Search -->
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/sok</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass-frontend.pages.dev/sok"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://autoglass-frontend.pages.dev/sok?lang=sv"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://autoglass-frontend.pages.dev/sok?lang=en"/>
+  </url>
+
+  <!-- Browse -->
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/bla</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass-frontend.pages.dev/bla"/>
+  </url>
+
+  <!-- Glass Guide -->
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/bilglassguide</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass-frontend.pages.dev/bilglassguide"/>
+  </url>
+
+  <!-- Guide Subpages -->
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/bilglassguide/frontrute</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/bilglassguide/sideglass</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/bilglassguide/bakglass</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/bilglassguide/adas-kalibrering</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Cart/Checkout -->
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/kasse</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Static Pages -->
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/bli-kunde</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://autoglass-frontend.pages.dev/kundeservice</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
