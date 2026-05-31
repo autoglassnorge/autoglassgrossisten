@@ -1,7 +1,6 @@
 name = "autoglass-frontend"
-compatibility_date = "2026-05-30"
 pages_build_output_dir = "dist"
+production_branch = "main"
 
-# Custom domains - må konfigureres i Cloudflare Dashboard
-# Gå til: dash.cloudflare.com → Pages → autoglass-frontend → Custom domains
-# Legg til: app.auto-glass.no
+# Domains must be configured in dashboard or via API with Global Key
+# Current domains: autoglass-frontend.pages.dev, autoglass.finnbilglass.no

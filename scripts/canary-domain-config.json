@@ -1,0 +1,46 @@
+{
+  "domain_configuration": {
+    "project_name": "autoglass-frontend",
+    "account_id": "2266e975a1d0ff5356bba1af884a2773",
+    "domain": "app.auto-glass.no",
+    "type": "custom_domain",
+    "ssl": "full",
+    "setup_steps": [
+      {
+        "step": 1,
+        "action": "Add custom domain to Pages project",
+        "method": "Dashboard",
+        "url": "https://dash.cloudflare.com",
+        "path": "Pages → autoglass-frontend → Custom domains → Set up custom domain",
+        "input": "app.auto-glass.no"
+      },
+      {
+        "step": 2,
+        "action": "Verify DNS",
+        "command": "dig app.auto-glass.no CNAME",
+        "expected": "autoglass-frontend.pages.dev"
+      },
+      {
+        "step": 3,
+        "action": "Test HTTPS",
+        "command": "curl -sI https://app.auto-glass.no/ | head -1",
+        "expected": "HTTP/2 200"
+      },
+      {
+        "step": 4,
+        "action": "Start monitoring",
+        "command": "node scripts/canary-monitor.mjs"
+      }
+    ],
+    "verification": {
+      "health_endpoint": "https://app.auto-glass.no/api/health",
+      "metrics_endpoint": "https://app.auto-glass.no/api/metrics",
+      "react_check": "curl https://app.auto-glass.no/ | grep '<div id=\"root\">'"
+    },
+    "rollback": {
+      "method": "Delete CNAME record in Cloudflare DNS",
+      "record": "app.auto-glass.no",
+      "alternative": "Change A record to 46.62.128.105"
+    }
+  }
+}

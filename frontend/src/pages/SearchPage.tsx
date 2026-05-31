@@ -182,8 +182,21 @@ export default function SearchPage() {
                 <>
                   <p className="font-medium text-red-800">Kjøretøyoppslag midlertidig utilgjengelig</p>
                   <p className="text-sm text-red-700 mt-1">
-                    Vi får ikke kontakt med Statens vegvesen sitt register akkurat nå. Prøv igjen om noen minutter.
+                    Vi får ikke kontakt med Statens vegvesen sitt register akkurat nå på grunn av sikkerhetstiltak. 
+                    Du kan sjekke kjøretøyopplysninger direkte på vegvesen.no eller bla i katalogen vår.
                   </p>
+                  {error instanceof SearchError && error.backupUrl && (
+                    <div className="mt-3 flex flex-col sm:flex-row gap-2">
+                      <a 
+                        href={error.backupUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 rounded-md bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700"
+                      >
+                        Sjekk på vegvesen.no
+                      </a>
+                    </div>
+                  )}
                 </>
               ) : isInternalError ? (
                 <>

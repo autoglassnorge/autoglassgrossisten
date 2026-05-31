@@ -6,7 +6,8 @@ export class SearchError extends Error {
   constructor(
     message: string,
     public status: number,
-    public code?: string
+    public code?: string,
+    public backupUrl?: string
   ) {
     super(message);
     this.name = 'SearchError';
@@ -20,7 +21,8 @@ export async function searchByRegnr(regnr: string): Promise<SearchResult> {
     throw new SearchError(
       body.error ?? `Søk feilet (${res.status})`,
       res.status,
-      body.code
+      body.code,
+      body.backupUrl
     );
   }
   return res.json();

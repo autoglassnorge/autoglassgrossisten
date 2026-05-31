@@ -73,7 +73,13 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           return {
             httpStatus: 503,
             retryAfter: 60,
-            body: { error: "Kjøretøyoppslag midlertidig utilgjengelig", regnr, code: "svv_upstream_error" },
+            body: { 
+              error: "Kjøretøyoppslag midlertidig utilgjengelig", 
+              regnr, 
+              code: "svv_upstream_error",
+              backupUrl: `https://www.vegvesen.no/kjoretoy/kjop-og-salg/kjoretoyopplysninger/sjekk-kjoretoyopplysninger/?registreringsnummer=${encodeURIComponent(regnr)}`,
+              message: "Du kan sjekke kjøretøyopplysninger direkte på vegvesen.no eller legge inn informasjon manuelt"
+            },
           };
         case "not_found":
         default:
