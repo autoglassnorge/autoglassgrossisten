@@ -136,6 +136,38 @@ export default {
       return handleAdminQuotes(request, env);
     }
 
+    // Vegvesen Scraper (backup når SVV er nede)
+    if (path === "/api/scrape-vegvesen" && request.method === "GET") {
+      const url = new URL(request.url);
+      const regnr = url.searchParams.get("regnr");
+      
+      if (!regnr) {
+        return errorResponse("Mangler regnr parameter", 400);
+      }
+      
+      // Importer scraper dynamisk for å unngå oppstartskostnad
+      const { scrapeVegvesen } = await import("./providers/vegvesen-scraper");
+      const result = await scrapeVegvesen(regnr);
+      
+      if (result.status === "ok" && result.vehicle) {
+        return jsonResponse({
+          status: "ok",
+          source: "vegvesen-scraper",
+          vehicle: result.vehicle,
+        });
+      } else if (result.status === "not_found") {
+        return jsonResponse({ 
+          status: "not_found", 
+          error: "Kjøretøy ikke funnet på vegvesen.no" 
+        }, 404);
+      } else {
+        return jsonResponse({ 
+          status: "error", 
+          error: result.error || "Scraping feilet" 
+        }, 503);
+      }
+    }
+
     return errorResponse("Ukjent endepunkt", 404);
   },
 };
