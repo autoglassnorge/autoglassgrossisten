@@ -78,6 +78,16 @@ export interface VehicleInfo {
   k_type: number;
   submodel?: string | null;
   effectiveEquipment?: EquipmentFlags | null;
+
+  // Extended vehicle details from SVV/Biluppgifter
+  regno?: string;              // Registration number
+  color?: string;              // Farge (f.eks. "Rød", "Sort")
+  fuelType?: string;           // Drivstoff (f.eks. "Bensin", "Diesel")
+  euroClass?: string;          // Euro-klasse (f.eks. "Euro 6")
+  nextEUDate?: string;         // ISO dato for neste EU-kontroll
+  registrationStatus?: string; // "Registrert" / "Avregistrert"
+  vehicleClass?: string;       // "Personbil", "Varebil", etc.
+  seatCount?: number;          // Antall seter
 }
 
 export interface EquipmentFlags {

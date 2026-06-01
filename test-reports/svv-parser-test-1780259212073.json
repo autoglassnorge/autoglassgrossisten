@@ -1,0 +1,386 @@
+{
+  "timestamp": "2026-05-31T20:26:52.065Z",
+  "baseUrl": "https://autoglass-glass-sok.autoglassnorge.workers.dev",
+  "mode": "mock",
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  "categories": {
+    "parsing": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    "backward-compat": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "error-handling": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0
+    }
+  },
+  "tests": [
+    {
+      "id": "P001",
+      "description": "Parsing av alle nye felter - komplett kjøretøydata",
+      "category": "parsing",
+      "regnr": "EB21570",
+      "passed": true,
+      "assertions": [
+        {
+          "name": "status",
+          "expected": "ok",
+          "actual": "ok",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:color",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:fuelType",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:euroClass",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:nextEUDate",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:registrationStatus",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:vehicleClass",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:seatCount",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:color",
+          "expected": "SVART",
+          "actual": "SVART",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:fuelType",
+          "expected": "Diesel",
+          "actual": "Diesel",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:euroClass",
+          "expected": 1,
+          "actual": 1,
+          "passed": true
+        },
+        {
+          "name": "fieldValue:nextEUDate",
+          "expected": "2025-05-15",
+          "actual": "2025-05-15",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:registrationStatus",
+          "expected": "REGISTRERT",
+          "actual": "REGISTRERT",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:vehicleClass",
+          "expected": "M1",
+          "actual": "M1",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:seatCount",
+          "expected": 5,
+          "actual": 5,
+          "passed": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "P002",
+      "description": "Håndtering av manglende felter - skal returnere undefined/null",
+      "category": "parsing",
+      "regnr": "XX12345",
+      "passed": true,
+      "assertions": [
+        {
+          "name": "status",
+          "expected": "ok",
+          "actual": "ok",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:regno",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:make",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:model",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:year",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldUndefined:color",
+          "expected": "undefined",
+          "actual": "undefined",
+          "passed": true
+        },
+        {
+          "name": "fieldUndefined:fuelType",
+          "expected": "undefined",
+          "actual": "undefined",
+          "passed": true
+        },
+        {
+          "name": "fieldUndefined:euroClass",
+          "expected": "undefined",
+          "actual": "undefined",
+          "passed": true
+        },
+        {
+          "name": "fieldUndefined:nextEUDate",
+          "expected": "undefined",
+          "actual": "undefined",
+          "passed": true
+        },
+        {
+          "name": "fieldUndefined:registrationStatus",
+          "expected": "undefined",
+          "actual": "undefined",
+          "passed": true
+        },
+        {
+          "name": "fieldUndefined:vehicleClass",
+          "expected": "undefined",
+          "actual": "undefined",
+          "passed": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "P003",
+      "description": "ISO dato-format for nextEUDate",
+      "category": "parsing",
+      "regnr": "TEST001",
+      "passed": true,
+      "assertions": [
+        {
+          "name": "status",
+          "expected": "ok",
+          "actual": "ok",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:nextEUDate",
+          "expected": "2024-12-31",
+          "actual": "2024-12-31",
+          "passed": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "B001",
+      "description": "Bakoverkompatibilitet - eksisterende felter fungerer",
+      "category": "backward-compat",
+      "regnr": "BK00100",
+      "passed": true,
+      "assertions": [
+        {
+          "name": "status",
+          "expected": "ok",
+          "actual": "ok",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:regno",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:vin",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:make",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:model",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:year",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldPresent:k_type",
+          "expected": "present",
+          "actual": "present",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:regno",
+          "expected": "BK00100",
+          "actual": "BK00100",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:make",
+          "expected": "AUDI",
+          "actual": "AUDI",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:model",
+          "expected": "A4",
+          "actual": "A4",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:year",
+          "expected": 2021,
+          "actual": 2021,
+          "passed": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "E001",
+      "description": "Feilhåndtering - 404 for ukjent regnr",
+      "category": "error-handling",
+      "regnr": "NOTFOUND",
+      "passed": true,
+      "assertions": [
+        {
+          "name": "status",
+          "expected": "not_found",
+          "actual": "not_found",
+          "passed": true
+        },
+        {
+          "name": "httpStatus",
+          "expected": 404,
+          "actual": 404,
+          "passed": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "E002",
+      "description": "Feilhåndtering - 503 når SVV er nede",
+      "category": "error-handling",
+      "regnr": "SVVDOWN1",
+      "passed": true,
+      "assertions": [
+        {
+          "name": "status",
+          "expected": "upstream_error",
+          "actual": "upstream_error",
+          "passed": true
+        },
+        {
+          "name": "httpStatus",
+          "expected": 503,
+          "actual": 503,
+          "passed": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "E003",
+      "description": "Feilhåndtering - ugyldig dato-format skal ikke krasje",
+      "category": "error-handling",
+      "regnr": "BADDATE1",
+      "passed": true,
+      "assertions": [
+        {
+          "name": "status",
+          "expected": "ok",
+          "actual": "ok",
+          "passed": true
+        },
+        {
+          "name": "fieldValue:year",
+          "expected": 0,
+          "actual": 0,
+          "passed": true
+        },
+        {
+          "name": "fieldValue:nextEUDate",
+          "passed": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "validation": {
+    "newFields": {},
+    "backwardCompat": "PASS",
+    "errorHandling": "PASS",
+    "color": "PASS",
+    "fuelType": "PASS",
+    "euroClass": "PASS",
+    "nextEUDate": "PASS",
+    "registrationStatus": "PASS",
+    "vehicleClass": "PASS",
+    "seatCount": "PASS"
+  }
+}

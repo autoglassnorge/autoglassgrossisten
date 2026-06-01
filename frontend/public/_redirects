@@ -1,5 +1,3 @@
-# Serve static files directly
+/browse/* /browse/:splat 200
 /videos/* /videos/:splat 200
-
-# SPA fallback
 /* /index.html 200

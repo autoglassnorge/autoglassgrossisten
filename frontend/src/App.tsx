@@ -18,6 +18,7 @@ const OppvarmetFrontrutePage = lazy(() => import('@/pages/bilglassguide/Oppvarme
 const IdentifiserePage = lazy(() => import('@/pages/bilglassguide/IdentifiserePage'))
 const FlereFrontruterPage = lazy(() => import('@/pages/bilglassguide/FlereFrontruterPage'))
 const AkustiskPage = lazy(() => import('@/pages/bilglassguide/AkustiskPage'))
+const VariantMatchingPage = lazy(() => import('@/pages/bilglassguide/VariantMatchingPage'))
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/bilglassguide/identifisere-riktig-bilglass" element={<IdentifiserePage />} />
             <Route path="/bilglassguide/flere-frontruter-samme-modell" element={<FlereFrontruterPage />} />
             <Route path="/bilglassguide/akustisk-bilglass" element={<AkustiskPage />} />
+            <Route path="/bilglassguide/variantmatching" element={<VariantMatchingPage />} />
             <Route path="/sok" element={<SearchPage />} />
             <Route path="/kasse" element={<AccountPage />} />
             <Route path="*" element={

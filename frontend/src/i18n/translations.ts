@@ -56,6 +56,21 @@ export const translations: Record<Lang, Dict> = {
     'categories.tools': 'Verktøy & forbruk',
     'categories.tools.desc': 'Snorer, kniver, sugekopper, ruteløftere.',
 
+    'categorygrid.title': 'Finn riktig glass etter kategori',
+    'categorygrid.subtitle': 'Bla i vårt komplette utvalg av bilglass',
+    'categorygrid.windshield.title': 'Frontrute',
+    'categorygrid.windshield.desc': 'OEM og kvalitet frontruter med ADAS-støtte',
+    'categorygrid.rear.title': 'Bakrute',
+    'categorygrid.rear.desc': 'Bakruter med varme og antenne',
+    'categorygrid.side.title': 'Sideglass',
+    'categorygrid.side.desc': 'Sideruter og dørvinduer',
+    'categorygrid.adas.title': 'ADAS-glass',
+    'categorygrid.adas.desc': 'Kameraklargjort glass og kalibrering',
+    'categorygrid.transporter.title': 'Varebil',
+    'categorygrid.transporter.desc': 'Glass til varebiler og buss',
+    'categorygrid.calibration.title': 'Kalibrering',
+    'categorygrid.calibration.desc': 'ADAS-kalibrering og utstyr',
+
     'adas.eyebrow': 'TEKNISK SPESIFIKASJON',
     'adas.title': 'ADAS-klar ut av esken',
     'adas.body': 'Hvert frontruteoppslag inkluderer kompatibilitetsdata for kamera, regn-/lyssensor, varmefelt og HUD. Vi merker hver SKU med kalibreringskrav (statisk, dynamisk eller begge) og leverer mot OEM-toleranser.',
@@ -86,6 +101,9 @@ export const translations: Record<Lang, Dict> = {
     'footer.contact': 'Kontakt',
     'footer.links': 'Lenker',
     'footer.legal': 'Org.nr · MVA · EORI',
+
+    'quicksearch.popularBrands': 'Populære merker',
+    'quicksearch.recentSearches': 'Dine siste søk',
   },
 
   sv: {
@@ -130,6 +148,21 @@ export const translations: Record<Lang, Dict> = {
     'categories.tools': 'Verktyg & förbruk',
     'categories.tools.desc': 'Snören, knivar, sugkoppar, rutlyftare.',
 
+    'categorygrid.title': 'Hitta rätt glas efter kategori',
+    'categorygrid.subtitle': 'Bläddra i vårt kompletta sortiment av bilglas',
+    'categorygrid.windshield.title': 'Vindruta',
+    'categorygrid.windshield.desc': 'OEM och kvalitet vindrutor med ADAS-stöd',
+    'categorygrid.rear.title': 'Bakruta',
+    'categorygrid.rear.desc': 'Bakglas med värme och antenn',
+    'categorygrid.side.title': 'Sidelglas',
+    'categorygrid.side.desc': 'Sidoglas och dörrfönster',
+    'categorygrid.adas.title': 'ADAS-glas',
+    'categorygrid.adas.desc': 'Kameraförberett glas och kalibrering',
+    'categorygrid.transporter.title': 'Skåpbil',
+    'categorygrid.transporter.desc': 'Glas till skåpbilar och bussar',
+    'categorygrid.calibration.title': 'Kalibrering',
+    'categorygrid.calibration.desc': 'ADAS-kalibrering och utrustning',
+
     'adas.eyebrow': 'TEKNISK SPECIFIKATION',
     'adas.title': 'ADAS-redo direkt ur lådan',
     'adas.body': 'Varje vindruteuppslag innehåller kompatibilitetsdata för kamera, regn-/ljussensor, värmefält och HUD. Vi märker varje SKU med kalibreringskrav (statisk, dynamisk eller båda) och levererar mot OEM-toleranser.',
@@ -160,6 +193,9 @@ export const translations: Record<Lang, Dict> = {
     'footer.contact': 'Kontakt',
     'footer.links': 'Länkar',
     'footer.legal': 'Org.nr · Moms · EORI',
+
+    'quicksearch.popularBrands': 'Populära märken',
+    'quicksearch.recentSearches': 'Dina senaste sökningar',
   },
 
   en: {
@@ -204,6 +240,21 @@ export const translations: Record<Lang, Dict> = {
     'categories.tools': 'Tools & consumables',
     'categories.tools.desc': 'Cut-out wires, blades, suction cups, glass lifters.',
 
+    'categorygrid.title': 'Find the right glass by category',
+    'categorygrid.subtitle': 'Browse our complete range of automotive glass',
+    'categorygrid.windshield.title': 'Windshield',
+    'categorygrid.windshield.desc': 'OEM and quality windshields with ADAS support',
+    'categorygrid.rear.title': 'Backlite',
+    'categorygrid.rear.desc': 'Rear glass with defroster and antenna',
+    'categorygrid.side.title': 'Side glass',
+    'categorygrid.side.desc': 'Side windows and door glass',
+    'categorygrid.adas.title': 'ADAS glass',
+    'categorygrid.adas.desc': 'Camera-ready glass and calibration',
+    'categorygrid.transporter.title': 'Commercial',
+    'categorygrid.transporter.desc': 'Glass for vans and buses',
+    'categorygrid.calibration.title': 'Calibration',
+    'categorygrid.calibration.desc': 'ADAS calibration and equipment',
+
     'adas.eyebrow': 'TECHNICAL SPECIFICATION',
     'adas.title': 'ADAS-ready out of the box',
     'adas.body': 'Every windshield listing carries compatibility data for camera, rain/light sensor, heated zones and HUD. Each SKU is tagged with calibration requirements (static, dynamic or both) and shipped to OEM tolerances.',
@@ -234,5 +285,8 @@ export const translations: Record<Lang, Dict> = {
     'footer.contact': 'Contact',
     'footer.links': 'Links',
     'footer.legal': 'Org.no · VAT · EORI',
+
+    'quicksearch.popularBrands': 'Popular brands',
+    'quicksearch.recentSearches': 'Your recent searches',
   },
 };

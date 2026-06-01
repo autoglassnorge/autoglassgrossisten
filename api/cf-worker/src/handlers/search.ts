@@ -5,6 +5,7 @@
 import type { Env, GlassRecord, SearchResult, BovsoftVehicle, GroundTruthRecord } from "../types";
 import type { TecdocVehicle, SvvFetchResult } from "../providers/svv";
 import { fetchSvvEnkeltoppslag } from "../providers/svv";
+import { fetchBiluppgifterVehicle } from "../providers/biluppgifter-svv-backup";
 import { getCachedSvvVehicle, cacheSvvVehicle } from "../lib/svv-cache";
 import { getCachedBovsoftVehicle, fetchBovsoftVehicle, cacheBovsoftVehicle } from "../lib/bovsoft";
 import { normalizeBrand, getBrandAliases } from "../lib/brand";
@@ -52,44 +53,62 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
         await cacheSvvVehicle(env.GLASS_CATALOG, regnr, svvResult.vehicle);
       }
     }
-    let source = "svv.enkeltoppslag";
-
+    // 1b. Fallback til Biluppgifter hvis SVV er nede
+    let biluppgifterUsed = false;
     if (svvResult.status !== "ok") {
-      switch (svvResult.status) {
-        case "not_configured":
-          return {
-            httpStatus: 503,
-            retryAfter: 3600,
-            body: { error: "Kjøretøyoppslag midlertidig utilgjengelig (konfigurasjon)", regnr, code: "svv_not_configured" },
-          };
-        case "auth_error":
-          return {
-            httpStatus: 503,
-            retryAfter: 3600,
-            body: { error: "Kjøretøyoppslag midlertidig utilgjengelig", regnr, code: "svv_auth_error" },
-          };
-        case "upstream_error":
-        case "parse_error":
-          return {
-            httpStatus: 503,
-            retryAfter: 60,
-            body: { 
-              error: "Kjøretøyoppslag midlertidig utilgjengelig", 
-              regnr, 
-              code: "svv_upstream_error",
-              backupUrl: `https://www.vegvesen.no/kjoretoy/kjop-og-salg/kjoretoyopplysninger/sjekk-kjoretoyopplysninger/?registreringsnummer=${encodeURIComponent(regnr)}`,
-              message: "Du kan sjekke kjøretøyopplysninger direkte på vegvesen.no eller legge inn informasjon manuelt"
-            },
-          };
-        case "not_found":
-        default:
-          return {
-            httpStatus: 404,
-            body: { error: "Kunne ikke slå opp registreringsnummer", regnr },
-          };
+      // Prøv Biluppgitter som backup ved upstream_error eller parse_error
+      if (svvResult.status === "upstream_error" || svvResult.status === "parse_error") {
+        console.log(`[Backup] SVV failed with ${svvResult.status}, trying Biluppgifter...`);
+        const biluppgifterResult = await fetchBiluppgifterVehicle(regnr, env.BILUPPGIFTER_API_KEY);
+        
+        if (biluppgifterResult.status === "ok") {
+          console.log(`[Backup] Biluppgitter success for ${regnr}`);
+          svvResult = { status: "ok", vehicle: biluppgifterResult.vehicle };
+          biluppgifterUsed = true;
+        } else {
+          console.warn(`[Backup] Biluppgitter also failed: ${biluppgifterResult.status}`);
+        }
+      }
+      
+      // Hvis fortsatt ikke OK, returner feil
+      if (svvResult.status !== "ok") {
+        switch (svvResult.status) {
+          case "not_configured":
+            return {
+              httpStatus: 503,
+              retryAfter: 3600,
+              body: { error: "Kjøretøyoppslag midlertidig utilgjengelig (konfigurasjon)", regnr, code: "svv_not_configured" },
+            };
+          case "auth_error":
+            return {
+              httpStatus: 503,
+              retryAfter: 3600,
+              body: { error: "Kjøretøyoppslag midlertidig utilgjengelig", regnr, code: "svv_auth_error" },
+            };
+          case "upstream_error":
+          case "parse_error":
+            return {
+              httpStatus: 503,
+              retryAfter: 60,
+              body: { 
+                error: "Kjøretøyoppslag midlertidig utilgjengelig", 
+                regnr, 
+                code: "svv_upstream_error",
+                backupUrl: `https://www.vegvesen.no/kjoretoy/kjop-og-salg/kjoretoyopplysninger/sjekk-kjoretoyopplysninger/?registreringsnummer=${encodeURIComponent(regnr)}`,
+                message: "Du kan sjekke kjøretøyopplysninger direkte på vegvesen.no eller legge inn informasjon manuelt"
+              },
+            };
+          case "not_found":
+          default:
+            return {
+              httpStatus: 404,
+              body: { error: "Kunne ikke slå opp registreringsnummer", regnr },
+            };
+        }
       }
     }
 
+    const source = biluppgifterUsed ? "biluppgifter.backup" : "svv.enkeltoppslag";
     const vehicle: TecdocVehicle = svvResult.vehicle;
     const db = env.GLASS_CATALOG_D1;
 

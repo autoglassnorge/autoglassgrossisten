@@ -15,6 +15,7 @@ import { CalibrationInfoPanel } from '@/components/search/CalibrationInfoPanel';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
 import { EquipmentVerifier } from '@/components/search/EquipmentVerifier';
 import { AccessorySuggestions } from '@/components/search/AccessorySuggestions';
+import { EUKontrollReminder } from '@/components/search/EUKontrollReminder';
 import { GlassCategoryFilter } from '@/components/search/GlassCategoryFilter';
 import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
 import { ProductCard } from '@/components/catalog/ProductCard';
@@ -245,6 +246,9 @@ export default function SearchPage() {
             equipment={data.equipment}
             regnr={data.regnr}
           />
+
+          {/* EU-kontroll påminnelse */}
+          <EUKontrollReminder nextEUDate={vehicle.nextEUDate} />
 
           {/* kType enrichment (subtle — internal reference) */}
           {data.ktypeInfo && (

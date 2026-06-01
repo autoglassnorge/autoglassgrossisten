@@ -9,12 +9,96 @@ import { CORS_HEADERS, jsonResponse, errorResponse } from "./lib/cors";
 import { checkRateLimit } from "./lib/rate-limit";
 import { handleGlass } from "./handlers/glass";
 import { handleCatalogBrands, handleCatalogCategories, handleCatalogSearch, handleCatalogBulkLookup } from "./handlers/catalog";
+import { handleBrowseBrands, handleBrowseBrand } from "./handlers/browse";
 import { handleQuote } from "./handlers/quote";
 import { handleFeedback } from "./handlers/feedback";
 import { handleAdminQuotes } from "./handlers/admin";
 import { handleVinLookup, handleVinLookupStatus } from "./handlers/vin";
 import { handleHealth } from "./handlers/health";
 import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
+import { fetchSvvEnkeltoppslag } from "./providers/svv";
+
+/** Lagre SVV-status til KV for overvåking */
+async function recordSvvStatus(
+  env: Env,
+  status: "ok" | "degraded" | "down",
+  error?: string,
+  httpStatus?: number
+): Promise<void> {
+  const now = new Date().toISOString();
+  const key = "svv:status:history";
+  
+  try {
+    // Hent eksisterende historikk
+    const existing = await env.GLASS_CATALOG.get(key, "json") as {
+      entries?: Array<{ timestamp: string; status: string; error?: string; httpStatus?: number }>;
+      lastSuccessAt?: string;
+      lastFailureAt?: string;
+      failureCount: number;
+    } | null;
+    
+    const entries = existing?.entries || [];
+    
+    // Legg til ny entry
+    entries.push({
+      timestamp: now,
+      status,
+      error,
+      httpStatus,
+    });
+    
+    // Hold kun siste 50 entries
+    if (entries.length > 50) {
+      entries.shift();
+    }
+    
+    // Oppdater counters
+    const lastSuccessAt = status === "ok" ? now : existing?.lastSuccessAt;
+    const lastFailureAt = status !== "ok" ? now : existing?.lastFailureAt;
+    const failureCount = status !== "ok" 
+      ? (existing?.failureCount || 0) + 1 
+      : 0; // Reset ved suksess
+    
+    await env.GLASS_CATALOG.put(key, JSON.stringify({
+      entries,
+      lastSuccessAt,
+      lastFailureAt,
+      failureCount,
+      updatedAt: now,
+    }));
+    
+    console.log(`[SVV Monitor] Status recorded: ${status}${error ? ` (${error})` : ""}`);
+  } catch (e) {
+    console.error("[SVV Monitor] Failed to record status:", e);
+  }
+}
+
+/** Cron-trigger: Periodisk SVV health check */
+async function runSvvHealthCheck(env: Env): Promise<void> {
+  const testRegnr = "EB21570";
+  const startTime = Date.now();
+  
+  console.log("[SVV Monitor] Running scheduled health check...");
+  
+  try {
+    const result = await fetchSvvEnkeltoppslag(testRegnr, env.SVV_API_KEY);
+    const responseTimeMs = Date.now() - startTime;
+    
+    if (result.status === "ok" || result.status === "not_found") {
+      console.log(`[SVV Monitor] Health check passed (${responseTimeMs}ms)`);
+      await recordSvvStatus(env, "ok");
+    } else if (result.status === "upstream_error") {
+      console.warn(`[SVV Monitor] Health check failed: upstream error ${result.httpStatus}`);
+      await recordSvvStatus(env, "down", `HTTP ${result.httpStatus}`, result.httpStatus);
+    } else {
+      console.warn(`[SVV Monitor] Health check degraded: ${result.status}`);
+      await recordSvvStatus(env, "degraded", result.status);
+    }
+  } catch (e) {
+    console.error(`[SVV Monitor] Health check error: ${e instanceof Error ? e.message : String(e)}`);
+    await recordSvvStatus(env, "down", e instanceof Error ? e.message : "Unknown error");
+  }
+}
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -36,6 +120,37 @@ export default {
     // Health check
     if (path === "/api/health") {
       return handleHealth(request, env);
+    }
+    
+    // SVV Status monitor (detaljert historikk)
+    if (path === "/api/svv-status") {
+      const history = await env.GLASS_CATALOG.get("svv:status:history", "json") as {
+        entries?: Array<{ timestamp: string; status: string; error?: string; httpStatus?: number }>;
+        lastSuccessAt?: string;
+        lastFailureAt?: string;
+        failureCount: number;
+        updatedAt?: string;
+      } | null;
+      
+      // Beregn uptime % fra siste 24 timer
+      const now = Date.now();
+      const oneDayAgo = now - 24 * 60 * 60 * 1000;
+      const recentEntries = history?.entries?.filter(e => new Date(e.timestamp).getTime() > oneDayAgo) || [];
+      const okCount = recentEntries.filter(e => e.status === "ok").length;
+      const uptime24h = recentEntries.length > 0 ? (okCount / recentEntries.length) * 100 : 100;
+      
+      return jsonResponse({
+        current: history?.entries?.[history.entries.length - 1] || null,
+        summary: {
+          lastSuccessAt: history?.lastSuccessAt,
+          lastFailureAt: history?.lastFailureAt,
+          totalFailures: history?.failureCount || 0,
+          uptime24h: Math.round(uptime24h * 100) / 100,
+          checksLast24h: recentEntries.length,
+        },
+        history: history?.entries?.slice(-20) || [], // Siste 20 entries
+        timestamp: new Date().toISOString(),
+      });
     }
 
     // Metrics endpoint (enterprise observability)
@@ -104,6 +219,14 @@ export default {
       return handleCatalogBulkLookup(request, env);
     }
 
+    // Browse data (merke/modell/år)
+    if (path === "/api/browse/brands") {
+      return handleBrowseBrands(request, env);
+    }
+    if (path.startsWith("/api/browse/") && path.endsWith(".json")) {
+      return handleBrowseBrand(request, env);
+    }
+
     // Auth
     if (path === "/api/me") {
       const email = request.headers.get("CF-Access-Authenticated-User-Email");
@@ -169,5 +292,13 @@ export default {
     }
 
     return errorResponse("Ukjent endepunkt", 404);
+  },
+  
+  /** Cron-trigger handler - kjører på schedule */
+  async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
+    console.log(`[Cron] Triggered at ${new Date().toISOString()}, cron: ${controller.cron}`);
+    
+    // Kjør SVV health check
+    ctx.waitUntil(runSvvHealthCheck(env));
   },
 };

@@ -18,6 +18,14 @@ export interface TecdocVehicle {
   engineCode?: string;
   seats?: number;
   gvwr?: number;
+  // Utvidede felter fra SVV API (v2)
+  color?: string;                    // karosseriOgLasteplan.rFarge[0].kodeNavn
+  fuelType?: string;                 // miljodata.miljoOgdrivstoffGruppe[0].drivstoffKodeMiljodata.kodeNavn
+  euroClass?: string;                // miljodata.euroKlasse.kodeNavn
+  nextEUDate?: string;               // periodiskKjoretoyKontroll.kontrollfrist (ISO dato)
+  registrationStatus?: string;       // registrering.registreringsstatus.kodeBeskrivelse
+  vehicleClass?: string;             // kjoretoyklassifisering.beskrivelse
+  seatCount?: number;                // persontall.sitteplasserTotalt (alias for seats)
 }
 
 /** Raw SVV enkeltoppslag response shape. */
@@ -25,6 +33,17 @@ export interface SvvKjoretoyData {
   kjoretoydataListe?: Array<{
     kjoretoyId?: { understellsnummer?: string };
     forstegangsregistrering?: { registrertForstegangNorgeDato?: string };
+    registrering?: {
+      registreringsstatus?: {
+        kodeBeskrivelse?: string;
+      };
+    };
+    periodiskKjoretoyKontroll?: {
+      kontrollfrist?: string;
+    };
+    kjoretoyklassifisering?: {
+      beskrivelse?: string;
+    };
     godkjenning?: {
       tekniskGodkjenning?: {
         tekniskeData?: {
@@ -42,6 +61,21 @@ export interface SvvKjoretoyData {
           };
           persontall?: { sitteplasserTotalt?: number };
           vekter?: { tillattTotalvekt?: number };
+          karosseriOgLasteplan?: {
+            rFarge?: Array<{
+              kodeNavn?: string;
+            }>;
+          };
+          miljodata?: {
+            euroKlasse?: {
+              kodeNavn?: string;
+            };
+            miljoOgdrivstoffGruppe?: Array<{
+              drivstoffKodeMiljodata?: {
+                kodeNavn?: string;
+              };
+            }>;
+          };
         };
       };
     };
@@ -105,6 +139,15 @@ export function parseSvvVehicle(data: SvvKjoretoyData, regnr: string): TecdocVeh
   const seats = td?.persontall?.sitteplasserTotalt || 0;
   const gvwr = td?.vekter?.tillattTotalvekt || 0;
 
+  // Nye utvidede felter
+  const color = td?.karosseriOgLasteplan?.rFarge?.[0]?.kodeNavn;
+  const fuelType = td?.miljodata?.miljoOgdrivstoffGruppe?.[0]?.drivstoffKodeMiljodata?.kodeNavn;
+  const euroClass = td?.miljodata?.euroKlasse?.kodeNavn;
+  const nextEUDate = k.periodiskKjoretoyKontroll?.kontrollfrist;
+  const registrationStatus = k.registrering?.registreringsstatus?.kodeBeskrivelse;
+  const vehicleClass = k.kjoretoyklassifisering?.beskrivelse;
+  const seatCount = td?.persontall?.sitteplasserTotalt;
+
   return {
     regno: regnr,
     vin,
@@ -118,6 +161,14 @@ export function parseSvvVehicle(data: SvvKjoretoyData, regnr: string): TecdocVeh
     engineCode,
     seats,
     gvwr,
+    // Nye felter (optional, undefined hvis ikke tilgjengelig)
+    color,
+    fuelType,
+    euroClass,
+    nextEUDate,
+    registrationStatus,
+    vehicleClass,
+    seatCount,
   };
 }
 
