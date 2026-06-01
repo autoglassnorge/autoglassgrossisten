@@ -129,6 +129,17 @@ export interface KtypeInfo {
   source: string;
 }
 
+export interface KtypeLookupResponse {
+  success: boolean;
+  ktype?: number;
+  vehicle?: {
+    brand: string;
+    model: string;
+    year: number;
+  };
+  error?: string;
+}
+
 export interface SearchResult {
   vehicle: VehicleInfo;
   candidates: Product[];
