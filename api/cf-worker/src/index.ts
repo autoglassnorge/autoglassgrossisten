@@ -15,6 +15,7 @@ import { handleFeedback } from "./handlers/feedback";
 import { handleAdminQuotes } from "./handlers/admin";
 import { handleVinLookup, handleVinLookupStatus } from "./handlers/vin";
 import { handleHealth } from "./handlers/health";
+import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, handleVehicleYears, handleVehicleProducts } from "./handlers/vehicle";
 import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
 import { fetchSvvEnkeltoppslag } from "./providers/svv";
 
@@ -291,6 +292,23 @@ export default {
       }
     }
 
+
+    // Vehicle Wizard endpoints
+    if (path.startsWith("/api/vehicle/ktype/")) {
+      return handleVehicleKtypeLookup(request, env);
+    }
+    if (path === "/api/vehicle/brands") {
+      return handleVehicleBrands(request, env);
+    }
+    if (path === "/api/vehicle/models") {
+      return handleVehicleModels(request, env);
+    }
+    if (path === "/api/vehicle/years") {
+      return handleVehicleYears(request, env);
+    }
+    if (path === "/api/vehicle/products") {
+      return handleVehicleProducts(request, env);
+    }
     return errorResponse("Ukjent endepunkt", 404);
   },
   
