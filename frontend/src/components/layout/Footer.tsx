@@ -54,6 +54,7 @@ export function Footer() {
               <li><a href="https://auto-glass.no" className="hover:text-autoglass-blue">auto-glass.no</a></li>
               <li><a href="https://www.finnbilglass.no" className="hover:text-autoglass-blue">finnbilglass.no</a></li>
               <li><span className="text-gray-400">B2B Katalog v3.0</span></li>
+              <li><Link to="/admin" className="text-gray-400 hover:text-autoglass-blue transition">Admin</Link></li>
             </ul>
           </div>
         </div>

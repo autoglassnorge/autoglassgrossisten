@@ -8,6 +8,7 @@ const HomePage = lazy(() => import('@/pages/HomePage'))
 const SearchPage = lazy(() => import('@/pages/SearchPage'))
 const AccountPage = lazy(() => import('@/pages/AccountPage'))
 const CartPage = lazy(() => import('@/pages/CartPage'))
+const AdminPage = lazy(() => import('@/pages/AdminPage'))
 const BrowsePage = lazy(() => import('@/pages/BrowsePage'))
 const BilglassguidePage = lazy(() => import('@/pages/BilglassguidePage'))
 const OmOssPage = lazy(() => import('@/pages/OmOssPage'))
@@ -56,6 +57,7 @@ function App() {
             <Route path="/kontakt" element={<KontaktPage />} />
             <Route path="/personvern" element={<PersonvernPage />} />
             <Route path="/vilkar" element={<VilkarPage />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={
               <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
