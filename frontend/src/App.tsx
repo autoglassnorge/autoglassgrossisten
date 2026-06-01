@@ -9,6 +9,10 @@ const SearchPage = lazy(() => import('@/pages/SearchPage'))
 const AccountPage = lazy(() => import('@/pages/AccountPage'))
 const BrowsePage = lazy(() => import('@/pages/BrowsePage'))
 const BilglassguidePage = lazy(() => import('@/pages/BilglassguidePage'))
+const OmOssPage = lazy(() => import('@/pages/OmOssPage'))
+const KontaktPage = lazy(() => import('@/pages/KontaktPage'))
+const PersonvernPage = lazy(() => import('@/pages/PersonvernPage'))
+const VilkarPage = lazy(() => import('@/pages/VilkarPage'))
 const FrontrutePage = lazy(() => import('@/pages/bilglassguide/FrontrutePage'))
 const AdasKameraPage = lazy(() => import('@/pages/bilglassguide/AdasKameraPage'))
 const KalibreringPage = lazy(() => import('@/pages/bilglassguide/KalibreringPage'))
@@ -42,6 +46,10 @@ function App() {
             <Route path="/bilglassguide/variantmatching" element={<VariantMatchingPage />} />
             <Route path="/sok" element={<SearchPage />} />
             <Route path="/kasse" element={<AccountPage />} />
+            <Route path="/om-oss" element={<OmOssPage />} />
+            <Route path="/kontakt" element={<KontaktPage />} />
+            <Route path="/personvern" element={<PersonvernPage />} />
+            <Route path="/vilkar" element={<VilkarPage />} />
             <Route path="*" element={
               <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
                 <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>

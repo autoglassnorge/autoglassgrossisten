@@ -1,10 +1,11 @@
 import { GlassWater, Phone, Mail, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function Footer() {
   return (
     <footer className="border-t bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 text-autoglass-blue mb-4">
@@ -14,6 +15,17 @@ export function Footer() {
             <p className="text-sm text-gray-600">
               Norges største bilglass-grossist. 130 000+ ruter på lager. Levering neste dag til over 500 verksteder.
             </p>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h4 className="font-semibold text-gray-900 mb-4">Navigasjon</h4>
+            <ul className="space-y-2 text-sm text-gray-600">
+              <li><Link to="/" className="hover:text-autoglass-blue">Forside</Link></li>
+              <li><Link to="/bla" className="hover:text-autoglass-blue">Katalog</Link></li>
+              <li><Link to="/bilglassguide" className="hover:text-autoglass-blue">Bilglassguide</Link></li>
+              <li><Link to="/sok" className="hover:text-autoglass-blue">Søk</Link></li>
+            </ul>
           </div>
 
           {/* Contact */}
@@ -46,8 +58,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t pt-8 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Autoglass AS. Alle rettigheter reservert.
+        <div className="mt-8 border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+          <div>
+            © {new Date().getFullYear()} Autoglass AS. Alle rettigheter reservert.
+          </div>
+          <div className="flex gap-4">
+            <Link to="/personvern" className="hover:text-autoglass-blue">Personvern</Link>
+            <Link to="/vilkar" className="hover:text-autoglass-blue">Vilkår</Link>
+            <Link to="/kontakt" className="hover:text-autoglass-blue">Kontakt</Link>
+          </div>
         </div>
       </div>
     </footer>

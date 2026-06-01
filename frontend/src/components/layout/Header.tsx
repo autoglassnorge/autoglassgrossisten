@@ -25,10 +25,11 @@ export function Header() {
   const navLinks = [
     { label: 'Katalog', href: '/bla' },
     { label: 'Bilglassguide', href: '/bilglassguide' },
-    { label: 'Søk', href: '/sok' },
+    { label: 'Om oss', href: '/om-oss' },
+    { label: 'Kontakt', href: '/kontakt' },
   ];
 
-  const authLink = { label: 'Logg inn', href: '/kundeportal.html' };
+  const authLink = { label: 'Logg inn', href: '/kasse' };
 
   return (
     <>
