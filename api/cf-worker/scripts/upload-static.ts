@@ -24,6 +24,7 @@ const MAX_RETRIES = 3;
 
 const FILES: Array<{ file: string; key: string }> = [
   { file: "index.html", key: "_site_index_html" },
+  { file: "sok.html", key: "_site_sok_html" },
   { file: "vin-sok.html", key: "_site_vin_sok_html" },
   { file: "produkter.html", key: "_site_produkter_html" },
   { file: "bli-kunde.html", key: "_site_bli_kunde_html" },
