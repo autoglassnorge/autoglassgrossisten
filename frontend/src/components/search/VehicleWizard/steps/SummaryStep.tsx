@@ -55,8 +55,8 @@ export function SummaryStep({
         let url: string;
 
         if (ktype) {
-          // Exact kType match
-          url = `/api/products/search?ktype=${encodeURIComponent(ktype)}`;
+          // Exact kType match - use vehicle products endpoint
+          url = `/api/vehicle/products?ktype=${encodeURIComponent(ktype)}`;
         } else if (selectedBrand && selectedModel && selectedYear) {
           // Manual selection fallback - use the existing glass endpoint
           const params = new URLSearchParams({

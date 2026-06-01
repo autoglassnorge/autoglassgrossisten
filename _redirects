@@ -30,6 +30,7 @@
 /personvern.html      /personvern.html        200
 /vin-sok.html         /vin-sok.html           200
 /kundeportal.html     /kundeportal.html       200
+/sok.html             /sok.html               200
 
 # API passthrough
 /api/*                https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 200

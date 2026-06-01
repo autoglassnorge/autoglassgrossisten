@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<script>(function(){var t=localStorage.getItem('ag-theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(!t&&d))document.documentElement.setAttribute('data-theme','dark');})();</script>
+<meta charset="UTF-8">
+  <link rel="icon" href="images/favicon.png" sizes="32x32">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Søkeresultater — Autoglass AS</title>
+<meta name="description" content="Søk etter bilglass med registreringsnummer eller VIN. 130 000 ruter på lager.">
+<meta name="robots" content="index, follow">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://auto-glass.no/sok.html">
+
+<!-- OpenGraph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Søk bilglass — Autoglass AS">
+<meta property="og:description" content="Finn riktig glass til ditt kjøretøy.">
+<meta property="og:url" content="https://auto-glass.no/sok.html">
+<meta property="og:site_name" content="Autoglass AS">
+
+<link rel="preconnect" href="https://autoglass-glass-sok.autoglassnorge.workers.dev">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+.search-page-header {
+  background: var(--color-surface-alt);
+  padding: 32px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.search-page-header h1 {
+  font-size: clamp(24px, 3vw, 32px);
+  margin-bottom: 8px;
+}
+.search-page-header .subtitle {
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+}
+.search-form-container {
+  background: var(--color-surface);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  max-width: 800px;
+}
+.search-form-container .type-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.search-form-container .search-row {
+  display: flex;
+  gap: 12px;
+}
+.search-form-container input[type="text"] {
+  flex: 1;
+  padding: 14px 18px;
+  font-size: 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+.search-form-container input[type="text"]:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+}
+.search-form-container button {
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.results-section {
+  padding: 32px 0 64px;
+  min-height: 400px;
+}
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.results-count {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+.share-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.share-search button {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+.no-search-state {
+  text-align: center;
+  padding: 64px 20px;
+  color: var(--color-text-secondary);
+}
+.no-search-state svg {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+.loading-state {
+  text-align: center;
+  padding: 64px 20px;
+}
+.loading-state .spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary-500);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html"><img src="images/logo.png" alt="Autoglass AS" class="logo-img" height="40"></a>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav.home">Hjem</a>
+      <a href="frontruter.html">Frontruter</a>
+      <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+      <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+      <a href="katalog.html">📋 Katalog</a>
+      <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+      <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+      <a href="aktuelt.html">Aktuelt</a>
+      <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+      <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switcher">
+        <button data-lang="no" class="active">NO</button>
+        <button data-lang="sv">SV</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Bytt tema">🌓</button>
+      <a href="kundeportal.html" class="btn-login" data-i18n="nav.login">Logg inn</a>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Meny">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <button class="close" onclick="toggleMobileMenu()">&times;</button>
+  <a href="index.html" data-i18n="nav.home">Hjem</a>
+  <a href="produkter.html" data-i18n="nav.products">Produkter</a>
+  <a href="vin-sok.html" data-i18n="nav.vin">VIN-søk</a>
+  <a href="katalog.html">📋 Katalog</a>
+  <a href="bli-kunde.html" data-i18n="nav.become">Bli kunde</a>
+  <a href="kundeportal.html" data-i18n="nav.portal">Kundeportal</a>
+  <a href="aktuelt.html">Aktuelt</a>
+  <a href="om-oss.html" data-i18n="nav.about">Om oss</a>
+  <a href="kontakt.html" data-i18n="nav.contact">Kontakt</a>
+</div>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Brødsmulesti">
+  <div class="container">
+    <a href="index.html">Hjem</a>
+    <span class="separator">›</span>
+    <span class="current" aria-current="page">Søk</span>
+  </div>
+</nav>
+
+<!-- SEARCH HEADER -->
+<section class="search-page-header">
+  <div class="container">
+    <h1>Finn riktig glass til ditt kjøretøy</h1>
+    <p class="subtitle">Søk med registreringsnummer eller VIN — vi matcher deg med riktig rute fra vår katalog på 130 000+ produkter</p>
+    
+    <div class="search-form-container">
+      <div class="type-pills">
+        <label class="type-pill"><input type="radio" name="glass-type" value="" checked><span>Alle typer</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="frontrute"><span>Frontrute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="siderute"><span>Siderute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="bakrute"><span>Bakrute</span></label>
+        <label class="type-pill"><input type="radio" name="glass-type" value="tak"><span>Tak</span></label>
+      </div>
+      <div class="search-row">
+        <input type="text" id="search-input" placeholder="Reg.nr. eller VIN (f.eks. AB12345)" maxlength="17">
+        <button class="btn-primary" onclick="executeSearch()">Søk</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results-section">
+  <div class="container">
+    <div class="results-header" id="results-header" style="display:none">
+      <span class="results-count" id="results-count"></span>
+      <div class="share-search">
+        <button class="btn-secondary" onclick="copySearchUrl()">
+          <span id="copy-text">📋 Kopier lenke</span>
+        </button>
+      </div>
+    </div>
+    
+    <div id="search-results"></div>
+    
+    <div class="no-search-state" id="no-search-state">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+        <path d="M8 11h6"/>
+      </svg>
+      <p>Tast inn registreringsnummer eller VIN for å søke</p>
+      <p style="font-size:13px;opacity:0.7;margin-top:8px">Tips: Norske regnr: AB12345 · Svenske: ABC123 · VIN: 17 tegn</p>
+    </div>
+    
+    <div class="loading-state" id="loading-state" style="display:none">
+      <div class="spinner"></div>
+      <p>Søker i katalogen...</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <h4>Autoglass AS</h4>
+      <p style="font-size:14px;margin-bottom:8px">Norges ledende bilglass-grossist</p>
+      <p style="font-size:14px">Kontakt oss via kundeportalen eller skjemaet på kontaktsiden.</p>
+    </div>
+    <div>
+      <h4>Snarveier</h4>
+      <a href="produkter.html">Produkter</a>
+      <a href="vin-sok.html">VIN-søk</a>
+      <a href="bli-kunde.html">Bli kunde</a>
+      <a href="kundeportal.html">Kundeportal</a>
+      <a href="aktuelt.html">Aktuelt</a>
+    </div>
+    <div>
+      <h4>Selskapet</h4>
+      <a href="om-oss.html">Om oss</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+    <div>
+      <h4>Markeder</h4>
+      <a href="#">Norge</a>
+      <a href="#">Sverige</a>
+      <a href="#">Danmark</a>
+      <a href="#">Europa</a>
+    </div>
+    <div class="bottom" style="grid-column:1/-1">
+      © 2026 Autoglass AS. Alle rettigheter reservert.
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" onclick="scrollToTop()" aria-label="Tilbake til toppen">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="m18 15-6-6-6 6"/>
+  </svg>
+</button>
+
+<script src="js/i18n.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/main.js"></script>
+<script src="js/search-glass.js?v=3"></script>
+<script>
+const API_BASE = 'https://autoglass-glass-sok.autoglassnorge.workers.dev';
+
+// Parse URL parameters on load
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('q');
+  const type = params.get('type') || '';
+  
+  if (query) {
+    document.getElementById('search-input').value = query;
+    if (type) {
+      const radio = document.querySelector(`input[name="glass-type"][value="${type}"]`);
+      if (radio) radio.checked = true;
+    }
+    executeSearch();
+  }
+  
+  // Enter key support
+  document.getElementById('search-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') executeSearch();
+  });
+  
+  // Type pill styling
+  document.querySelectorAll('.type-pill input').forEach(radio => {
+    radio.addEventListener('change', () => {
+      document.querySelectorAll('.type-pill').forEach(p => p.classList.remove('active'));
+      radio.closest('.type-pill').classList.add('active');
+    });
+  });
+  // Set initial active state
+  const checked = document.querySelector('.type-pill input:checked');
+  if (checked) checked.closest('.type-pill').classList.add('active');
+});
+
+async function executeSearch() {
+  const input = document.getElementById('search-input');
+  const query = input.value.trim().toUpperCase();
+  if (!query) return;
+  
+  const type = document.querySelector('input[name="glass-type"]:checked')?.value || '';
+  
+  // Update URL without reload
+  const url = new URL(window.location);
+  url.searchParams.set('q', query);
+  if (type) url.searchParams.set('type', type);
+  else url.searchParams.delete('type');
+  window.history.replaceState({}, '', url);
+  
+  // Show loading
+  document.getElementById('no-search-state').style.display = 'none';
+  document.getElementById('search-results').innerHTML = '';
+  document.getElementById('results-header').style.display = 'none';
+  document.getElementById('loading-state').style.display = 'block';
+  
+  try {
+    const typeParam = type ? `&category=${encodeURIComponent(type)}` : '';
+    const res = await fetch(`${API_BASE}/api/glass?regnr=${encodeURIComponent(query)}${typeParam}`);
+    
+    if (!res.ok) throw new Error('Søk feilet');
+    
+    const data = await res.json();
+    renderResults(data, query);
+  } catch (err) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('search-results').innerHTML = `
+      <div class="no-result" style="text-align:center;padding:40px">
+        <p style="color:var(--color-error)">❌ ${escapeHtml(err.message || 'Kunne ikke utføre søket')}</p>
+        <p style="font-size:14px;color:var(--color-text-secondary);margin-top:8px">Sjekk at registreringsnummeret er korrekt og prøv igjen.</p>
+      </div>
+    `;
+  }
+}
+
+function renderResults(data, query) {
+  document.getElementById('loading-state').style.display = 'none';
+  
+  const container = document.getElementById('search-results');
+  
+  if (data.error || !data.candidates || data.candidates.length === 0) {
+    container.innerHTML = `
+      <div class="no-result" style="text-align:center;padding:40px">
+        <p>Ingen treff for <strong>${escapeHtml(query)}</strong></p>
+        <p style="font-size:14px;color:var(--color-text-secondary);margin-top:8px">Prøv et annet registreringsnummer eller VIN.</p>
+      </div>
+    `;
+    return;
+  }
+  
+  // Show results header
+  const header = document.getElementById('results-header');
+  header.style.display = 'flex';
+  document.getElementById('results-count').textContent = `${data.candidates.length} treff`;
+  
+  // Use GlassSearch rendering logic
+  const v = data.vehicle || {};
+  const flags = data.flags || {};
+  
+  // Store for quote modal
+  window.__lastSearchVehicle = {
+    regnr: v.regnr,
+    make: v.make,
+    model: v.model,
+    year: v.year,
+    factoryEquipment: v.factoryEquipment || null,
+  };
+  
+  // Build vehicle banner
+  const flagHtml = [
+    { key: 'adas', label: 'ADAS' },
+    { key: 'rainSensor', label: 'Regnsensor' },
+    { key: 'heated', label: 'Oppvarmet' },
+    { key: 'acoustic', label: 'Akustisk' },
+    { key: 'antenna', label: 'Antenne' },
+    { key: 'hud', label: 'HUD' },
+  ].map(f => `<span class="flag ${flags[f.key] ? 'on' : 'off'}">${f.label} ${flags[f.key] ? '✓' : '✗'}</span>`).join('');
+  
+  let html = `
+    <div class="vehicle-banner" style="margin-bottom:24px">
+      <h3>🚗 ${escapeHtml(v.make) || '?'} ${escapeHtml(v.model) || '?'} ${v.year ? '(' + v.year + ')' : ''}</h3>
+      <p class="meta">Reg.nr: ${escapeHtml(v.regnr) || '-'} · VIN: ${escapeHtml((v.vin || '-').slice(0, 8))}…${escapeHtml((v.vin || '-').slice(-4))} · kType: ${escapeHtml(v.kType) || '-'}</p>
+      <div class="flags">${flagHtml}</div>
+    </div>
+    <div class="results-list">
+  `;
+  
+  const layerLabels = ['Eksakt match', 'Merke + modell + år', 'Merke + modell', 'Merke', 'Prefix4'];
+  
+  data.candidates.forEach((c, idx) => {
+    const isTop = idx === 0;
+    const confClass = data.confidence || 'medium';
+    const layerLabel = layerLabels[(data.layer || 1) - 1] || 'Statistisk match';
+    const confLabel = confClass === 'exact' ? 'Bekreftet originalrute'
+      : confClass === 'high' ? 'Høy konfidens'
+      : confClass === 'medium' ? 'Middels konfidens'
+      : 'Lav konfidens';
+    
+    const flagTags = [
+      c.adas && 'ADAS',
+      c.rainSensor && 'Regnsensor',
+      c.heated && 'Oppvarmet',
+      c.acoustic && 'Akustisk',
+      c.antenna && 'Antenne',
+      c.hud && 'HUD',
+      c.shade && 'Solstripe',
+      c.camera && 'Kamera',
+      c.laneAssist && 'Filskifteass.',
+    ].filter(Boolean);
+    
+    const yearRange = c.yearFrom ? c.yearFrom + (c.yearTo ? '–' + c.yearTo : '–') : '';
+    const meta = `${escapeHtml(c.brand) || '?'} ${escapeHtml(c.model) || ''} ${yearRange} · ${escapeHtml(layerLabel)}`;
+    const flagsRow = flagTags.map(f => `<span class="flag on">${escapeHtml(f)}</span>`).join('');
+    
+    const topBadge = isTop ? `<div class="top-badge">⭐ Mest sannsynlig riktig — ${escapeHtml(confLabel)}</div>` : '';
+    
+    const veh = window.__lastSearchVehicle || {};
+    const equipJson = JSON.stringify(veh.factoryEquipment || {}).replace(/"/g, '&quot;');
+    
+    html += `
+      <div class="result-item ${isTop ? 'top-match' : ''}">
+        ${topBadge}
+        <div class="header">
+          <div>
+            <div class="eurocode">${escapeHtml(c.eurocode)}</div>
+            <p style="font-size:14px;color:var(--color-text-secondary);margin-top:4px">${escapeHtml(c.description) || ''}</p>
+            <p style="font-size:12px;color:var(--color-text-muted);margin-top:2px">${meta}</p>
+          </div>
+          <span class="confidence ${confClass}">${confClass.toUpperCase()}</span>
+        </div>
+        ${c.imageUrl ? `<img src="${escapeHtml(c.imageUrl)}" alt="${escapeHtml(c.eurocode)}" class="result-image" loading="lazy" onerror="this.style.display='none'">` : ''}
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:12px">
+          ${c.price ? `<span class="price">${c.price.toLocaleString('no-NO')} kr</span>` : '<span class="price">Pris på forespørsel</span>'}
+          <span class="stock ${c.stockStatus > 0 ? '' : 'out'}">${c.stockStatus > 0 ? c.stockStatus + ' på lager' : 'Bestillingsvare'}</span>
+        </div>
+        <div class="flags">${flagsRow}</div>
+        ${c.nagsCodes?.length ? `<div class="nags-badge">🇺🇸 NAGS: ${escapeHtml(c.nagsCodes.slice(0, 5).join(', '))}${c.nagsCodes.length > 5 ? ' +' + (c.nagsCodes.length - 5) + ' flere' : ''}</div>` : ''}
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <button class="btn-primary" style="padding:10px 20px;font-size:13px" onclick="openQuoteModal('${escapeHtml(c.eurocode)}', '${escapeHtml(c.brand || '').replace(/'/g, "\\'")}', '${escapeHtml(c.model || '').replace(/'/g, "\\'")}', '${equipJson}')">Be om pris</button>
+          <button class="btn-secondary" style="padding:10px 20px;font-size:13px" onclick="saveVehicleFromSearch('${escapeHtml(c.eurocode)}', '${escapeHtml(c.brand || '').replace(/'/g, "\\'")}', '${escapeHtml(c.model || '').replace(/'/g, "\\'")}')">Lagre kjøretøy</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function copySearchUrl() {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('copy-text');
+    const original = btn.textContent;
+    btn.textContent = '✅ Kopiert!';
+    setTimeout(() => btn.textContent = original, 2000);
+  });
+}
+</script>
+<script>if('serviceWorker'in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
+</body>
+</html>

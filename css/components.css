@@ -202,3 +202,22 @@
 .filter-bar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:24px;padding:16px;background:var(--color-surface-alt);border-radius:var(--radius-md)}
 .filter-bar select,.filter-bar input{padding:10px 14px;font-size:14px;border:1.5px solid var(--color-border);border-radius:var(--radius-sm);background:var(--color-surface);color:var(--color-text-primary)}
 .filter-bar select:focus,.filter-bar input:focus{outline:none;border-color:var(--color-accent)}
+
+/* ============================================================
+   Breadcrumb Navigation
+   ============================================================ */
+.breadcrumb{background:var(--color-surface-alt);border-bottom:1px solid var(--color-border);padding:12px 0}
+.breadcrumb .container{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.breadcrumb a{font-size:13px;color:var(--color-text-secondary);transition:color var(--transition-fast)}
+.breadcrumb a:hover{color:var(--color-accent-dark)}
+.breadcrumb .separator{color:var(--color-text-muted);font-size:13px}
+.breadcrumb .current{font-size:13px;color:var(--color-text-primary);font-weight:500}
+
+/* ============================================================
+   Back to Top Button
+   ============================================================ */
+.back-to-top{position:fixed;bottom:24px;right:24px;z-index:90;width:48px;height:48px;border-radius:50%;background:var(--color-surface);border:1.5px solid var(--color-border);color:var(--color-text-secondary);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(20px);transition:opacity var(--transition-base),transform var(--transition-base),visibility var(--transition-base),background var(--transition-fast),border-color var(--transition-fast),color var(--transition-fast);box-shadow:var(--shadow-md)}
+.back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.back-to-top:hover{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-primary-900)}
+.back-to-top svg{width:20px;height:20px}
+@media(max-width:600px){.back-to-top{bottom:16px;right:16px;width:44px;height:44px}}

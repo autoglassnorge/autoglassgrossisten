@@ -106,12 +106,40 @@ function initForms() {
   });
 }
 
+// --- Back to Top Button ---
+function initBackToTop() {
+  // Create button if it doesn't exist
+  let btn = document.querySelector('.back-to-top');
+  if (!btn) {
+    btn = document.createElement('button');
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Tilbake til toppen');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>';
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.appendChild(btn);
+  }
+  
+  // Show/hide based on scroll position
+  const toggleVisibility = () => {
+    const scrollY = window.scrollY || window.pageYOffset;
+    if (scrollY > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  };
+  
+  window.addEventListener('scroll', throttle(toggleVisibility, 100), { passive: true });
+  toggleVisibility(); // Check initial state
+}
+
 // --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initReveal();
   initLangSwitcher();
   initForms();
+  initBackToTop();
 
   // Defer heavy / non-critical work
   onIdle(() => {

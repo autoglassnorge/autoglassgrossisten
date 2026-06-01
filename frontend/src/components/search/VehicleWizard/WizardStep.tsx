@@ -58,7 +58,7 @@ export function WizardStepContainer({
           ))}
         </div>
         <p className="text-xs text-carbon-500 font-mono uppercase tracking-wider">
-          Steg {currentIndex + 1} av {stepOrder.length - 1}
+          {currentStep === 'summary' ? 'Sammendrag' : `Steg ${currentIndex + 1} av ${stepOrder.length - 1}`}
         </p>
       </div>
 
