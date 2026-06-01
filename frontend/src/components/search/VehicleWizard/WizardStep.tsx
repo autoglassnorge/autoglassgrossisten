@@ -30,9 +30,7 @@ export function WizardStepContainer({
   children,
 }: WizardStepProps) {
   const currentIndex = stepOrder.indexOf(currentStep);
-  const stepIndex = stepOrder.indexOf(step);
   const isActive = step === currentStep;
-  const isPast = stepIndex < currentIndex;
 
   if (!isActive) return null;
 

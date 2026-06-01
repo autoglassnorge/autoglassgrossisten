@@ -1,30 +1,30 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Car, ScanLine } from 'lucide-react';
+import { Car, ScanLine, Sparkles } from 'lucide-react';
 import { HeroVideo } from './HeroVideo';
+import { VehicleWizard } from '@/components/search/VehicleWizard';
 
 /**
  * HeroSekurit - Inspirert av Sekurit Service design
- * Mørk hero med stort, prominent søkefelt
+ * Mørk hero med VehicleWizard for guided search
  * Autoglass farger: carbon-950 bg, glass-cyan aksenter
  */
 
+type SearchMode = 'wizard' | 'vin';
+
 export function HeroSekurit() {
-  const [searchValue, setSearchValue] = useState('');
-  const [searchType, setSearchType] = useState<'regnr' | 'vin'>('regnr');
+  const [searchMode, setSearchMode] = useState<SearchMode>('wizard');
+  const [vinValue, setVinValue] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleVinSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const v = searchValue.trim().toUpperCase();
-    if (!v) return;
-    
-    // Bestem om det er VIN (17 tegn) eller regnr
-    const isVin = v.length === 17 && /^[A-HJ-NPR-Z0-9]{17}$/i.test(v);
-    const param = isVin ? 'vin' : 'regnr';
-    
-    navigate(`/sok?${param}=${encodeURIComponent(v)}`);
+    const v = vinValue.trim().toUpperCase();
+    if (!v || v.length !== 17) return;
+    navigate(`/sok?vin=${encodeURIComponent(v)}`);
   };
+
+  // Wizard handles its own navigation via SummaryStep
 
   return (
     <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-carbon-950">
@@ -51,85 +51,74 @@ export function HeroSekurit() {
         </h1>
 
         <p className="text-center text-lg text-carbon-300 mb-10 max-w-2xl mx-auto">
-          Søk med registreringsnummer eller VIN for å finne kompatibelt bilglass. 
+          Søk med registreringsnummer for å finde kompatibelt bilglass.
           27 000+ produkter på lager.
         </p>
 
-        {/* Søkefelt-container */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-2 sm:p-4 border border-white/10 shadow-2xl">
-          {/* Toggle VIN/Regnr */}
-          <div className="flex justify-center mb-4">
-            <div className="inline-flex bg-carbon-900/50 rounded-lg p-1">
-              <button
-                type="button"
-                onClick={() => setSearchType('regnr')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  searchType === 'regnr'
-                    ? 'bg-glass-cyan text-carbon-950'
-                    : 'text-carbon-400 hover:text-white'
-                }`}
-              >
-                Reg.nr
-              </button>
-              <button
-                type="button"
-                onClick={() => setSearchType('vin')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  searchType === 'vin'
-                    ? 'bg-glass-cyan text-carbon-950'
-                    : 'text-carbon-400 hover:text-white'
-                }`}
-              >
-                VIN
-              </button>
-            </div>
+        {/* Search mode toggle */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex bg-carbon-900/50 rounded-lg p-1 border border-carbon-800">
+            <button
+              type="button"
+              onClick={() => setSearchMode('wizard')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                searchMode === 'wizard'
+                  ? 'bg-glass-cyan text-carbon-950'
+                  : 'text-carbon-400 hover:text-white'
+              }`}
+            >
+              <Sparkles className="h-4 w-4" />
+              Veiviser
+            </button>
+            <button
+              type="button"
+              onClick={() => setSearchMode('vin')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                searchMode === 'vin'
+                  ? 'bg-glass-cyan text-carbon-950'
+                  : 'text-carbon-400 hover:text-white'
+              }`}
+            >
+              <ScanLine className="h-4 w-4" />
+              VIN-søk
+            </button>
           </div>
+        </div>
 
-          {/* Søkefelt */}
-          <form onSubmit={handleSubmit} className="relative">
-            <div className="flex items-stretch gap-2">
-              <div className="relative flex-1">
+        {/* Search container */}
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/10 shadow-2xl">
+          {searchMode === 'wizard' ? (
+            <VehicleWizard />
+          ) : (
+            <form onSubmit={handleVinSubmit} className="space-y-4">
+              <div className="relative">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-carbon-400">
-                  {searchType === 'vin' ? (
-                    <ScanLine className="h-5 w-5" />
-                  ) : (
-                    <Car className="h-5 w-5" />
-                  )}
+                  <ScanLine className="h-5 w-5" />
                 </div>
                 <input
                   type="text"
-                  value={searchValue}
-                  onChange={(e) => setSearchValue(e.target.value.toUpperCase())}
-                  placeholder={searchType === 'vin' 
-                    ? 'Skriv inn VIN (17 tegn)...' 
-                    : 'F.eks. EB21570...'
-                  }
-                  className="w-full bg-carbon-900/80 border border-carbon-700 rounded-xl py-4 pl-12 pr-4 text-white placeholder:text-carbon-500 text-lg focus:outline-none focus:border-glass-cyan focus:ring-2 focus:ring-glass-cyan/20 transition-all"
-                  maxLength={searchType === 'vin' ? 17 : 10}
+                  value={vinValue}
+                  onChange={(e) => setVinValue(e.target.value.toUpperCase())}
+                  placeholder="Skriv inn VIN (17 tegn)..."
+                  className="w-full bg-carbon-900/80 border border-carbon-700 rounded-xl py-4 pl-12 pr-16 text-white placeholder:text-carbon-500 text-lg focus:outline-none focus:border-glass-cyan focus:ring-2 focus:ring-glass-cyan/20 transition-all"
+                  maxLength={17}
                 />
-                {searchType === 'vin' && (
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-carbon-500">
-                    {searchValue.length}/17
-                  </div>
-                )}
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-carbon-500">
+                  {vinValue.length}/17
+                </div>
               </div>
               <button
                 type="submit"
-                className="flex items-center gap-2 px-6 sm:px-8 py-4 bg-glass-cyan hover:bg-glass-cyanLight text-carbon-950 font-semibold rounded-xl transition-colors"
+                disabled={vinValue.length !== 17}
+                className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-glass-cyan hover:bg-glass-cyanLight disabled:bg-carbon-700 disabled:text-carbon-500 text-carbon-950 font-semibold rounded-xl transition-colors"
               >
-                <Search className="h-5 w-5" />
-                <span className="hidden sm:inline">Søk</span>
+                Søk med VIN
               </button>
-            </div>
-          </form>
-
-          {/* Hjelpetekst */}
-          <p className="text-center text-xs text-carbon-500 mt-3">
-            {searchType === 'vin' 
-              ? 'VIN (Vehicle Identification Number) finner du i vognkortet eller på bilens dashboard'
-              : 'Registreringsnummer finner du på skiltene på bilen'
-            }
-          </p>
+              <p className="text-center text-xs text-carbon-500">
+                VIN (Vehicle Identification Number) finner du i vognkortet eller på bilens dashboard
+              </p>
+            </form>
+          )}
         </div>
 
         {/* Quick stats */}
