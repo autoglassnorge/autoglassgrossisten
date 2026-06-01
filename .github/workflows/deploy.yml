@@ -7,6 +7,9 @@ on:
 
 env:
   NODE_VERSION: '24'
+  # Force Node 24 for built-in actions (setup-node, checkout, etc.)
+  # Removes deprecation warnings; required after 2026-09-16.
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   # ── 1. Deploy API Worker ──────────────────────────────────────
