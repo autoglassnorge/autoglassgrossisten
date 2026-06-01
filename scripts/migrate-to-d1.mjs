@@ -20,8 +20,10 @@ function main() {
   console.log("🔌 Migrerer katalog til D1...\n");
   
   const data = JSON.parse(fs.readFileSync(CATALOG_PATH, "utf-8"));
-  const records = data.records || [];
-  console.log(`Totalt: ${records.length.toLocaleString("nb-NO")} poster`);
+  const records = (data.records || []).filter(r => r.eurocode && r.eurocode.trim() !== '');
+  console.log(`Totalt: ${data.records?.length.toLocaleString("nb-NO") || 0} poster`);
+  console.log(`Med eurocode: ${records.length.toLocaleString("nb-NO")} poster`);
+  console.log(`Filtrert vekk: ${(data.records?.length || 0) - records.length} poster\n`);
   
   let sql = "-- D1 Migration: glass_catalog\n";
   sql += "PRAGMA foreign_keys=OFF;\n";
@@ -34,7 +36,7 @@ function main() {
   for (let i = 0; i < records.length; i += BATCH_SIZE) {
     const batch = records.slice(i, i + BATCH_SIZE);
     
-    sql += `INSERT INTO glass_catalog (eurocode, article_number, scan_number, category, supplier, brand, model, year_from, year_to, adas, rain_sensor, heated, acoustic, antenna, hud, shade, camera, lane_assist, price, stock_status, warehouse_location, oem_numbers, cross_references, weight, dimensions, description, prefix4, image_url, pdf_url, source, nags_codes, brand_original) VALUES\n`;
+    sql += `INSERT OR IGNORE INTO glass_catalog (eurocode, article_number, scan_number, category, supplier, brand, model, year_from, year_to, adas, rain_sensor, heated, acoustic, antenna, hud, shade, camera, lane_assist, price, stock_status, warehouse_location, oem_numbers, cross_references, weight, dimensions, description, prefix4, image_url, pdf_url, source, nags_codes, brand_original) VALUES\n`;
     
     const values = batch.map((r, idx) => {
       const dims = r.dimensions ? JSON.stringify(r.dimensions) : null;
