@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/Footer'
 const HomePage = lazy(() => import('@/pages/HomePage'))
 const SearchPage = lazy(() => import('@/pages/SearchPage'))
 const AccountPage = lazy(() => import('@/pages/AccountPage'))
+const CartPage = lazy(() => import('@/pages/CartPage'))
 const BrowsePage = lazy(() => import('@/pages/BrowsePage'))
 const BilglassguidePage = lazy(() => import('@/pages/BilglassguidePage'))
 const OmOssPage = lazy(() => import('@/pages/OmOssPage'))
@@ -45,7 +46,12 @@ function App() {
             <Route path="/bilglassguide/akustisk-bilglass" element={<AkustiskPage />} />
             <Route path="/bilglassguide/variantmatching" element={<VariantMatchingPage />} />
             <Route path="/sok" element={<SearchPage />} />
-            <Route path="/kasse" element={<AccountPage />} />
+            <Route path="/kasse" element={<CartPage />} />
+            <Route path="/konto" element={<AccountPage />} />
+            <Route path="/om-oss" element={<OmOssPage />} />
+            <Route path="/kontakt" element={<KontaktPage />} />
+            <Route path="/personvern" element={<PersonvernPage />} />
+            <Route path="/vilkar" element={<VilkarPage />} />
             <Route path="/om-oss" element={<OmOssPage />} />
             <Route path="/kontakt" element={<KontaktPage />} />
             <Route path="/personvern" element={<PersonvernPage />} />

@@ -29,7 +29,7 @@ export function Header() {
     { label: 'Kontakt', href: '/kontakt' },
   ];
 
-  const authLink = { label: 'Logg inn', href: '/kasse' };
+  const authLink = { label: 'Min konto', href: '/konto' };
 
   return (
     <>
@@ -75,9 +75,9 @@ export function Header() {
                 )}
               </Button>
             </Link>
-            <a href={authLink.href}>
+            <Link to={authLink.href}>
               <Button variant="default" size="sm" className="min-h-[44px]">{authLink.label}</Button>
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile actions */}
@@ -125,9 +125,15 @@ export function Header() {
                 <Button variant="ghost" className="w-full justify-start min-h-[44px]">{link.label}</Button>
               </Link>
             ))}
-            <a href={authLink.href} className="block" onClick={() => setMobileOpen(false)}>
+            <Link to="/kasse" className="block" onClick={() => setMobileOpen(false)}>
+              <Button variant="ghost" className="w-full justify-start min-h-[44px]">
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Handlekurv {cartTotal > 0 && `(${cartTotal})`}
+              </Button>
+            </Link>
+            <Link to={authLink.href} className="block" onClick={() => setMobileOpen(false)}>
               <Button variant="default" className="w-full justify-start min-h-[44px]">{authLink.label}</Button>
-            </a>
+            </Link>
           </div>
         )}
       </header>
