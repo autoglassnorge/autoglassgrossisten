@@ -78,7 +78,7 @@ async function queryTecDocFallback(
       };
     }
     
-    // Try partial model match
+    // Try partial model match (bidirectional)
     const partialMatch = await db
       .prepare(`
         SELECT ktype, brand, model, year_from, year_to 
@@ -100,6 +100,39 @@ async function queryTecDocFallback(
         source: 'tecdoc',
         confidence: 0.70
       };
+    }
+    
+    // Try generic model match (e.g., "CARAVELLE" → "TRANSPORTER")
+    const genericModel = model.toUpperCase()
+      .replace(/CARAVELLE/g, 'TRANSPORTER')
+      .replace(/MULTIVAN/g, 'TRANSPORTER')
+      .replace(/\s+V\s+/g, ' T5 ')  // VW Caravelle V → T5
+      .replace(/BUSS/g, '')
+      .trim();
+    
+    if (genericModel !== model.toUpperCase()) {
+      const genericMatch = await db
+        .prepare(`
+          SELECT ktype, brand, model, year_from, year_to 
+          FROM ktype_registry 
+          WHERE brand = ? AND model LIKE ? AND year_from <= ? AND (year_to >= ? OR year_to IS NULL)
+          ORDER BY ABS(year_from - ?)
+          LIMIT 1
+        `)
+        .bind(brand.toUpperCase(), `%${genericModel}%`, year, year, year)
+        .first<{ ktype: number; brand: string; model: string; year_from: number; year_to: number }>();
+      
+      if (genericMatch) {
+        return {
+          ktype: genericMatch.ktype,
+          brand: genericMatch.brand,
+          model: genericMatch.model,
+          yearFrom: genericMatch.year_from,
+          yearTo: genericMatch.year_to || new Date().getFullYear(),
+          source: 'tecdoc',
+          confidence: 0.65
+        };
+      }
     }
     
     return null;
