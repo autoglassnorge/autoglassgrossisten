@@ -110,17 +110,24 @@ async function queryTecDocFallback(
       .replace(/BUSS/g, '')
       .trim();
     
+    console.log(`[TecDoc Fallback] Trying generic model: "${genericModel}"`);
+    
     if (genericModel !== model.toUpperCase()) {
+      // Simplified query - just look for TRANSPORTER T5
+      const searchPattern = `%TRANSPORTER%T5%`;
+      console.log(`[TecDoc Fallback] Search pattern: "${searchPattern}"`);
+      
       const genericMatch = await db
         .prepare(`
           SELECT ktype, brand, model, year_from, year_to 
           FROM ktype_registry 
           WHERE brand = ? AND model LIKE ? AND year_from <= ? AND (year_to >= ? OR year_to IS NULL)
-          ORDER BY ABS(year_from - ?)
           LIMIT 1
         `)
-        .bind(brand.toUpperCase(), `%${genericModel}%`, year, year, year)
+        .bind(brand.toUpperCase(), searchPattern, year, year)
         .first<{ ktype: number; brand: string; model: string; year_from: number; year_to: number }>();
+      
+      console.log(`[TecDoc Fallback] Generic match result:`, genericMatch ? `kType ${genericMatch.ktype}` : 'null');
       
       if (genericMatch) {
         return {
@@ -184,6 +191,8 @@ export async function resolveKtype(
   env: Env
 ): Promise<KtypeResult> {
   
+  console.log(`[resolveKtype] Starting resolution for ${regnr}: kType=${bovsoftKtype}, vehicle=${bovsoftVehicle?.brand} ${bovsoftVehicle?.model}`);
+  
   // If we have vehicle info from Bovsoft/SVV
   if (bovsoftVehicle && bovsoftVehicle.brand && bovsoftVehicle.model) {
     
@@ -195,6 +204,8 @@ export async function resolveKtype(
         bovsoftVehicle.brand,
         bovsoftVehicle.model
       );
+      
+      console.log(`[resolveKtype] Bovsoft kType ${bovsoftKtype} validation: ${isValid}`);
       
       if (isValid) {
         return {
@@ -209,16 +220,19 @@ export async function resolveKtype(
       }
       
       // kType doesn't match vehicle - try TecDoc fallback
-      console.log(`[resolveKtype] Bovsoft kType ${bovsoftKtype} invalid for ${bovsoftVehicle.brand} ${bovsoftVehicle.model}, trying TecDoc fallback`);
+      console.log(`[resolveKtype] Bovsoft kType ${bovsoftKtype} invalid, trying TecDoc fallback`);
     }
     
     // Try TecDoc fallback
+    console.log(`[resolveKtype] Trying TecDoc fallback for ${bovsoftVehicle.brand} ${bovsoftVehicle.model} ${bovsoftVehicle.year}`);
     const tecdocResult = await queryTecDocFallback(
       env.GLASS_CATALOG_D1,
       bovsoftVehicle.brand,
       bovsoftVehicle.model,
       bovsoftVehicle.year
     );
+    
+    console.log(`[resolveKtype] TecDoc fallback result:`, tecdocResult ? `kType ${tecdocResult.ktype}` : 'null');
     
     if (tecdocResult) {
       return tecdocResult;
