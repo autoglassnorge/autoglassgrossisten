@@ -110,6 +110,38 @@ async function queryTecDocFallback(
 }
 
 /**
+ * Validate that kType matches the expected vehicle brand/model
+ */
+async function validateKtype(
+  db: D1Database,
+  ktype: number,
+  expectedBrand: string,
+  expectedModel: string
+): Promise<boolean> {
+  try {
+    const result = await db
+      .prepare(`SELECT brand, model FROM ktype_registry WHERE ktype = ? LIMIT 1`)
+      .bind(ktype)
+      .first<{ brand: string; model: string }>();
+    
+    if (!result) return false;
+    
+    // Check if brand matches (case insensitive)
+    const brandMatch = result.brand.toUpperCase() === expectedBrand.toUpperCase();
+    
+    // Check if model matches (partial match is OK)
+    const modelMatch = 
+      result.model.toUpperCase().includes(expectedModel.toUpperCase()) ||
+      expectedModel.toUpperCase().includes(result.model.toUpperCase());
+    
+    return brandMatch && modelMatch;
+  } catch (e) {
+    console.error('[validateKtype] Error:', e);
+    return false;
+  }
+}
+
+/**
  * Main kType resolver with hybrid approach
  */
 export async function resolveKtype(
@@ -118,21 +150,36 @@ export async function resolveKtype(
   bovsoftVehicle: { brand: string; model: string; year: number } | null,
   env: Env
 ): Promise<KtypeResult> {
-  // If Bovsoft returned a valid kType with matching vehicle info
-  if (bovsoftKtype && bovsoftVehicle && bovsoftVehicle.brand && bovsoftVehicle.model) {
-    return {
-      ktype: bovsoftKtype,
-      brand: bovsoftVehicle.brand,
-      model: bovsoftVehicle.model,
-      yearFrom: bovsoftVehicle.year,
-      yearTo: bovsoftVehicle.year + 5, // Assume 5 year range
-      source: 'bovsoft',
-      confidence: 0.90
-    };
-  }
   
-  // Try TecDoc fallback if we have SVV vehicle data
+  // If we have vehicle info from Bovsoft/SVV
   if (bovsoftVehicle && bovsoftVehicle.brand && bovsoftVehicle.model) {
+    
+    // Validate Bovsoft kType if provided
+    if (bovsoftKtype) {
+      const isValid = await validateKtype(
+        env.GLASS_CATALOG_D1,
+        bovsoftKtype,
+        bovsoftVehicle.brand,
+        bovsoftVehicle.model
+      );
+      
+      if (isValid) {
+        return {
+          ktype: bovsoftKtype,
+          brand: bovsoftVehicle.brand,
+          model: bovsoftVehicle.model,
+          yearFrom: bovsoftVehicle.year,
+          yearTo: bovsoftVehicle.year + 5,
+          source: 'bovsoft',
+          confidence: 0.90
+        };
+      }
+      
+      // kType doesn't match vehicle - try TecDoc fallback
+      console.log(`[resolveKtype] Bovsoft kType ${bovsoftKtype} invalid for ${bovsoftVehicle.brand} ${bovsoftVehicle.model}, trying TecDoc fallback`);
+    }
+    
+    // Try TecDoc fallback
     const tecdocResult = await queryTecDocFallback(
       env.GLASS_CATALOG_D1,
       bovsoftVehicle.brand,
@@ -143,6 +190,19 @@ export async function resolveKtype(
     if (tecdocResult) {
       return tecdocResult;
     }
+  }
+  
+  // Fallback: return Bovsoft kType even if invalid (better than nothing)
+  if (bovsoftKtype && bovsoftVehicle) {
+    return {
+      ktype: bovsoftKtype,
+      brand: bovsoftVehicle.brand,
+      model: bovsoftVehicle.model,
+      yearFrom: bovsoftVehicle.year,
+      yearTo: bovsoftVehicle.year + 5,
+      source: 'bovsoft',
+      confidence: 0.50
+    };
   }
   
   // Return not found
