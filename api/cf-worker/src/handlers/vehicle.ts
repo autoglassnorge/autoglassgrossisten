@@ -6,6 +6,7 @@
 import type { Env } from "../types";
 import { jsonResponse, errorResponse } from "../lib/cors";
 import { fetchBovsoftVehicle, getCachedBovsoftVehicle, cacheBovsoftVehicle } from "../lib/bovsoft";
+import { resolveKtype } from "../lib/ktype-resolver";
 
 // ---------------------------------------------------------------------------
 // GET /api/vehicle/ktype/:regnr
@@ -55,12 +56,31 @@ export async function handleVehicleKtypeLookup(request: Request, env: Env): Prom
       });
     }
 
-    // 3. Cache the result
-    await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, vehicle);
+    // 3. Try to resolve/correct kType with TecDoc fallback
+    const resolved = await resolveKtype(
+      regnr,
+      vehicle.ktype,
+      {
+        brand: vehicle.brand,
+        model: vehicle.model,
+        year: vehicle.yearFrom || vehicle.yearTo || 0,
+      },
+      env
+    );
+
+    // Use resolved kType if confidence is higher or Bovsoft had wrong/no kType
+    const finalKtype = resolved.confidence > 0.8 ? resolved.ktype : vehicle.ktype;
+    const source = resolved.source === 'tecdoc' ? 'bovsoft+tecdoc' : 'bovsoft';
+
+    // 4. Cache the result
+    await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, {
+      ...vehicle,
+      ktype: finalKtype,
+    });
 
     return jsonResponse({
       success: true,
-      ktype: vehicle.ktype,
+      ktype: finalKtype,
       vehicle: {
         brand: vehicle.brand,
         model: vehicle.model,
@@ -70,7 +90,7 @@ export async function handleVehicleKtypeLookup(request: Request, env: Env): Prom
         body: vehicle.body,
         vin: vehicle.vin,
       },
-      source: "bovsoft",
+      source,
     });
   } catch (e) {
     console.error(`[VehicleKtype] Error for regnr=${regnr}:`, e);
