@@ -78,8 +78,10 @@ async function queryTecDocFallback(
       };
     }
     
-    // Try partial model match (bidirectional)
-    const partialMatch = await db
+    // Try partial model match (bidirectional) — use first word only to avoid
+    // D1 SQLITE_ERROR "LIKE or GLOB pattern too complex" on long model strings
+    const firstWord = model.toUpperCase().split(/\s+/)[0].replace(/[^A-Z0-9]/g, '');
+    const partialMatch = firstWord.length >= 2 ? await db
       .prepare(`
         SELECT ktype, brand, model, year_from, year_to 
         FROM ktype_registry 
@@ -87,8 +89,8 @@ async function queryTecDocFallback(
         ORDER BY ABS(year_from - ?)
         LIMIT 1
       `)
-      .bind(brand.toUpperCase(), `%${model.toUpperCase()}%`, year, year, year)
-      .first<{ ktype: number; brand: string; model: string; year_from: number; year_to: number }>();
+      .bind(brand.toUpperCase(), `%${firstWord}%`, year, year, year)
+      .first<{ ktype: number; brand: string; model: string; year_from: number; year_to: number }>() : null;
     
     if (partialMatch) {
       return {

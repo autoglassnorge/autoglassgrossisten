@@ -579,5 +579,290 @@
       "object": "need_valid_autoglass_no_login_or_alternative_eurocode_source",
       "validFrom": "2026-05-30T17:20:00Z"
     }
+  ],
+  "token-optimization": [
+    {
+      "predicate": "deployed_at",
+      "object": "2026-05-30T23:40:00Z",
+      "validFrom": "2026-05-30T23:38:27.319Z"
+    }
+  ],
+  "canary-deployment": [
+    {
+      "predicate": "status",
+      "object": "live",
+      "validFrom": "2026-05-31T07:20:00Z"
+    },
+    {
+      "predicate": "domain",
+      "object": "autoglass.finnbilglass.no",
+      "validFrom": "2026-05-31T07:20:00Z"
+    },
+    {
+      "predicate": "target",
+      "object": "autoglass-frontend.pages.dev",
+      "validFrom": "2026-05-31T07:20:00Z"
+    },
+    {
+      "predicate": "dns_provider",
+      "object": "domeneshop",
+      "validFrom": "2026-05-31T07:20:00Z"
+    },
+    {
+      "predicate": "record_type",
+      "object": "CNAME",
+      "validFrom": "2026-05-31T07:20:00Z"
+    },
+    {
+      "predicate": "verified",
+      "object": "true",
+      "validFrom": "2026-05-31T07:20:00Z"
+    },
+    {
+      "predicate": "monitoring_script",
+      "object": "scripts/canary-monitor.mjs",
+      "validFrom": "2026-05-31T07:20:00Z"
+    },
+    {
+      "predicate": "next_phase",
+      "object": "gradual_transition",
+      "validFrom": "2026-05-31T07:20:00Z"
+    }
+  ],
+  "svv-api": [
+    {
+      "predicate": "status",
+      "object": "upstream_error_2026-05-31",
+      "validFrom": "2026-05-31T08:15:00Z"
+    },
+    {
+      "predicate": "impact",
+      "object": "regnr_search_unavailable",
+      "validFrom": "2026-05-31T08:15:00Z"
+    },
+    {
+      "predicate": "error_rate",
+      "object": "92.3_percent_2026-05-31",
+      "validFrom": "2026-05-31T08:20:00Z"
+    },
+    {
+      "predicate": "api_key",
+      "object": "4e0f9b0f-944a-4e1c-afd0-b916685fa1e2",
+      "validFrom": "2026-05-31T12:32:00Z"
+    },
+    {
+      "predicate": "key_purpose",
+      "object": "kjøretøyopplysninger_regnr_vin_søk",
+      "validFrom": "2026-05-31T12:32:00Z"
+    },
+    {
+      "predicate": "outage_status",
+      "object": "503_no_healthy_upstream",
+      "validFrom": "2026-05-31T12:32:00Z"
+    },
+    {
+      "predicate": "outage_detected",
+      "object": "2026-05-31T08:15:00Z",
+      "validFrom": "2026-05-31T12:32:00Z"
+    },
+    {
+      "predicate": "outage_duration",
+      "object": "6_hours_plus",
+      "validFrom": "2026-05-31T12:32:00Z"
+    },
+    {
+      "predicate": "resolution",
+      "object": "pending_svv_fix",
+      "validFrom": "2026-05-31T12:32:00Z"
+    },
+    {
+      "predicate": "workaround",
+      "object": "katalog_søk_eller_kundeservice",
+      "validFrom": "2026-05-31T12:32:00Z"
+    }
+  ],
+  "svv-outage": [
+    {
+      "predicate": "analysis_date",
+      "object": "2026-05-31T14:37:00Z",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "scope",
+      "object": "isolated_api_only",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "main_website_status",
+      "object": "http_200_ok",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "api_endpoint_status",
+      "object": "http_503_failed",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "error_message",
+      "object": "no_healthy_upstream",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "likely_cause",
+      "object": "backend_service_failure",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "response_time",
+      "object": "0.2_seconds",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "root_cause",
+      "object": "nvdb_security_measures_2026-05-31",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "affected_service",
+      "object": "les_v3_read_api",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "unaffected_service",
+      "object": "write_api",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "official_source",
+      "object": "https://www.nvdb.no/aktuelt/endring/",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "incident_type",
+      "object": "planned_security_update",
+      "validFrom": "2026-05-31T14:37:00Z"
+    },
+    {
+      "predicate": "estimated_resolution",
+      "object": "unknown_wait_for_svv",
+      "validFrom": "2026-05-31T14:37:00Z"
+    }
+  ],
+  "vegvesen-scraper": [
+    {
+      "predicate": "status",
+      "object": "deployed_but_503_error",
+      "validFrom": "2026-05-31T14:45:00Z"
+    }
+  ],
+  "startpage-vehicle-wizard": [
+    {
+      "predicate": "implements",
+      "object": "guided-search-wizard",
+      "validFrom": "2026-06-01T08:00:58.693Z"
+    },
+    {
+      "predicate": "replaces",
+      "object": "single-regnr-input",
+      "validFrom": "2026-06-01T08:00:58.698Z"
+    },
+    {
+      "predicate": "goal",
+      "object": "reduce-prefix4-false-positives",
+      "validFrom": "2026-06-01T08:00:58.699Z"
+    },
+    {
+      "predicate": "has-steps",
+      "object": "regnr-brand-model-year-summary",
+      "validFrom": "2026-06-01T08:00:58.699Z"
+    },
+    {
+      "predicate": "uses",
+      "object": "useWizardState-hook",
+      "validFrom": "2026-06-01T08:00:58.699Z"
+    },
+    {
+      "predicate": "uses",
+      "object": "useKtypeLookup-hook",
+      "validFrom": "2026-06-01T08:00:58.699Z"
+    },
+    {
+      "predicate": "uses",
+      "object": "useVehicleOptions-hook",
+      "validFrom": "2026-06-01T08:00:58.699Z"
+    }
+  ],
+  "VehicleWizard": [
+    {
+      "predicate": "location",
+      "object": "frontend/src/components/search/VehicleWizard/",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    },
+    {
+      "predicate": "orchestrates",
+      "object": "5-step-wizard-flow",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
+  ],
+  "kType-lookup": [
+    {
+      "predicate": "endpoint",
+      "object": "/api/vehicle/ktype/:regnr",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
+  ],
+  "brand-endpoint": [
+    {
+      "predicate": "location",
+      "object": "/api/vehicle/brands",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
+  ],
+  "model-endpoint": [
+    {
+      "predicate": "location",
+      "object": "/api/vehicle/models",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
+  ],
+  "year-endpoint": [
+    {
+      "predicate": "location",
+      "object": "/api/vehicle/years",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
+  ],
+  "vehicle-wizard-spec": [
+    {
+      "predicate": "location",
+      "object": "docs/superpowers/specs/2026-06-01-startpage-vehicle-wizard-design.md",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
+  ],
+  "vehicle-wizard-plan": [
+    {
+      "predicate": "location",
+      "object": "docs/superpowers/plans/2026-06-01-vehicle-wizard-plan.md",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    },
+    {
+      "predicate": "tasks",
+      "object": "13-total-tasks",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
+  ],
+  "vehicle-wizard-implementation": [
+    {
+      "predicate": "status",
+      "object": "approved-ready-for-execution",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
+  ],
+  "HeroSearch": [
+    {
+      "predicate": "integrates",
+      "object": "VehicleWizard",
+      "validFrom": "2026-06-01T08:00:58.703Z"
+    }
   ]
 }

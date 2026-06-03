@@ -21,15 +21,15 @@ Hvis Klarpakke-kontekst lekker inn — avvis den.
 
 | Komponent | Teknologi |
 |-----------|-----------|
-| Frontend | Statisk HTML/CSS/JS (7 sider, trespråklig) |
+| Frontend | React 18 + Vite + TypeScript + Tailwind CSS (12+ sider, trespråklig NO/SV/EN) |
 | Backend | Cloudflare Worker (TypeScript) |
-| Lagring | Cloudflare KV (katalog-metadata), D1 (SQLite) |
-| Deploy | Cloudflare (Worker + Pages), GitHub Actions |
-| Datakilder | SVV Enkeltoppslag, Biluppgifter TecDoc, Bovsoft REGNUM, Pilkington, Glavista, Euroglass.ru, Autoglass.ru, Nord Glass |
-| Node | v20 (se `.nvmrc`) |
-| D1 Tabeller | `glass_catalog`, `ktype_matches`, `glass_rules`, `search_results`, `vin_decode_cache`, `provider_calls` |
-| Matching | Layer 0 (kType exact) → Layer 1-4 (brand/model/year/equipment scoring) |
-| Learning | D1 `search_results` (VIN-prefix → equipment), `glass_rules` (brand:model:year → kType) |
+| Lagring | Cloudflare KV (katalog-metadata), D1 (SQLite), R2 (bilde-assets) |
+| Deploy | Cloudflare (Worker + Pages), GitHub Actions CI/CD |
+| Datakilder | SVV Enkeltoppslag, Biluppgifter.se, Bovsoft REGNUM, Pilkington, Glavista, Nord Glass, TecDoc 1Q2019 |
+| Node | v22 (se `.nvmrc`, oppgradert fra v20 mai 2026) |
+| D1 Tabeller | `glass_catalog`, `ktype_matches`, `glass_rules`, `search_results`, `vin_decode_cache`, `provider_calls`, `ground_truth`, `glass_variants`, `tecdoc_ktype_registry`, `vehicle_fingerprints`, `vin_glass_rules`, `quote_requests` |
+| Matching | Layer -1 (ground truth) → Layer 0 (kType exact) → Layer 0.5 (TecDoc fallback, collision-gated) → Layer 1-4 (brand/model/year/equipment scoring) |
+| Learning | D1 `search_results` (VIN-prefix → equipment), `glass_rules` (brand:model:year → kType), `ktype_matches` (regnr→kType→eurocode statistikk) |
 
 ---
 
@@ -152,7 +152,10 @@ Hver respons skal avsluttes med:
 | `api/scrapers/merge-catalogs.ts` | Katalog-merge-logikk | ALLTID ved data-endringer |
 | `scripts/batch-bovsoft-local.mjs` | Bovsoft batch runner (regnr→kType→eurocode) | Ved kType-bootstrap |
 | `scripts/apify-tecdoc-scraper.mjs` | TecDoc equipment criteria scrape | Ved TecDoc-beriking |
-| `js/main.js` | Frontend JS, API_BASE | ALLTID ved URL-endringer |
+| `frontend/src/App.tsx` | React-router, lazy loading, 12+ pages | ALLTID ved nye sider/routes |
+| `frontend/src/api/client.ts` | API_BASE konfigurasjon | ALLTID ved miljø-endringer |
+| `frontend/src/stores/cartStore.ts` | zustand handlekurv med persist | Ved handlekurv/katalog-endringer |
+| `frontend/vite.config.ts` | Vite build-konfigurasjon | Ved frontend-infra |
 | `.github/workflows/deploy.yml` | Deploy-pipeline | ALLTID ved CI/CD-endringer |
 | `AGENTS.md` | Prosjekt-regler | ALLTID |
 | `.kimi/PROJECT_STATE.md` | Single source of truth for AI-assistenter | ALLTID |

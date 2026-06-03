@@ -69,7 +69,8 @@ export async function handleVehicleKtypeLookup(request: Request, env: Env): Prom
     );
 
     // Use resolved kType if confidence is higher or Bovsoft had wrong/no kType
-    const finalKtype = resolved.confidence > 0.8 ? resolved.ktype : vehicle.ktype;
+    // Lowered threshold to 0.6 to allow TecDoc fallback (confidence 0.65-0.70)
+    const finalKtype = resolved.confidence > 0.6 ? resolved.ktype : vehicle.ktype;
     const source = resolved.source === 'tecdoc' ? 'bovsoft+tecdoc' : 'bovsoft';
 
     // 4. Cache the result
@@ -215,6 +216,119 @@ export async function handleVehicleYears(request: Request, env: Env): Promise<Re
 // GET /api/vehicle/products?ktype=X
 // Get products by kType (for summary step)
 // ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// GET /api/vehicle/debug/:regnr
+// Debug kType resolution step-by-step (no caching)
+// ---------------------------------------------------------------------------
+
+export async function handleVehicleDebug(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const pathParts = url.pathname.split("/");
+  const regnr = pathParts[pathParts.length - 1]?.toUpperCase().replace(/\s/g, "");
+
+  if (!regnr || !/^[A-Z]{2}\d{4,5}$/.test(regnr)) {
+    return errorResponse("Ugyldig registreringsnummer", 400);
+  }
+
+  try {
+    // 1. Fetch from Bovsoft (skip cache)
+    const bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID || "", env.BOVSOFT_SECCODE || "");
+
+    if (!bovsoftVehicle) {
+      return jsonResponse({ success: false, error: "Bovsoft fant ikke kjøretøy" });
+    }
+
+    // 2. Validate kType
+    let validationResult: { isValid: boolean; dbBrand?: string; dbModel?: string } = { isValid: false };
+    
+    if (bovsoftVehicle.ktype) {
+      const dbResult = await env.GLASS_CATALOG_D1
+        .prepare(`SELECT brand, model FROM ktype_registry WHERE ktype = ? LIMIT 1`)
+        .bind(bovsoftVehicle.ktype)
+        .first<{ brand: string; model: string }>();
+      
+      if (dbResult) {
+        const brandMatch = dbResult.brand.toUpperCase() === bovsoftVehicle.brand.toUpperCase();
+        const modelMatch = 
+          dbResult.model.toUpperCase().includes(bovsoftVehicle.model) ||
+          bovsoftVehicle.model.includes(dbResult.model.toUpperCase());
+        validationResult = {
+          isValid: brandMatch && modelMatch,
+          dbBrand: dbResult.brand,
+          dbModel: dbResult.model,
+        };
+      }
+    }
+
+    // 3. Test each fallback step
+    const year = bovsoftVehicle.yearFrom || bovsoftVehicle.yearTo || 0;
+    const brand = bovsoftVehicle.brand;
+    const model = bovsoftVehicle.model;
+
+    // Exact match
+    const exactMatch = await env.GLASS_CATALOG_D1
+      .prepare(`SELECT ktype, brand, model, year_from, year_to FROM ktype_registry WHERE brand = ? AND model = ? AND year_from <= ? AND (year_to >= ? OR year_to IS NULL) LIMIT 1`)
+      .bind(brand, model, year, year)
+      .first<{ ktype: number; brand: string; model: string; year_from: number; year_to: number | null }>();
+
+    // Partial match (first word only — avoid D1 SQLITE_ERROR on complex strings)
+    const firstWord = model.split(/\s+/)[0].replace(/[^A-Z0-9]/gi, '');
+    const partialMatch = firstWord.length >= 2 ? await env.GLASS_CATALOG_D1
+      .prepare(`SELECT ktype, brand, model, year_from, year_to FROM ktype_registry WHERE brand = ? AND model LIKE ? AND year_from <= ? AND (year_to >= ? OR year_to IS NULL) LIMIT 1`)
+      .bind(brand, `%${firstWord}%`, year, year)
+      .first<{ ktype: number; brand: string; model: string; year_from: number; year_to: number | null }>() : null;
+
+    // Generic match
+    const genericModel = model
+      .replace(/CARAVELLE/g, 'TRANSPORTER')
+      .replace(/MULTIVAN/g, 'TRANSPORTER')
+      .replace(/\s+V\s+/g, ' T5 ')
+      .replace(/BUSS/g, '')
+      .trim();
+    const searchPattern = `%TRANSPORTER%T5%`;
+    const genericMatch = await env.GLASS_CATALOG_D1
+      .prepare(`SELECT ktype, brand, model, year_from, year_to FROM ktype_registry WHERE brand = ? AND model LIKE ? AND year_from <= ? AND (year_to >= ? OR year_to IS NULL) LIMIT 1`)
+      .bind(brand, searchPattern, year, year)
+      .first<{ ktype: number; brand: string; model: string; year_from: number; year_to: number | null }>();
+
+    return jsonResponse({
+      success: true,
+      regnr,
+      bovsoft: {
+        ktype: bovsoftVehicle.ktype,
+        brand: bovsoftVehicle.brand,
+        model: bovsoftVehicle.model,
+        yearFrom: bovsoftVehicle.yearFrom,
+        yearTo: bovsoftVehicle.yearTo,
+      },
+      validation: validationResult,
+      fallbackSteps: {
+        exactMatch: exactMatch || null,
+        partialMatch: partialMatch || null,
+        genericModel,
+        searchPattern,
+        genericMatch: genericMatch || null,
+      },
+      final: {
+        wouldUse: validationResult.isValid ? 'bovsoft' : (genericMatch || partialMatch || exactMatch ? 'tecdoc' : 'bovsoft_fallback'),
+        suggestedKtype: validationResult.isValid 
+          ? bovsoftVehicle.ktype 
+          : (genericMatch?.ktype || partialMatch?.ktype || exactMatch?.ktype || bovsoftVehicle.ktype),
+      },
+    });
+  } catch (e) {
+    console.error(`[VehicleDebug] Error for regnr=${regnr}:`, e);
+    return jsonResponse({
+      success: false,
+      error: "Debug feilet",
+      details: e instanceof Error ? e.message : String(e),
+      stack: e instanceof Error ? e.stack : undefined,
+      bovsoftClientIdSet: !!env.BOVSOFT_CLIENT_ID,
+      bovsoftSecCodeSet: !!env.BOVSOFT_SECCODE,
+    }, 500);
+  }
+}
 
 export async function handleVehicleProducts(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);

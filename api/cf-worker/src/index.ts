@@ -15,7 +15,7 @@ import { handleFeedback } from "./handlers/feedback";
 import { handleAdminQuotes } from "./handlers/admin";
 import { handleVinLookup, handleVinLookupStatus } from "./handlers/vin";
 import { handleHealth } from "./handlers/health";
-import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, handleVehicleYears, handleVehicleProducts } from "./handlers/vehicle";
+import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, handleVehicleYears, handleVehicleProducts, handleVehicleDebug } from "./handlers/vehicle";
 import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
 import { fetchSvvEnkeltoppslag } from "./providers/svv";
 
@@ -294,6 +294,9 @@ export default {
 
 
     // Vehicle Wizard endpoints
+    if (path.startsWith("/api/vehicle/debug/")) {
+      return handleVehicleDebug(request, env);
+    }
     if (path.startsWith("/api/vehicle/ktype/")) {
       return handleVehicleKtypeLookup(request, env);
     }
