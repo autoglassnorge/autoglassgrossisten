@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { RegnrStep } from '../VehicleWizard/steps/RegnrStep';
 import type { KtypeLookupResponse } from '@/types/api';
@@ -19,11 +19,15 @@ describe('RegnrStep', () => {
     return render(<RegnrStep {...defaultProps} {...props} />);
   };
 
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it('renders input field with placeholder "AB 12345"', () => {
     renderComponent();
     const input = screen.getByPlaceholderText('AB 12345');
-    expect(input).toBeDefined();
-    expect((input as HTMLInputElement).id).toBe('regnr');
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('id', 'regnr');
   });
 
   it('calls onRegnrChange with uppercase value when typing', () => {
@@ -45,13 +49,13 @@ describe('RegnrStep', () => {
 
     fireEvent.click(submitButton);
 
-    expect(screen.getByText('Ugyldig registreringsnummer. Format: AB12345')).toBeDefined();
+    expect(screen.getByText('Ugyldig registreringsnummer. Format: AB12345')).toBeInTheDocument();
   });
 
   it('calls lookupKtype with regnr on valid form submit', async () => {
-    const lookupKtype = vi.fn().mockResolvedValue({
+    const lookupKtype = vi.fn<() => Promise<KtypeLookupResponse | null>>().mockResolvedValue({
       success: false,
-    } as KtypeLookupResponse);
+    });
     renderComponent({ regnr: 'AB12345', lookupKtype });
     const submitButton = screen.getByRole('button', { name: /Finn bilglass/i });
 
@@ -64,11 +68,11 @@ describe('RegnrStep', () => {
 
   it('calls onKtypeFound when lookup returns success + ktype', async () => {
     const onKtypeFound = vi.fn();
-    const lookupKtype = vi.fn().mockResolvedValue({
+    const lookupKtype = vi.fn<() => Promise<KtypeLookupResponse | null>>().mockResolvedValue({
       success: true,
       ktype: 12345,
       vehicle: { brand: 'Volvo', model: 'V70', year: 2015 },
-    } as KtypeLookupResponse);
+    });
 
     renderComponent({ regnr: 'AB12345', onKtypeFound, lookupKtype });
     const submitButton = screen.getByRole('button', { name: /Finn bilglass/i });
@@ -86,9 +90,9 @@ describe('RegnrStep', () => {
 
   it('calls onManualSelect when lookup returns success=false (no ktype found)', async () => {
     const onManualSelect = vi.fn();
-    const lookupKtype = vi.fn().mockResolvedValue({
+    const lookupKtype = vi.fn<() => Promise<KtypeLookupResponse | null>>().mockResolvedValue({
       success: false,
-    } as KtypeLookupResponse);
+    });
 
     renderComponent({ regnr: 'AB12345', onManualSelect, lookupKtype });
     const submitButton = screen.getByRole('button', { name: /Finn bilglass/i });
@@ -103,25 +107,25 @@ describe('RegnrStep', () => {
   it('shows loading state (button text changes to "Søker...")', () => {
     renderComponent({ isLoading: true });
     const submitButton = screen.getByRole('button', { name: /Søker\.\.\./i });
-    expect(submitButton).toBeDefined();
+    expect(submitButton).toBeInTheDocument();
   });
 
   it('submit button is disabled when isLoading=true', () => {
     renderComponent({ isLoading: true });
-    const submitButton = screen.getByRole('button', { name: /Søker\.\.\./i }) as HTMLButtonElement;
-    expect(submitButton.disabled).toBe(true);
+    const submitButton = screen.getByRole('button', { name: /Søker\.\.\./i });
+    expect(submitButton).toBeDisabled();
   });
 
   it('submit button is disabled when regnr.length < 5', () => {
     renderComponent({ regnr: 'AB12' });
-    const submitButton = screen.getByRole('button', { name: /Finn bilglass/i }) as HTMLButtonElement;
-    expect(submitButton.disabled).toBe(true);
+    const submitButton = screen.getByRole('button', { name: /Finn bilglass/i });
+    expect(submitButton).toBeDisabled();
   });
 
   it('submit button is enabled when regnr.length >= 5 and not loading', () => {
     renderComponent({ regnr: 'AB123' });
-    const submitButton = screen.getByRole('button', { name: /Finn bilglass/i }) as HTMLButtonElement;
-    expect(submitButton.disabled).toBe(false);
+    const submitButton = screen.getByRole('button', { name: /Finn bilglass/i });
+    expect(submitButton).toBeEnabled();
   });
 
   it('"Jeg har ikke registreringsnummeret" button calls onManualSelect', () => {
@@ -136,7 +140,7 @@ describe('RegnrStep', () => {
 
   it('displays external error when error prop is provided', () => {
     renderComponent({ error: 'Nettverksfeil' });
-    expect(screen.getByText('Nettverksfeil')).toBeDefined();
+    expect(screen.getByText('Nettverksfeil')).toBeInTheDocument();
   });
 
   it('clears local error when user types in the input', () => {
@@ -145,9 +149,9 @@ describe('RegnrStep', () => {
     const input = screen.getByPlaceholderText('AB 12345');
 
     fireEvent.click(submitButton);
-    expect(screen.getByText('Ugyldig registreringsnummer. Format: AB12345')).toBeDefined();
+    expect(screen.getByText('Ugyldig registreringsnummer. Format: AB12345')).toBeInTheDocument();
 
     fireEvent.change(input, { target: { value: 'AB123' } });
-    expect(screen.queryByText('Ugyldig registreringsnummer. Format: AB12345')).toBeNull();
+    expect(screen.queryByText('Ugyldig registreringsnummer. Format: AB12345')).not.toBeInTheDocument();
   });
 });
