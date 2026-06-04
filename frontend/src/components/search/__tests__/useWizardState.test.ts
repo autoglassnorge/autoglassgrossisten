@@ -8,6 +8,7 @@ describe('useWizardState', () => {
     expect(result.current.state.step).toBe('regnr');
     expect(result.current.state.regnr).toBe('');
     expect(result.current.state.ktype).toBeUndefined();
+    expect(result.current.state.ktypeVehicle).toBeUndefined();
     expect(result.current.state.selectedBrand).toBeUndefined();
     expect(result.current.state.selectedModel).toBeUndefined();
     expect(result.current.state.selectedYear).toBeUndefined();
@@ -60,20 +61,23 @@ describe('useWizardState', () => {
     expect(result.current.state.selectedModel).toBeUndefined();
     expect(result.current.state.selectedYear).toBeUndefined();
     expect(result.current.state.ktype).toBeUndefined();
+    expect(result.current.state.ktypeVehicle).toBeUndefined();
   });
 
-  it('goBack from summary with ktype returns to regnr AND clears ktype', () => {
+  it('goBack from summary with ktype returns to regnr AND clears ktype + ktypeVehicle', () => {
     const { result } = renderHook(() => useWizardState());
     act(() => {
-      result.current.setKtypeMatch('12345');
+      result.current.setKtypeMatch('12345', { brand: 'Volvo', model: 'V70', year: 2015 });
     });
     expect(result.current.state.step).toBe('summary');
     expect(result.current.state.ktype).toBe('12345');
+    expect(result.current.state.ktypeVehicle).toEqual({ brand: 'Volvo', model: 'V70', year: 2015 });
     act(() => {
       result.current.goBack();
     });
     expect(result.current.state.step).toBe('regnr');
     expect(result.current.state.ktype).toBeUndefined();
+    expect(result.current.state.ktypeVehicle).toBeUndefined();
   });
 
   it('goBack from summary without ktype returns to year AND clears selectedYear', () => {

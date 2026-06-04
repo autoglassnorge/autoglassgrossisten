@@ -2,10 +2,17 @@ import { useState, useCallback } from 'react';
 
 export type WizardStep = 'regnr' | 'brand' | 'model' | 'year' | 'summary';
 
+export interface KtypeVehicle {
+  brand: string;
+  model: string;
+  year: number;
+}
+
 export interface WizardState {
   step: WizardStep;
   regnr: string;
   ktype?: string;
+  ktypeVehicle?: KtypeVehicle;
   selectedBrand?: string;
   selectedModel?: string;
   selectedYear?: string;
@@ -48,7 +55,7 @@ export function useWizardState() {
           return { ...prev, step: 'model', selectedModel: undefined };
         case 'summary':
           if (prev.ktype) {
-            return { ...prev, step: 'regnr', ktype: undefined };
+            return { ...prev, step: 'regnr', ktype: undefined, ktypeVehicle: undefined };
           }
           return { ...prev, step: 'year', selectedYear: undefined };
         default:
@@ -57,8 +64,8 @@ export function useWizardState() {
     });
   }, []);
 
-  const setKtypeMatch = useCallback((ktype: string) => {
-    setState(prev => ({ ...prev, ktype, step: 'summary' }));
+  const setKtypeMatch = useCallback((ktype: string, vehicle?: KtypeVehicle) => {
+    setState(prev => ({ ...prev, ktype, ktypeVehicle: vehicle, step: 'summary' }));
   }, []);
 
   const reset = useCallback(() => {

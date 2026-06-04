@@ -35,8 +35,8 @@ export function VehicleWizard({ onComplete }: VehicleWizardProps) {
   } = useVehicleOptions(state.selectedBrand, state.selectedModel);
 
   // Handle successful kType lookup
-  const handleKtypeFound = (ktype: string, _vehicle: KtypeLookupResponse['vehicle']) => {
-    setKtypeMatch(ktype);
+  const handleKtypeFound = (ktype: string, vehicle: KtypeLookupResponse['vehicle']) => {
+    setKtypeMatch(ktype, vehicle ?? undefined);
     onComplete?.();
   };
 
@@ -127,6 +127,7 @@ export function VehicleWizard({ onComplete }: VehicleWizardProps) {
         currentStep={state.step}
         regnr={state.regnr}
         ktype={state.ktype}
+        ktypeVehicle={state.ktypeVehicle}
         selectedBrand={state.selectedBrand}
         selectedModel={state.selectedModel}
         selectedYear={state.selectedYear}

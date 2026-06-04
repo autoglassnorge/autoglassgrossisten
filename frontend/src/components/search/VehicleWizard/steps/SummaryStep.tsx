@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { AlertCircle, RefreshCw, Check, Car } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { WizardStepContainer } from '../WizardStep';
-import type { WizardStep as StepType } from '../hooks/useWizardState';
+import type { WizardStep as StepType, KtypeVehicle } from '../hooks/useWizardState';
 import type { Product } from '@/types/api';
 
 interface SummaryStepProps {
   currentStep: StepType;
   regnr: string;
   ktype?: string;
+  ktypeVehicle?: KtypeVehicle;
   selectedBrand?: string;
   selectedModel?: string;
   selectedYear?: string;
@@ -20,6 +21,7 @@ export function SummaryStep({
   currentStep,
   regnr,
   ktype,
+  ktypeVehicle,
   selectedBrand,
   selectedModel,
   selectedYear,
@@ -32,8 +34,8 @@ export function SummaryStep({
 
   // Format vehicle display string
   const vehicleDisplay = () => {
-    if (ktype && selectedBrand && selectedModel) {
-      return `${selectedBrand} ${selectedModel} ${selectedYear || ''}`.trim();
+    if (ktypeVehicle) {
+      return `${ktypeVehicle.brand} ${ktypeVehicle.model} ${ktypeVehicle.year || ''}`.trim();
     }
     if (selectedBrand && selectedModel && selectedYear) {
       return `${selectedBrand} ${selectedModel} ${selectedYear}`;

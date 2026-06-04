@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Car, ScanLine, Sparkles } from 'lucide-react';
 import { HeroVideo } from './HeroVideo';
-import { VehicleWizard } from '@/components/search/VehicleWizard';
+import { HeroSearch } from './HeroSearch';
 
 /**
  * HeroSekurit - Inspirert av Sekurit Service design
@@ -88,7 +88,7 @@ export function HeroSekurit() {
         {/* Search container */}
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/10 shadow-2xl">
           {searchMode === 'wizard' ? (
-            <VehicleWizard />
+            <HeroSearch />
           ) : (
             <form onSubmit={handleVinSubmit} className="space-y-4">
               <div className="relative">
