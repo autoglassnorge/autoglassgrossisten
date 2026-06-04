@@ -3,3 +3,7 @@ agent:
   extend: default
   name: autoglass-orchestrator
   system_prompt_path: ./autoglass-orchestrator-agent.md
+metadata:
+  last_updated: "2026-06-04"
+  validated_against: "AGENTS.md, .kimi/agents/"
+  status: "active"

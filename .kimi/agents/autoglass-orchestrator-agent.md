@@ -200,3 +200,11 @@ npx complexity-report api/cf-worker/src/index.ts
 | autoglass-web | `.yaml` | `.md` | HTML, CSS, JS, SEO, i18n |
 | autoglass-ops | `.yaml` | `.md` | Deploy, CI/CD, secrets, uptime |
 | autoglass-ktype | `.yaml` | `.md` | kType, Bovsoft, TecDoc, D1 kType-tabeller |
+
+---
+
+## 📝 Endringslogg
+
+| Dato | Endring |
+|------|---------|
+| 2026-06-04 | Validert mot kodebase, YAML-metadata lagt til |

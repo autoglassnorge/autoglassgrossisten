@@ -113,6 +113,20 @@ else
   echo "  (gh CLI ikke installert)"
 fi
 
+# 7. AGENT-KONSISTENS-SJEKK
+echo ""
+echo "🤖 AGENT-KONSISTENS:"
+echo "───────────────────────────────────────────────────────"
+
+VALIDATE_OUTPUT=$(cd "$REPO_ROOT" && node scripts/validate-agents.mjs --quick 2>&1)
+VALIDATE_EXIT=$?
+
+if [ $VALIDATE_EXIT -eq 0 ]; then
+  echo "  ✅ Agent-instruksjoner stemmer med kodebasen"
+else
+  echo "  ⚠️  AGENT-FEIL FUNNET — kjør 'node scripts/validate-agents.mjs' for detaljer"
+fi
+
 echo ""
 echo "═══════════════════════════════════════════════════════"
 echo ""

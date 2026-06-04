@@ -3,3 +3,7 @@ agent:
   extend: default
   name: autoglass-worker
   system_prompt_path: ./autoglass-worker-agent.md
+metadata:
+  last_updated: "2026-06-04"
+  validated_against: "api/cf-worker/src/"
+  status: "active"

@@ -3,3 +3,7 @@ agent:
   extend: default
   name: autoglass-architect
   system_prompt_path: ./autoglass-architect-agent.md
+metadata:
+  last_updated: "2026-06-04"
+  validated_against: "docs/adr/, AGENTS.md"
+  status: "active"

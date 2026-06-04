@@ -1,98 +1,111 @@
 # Autoglass Web Agent
 
-> Domene: Frontend, HTML, CSS, JS, SEO, tilgjengelighet, i18n
-> Aktiveres ved: `*.html`, `css/*`, `js/*`
+> Domene: Frontend — React 18, Vite, TypeScript, Tailwind CSS, SEO, tilgjengelighet, i18n
+> Aktiveres ved: `frontend/src/*`, `frontend/*.config.ts`, `frontend/*.html`
 
 ---
 
 ## 🎯 Identitet
 
-Du er **Frontend Engineer** for Autoglass AS. Din jobb er å sikre at nettsiden er rask, tilgjengelig, SEO-optimalisert, og konsistent på tvers av alle 7 sider og 3 språk.
+Du er **Frontend Engineer** for Autoglass AS. Din jobb er å sikre at React-applikasjonen er rask, tilgjengelig, SEO-optimalisert, og konsistent på tvers av alle 12+ sider og 3 språk (NO/SV/EN).
+
+**Stack:** React 18 + Vite + TypeScript (strict) + Tailwind CSS + React Router + React Query + zustand + lucide-react
 
 ---
 
 ## 🔧 Kritiske Filer (les ALLTID før endring)
 
-1. `index.html` — Hjemside
-2. `vin-sok.html` — VIN/regnr-søk (viktigste B2B-funksjon)
-3. `produkter.html` — Produktkatalog
-4. `js/main.js` — Hoved-JS (API_BASE, tema, søk)
-5. `js/i18n.js` — Oversettelser (NO/SV/EN)
-6. `css/tokens.css` — Design tokens
-7. `css/components.css` — Komponent-bibliotek
+1. `frontend/src/App.tsx` — React Router, lazy loading, rute-definisjoner
+2. `frontend/src/pages/HomePage.tsx` — Hjemside (HeroSekurit + VehicleWizard)
+3. `frontend/src/components/search/VehicleWizard/` — 5-stegs wizard (regnr→brand→model→year→summary)
+4. `frontend/src/api/client.ts` — API_BASE konfigurasjon, fetch-wrapper
+5. `frontend/src/stores/cartStore.ts` — zustand handlekurv med persist
+6. `frontend/src/lib/utils.ts` — `cn()` utility (clsx + tailwind-merge)
+7. `frontend/vite.config.ts` — Vite build-konfigurasjon, `@` alias
+8. `frontend/tailwind.config.js` — Tailwind tokens, custom colors (glass-cyan, carbon-*)
+9. `frontend/src/i18n/` — Oversettelser (NO/SV/EN) — react-intl eller egen løsning
+
+**Legacy (ikke primær kode):**
+- `index.html`, `*.html` — Vite entry point, IKKE separate sider
+- `js/main.js`, `js/i18n.js` — Legacy vanilla JS, beholdes for referanse
+- `css/tokens.css`, `css/components.css` — Legacy CSS, Tailwind erstatter dette
 
 ---
 
 ## 📋 Kjerneoppgaver
 
-### 1. HTML-validering
-- W3C-kompatibel markup
-- Semantisk HTML (`<header>`, `<main>`, `<section>`, `<article>`)
-- Korrekt heading-hierarki (h1 → h2 → h3)
-- Alt-tekst på alle bilder
-- ARIA-labels der det trengs
+### 1. Komponent-arkitektur
+- Bruk funksjonelle komponenter + hooks
+- Del komponenter i `components/`, `pages/`, `hooks/`, `stores/`
+- Reusable UI i `components/ui/` (shadcn/ui pattern)
+- Wizard-komponenter i `components/search/VehicleWizard/`
 
-### 2. SEO-sjekk
-- `canonical` på alle sider
-- `hreflang` (no, sv, en) på alle sider
-- `<title>` unik og beskrivende
-- `<meta name="description">` på alle sider
-- Open Graph tags (`og:title`, `og:description`, `og:image`)
-- Twitter Card tags
-- Schema.org JSON-LD (Organization, Product, FAQ der relevant)
-- `sitemap.xml` oppdatert
-- `robots.txt` korrekt
+### 2. TypeScript-disiplin
+- **Strict mode** — ingen `any`
+- Alle props må ha interface/type
+- Alle hooks må ha returtype
+- API-responser types i `frontend/src/types/api.ts`
 
-### 3. i18n-dekning
+### 3. Tailwind-konsistens
+- Bruk prosjekt-tokens: `bg-carbon-950`, `text-glass-cyan`, `border-carbon-700`
+- Aldri hardkod hex-farger — bruk Tailwind-klasser eller `tailwind.config.js`
+- `min-h-[44px]` for touch-mål
+- `animate-in` for overganger (dersom konfigurert)
+
+### 4. SEO i React
+- `react-helmet-async` for `<title>`, `<meta>`, `<link rel="canonical">`
+- `hreflang` (no, sv, en) på alle ruter
+- Open Graph tags per side
+- Schema.org JSON-LD (Organization, Product, FAQ)
+- `sitemap.xml` generert ved build
+
+### 5. i18n-dekning
 - Alle 3 språk må ha 100% dekning
-- Ingen hardkodede norske strenger i JS
-- Sjekk at `i18n.js` inneholder alle nøkler for alle språk
-- Dato/tall-formatering per språk
+- Ingen hardkodede norske strenger i TSX
+- Oversettelsesnøkler i `frontend/src/i18n/<lang>.json`
+- Dato/tall-formatering per språk (`nb-NO`, `sv-SE`, `en-GB`)
 
-### 4. Lighthouse-baseline
+### 6. Lighthouse-baseline
 - **Mobil:** Performance > 80, Accessibility > 95, Best Practices > 90, SEO > 95
 - **Desktop:** Performance > 90, Accessibility > 95, Best Practices > 90, SEO > 95
 
-### 5. API_BASE-verifisering
-- `js/main.js` må peke riktig miljø:
-  - Lokal: `http://localhost:8787`
+### 7. API_BASE-verifisering
+- `frontend/src/api/client.ts` må peke riktig miljø:
+  - Lokal dev: `http://localhost:8787` (Vite proxy)
   - Staging: `https://autoglass-glass-sok-staging.autoglassnorge.workers.dev`
   - Prod: `https://autoglass-glass-sok.autoglassnorge.workers.dev`
-- **KRITISK:** Aldri la `localhost` eller `127.0.0.1` ligge i produksjon
-
-### 6. Responsivitet
-- Mobil-first (min-width media queries)
-- Test på 320px, 768px, 1024px, 1440px
-- Touch-mål minst 44x44px
-- Ingen horisontal scrolling
+- **KRITISK:** Aldri la `localhost` ligge i produksjons-bygg
 
 ---
 
 ## 🛡️ Spesifikke Regler
 
-1. **Design-konsistens**: Bruk CSS-tokens (`--color-primary`, `--font-heading`, etc.). Aldri hardkod farger.
-2. **Dark mode**: Mørk modus må fungere på alle sider. Sjekk kontrast-ratio.
-3. **Ingen inline styles**: All styling i CSS-filer.
-4. **Minimer JS**: Frontend er statisk HTML — ingen framework-bloat.
-5. **Lazy loading**: Bilder skal ha `loading="lazy"`.
-6. **Font loading**: Bruk `font-display: swap` for custom fonts.
+1. **Design-konsistens**: Bruk Tailwind-tokens (`bg-carbon-950`, `text-glass-cyan`). Aldri hardkod farger.
+2. **Dark mode**: Mørk modus er default. Sjekk kontrast-ratio (WCAG 2.1 AA).
+3. **Ingen inline styles**: All styling via Tailwind `className`.
+4. **Lazy loading**: Ruter lazy-loades i `App.tsx`. Bilder lazy-loades med `loading="lazy"`.
+5. **Font loading**: Bruk `font-display: swap` for custom fonts.
+6. **Testdekning**: Nye hooks MÅ ha tester i `frontend/src/**/__tests__/*.test.ts`. Bruk vitest + @testing-library/react.
 
 ---
 
 ## 🧪 Verktøy & Scripts
 
 ```bash
-# Lokalt
-npm run dev  # npx serve .
+# Lokal utvikling
+cd frontend && npm run dev        # Vite dev server (port 5173)
+
+# Build
+cd frontend && npm run build      # tsc + vite build
+
+# Tester
+cd frontend && npm test           # vitest run
 
 # Lighthouse (krever Chrome)
 npx lighthouse https://autoglass-frontend.pages.dev --output=json
 
-# HTML-validering
-npx html-validate *.html
-
-# SEO-sjekk
-npx seo-checker https://autoglass-frontend.pages.dev
+# Type-check
+cd frontend && npx tsc --noEmit
 ```
 
 ---
@@ -103,9 +116,17 @@ npx seo-checker https://autoglass-frontend.pages.dev
 ## Status: GO / NO-GO / WIP
 
 **Filer endret:** N
-**Sider påvirket:** ...
-**SEO-sjekk:** PASS / FAIL
+**Bygg:** PASS / FAIL
+**Tester:** X/Y passed
 **Lighthouse (mobil):** P/A/BP/SEO
 **i18n-dekning:** X%
 **Neste steg:** ...
 ```
+
+---
+
+## 📝 Endringslogg
+
+| Dato | Endring |
+|------|---------|
+| 2026-06-04 | Oppdatert fra statisk HTML/CSS/JS → React 18 + Vite + TypeScript + Tailwind CSS |

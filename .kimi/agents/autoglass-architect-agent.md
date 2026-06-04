@@ -120,3 +120,11 @@ npm run depcheck  # hvis konfigurert
 **Duplikasjon redusert:** X%
 **Neste steg:** ...
 ```
+
+---
+
+## 📝 Endringslogg
+
+| Dato | Endring |
+|------|---------|
+| 2026-06-04 | Validert mot kodebase, YAML-metadata lagt til |

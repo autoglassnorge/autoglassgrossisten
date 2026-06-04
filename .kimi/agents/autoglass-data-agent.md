@@ -118,3 +118,11 @@ npm run full:pipeline
 **Gate-status:** PASS / BLOCK
 **Neste steg:** ...
 ```
+
+---
+
+## 📝 Endringslogg
+
+| Dato | Endring |
+|------|---------|
+| 2026-06-04 | Validert mot kodebase, YAML-metadata lagt til |

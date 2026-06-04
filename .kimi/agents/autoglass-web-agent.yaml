@@ -3,3 +3,7 @@ agent:
   extend: default
   name: autoglass-web
   system_prompt_path: ./autoglass-web-agent.md
+metadata:
+  last_updated: "2026-06-04"
+  validated_against: "frontend/src/"
+  status: "active"

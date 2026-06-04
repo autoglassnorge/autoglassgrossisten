@@ -109,3 +109,11 @@ npm run pages:deploy
 **Uptime siste 24t:** X%
 **Neste steg:** ...
 ```
+
+---
+
+## 📝 Endringslogg
+
+| Dato | Endring |
+|------|---------|
+| 2026-06-04 | Validert mot kodebase, YAML-metadata lagt til |

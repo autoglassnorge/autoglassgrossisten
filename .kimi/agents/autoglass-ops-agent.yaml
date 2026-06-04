@@ -3,3 +3,7 @@ agent:
   extend: default
   name: autoglass-ops
   system_prompt_path: ./autoglass-ops-agent.md
+metadata:
+  last_updated: "2026-06-04"
+  validated_against: ".github/workflows/"
+  status: "active"

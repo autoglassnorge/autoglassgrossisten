@@ -117,3 +117,11 @@ node scripts/verify-kv.mjs
 **Performance OK:** ja/nei
 **Neste steg:** ...
 ```
+
+---
+
+## 📝 Endringslogg
+
+| Dato | Endring |
+|------|---------|
+| 2026-06-04 | Validert mot kodebase, YAML-metadata lagt til |

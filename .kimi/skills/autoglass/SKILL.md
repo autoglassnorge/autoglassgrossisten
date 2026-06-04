@@ -12,28 +12,28 @@ tags: [autoglass, bilglass, b2b, cloudflare, worker, scraper, tecdoc, wrangler, 
 
 | Komponent | Teknologi |
 |-----------|-----------|
-| Frontend | Statisk HTML/CSS/JS (7 sider, trespråklig: no/en/ru) |
+| Frontend | React 18 + Vite + TypeScript + Tailwind CSS (12+ sider, trespråklig: NO/SV/EN) |
 | Backend | Cloudflare Worker (TypeScript, strict mode) |
 | Lagring | Cloudflare KV (katalog-metadata), D1 (SQLite) |
 | Deploy | Wrangler CLI (OAuth, ingen API-token nødvendig) + GitHub Actions |
 | Datakilder | SVV Enkeltoppslag, Biluppgifter TecDoc, Bovsoft REGNUM, Pilkington, Glavista, Euroglass.ru, Autoglass.ru, Nord Glass, Hella Gutmann CSC |
-| Node | v20 |
+| Node | v22 |
 
 ## Katalog (per 2026-05-29)
 
-- **Totalt:** 33,215 produkter
-- **Frontrute:** 7,818
-- **Annet:** 22,297
-- **Bakrute:** 49
-- **Dørglass:** 3,047
-- **Sideglass:** 4
-- **Kilder:** Pilkington IRL, Glavista, Pilkington Finland 2017 + Glavista
+- **Totalt:** 37,581+ produkter
+- **Frontrute:** ~8,500
+- **Annet:** ~25,000
+- **Bakrute:** ~60
+- **Dørglass:** ~3,500
+- **Sideglass:** ~10
+- **Kilder:** Pilkington, Glavista, Euroglass, Autoglass, Nord Glass
 
 ## D1-tabeller
 
 | Tabell | Formål |
 |--------|--------|
-| `glass_catalog` | 33,215 produkter — eurocode, brand, model, year, ktype, pris, equipment |
+| `glass_catalog` | 37,581+ produkter — eurocode, brand, model, year, ktype, pris, equipment |
 | `ktype_matches` | (ktype, eurocode) frequency aggregation — statistisk læring |
 | `ktype_registry` | Bovsoft-verifiserte ktyper fra Finn.no scraping |
 | `tecdoc_ktype_registry` | **NY** — TecDoc 1Q2019 collision-gated mappings (908 rows, 412 kTypes) |
@@ -161,7 +161,7 @@ cd api/cf-worker && wrangler deploy
 - `api/cf-worker/src/handlers/search.ts` — Søke-logikk med Layer 0.5
 - `api/cf-worker/wrangler.toml` — Worker-konfig
 - `api/cf-worker/schema.sql` — D1 schema (inkl. `tecdoc_ktype_registry`)
-- `data/catalog-prod.json` — Produksjonskatalog (33,215 records)
+- `data/catalog-prod.json` — Produksjonskatalog (37,581+ records)
 - `data/tecdoc-import/tecdoc-ktype-registry-safe.sql` — TecDoc data
 - `scripts/deploy-full-wrangler.mjs` — Full deploy-pipeline
 - `scripts/upload-catalog-wrangler.mjs` — KV-upload via Wrangler

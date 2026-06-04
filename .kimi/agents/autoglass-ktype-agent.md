@@ -60,3 +60,11 @@ Kilde (TecDoc/Bovsoft/Biluppgifter) → Parse → Match → D1-import → Worker
 1. **Lag 0:** Biluppgifter.se `GET /api/v1/tecdoc/regno/{regnr}?country_code=NO` → kType direkte
 2. **Lag 1:** TecDoc 1Q2019 fallback (brand+model+year → kType) — 60.3% dekning
 3. **Lag 2:** Bovsoft strategisk (333 søk på unike modeller) — validering + backfill
+
+---
+
+## 📝 Endringslogg
+
+| Dato | Endring |
+|------|---------|
+| 2026-06-04 | Validert mot kodebase, YAML-metadata lagt til |
