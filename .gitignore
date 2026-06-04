@@ -106,3 +106,4 @@ e2e/
 data/autoglass-scrape/.price-update-status.json
 data/autoglass-scrape/price-diff.json
 data/autoglass-scrape/price-update-report.md
+.worktrees/
