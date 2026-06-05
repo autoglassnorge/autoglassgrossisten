@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 /**
- * Import Hella Gutmann CSC data from Excel/CSV into D1 SQL
+ * Import Hella Gutmann CSC data from CSV into D1 SQL
  *
  * Usage:
- *   node scripts/import-csc-data.mjs <input.xlsx|input.csv>
+ *   node scripts/import-csc-data.mjs <input.csv>
  *
- * Input format (Excel/CSV columns):
+ * Input format (CSV columns):
  *   manufacturer, model, year_range, calibration_required_by, calibration_type,
  *   csc_tool, target_plate, notes, [sensor_type, sensor_label]
+ *
+ * Note: Excel files (.xlsx/.xls) are not supported for security reasons.
+ *       Convert to CSV first: File → Save As → CSV in Excel or Google Sheets.
  *
  * Output: api/cf-worker/generated-csc-inserts.sql
  */
@@ -17,7 +20,15 @@ import path from "path";
 
 const INPUT_FILE = process.argv[2];
 if (!INPUT_FILE) {
-  console.error("Usage: node scripts/import-csc-data.mjs <input.xlsx|input.csv>");
+  console.error("Usage: node scripts/import-csc-data.mjs <input.csv>");
+  console.error("Note: Convert .xlsx files to CSV first (File → Save As → CSV).");
+  process.exit(1);
+}
+
+const ext = path.extname(INPUT_FILE).toLowerCase();
+if (ext !== ".csv") {
+  console.error(`Error: Only CSV files are supported. Received: ${ext}`);
+  console.error("Convert Excel files to CSV: File → Save As → CSV (UTF-8)");
   process.exit(1);
 }
 
@@ -64,33 +75,15 @@ function recordToValues(r) {
 }
 
 async function main() {
-  const ext = path.extname(INPUT_FILE).toLowerCase();
-  let rows = [];
-
-  if (ext === ".csv") {
-    const text = fs.readFileSync(INPUT_FILE, "utf-8");
-    const lines = text.split("\n").filter((l) => l.trim());
-    const headers = lines[0].split(",").map((h) => h.trim().toLowerCase());
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(",");
-      const row = {};
-      headers.forEach((h, j) => (row[h] = values[j]?.trim() || ""));
-      rows.push(row);
-    }
-  } else if (ext === ".xlsx" || ext === ".xls") {
-    // Try to use xlsx package
-    try {
-      const XLSX = await import("xlsx");
-      const workbook = XLSX.readFile(INPUT_FILE);
-      const sheet = workbook.Sheets[workbook.SheetNames[0]];
-      rows = XLSX.utils.sheet_to_json(sheet);
-    } catch (e) {
-      console.error("xlsx package not installed. Run: npm install xlsx");
-      process.exit(1);
-    }
-  } else {
-    console.error(`Unsupported file format: ${ext}`);
-    process.exit(1);
+  const text = fs.readFileSync(INPUT_FILE, "utf-8");
+  const lines = text.split("\n").filter((l) => l.trim());
+  const headers = lines[0].split(",").map((h) => h.trim().toLowerCase());
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(",");
+    const row = {};
+    headers.forEach((h, j) => (row[h] = values[j]?.trim() || ""));
+    rows.push(row);
   }
 
   console.log(`Parsed ${rows.length} rows from ${INPUT_FILE}`);
