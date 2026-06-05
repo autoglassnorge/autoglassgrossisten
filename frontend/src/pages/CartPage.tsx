@@ -301,7 +301,7 @@ export default function CartPage() {
                             kr
                           </div>
                           <div className="text-xs text-gray-500">
-                            {item.product.price.toLocaleString('nb-NO')} kr/stk
+                            {item.product.price.toLocaleString('nb-NO')} kr/stk eks. mva
                           </div>
                         </>
                       ) : (

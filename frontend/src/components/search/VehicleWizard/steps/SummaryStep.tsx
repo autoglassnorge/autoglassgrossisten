@@ -212,7 +212,7 @@ export function SummaryStep({
                       </p>
                       <div className="mt-2 flex items-center gap-4">
                         <span className="font-semibold text-glass-cyan">
-                          {product.price.toLocaleString('no-NO')} kr
+                          {product.price.toLocaleString('no-NO')} kr eks. mva
                         </span>
                         <span
                           className={cn(

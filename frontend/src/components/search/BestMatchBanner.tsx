@@ -111,7 +111,7 @@ export function BestMatchBanner({ products, vehicle }: Props) {
                   {best.product.eurocode || best.product.articleNumber}
                 </span>
                 <span className="text-xs text-gray-500">
-                  kr {best.product.price?.toLocaleString('no-NO')}
+                  kr {best.product.price?.toLocaleString('no-NO')} eks. mva
                 </span>
               </div>
               <p className="text-xs text-gray-600">{best.explanation}</p>

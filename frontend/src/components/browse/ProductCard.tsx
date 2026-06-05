@@ -62,6 +62,20 @@ const formatPrice = (price: number | null) => {
   return new Intl.NumberFormat('no-NO', { style: 'currency', currency: 'NOK' }).format(price);
 };
 
+const PriceLabel = ({ price }: { price: number | null }) => {
+  if (price === null || price === 0) {
+    return <span className="text-sm text-gray-500 italic">Pris på forespørsel</span>;
+  }
+  return (
+    <div className="flex flex-col">
+      <span className="text-sm font-semibold text-gray-900">
+        {formatPrice(price)}
+      </span>
+      <span className="text-xs text-gray-400">eks. mva</span>
+    </div>
+  );
+};
+
 export function ProductCard({
   product,
   onQuickView,
@@ -69,8 +83,6 @@ export function ProductCard({
   isInComparison,
   onToggleComparison,
 }: ProductCardProps) {
-  const hasPrice = product.price !== null && product.price > 0;
-  
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow duration-200 flex flex-col">
       {/* Image placeholder */}
@@ -99,9 +111,7 @@ export function ProductCard({
         
         {/* Footer: Price and Actions */}
         <div className="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
-          <span className={`text-sm font-semibold ${hasPrice ? 'text-gray-900' : 'text-gray-500 italic'}`}>
-            {formatPrice(product.price)}
-          </span>
+          <PriceLabel price={product.price} />
           
           <div className="flex items-center gap-2">
             {/* Comparison toggle */}

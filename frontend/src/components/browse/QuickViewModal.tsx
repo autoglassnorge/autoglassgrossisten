@@ -105,9 +105,12 @@ export function QuickViewModal({
             
             <div className="flex justify-between py-2 border-b border-gray-100">
               <span className="text-gray-500">Pris</span>
-              <span className={`font-semibold ${hasPrice ? 'text-gray-900' : 'text-gray-500'}`}>
-                {formatPrice(product.price)}
-              </span>
+              <div className="text-right">
+                <span className={`font-semibold block ${hasPrice ? 'text-gray-900' : 'text-gray-500'}`}>
+                  {formatPrice(product.price)}
+                </span>
+                {hasPrice && <span className="text-xs text-gray-400">eks. mva</span>}
+              </div>
             </div>
           </div>
           

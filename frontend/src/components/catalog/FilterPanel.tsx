@@ -179,8 +179,8 @@ export function FilterPanel({ filters, availableFilters, onChange }: FilterPanel
       <AccordionSection title="Pris" defaultOpen>
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm text-gray-600">
-            <span>{priceMin.toLocaleString('no-NO')} kr</span>
-            <span>{priceMax.toLocaleString('no-NO')} kr</span>
+            <span>{priceMin.toLocaleString('no-NO')} kr eks. mva</span>
+            <span>{priceMax.toLocaleString('no-NO')} kr eks. mva</span>
           </div>
           <input
             type="range"

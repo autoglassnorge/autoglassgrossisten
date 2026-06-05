@@ -237,6 +237,7 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
               <div className="text-2xl sm:text-3xl font-bold text-autoglass-blue">
                 {formatPrice(product.price)}
               </div>
+              <div className="text-xs text-gray-400 mt-0.5">eks. mva</div>
               <div className="flex items-center gap-1.5 text-sm text-gray-500 mt-1">
                 <span className={`inline-block h-2 w-2 rounded-full ${stockDot}`} />
                 <span>{stockText}</span>

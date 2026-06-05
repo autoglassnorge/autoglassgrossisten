@@ -3,6 +3,12 @@ export function formatPrice(n: number | null | undefined): string {
   return new Intl.NumberFormat('no-NO', { style: 'currency', currency: 'NOK' }).format(n);
 }
 
+/** B2B grossistpris eks. mva (25% påslag for inkl. mva) */
+export function formatPriceInclVat(n: number | null | undefined): string {
+  if (n == null || isNaN(n)) return '–';
+  return new Intl.NumberFormat('no-NO', { style: 'currency', currency: 'NOK' }).format(n * 1.25);
+}
+
 export function formatYearRange(from: number | null, to: number | null): string {
   if (!from && !to) return '';
   if (from && to) return `${from}–${to}`;

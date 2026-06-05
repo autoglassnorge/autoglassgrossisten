@@ -233,7 +233,7 @@ export function CompareModal({
                             : 'text-gray-300'
                         )}
                       >
-                        {product?.price ? formatPrice(product.price) : '–'}
+                        {product?.price ? formatPrice(product.price) + ' eks. mva' : '–'}
                       </td>
                     ))}
                   </tr>
