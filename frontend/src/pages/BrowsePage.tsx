@@ -46,67 +46,6 @@ interface BrandInfo {
   productCount: number;
 }
 
-// TEST-DATA: Hardkodet til KV er fylt opp
-const TEST_BRANDS: BrandInfo[] = [
-  { name: "VOLKSWAGEN", productCount: 2453 },
-  { name: "BMW", productCount: 1547 },
-  { name: "MERCEDES", productCount: 1588 },
-  { name: "AUDI", productCount: 1248 },
-  { name: "FORD", productCount: 1386 },
-  { name: "TOYOTA", productCount: 892 },
-  { name: "VOLVO", productCount: 756 },
-  { name: "OPEL", productCount: 634 },
-  { name: "NISSAN", productCount: 523 },
-  { name: "HYUNDAI", productCount: 783 },
-];
-
-// Test-data for Volkswagen
-const TEST_VW_DATA: BrowseBrandData = {
-  name: "VOLKSWAGEN",
-  models: {
-    "GOLF": {
-      "2019": {
-        url: "/browse/VOLKSWAGEN/GOLF/2019",
-        products: [
-          { title: "Frontrute VW Golf 2019 med regnsensor", sku: "VW-GOLF-F-19", typeCode: "F", typeCodeRel: "F", price: 2450 },
-          { title: "Bakrute VW Golf 2019", sku: "VW-GOLF-B-19", typeCode: "B", typeCodeRel: "B", price: 1890 },
-          { title: "Dørrute venstre foran VW Golf 2019", sku: "VW-GOLF-DFF-19", typeCode: "DFF", typeCodeRel: "DFF", price: 1250 },
-          { title: "Dørrute høyre foran VW Golf 2019", sku: "VW-GOLF-DPF-19", typeCode: "DPF", typeCodeRel: "DPF", price: 1250 },
-          { title: "Siderute venstre bak VW Golf 2019", sku: "VW-GOLF-SFB1-19", typeCode: "SFB1", typeCodeRel: "SFB1", price: 980 },
-        ]
-      },
-      "2020": {
-        url: "/browse/VOLKSWAGEN/GOLF/2020",
-        products: [
-          { title: "Frontrute VW Golf 2020 med ADAS", sku: "VW-GOLF-F-20", typeCode: "F", typeCodeRel: "F", price: 2890 },
-          { title: "Bakrute VW Golf 2020", sku: "VW-GOLF-B-20", typeCode: "B", typeCodeRel: "B", price: 1950 },
-          { title: "Dørrute venstre foran VW Golf 2020", sku: "VW-GOLF-DFF-20", typeCode: "DFF", typeCodeRel: "DFF", price: 1320 },
-        ]
-      }
-    },
-    "POLO": {
-      "2019": {
-        url: "/browse/VOLKSWAGEN/POLO/2019",
-        products: [
-          { title: "Frontrute VW Polo 2019", sku: "VW-POLO-F-19", typeCode: "F", typeCodeRel: "F", price: 2150 },
-          { title: "Bakrute VW Polo 2019", sku: "VW-POLO-B-19", typeCode: "B", typeCodeRel: "B", price: 1650 },
-        ]
-      }
-    },
-    "PASSAT": {
-      "2019": {
-        url: "/browse/VOLKSWAGEN/PASSAT/2019",
-        products: [
-          { title: "Frontrute VW Passat 2019 med ADAS", sku: "VW-PASSAT-F-19", typeCode: "F", typeCodeRel: "F", price: 3250 },
-          { title: "Bakrute VW Passat 2019", sku: "VW-PASSAT-B-19", typeCode: "B", typeCodeRel: "B", price: 2450 },
-          { title: "Dørrute venstre foran VW Passat 2019", sku: "VW-PASSAT-DFF-19", typeCode: "DFF", typeCodeRel: "DFF", price: 1850 },
-          { title: "Dørrute høyre foran VW Passat 2019", sku: "VW-PASSAT-DPF-19", typeCode: "DPF", typeCodeRel: "DPF", price: 1850 },
-        ]
-      }
-    }
-  }
-};
-
 // Type for browse step
 type BrowseStep = {
   id: 'brand' | 'model' | 'year' | 'products';
@@ -122,7 +61,7 @@ export default function BrowsePage() {
   const [selectedYear, setSelectedYear] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [loadingBrands, setLoadingBrands] = useState(true);
-  const [useTestData, setUseTestData] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   // === NY STATE FOR FILTER OG PRODUKTVISNING ===
   const [searchQuery, setSearchQuery] = useState('');
@@ -135,22 +74,13 @@ export default function BrowsePage() {
   const { selectedProducts, toggleProduct, isSelected, clearAll, removeProduct } = useProductComparison();
   // =============================================
 
-  // Load brands list
+  // Load brands list from KV via Worker API
   useEffect(() => {
-    // Bruk test-data eller hent fra API
-    if (useTestData) {
-      setBrands(TEST_BRANDS);
-      setLoadingBrands(false);
-      return;
-    }
-
+    setApiError(null);
     fetch('/api/browse/brands')
       .then(r => {
         if (!r.ok) {
-          // Fallback til test-data
-          setUseTestData(true);
-          setBrands(TEST_BRANDS);
-          return null;
+          throw new Error(`HTTP ${r.status}: ${r.statusText}`);
         }
         return r.json();
       })
@@ -158,17 +88,16 @@ export default function BrowsePage() {
         if (data && data.brands) {
           setBrands(data.brands);
         } else {
-          setBrands(TEST_BRANDS);
-          setUseTestData(true);
+          setApiError('Ingen merker funnet i katalogen.');
         }
         setLoadingBrands(false);
       })
-      .catch(() => {
-        setBrands(TEST_BRANDS);
-        setUseTestData(true);
+      .catch(err => {
+        console.error('Browse brands error:', err);
+        setApiError('Kunne ikke laste merker. Prøv igjen senere.');
         setLoadingBrands(false);
       });
-  }, [useTestData]);
+  }, []);
 
   // Load brand data when brand selected
   useEffect(() => {
@@ -179,23 +108,13 @@ export default function BrowsePage() {
       return;
     }
     setLoading(true);
-
-    // Bruk test-data for Volkswagen
-    if (useTestData && selectedBrand === "VOLKSWAGEN") {
-      setBrandData(TEST_VW_DATA);
-      setLoading(false);
-      return;
-    }
+    setApiError(null);
 
     const safeName = selectedBrand.replace(/\//g, '-').replace(/ /g, '_');
     fetch(`/api/browse/${safeName}.json`)
       .then(r => {
         if (!r.ok) {
-          // Fallback til test-data for Volkswagen
-          if (selectedBrand === "VOLKSWAGEN") {
-            return TEST_VW_DATA;
-          }
-          return null;
+          throw new Error(`HTTP ${r.status}: ${r.statusText}`);
         }
         return r.json();
       })
@@ -205,13 +124,12 @@ export default function BrowsePage() {
         }
         setLoading(false);
       })
-      .catch(() => {
-        if (selectedBrand === "VOLKSWAGEN") {
-          setBrandData(TEST_VW_DATA);
-        }
+      .catch(err => {
+        console.error('Browse brand error:', err);
+        setApiError(`Kunne ikke laste data for ${selectedBrand}.`);
         setLoading(false);
       });
-  }, [selectedBrand, useTestData]);
+  }, [selectedBrand]);
 
   // Reset model/year when brand changes
   useEffect(() => {
@@ -354,17 +272,18 @@ export default function BrowsePage() {
       />
 
       <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 pb-8">
+        {/* API Error Banner */}
+        {apiError && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+            <p className="text-sm text-red-800">
+              <strong>Feil:</strong> {apiError}
+            </p>
+          </div>
+        )}
+
         {/* STEP 1: Brand Grid */}
         {!selectedBrand && (
           <div className="space-y-4">
-            {useTestData && (
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
-                <p className="text-sm text-amber-800">
-                  <strong>Merk:</strong> Viser test-data mens systemet laster fullstendig katalog. 
-                  Dataene er kun for demonstrasjon.
-                </p>
-              </div>
-            )}
             <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
               Velg merke
             </h2>
