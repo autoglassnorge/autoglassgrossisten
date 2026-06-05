@@ -10,6 +10,7 @@ import { searchByRegnr, SearchError } from '@/api/glass';
 import { formatLayerLabel, formatConfidence } from '@/utils/formatters';
 
 import { VehicleCard } from '@/components/search/VehicleCard';
+import { StickyVehicleHeader } from '@/components/search/StickyVehicleHeader';
 import { KtypeInfoBadge } from '@/components/search/KtypeInfoBadge';
 import { CalibrationInfoPanel } from '@/components/search/CalibrationInfoPanel';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
@@ -249,6 +250,16 @@ export default function SearchPage() {
 
       {data && vehicle && (
         <div className="space-y-4 sm:space-y-6 animate-slide-up">
+          {/* Sticky vehicle header — follows user while scrolling */}
+          <StickyVehicleHeader
+            vehicle={vehicle}
+            regnr={data.regnr}
+            onChange={() => {
+              setRegnr('');
+              setActiveRegnr('');
+            }}
+          />
+
           {/* Vehicle info */}
           <VehicleCard
             vehicle={vehicle}

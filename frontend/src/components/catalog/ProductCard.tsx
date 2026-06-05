@@ -1,4 +1,4 @@
-import { ShoppingCart, Check, Thermometer, Droplets, Shield, AlertTriangle, Paperclip, Target } from 'lucide-react';
+import { ShoppingCart, Check, AlertTriangle, Paperclip, Target } from 'lucide-react';
 import { GlassVisualizer } from './GlassVisualizer';
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
@@ -8,6 +8,7 @@ import { formatPrice, typeCodeShort, positionColor } from '@/utils/formatters';
 import { useCartStore } from '@/stores/cartStore';
 import { useState } from 'react';
 import { logFeedback } from '@/api/glass';
+import { FeatureBadges } from './FeatureBadges';
 
 /**
  * Badge component displaying product match score
@@ -201,54 +202,8 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
           </div>
         )}
 
-        {/* Equipment badges */}
-        <div className="mt-2 flex flex-wrap gap-1">
-          {product.properties?.adas && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-700">
-              <Shield className="h-3 w-3" /> ADAS
-            </span>
-          )}
-          {product.properties?.heated && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-orange-50 px-1.5 py-0.5 text-[10px] font-medium text-orange-700">
-              <Thermometer className="h-3 w-3" /> Varme
-            </span>
-          )}
-          {product.properties?.rainSensor && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-sky-50 px-1.5 py-0.5 text-[10px] font-medium text-sky-700">
-              <Droplets className="h-3 w-3" /> Regn
-            </span>
-          )}
-          {product.properties?.acoustic && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-600">
-              Akustisk
-            </span>
-          )}
-          {product.properties?.hud && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-purple-50 px-1.5 py-0.5 text-[10px] font-medium text-purple-700">
-              HUD
-            </span>
-          )}
-          {product.properties?.antenna && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-teal-50 px-1.5 py-0.5 text-[10px] font-medium text-teal-700">
-              Antenne
-            </span>
-          )}
-          {product.properties?.camera && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-indigo-50 px-1.5 py-0.5 text-[10px] font-medium text-indigo-700">
-              Kamera
-            </span>
-          )}
-          {product.properties?.solar && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-yellow-50 px-1.5 py-0.5 text-[10px] font-medium text-yellow-700">
-              Solar
-            </span>
-          )}
-          {product.properties?.tinted && (
-            <span className="inline-flex items-center gap-0.5 rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-600">
-              Tinted
-            </span>
-          )}
-        </div>
+        {/* Equipment feature badges */}
+        <FeatureBadges product={product} maxVisible={4} />
       </CardContent>
 
       {/* Footer */}
@@ -257,7 +212,8 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
           <div className="text-base sm:text-lg font-bold text-autoglass-blue">
             {formatPrice(product.price)}
           </div>
-          <div className="flex items-center gap-1 text-xs text-gray-500">
+          <div className="text-[10px] text-gray-400">eks. mva</div>
+          <div className="flex items-center gap-1 text-xs text-gray-500 mt-0.5">
             <span className={`inline-block h-1.5 w-1.5 rounded-full ${stockDot}`} />
             <span className="truncate">{stockText}</span>
           </div>
