@@ -2,16 +2,13 @@ import { useI18n } from '@/i18n/I18nProvider';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { JsonLd } from '@/components/seo/JsonLd';
 
-// Ny hybrid-seksjoner (Sekurit layout + Autoglass farger)
-import { HeroSekurit } from '@/components/home/HeroSekurit';
-import { TrustSection } from '@/components/home/TrustSection';
-import { QuickActions } from '@/components/home/QuickActions';
-
-// Eksisterende seksjoner
-import { LiveStats } from '@/components/home/LiveStats';
-import { AdasSection } from '@/components/home/AdasSection';
+// Redesign seksjoner
+import { HeroWithSearch } from '@/components/home/HeroWithSearch';
+import { TrustBar } from '@/components/home/TrustBar';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
-import { TestimonialsSection } from '@/components/home/TestimonialsSection';
+import { PopularBrands } from '@/components/home/PopularBrands';
+import { WhyChooseUs } from '@/components/home/WhyChooseUs';
+import { AdasSection } from '@/components/home/AdasSection';
 import { CtaBanner } from '@/components/home/CtaBanner';
 
 /**
@@ -124,29 +121,26 @@ export default function HomePage() {
         }}
       />
 
-      <main className="bg-carbon-950">
-        {/* ============================ HERO ============================ */}
-        <HeroSekurit />
+      <main>
+        {/* 1. HERO — Direct regnr search */}
+        <HeroWithSearch />
 
-        {/* ============================ TRUST ============================ */}
-        <TrustSection />
+        {/* 2. TRUST — Manufacturer bar */}
+        <TrustBar />
 
-        {/* ============================ CATEGORIES ============================ */}
+        {/* 3. CATEGORIES — Product categories */}
         <CategoryGrid />
 
-        {/* ============================ STATS ============================ */}
-        <LiveStats />
+        {/* 4. POPULAR BRANDS — Top brands from KV */}
+        <PopularBrands />
 
-        {/* ============================ TESTIMONIALS ============================ */}
-        <TestimonialsSection />
+        {/* 5. WHY CHOOSE US — Trust points + stats */}
+        <WhyChooseUs />
 
-        {/* ============================ ADAS ============================ */}
+        {/* 6. ADAS — Calibration competence */}
         <AdasSection />
 
-        {/* ============================ QUICK ACTIONS ============================ */}
-        <QuickActions />
-
-        {/* ============================ CTA ============================ */}
+        {/* 7. CTA — Closing call-to-action */}
         <CtaBanner />
       </main>
     </>
