@@ -72,6 +72,8 @@ export default function SearchPage() {
     queryFn: () => searchByRegnr(activeRegnr),
     enabled: activeRegnr.length >= 2,
     retry: 1,
+    staleTime: 1000 * 60 * 2, // 2 min cache
+    gcTime: 1000 * 60 * 5,    // 5 min keep in cache
   });
 
   // Auto-search on debounced input (min 2 chars)
