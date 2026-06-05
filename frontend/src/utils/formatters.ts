@@ -19,6 +19,8 @@ export function formatYearRange(from: number | null, to: number | null): string 
 export const categoryLabels: Record<string, string> = {
   frontrute: 'Frontrute',
   bakrute: 'Bakrute',
+  'dørglass-frem': 'Dørrute fremme',
+  'dørglass-bak': 'Dørrute bak',
   dørglass: 'Dørglass',
   sideglass: 'Sideglass',
   siderute: 'Siderute',

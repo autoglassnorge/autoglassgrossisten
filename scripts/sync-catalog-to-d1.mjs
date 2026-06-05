@@ -22,12 +22,12 @@ const CHUNK_SIZE = 100;
 
 // Schema columns (must match glass_catalog table)
 const COLUMNS = [
-  'eurocode', 'article_number', 'scan_number', 'category', 'supplier', 'brand',
-  'model', 'year_from', 'year_to', 'adas', 'rain_sensor', 'heated', 'acoustic',
-  'antenna', 'hud', 'shade', 'camera', 'lane_assist', 'price', 'stock_status',
-  'warehouse_location', 'oem_numbers', 'cross_references', 'weight', 'dimensions',
-  'description', 'type_description', 'properties', 'prefix4', 'image_url', 'pdf_url',
-  'source', 'nags_codes', 'brand_original', 'ktype'
+  'eurocode', 'article_number', 'scan_number', 'category', 'type_code', 'type_code_desc',
+  'position', 'supplier', 'brand', 'model', 'year_from', 'year_to', 'adas', 'rain_sensor',
+  'heated', 'acoustic', 'antenna', 'hud', 'shade', 'camera', 'lane_assist', 'price',
+  'stock_status', 'warehouse_location', 'oem_numbers', 'cross_references', 'weight',
+  'dimensions', 'description', 'type_description', 'properties', 'prefix4', 'image_url',
+  'pdf_url', 'source', 'nags_codes', 'brand_original', 'ktype'
 ];
 
 function escapeSql(val) {
@@ -62,6 +62,9 @@ function recordToRow(record) {
     article_number: record.article_number,
     scan_number: record.scan_number || null,
     category: record.category,
+    type_code: record.typeCode || null,
+    type_code_desc: record.typeCodeRel || null,
+    position: record.position || null,
     supplier: record.supplier,
     brand: record.brand,
     model: record.model,

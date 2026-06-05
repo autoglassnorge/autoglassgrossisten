@@ -46,14 +46,26 @@ let newRecords = 0;
 const newByBrand = {};
 const skipped = [];
 
+// Position mapping from typeCode (Norway = left-hand drive)
+const positionMap = {
+  'DFF': 'driver',      // Door front front-side = left = driver in Norway
+  'DFB': 'driver',      // Door back front-side = left = driver
+  'DPF': 'passenger',   // Door front passenger-side = right
+  'DPB': 'passenger',   // Door back passenger-side = right
+  'SFB1': 'driver',
+  'SPB1': 'passenger',
+  'SFB2': 'driver',
+  'SPB2': 'passenger',
+};
+
 for (const ag of agProducts) {
   const eurocode = ag.sku.toUpperCase();
   const existing = catalogByEurocode.get(eurocode);
-  
+
   if (existing) {
     // Enrich existing record
     let changed = false;
-    
+
     if (ag.price && !existing.price) {
       existing.price = ag.price;
       enrichedWithPrice++;
@@ -79,31 +91,56 @@ for (const ag of agProducts) {
       existing.yearTo = ag.yearEnd;
       changed = true;
     }
-    
+    // Enrich typeCode/typeCodeRel/position if missing
+    if (!existing.typeCode && ag.typeCode) {
+      existing.typeCode = ag.typeCode;
+      changed = true;
+    }
+    if (!existing.typeCodeRel && ag.typeCodeDesc) {
+      existing.typeCodeRel = ag.typeCodeDesc;
+      changed = true;
+    }
+    if (!existing.position && positionMap[ag.typeCode]) {
+      existing.position = positionMap[ag.typeCode];
+      changed = true;
+    }
+
     if (changed) enriched++;
   } else {
     // Create new record
+    // TypeCode → category mapping (split door glass into front/rear)
     const typeMap = {
       'F': 'frontrute',
       'B': 'bakrute',
-      'DFF': 'dørglass',
-      'DFB': 'dørglass',
-      'DPF': 'dørglass',
-      'DPB': 'dørglass',
+      'DFF': 'dørglass-frem',
+      'DFB': 'dørglass-bak',
+      'DPF': 'dørglass-frem',
+      'DPB': 'dørglass-bak',
       'SFB1': 'sideglass',
       'SPB1': 'sideglass',
       'SFB2': 'sideglass',
       'SPB2': 'sideglass',
+      'SFB3': 'sideglass',
+      'SPB3': 'sideglass',
       'Q': 'annet',
       'L': 'annet',
       'V': 'annet',
     };
-    
+
+    // Update category for existing records based on typeCode
+    if (existing.typeCode && typeMap[existing.typeCode] && existing.category !== typeMap[existing.typeCode]) {
+      existing.category = typeMap[existing.typeCode];
+      changed = true;
+    }
+
     const newRecord = {
       eurocode: eurocode,
       articleNumber: eurocode,
       scanNumber: null,
       category: typeMap[ag.typeCode] || 'annet',
+      typeCode: ag.typeCode || null,
+      typeCodeRel: ag.typeCodeDesc || null,
+      position: positionMap[ag.typeCode] || null,
       supplier: 'Autoglass AS',
       brand: (ag.brand || '').toUpperCase(),
       model: ag.model || null,

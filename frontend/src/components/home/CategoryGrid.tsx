@@ -5,8 +5,6 @@ import {
   RearWindowIcon,
   SideWindowIcon,
   AdasCameraIcon,
-  TransporterIcon,
-  CalibrationIcon,
 } from '@/components/icons/GlassIcons';
 
 interface Category {
@@ -22,12 +20,22 @@ export function CategoryGrid() {
     {
       key: 'windshield',
       icon: <WindshieldIcon className="h-8 w-8" />,
-      href: '/bilglassguide/frontrute',
+      href: '/bla?category=frontrute',
     },
     {
       key: 'rear',
       icon: <RearWindowIcon className="h-8 w-8" />,
       href: '/bla?category=bakrute',
+    },
+    {
+      key: 'door-front',
+      icon: <SideWindowIcon className="h-8 w-8" />,
+      href: '/bla?category=dørglass-frem',
+    },
+    {
+      key: 'door-rear',
+      icon: <SideWindowIcon className="h-8 w-8" />,
+      href: '/bla?category=dørglass-bak',
     },
     {
       key: 'side',
@@ -38,16 +46,6 @@ export function CategoryGrid() {
       key: 'adas',
       icon: <AdasCameraIcon className="h-8 w-8" />,
       href: '/bilglassguide/adas-kamera',
-    },
-    {
-      key: 'transporter',
-      icon: <TransporterIcon className="h-8 w-8" />,
-      href: '/bla?category=transporter',
-    },
-    {
-      key: 'calibration',
-      icon: <CalibrationIcon className="h-8 w-8" />,
-      href: '/bilglassguide/kalibrering',
     },
   ];
 
