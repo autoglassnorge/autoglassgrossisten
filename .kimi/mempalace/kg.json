@@ -679,6 +679,11 @@
       "predicate": "workaround",
       "object": "katalog_søk_eller_kundeservice",
       "validFrom": "2026-05-31T12:32:00Z"
+    },
+    {
+      "predicate": "has-key",
+      "object": "a578e3c7-f27b-4b73-8938-af26edd89d68",
+      "validFrom": "2026-06-05T14:11:31.267Z"
     }
   ],
   "svv-outage": [
@@ -802,6 +807,16 @@
       "predicate": "orchestrates",
       "object": "5-step-wizard-flow",
       "validFrom": "2026-06-01T08:00:58.703Z"
+    },
+    {
+      "predicate": "integrated-into",
+      "object": "HeroSearch",
+      "validFrom": "2026-06-04T20:19:00.699Z"
+    },
+    {
+      "predicate": "uses",
+      "object": "ktype-vehicle-data-display",
+      "validFrom": "2026-06-04T20:19:00.700Z"
     }
   ],
   "kType-lookup": [
@@ -863,6 +878,395 @@
       "predicate": "integrates",
       "object": "VehicleWizard",
       "validFrom": "2026-06-01T08:00:58.703Z"
+    },
+    {
+      "predicate": "wired-into",
+      "object": "HeroSekurit",
+      "validFrom": "2026-06-04T20:19:00.700Z"
+    }
+  ],
+  "frontend": [
+    {
+      "predicate": "uses",
+      "object": "vitest-testing-framework",
+      "validFrom": "2026-06-04T20:19:00.692Z"
+    },
+    {
+      "predicate": "uses",
+      "object": "@testing-library/react",
+      "validFrom": "2026-06-04T20:19:00.694Z"
+    },
+    {
+      "predicate": "uses",
+      "object": "@testing-library/jest-dom",
+      "validFrom": "2026-06-04T20:19:00.696Z"
+    },
+    {
+      "predicate": "uses",
+      "object": "jsdom-test-environment",
+      "validFrom": "2026-06-04T20:19:00.697Z"
+    },
+    {
+      "predicate": "has",
+      "object": "vitest.config.ts",
+      "validFrom": "2026-06-04T20:19:00.697Z"
+    },
+    {
+      "predicate": "has",
+      "object": "src/test/setup.ts",
+      "validFrom": "2026-06-04T20:19:00.697Z"
+    },
+    {
+      "predicate": "has-tests-for",
+      "object": "useWizardState-hook",
+      "validFrom": "2026-06-04T20:19:00.702Z"
+    },
+    {
+      "predicate": "has-tests-for",
+      "object": "RegnrStep-component",
+      "validFrom": "2026-06-04T20:19:00.702Z"
+    },
+    {
+      "predicate": "sends-vehicle-params",
+      "object": "brand-model-yearFrom-yearTo",
+      "validFrom": "2026-06-05T14:11:31.271Z"
+    }
+  ],
+  "useWizardState": [
+    {
+      "predicate": "has-field",
+      "object": "ktypeVehicle",
+      "validFrom": "2026-06-04T20:19:00.701Z"
+    }
+  ],
+  "SummaryStep": [
+    {
+      "predicate": "displays",
+      "object": "ktypeVehicle-brand-model-year",
+      "validFrom": "2026-06-04T20:19:00.701Z"
+    }
+  ],
+  "worker-api": [
+    {
+      "predicate": "provides",
+      "object": "GET-/api/vehicle/ktype/:regnr",
+      "validFrom": "2026-06-04T20:19:00.707Z"
+    },
+    {
+      "predicate": "provides",
+      "object": "GET-/api/vehicle/brands",
+      "validFrom": "2026-06-04T20:19:00.707Z"
+    },
+    {
+      "predicate": "provides",
+      "object": "GET-/api/vehicle/models",
+      "validFrom": "2026-06-04T20:19:00.708Z"
+    },
+    {
+      "predicate": "provides",
+      "object": "GET-/api/vehicle/years",
+      "validFrom": "2026-06-04T20:19:00.708Z"
+    },
+    {
+      "predicate": "provides",
+      "object": "GET-/api/vehicle/products",
+      "validFrom": "2026-06-04T20:19:00.708Z"
+    }
+  ],
+  "repo": [
+    {
+      "predicate": "uses",
+      "object": "git-worktrees-for-isolated-development",
+      "validFrom": "2026-06-04T20:19:00.708Z"
+    },
+    {
+      "predicate": "has-worktree-dir",
+      "object": ".worktrees/",
+      "validFrom": "2026-06-04T20:19:00.708Z"
+    }
+  ],
+  "AGENTS.md": [
+    {
+      "predicate": "specifies",
+      "object": "subagent-driven-development-workflow",
+      "validFrom": "2026-06-04T20:19:00.709Z"
+    }
+  ],
+  "agent-validation-script": [
+    {
+      "predicate": "exists-at",
+      "object": "scripts/validate-agents.mjs",
+      "validFrom": "2026-06-04T20:27:39.620Z"
+    },
+    {
+      "predicate": "checks",
+      "object": "37-validation-rules",
+      "validFrom": "2026-06-04T20:27:39.620Z"
+    },
+    {
+      "predicate": "covers",
+      "object": "all-7-agents-plus-skill-md",
+      "validFrom": "2026-06-04T20:27:39.621Z"
+    }
+  ],
+  "web-agent": [
+    {
+      "predicate": "updated-to",
+      "object": "React-18-Vite-TypeScript-Tailwind",
+      "validFrom": "2026-06-04T20:27:39.621Z"
+    }
+  ],
+  "SKILL.md": [
+    {
+      "predicate": "updated-to",
+      "object": "React-18-Vite-TypeScript-Tailwind",
+      "validFrom": "2026-06-04T20:27:39.621Z"
+    }
+  ],
+  "agent-YAMLs": [
+    {
+      "predicate": "have",
+      "object": "metadata-last_updated-validated_against-status",
+      "validFrom": "2026-06-04T20:27:39.621Z"
+    }
+  ],
+  "session-start-hook": [
+    {
+      "predicate": "runs",
+      "object": "agent-consistency-check",
+      "validFrom": "2026-06-04T20:27:39.621Z"
+    }
+  ],
+  "agent-MDs": [
+    {
+      "predicate": "have",
+      "object": "changelog-section",
+      "validFrom": "2026-06-04T20:27:39.621Z"
+    }
+  ],
+  "subagent-ecosystem": [
+    {
+      "predicate": "status",
+      "object": "37-of-37-checks-passing",
+      "validFrom": "2026-06-04T20:27:39.621Z"
+    }
+  ],
+  "eurocode": [
+    {
+      "predicate": "source",
+      "object": "autoglass-by-eurocode.json",
+      "validFrom": "2026-06-05T00:15:22.021Z"
+    },
+    {
+      "predicate": "count_in_source",
+      "object": "20504",
+      "validFrom": "2026-06-05T00:15:22.022Z"
+    },
+    {
+      "predicate": "merge_coverage",
+      "object": "99.8%",
+      "validFrom": "2026-06-05T00:15:22.025Z"
+    },
+    {
+      "predicate": "missing_before_merge",
+      "object": "15630",
+      "validFrom": "2026-06-05T00:15:22.031Z"
+    },
+    {
+      "predicate": "fillable_from_source",
+      "object": "15585",
+      "validFrom": "2026-06-05T00:15:22.031Z"
+    }
+  ],
+  "autoglass-by-eurocode": [
+    {
+      "predicate": "article_number_match_rate",
+      "object": "98.7%",
+      "validFrom": "2026-06-05T00:15:22.031Z"
+    },
+    {
+      "predicate": "brands_covered",
+      "object": "77",
+      "validFrom": "2026-06-05T00:15:22.031Z"
+    },
+    {
+      "predicate": "enrichment_fields",
+      "object": "properties,typeCodeDesc,sourceUrl,price",
+      "validFrom": "2026-06-05T00:15:22.031Z"
+    },
+    {
+      "predicate": "properties_available",
+      "object": "ADAS,rainSensor,HUD,laneAssist,acoustic,solar,encapsulated,heated,green,blue,coated,tinted,antenna,laminated,aqua,clips,molding,darkGreen",
+      "validFrom": "2026-06-05T00:15:22.032Z"
+    }
+  ],
+  "autodoc": [
+    {
+      "predicate": "status",
+      "object": "blocked_by_cloudflare",
+      "validFrom": "2026-06-05T00:15:22.032Z"
+    },
+    {
+      "predicate": "eurocode_value",
+      "object": "none_directly_uses_tecdoc_under_hood",
+      "validFrom": "2026-06-05T00:15:22.032Z"
+    }
+  ],
+  "catalog-prod.json": [
+    {
+      "predicate": "eurocode_coverage_before_merge",
+      "object": "42.5%",
+      "validFrom": "2026-06-05T00:15:22.032Z"
+    },
+    {
+      "predicate": "eurocode_coverage_after_merge",
+      "object": "99.8%",
+      "validFrom": "2026-06-05T00:15:22.032Z"
+    },
+    {
+      "predicate": "eurocode_coverage_after_merge",
+      "object": "99.83%",
+      "validFrom": "2026-06-05T00:19:43.209Z"
+    }
+  ],
+  "eurocode-pipeline": [
+    {
+      "predicate": "next_step",
+      "object": "build_merge_script",
+      "validFrom": "2026-06-05T00:15:22.032Z"
+    },
+    {
+      "predicate": "d1_schema_update_needed",
+      "object": "properties_json_field",
+      "validFrom": "2026-06-05T00:15:22.032Z"
+    }
+  ],
+  "D1 glass_catalog": [
+    {
+      "predicate": "record_count",
+      "object": "27139",
+      "validFrom": "2026-06-05T00:19:43.209Z"
+    },
+    {
+      "predicate": "eurocode_coverage",
+      "object": "100%",
+      "validFrom": "2026-06-05T00:19:43.210Z"
+    },
+    {
+      "predicate": "properties_coverage",
+      "object": "98.9%",
+      "validFrom": "2026-06-05T00:19:43.210Z"
+    },
+    {
+      "predicate": "schema_updated",
+      "object": "type_description_properties_columns_added",
+      "validFrom": "2026-06-05T00:19:43.211Z"
+    },
+    {
+      "predicate": "unique_constraint",
+      "object": "removed_from_eurocode",
+      "validFrom": "2026-06-05T00:19:43.211Z"
+    },
+    {
+      "predicate": "remote_record_count",
+      "object": "27139",
+      "validFrom": "2026-06-05T01:23:24.666Z"
+    },
+    {
+      "predicate": "remote_eurocode_coverage",
+      "object": "100%",
+      "validFrom": "2026-06-05T01:23:24.667Z"
+    },
+    {
+      "predicate": "remote_properties_coverage",
+      "object": "99.1%",
+      "validFrom": "2026-06-05T01:23:24.667Z"
+    }
+  ],
+  "scripts": [
+    {
+      "predicate": "merge_eurocode_enrichment",
+      "object": "scripts/merge-eurocode-enrichment.mjs",
+      "validFrom": "2026-06-05T00:19:43.215Z"
+    },
+    {
+      "predicate": "sync_catalog_to_d1",
+      "object": "scripts/sync-catalog-to-d1.mjs",
+      "validFrom": "2026-06-05T00:19:43.215Z"
+    }
+  ],
+  "Worker": [
+    {
+      "predicate": "deployed_version",
+      "object": "75718b56",
+      "validFrom": "2026-06-05T01:23:24.667Z"
+    },
+    {
+      "predicate": "equipment_scoring",
+      "object": "active",
+      "validFrom": "2026-06-05T01:23:24.667Z"
+    },
+    {
+      "predicate": "fallback_brand_year",
+      "object": "active",
+      "validFrom": "2026-06-05T01:23:24.668Z"
+    }
+  ],
+  "deploy": [
+    {
+      "predicate": "status",
+      "object": "production_live",
+      "validFrom": "2026-06-05T01:23:24.671Z"
+    },
+    {
+      "predicate": "d1_chunks_deployed",
+      "object": "272",
+      "validFrom": "2026-06-05T01:23:24.671Z"
+    },
+    {
+      "predicate": "d1_chunks_failed",
+      "object": "0",
+      "validFrom": "2026-06-05T01:23:24.671Z"
+    }
+  ],
+  "bovsoft": [
+    {
+      "predicate": "ktype-system",
+      "object": "different-from-tecdoc",
+      "validFrom": "2026-06-05T14:11:31.267Z"
+    }
+  ],
+  "glass_catalog": [
+    {
+      "predicate": "year_to-fixed",
+      "object": "12176-records",
+      "validFrom": "2026-06-05T14:11:31.270Z"
+    },
+    {
+      "predicate": "cache-prefix",
+      "object": "v3",
+      "validFrom": "2026-06-05T14:11:31.270Z"
+    }
+  ],
+  "response-compressor": [
+    {
+      "predicate": "field-format",
+      "object": "camelCase",
+      "validFrom": "2026-06-05T14:11:31.270Z"
+    }
+  ],
+  "bovsoft-kv-cache": [
+    {
+      "predicate": "verified-regnrs",
+      "object": "118-entries",
+      "validFrom": "2026-06-05T14:11:31.271Z"
+    }
+  ],
+  "search-endpoint": [
+    {
+      "predicate": "fallback-chain",
+      "object": "svv-biluppgifter-bovsoft",
+      "validFrom": "2026-06-05T14:11:31.271Z"
     }
   ]
 }

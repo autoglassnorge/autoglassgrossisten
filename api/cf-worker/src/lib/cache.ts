@@ -4,7 +4,7 @@
 
 import type { CacheEnvelope } from "../types";
 
-export const CACHE_VERSION = "6";
+export const CACHE_VERSION = "7";
 
 export async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
   const cached = await kv.get(key);
@@ -21,7 +21,7 @@ export async function setCache(kv: KVNamespace, key: string, data: unknown, ttlS
 
 export function cacheKey(endpoint: string, params: Record<string, string>): string {
   const sorted = Object.entries(params).sort(([a], [b]) => a.localeCompare(b));
-  return `cache:v2:${endpoint}:${sorted.map(([k, v]) => `${k}=${v}`).join("&")}`;
+  return `cache:v3:${endpoint}:${sorted.map(([k, v]) => `${k}=${v}`).join("&")}`;
 }
 
 export function buildCacheEnvelope<T>(data: T, version = CACHE_VERSION): CacheEnvelope<T> {

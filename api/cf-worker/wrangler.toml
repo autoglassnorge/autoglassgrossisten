@@ -1,6 +1,8 @@
 name = "autoglass-glass-sok"
 main = "src/index.ts"
-compatibility_date = "2024-01-01"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+minify = true
 
 # ── KV Namespace (katalog + cache) ────────────────────────────
 [[kv_namespaces]]
@@ -8,26 +10,28 @@ binding = "GLASS_CATALOG"
 id = "15099e572e51423dafb723996c01c668"
 
 # ── D1 Database (glasskatalog SQL) ────────────────────────────
-# 1. Opprett database:
-#    wrangler d1 create glass-catalog-db
 [[d1_databases]]
 binding = "GLASS_CATALOG_D1"
 database_name = "glass-catalog-db"
 database_id = "f79095b3-da80-43fe-8064-ff480e8a1b4b"
 
 # ── Secrets (IKKE legg dem i denne filen — bruk wrangler secret put):
-#
-#    Primær kilde — SVV Enkeltoppslag (åpent API):
 #    wrangler secret put SVV_API_KEY
-#
-#    Fallback — Biluppgifter (Sverige):
+#    wrangler secret put BOVSOFT_CLIENT_ID
+#    wrangler secret put BOVSOFT_SECCODE
 #    wrangler secret put BILUPPGIFTER_API_KEY
+#
+#  Secrets settes ÉN GANG og ved rotasjon. IKKE i deploy-pipeline.
 
 [vars]
-# Ingen hardkodede secrets her
 ENVIRONMENT = "production"
 
+# ── Build-innstillinger ────────────────────────────────────────
+[build]
+command = ""
+
 # ── Cron-triggers ──────────────────────────────────────────────
-# Sjekk SVV health hvert 5. minutt
+# Sjekk SVV health hver time (var hvert 5. minutt — redusert for å
+# unngå rate-limit og unødvendig Workers-kjøring)
 [[triggers]]
-crons = ["*/5 * * * *"]
+crons = ["0 * * * *"]

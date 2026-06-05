@@ -57,8 +57,15 @@ export function SummaryStep({
         let url: string;
 
         if (ktype) {
-          // Exact kType match - use vehicle products endpoint
-          url = `/api/vehicle/products?ktype=${encodeURIComponent(ktype)}`;
+          // Exact kType match - use vehicle products endpoint with vehicle info
+          const params = new URLSearchParams({ ktype });
+          if (ktypeVehicle) {
+            params.set('brand', ktypeVehicle.brand);
+            if (ktypeVehicle.model) params.set('model', ktypeVehicle.model);
+            params.set('yearFrom', String(ktypeVehicle.yearFrom || ktypeVehicle.year));
+            if (ktypeVehicle.yearTo) params.set('yearTo', String(ktypeVehicle.yearTo));
+          }
+          url = `/api/vehicle/products?${params}`;
         } else if (selectedBrand && selectedModel && selectedYear) {
           // Manual selection fallback - use the existing glass endpoint
           const params = new URLSearchParams({

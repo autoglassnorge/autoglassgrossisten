@@ -69,14 +69,14 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b">
           <div className="flex items-center gap-2 min-w-0">
-            <Badge variant="outline" className="font-mono text-xs flex-shrink-0 gap-1">
-              <span className="text-[9px] font-medium text-gray-500 uppercase tracking-wider">
+            <Badge variant="outline" className="font-mono text-sm flex-shrink-0 gap-1.5 px-2.5 py-1 border-autoglass-blue/30 bg-autoglass-blue/5">
+              <span className="text-[10px] font-medium text-autoglass-blue uppercase tracking-wider">
                 {product.eurocode ? 'Eurokode' : 'Varenr'}
               </span>
-              <span className="font-bold text-gray-800">{product.eurocode || product.articleNumber}</span>
+              <span className="font-bold text-gray-900">{product.eurocode || product.articleNumber}</span>
             </Badge>
-            <span className="text-xs text-gray-400 flex-shrink-0">
-              {typeCodeLabel(product.typeCode || product.category)}
+            <span className="text-xs text-gray-500 flex-shrink-0">
+              {product.typeDescription || typeCodeLabel(product.typeCode || product.category)}
             </span>
           </div>
           <button
@@ -213,10 +213,10 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
                     <td className="px-4 py-2.5 text-gray-900">{positionLabel(product.position)}</td>
                   </tr>
                 )}
-                {product.nagsCodes && product.nagsCodes.length > 0 && (
+                {product.typeDescription && (
                   <tr>
-                    <td className="px-4 py-2.5 bg-gray-50 font-medium text-gray-700">NAGS</td>
-                    <td className="px-4 py-2.5 text-gray-900 font-mono">{product.nagsCodes.join(', ')}</td>
+                    <td className="px-4 py-2.5 bg-gray-50 font-medium text-gray-700">Beskrivelse</td>
+                    <td className="px-4 py-2.5 text-gray-900">{product.typeDescription}</td>
                   </tr>
                 )}
                 {product.properties?.color && (

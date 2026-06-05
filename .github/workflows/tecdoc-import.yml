@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Generate SQL from TecDoc mappings
         run: node scripts/import-tecdoc-ktype.mjs "${{ github.event.inputs.input_file }}" --dry-run

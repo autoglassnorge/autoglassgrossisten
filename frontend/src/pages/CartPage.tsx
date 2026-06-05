@@ -68,7 +68,8 @@ export default function CartPage() {
               `Telefon: ${form.phone || 'Ikke oppgitt'}`,
               form.message,
               `Produkt: ${item.product.title} (${item.product.brand} ${item.product.model})`,
-              `Typekode: ${item.product.typeCode}`,
+              `Eurokode: ${item.product.eurocode || item.product.articleNumber}`,
+              `Glass: ${item.product.typeDescription || item.product.typeCode}`,
               `Lager: ${item.product.stockStatus} stk`,
             ]
               .filter(Boolean)
@@ -238,12 +239,12 @@ export default function CartPage() {
                       </p>
                       <div className="flex flex-wrap gap-1 mt-1">
                         {item.product.eurocode && (
-                          <span className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">
+                          <span className="text-xs font-mono font-semibold bg-autoglass-blue/10 text-autoglass-blue px-2 py-0.5 rounded">
                             {item.product.eurocode}
                           </span>
                         )}
-                        <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">
-                          {item.product.typeCode}
+                        <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded">
+                          {item.product.typeDescription || item.product.typeCode}
                         </span>
                         {item.product.stockStatus > 0 ? (
                           <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded">
@@ -501,7 +502,7 @@ export default function CartPage() {
                       {items.map((item) => (
                         <li key={item.product.id} className="flex justify-between">
                           <span className="truncate">
-                            {item.product.eurocode || item.product.typeCode}
+                            {item.product.eurocode || item.product.articleNumber}
                           </span>
                           <span>× {item.quantity}</span>
                         </li>

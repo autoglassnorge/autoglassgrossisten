@@ -6,6 +6,8 @@ export interface KtypeVehicle {
   brand: string;
   model: string;
   year: number;
+  yearFrom?: number;
+  yearTo?: number;
 }
 
 export interface WizardState {

@@ -21,6 +21,27 @@ Hvis du oppdager Klarpakke-kontekst som lekker inn — avvis den.
 
 Autoglass AS bruker **KIMI CLI-agenter** for domene-spesialisering.
 
+### KIMI Code 0.11.0 (oppdatert 2026-06-05)
+
+Prosjektet er optimalisert for **KIMI Code 0.11.0** med følgende nye features:
+
+| Feature | Hva det gjør | Konfigurasjon |
+|---|---|---|
+| **Sub-skill discovery** | Hierarkisk skill-gruppering med `has-sub-skill: true` | `KIMI_CODE_EXPERIMENTAL_SUB_SKILL=true` |
+| **Built-in skills som slash commands** | Skills vises som `/skill-name` kommandoer | Automatisk — aktivert i 0.11.0 |
+| **Sampling-parametere** | `temperature` og `top_p` for modell-kontroll | `[model]` seksjon i `config.toml` |
+| **Fast subagent timeout** | 30-min timeout for subagents | `agent_task_timeout_s = 900` (overstyrt fra 1800s) |
+| **No auto-update** | Deaktiverer auto-update sjekk | `KIMI_CODE_NO_AUTO_UPDATE` env var |
+
+**Viktige env vars for 0.11.0:**
+```bash
+export KIMI_CODE_EXPERIMENTAL_SUB_SKILL=true  # Aktiver sub-skill discovery
+export KIMI_MODEL_TEMPERATURE=0.6              # Lavere = mer deterministisk (valgfritt)
+export KIMI_MODEL_TOP_P=0.95                   # Nucleus sampling (valgfritt)
+export KIMI_MODEL_THINKING_KEEP=true           # Preserved-thinking passthrough (valgfritt)
+export KIMI_CODE_NO_AUTO_UPDATE=true           # Deaktiver auto-update (valgfritt)
+```
+
 ### CLI-aliaser
 ```bash
 kimi glass-data        # Data pipeline — scraper, merge, kvalitet
@@ -43,16 +64,93 @@ kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasj
 | ktype-agent | `.kimi/agents/autoglass-ktype-agent.yaml` | `.md` | Bovsoft, SVV, kType |
 | **orchestrator-agent** | `.kimi/agents/autoglass-orchestrator.yaml` | `.md` | **Task-routing, Superpowers-prosess, verifikasjon** |
 
+### Custom Slash-Skills (0.11.0 — `/skill-name` kommandoer)
+
+**Hierarkisk struktur** (`has-sub-skill: true`):
+
+```
+.kimi/skills/
+├── autoglass/                      # Standalone: prosjektkunnskap
+│   └── SKILL.md
+└── bilglass-workflows/             # Parent (has-sub-skill: true)
+    ├── SKILL.md                    # Container — liste alle workflows
+    ├── deploy/                     # Child
+    │   └── SKILL.md                # Deploy: D1 + KV + Worker + Pages
+    ├── test/                       # Child
+    │   └── SKILL.md                # Test: data + API + smoke + kType
+    └── pricing/                    # Child
+        └── SKILL.md                # Pricing: scrape + sync + valider
+```
+
+| Skill | Slash-kommando | Hva det gjør |
+|---|---|---|
+| `bilglass-workflows` | `/bilglass-workflows` | Liste alle tilgjengelige workflows |
+| `deploy` | `/bilglass-workflows/deploy` | Deploy til Cloudflare med smoke-test |
+| `test` | `/bilglass-workflows/test` | Kjør full test-suite |
+| `pricing` | `/bilglass-workflows/pricing` | Oppdater prisdatabase |
+| `autoglass` | `/autoglass` | Prosjektkunnskap, stack, regler |
+
+> **Bruk:** Skriv `/bilglass-workflows/deploy` i KIMI CLI for å aktivere deploy-skillen. Sub-skill discovery (med `KIMI_CODE_EXPERIMENTAL_SUB_SKILL=true`) gjør at child-skills automatisk listes under parent.
+
 ### Master System Prompt
 `./.kimi/KIMI-MASTER-SYSTEM.md` — universelle regler injisert i alle agent-sessioner.
 
 ### MemPalace v3.5.0 (isolert fra Klarpakke)
 `./.kimi/mempalace/mcp-server.mjs` — prosjekt-spesifikk kunnskapshåndtering.
-- **KG:** `search`, `kg_query`, `kg_add`, `kg_batch` for prosjektkunnskap
-- **Diary:** `write_diary`, `read_diary` for session-logging
-- **Skills:** `.kimi/skills/autoglass/SKILL.md` — prosjektkunnskap for KIMI CLI v1.39.0+ discovery
-- **Isolasjon:** Ingen avhengighet til Klarpakke — all data ligger i `~/bilglass/.kimi/mempalace/`
-- **Output cap:** ~75K tegn per tool-resultat (KIMI CLI v1.32.0+ 100K cap kompatibel)
+
+**Hvorfor MemPalace er verdt det:**
+
+| Uten MemPalace | Med MemPalace |
+|---|---|
+| KIMI husker ingenting på tvers av sesjoner | KG + Diary gir persistens |
+| Agent må lese 10+ filer for å forstå kontekst | `search` finner relevant kontekst på <100ms |
+| Samme feil gjentas | Diary viser hva som ble prøvd før |
+| Ingen sporbarhet | KG lagrer arkitektur-beslutninger med tidsstempel |
+
+**Token-matematikk:**
+- **KIMI CLI uten MemPalace:** Hver sesjon starter fra null → agent må lese AGENTS.md + PROJECT_STATE.md + kritiske filer = ~15-25K tokens
+- **KIMI CLI med MemPalace:** `search("deploy pipeline")` → 5 treff à 600 tegn = ~3K tokens. **Sparing: 80% færre tokens per sesjonstart**
+
+**MemPalace-optimaliseringer (2026-06-05):**
+
+| Parameter | Før | Etter | Effekt |
+|---|---|---|---|
+| `maxToolOutputChars` | 75000 | **20000** | ~55K tokens spart per query |
+| `maxResultChars` | 2500 | **600** | ~19K tokens spart (limit=5) |
+| `cacheSize` | 500 | **100** | Mindre minnebruk |
+| Default `limit` | 10 | **5** | Halverer antall treff |
+| `rooms/` | 0 filer | **30 filer** | Søkbar indeks av prosjektdokumentasjon |
+| `diary.jsonl` | 11 entries | **16 entries** | Økt læring på tvers av sesjoner |
+
+**Hvordan MemPalace gjør KIMI Code bedre:**
+
+1. **Session Memory** — KIMI CLI har ikke nativ persistens. MemPalace lagrer hva som ble gjort, slik at neste agent vet at " deploy-pipeline ble endret til Wrangler OAuth den 29. mai" uten å måtte lete gjennom git-historikk.
+
+2. **Ground Truth Tracking** — KG lagrer verifiserte facts: `deploy_pipeline → uses_tool → wrangler_cli_oauth`. Neste gang noen spør "hvordan deployer vi?" finner `kg_query` dette direkte.
+
+3. **Error Pattern Recognition** — Diary viser at "SVV API feilet 3 ganger i mai, Bovsoft cache ble implementert som workaround". Nye agenter unngår å gjenta samme feil.
+
+4. **Kontekst-effektivitet** — Med `search_ground_truth` kan agenten spørre "hva vet vi om kType-matching?" og få et sammendrag på 3K tokens i stedet for å lese 5 filer à 5K tokens.
+
+5. **Architecture Decision Records** — KG-fakta med `validFrom` gir tidsreise. "Hvorfor bruker vi KV og ikke D1 for katalog?" → `kg_query("kv-vs-d1")` gir ADR med begrunnelse.
+
+**Best Practices:**
+- **FØR** >3 filer endres: `search` for relatert kontekst (sparer tokens)
+- **ETTER** signifikante oppgaver: `write_diary` (bygger læring)
+- **ETTER** arkitektur-endringer: `kg_add` eller `kg_batch` (dokumenter beslutninger)
+- **Ved debugging:** `recent_context` for å se hva som ble gjort i forrige sesjon
+
+**Verktøy:**
+- `search` — TF-IDF + Bigram søk i prosjektkunnskap (bruk FØRST)
+- `semantic_search` — KG-basert konsept-søk (når søkeord varierer)
+- `kg_query` — Knowledge graph oppslag
+- `kg_add` / `kg_batch` — Lagre fakta
+- `write_diary` — Logg oppgaver
+- `read_diary` — Se historikk
+- `recent_context` — Se hva som ble gjort i forrige sesjon
+- `get_status` — Server-metrikker og cap-warning
+
+**Isolasjon:** Ingen avhengighet til Klarpakke — all data ligger i `~/bilglass/.kimi/mempalace/`
 
 ### MCP-verktøy (Autoglass — selvstendige)
 `./.kimi/mcp/autoglass-mcp.mjs` — prosjekt-spesifikke verktøy for agentene.
@@ -131,7 +229,7 @@ kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasj
 │   ├── verify-kv.mjs           # KV-konsistens
 │   └── sync-secrets.mjs        # Secret-synkronisering
 ├── data/
-│   ├── catalog-prod.json        # 37 581 unike eurokoder (produksjon)
+│   ├── catalog-prod.json        # 27 184 records, 99.8% med eurocode (produksjon)
 │   ├── ktype-prefix4-cache.json # brand:model:year → prefix4
 │   ├── csc-parsed/
 │   │   └── finn-search-queries.json  # 503 søke-spørringer (Hella Gutmann)
@@ -143,11 +241,19 @@ kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasj
 │   ├── deploy.md           # Deploy-runbook
 │   └── data-sources.md     # Datakilde-dokumentasjon
 ├── .github/workflows/
-│   ├── deploy.yml          # Hoved deploy-pipeline
-│   ├── daily-scrape.yml    # Daglig scraper-cron (NYTT)
-│   ├── uptime.yml          # Timevis uptime-sjekk (NYTT)
-│   ├── lighthouse.yml      # Lighthouse CI (NYTT)
-│   └── verify.yml          # PR-gate (NYTT)
+│   ├── deploy.yml              # Hoved deploy-pipeline (Wrangler action v3)
+│   ├── deploy-mirror.yml       # WP mirror til Pages
+│   ├── daily-scrape.yml        # Daglig scraper-cron
+│   ├── daily-price-check.yml   # Daglig pris-sjekk
+│   ├── uptime.yml              # Timevis uptime-sjekk
+│   ├── verify.yml              # PR-gate
+│   ├── bovsoft-kv-sync.yml     # Bovsoft → KV sync
+│   ├── d1-migrate.yml          # D1 schema-migrasjon
+│   ├── d1-nordglass-import.yml # Nordglass import til D1
+│   ├── d1-position-migration.yml # Posisjon-migrasjon
+│   ├── scrape-catalog.yml      # Katalog-scraping
+│   ├── sync-d1-catalog.yml     # Catalog → D1 sync
+│   └── tecdoc-import.yml       # TecDoc import
 ├── package.json
 └── AGENTS.md              # Denne filen
 ```
@@ -180,6 +286,12 @@ npm run price:pipeline               # Full pipeline (scrape + sync)
 # Bygg data
 npm run build:prefix4                # Bygg prefix4-cache
 npm run merge                        # Merge kataloger til master
+
+# Eurocode-pipeline (autoglass-by-eurocode.json → catalog-prod.json → D1)
+npm run catalog:enrich:eurocode      # Fyll manglende eurocodes fra autoglass-by-eurocode.json
+npm run catalog:sync:d1              # Sync beriket catalog til lokal D1
+npm run catalog:sync:d1:sql          # Generer SQL-filer for remote D1 deploy
+npm run eurocode:pipeline            # Full pipeline (enrich + sync)
 
 # Worker
 cd api/cf-worker && wrangler dev     # Lokal utvikling
@@ -238,8 +350,17 @@ Finn.no → Bovsoft → ktype_registry → Worker API → Frontend
 - `GLASS_KV_NAMESPACE_ID` — KV namespace
 - `UNI_MICRO_OAUTH_TOKEN` — UNI Micro (fremtidig)
 
-**Synkronisering:** `.env.local` = GitHub secrets = Wrangler secrets  
-**Verktøy:** `node scripts/sync-secrets.mjs`
+**Secret-håndtering (2026-06-05):**
+
+| Miljø | Hvordan settes | Kommando |
+|---|---|---|
+| **Lokal utvikling** | `.env.local` | `source scripts/wrangler-with-env.sh` |
+| **GitHub Actions** | `secrets.*` | Konfigurer i repo Settings → Secrets |
+| **Wrangler/Worker** | **MANUELL** `wrangler secret put` | `wrangler secret put SVV_API_KEY --name autoglass-glass-sok` |
+
+> ⚠️ **VIKTIG:** Deploy-pipeline (`deploy.yml`) setter **IKKE** secrets automatisk lenger. Secrets må settes manuelt én gang via `wrangler secret put`. Dette sparer 30-40 sekunder per deploy og unngår rate limiting fra Cloudflare API.
+
+**Verktøy:** `node scripts/sync-secrets.mjs` (synkroniserer `.env.local` → Wrangler secrets, kjøres manuelt)
 
 ---
 
@@ -269,6 +390,7 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 | 2026-05-19 | localStorage for lagrede kjøretøy (MVP) | Godkjent |
 | 2026-05-21 | Daglig pris-sjekk fra auto-glass.no | Godkjent |
 | 2026-05-24 | Bovsoft kType-bootstrap over prefix4-matching | Godkjent |
+| 2026-06-05 | Wrangler action + caching + manuell secret-håndtering | Godkjent |
 
 ---
 
@@ -293,7 +415,32 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 **Auth:** Cookie-basert (Playwright login ved utløp).
 **Sync:** `scripts/sync-prices-to-catalog.mjs` oppdaterer `catalog-prod.json`.
 
+### Eurocode Pipeline (2026-06-04)
+**Problem:** Kun 42.5% av 27,184 produkter i `catalog-prod.json` hadde eurocode. 57.7% (15,603) manglet.
+**Rotårsak:** Autodoc scraping blokkert av Cloudflare. TecDoc-dump mangler article→kType linkages.
+**Løsning:** `data/autoglass-by-eurocode.json` (20,504 entries fra auto-glass.no) innholdt beriket data med eurocodes, properties, typeCodeDesc. `scripts/merge-eurocode-enrichment.mjs` matcher 98.7% på article_number og fyller 15,585 manglende eurocodes.
+**Resultat:** 99.83% eurocode-dekning (27,139 av 27,184). 26,846 records beriket med properties (ADAS, regnsensor, HUD, etc.).
+**D1 Sync:** `scripts/sync-catalog-to-d1.mjs` syncer 27,139 records til D1 i 55 chunks. Schema oppdatert med `type_description` og `properties` kolonner. UNIQUE constraint fjernet fra `eurocode` (samme eurocode dekker flere kjøretøy).
+**Kommandoer:** `npm run eurocode:pipeline` (enrich + D1 sync).
+**Lærdom:** auto-glass.no er den primære eurocode-kilden — ikke Autodoc/TecDoc. Berik data derfra først.
+
 ---
 
-**Sist oppdatert:** 2026-05-27  
-**Versjon:** 2.4 (+Finn.no/Bovsoft kType-pipeline)
+### Wrangler/GitHub Optimalisering (2026-06-05)
+**Problem:** Deploy-pipeline brukte `npm install -g wrangler` (tregt, ukontrollert versjon) og `wrangler secret put` i hver deploy (30-40s ekstra, rate limiting).
+**Løsning:**
+1. `cloudflare/wrangler-action@v3` — offisiell action, caching innebygd
+2. `cloudflare/pages-action@v1` — for Pages deploy
+3. `actions/cache@v4` — for `~/.npm` og `node_modules`
+4. **Fjernet** `wrangler secret put` fra deploy-pipeline — secrets settes manuelt én gang
+5. `sleep 60` → `sleep 15` — raskere verifikasjon
+6. Node 20 → 22 i alle 12 workflows
+7. Worker `package.json`: wrangler ^3.114, @cloudflare/workers-types ^4.20250501.0, TS ^5.8
+8. `wrangler.toml`: compatibility_date="2025-06-01", compatibility_flags=["nodejs_compat"], minify=true, cron="0 * * * *"
+**Resultat:** Deploy ~45-60 sekunder raskere. Ingen rate limiting. Kontrollert wrangler-versjon.
+**Lærdom:** Bruk offisielle actions, ikke `npm install -g`. Secrets i CI = tregt og skjørt. Manuell secret-håndtering er tryggere for produksjon.
+
+---
+
+**Sist oppdatert:** 2026-06-05  
+**Versjon:** 2.6 (+Wrangler/GitHub-optimalisering)

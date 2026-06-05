@@ -19,13 +19,15 @@ const DEFAULT_CANDIDATE_FIELDS = [
   "eurocode",
   "brand",
   "model",
-  "year_from",
-  "year_to",
+  "yearFrom",
+  "yearTo",
   "category",
-  "type_code",
+  "typeCode",
+  "typeCodeDesc",
   "price",
   "description",
   "_score",
+  "properties",
 ];
 
 /** Default vehicle fields when using field selection */

@@ -56,8 +56,8 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
     // 1b. Fallback til Biluppgifter hvis SVV er nede
     let biluppgifterUsed = false;
     if (svvResult.status !== "ok") {
-      // Prøv Biluppgitter som backup ved upstream_error eller parse_error
-      if (svvResult.status === "upstream_error" || svvResult.status === "parse_error") {
+      // Prøv Biluppgitter som backup ved upstream_error, parse_error, eller auth_error
+      if (svvResult.status === "upstream_error" || svvResult.status === "parse_error" || svvResult.status === "auth_error") {
         console.log(`[Backup] SVV failed with ${svvResult.status}, trying Biluppgifter...`);
         const biluppgifterResult = await fetchBiluppgifterVehicle(regnr, env.BILUPPGIFTER_API_KEY);
         
@@ -67,6 +67,36 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           biluppgifterUsed = true;
         } else {
           console.warn(`[Backup] Biluppgitter also failed: ${biluppgifterResult.status}`);
+        }
+      }
+      
+      // 1c. Fallback til Bovsoft cache hvis både SVV og Biluppgitter feiler
+      let bovsoftUsed = false;
+      if (svvResult.status !== "ok") {
+        const bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
+        console.log(`[DEBUG] Bovsoft cache for ${regnr}:`, JSON.stringify(bovsoftVehicle));
+        if (bovsoftVehicle && bovsoftVehicle.brand && bovsoftVehicle.yearFrom > 0) {
+          console.log(`[Backup] Using Bovsoft cache for ${regnr}: ${bovsoftVehicle.brand} ${bovsoftVehicle.model} ${bovsoftVehicle.yearFrom}`);
+          svvResult = {
+            status: "ok",
+            vehicle: {
+              regno: regnr,
+              make: normalizeBrand(bovsoftVehicle.brand),
+              model: bovsoftVehicle.model || "",
+              year: bovsoftVehicle.yearFrom,
+              vin: "",
+              typeCode: "",
+              fuelCode: "",
+              engineCode: "",
+              length: null,
+              seats: null,
+              gvwr: null,
+              firstRegDate: null,
+              lastRegDate: null,
+              status: "Registrert",
+            } as TecdocVehicle,
+          };
+          bovsoftUsed = true;
         }
       }
       
@@ -83,7 +113,13 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
             return {
               httpStatus: 503,
               retryAfter: 3600,
-              body: { error: "Kjøretøyoppslag midlertidig utilgjengelig", regnr, code: "svv_auth_error" },
+              body: { 
+                error: "Kjøretøyoppslag midlertidig utilgjengelig", 
+                regnr, 
+                code: "svv_auth_error",
+                backupUrl: `https://www.vegvesen.no/kjoretoy/kjop-og-salg/kjoretoyopplysninger/sjekk-kjoretoyopplysninger/?registreringsnummer=${encodeURIComponent(regnr)}`,
+                message: "Du kan sjekke kjøretøyopplysninger direkte på vegvesen.no eller legge inn informasjon manuelt"
+              },
             };
           case "upstream_error":
           case "parse_error":

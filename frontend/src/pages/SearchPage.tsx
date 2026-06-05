@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, lazy, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Search, Loader2, AlertTriangle, Car, Wrench } from 'lucide-react';
@@ -19,8 +19,12 @@ import { EUKontrollReminder } from '@/components/search/EUKontrollReminder';
 import { GlassCategoryFilter } from '@/components/search/GlassCategoryFilter';
 import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
 import { ProductCard } from '@/components/catalog/ProductCard';
-import { ProductDetail } from '@/components/catalog/ProductDetail';
 import type { Product } from '@/types/api';
+
+// Lazy-load ProductDetail — only needed when user clicks a product
+const ProductDetail = lazy(() =>
+  import('@/components/catalog/ProductDetail').then((m) => ({ default: m.ProductDetail }))
+);
 
 export default function SearchPage() {
   const [searchParams] = useSearchParams();
@@ -360,8 +364,10 @@ export default function SearchPage() {
         </div>
       )}
 
-      {/* Product detail modal */}
-      <ProductDetail product={detailProduct} onClose={() => setDetailProduct(null)} />
+      {/* Product detail modal — lazy-loaded */}
+      <Suspense fallback={null}>
+        <ProductDetail product={detailProduct} onClose={() => setDetailProduct(null)} />
+      </Suspense>
 
       {data && candidates.length === 0 && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-6 text-center">

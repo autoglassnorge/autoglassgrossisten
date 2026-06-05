@@ -70,3 +70,52 @@
 {"subject":"repo","predicate":"uses","object":"git-worktrees-for-isolated-development","validFrom":"2026-06-04T20:19:00.708Z"}
 {"subject":"repo","predicate":"has-worktree-dir","object":".worktrees/","validFrom":"2026-06-04T20:19:00.708Z"}
 {"subject":"AGENTS.md","predicate":"specifies","object":"subagent-driven-development-workflow","validFrom":"2026-06-04T20:19:00.709Z"}
+{"subject":"agent-validation-script","predicate":"exists-at","object":"scripts/validate-agents.mjs","validFrom":"2026-06-04T20:27:39.620Z"}
+{"subject":"agent-validation-script","predicate":"checks","object":"37-validation-rules","validFrom":"2026-06-04T20:27:39.620Z"}
+{"subject":"agent-validation-script","predicate":"covers","object":"all-7-agents-plus-skill-md","validFrom":"2026-06-04T20:27:39.621Z"}
+{"subject":"web-agent","predicate":"updated-to","object":"React-18-Vite-TypeScript-Tailwind","validFrom":"2026-06-04T20:27:39.621Z"}
+{"subject":"SKILL.md","predicate":"updated-to","object":"React-18-Vite-TypeScript-Tailwind","validFrom":"2026-06-04T20:27:39.621Z"}
+{"subject":"agent-YAMLs","predicate":"have","object":"metadata-last_updated-validated_against-status","validFrom":"2026-06-04T20:27:39.621Z"}
+{"subject":"session-start-hook","predicate":"runs","object":"agent-consistency-check","validFrom":"2026-06-04T20:27:39.621Z"}
+{"subject":"agent-MDs","predicate":"have","object":"changelog-section","validFrom":"2026-06-04T20:27:39.621Z"}
+{"subject":"subagent-ecosystem","predicate":"status","object":"37-of-37-checks-passing","validFrom":"2026-06-04T20:27:39.621Z"}
+{"subject":"eurocode","predicate":"source","object":"autoglass-by-eurocode.json","validFrom":"2026-06-05T00:15:22.021Z"}
+{"subject":"eurocode","predicate":"count_in_source","object":"20504","validFrom":"2026-06-05T00:15:22.022Z"}
+{"subject":"eurocode","predicate":"merge_coverage","object":"99.8%","validFrom":"2026-06-05T00:15:22.025Z"}
+{"subject":"eurocode","predicate":"missing_before_merge","object":"15630","validFrom":"2026-06-05T00:15:22.031Z"}
+{"subject":"eurocode","predicate":"fillable_from_source","object":"15585","validFrom":"2026-06-05T00:15:22.031Z"}
+{"subject":"autoglass-by-eurocode","predicate":"article_number_match_rate","object":"98.7%","validFrom":"2026-06-05T00:15:22.031Z"}
+{"subject":"autoglass-by-eurocode","predicate":"brands_covered","object":"77","validFrom":"2026-06-05T00:15:22.031Z"}
+{"subject":"autoglass-by-eurocode","predicate":"enrichment_fields","object":"properties,typeCodeDesc,sourceUrl,price","validFrom":"2026-06-05T00:15:22.031Z"}
+{"subject":"autoglass-by-eurocode","predicate":"properties_available","object":"ADAS,rainSensor,HUD,laneAssist,acoustic,solar,encapsulated,heated,green,blue,coated,tinted,antenna,laminated,aqua,clips,molding,darkGreen","validFrom":"2026-06-05T00:15:22.032Z"}
+{"subject":"autodoc","predicate":"status","object":"blocked_by_cloudflare","validFrom":"2026-06-05T00:15:22.032Z"}
+{"subject":"autodoc","predicate":"eurocode_value","object":"none_directly_uses_tecdoc_under_hood","validFrom":"2026-06-05T00:15:22.032Z"}
+{"subject":"catalog-prod.json","predicate":"eurocode_coverage_before_merge","object":"42.5%","validFrom":"2026-06-05T00:15:22.032Z"}
+{"subject":"catalog-prod.json","predicate":"eurocode_coverage_after_merge","object":"99.8%","validFrom":"2026-06-05T00:15:22.032Z"}
+{"subject":"eurocode-pipeline","predicate":"next_step","object":"build_merge_script","validFrom":"2026-06-05T00:15:22.032Z"}
+{"subject":"eurocode-pipeline","predicate":"d1_schema_update_needed","object":"properties_json_field","validFrom":"2026-06-05T00:15:22.032Z"}
+{"subject":"catalog-prod.json","predicate":"eurocode_coverage_after_merge","object":"99.83%","validFrom":"2026-06-05T00:19:43.209Z"}
+{"subject":"D1 glass_catalog","predicate":"record_count","object":"27139","validFrom":"2026-06-05T00:19:43.209Z"}
+{"subject":"D1 glass_catalog","predicate":"eurocode_coverage","object":"100%","validFrom":"2026-06-05T00:19:43.210Z"}
+{"subject":"D1 glass_catalog","predicate":"properties_coverage","object":"98.9%","validFrom":"2026-06-05T00:19:43.210Z"}
+{"subject":"D1 glass_catalog","predicate":"schema_updated","object":"type_description_properties_columns_added","validFrom":"2026-06-05T00:19:43.211Z"}
+{"subject":"D1 glass_catalog","predicate":"unique_constraint","object":"removed_from_eurocode","validFrom":"2026-06-05T00:19:43.211Z"}
+{"subject":"scripts","predicate":"merge_eurocode_enrichment","object":"scripts/merge-eurocode-enrichment.mjs","validFrom":"2026-06-05T00:19:43.215Z"}
+{"subject":"scripts","predicate":"sync_catalog_to_d1","object":"scripts/sync-catalog-to-d1.mjs","validFrom":"2026-06-05T00:19:43.215Z"}
+{"subject":"D1 glass_catalog","predicate":"remote_record_count","object":"27139","validFrom":"2026-06-05T01:23:24.666Z"}
+{"subject":"D1 glass_catalog","predicate":"remote_eurocode_coverage","object":"100%","validFrom":"2026-06-05T01:23:24.667Z"}
+{"subject":"D1 glass_catalog","predicate":"remote_properties_coverage","object":"99.1%","validFrom":"2026-06-05T01:23:24.667Z"}
+{"subject":"Worker","predicate":"deployed_version","object":"75718b56","validFrom":"2026-06-05T01:23:24.667Z"}
+{"subject":"Worker","predicate":"equipment_scoring","object":"active","validFrom":"2026-06-05T01:23:24.667Z"}
+{"subject":"Worker","predicate":"fallback_brand_year","object":"active","validFrom":"2026-06-05T01:23:24.668Z"}
+{"subject":"deploy","predicate":"status","object":"production_live","validFrom":"2026-06-05T01:23:24.671Z"}
+{"subject":"deploy","predicate":"d1_chunks_deployed","object":"272","validFrom":"2026-06-05T01:23:24.671Z"}
+{"subject":"deploy","predicate":"d1_chunks_failed","object":"0","validFrom":"2026-06-05T01:23:24.671Z"}
+{"subject":"svv-api","predicate":"has-key","object":"a578e3c7-f27b-4b73-8938-af26edd89d68","validFrom":"2026-06-05T14:11:31.267Z"}
+{"subject":"bovsoft","predicate":"ktype-system","object":"different-from-tecdoc","validFrom":"2026-06-05T14:11:31.267Z"}
+{"subject":"glass_catalog","predicate":"year_to-fixed","object":"12176-records","validFrom":"2026-06-05T14:11:31.270Z"}
+{"subject":"glass_catalog","predicate":"cache-prefix","object":"v3","validFrom":"2026-06-05T14:11:31.270Z"}
+{"subject":"response-compressor","predicate":"field-format","object":"camelCase","validFrom":"2026-06-05T14:11:31.270Z"}
+{"subject":"frontend","predicate":"sends-vehicle-params","object":"brand-model-yearFrom-yearTo","validFrom":"2026-06-05T14:11:31.271Z"}
+{"subject":"bovsoft-kv-cache","predicate":"verified-regnrs","object":"118-entries","validFrom":"2026-06-05T14:11:31.271Z"}
+{"subject":"search-endpoint","predicate":"fallback-chain","object":"svv-biluppgifter-bovsoft","validFrom":"2026-06-05T14:11:31.271Z"}

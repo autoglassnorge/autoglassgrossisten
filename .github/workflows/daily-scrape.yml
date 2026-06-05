@@ -4,10 +4,13 @@ name: Daily Scraper + Data Pipeline
 on:
   schedule:
     - cron: "0 4 * * *"
-  workflow_dispatch: # Manuell trigger
+  workflow_dispatch:
 
 env:
-  NODE_VERSION: "20"
+  NODE_VERSION: "22"
+
+permissions:
+  contents: read
 
 jobs:
   # ── 1. Scrape + Merge ─────────────────────────────────────────
@@ -20,8 +23,16 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
       - name: Installer avhengigheter
-        run: npm install
+        run: npm ci
 
       - name: Kjør scrapere + merge + kvalitets-gate
         run: node scripts/run-scrapers.mjs
@@ -46,18 +57,23 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
       - name: Installer avhengigheter
-        run: |
-          npm install
-          npm install --save-dev @types/node
+        run: npm ci
 
       - name: Last opp katalog til KV
-        run: |
-          node scripts/upload-catalog.mjs
+        run: node scripts/upload-catalog.mjs
         env:
-          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          KV_NAMESPACE_ID: ${{ secrets.GLASS_KV_NAMESPACE_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GLASS_KV_NAMESPACE_ID: ${{ secrets.GLASS_KV_NAMESPACE_ID }}
 
   # ── 3. Post-upload smoke-test ─────────────────────────────────
   verify:
@@ -89,15 +105,13 @@ jobs:
           if [ "$COUNT" -eq "0" ]; then exit 1; fi
           echo "✅ Eurocode-oppslag OK ($COUNT treff)"
 
-      - name: Oppdater catalog-størrelse
-        run: |
-          echo '{"size":'$(node -e "console.log(JSON.parse(require('fs').readFileSync('data/catalog-prod.json')).records.length)")',"date":"'$(date -Iseconds)'"}' > data/.catalog-prev-size.json
-
   # ── 4. Opprett GitHub Issue ved feil ──────────────────────────
   notify-on-failure:
     needs: [scrape, upload-kv, verify]
     if: failure()
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - uses: actions/checkout@v4
 

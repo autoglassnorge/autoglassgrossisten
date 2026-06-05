@@ -4,7 +4,7 @@
 
 CREATE TABLE IF NOT EXISTS glass_catalog (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  eurocode TEXT NOT NULL UNIQUE,
+  eurocode TEXT NOT NULL,
   article_number TEXT,
   scan_number TEXT,
   category TEXT,
@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS glass_catalog (
   weight REAL,
   dimensions TEXT,         -- JSON object as string
   description TEXT,
+  type_description TEXT,   -- Human-readable type (e.g. "Frontrute + INNK + GN")
+  properties TEXT,         -- JSON object: green, blue, coated, tinted, solar, encapsulated, etc.
   prefix4 TEXT,
   image_url TEXT,
   pdf_url TEXT,

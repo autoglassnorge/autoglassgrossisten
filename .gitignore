@@ -6,6 +6,9 @@ data/scrapers/*.ndjson
 data/scrapers/*.lock
 data/scrapers/pilkington-checkpoint.json.old
 
+# Archive (old catalog variants, kept for reference but not tracked)
+data/archive/
+
 # Secrets
 .env
 .env.local
@@ -21,13 +24,15 @@ data/scrapers/pilkington-checkpoint.json.old
 .vscode/
 .idea/
 
-# Build outputs (if any)
+# Build outputs
 dist/
 build/
 
 # Cloudflare
 .wrangler/
-node_modules/
+.wrangler-tmp/
+
+# Data artefacts
 data/*.pdf
 data/parse-*.js
 
@@ -41,10 +46,10 @@ data/wp-scrape/
 # CSC parsed data (PNG pages)
 data/csc-parsed/*.png
 
-
 # Finn.no scraper output
 data/finn-no-regnr/
 
+# SQLite databases
 *.db
 
 # MemPalace generated data

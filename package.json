@@ -45,12 +45,15 @@
     "verify:bovsoft": "node scripts/verify-with-bovsoft.mjs",
     "catalog:optimize": "node scripts/optimize-catalog.mjs",
     "catalog:validate": "node scripts/validate-optimized.mjs",
-    "catalog:build": "npm run catalog:optimize && npm run catalog:validate"
+    "catalog:build": "npm run catalog:optimize && npm run catalog:validate",
+    "catalog:enrich:eurocode": "node scripts/merge-eurocode-enrichment.mjs",
+    "catalog:sync:d1": "node scripts/sync-catalog-to-d1.mjs --local",
+    "catalog:sync:d1:sql": "node scripts/sync-catalog-to-d1.mjs --sql /tmp/d1-sync",
+    "eurocode:pipeline": "npm run catalog:enrich:eurocode && npm run catalog:sync:d1"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "^20.19.41",
-    "allure-playwright": "^3.9.0",
     "chrome-launcher": "^1.2.1",
     "csv-parse": "^6.2.1",
     "csv-stringify": "^6.7.0",
@@ -60,7 +63,7 @@
     "simple-icons": "^16.21.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

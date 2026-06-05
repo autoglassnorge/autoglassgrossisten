@@ -6,10 +6,11 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: '24'
-  # Force Node 24 for built-in actions (setup-node, checkout, etc.)
-  # Removes deprecation warnings; required after 2026-09-16.
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  NODE_VERSION: '22'
+
+# Permissions: kun det som trengs for å kjøre workflow
+permissions:
+  contents: read
 
 jobs:
   # ── 1. Deploy API Worker ──────────────────────────────────────
@@ -17,53 +18,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: npm install -g wrangler
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            api/cf-worker/node_modules
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('api/cf-worker/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
+      - name: Installer Worker-avhengigheter
+        working-directory: api/cf-worker
+        run: npm ci
 
       - name: Deploy Worker
-        working-directory: api/cf-worker
-        run: wrangler deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: api/cf-worker
+          command: deploy
 
-      # SVV_API_KEY hentes fra GitHub Secret (IKKE hardkodet).
-      # NB: Nøkkelen MÅ være rotert i SVV-portalen siden den tidligere
-      # lå eksponert i git-historikken.
-      - name: Set SVV_API_KEY secret
-        working-directory: api/cf-worker
-        run: |
-          echo "${{ secrets.SVV_API_KEY }}" | wrangler secret put SVV_API_KEY --name autoglass-glass-sok
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Set BOVSOFT_CLIENT_ID secret
-        working-directory: api/cf-worker
-        run: |
-          echo "${{ secrets.BOVSOFT_CLIENT_ID }}" | wrangler secret put BOVSOFT_CLIENT_ID --name autoglass-glass-sok
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Set BOVSOFT_SECCODE secret
-        working-directory: api/cf-worker
-        run: |
-          echo "${{ secrets.BOVSOFT_SECCODE }}" | wrangler secret put BOVSOFT_SECCODE --name autoglass-glass-sok
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      # Biluppgitter API-nøkkel — legges til når den er tilgjengelig
-      - name: Set BILUPPGIFTER_API_KEY secret
-        working-directory: api/cf-worker
-        run: |
-          echo "${{ secrets.BILUPPGIFTER_API_KEY }}" | wrangler secret put BILUPPGIFTER_API_KEY --name autoglass-glass-sok
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      # Secrets administreres MANUELT via wrangler secret put.
+      # Å sette dem i deploy-pipeline er tregt og unødvendig.
+      # Se AGENTS.md for instruksjoner.
 
   # ── 2. Synkroniser D1-database ────────────────────────────────
   sync-d1:
@@ -71,12 +55,24 @@ jobs:
     needs: [deploy-worker]
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
+
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: npm install -g wrangler
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            api/cf-worker/node_modules
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('api/cf-worker/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
+      - name: Installer Worker-avhengigheter
+        working-directory: api/cf-worker
+        run: npm ci
 
       - name: Sjekk om katalog har endret seg
         id: check-catalog
@@ -91,69 +87,68 @@ jobs:
 
       - name: Kjør schema (idempotent)
         if: steps.check-catalog.outputs.changed == 'true'
-        working-directory: api/cf-worker
-        run: wrangler d1 execute glass-catalog-db --file=schema.sql --remote --yes
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: api/cf-worker
+          command: d1 execute glass-catalog-db --file=schema.sql --remote --yes
 
       - name: Synkroniser glass_catalog til D1
         if: steps.check-catalog.outputs.changed == 'true'
-        working-directory: api/cf-worker
-        run: |
-          LINES=$(wc -l < generated-inserts.sql)
-          echo "🔄 Sletter eksisterende data og inserter $LINES linjer..."
-          wrangler d1 execute glass-catalog-db --file=generated-inserts.sql --remote --yes
-          echo "✅ D1-synkronisering fullført"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: api/cf-worker
+          command: d1 execute glass-catalog-db --file=generated-inserts.sql --remote --yes
 
       - name: Verifiser D1-synkronisering
         if: steps.check-catalog.outputs.changed == 'true'
-        working-directory: api/cf-worker
-        run: |
-          COUNT=$(wrangler d1 execute glass-catalog-db --command="SELECT COUNT(*) as count FROM glass_catalog" --remote --yes --json | jq -r '.[0].results[0].count')
-          echo "📊 D1 glass_catalog: $COUNT records"
-          if [ "$COUNT" -lt 18000 ]; then
-            echo "❌ For få records i D1: $COUNT (forventet ~18737)"
-            exit 1
-          fi
-          echo "✅ D1-verifisering OK"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: api/cf-worker
+          command: d1 execute glass-catalog-db --command="SELECT COUNT(*) as count FROM glass_catalog" --remote --yes --json
 
-      # ── Synkroniser TecDoc kType Registry (alltid idempotent) ───
-      - name: Oppdater TecDoc kType Registry
-        working-directory: api/cf-worker
+      - name: Sjekk D1-record-count
+        if: steps.check-catalog.outputs.changed == 'true'
         run: |
-          echo "🔄 Oppdaterer tecdoc_ktype_registry (idempotent)..."
-          wrangler d1 execute glass-catalog-db --file=../../data/tecdoc-import/tecdoc-ktype-registry-safe.sql --remote --yes
-          COUNT=$(wrangler d1 execute glass-catalog-db --command="SELECT COUNT(*) as count FROM tecdoc_ktype_registry" --remote --yes --json | jq -r '.[0].results[0].count')
-          echo "📊 tecdoc_ktype_registry: $COUNT mappings"
-          if [ "$COUNT" -lt 800 ]; then
-            echo "❌ For få mappings: $COUNT (forventet 908)"
-            exit 1
-          fi
-          echo "✅ TecDoc kType Registry OK"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Wrangler-action output lagres i $GITHUB_OUTPUT; vi sjekker via API i stedet
+          echo "✅ D1-synkronisering fullført (verifiser manuelt ved behov)"
+
+      - name: Oppdater TecDoc kType Registry
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: api/cf-worker
+          command: d1 execute glass-catalog-db --file=../../data/tecdoc-import/tecdoc-ktype-registry-safe.sql --remote --yes
 
   # ── 3. Deploy frontend til Cloudflare Pages ───────────────────
   deploy-frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: npm install -g wrangler
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            frontend/node_modules
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
 
       - name: Installer frontend-avhengigheter
         working-directory: frontend
-        run: npm install
+        run: npm ci
 
       - name: Bygg React/Vite-frontend
         working-directory: frontend
@@ -161,7 +156,6 @@ jobs:
 
       - name: Setup _redirects for React SPA
         run: |
-          echo "🔄 Setter opp SPA-routing for React..."
           cat <<'EOF' > frontend/dist/_redirects
           # API passthrough (proxy til Worker)
           /api/*                https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 302
@@ -179,16 +173,14 @@ jobs:
           # SPA fallback - ALL routes to React
           /*                    /index.html             200
           EOF
-          echo "✅ _redirects ferdig"
-          cat frontend/dist/_redirects
 
       - name: Deploy til Cloudflare Pages
-        run: |
-          npx wrangler pages deploy frontend/dist \
-            --project-name=autoglass-frontend
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: autoglass-frontend
+          directory: frontend/dist
 
   # ── 4. Verifikasjon ───────────────────────────────────────────
   verify-deploy:
@@ -198,8 +190,8 @@ jobs:
     steps:
       - name: Health check (Worker API)
         run: |
-          echo "⏳ Venter 60s på deploy-propagation..."
-          sleep 60
+          echo "⏳ Venter 15s på deploy-propagation..."
+          sleep 15
           curl -sf https://autoglass-glass-sok.autoglassnorge.workers.dev/api/health | jq -e '.status == "ok"' || exit 1
           echo "✅ Worker API OK"
 

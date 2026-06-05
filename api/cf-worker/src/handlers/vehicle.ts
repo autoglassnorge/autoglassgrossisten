@@ -7,6 +7,7 @@ import type { Env } from "../types";
 import { jsonResponse, errorResponse } from "../lib/cors";
 import { fetchBovsoftVehicle, getCachedBovsoftVehicle, cacheBovsoftVehicle } from "../lib/bovsoft";
 import { resolveKtype } from "../lib/ktype-resolver";
+import { guessEquipment } from "../lib/scoring";
 
 // ---------------------------------------------------------------------------
 // GET /api/vehicle/ktype/:regnr
@@ -333,6 +334,10 @@ export async function handleVehicleDebug(request: Request, env: Env): Promise<Re
 export async function handleVehicleProducts(request: Request, env: Env): Promise<Response> {
   const url = new URL(request.url);
   const ktypeParam = url.searchParams.get("ktype");
+  const brandParam = url.searchParams.get("brand");
+  const modelParam = url.searchParams.get("model");
+  const yearFromParam = url.searchParams.get("yearFrom");
+  const yearToParam = url.searchParams.get("yearTo");
 
   if (!ktypeParam) {
     return errorResponse("Mangler 'ktype' parameter", 400);
@@ -343,8 +348,35 @@ export async function handleVehicleProducts(request: Request, env: Env): Promise
     return errorResponse("Ugyldig kType", 400);
   }
 
+  let ktypeVehicle: { brand: string; model: string; year_from: number; year_to: number | null } | null = null;
+
   try {
-    const { results } = await env.GLASS_CATALOG_D1
+    // 1. Use provided vehicle params (from Bovsoft cache) if available, else fall back to ktype_registry
+    if (brandParam && yearFromParam) {
+      ktypeVehicle = {
+        brand: brandParam,
+        model: modelParam || '',
+        year_from: parseInt(yearFromParam, 10) || 0,
+        year_to: yearToParam ? parseInt(yearToParam, 10) : null,
+      };
+    } else {
+      // Fallback: lookup from ktype_registry (TecDoc data — may not match Bovsoft ktypes)
+      ktypeVehicle = await env.GLASS_CATALOG_D1
+        .prepare(`SELECT brand, model, year_from, year_to FROM ktype_registry WHERE ktype = ? LIMIT 1`)
+        .bind(ktype)
+        .first<{ brand: string; model: string; year_from: number; year_to: number | null }>() || null;
+    }
+
+    const vehicleYear = ktypeVehicle?.year_from || 0;
+    const guessed = ktypeVehicle
+      ? guessEquipment(ktypeVehicle.brand, ktypeVehicle.model, vehicleYear)
+      : null;
+
+    // 2. Fetch glass candidates (try kType first, then fallback to brand+model+year)
+    let results: any[] = [];
+    let usedFallback = false;
+
+    const ktypeResults = await env.GLASS_CATALOG_D1
       .prepare(`
         SELECT 
           id,
@@ -353,15 +385,17 @@ export async function handleVehicleProducts(request: Request, env: Env): Promise
           model,
           description as title,
           description,
+          type_description as typeDescription,
           year_from as yearFrom,
           year_to as yearTo,
           article_number as articleNumber,
           price,
           stock_status as stockStatus,
           image_url as imageUrl,
-          type_code as typeCode,
-          type_code_desc as typeCodeDesc,
+          category,
+          nags_codes,
           position,
+          properties,
           heated,
           rain_sensor as rainSensor,
           adas,
@@ -372,45 +406,185 @@ export async function handleVehicleProducts(request: Request, env: Env): Promise
           tinted
         FROM glass_catalog 
         WHERE ktype = ?
-        ORDER BY 
-          CASE WHEN type_code = 'WS' THEN 0 ELSE 1 END,
-          brand
-        LIMIT 50
+        LIMIT 100
       `)
       .bind(ktype)
       .all();
 
-    const products = (results || []).map((r: any) => ({
-      id: r.id,
-      eurocode: r.eurocode,
-      brand: r.brand,
-      model: r.model,
-      title: r.title || r.description,
-      description: r.description,
-      yearFrom: r.yearFrom,
-      yearTo: r.yearTo,
-      articleNumber: r.articleNumber,
-      price: r.price || 0,
-      stockStatus: r.stockStatus || 0,
-      imageUrl: r.imageUrl || "",
-      typeCode: r.typeCode,
-      typeCodeDesc: r.typeCodeDesc,
-      position: r.position,
-      properties: {
-        heated: !!r.heated,
-        rainSensor: !!r.rainSensor,
-        adas: !!r.adas,
-        hud: !!r.hud,
-        acoustic: !!r.acoustic,
-        antenna: !!r.antenna,
-        solar: !!r.solar,
-        tinted: !!r.tinted,
-      },
-    }));
+    results = ktypeResults.results || [];
 
-    return jsonResponse({ products });
+    // Fallback: if no kType matches, search by brand+year from ktype_registry
+    // (model matching is too fragile — use broader brand+year filter)
+    if (results.length === 0 && ktypeVehicle) {
+      usedFallback = true;
+      const fbYearTo = ktypeVehicle.year_to || ktypeVehicle.year_from || 9999;
+      const fbYearFrom = ktypeVehicle.year_from || 0;
+      const fallbackResults = await env.GLASS_CATALOG_D1
+        .prepare(`
+          SELECT 
+            id,
+            eurocode,
+            brand,
+            model,
+            description as title,
+            description,
+            type_description as typeDescription,
+            year_from as yearFrom,
+            year_to as yearTo,
+            article_number as articleNumber,
+            price,
+            stock_status as stockStatus,
+            image_url as imageUrl,
+            category,
+            nags_codes,
+            position,
+            properties,
+            heated,
+            rain_sensor as rainSensor,
+            adas,
+            hud,
+            acoustic,
+            antenna,
+            solar,
+            tinted
+          FROM glass_catalog 
+          WHERE brand = ? 
+            AND year_from <= ? 
+            AND (year_to >= ? OR year_to IS NULL)
+          LIMIT 100
+        `)
+        .bind(
+          ktypeVehicle.brand,
+          fbYearTo,
+          fbYearFrom
+        )
+        .all();
+      results = fallbackResults.results || [];
+    }
+
+    // 3. Score and map candidates
+    const categoryToTypeCode: Record<string, { code: string; desc: string }> = {
+      'frontrute': { code: 'F', desc: 'Frontrute' },
+      'bakrute': { code: 'B', desc: 'Bakrute' },
+      'siderute': { code: 'SFB1', desc: 'Siderute' },
+      'dørrute-frem': { code: 'DFF', desc: 'Dørrute fremme' },
+      'dørrute-bak': { code: 'DFB', desc: 'Dørrute bak' },
+      'annet': { code: 'OTHER', desc: 'Annet' },
+    };
+
+    const products = (results || []).map((r: any) => {
+      // Parse full properties JSON from D1 if available
+      let fullProperties: Record<string, any> = {};
+      try {
+        if (r.properties) {
+          fullProperties = JSON.parse(r.properties);
+        }
+      } catch {
+        fullProperties = {};
+      }
+
+      const recordProps = {
+        heated: !!(r.heated ?? fullProperties.heated),
+        rainSensor: !!(r.rainSensor ?? fullProperties.rainSensor),
+        adas: !!(r.adas ?? fullProperties.adas),
+        hud: !!(r.hud ?? fullProperties.hud),
+        acoustic: !!(r.acoustic ?? fullProperties.acoustic),
+        antenna: !!(r.antenna ?? fullProperties.antenna),
+        solar: !!(r.solar ?? fullProperties.solar),
+        tinted: !!(r.tinted ?? fullProperties.tinted),
+        green: !!fullProperties.green,
+        blue: !!fullProperties.blue,
+        coated: !!fullProperties.coated,
+        encapsulated: !!fullProperties.encapsulated,
+        laminated: !!fullProperties.laminated,
+        darkGreen: !!fullProperties.darkGreen,
+        laneAssist: !!fullProperties.laneAssist,
+      };
+
+      // Compute equipment match score
+      let score = 0;
+      if (guessed) {
+        if (guessed.adas > 0.3 && recordProps.adas) score += 20;
+        if (guessed.rainSensor > 0.3 && recordProps.rainSensor) score += 14;
+        if (guessed.heated > 0.3 && recordProps.heated) score += 10;
+        if (guessed.hud > 0.3 && recordProps.hud) score += 10;
+        if (guessed.acoustic > 0.3 && recordProps.acoustic) score += 8;
+        if (guessed.antenna > 0.3 && recordProps.antenna) score += 6;
+        if (guessed.camera > 0.3 && recordProps.darkGreen) score += 6; // proxy
+        // Penalize mismatches
+        if (guessed.adas < 0.2 && recordProps.adas) score -= 8;
+        if (guessed.hud < 0.2 && recordProps.hud) score -= 4;
+        if (guessed.rainSensor < 0.2 && recordProps.rainSensor) score -= 3;
+      }
+
+      // Category boost
+      const cat = r.category?.toLowerCase();
+      if (cat === 'frontrute') score += 15;
+      else if (cat === 'bakrute') score += 5;
+
+      // Year compatibility
+      if (vehicleYear && r.yearFrom && r.yearTo) {
+        if (vehicleYear >= r.yearFrom && vehicleYear <= r.yearTo) score += 10;
+        else if (vehicleYear >= r.yearFrom - 2 && vehicleYear <= r.yearTo + 2) score += 3;
+      }
+
+      // Type code mapping
+      let typeCode: string;
+      let typeCodeDesc: string;
+      try {
+        const nags = r.nags_codes ? JSON.parse(r.nags_codes) : [];
+        if (Array.isArray(nags) && nags.length > 0) {
+          typeCode = nags[0];
+          typeCodeDesc = r.typeDescription || categoryToTypeCode[r.category]?.desc || r.category;
+        } else {
+          typeCode = categoryToTypeCode[r.category]?.code || 'OTHER';
+          typeCodeDesc = r.typeDescription || categoryToTypeCode[r.category]?.desc || r.category;
+        }
+      } catch {
+        typeCode = categoryToTypeCode[r.category]?.code || 'OTHER';
+        typeCodeDesc = r.typeDescription || categoryToTypeCode[r.category]?.desc || r.category;
+      }
+
+      return {
+        id: r.id,
+        eurocode: r.eurocode,
+        brand: r.brand,
+        model: r.model,
+        title: r.title || r.description,
+        description: r.description,
+        typeDescription: r.typeDescription || typeCodeDesc,
+        yearFrom: r.yearFrom,
+        yearTo: r.yearTo,
+        articleNumber: r.articleNumber,
+        price: r.price || 0,
+        stockStatus: r.stockStatus || 0,
+        imageUrl: r.imageUrl || "",
+        category: r.category,
+        typeCode,
+        typeCodeDesc,
+        position: r.position,
+        _score: score,
+        properties: recordProps,
+      };
+    });
+
+    // Sort by score descending, then frontrute first, then brand
+    products.sort((a: any, b: any) => {
+      if (b._score !== a._score) return b._score - a._score;
+      const aFront = a.typeCode === 'F' ? 0 : 1;
+      const bFront = b.typeCode === 'F' ? 0 : 1;
+      if (aFront !== bFront) return aFront - bFront;
+      return (a.brand || '').localeCompare(b.brand || '');
+    });
+
+    return jsonResponse({ products, meta: { ktype, usedFallback, total: products.length } });
   } catch (e) {
     console.error(`[VehicleProducts] Error for ktype=${ktype}:`, e);
-    return errorResponse("Kunne ikke hente produkter", 500);
+    return jsonResponse({ 
+      error: "Kunne ikke hente produkter", 
+      debug: e instanceof Error ? e.message : String(e),
+      ktype,
+      ktypeVehicle: ktypeVehicle || null
+    }, 500);
   }
 }

@@ -1,0 +1,465 @@
+{
+  "timestamp": "2026-06-05T00:16:00.360Z",
+  "source_file": "data/autoglass-by-eurocode.json",
+  "target_file": "data/catalog-prod.json",
+  "stats": {
+    "total_records": 27184,
+    "enriched_records": 26846,
+    "unchanged_records": 338,
+    "eurocode_filled": 15585,
+    "properties_added": 26846,
+    "type_code_desc_added": 8,
+    "total_with_eurocode": 27139,
+    "total_missing_eurocode": 45,
+    "eurocode_coverage_percent": "99.83"
+  },
+  "still_missing": [
+    {
+      "article_number": "21806PY",
+      "brand": "HONDA",
+      "model": "PRELUDE",
+      "description": "HONDA PRELUDE 2D COUPE   92-   PYNTELIST BAKRUTE @",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "664GU",
+      "brand": "NISSAN",
+      "model": "280 ZX COUPE",
+      "description": "DATSUN 240Z + 260Z+280Z  COUPE 71-79 GUMMILIST FRONTRUTE",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "685GU",
+      "brand": "MERCEDES",
+      "model": "SERIE W116",
+      "description": "MERCEDES W116 4D SED S+SEL 72-79 GUMMILIST FRONTRUTE",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.00.448CL",
+      "brand": "MOTORHOMES",
+      "model": "HYMER",
+      "description": "HYMER B-PREMIUMLINE/HYMER B 778 PL 2017- FRONTRUTE CL",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.004GU",
+      "brand": "MOTORHOMES",
+      "model": "FRANKIA",
+      "description": "FRANKIA INTEGRAAL i 500-800 GUMMILIST 95 – 02  ##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.008GU",
+      "brand": "MOTORHOMES",
+      "model": "HYMER",
+      "description": "HYMER MOBIL  540+650 83-02 GUMMILIST FRONTRUTE##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.113PY",
+      "brand": "MOTORHOMES",
+      "model": "EURAMOBIL",
+      "description": "EURAMOBIL INTEGRA II   PYNTELIST 2001",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.115GU",
+      "brand": "MOTORHOMES",
+      "model": "RAPIDO MERCEDES/FIAT",
+      "description": "RAPIDO 900-9000 MERCEDES/FIAT  00- GUMMILIST  FRONTRUTE##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.119GU",
+      "brand": "MOTORHOMES",
+      "model": "HYMER",
+      "description": "HYMER EXSIS   03-06   GUMMILIST FRONTRUTE",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.159GU",
+      "brand": "MOTORHOMES",
+      "model": "AUTOSTAR",
+      "description": "AUTOSTAR ARYAL 2/7/9/10 90-06  GUMMILIST FRONTRUTE  ##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.160GU",
+      "brand": "MOTORHOMES",
+      "model": "KNAUS",
+      "description": "KNAUS TRAVELLINER 97-02   GUMMILIST FRONTRUTE##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.164GU",
+      "brand": "MOTORHOMES",
+      "model": "HYMER",
+      "description": "HYMER E+S -CLASSE 640+740+820  01-06  GUMMILIST FRONT##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.165GU",
+      "brand": "MOTORHOMES",
+      "model": "NIESMANN BISCHOFF",
+      "description": "NIESMANN BISCHOFF ARTO II 99-06  FRONTRUTE GUMMILIST ##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "BO.90.90.166GU",
+      "brand": "MOTORHOMES",
+      "model": "NIESMANN BISCHOFF",
+      "description": "NIESMANN BISCHOFF FLAIR II 01-06  GUMMILIST ##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "DD11934GN",
+      "brand": "USA CARS",
+      "model": "CHRYSLER",
+      "description": "USE 4743RGSS4FDKW",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "DD11935GN",
+      "brand": "USA CARS",
+      "model": "CHRYSLER",
+      "description": "USE 4743LGSS4FDKW",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "DD5813GN",
+      "brand": "USA CARS",
+      "model": "DODGE",
+      "description": "DODGE VAN 90-99 DØR+SKYVEDØR GN FAST###NB MÅL 46,5X52",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "DD5813GN",
+      "brand": "USA CARS",
+      "model": "DODGE",
+      "description": "DODGE VAN 90-99 DØR+SKYVEDØR GN FAST###NB MÅL 46,5X52",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "DV5809GN",
+      "brand": "USA CARS",
+      "model": "DODGE",
+      "description": "DODGE VAN 77-84  VENTILRUTE (SVERIGE)",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "DV5810GN",
+      "brand": "USA CARS",
+      "model": "DODGE",
+      "description": "DODGE VAN 77-84  VENTILRUTE (SVERIGE)",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EC01AGACMOUVZ",
+      "brand": "HONGQI",
+      "model": "",
+      "description": "HONGQI HS9 5D SUV 21-  FRONTRUTE  LDW HUD SENSOR GN ##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EC01AGACMOUVZ",
+      "brand": "HONGQI",
+      "model": "",
+      "description": "HONGQI HS9 5D SUV 21-  FRONTRUTE  LDW HUD SENSOR GN ##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EC01LGAR5FDKW",
+      "brand": "HONGQI",
+      "model": "",
+      "description": "HONGQI HS9 5D SUV 21- FRONT DOOR LAMINATED AKU GREEN",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EC01LGAR5FDKW",
+      "brand": "HONGQI",
+      "model": "",
+      "description": "HONGQI HS9 5D SUV 21- FRONT DOOR LAMINATED AKU GREEN",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EC01RGAR5FDKW",
+      "brand": "HONGQI",
+      "model": "",
+      "description": "HONGQI HS9 5D SUV 21- FRONT DOOR LAMINATED AKU GREEN",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EC01RGAR5FDKW",
+      "brand": "HONGQI",
+      "model": "",
+      "description": "HONGQI HS9 5D SUV 21- FRONT DOOR LAMINATED AKU GREEN",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EK08ACLCVZ",
+      "brand": "DONGFENG",
+      "model": "",
+      "description": "DONGFENG NAMMI BOX 5D HBK 24- WINDSHIELD LDW CLEAR",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EK08ACLCVZ",
+      "brand": "DONGFENG",
+      "model": "",
+      "description": "DONGFENG NAMMI BOX 5D HBK 24- WINDSHIELD LDW CLEAR",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EW01AGACMVZ",
+      "brand": "VOYAH",
+      "model": "",
+      "description": "VOYAH FREE 5DR 2021- WS  SENSOR LDW HUD AKU GN",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EW01BYPRA",
+      "brand": "VOYAH",
+      "model": "",
+      "description": "VOYAH FREE 5DR 2021-BACKLITE EL PRIVACY",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EW01LYPR5RDW",
+      "brand": "VOYAH",
+      "model": "",
+      "description": "VOYAH FREE 5DR 2021- DORWAY REAR LAM LEFT PRIVACY",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EW01RYPR5RDW",
+      "brand": "VOYAH",
+      "model": "",
+      "description": "VOYAH FREE 5DR 2021- DORWAY REAR LAM RIGHT PRIVACY",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EZ01AGACMUVZ",
+      "brand": "ZEEKR",
+      "model": "",
+      "description": "ZEEKR 01 5D SHOOTING BRAKE 24- WS +LDW+SENS+HUD ##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EZ01BYPRAZ",
+      "brand": "ZEEKR",
+      "model": "",
+      "description": "ZEEKR 01 5D SHOOTING BRAKE 24- BACKLITE ENC HTD ANT PRIVACY",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EZ01LGSR5FDW",
+      "brand": "ZEEKR",
+      "model": "",
+      "description": "ZEEKR 01 5D SHOOTING BRAKE 24- FRONT DOORGLASS GN",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EZ01LYPR5RDW",
+      "brand": "ZEEKR",
+      "model": "",
+      "description": "ZEEKR 01 5D SHOOTING BRAKE 24- REAR DOORGLASS PRIVACY",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EZ01RGSR5FDW",
+      "brand": "ZEEKR",
+      "model": "",
+      "description": "ZEEKR 01 5D SHOOTING BRAKE 24- FRONT DOORGLASS GN",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EZ01RYPR5RDW",
+      "brand": "ZEEKR",
+      "model": "",
+      "description": "ZEEKR 01 5D SHOOTING BRAKE 24- REAR DOORGLASS PRIVACY",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "EZ03AGACMUVZ",
+      "brand": "ZEEKR",
+      "model": "",
+      "description": "ZEEKR X 5D CROSSOVER SUV 24- WS +LDW+SENS+HUD ##",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "FW2395PY",
+      "brand": "TOYOTA",
+      "model": "SIENNA",
+      "description": "TOYOTA SIENNA 5D MPV 03-10  WINDSCREEN MOULDING (SVERIGE)",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "FW3878PY",
+      "brand": "TOYOTA",
+      "model": "HIGHLANDER",
+      "description": "TOYOTA HIGHLANDER 5D SUV 14-19  WINDSCREEN MOULDING",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "THINK",
+      "brand": "THINK",
+      "model": "",
+      "description": "THINK CITY 1999-  FR+KLAR ## NB-NB-NB  IKKE EL",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "W1265GN",
+      "brand": "USA CARS",
+      "model": "GMC",
+      "description": "BRUK W1266GN",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "W2036GN",
+      "brand": "USA CARS",
+      "model": "CADILLAC",
+      "description": "CADILLAC SRX 5D SUV 09-16  FR GN +INK+SENR #-10%# (SVERIGE)",
+      "reason": "no_source_match"
+    },
+    {
+      "article_number": "W3312C",
+      "brand": "USA CARS",
+      "model": "HUMMER",
+      "description": "BRUK W3311C",
+      "reason": "no_source_match"
+    }
+  ],
+  "sample_enriched": [
+    {
+      "article_number": "10025C",
+      "eurocode": "10025C",
+      "brand": "FIAT",
+      "model": "PANDA",
+      "properties": {
+        "green": false,
+        "blue": false,
+        "coated": false,
+        "tinted": false,
+        "heated": true,
+        "rainSensor": false,
+        "adas": false,
+        "hud": false,
+        "laneAssist": false,
+        "antenna": false,
+        "acoustic": false,
+        "solar": false,
+        "encapsulated": false,
+        "laminated": false,
+        "aqua": false,
+        "clips": false,
+        "molding": null,
+        "darkGreen": false
+      }
+    },
+    {
+      "article_number": "10025GN",
+      "eurocode": "10025GN",
+      "brand": "FIAT",
+      "model": "PANDA",
+      "properties": {
+        "green": true,
+        "blue": false,
+        "coated": false,
+        "tinted": false,
+        "heated": true,
+        "rainSensor": false,
+        "adas": false,
+        "hud": false,
+        "laneAssist": false,
+        "antenna": false,
+        "acoustic": false,
+        "solar": false,
+        "encapsulated": false,
+        "laminated": false,
+        "aqua": false,
+        "clips": false,
+        "molding": null,
+        "darkGreen": false
+      }
+    },
+    {
+      "article_number": "10030BZ",
+      "eurocode": "10030BZ",
+      "brand": "FIAT TRUCKS",
+      "model": "DUCATO",
+      "properties": {
+        "green": false,
+        "blue": false,
+        "coated": false,
+        "tinted": false,
+        "heated": false,
+        "rainSensor": false,
+        "adas": false,
+        "hud": false,
+        "laneAssist": false,
+        "antenna": false,
+        "acoustic": false,
+        "solar": false,
+        "encapsulated": false,
+        "laminated": false,
+        "aqua": false,
+        "clips": false,
+        "molding": null,
+        "darkGreen": false
+      }
+    },
+    {
+      "article_number": "10030CL",
+      "eurocode": "10030CL",
+      "brand": "DAIHATSU",
+      "model": "CUORE",
+      "properties": {
+        "green": false,
+        "blue": false,
+        "coated": false,
+        "tinted": false,
+        "heated": false,
+        "rainSensor": false,
+        "adas": false,
+        "hud": false,
+        "laneAssist": false,
+        "antenna": false,
+        "acoustic": false,
+        "solar": false,
+        "encapsulated": false,
+        "laminated": false,
+        "aqua": false,
+        "clips": false,
+        "molding": null,
+        "darkGreen": false
+      }
+    },
+    {
+      "article_number": "10030CL",
+      "eurocode": "10030CL",
+      "brand": "FIAT TRUCKS",
+      "model": "DUCATO",
+      "properties": {
+        "green": false,
+        "blue": false,
+        "coated": false,
+        "tinted": false,
+        "heated": false,
+        "rainSensor": false,
+        "adas": false,
+        "hud": false,
+        "laneAssist": false,
+        "antenna": false,
+        "acoustic": false,
+        "solar": false,
+        "encapsulated": false,
+        "laminated": false,
+        "aqua": false,
+        "clips": false,
+        "molding": null,
+        "darkGreen": false
+      }
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * 🏛️ MemPalace MCP Server v3.5.0 — KIMI CLI v1.45.0 Optimalisert
+ * 🏛️ MemPalace MCP Server v3.5.0 — KIMI Code 0.11.0 Optimalisert
  *
  * Fikser i v3.5.0:
  * - Output truncation: respekterer KIMI CLI v1.32.0+ 100K tool-output cap
  *   (truncateOutput sikrer at resultater alltid er under ~80K tegn)
- * - v1.45.0-aware: oppdatert for max_steps_per_turn=750, show_thinking_stream
+ * - 0.11.0-aware: oppdatert for max_steps_per_turn=750, show_thinking_stream, sub-skill discovery
  * - Forbedret get_status med server-metrikker og cap-warning
  * - Versjon-agnostisk: støtter både v1.44 alias-resolution og v1.43 OAuth
  *
@@ -13,7 +13,7 @@
  * - Atomic writes: index-cache og KG compaction skrives atomisk (tmp + rename)
  * - KG backup: kg.json sikkerhetskopieres før compaction
  * - File watcher: 2s debounce, kun Knowledge/Handoffs/Docs
- * - Økt cacheSize 500 og maxResultChars 2500 for k2.6
+ * - Optimalisert cacheSize 100 og maxResultChars 600 for token-effektivitet
  * - Diary chunking: lange diary-linjer splittes i sub-docs
  * - Graceful shutdown med timeout
  *
@@ -38,7 +38,7 @@
  *
  * Versjon: 3.5.0
  * Dato: 2026-05-27
- * For: KIMI CLI v1.45.0, k2.6, macOS ARM64
+ * For: KIMI Code 0.11.0, k2.6, macOS ARM64
  */
 
 import {
@@ -58,9 +58,9 @@ const root = resolve(__dirname, '../..');
 const CONFIG = {
   version: '3.5.0',
   wing: 'autoglass',
-  cacheSize: 500,           // økt fra 300
-  maxResultChars: 2500,     // økt fra 1500 — bedre kontekst per treff
-  maxToolOutputChars: 75000, // ~75% av KIMI CLI v1.32.0+ 100K cap, gir headroom for JSON-wrapping
+  cacheSize: 100,           // redusert fra 500 — tilstrekkelig for Bilglass-prosjektet
+  maxResultChars: 600,      // redusert fra 2500 — fokus på mest relevante kontekst
+  maxToolOutputChars: 20000, // redusert fra 75000 — ~8% av 262K kontekst, gir headroom
   batchSize: 50,
   kgBatchSize: 100,
   indexCachePath: '.kimi/mempalace/data/index-cache-v3.json',
@@ -71,6 +71,7 @@ const CONFIG = {
     { path: 'docs', label: 'Docs', types: ['md'] },
     { path: '.kimi', label: 'Diary', include: ['diary.jsonl'] },
     { path: '.kimi/mempalace/rooms/Knowledge', label: 'Knowledge', types: ['md', 'txt'] },
+    { path: '.kimi/mempalace/rooms/Docs', label: 'Docs', types: ['md', 'txt'] },
     { path: '.kimi/mempalace/rooms/Handoffs', label: 'Handoffs', types: ['md'] },
     { path: '.kimi/mempalace/rooms/Plans', label: 'Plans', types: ['md'] },
     { path: '.kimi/mempalace/rooms/Memory', label: 'Memory', types: ['md'] }
@@ -215,7 +216,7 @@ const CONFIG = {
 
 // ─── OUTPUT TRUNCATION (v3.5.0) ───
 // Respekterer KIMI CLI v1.32.0+ 100K tool-output cap.
-// Truncater tekst-resultater til ~75K tegn med varsel i slutten.
+// Truncater tekst-resultater til ~20K tegn med varsel i slutten.
 function truncateOutput(text, maxChars = CONFIG.maxToolOutputChars) {
   if (!text || text.length <= maxChars) return text;
   const truncated = text.slice(0, maxChars);
@@ -943,14 +944,14 @@ function getContextSnippet(doc, tokens, windowSize = 80) {
 }
 
 function searchDocs(query, opts = {}) {
-  const cacheKey = `search:${query}:${opts.room || 'all'}:${opts.limit || 10}`;
+  const cacheKey = `search:${query}:${opts.room || 'all'}:${opts.limit || 5}`;
   const cached = cache.get(cacheKey);
   if (cached) return cached;
 
   const tokens = tokenize(query);
   if (tokens.length === 0) return [];
 
-  const limit = opts.limit || 10;
+  const limit = opts.limit || 5;
   const roomFilter = opts.room;
   const since = opts.since ? new Date(opts.since) : null;
 
@@ -1490,13 +1491,13 @@ class MempalaceMCP {
     return [
       {
         name: 'search',
-        description: 'Søk i MemPalace kunnskap med TF-IDF + Bigram rangering. Bruk dette FØRST. Output truncates ved ~75K tegn (KIMI CLI v1.32.0+ cap).',
+        description: 'Søk i MemPalace kunnskap med TF-IDF + Bigram rangering. Bruk dette FØRST. Output truncates ved ~20K tegn.',
         inputSchema: {
           type: 'object',
           properties: {
             query: { type: 'string', description: 'Søkestreng — vær spesifikk' },
             room: { type: 'string', description: 'Rom-filter: Knowledge, Diary, Handoffs, Plans, Docs, Memory' },
-            limit: { type: 'number', description: 'Maks resultater (default: 10)', default: 10 },
+            limit: { type: 'number', description: 'Maks resultater (default: 5)', default: 5 },
             since: { type: 'string', description: 'ISO dato — kun treff etter denne datoen' }
           },
           required: ['query']
@@ -1504,7 +1505,7 @@ class MempalaceMCP {
       },
       {
         name: 'semantic_search',
-        description: 'Semantisk søk med KG + Cross-lingual synonym-ekspansjon. Bruk når søkeord kan variere. Output truncates ved ~75K tegn.',
+        description: 'Semantisk søk med KG + Cross-lingual synonym-ekspansjon. Bruk når søkeord kan variere. Output truncates ved ~20K tegn.',
         inputSchema: {
           type: 'object',
           properties: {
@@ -1517,7 +1518,7 @@ class MempalaceMCP {
       },
       {
         name: 'recent_context',
-        description: 'Hent nylig lagt til innhold (siste N timer). Bruk for å finne det som skjedde i forrige sesjon. Output truncates ved ~75K tegn.',
+        description: 'Hent nylig lagt til innhold (siste N timer). Bruk for å finne det som skjedde i forrige sesjon. Output truncates ved ~20K tegn.',
         inputSchema: {
           type: 'object',
           properties: {
@@ -1773,7 +1774,7 @@ class MempalaceMCP {
           rooms: CONFIG.indexPaths.map(p => p.label),
           criticalRooms: CONFIG.criticalRooms,
           maxToolOutputChars: CONFIG.maxToolOutputChars,
-          kimiCliCompatibility: 'v1.45.0',
+          kimiCliCompatibility: '0.11.0',
           queryCache: queryCache.getStats()
         };
 
@@ -1891,7 +1892,7 @@ process.stdin.on('data', async (chunk) => {
 });
 
 if (process.env.MEMPALACE_VERBOSE) {
-  console.error('\u{1F3DB}\uFE0F  MemPalace MCP Server v3.5.0 — KIMI CLI v1.45.0 Optimalisert');
+  console.error('\u{1F3DB}\uFE0F  MemPalace MCP Server v3.5.0 — KIMI Code 0.11.0 Optimalisert');
   console.error(`   Wing: ${CONFIG.wing}`);
   console.error(`   Backend: in-memory FTS med inverted + bigram index (zero-dep)`);
   console.error(`   Scoring: TF-IDF + Bigram-boost + Kontekst-snippets`);

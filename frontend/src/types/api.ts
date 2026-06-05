@@ -21,6 +21,7 @@ export interface Product {
   typeCode: string;
   typeCodeDesc: string;
   position: 'driver' | 'passenger' | 'center' | null;
+  typeDescription?: string;
   properties: {
     heated: boolean;
     rainSensor: boolean;
@@ -32,6 +33,13 @@ export interface Product {
     solar: boolean;
     tinted: boolean;
     camera?: boolean;
+    green?: boolean;
+    blue?: boolean;
+    coated?: boolean;
+    encapsulated?: boolean;
+    laminated?: boolean;
+    darkGreen?: boolean;
+    laneAssist?: boolean;
     hasList?: boolean;
     listRequired?: boolean;
     listIncluded?: boolean;
@@ -136,6 +144,8 @@ export interface KtypeLookupResponse {
     brand: string;
     model: string;
     year: number;
+    yearFrom?: number;
+    yearTo?: number;
   };
   error?: string;
 }
