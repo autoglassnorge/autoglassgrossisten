@@ -1,7 +1,8 @@
-import { useState, useEffect, useMemo, lazy, Suspense } from 'react';
+import { useState, useEffect, useMemo, lazy, Suspense, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Search, Loader2, AlertTriangle, Car, Wrench } from 'lucide-react';
+import { Search, Loader2, AlertTriangle, Car, Wrench, Clock, X } from 'lucide-react';
+import { useDebounce } from '@/hooks/useDebounce';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { Input } from '@/components/ui/Input';
@@ -32,8 +33,28 @@ const ProductDetail = lazy(() =>
   import('@/components/catalog/ProductDetail').then((m) => ({ default: m.ProductDetail }))
 );
 
+const RECENT_SEARCHES_KEY = 'ag_recent_searches';
+const MAX_RECENT = 5;
+
+function getRecentSearches(): string[] {
+  try {
+    const raw = localStorage.getItem(RECENT_SEARCHES_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function addRecentSearch(regnr: string) {
+  const normalized = regnr.trim().toUpperCase();
+  if (normalized.length < 2) return;
+  const existing = getRecentSearches().filter((r) => r !== normalized);
+  const next = [normalized, ...existing].slice(0, MAX_RECENT);
+  localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(next));
+}
+
 export default function SearchPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const initialRegnr = searchParams.get('regnr') ?? '';
   const [regnr, setRegnr] = useState(initialRegnr);
   const [activeRegnr, setActiveRegnr] = useState(initialRegnr);
@@ -41,6 +62,10 @@ export default function SearchPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [equipmentFiltered, setEquipmentFiltered] = useState<Product[] | null>(null);
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
+  const [showRecent, setShowRecent] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const debouncedRegnr = useDebounce(regnr, 400);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['search', activeRegnr],
@@ -49,9 +74,23 @@ export default function SearchPage() {
     retry: 1,
   });
 
+  // Auto-search on debounced input (min 2 chars)
   useEffect(() => {
-    if (initialRegnr) setActiveRegnr(initialRegnr);
-  }, [initialRegnr]);
+    const normalized = debouncedRegnr.trim().toUpperCase();
+    if (normalized.length >= 2 && normalized !== activeRegnr) {
+      setActiveRegnr(normalized);
+      setSearchParams({ regnr: normalized });
+    }
+  }, [debouncedRegnr, activeRegnr, setSearchParams]);
+
+  // Sync from URL on mount / back-button
+  useEffect(() => {
+    const urlRegnr = searchParams.get('regnr') ?? '';
+    if (urlRegnr && urlRegnr !== activeRegnr) {
+      setRegnr(urlRegnr);
+      setActiveRegnr(urlRegnr);
+    }
+  }, [searchParams, activeRegnr]);
 
   // Reset type filter when search changes
   useEffect(() => {
@@ -62,10 +101,32 @@ export default function SearchPage() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (regnr.trim().length >= 2) {
-      setActiveRegnr(regnr.trim().toUpperCase());
+    const normalized = regnr.trim().toUpperCase();
+    if (normalized.length >= 2) {
+      setActiveRegnr(normalized);
+      setSearchParams({ regnr: normalized });
+      addRecentSearch(normalized);
+      setShowRecent(false);
     }
   };
+
+  const handleSelectRecent = (r: string) => {
+    setRegnr(r);
+    setActiveRegnr(r);
+    setSearchParams({ regnr: r });
+    addRecentSearch(r);
+    setShowRecent(false);
+    inputRef.current?.focus();
+  };
+
+  const handleClear = () => {
+    setRegnr('');
+    setActiveRegnr('');
+    setSearchParams({});
+    setShowRecent(false);
+  };
+
+  const recentSearches = getRecentSearches();
 
   const vehicle = data?.vehicle;
   const candidates = data?.candidates ?? [];
@@ -122,33 +183,91 @@ export default function SearchPage() {
       <h1 className="text-xl sm:text-3xl font-bold text-gray-900 mb-1 sm:mb-2">Søk med registreringsnummer</h1>
       <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-8">Tast inn bilens registreringsnummer for å finne riktig glass.</p>
 
-      <form onSubmit={handleSearch} className="flex gap-2 mb-4 sm:mb-8">
-        <label htmlFor="regnr-input" className="sr-only">
-          Registreringsnummer
-        </label>
-        <Input
-          id="regnr-input"
-          placeholder="AB12345"
-          value={regnr}
-          onChange={(e) => setRegnr(e.target.value)}
-          className="h-14 flex-1 text-lg uppercase"
-          maxLength={8}
-          aria-describedby="regnr-help"
-        />
-        <Button
-          type="submit"
-          size="lg"
-          className="h-14 px-4 sm:px-6 gap-2 flex-shrink-0"
-          disabled={isLoading}
-          aria-label="Søk etter bilglass"
-        >
-          {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Search className="h-5 w-5" />}
-          <span className="hidden sm:inline">Søk</span>
-        </Button>
-        <span id="regnr-help" className="sr-only">
-          Skriv inn bilens registreringsnummer for å finne riktig glass
-        </span>
-      </form>
+      {/* Search form with autocomplete */}
+      <div className="relative mb-2">
+        <form onSubmit={handleSearch} className="flex gap-2">
+          <label htmlFor="regnr-input" className="sr-only">
+            Registreringsnummer
+          </label>
+          <div className="relative flex-1">
+            <Input
+              ref={inputRef}
+              id="regnr-input"
+              placeholder="AB12345"
+              value={regnr}
+              onChange={(e) => setRegnr(e.target.value)}
+              onFocus={() => setShowRecent(true)}
+              className="h-14 text-lg uppercase pr-10"
+              maxLength={8}
+              aria-describedby="regnr-help"
+              autoComplete="off"
+            />
+            {regnr && (
+              <button
+                type="button"
+                onClick={() => { setRegnr(''); inputRef.current?.focus(); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                aria-label="Tøm søkefelt"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            )}
+          </div>
+          <Button
+            type="submit"
+            size="lg"
+            className="h-14 px-4 sm:px-6 gap-2 flex-shrink-0"
+            disabled={isLoading}
+            aria-label="Søk etter bilglass"
+          >
+            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Search className="h-5 w-5" />}
+            <span className="hidden sm:inline">Søk</span>
+          </Button>
+          <span id="regnr-help" className="sr-only">
+            Skriv inn bilens registreringsnummer for å finne riktig glass
+          </span>
+        </form>
+
+        {/* Recent searches dropdown */}
+        {showRecent && recentSearches.length > 0 && !activeRegnr && (
+          <div
+            className="absolute z-50 w-full mt-1 bg-white rounded-lg border border-gray-200 shadow-lg overflow-hidden"
+            onMouseDown={(e) => e.preventDefault()} // prevent input blur
+          >
+            <div className="px-3 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-100">
+              Siste søk
+            </div>
+            {recentSearches.map((r) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => handleSelectRecent(r)}
+                className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition"
+              >
+                <Clock className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
+                <span className="font-mono">{r}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Quick recent-search chips */}
+      {recentSearches.length > 0 && !activeRegnr && (
+        <div className="flex flex-wrap gap-1.5 mb-4 sm:mb-8">
+          {recentSearches.map((r) => (
+            <button
+              key={r}
+              type="button"
+              onClick={() => handleSelectRecent(r)}
+              className="inline-flex items-center gap-1 rounded-full bg-gray-100 border border-gray-200 px-2.5 py-1 text-xs font-medium text-gray-700 hover:bg-gray-200 transition"
+            >
+              <Clock className="h-3 w-3 text-gray-400" />
+              <span className="font-mono">{r}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Loading skeleton */}
       {isLoading && (
@@ -235,10 +354,7 @@ export default function SearchPage() {
             </a>
             <button
               type="button"
-              onClick={() => {
-                setRegnr('');
-                setActiveRegnr('');
-              }}
+              onClick={handleClear}
               className="inline-flex items-center justify-center gap-2 rounded-md border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-50"
             >
               <Wrench className="h-4 w-4" />
@@ -254,10 +370,7 @@ export default function SearchPage() {
           <StickyVehicleHeader
             vehicle={vehicle}
             regnr={data.regnr}
-            onChange={() => {
-              setRegnr('');
-              setActiveRegnr('');
-            }}
+            onChange={handleClear}
           />
 
           {/* Vehicle info */}
@@ -330,13 +443,69 @@ export default function SearchPage() {
             />
           )}
 
+          {/* Active filter chips */}
+          {(selectedCategory || selectedType || equipmentFiltered) && (
+            <div className="flex flex-wrap gap-2">
+              {selectedCategory && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-autoglass-blue/10 border border-autoglass-blue/20 px-3 py-1 text-xs font-medium text-autoglass-blue">
+                  {selectedCategory}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCategory(null)}
+                    className="hover:text-autoglass-blue/70"
+                    aria-label="Fjern kategorifilter"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </span>
+              )}
+              {selectedType && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 border border-gray-200 px-3 py-1 text-xs font-medium text-gray-700">
+                  {selectedType}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedType(null)}
+                    className="hover:text-gray-500"
+                    aria-label="Fjern typefilter"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </span>
+              )}
+              {equipmentFiltered && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-green-50 border border-green-200 px-3 py-1 text-xs font-medium text-green-700">
+                  Utstyr: {equipmentFiltered.length} treff
+                  <button
+                    type="button"
+                    onClick={() => setEquipmentFiltered(null)}
+                    className="hover:text-green-500"
+                    aria-label="Fjern utstyrfilter"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </span>
+              )}
+              {(selectedCategory || selectedType || equipmentFiltered) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedCategory(null);
+                    setSelectedType(null);
+                    setEquipmentFiltered(null);
+                  }}
+                  className="text-xs text-gray-500 hover:text-gray-700 underline"
+                >
+                  Nullstill alle
+                </button>
+              )}
+            </div>
+          )}
+
           {/* Results */}
           {filteredProducts.length > 0 && (
             <div>
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">
                 {filteredProducts.length} resultat{filteredProducts.length !== 1 ? 'er' : ''}
-                {selectedCategory ? ` · ${selectedCategory}` : ''}
-                {selectedType ? ` · ${selectedType}` : ''}
               </h3>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredProducts.map((product) => (
@@ -372,10 +541,7 @@ export default function SearchPage() {
           <div className="text-center pt-2">
             <button
               type="button"
-              onClick={() => {
-                setRegnr('');
-                setActiveRegnr('');
-              }}
+              onClick={handleClear}
               className="text-sm text-autoglass-blue hover:underline"
             >
               Ikke riktig kjøretøy? Søk på nytt

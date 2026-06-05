@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * Debounce a value by delaying updates until `delay` ms after the last change.
+ */
 export function useDebounce<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  const [debounced, setDebounced] = useState(value);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    const timer = setTimeout(() => setDebounced(value), delay);
     return () => clearTimeout(timer);
   }, [value, delay]);
 
-  return debouncedValue;
+  return debounced;
 }
