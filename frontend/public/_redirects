@@ -1,7 +1,7 @@
 /browse/* /browse/:splat 200
 /videos/* /videos/:splat 200
 
-# API passthrough (proxy til Worker)
-/api/* https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 302
+# API passthrough (proxy til Worker — 200 = transparent proxy, ingen CORS)
+/api/* https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 200
 
 /* /index.html 200
