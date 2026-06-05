@@ -13,8 +13,13 @@ import { VehicleCard } from '@/components/search/VehicleCard';
 import { KtypeInfoBadge } from '@/components/search/KtypeInfoBadge';
 import { CalibrationInfoPanel } from '@/components/search/CalibrationInfoPanel';
 import { ConfidenceBadge } from '@/components/search/ConfidenceBadge';
-import { EquipmentVerifier } from '@/components/search/EquipmentVerifier';
-import { AccessorySuggestions } from '@/components/search/AccessorySuggestions';
+// Lazy-load heavy components only when needed
+const EquipmentVerifier = lazy(() =>
+  import('@/components/search/EquipmentVerifier').then((m) => ({ default: m.EquipmentVerifier }))
+);
+const AccessorySuggestions = lazy(() =>
+  import('@/components/search/AccessorySuggestions').then((m) => ({ default: m.AccessorySuggestions }))
+);
 import { EUKontrollReminder } from '@/components/search/EUKontrollReminder';
 import { GlassCategoryFilter } from '@/components/search/GlassCategoryFilter';
 import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
@@ -279,17 +284,21 @@ export default function SearchPage() {
             </div>
           )}
 
-          {/* Equipment verifier — show when confidence is medium/low */}
+          {/* Equipment verifier — lazy-loaded, show when confidence is medium/low */}
           {data.confidenceInfo && data.confidenceInfo.score < 90 && candidates.length > 1 && (
-            <EquipmentVerifier
-              products={candidates}
-              onFilter={setEquipmentFiltered}
-            />
+            <Suspense fallback={null}>
+              <EquipmentVerifier
+                products={candidates}
+                onFilter={setEquipmentFiltered}
+              />
+            </Suspense>
           )}
 
-          {/* Accessory suggestions */}
+          {/* Accessory suggestions — lazy-loaded */}
           {selectedType && candidates.some((p) => (p.typeCode || 'Ukjent') === selectedType) && (
-            <AccessorySuggestions typeCode={selectedType} />
+            <Suspense fallback={null}>
+              <AccessorySuggestions typeCode={selectedType} />
+            </Suspense>
           )}
 
           {/* Glass category filter — primary navigation */}
