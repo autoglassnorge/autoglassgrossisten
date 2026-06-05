@@ -33,5 +33,5 @@ command = ""
 # ── Cron-triggers ──────────────────────────────────────────────
 # Sjekk SVV health hver time (var hvert 5. minutt — redusert for å
 # unngå rate-limit og unødvendig Workers-kjøring)
-[[triggers]]
+[triggers]
 crons = ["0 * * * *"]
