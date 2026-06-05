@@ -42,9 +42,17 @@ export function HeroWithSearch() {
 
   return (
     <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center overflow-hidden bg-carbon-950">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-carbon-950 via-carbon-900 to-autoglass-dark/30" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-glass-cyan/5 via-transparent to-transparent" />
+      {/* Background image with dark overlay */}
+      <div className="absolute inset-0">
+        <img
+          src="/hero-bg.jpg"
+          alt=""
+          className="h-full w-full object-cover object-center"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-carbon-950/75" />
+        <div className="absolute inset-0 bg-gradient-to-t from-carbon-950 via-transparent to-carbon-950/50" />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">

@@ -1,6 +1,13 @@
-import { Shield, Square, PanelLeft, Eye, Truck, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useI18n } from '@/i18n/I18nProvider';
+import {
+  WindshieldIcon,
+  RearWindowIcon,
+  SideWindowIcon,
+  AdasCameraIcon,
+  TransporterIcon,
+  CalibrationIcon,
+} from '@/components/icons/GlassIcons';
 
 interface Category {
   key: string;
@@ -14,32 +21,32 @@ export function CategoryGrid() {
   const categories: Category[] = [
     {
       key: 'windshield',
-      icon: <Shield className="h-8 w-8" />,
+      icon: <WindshieldIcon className="h-8 w-8" />,
       href: '/bilglassguide/frontrute',
     },
     {
       key: 'rear',
-      icon: <Square className="h-8 w-8" />,
+      icon: <RearWindowIcon className="h-8 w-8" />,
       href: '/bla?category=bakrute',
     },
     {
       key: 'side',
-      icon: <PanelLeft className="h-8 w-8" />,
+      icon: <SideWindowIcon className="h-8 w-8" />,
       href: '/bla?category=sideglass',
     },
     {
       key: 'adas',
-      icon: <Eye className="h-8 w-8" />,
+      icon: <AdasCameraIcon className="h-8 w-8" />,
       href: '/bilglassguide/adas-kamera',
     },
     {
       key: 'transporter',
-      icon: <Truck className="h-8 w-8" />,
+      icon: <TransporterIcon className="h-8 w-8" />,
       href: '/bla?category=transporter',
     },
     {
       key: 'calibration',
-      icon: <Settings className="h-8 w-8" />,
+      icon: <CalibrationIcon className="h-8 w-8" />,
       href: '/bilglassguide/kalibrering',
     },
   ];
