@@ -355,13 +355,13 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
 
         // If position was just answered, filter candidates by position first
         if (session.pending_question === 'position' && candidates.length > 0) {
-          const pos = answer.toLowerCase();
+          const positionAnswer = answer.toLowerCase();
           candidates = candidates.filter((c: Candidate) => {
             const cat = String(c.category || '').toLowerCase();
-            if (pos === 'frontrute') return cat.includes('front');
-            if (pos === 'bakrute') return cat.includes('bak');
-            if (pos === 'dørrute' || pos === 'dør') return cat.includes('dør') || cat.includes('dor');
-            if (pos === 'siderute') return cat.includes('side');
+            if (positionAnswer === 'frontrute') return cat.includes('front');
+            if (positionAnswer === 'bakrute') return cat.includes('bak');
+            if (positionAnswer === 'dørrute' || positionAnswer === 'dør') return cat.includes('dør') || cat.includes('dor');
+            if (positionAnswer === 'siderute') return cat.includes('side');
             return true;
           });
         }
@@ -680,6 +680,8 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     const pendingQuestionField = nextAction?.startsWith('ask_')
       ? (() => {
           const field = nextAction.replace('ask_', '');
+          // LLM-managed questions don't use the rigid pending_question mechanism
+          if (field === 'llm') return null;
           const mapping: Record<string, string> = {
             rain_sensor: 'rainSensor',
             heated_type: 'heated_type',
