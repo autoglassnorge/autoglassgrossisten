@@ -31,6 +31,11 @@
       "description": "kType agent — Bovsoft, TecDoc, Biluppgifter, D1 enrichment"
     },
     {
+      "alias": "glass-ordre",
+      "command": "kimi --agent-file .kimi/agents/autoglass-ordremottaker-agent.yaml",
+      "description": "Ordremottaker LLM agent — conversational AI, naturlig språk, automatisk bestilling"
+    },
+    {
       "alias": "glass-orchestrator",
       "command": "kimi --agent-file .kimi/agents/autoglass-orchestrator.yaml",
       "description": "Orchestrator — task-routing, Superpowers-prosess, verifikasjons-gate. Start ALLTID her ved usikkerhet."

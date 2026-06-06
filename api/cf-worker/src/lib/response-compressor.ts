@@ -28,6 +28,8 @@ const DEFAULT_CANDIDATE_FIELDS = [
   "description",
   "_score",
   "properties",
+  "equipmentMatch",
+  "equipmentDiff",
 ];
 
 /** Default vehicle fields when using field selection */

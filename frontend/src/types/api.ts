@@ -50,6 +50,8 @@ export interface Product {
   };
   sourceUrl: string;
   _score?: number; // Matching score from backend (0-100+)
+  equipmentMatch?: 'perfect' | 'good' | 'check' | 'mismatch';
+  equipmentDiff?: string[];
 }
 
 export interface CatalogFilters {

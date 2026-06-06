@@ -119,3 +119,11 @@
 {"subject":"frontend","predicate":"sends-vehicle-params","object":"brand-model-yearFrom-yearTo","validFrom":"2026-06-05T14:11:31.271Z"}
 {"subject":"bovsoft-kv-cache","predicate":"verified-regnrs","object":"118-entries","validFrom":"2026-06-05T14:11:31.271Z"}
 {"subject":"search-endpoint","predicate":"fallback-chain","object":"svv-biluppgifter-bovsoft","validFrom":"2026-06-05T14:11:31.271Z"}
+{"subject":"user-profile","predicate":"role","object":"ordremottaker-30-ar","validFrom":"2026-06-06T02:38:28.279Z"}
+{"subject":"user-profile","predicate":"priority","object":"automasjon-modernisering-optimalisering","validFrom":"2026-06-06T02:38:28.279Z"}
+{"subject":"glass-guide","predicate":"evolution-next","object":"ordremottaker-llm-agent","validFrom":"2026-06-06T02:38:28.279Z"}
+{"subject":"ordremottaker-llm-agent","predicate":"requires","object":"conversational-ai","validFrom":"2026-06-06T02:38:28.279Z"}
+{"subject":"ordremottaker-llm-agent","predicate":"requires","object":"natural-language-understanding","validFrom":"2026-06-06T02:38:28.279Z"}
+{"subject":"ordremottaker-llm-agent","predicate":"input-methods","object":"regnr-vin-bilmerke-beskrivelse","validFrom":"2026-06-06T02:38:28.279Z"}
+{"subject":"ordremottaker-llm-agent","predicate":"goal","object":"zero-click-order-completion","validFrom":"2026-06-06T02:38:28.279Z"}
+{"subject":"ordremottaker-llm-agent","predicate":"owner-expertise","object":"30-years-order-receiving","validFrom":"2026-06-06T02:38:28.279Z"}

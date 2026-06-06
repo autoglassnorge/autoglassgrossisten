@@ -188,3 +188,66 @@ export async function fetchBiluppgifterEquipment(regno: string, apiKey: string):
     return null;
   }
 }
+
+/** Compute equipment match quality between a record and factory data */
+export function computeEquipmentMatch(
+  recordEquipment: {
+    adas: boolean;
+    rainSensor: boolean;
+    heated: boolean;
+    acoustic: boolean;
+    antenna: boolean;
+    camera: boolean;
+    hud: boolean;
+  },
+  factoryEquipment: {
+    adas: boolean;
+    rainSensor: boolean;
+    heated: boolean;
+    acoustic: boolean;
+    antenna: boolean;
+    camera: boolean;
+    hud: boolean;
+  } | null
+): { match: "perfect" | "good" | "check" | "mismatch"; diff: string[] } {
+  if (!factoryEquipment) {
+    return { match: "check", diff: ["no_factory_data"] };
+  }
+
+  const diff: string[] = [];
+  let score = 0;
+  let total = 0;
+
+  const flags: Array<keyof typeof recordEquipment> = [
+    "adas",
+    "rainSensor",
+    "heated",
+    "acoustic",
+    "antenna",
+    "camera",
+    "hud",
+  ];
+
+  for (const flag of flags) {
+    const expected = factoryEquipment[flag];
+    const got = recordEquipment[flag];
+    total++;
+    if (expected === got) {
+      score++;
+    } else {
+      diff.push(`${flag}: expected=${expected}, got=${got}`);
+    }
+  }
+
+  const ratio = total > 0 ? score / total : 0;
+
+  if (diff.length === 0) return { match: "perfect", diff: [] };
+  if (
+    ratio >= 0.8 &&
+    !diff.some((d) => d.startsWith("adas:") || d.startsWith("camera:"))
+  ) {
+    return { match: "good", diff };
+  }
+  if (ratio >= 0.5) return { match: "check", diff };
+  return { match: "mismatch", diff };
+}

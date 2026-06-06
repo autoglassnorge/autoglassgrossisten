@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS glass_catalog (
   supplier TEXT,
   brand TEXT,
   model TEXT,
+  position TEXT,
   year_from INTEGER,
   year_to INTEGER,
   adas INTEGER DEFAULT 0,
@@ -31,6 +32,8 @@ CREATE TABLE IF NOT EXISTS glass_catalog (
   dimensions TEXT,         -- JSON object as string
   description TEXT,
   type_description TEXT,   -- Human-readable type (e.g. "Frontrute + INNK + GN")
+  type_code TEXT,          -- Short type code (e.g. "F", "B", "DFF", "DPF")
+  type_code_desc TEXT,     -- Human-readable type code description
   properties TEXT,         -- JSON object: green, blue, coated, tinted, solar, encapsulated, etc.
   prefix4 TEXT,
   image_url TEXT,

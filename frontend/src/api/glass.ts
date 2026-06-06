@@ -64,6 +64,52 @@ export async function scrapeVegvesen(regnr: string): Promise<{status: string, da
   }
 }
 
+export interface GuideQuestion {
+  id: string;
+  type: "single_choice" | "boolean" | "multi_choice";
+  label: string;
+  options?: { value: string; label: string }[];
+  reason: string;
+}
+
+export interface GuideState {
+  step: number;
+  question: GuideQuestion | null;
+  candidates: number;
+  progress: { current: number; total: number };
+  recommendation?: SearchResult["candidates"];
+  answers?: Record<string, string>;
+  vehicle?: SearchResult["vehicle"];
+  confidence?: SearchResult["confidence"];
+}
+
+export async function guideGlass(
+  regnr: string,
+  step: number,
+  answers: Record<string, string>,
+  categoryFilter?: string,
+  mode?: "rule" | "llm",
+  vin?: string
+): Promise<GuideState> {
+  const body: Record<string, unknown> = { step, answers, categoryFilter, mode };
+  if (vin) body.vin = vin;
+  else body.regnr = regnr;
+
+  const res = await fetch(`${API_BASE}/api/glass-guide`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new SearchError(
+      body.error ?? `Glassveileder feilet (${res.status})`,
+      res.status
+    );
+  }
+  return res.json();
+}
+
 export async function logFeedback(params: {
   regnr: string;
   eurocode: string;

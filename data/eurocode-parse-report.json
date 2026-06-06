@@ -1,0 +1,22 @@
+{
+  "generated": "2026-06-05T23:47:30.800Z",
+  "parser": "ARGIC Matrix 2014.7.31",
+  "results": {
+    "totalRecords": 27184,
+    "withTypeCode": 19746,
+    "withPosition": 3732,
+    "withCategory": 27045,
+    "inferredTypeCodes": 13820,
+    "inferredPositions": 0
+  },
+  "categories": {
+    "bakrute": 3932,
+    "sideglass": 7099,
+    "dørglass": 7299,
+    "frontrute": 6954,
+    "annet": 139,
+    "dørglass-frem": 781,
+    "dørglass-bak": 976,
+    "takglass": 4
+  }
+}

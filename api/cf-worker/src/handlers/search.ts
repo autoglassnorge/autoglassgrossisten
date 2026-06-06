@@ -26,7 +26,7 @@ import {
   queryTecdocKtypeByVehicle,
   KTYPE_CONFIDENCE_THRESHOLD,
 } from "../lib/db";
-import { fetchBiluppgifterEquipment, inferRecordEquipment, detectFlagsFromOem } from "../lib/equipment";
+import { fetchBiluppgifterEquipment, inferRecordEquipment, detectFlagsFromOem, computeEquipmentMatch } from "../lib/equipment";
 import { decodeVwTransporterBody, decodeVin, inferBodyFromSvvData } from "../lib/vin-decoder";
 import { parseGenerationFromDescription } from "../lib/generation";
 import { scoreCandidate, modelMatches, yearCompatible, guessEquipment } from "../lib/scoring";
@@ -660,30 +660,8 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
         })
       : scored;
 
-    // Top-per-type selection
-    const MAX_PER_TYPE = 3;
-    const MAX_TOTAL = 30;
-
-    const byType = new Map<string, typeof filteredScored>();
-    for (const s of filteredScored) {
-      const code = s.c.typeCode || inferTypeCodeFromRecord(s.c) || "UNKNOWN";
-      if (!byType.has(code)) byType.set(code, []);
-      byType.get(code)!.push(s);
-    }
-
-    const selected: typeof filteredScored = [];
-    let round = 0;
-    while (selected.length < MAX_TOTAL) {
-      let addedInRound = 0;
-      for (const [, list] of byType) {
-        if (list[round] && selected.length < MAX_TOTAL) {
-          selected.push(list[round]);
-          addedInRound++;
-        }
-      }
-      if (addedInRound === 0 || round >= MAX_PER_TYPE - 1) break;
-      round++;
-    }
+    // Return all candidates sorted by score (no per-type limits)
+    const selected = filteredScored;
 
     const candidatesWithEquipment = selected.map((s) => {
       const record = s.c;
@@ -694,10 +672,17 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
         record.year_to,
         record.category || inferTypeCodeFromRecord(record) || 'annet'
       );
+      const recordEquipment = inferRecordEquipment(record);
+      const { match: equipmentMatch, diff: equipmentDiff } = computeEquipmentMatch(
+        recordEquipment,
+        effectiveEquipment
+      );
       return {
         ...normalizeRecord(record),
         _score: s.score,
-        _equipment: inferRecordEquipment(record),
+        _equipment: recordEquipment,
+        equipmentMatch,
+        equipmentDiff,
         nagsCodes: nagsCodes.length > 0 ? nagsCodes : undefined,
       };
     });

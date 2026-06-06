@@ -40,7 +40,7 @@ function wranglerKVSync(key, value) {
   const tmpFile = `/tmp/kv-${key.replace(/[^a-zA-Z0-9]/g, "_")}-${Date.now()}.json`;
   writeFileSync(tmpFile, jsonStr);
   
-  const cmd = `npx wrangler kv key put "${key}" --namespace-id=${KV_NAMESPACE_ID} --path="${tmpFile}" 2>/dev/null`;
+  const cmd = `npx wrangler kv key put "${key}" --namespace-id=${KV_NAMESPACE_ID} --path="${tmpFile}" --remote`;
   try {
     execSync(cmd, { encoding: "utf-8", timeout: 60000 });
     unlinkSync(tmpFile);

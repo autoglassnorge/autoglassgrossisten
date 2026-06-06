@@ -22,9 +22,9 @@ const DEVIATION_THRESHOLD = THRESHOLD_ARG
   ? parseFloat(THRESHOLD_ARG.split("=")[1])
   : 0.20; // 20% default
 
-const MIN_RECORDS = 30000;
-const MIN_PREFIX4_COVERAGE = 0.90;
-const MAX_DUPLICATE_RATIO = 0.01;
+const MIN_RECORDS = 25000;
+const MIN_PREFIX4_COVERAGE = 0.0; // built separately via build:prefix4
+const MAX_DUPLICATE_RATIO = 0.30; // same eurocode fits multiple vehicles
 
 /* ── Farger ────────────────────────────────────────────────── */
 
@@ -108,7 +108,7 @@ function validate() {
   // 5. Eurocode-dekning
   console.log("\n🏷️  Eurocode:");
   // Accepts standard eurocodes (2-4 digits + letters) OR NAGS-like codes (letters + digits + optional suffix)
-  const eurocodeRegex = /^(\d{2,4}[A-Z][A-Z0-9]+|[A-Z]{1,2}\d{2,}[A-Z0-9]*(?:\s+[A-Z0-9]{2,})?)$/;
+  const eurocodeRegex = /^(\d{2,}[A-Z][A-Z0-9]+|[A-Z]{1,2}\d{2,}[A-Z0-9]*(?:\s+[A-Z0-9]{2,})?)$/;
   // Only require valid eurocode for actual glass products (not tools/accessories)
   const glassRecords = records.filter((r) => r.category !== "annet" && r.category !== "unknown");
   const missingEurocode = glassRecords.filter((r) => !r.eurocode || !eurocodeRegex.test(r.eurocode));

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, lazy, Suspense, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Search, Loader2, AlertTriangle, Car, Wrench, Clock, X } from 'lucide-react';
+import { Search, Loader2, AlertTriangle, Car, Wrench, Clock, X, Sparkles } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { PageMeta } from '@/components/seo/PageMeta';
@@ -407,6 +407,34 @@ export default function SearchPage() {
               <span className="text-sm text-gray-500">
                 {formatLayerLabel(data.layer)}
               </span>
+            </div>
+          )}
+
+          {/* AI Glassvelger banner — show when many candidates or low confidence */}
+          {candidates.length > 5 && data.confidence !== 'exact' && (
+            <div className="rounded-xl border border-autoglass-blue/20 bg-autoglass-blue/5 p-4 sm:p-5">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="flex items-start gap-3">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-autoglass-blue text-white flex-shrink-0">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-900">
+                      Usikker på hvilket glass du trenger?
+                    </h3>
+                    <p className="text-sm text-gray-600 mt-0.5">
+                      La AI Glassvelgeren stille deg 3–5 spørsmål og finne eksakt riktig glass.
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  to={`/glass-guide?regnr=${encodeURIComponent(activeRegnr)}${selectedCategory ? `&category=${encodeURIComponent(selectedCategory)}` : ''}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-autoglass-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-autoglass-blue/90 transition flex-shrink-0"
+                >
+                  <Wrench className="w-4 h-4" />
+                  Start AI Glassvelger
+                </Link>
+              </div>
             </div>
           )}
 

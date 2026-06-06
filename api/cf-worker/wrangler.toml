@@ -15,6 +15,10 @@ binding = "GLASS_CATALOG_D1"
 database_name = "glass-catalog-db"
 database_id = "f79095b3-da80-43fe-8064-ff480e8a1b4b"
 
+# ── Workers AI (Moonshot Kimi) ────────────────────────────────
+[ai]
+binding = "AI"
+
 # ── Secrets (IKKE legg dem i denne filen — bruk wrangler secret put):
 #    wrangler secret put SVV_API_KEY
 #    wrangler secret put BOVSOFT_CLIENT_ID

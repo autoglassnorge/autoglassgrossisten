@@ -11,6 +11,7 @@ const CartPage = lazy(() => import('@/pages/CartPage'))
 const AdminPage = lazy(() => import('@/pages/AdminPage'))
 const BrowsePage = lazy(() => import('@/pages/BrowsePage'))
 const BilglassguidePage = lazy(() => import('@/pages/BilglassguidePage'))
+const GlassGuidePage = lazy(() => import('@/pages/GlassGuidePage'))
 const OmOssPage = lazy(() => import('@/pages/OmOssPage'))
 const KontaktPage = lazy(() => import('@/pages/KontaktPage'))
 const PersonvernPage = lazy(() => import('@/pages/PersonvernPage'))
@@ -47,6 +48,7 @@ function App() {
             <Route path="/bilglassguide/akustisk-bilglass" element={<AkustiskPage />} />
             <Route path="/bilglassguide/variantmatching" element={<VariantMatchingPage />} />
             <Route path="/sok" element={<SearchPage />} />
+            <Route path="/glass-guide" element={<GlassGuidePage />} />
             <Route path="/kasse" element={<CartPage />} />
             <Route path="/konto" element={<AccountPage />} />
             <Route path="/om-oss" element={<OmOssPage />} />

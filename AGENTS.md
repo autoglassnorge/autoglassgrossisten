@@ -50,6 +50,7 @@ kimi glass-web         # Frontend — HTML, CSS, JS, SEO, i18n
 kimi glass-ops         # DevOps — CI/CD, secrets, monitor
 kimi glass-arch        # Lead architect — ADR, refaktorering, plan
 kimi glass-ktype       # kType specialist — Bovsoft, SVV, statistisk læring
+kimi glass-ordre       # Ordremottaker LLM — conversational AI, automatisert bestilling
 kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasjon (start ALLTID her)
 ```
 
@@ -62,6 +63,7 @@ kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasj
 | ops-agent | `.kimi/agents/autoglass-ops-agent.yaml` | `.md` | Deploy, CI/CD, monitor |
 | architect-agent | `.kimi/agents/autoglass-architect-agent.yaml` | `.md` | ADR, refaktorering |
 | ktype-agent | `.kimi/agents/autoglass-ktype-agent.yaml` | `.md` | Bovsoft, SVV, kType |
+| **ordremottaker-agent** | `.kimi/agents/autoglass-ordremottaker-agent.yaml` | `.md` | **Conversational AI, automatisert ordremottak** |
 | **orchestrator-agent** | `.kimi/agents/autoglass-orchestrator.yaml` | `.md` | **Task-routing, Superpowers-prosess, verifikasjon** |
 
 ### Custom Slash-Skills (0.11.0 — `/skill-name` kommandoer)
@@ -364,6 +366,40 @@ Finn.no → Bovsoft → ktype_registry → Worker API → Frontend
 
 ---
 
+## 🎙️ Ordremottaker LLM-Agent (NY — 2026-06-04)
+
+**Eier:** Tomar (30 års erfaring som ordremottaker)  
+**Agent:** `kimi glass-ordre`  
+**Fil:** `.kimi/agents/autoglass-ordremottaker-agent.yaml` + `.md`
+
+### Visjon
+En **conversational AI** som tar imot kundehenvendelser på naturlig språk — via telefon (transkribert), chat, e-post eller direkteinput — og automatisk finner riktig glass med færrest mulig klikk.
+
+### Kundesitat agenten må forstå
+- *"Jeg trenger en frontrute til en VW Transporter 2005"*
+- *"Har dere glass til en Audi A4 med kamera i ruta?"*
+- *"Jeg har knust sideruten på venstre side"*
+- *"Hallooo, jeg har knust ruta på bilen min"*
+- *"Jeg trenger det samme som sist"*
+
+### Workflow
+1. **NER + Intent** — LLM ekstraherer merke/modell/år/regnr/VIN/posisjon/utstyr
+2. **Glass-oppslag** — regnr→SVV→kType→D1, VIN→decode→D1, eller fuzzy match
+3. **Equipment-verifikasjon** — rule-based + LLM-dialog for usikkerhet
+4. **Tilbehør + pris** — list, lim, kalibrering, montering, MVA
+5. **Ordre** — handlekurv (B2C) eller UNI Micro (B2B, fremtidig)
+
+### KPI-mål
+| Metrikk | Mål |
+|---------|-----|
+| Konverteringsrate | >60% |
+| Nøyaktighet | >95% |
+| Gjennomsnittlig turer | <4 |
+| Eskaleringsrate | <10% |
+| Tid til tilbud | <10s |
+
+---
+
 ## 📝 Regler
 
 1. **Scraper-etikk**: Maks 10 parallelle requests, 10s timeout, respekter server
@@ -442,5 +478,5 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 
 ---
 
-**Sist oppdatert:** 2026-06-05  
-**Versjon:** 2.6 (+Wrangler/GitHub-optimalisering)
+**Sist oppdatert:** 2026-06-04  
+**Versjon:** 2.7 (+Ordremottaker LLM-agent)

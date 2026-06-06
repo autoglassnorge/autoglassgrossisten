@@ -49,7 +49,7 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
       const compressOptions: CompressOptions = {
         includeDebug,
         includeEquipmentDetails: debugParam === "true",
-        maxCandidates: 20,
+        maxCandidates: 1000,
         fields,
       };
       responseBody = compressSearchResponse(

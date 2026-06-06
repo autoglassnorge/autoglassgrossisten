@@ -16,6 +16,7 @@ import { handleAdminQuotes } from "./handlers/admin";
 import { handleVinLookup, handleVinLookupStatus } from "./handlers/vin";
 import { handleHealth } from "./handlers/health";
 import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, handleVehicleYears, handleVehicleProducts, handleVehicleDebug } from "./handlers/vehicle";
+import { handleGlassGuide } from "./handlers/glass-guide";
 import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
 import { fetchSvvEnkeltoppslag } from "./providers/svv";
 
@@ -204,6 +205,11 @@ export default {
       }
       
       return response;
+    }
+
+    // Glass Guide (AI glassvelger)
+    if (path === "/api/glass-guide" && request.method === "POST") {
+      return handleGlassGuide(request, env);
     }
 
     // Catalog metadata

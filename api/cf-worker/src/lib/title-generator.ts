@@ -100,8 +100,12 @@ export function generateDescription(r: GlassRecord): string {
   const cat = catMap[r.category] || r.category;
   if (cat) positionParts.push(cat);
 
-  // Side (VS/HS)
-  if (d.includes('VS') || d.includes('VENSTRE')) positionParts.push('venstre side');
+  // Side position (from parsed catalog field)
+  if (r.position === 'driver') positionParts.push('venstre side (fører)');
+  else if (r.position === 'passenger') positionParts.push('høyre side (passasjer)');
+  else if (r.position === 'both') positionParts.push('begge sider');
+  // Fallback: parse from description if position field not set
+  else if (d.includes('VS') || d.includes('VENSTRE')) positionParts.push('venstre side');
   else if (d.includes('HS') || d.includes('HØYRE')) positionParts.push('høyre side');
 
   // Special variants

@@ -5,6 +5,7 @@
 export interface Env {
   GLASS_CATALOG: KVNamespace;
   GLASS_CATALOG_D1: D1Database;
+  AI: Ai;
   BILUPPGIFTER_API_KEY: string;
   BOVSOFT_CLIENT_ID: string;
   BOVSOFT_SECCODE: string;
@@ -62,7 +63,7 @@ export interface GlassRecord {
   created_at: string | null;
   typeCode?: string;
   typeCodeDesc?: string;
-  position?: "driver" | "passenger" | null;
+  position?: "driver" | "passenger" | "both" | null;
   nagsCodes?: string[];
 }
 
@@ -209,6 +210,23 @@ export type SearchResult = {
   retryAfter?: number;
   body: unknown;
 };
+
+export interface GuideQuestion {
+  id: string;
+  type: "single_choice" | "boolean" | "multi_choice";
+  label: string;
+  options?: { value: string; label: string }[];
+  reason: string;
+}
+
+export interface GuideState {
+  step: number;
+  question: GuideQuestion | null;
+  candidates: number;
+  progress: { current: number; total: number };
+  recommendation?: GlassRecord[];
+  answers?: Record<string, string>;
+}
 
 export interface CacheEnvelope<T> {
   version: string;
