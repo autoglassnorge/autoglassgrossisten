@@ -233,3 +233,45 @@ export interface CacheEnvelope<T> {
   cachedAt: string;
   data: T;
 }
+
+// ---------------------------------------------------------------------------
+// AI Ordremottaker types
+// ---------------------------------------------------------------------------
+
+export interface OrdremottakerRequest {
+  message: string;
+  session_token?: string;
+  customer_id?: number;
+  channel?: "chat" | "email" | "phone";
+  language?: "no" | "sv" | "da" | "en";
+}
+
+export interface AccessoryItem {
+  sku: string;
+  name: string;
+  price: number;
+  included: boolean;
+  removable: boolean;
+}
+
+export interface OrdremottakerResponse {
+  status: "question" | "recommendation" | "order_ready" | "escalated" | "clarification";
+  ai_response: string;
+  session_token: string;
+  candidates?: GlassRecord[];
+  accessories?: AccessoryItem[];
+  cart_url?: string;
+  confidence: number;
+  next_action?: string;
+}
+
+export interface AiSession {
+  id: number;
+  customer_id: number | null;
+  channel: string;
+  session_token: string;
+  context: string;
+  status: "active" | "completed" | "escalated";
+  created_at: string;
+  updated_at: string;
+}
