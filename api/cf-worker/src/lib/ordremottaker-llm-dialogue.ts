@@ -143,13 +143,13 @@ Gyldige actions:
 }
 
 function buildUserPrompt(context: DialogueContext): string {
-  const candidateDescriptions = context.candidates.slice(0, 10).map((c, i) => {
+  const candidateDescriptions = context.candidates.slice(0, 5).map((c, i) => {
     const code = c.eurocode || c.articleNumber || c.supplier_sku || '';
     const decoded = code ? decodeEurocode(code) : null;
     const props = c.properties || {};
     const features: string[] = [];
     if (props.heated) features.push('oppvarmet');
-    if (props.rainSensor) features.push('regnsensor');
+    if (props.rain_sensor) features.push('regnsensor');
     if (props.adas) features.push('ADAS');
     if (props.lane_assist) features.push('lane assist');
     if (props.hud) features.push('HUD');
