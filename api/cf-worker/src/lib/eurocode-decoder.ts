@@ -6,8 +6,8 @@
 
 // Fargekoder (lengste først for å unngå delstreng-overlapp)
 const COLOR_CODES: Record<string, string> = {
-  GYELM: 'grønn med el/speil og antenne',
-  GYEL: 'grønn med el/speil',
+  GYELM: 'grønn med varmetråder og regnsensor',
+  GYEL: 'grønn med varmetråder',
   GNEL: 'grønn elektrisk (oppvarmet)',
   GNZ: 'grønn z-bøy',
   GN: 'helfarget grønn',
