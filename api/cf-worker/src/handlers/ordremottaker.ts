@@ -15,6 +15,7 @@ import { decodeVin } from '../lib/vin-decoder';
 import { getCustomerHistory } from '../lib/customer-history';
 import { sha256 } from '../lib/learning';
 import { decodeEurocode } from '../lib/eurocode-decoder';
+import { generateDialogueTurn, normalizeExtracted, determineDialogueState, type ExtractedFields } from '../lib/ordremottaker-llm-dialogue';
 
 type Candidate = Record<string, unknown> & { properties?: Record<string, unknown>; decoded_description?: string | null };
 
@@ -277,6 +278,15 @@ function extractPositionFromMessage(message: string): string {
   return 'glass';
 }
 
+/** Merge LLM-extracted fields into equipment answers */
+function mergeExtractedIntoAnswers(
+  existing: Record<string, string>,
+  extracted: ExtractedFields
+): Record<string, string> {
+  const normalized = normalizeExtracted(extracted);
+  return { ...existing, ...normalized };
+}
+
 export async function handleOrdremottaker(request: Request, env: Env): Promise<Response> {
   if (request.method !== 'POST') {
     return errorResponse('Kun POST støttet', 405);
@@ -485,91 +495,156 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       candidates = filterByEquipment(candidates, equipmentAnswers);
     }
 
-    // ── C: Build response ──
-    if (confidence < 0.3 && candidates.length === 0) {
-      // Very low confidence - ask for more info
-      aiResponse = 'Hei! For å finne riktig glass trenger jeg å vite: bilmerke, modell, årsmodell, og hvilket glass (frontrute, bakrute, sidedør, etc.). Har du registreringsnummer er det enda bedre!';
-      status = 'clarification';
-      nextAction = 'ask_vehicle_details';
-    } else if (candidates.length === 0 && vehicleInfo) {
-      // We understood vehicle but no glass found
-      aiResponse = `Jeg forstår at du trenger glass til ${vehicleInfo.make} ${vehicleInfo.model} (${vehicleInfo.year}). Dessverre fant jeg ingen glass som passer i katalogen vår. Kan du dobbeltsjekke årsmodellen, eller har du registreringsnummer?`;
-      status = 'clarification';
-      nextAction = 'ask_regnr_or_verify_year';
-    } else if (candidates.length > 0) {
-      // We have candidates
-      const pos = nerResult?.position || extractPositionFromMessage(body.message);
+    // ── C: Build response — Dual flow: LLM Dialogue Engine (primary) or rigid fallback ──
+    let useLlmDialogue = false;
+    let pos = nerResult?.position || extractPositionFromMessage(body.message);
 
-      // If position is unknown and candidates have mixed categories, ask position FIRST
-      const posKnown = pos !== 'glass';
-      if (!posKnown && !session.answers?.position) {
-        const categories = new Set(candidates.map((c: Candidate) => String(c.category || '').toLowerCase()));
-        if (categories.size > 1) {
-          aiResponse = `Flott — jeg fant ${candidates.length} glass som passer. Hvilket glass trenger du? (frontrute, bakrute, siderute, eller dørrute)`;
-          status = 'question';
-          nextAction = 'ask_position';
-        }
-      }
-
-      // If position is known (or only one category), check equipment variations
-      if (status !== 'question') {
-        const eqQuestion = candidates.length > 3 ? buildEquipmentQuestion(candidates, equipmentAnswers, pos) : null;
-
-        if (eqQuestion) {
-          aiResponse = eqQuestion.question;
-          status = 'question';
-          nextAction = eqQuestion.nextAction;
-      } else {
-        // Show results
-        const make = vehicleInfo?.make || nerResult?.make || '';
-        const model = vehicleInfo?.model || nerResult?.model || '';
-        const year = vehicleInfo?.year || nerResult?.year || '';
-        const count = candidates.length;
-
-        // Build vehicle description without duplicates
-        const modelWithoutMake = model && model.toUpperCase().startsWith(make.toUpperCase())
-          ? model.slice(make.length).trim()
-          : model;
-        const vehicleDesc = [
-          make,
-          modelWithoutMake && modelWithoutMake !== make ? modelWithoutMake : '',
-          year && String(year) !== modelWithoutMake ? `(${year})` : ''
-        ].filter(Boolean).join(' ');
-
-        if (nerResult?.regnr) {
-          aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Her er glassene som passer basert på regnr ${nerResult.regnr}:`;
-        } else if (nerResult?.vin) {
-          aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Her er glassene som passer:`;
-        } else if (make && year && year < 2030) {
-          aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Jeg har ${count} alternativer. Velg OEM eller aftermarket:`;
-        } else if (make) {
-          aiResponse = `Forstått — ${make}, ${pos}. Jeg har ${count} alternativer. Sjekk at det stemmer:`;
-        } else {
-          aiResponse = `Her er ${count} glass som kan passe. Sjekk at merke og modell stemmer:`;
-        }
-        status = 'recommendation';
-        nextAction = 'show_candidates';
+    if (candidates.length > 0 && confidence >= 0.3) {
+      const posKnown = pos !== 'glass' || session.answers?.position;
+      if (posKnown) {
+        useLlmDialogue = true;
       }
     }
-    } else {
-      // Partial understanding
-      const parts: string[] = [];
-      if (nerResult?.make) parts.push(nerResult.make);
-      if (nerResult?.model) parts.push(nerResult.model);
-      if (nerResult?.year) parts.push(String(nerResult.year));
-      if (nerResult?.position) parts.push(nerResult.position);
 
-      if (parts.length > 0) {
-        aiResponse = `Jeg forstår at du trenger ${parts.join(' ')}. For å finne eksakt riktig glass, kan du oppgi registreringsnummer eller bekrefte årsmodellen?`;
-      } else {
-        aiResponse = 'Hei! Jeg hjelper deg å finne riktig bilglass. Kan du oppgi bilmerke, modell, årsmodell og hvilket glass du trenger (frontrute, bakrute, etc.)?';
+    if (useLlmDialogue) {
+      // === LLM DIALOGUE ENGINE (PRIMARY) ===
+      if (pos !== 'glass' && !equipmentAnswers.position) {
+        equipmentAnswers.position = pos;
       }
-      status = 'clarification';
-      nextAction = 'ask_vehicle_details';
+
+      const history = (session.messages || []).slice(-10).map(m => ({
+        role: m.role as 'user' | 'ai',
+        content: m.content,
+      }));
+
+      const dialogueResult = await generateDialogueTurn(env, {
+        candidates: candidates.map(c => ({
+          ...c,
+          decoded_description: decodeEurocode(String(c.eurocode || c.articleNumber || c.supplier_sku || '')),
+        })),
+        history,
+        extracted: equipmentAnswers,
+        vehicle: vehicleInfo || null,
+      });
+
+      if (dialogueResult) {
+        // Merge any new extracted fields
+        if (dialogueResult.extracted && Object.keys(dialogueResult.extracted).length > 0) {
+          equipmentAnswers = mergeExtractedIntoAnswers(equipmentAnswers, dialogueResult.extracted);
+        }
+
+        // Apply filtering if extracted fields changed
+        if (Object.keys(dialogueResult.extracted).length > 0) {
+          candidates = filterByEquipment(candidates, equipmentAnswers);
+        }
+
+        aiResponse = dialogueResult.message;
+        confidence = dialogueResult.confidence;
+
+        switch (dialogueResult.action) {
+          case 'ask_question':
+            status = 'question';
+            nextAction = 'ask_llm';
+            break;
+          case 'extract_info':
+            status = 'clarification';
+            nextAction = null;
+            break;
+          case 'show_results':
+          case 'confirm':
+            status = 'recommendation';
+            nextAction = 'show_candidates';
+            break;
+          case 'clarify':
+            status = 'clarification';
+            nextAction = 'ask_vehicle_details';
+            break;
+        }
+      } else {
+        // LLM failed — fallback to rigid flow
+        useLlmDialogue = false;
+      }
+    }
+
+    if (!useLlmDialogue) {
+      // === RIGID FALLBACK (ORIGINAL LOGIC) ===
+      if (confidence < 0.3 && candidates.length === 0) {
+        aiResponse = 'Hei! For å finne riktig glass trenger jeg å vite: bilmerke, modell, årsmodell, og hvilket glass (frontrute, bakrute, sidedør, etc.). Har du registreringsnummer er det enda bedre!';
+        status = 'clarification';
+        nextAction = 'ask_vehicle_details';
+      } else if (candidates.length === 0 && vehicleInfo) {
+        aiResponse = `Jeg forstår at du trenger glass til ${vehicleInfo.make} ${vehicleInfo.model} (${vehicleInfo.year}). Dessverre fant jeg ingen glass som passer i katalogen vår. Kan du dobbeltsjekke årsmodellen, eller har du registreringsnummer?`;
+        status = 'clarification';
+        nextAction = 'ask_regnr_or_verify_year';
+      } else if (candidates.length > 0) {
+        const posKnown = pos !== 'glass';
+
+        if (!posKnown && !session.answers?.position) {
+          const categories = new Set(candidates.map((c) => String(c.category || '').toLowerCase()));
+          if (categories.size > 1) {
+            aiResponse = `Flott — jeg fant ${candidates.length} glass som passer. Hvilket glass trenger du? (frontrute, bakrute, siderute, eller dørrute)`;
+            status = 'question';
+            nextAction = 'ask_position';
+          }
+        }
+
+        if (status !== 'question') {
+          const eqQuestion = candidates.length > 3 ? buildEquipmentQuestion(candidates, equipmentAnswers, pos) : null;
+
+          if (eqQuestion) {
+            aiResponse = eqQuestion.question;
+            status = 'question';
+            nextAction = eqQuestion.nextAction;
+          } else {
+            const make = vehicleInfo?.make || nerResult?.make || '';
+            const model = vehicleInfo?.model || nerResult?.model || '';
+            const year = vehicleInfo?.year || nerResult?.year || '';
+            const count = candidates.length;
+
+            // Build vehicle description without duplicates
+            const modelWithoutMake = model && model.toUpperCase().startsWith(make.toUpperCase())
+              ? model.slice(make.length).trim()
+              : model;
+            const vehicleDesc = [
+              make,
+              modelWithoutMake && modelWithoutMake !== make ? modelWithoutMake : '',
+              year && String(year) !== modelWithoutMake ? `(${year})` : ''
+            ].filter(Boolean).join(' ');
+
+            if (nerResult?.regnr) {
+              aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Her er glassene som passer basert på regnr ${nerResult.regnr}:`;
+            } else if (nerResult?.vin) {
+              aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Her er glassene som passer:`;
+            } else if (make && year && year < 2030) {
+              aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Jeg har ${count} alternativer. Velg OEM eller aftermarket:`;
+            } else if (make) {
+              aiResponse = `Forstått — ${make}, ${pos}. Jeg har ${count} alternativer. Sjekk at det stemmer:`;
+            } else {
+              aiResponse = `Her er ${count} glass som kan passe. Sjekk at merke og modell stemmer:`;
+            }
+            status = 'recommendation';
+            nextAction = 'show_candidates';
+          }
+        }
+      } else {
+        const parts: string[] = [];
+        if (nerResult?.make) parts.push(nerResult.make);
+        if (nerResult?.model) parts.push(nerResult.model);
+        if (nerResult?.year) parts.push(String(nerResult.year));
+        if (nerResult?.position) parts.push(nerResult.position);
+
+        if (parts.length > 0) {
+          aiResponse = `Jeg forstår at du trenger ${parts.join(' ')}. For å finne eksakt riktig glass, kan du oppgi registreringsnummer eller bekrefte årsmodellen?`;
+        } else {
+          aiResponse = 'Hei! Jeg hjelper deg å finne riktig bilglass. Kan du oppgi bilmerke, modell, årsmodell og hvilket glass du trenger (frontrute, bakrute, etc.)?';
+        }
+        status = 'clarification';
+        nextAction = 'ask_vehicle_details';
+      }
     }
 
     // Build position-based accessories
-    const pos = nerResult?.position || extractPositionFromMessage(body.message);
+    pos = nerResult?.position || extractPositionFromMessage(body.message);
     const hasAdas = candidates.some((c: Candidate) => !!getProp(c, 'adas')) || equipmentAnswers['adas'] === 'ja';
     const hasLdw = candidates.some((c: Candidate) => !!getProp(c, 'lane_assist') || !!getProp(c, 'adas')) || equipmentAnswers['ldw'] === 'ja';
     const isHeated = candidates.some((c: Candidate) => !!getProp(c, 'heated')) || equipmentAnswers['heated'] === 'ja';
@@ -624,6 +699,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       pending_question: pendingQuestionField,
       candidate_data: status === 'question' ? JSON.stringify(candidates) : undefined,
       answers: equipmentAnswers,
+      dialogueState: determineDialogueState(candidates, equipmentAnswers),
     });
 
     // Fetch proactive suggestions for known B2B customers
