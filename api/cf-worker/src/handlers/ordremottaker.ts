@@ -498,7 +498,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
 
     // ── C: Build response — Dual flow: LLM Dialogue Engine (primary) or rigid fallback ──
     let useLlmDialogue = false;
-    let pos = nerResult?.position || extractPositionFromMessage(body.message);
+    let pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
 
     if (candidates.length > 0 && confidence >= 0.3) {
       const posKnown = pos !== 'glass' || session.answers?.position;
@@ -645,7 +645,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     }
 
     // Build position-based accessories
-    pos = nerResult?.position || extractPositionFromMessage(body.message);
+    pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
     const hasAdas = candidates.some((c: Candidate) => !!getProp(c, 'adas')) || equipmentAnswers['adas'] === 'ja';
     const hasLdw = candidates.some((c: Candidate) => !!getProp(c, 'lane_assist') || !!getProp(c, 'adas')) || equipmentAnswers['ldw'] === 'ja';
     const isHeated = candidates.some((c: Candidate) => !!getProp(c, 'heated')) || equipmentAnswers['heated'] === 'ja';
