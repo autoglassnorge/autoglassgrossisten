@@ -14,8 +14,16 @@ import { normalizeRecord } from '../lib/normalize';
 import { decodeVin } from '../lib/vin-decoder';
 import { getCustomerHistory } from '../lib/customer-history';
 import { sha256 } from '../lib/learning';
+import { decodeEurocode } from '../lib/eurocode-decoder';
 
-type Candidate = Record<string, unknown> & { properties?: Record<string, unknown> };
+type Candidate = Record<string, unknown> & { properties?: Record<string, unknown>; decoded_description?: string | null };
+
+function addDecodedDescription(candidates: Candidate[]): Candidate[] {
+  return candidates.map((c) => ({
+    ...c,
+    decoded_description: decodeEurocode(String(c.eurocode || c.articleNumber || c.supplier_sku || '')),
+  }));
+}
 
 interface EquipmentFlags {
   hasAdas: boolean;
@@ -640,7 +648,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       status,
       ai_response: aiResponse,
       session_token: sessionToken,
-      candidates: status === 'recommendation' ? candidates.slice(0, 5) as unknown as GlassRecord[] : undefined,
+      candidates: status === 'recommendation' ? addDecodedDescription(candidates.slice(0, 5)) as unknown as GlassRecord[] : undefined,
       accessories: status === 'recommendation' ? accessories : undefined,
       cart_url: cartUrl,
       confidence: confidence,
