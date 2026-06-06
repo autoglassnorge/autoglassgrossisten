@@ -4,6 +4,7 @@
  */
 
 import type { Env } from "../types";
+import type { SessionContext } from './ordremottaker-session';
 import { decodeEurocode } from "./eurocode-decoder";
 
 interface LlmMessage {
@@ -142,9 +143,9 @@ Gyldige actions:
 }
 
 function buildUserPrompt(context: DialogueContext): string {
-  const candidateDescriptions = context.candidates.map((c, i) => {
+  const candidateDescriptions = context.candidates.slice(0, 10).map((c, i) => {
     const code = c.eurocode || c.articleNumber || c.supplier_sku || '';
-    const decoded = decodeEurocode(code);
+    const decoded = code ? decodeEurocode(code) : null;
     const props = c.properties || {};
     const features: string[] = [];
     if (props.heated) features.push('oppvarmet');
@@ -180,6 +181,8 @@ INSTRUKS: Analyser situasjonen. Hva vet du? Hva mangler? Hva er neste naturlige 
 Returner JSON med message, action, extracted, confidence.`;
 }
 
+// Using @cf/moonshotai/moonshot-auto for faster responses and lower cost
+// compared to kimi-k2.5, while maintaining good JSON schema adherence
 /** Call Workers AI with JSON schema mode for dialogue */
 async function callDialogueLlm(
   env: Env,
@@ -255,7 +258,7 @@ export function normalizeExtracted(extracted: ExtractedFields): Record<string, s
   if (extracted.ldw) result.ldw = extracted.ldw;
   if (extracted.heated) result.heated = extracted.heated;
   if (extracted.heated_type) result.heated_type = extracted.heated_type;
-  if (extracted.rain_sensor) result.rainSensor = extracted.rain_sensor;
+  if (extracted.rain_sensor) result.rain_sensor = extracted.rain_sensor;
   if (extracted.hud) result.hud = extracted.hud;
   if (extracted.antenna) result.antenna = extracted.antenna;
   if (extracted.coated) result.coated = extracted.coated;
@@ -267,8 +270,8 @@ export function normalizeExtracted(extracted: ExtractedFields): Record<string, s
 export function determineDialogueState(
   candidates: Candidate[],
   extracted: Record<string, string>
-): import("./ordremottaker-session").SessionContext['dialogueState'] {
-  if (!extracted.position || extracted.position === 'glass') {
+): SessionContext['dialogueState'] {
+  if (!extracted.position) {
     return 'needs_position';
   }
   if (candidates.length <= 3) {
