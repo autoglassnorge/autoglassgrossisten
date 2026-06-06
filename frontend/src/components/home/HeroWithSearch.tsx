@@ -5,7 +5,8 @@
 
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, ArrowRight, Clock, X, Car } from 'lucide-react';
+import { Search, ArrowRight, Clock, X, Car, MessageCircle } from 'lucide-react';
+import { useChatStore } from '@/stores/chatStore';
 
 const RECENT_SEARCHES_KEY = 'ag_recent_searches';
 
@@ -23,6 +24,7 @@ export function HeroWithSearch() {
   const [showRecent, setShowRecent] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { openChat } = useChatStore();
 
   const recentSearches = getRecentSearches();
 
@@ -30,13 +32,21 @@ export function HeroWithSearch() {
     e.preventDefault();
     const v = regnr.trim().toUpperCase();
     if (v.length >= 2) {
-      navigate(`/sok?regnr=${encodeURIComponent(v)}`);
+      if (window.innerWidth < 640) {
+        openChat({ regnr: v });
+      } else {
+        navigate(`/sok?regnr=${encodeURIComponent(v)}`);
+      }
     }
   };
 
   const handleSelectRecent = (r: string) => {
     setRegnr(r);
-    navigate(`/sok?regnr=${encodeURIComponent(r)}`);
+    if (window.innerWidth < 640) {
+      openChat({ regnr: r });
+    } else {
+      navigate(`/sok?regnr=${encodeURIComponent(r)}`);
+    }
     setShowRecent(false);
   };
 
@@ -134,6 +144,18 @@ export function HeroWithSearch() {
               ))}
             </div>
           )}
+        </div>
+
+        {/* Desktop: Spør Professor Autoglass button */}
+        <div className="hidden sm:flex justify-center mt-6">
+          <button
+            type="button"
+            onClick={() => openChat()}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-carbon-800/80 border border-carbon-700 text-white text-sm font-medium hover:bg-carbon-700 transition-colors min-h-[44px]"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Spør Professor Autoglass
+          </button>
         </div>
 
         {/* Quick stats */}

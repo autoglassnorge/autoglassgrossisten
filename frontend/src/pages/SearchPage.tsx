@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo, lazy, Suspense, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Search, Loader2, AlertTriangle, Car, Wrench, Clock, X, Sparkles } from 'lucide-react';
+import { Search, Loader2, AlertTriangle, Car, Wrench, Clock, X, Sparkles, MessageCircle } from 'lucide-react';
+import { useChatStore } from '@/stores/chatStore';
 import { useDebounce } from '@/hooks/useDebounce';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { PageMeta } from '@/components/seo/PageMeta';
@@ -54,6 +55,7 @@ function addRecentSearch(regnr: string) {
 }
 
 export default function SearchPage() {
+  const { openChat } = useChatStore();
   const [searchParams, setSearchParams] = useSearchParams();
   const initialRegnr = searchParams.get('regnr') ?? '';
   const [regnr, setRegnr] = useState(initialRegnr);
@@ -409,6 +411,18 @@ export default function SearchPage() {
               </span>
             </div>
           )}
+
+          {/* Professor Autoglass chat CTA — sticky on mobile */}
+          <div className="fixed bottom-0 left-0 right-0 z-40 sm:static sm:z-auto sm:mb-4">
+            <button
+              type="button"
+              onClick={() => openChat({ regnr: activeRegnr })}
+              className="w-full flex items-center justify-center gap-2 bg-autoglass-blue px-4 py-4 text-base font-semibold text-white shadow-lg hover:bg-autoglass-dark transition-colors sm:rounded-xl sm:px-5 sm:py-3 min-h-[48px]"
+            >
+              <MessageCircle className="h-5 w-5" />
+              Spør Professor Autoglass
+            </button>
+          </div>
 
           {/* AI Glassvelger banner — show when many candidates or low confidence */}
           {candidates.length > 5 && data.confidence !== 'exact' && (

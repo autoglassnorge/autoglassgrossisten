@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Loader2, RotateCcw, GraduationCap, Check, XCircle, HelpCircle } from 'lucide-react';
 import { useOrdremottaker } from '@/hooks/useOrdremottaker';
+import { useChatStore } from '@/stores/chatStore';
 import ChatMessage from './ChatMessage';
 import GlassSuggestion from './GlassSuggestion';
 import AccessorySelector from './AccessorySelector';
@@ -16,7 +17,7 @@ const EXAMPLE_PROMPTS = [
 const MVP_CUSTOMER_ID = 1;
 
 export default function ChatWidget() {
-  const [open, setOpen] = useState(false);
+  const { isOpen, initialMessage, initialRegnr, openChat, closeChat, clearInitial } = useChatStore();
   const [input, setInput] = useState('');
   const [feedbackState, setFeedbackState] = useState<'idle' | 'wrong' | 'submitted'>('idle');
   const [correctEurocode, setCorrectEurocode] = useState('');
@@ -40,14 +41,22 @@ export default function ChatWidget() {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages, isLoading, open, feedbackState]);
+  }, [messages, isLoading, isOpen, feedbackState]);
 
-  // Trigger proactive suggestions when chat opens and we have no prior context
+  // Handle chat open: send initial message/regnr or init proactive suggestions
   useEffect(() => {
-    if (open && messages.length === 0 && !proactiveSuggestions && !isLoading) {
+    if (!isOpen || messages.length > 0) return;
+
+    if (initialMessage) {
+      sendUserMessage(initialMessage, MVP_CUSTOMER_ID);
+      clearInitial();
+    } else if (initialRegnr) {
+      sendUserMessage(initialRegnr, MVP_CUSTOMER_ID);
+      clearInitial();
+    } else if (!proactiveSuggestions && !isLoading) {
       init(MVP_CUSTOMER_ID);
     }
-  }, [open, messages.length, proactiveSuggestions, isLoading, init]);
+  }, [isOpen, messages.length, initialMessage, initialRegnr, proactiveSuggestions, isLoading, init, sendUserMessage, clearInitial]);
 
   // Reset feedback state when a new AI message arrives
   useEffect(() => {
@@ -109,15 +118,15 @@ export default function ChatWidget() {
     <>
       {/* Floating button */}
       <button
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => isOpen ? closeChat() : openChat()}
         className="fixed bottom-6 right-6 z-50 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-autoglass-blue text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-autoglass-blue focus:ring-offset-2"
-        aria-label={open ? 'Lukk chat' : 'Åpne chat'}
+        aria-label={isOpen ? 'Lukk chat' : 'Åpne chat'}
       >
-        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+        {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
 
       {/* Chat window */}
-      {open && (
+      {isOpen && (
         <div className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-white animate-fade-in md:bottom-24 md:right-6 md:w-[380px] md:rounded-2xl md:border md:border-gray-200 md:shadow-2xl md:inset-auto md:h-auto md:max-h-[600px]">
           {/* Header */}
           <div className="flex items-center justify-between bg-autoglass-blue px-4 py-3 text-white shrink-0">
@@ -135,7 +144,7 @@ export default function ChatWidget() {
                 <RotateCcw className="h-4 w-4" />
               </button>
               <button
-                onClick={() => setOpen(false)}
+                onClick={closeChat}
                 className="rounded p-2 md:p-1 transition-colors hover:bg-white/20 min-h-[44px] min-w-[44px] md:min-h-0 md:min-w-0 flex items-center justify-center"
                 title="Lukk"
                 aria-label="Lukk"
@@ -152,7 +161,7 @@ export default function ChatWidget() {
                 <div className="flex items-center justify-center gap-2 text-gray-500">
                   <GraduationCap className="h-5 w-5 text-autoglass-blue" />
                   <p className="text-base md:text-sm font-medium">
-                    Hei! Jeg er Professor Autoglass, din ekspert på bilglass. Fortell meg hva du trenger!
+                    Hei! Jeg er Professor Autoglass, din ekspert på bilglass. Skal vi finne riktig glass til deg?
                   </p>
                 </div>
                 <div className="space-y-2">
