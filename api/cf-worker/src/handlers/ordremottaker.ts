@@ -3,31 +3,72 @@
  * POST /api/ordremottaker
  */
 
-import type { Env, GlassRecord, OrdremottakerRequest, OrdremottakerResponse } from '../types';
+import type { Env, GlassRecord, OrdremottakerRequest, OrdremottakerResponse, AccessoryItem, GroundTruthRecord } from '../types';
 import { jsonResponse, errorResponse } from '../lib/cors';
 import { extractVehicleHybrid } from '../lib/ordremottaker-ner';
 import { generateDialogue, buildCartUrl } from '../lib/ordremottaker-llm';
 import { createSession, getSession, updateSession, addMessage } from '../lib/ordremottaker-session';
 import { searchByRegnr } from './search';
-import { queryByBrandAndYear, queryByBrandOnly } from '../lib/db';
+import { queryByBrandAndYear, queryByBrandOnly, queryByEurocode } from '../lib/db';
 import { normalizeRecord } from '../lib/normalize';
 import { decodeVin } from '../lib/vin-decoder';
 import { getCustomerHistory } from '../lib/customer-history';
+import { sha256 } from '../lib/learning';
 
-const DEFAULT_ACCESSORIES = [
-  { sku: 'LIST-STD', name: 'List', price: 245, included: true, removable: false },
-  { sku: 'LIM-STD', name: 'Lim', price: 189, included: true, removable: false },
-  { sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true },
-];
+type Candidate = Record<string, unknown> & { properties?: Record<string, unknown> };
+
+/** Bygg tilbehørsliste basert på posisjon og equipment */
+function buildAccessories(position: string | null, hasAdas: boolean, isHeated: boolean): AccessoryItem[] {
+  const accessories: AccessoryItem[] = [];
+
+  if (position === 'bakrute') {
+    accessories.push({ sku: 'LIM-STD', name: 'Lim', price: 189, included: true, removable: false, category: 'required' });
+    accessories.push({ sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true, category: 'required' });
+  } else if (position === 'dørrute' || position === 'siderute') {
+    accessories.push({ sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true, category: 'required' });
+    accessories.push({ sku: 'TETNING-STD', name: 'Tetningslist', price: 145, included: true, removable: false, category: 'required' });
+  } else {
+    // Default = frontrute
+    accessories.push({ sku: 'LIST-STD', name: 'Pyntelist', price: 245, included: true, removable: false, category: 'required' });
+    accessories.push({ sku: 'LIM-STD', name: 'Lim', price: 189, included: true, removable: false, category: 'required' });
+    accessories.push({ sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true, category: 'required' });
+  }
+
+  if (hasAdas) {
+    accessories.push({
+      sku: 'ADAS-WARN',
+      name: 'ADAS-kalibrering',
+      price: 0,
+      included: false,
+      removable: false,
+      category: 'warning',
+      notes: 'Kalibrering av førerassistentsystemer kreves etter montering av frontrute med kamera/sensor',
+    });
+  }
+
+  if (isHeated) {
+    accessories.push({
+      sku: 'LIM-HEAT',
+      name: 'Spesial-lim (varmebestandig)',
+      price: 249,
+      included: true,
+      removable: true,
+      category: 'recommended',
+      notes: 'Anbefalt for oppvarmet glass — tåler høyere temperaturer',
+    });
+  }
+
+  return accessories;
+}
 
 /** Hjelper for å lese equipment fra properties (normalisert av normalizeRecord) */
-function getProp(c: any, key: string): unknown {
-  const props = (c.properties as Record<string, unknown>) || {};
+function getProp(c: { properties?: Record<string, unknown> }, key: string): unknown {
+  const props = c.properties || {};
   return props[key];
 }
 
 /** Sjekk om kandidater har variasjon i et gitt equipment-felt */
-function hasVariation(candidates: any[], field: 'adas' | 'rainSensor' | 'heated' | 'acoustic'): boolean {
+function hasVariation(candidates: Candidate[], field: 'adas' | 'rainSensor' | 'heated' | 'acoustic'): boolean {
   const values = new Set<string>();
   for (const c of candidates) {
     const val = String(!!getProp(c, field));
@@ -38,32 +79,67 @@ function hasVariation(candidates: any[], field: 'adas' | 'rainSensor' | 'heated'
 }
 
 /** Filtrer kandidater basert på equipment-svar */
-function filterByEquipment(candidates: any[], answers: Record<string, string>): any[] {
+function filterByEquipment(candidates: Candidate[], answers: Record<string, string>): Candidate[] {
   return candidates.filter((c) => {
     for (const [field, answer] of Object.entries(answers)) {
+      if (answer === 'vet_ikke') continue;
       if (field === 'adas' || field === 'rainSensor' || field === 'heated' || field === 'acoustic') {
-        if (String(!!getProp(c, field)) !== answer) return false;
+        const expected = answer === 'ja' ? 'true' : answer === 'nei' ? 'false' : answer;
+        if (String(!!getProp(c, field)) !== expected) return false;
       }
     }
     return true;
   });
 }
 
-/** Parse boolsk svar fra bruker */
-function parseBooleanAnswer(message: string): boolean | null {
+/** Parse equipment-svar fra bruker: ja / nei / vet_ikke */
+function parseEquipmentAnswer(message: string): 'ja' | 'nei' | 'vet_ikke' | null {
   const lower = message.toLowerCase().trim();
-  if (lower === 'ja' || lower === 'yes' || lower === 'true' || lower === 'jepp' || lower === 'joda' || lower === 'jo' || lower === 'y') return true;
-  if (lower === 'nei' || lower === 'no' || lower === 'false' || lower === 'nope' || lower === 'niks' || lower === 'n') return false;
+  if (lower === 'ja' || lower === 'yes' || lower === 'true' || lower === 'jepp' || lower === 'joda' || lower === 'jo' || lower === 'y' || lower === '1') return 'ja';
+  if (lower === 'nei' || lower === 'no' || lower === 'false' || lower === 'nope' || lower === 'niks' || lower === 'n' || lower === '0') return 'nei';
+  if (lower === 'vet ikke' || lower === 'vetikke' || lower === 'usikker' || lower === 'ikke sikker' || lower === 'maybe' || lower === 'kanskje' || lower === '?') return 'vet_ikke';
+  return null;
+}
+
+/** Map posisjon til ground_truth kolonne(r) for oppslag */
+function getGroundTruthColumns(position: string): string[] {
+  const p = position.toLowerCase().trim();
+  if (p === 'frontrute') return ['frontrute_eurocode'];
+  if (p === 'bakrute') return ['bakrute_eurocode'];
+  if (p === 'dørrute-frem' || p === 'dør-frem') return ['dor_fv_eurocode', 'dor_fh_eurocode'];
+  if (p === 'dørrute-bak' || p === 'dør-bak') return ['dor_bv_eurocode', 'dor_bh_eurocode'];
+  if (p === 'siderute') return ['sideglass_fv_eurocode', 'sideglass_fh_eurocode', 'sideglass_bv_eurocode', 'sideglass_bh_eurocode'];
+  if (p === 'dørrute' || p === 'dør') return ['dor_fv_eurocode', 'dor_fh_eurocode', 'dor_bv_eurocode', 'dor_bh_eurocode'];
+  return [];
+}
+
+/** Map posisjon til ground_truth kolonne for upsert (feedback) */
+function getGroundTruthColumnForUpsert(position: string): string | null {
+  const p = position.toLowerCase().trim();
+  if (p === 'frontrute') return 'frontrute_eurocode';
+  if (p === 'bakrute') return 'bakrute_eurocode';
+  if (p === 'dørrute-frem' || p === 'dør-frem') return 'dor_fv_eurocode';
+  if (p === 'dørrute-bak' || p === 'dør-bak') return 'dor_bv_eurocode';
+  if (p === 'siderute') return 'sideglass_fv_eurocode';
+  if (p === 'dørrute' || p === 'dør') return 'dor_fv_eurocode';
   return null;
 }
 
 /** Bygg spørsmål for neste equipment-variasjon */
-function buildEquipmentQuestion(candidates: any[], answers: Record<string, string>): { field: string; question: string; nextAction: string } | null {
+function buildEquipmentQuestion(
+  candidates: Candidate[],
+  answers: Record<string, string>,
+  position: string
+): { field: string; question: string; nextAction: string } | null {
+  const isFront = position === 'frontrute' || position === 'glass';
+  const isBack = position === 'bakrute';
+  const glassType = isBack ? 'bakruten' : isFront ? 'frontruten' : 'glasset';
+
   const priority = [
-    { field: 'adas', question: 'Har bilen ADAS-kamera i frontruten?', nextAction: 'ask_adas' },
-    { field: 'heated', question: 'Har bilen oppvarmet frontrute?', nextAction: 'ask_heated' },
+    { field: 'adas', question: `Har bilen ADAS-kamera i ${glassType}?`, nextAction: 'ask_adas' },
+    { field: 'heated', question: `Har bilen oppvarmet ${glassType}?`, nextAction: 'ask_heated' },
     { field: 'rainSensor', question: 'Har bilen regnsensor?', nextAction: 'ask_rain_sensor' },
-    { field: 'acoustic', question: 'Ønsker du akustisk (støydempet) glass?', nextAction: 'ask_acoustic' },
+    { field: 'acoustic', question: `Ønsker du akustisk (støydempet) ${glassType}?`, nextAction: 'ask_acoustic' },
   ];
 
   for (const item of priority) {
@@ -130,10 +206,10 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
 
     // ── A: Handle pending equipment question ──
     if (session.pending_question) {
-      const answer = parseBooleanAnswer(body.message);
+      const answer = parseEquipmentAnswer(body.message);
       if (answer !== null) {
         equipmentAnswers = { ...(session.answers || {}) };
-        equipmentAnswers[session.pending_question] = String(answer);
+        equipmentAnswers[session.pending_question] = answer;
 
         // Load stored candidates from previous turn
         if (session.candidate_data) {
@@ -152,7 +228,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         vehicleInfo = session.vehicle;
         confidence = 0.8; // We already had a good search before
       }
-      // If not a boolean answer, fall through to normal NER/search (user may have changed topic)
+      // If not a valid equipment answer, fall through to normal NER/search (user may have changed topic)
     }
 
     // ── B: Normal search flow ──
@@ -164,13 +240,44 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       if (nerResult.confidence >= 0.2) {
         if (nerResult.regnr) {
           console.log(`[Ordremottaker] Searching by regnr: ${nerResult.regnr}`);
+
+          // Ground truth lookup BEFORE search
+          const regnrHash = await sha256(nerResult.regnr);
+          const gt = await env.GLASS_CATALOG_D1
+            .prepare("SELECT * FROM ground_truth WHERE regnr_hash = ?")
+            .bind(regnrHash)
+            .first() as unknown as GroundTruthRecord | null;
+
+          const gtEurocodes = new Set<string>();
+          if (gt) {
+            const pos = nerResult.position?.toLowerCase() || 'frontrute';
+            const columns = getGroundTruthColumns(pos);
+            for (const col of columns) {
+              const eurocode = gt[col as keyof GroundTruthRecord] as string | null;
+              if (eurocode && !gtEurocodes.has(eurocode)) {
+                gtEurocodes.add(eurocode);
+                const record = await queryByEurocode(env.GLASS_CATALOG_D1, eurocode);
+                if (record) {
+                  console.log(`[Ordremottaker] Ground truth hit for ${nerResult.regnr}: ${eurocode}`);
+                  candidates.push({ ...normalizeRecord(record), isGroundTruth: true });
+                }
+              }
+            }
+          }
+
           const searchResult = await searchByRegnr(nerResult.regnr, env);
           if (searchResult.httpStatus === 200) {
             const searchBody = searchResult.body as {
               candidates?: any[];
               vehicle?: { make: string; model: string; year: number };
             };
-            candidates = searchBody.candidates || [];
+            const searchCandidates = searchBody.candidates || [];
+            // Merge search candidates, avoiding duplicates with ground truth
+            for (const sc of searchCandidates) {
+              if (!gtEurocodes.has(sc.eurocode)) {
+                candidates.push(sc);
+              }
+            }
             vehicleInfo = searchBody.vehicle;
           }
         } else if (nerResult.vin) {
@@ -232,9 +339,9 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       }
 
       // Auto-apply equipment from NER (user mentioned it explicitly)
-      if (nerResult?.adas !== null) equipmentAnswers['adas'] = String(nerResult.adas);
-      if (nerResult?.rain_sensor !== null) equipmentAnswers['rainSensor'] = String(nerResult.rain_sensor);
-      if (nerResult?.heated !== null) equipmentAnswers['heated'] = String(nerResult.heated);
+      if (nerResult?.adas !== null) equipmentAnswers['adas'] = nerResult.adas ? 'ja' : 'nei';
+      if (nerResult?.rain_sensor !== null) equipmentAnswers['rainSensor'] = nerResult.rain_sensor ? 'ja' : 'nei';
+      if (nerResult?.heated !== null) equipmentAnswers['heated'] = nerResult.heated ? 'ja' : 'nei';
     }
 
     // Apply all accumulated equipment answers to filter candidates
@@ -255,7 +362,8 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       nextAction = 'ask_regnr_or_verify_year';
     } else if (candidates.length > 0) {
       // We have candidates — check for equipment variations first
-      const eqQuestion = candidates.length > 3 ? buildEquipmentQuestion(candidates, equipmentAnswers) : null;
+      const pos = nerResult?.position || extractPositionFromMessage(body.message);
+      const eqQuestion = candidates.length > 3 ? buildEquipmentQuestion(candidates, equipmentAnswers, pos) : null;
 
       if (eqQuestion) {
         aiResponse = eqQuestion.question;
@@ -263,7 +371,6 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         nextAction = eqQuestion.nextAction;
       } else {
         // Show results
-        const pos = nerResult?.position || extractPositionFromMessage(body.message);
         const make = vehicleInfo?.make || nerResult?.make || '';
         const model = vehicleInfo?.model || nerResult?.model || '';
         const year = vehicleInfo?.year || nerResult?.year || '';
@@ -310,8 +417,11 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       nextAction = 'ask_vehicle_details';
     }
 
-    // Build default accessories
-    const accessories = DEFAULT_ACCESSORIES;
+    // Build position-based accessories
+    const pos = nerResult?.position || extractPositionFromMessage(body.message);
+    const hasAdas = candidates.some((c: Candidate) => !!getProp(c, 'adas')) || equipmentAnswers['adas'] === 'ja';
+    const isHeated = candidates.some((c: Candidate) => !!getProp(c, 'heated')) || equipmentAnswers['heated'] === 'ja';
+    const accessories = buildAccessories(pos, hasAdas, isHeated);
 
     // Build cart URL if recommendation and candidates exist
     let cartUrl: string | undefined;
@@ -380,5 +490,114 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       `[Ordremottaker] Handler error: ${e instanceof Error ? e.message : String(e)}`
     );
     return errorResponse('Intern feil i ordremottaker', 500);
+  }
+}
+
+export async function handleFeedback(request: Request, env: Env): Promise<Response> {
+  if (request.method !== 'POST') {
+    return errorResponse('Kun POST støttet', 405);
+  }
+
+  let body: {
+    session_token: string;
+    regnr?: string;
+    position: string;
+    recommended_eurocode?: string;
+    chosen_eurocode: string;
+    was_correct: number;
+    correction_eurocode?: string;
+    correction_reason?: string;
+    equipment_answers?: Record<string, string>;
+    make?: string;
+    model?: string;
+    year?: number;
+  };
+  try {
+    body = await request.json();
+  } catch {
+    return errorResponse('Ugyldig JSON', 400);
+  }
+
+  if (!body.session_token || typeof body.session_token !== 'string') {
+    return errorResponse('Mangler session_token', 400);
+  }
+  if (!body.position || typeof body.position !== 'string') {
+    return errorResponse('Mangler position', 400);
+  }
+  if (!body.chosen_eurocode || typeof body.chosen_eurocode !== 'string') {
+    return errorResponse('Mangler chosen_eurocode', 400);
+  }
+  if (typeof body.was_correct !== 'number') {
+    return errorResponse('Mangler was_correct', 400);
+  }
+
+  try {
+    const regnrHash = body.regnr ? await sha256(body.regnr) : null;
+    const db = env.GLASS_CATALOG_D1;
+
+    // Insert into feedback_log
+    const insertResult = await db.prepare(
+      `INSERT INTO feedback_log (
+        session_token, regnr_hash, position,
+        recommended_eurocode, chosen_eurocode, was_correct,
+        correction_eurocode, correction_reason, equipment_answers
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    ).bind(
+      body.session_token,
+      regnrHash,
+      body.position,
+      body.recommended_eurocode || null,
+      body.chosen_eurocode,
+      body.was_correct,
+      body.correction_eurocode || null,
+      body.correction_reason || null,
+      body.equipment_answers ? JSON.stringify(body.equipment_answers) : null
+    ).run();
+
+    const feedbackId = insertResult.meta?.last_row_id ?? 0;
+
+    // If correct, upsert into ground_truth
+    if (body.was_correct === 1 && regnrHash) {
+      const col = getGroundTruthColumnForUpsert(body.position);
+      if (col) {
+        // Get make/model/year from session if available
+        const session = await getSession(env, body.session_token);
+        const make = session?.vehicle?.make || body.make || '';
+        const model = session?.vehicle?.model || body.model || '';
+        const year = session?.vehicle?.year || body.year || new Date().getFullYear();
+
+        if (make && year) {
+          await db.prepare(
+            `INSERT INTO ground_truth (
+              regnr_hash, make, model, year, ${col},
+              verified_by, confidence
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(regnr_hash) DO UPDATE SET
+              make = excluded.make,
+              model = excluded.model,
+              year = excluded.year,
+              ${col} = excluded.${col},
+              verified_by = excluded.verified_by,
+              confidence = excluded.confidence,
+              verified_at = CURRENT_TIMESTAMP`
+          ).bind(
+            regnrHash,
+            make,
+            model,
+            year,
+            body.chosen_eurocode,
+            'ai_feedback',
+            0.9
+          ).run();
+        } else {
+          console.warn(`[Ordremottaker-Feedback] Skipping ground_truth upsert: missing make/year for ${regnrHash}`);
+        }
+      }
+    }
+
+    return jsonResponse({ success: true, feedback_id: feedbackId });
+  } catch (e) {
+    console.error(`[Ordremottaker-Feedback] Error: ${e instanceof Error ? e.message : String(e)}`);
+    return errorResponse('Kunne ikke lagre feedback', 500);
   }
 }
