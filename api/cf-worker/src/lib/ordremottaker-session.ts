@@ -17,7 +17,7 @@ export interface SessionContext {
   status: "active" | "completed" | "escalated";
   pending_question?: string | null;
   candidate_data?: string; // JSON-serialiserte kandidater (for equipment oppfølging)
-  dialogue_state?: 'needs_position' | 'filtering' | 'ready_to_show' | 'showing_results' | null;
+  dialogueState?: 'needs_position' | 'filtering' | 'ready_to_show' | 'showing_results' | null; // Dialogtilstand: needs_position | filtering | ready_to_show | showing_results
 }
 
 const SESSION_PREFIX = "ai_session:";
