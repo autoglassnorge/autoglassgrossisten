@@ -186,13 +186,46 @@ function filterByEquipment(candidates: Candidate[], answers: Record<string, stri
   });
 }
 
-/** Parse posisjon-svar fra bruker */
+/** Parse posisjon-svar fra bruker — støtter detaljerte høyre/venstre-valg */
 function parsePositionAnswer(message: string): string | null {
   const lower = message.toLowerCase().trim();
-  if (lower.includes('frontrute') || lower.includes('vindskjerm') || lower.includes('front')) return 'frontrute';
-  if (lower.includes('bakrute') || lower.includes('bakvindu') || lower.includes('bak')) return 'bakrute';
-  if (lower.includes('dørrute') || lower.includes('sidedør') || lower.includes('dør')) return 'dørrute';
-  if (lower.includes('siderute') || lower.includes('sidevindu') || lower.includes('side')) return 'siderute';
+
+  // Annet / ukjent
+  if (lower === 'annet' || lower === 'other' || lower === 'vet ikke') return 'annet';
+
+  // Frontrute / bakrute
+  if (lower.includes('frontrute') || lower.includes('vindskjerm') || lower === 'front') return 'frontrute';
+  if (lower.includes('bakrute') || lower.includes('bakvindu') || lower === 'bak') return 'bakrute';
+
+  // Dørrute — sjekk mest spesifikk først
+  if (lower.includes('førerdør') || lower.includes('førerside') || lower.includes('venstre foran') || lower.includes('foran venstre')) {
+    if (lower.includes('bak')) return 'dørrute-bv';
+    return 'dørrute-fv';
+  }
+  if (lower.includes('passasjerdør') || lower.includes('passasjerside') || lower.includes('høyre foran') || lower.includes('foran høyre')) {
+    if (lower.includes('bak')) return 'dørrute-bh';
+    return 'dørrute-fh';
+  }
+  if (lower.includes('dørrute') || lower.includes('sidedør') || lower.includes('dør')) {
+    if (lower.includes('bak') && (lower.includes('venstre') || lower.includes('fører'))) return 'dørrute-bv';
+    if (lower.includes('bak') && (lower.includes('høyre') || lower.includes('passasjer'))) return 'dørrute-bh';
+    if (lower.includes('bak')) return 'dørrute-bak';
+    if (lower.includes('frem') && (lower.includes('venstre') || lower.includes('fører'))) return 'dørrute-fv';
+    if (lower.includes('frem') && (lower.includes('høyre') || lower.includes('passasjer'))) return 'dørrute-fh';
+    if (lower.includes('frem')) return 'dørrute-frem';
+    return 'dørrute';
+  }
+
+  // Siderute / ventilrute
+  if (lower.includes('ventilrute')) return 'ventilrute';
+  if (lower.includes('siderute') || lower.includes('sidevindu') || lower.includes('side')) {
+    if (lower.includes('bak') && (lower.includes('venstre') || lower.includes('fører'))) return 'sideglass-bv';
+    if (lower.includes('bak') && (lower.includes('høyre') || lower.includes('passasjer'))) return 'sideglass-bh';
+    if (lower.includes('venstre') || lower.includes('fører')) return 'sideglass-fv';
+    if (lower.includes('høyre') || lower.includes('passasjer')) return 'sideglass-fh';
+    return 'siderute';
+  }
+
   return null;
 }
 
@@ -218,9 +251,17 @@ function getGroundTruthColumns(position: string): string[] {
   const p = position.toLowerCase().trim();
   if (p === 'frontrute') return ['frontrute_eurocode'];
   if (p === 'bakrute') return ['bakrute_eurocode'];
+  if (p === 'dørrute-fv' || p === 'dør-fv') return ['dor_fv_eurocode'];
+  if (p === 'dørrute-fh' || p === 'dør-fh') return ['dor_fh_eurocode'];
+  if (p === 'dørrute-bv' || p === 'dør-bv') return ['dor_bv_eurocode'];
+  if (p === 'dørrute-bh' || p === 'dør-bh') return ['dor_bh_eurocode'];
   if (p === 'dørrute-frem' || p === 'dør-frem') return ['dor_fv_eurocode', 'dor_fh_eurocode'];
   if (p === 'dørrute-bak' || p === 'dør-bak') return ['dor_bv_eurocode', 'dor_bh_eurocode'];
-  if (p === 'siderute') return ['sideglass_fv_eurocode', 'sideglass_fh_eurocode', 'sideglass_bv_eurocode', 'sideglass_bh_eurocode'];
+  if (p === 'sideglass-fv' || p === 'siderute-fv') return ['sideglass_fv_eurocode'];
+  if (p === 'sideglass-fh' || p === 'siderute-fh') return ['sideglass_fh_eurocode'];
+  if (p === 'sideglass-bv' || p === 'siderute-bv') return ['sideglass_bv_eurocode'];
+  if (p === 'sideglass-bh' || p === 'siderute-bh') return ['sideglass_bh_eurocode'];
+  if (p === 'siderute' || p === 'sideglass' || p === 'ventilrute') return ['sideglass_fv_eurocode', 'sideglass_fh_eurocode', 'sideglass_bv_eurocode', 'sideglass_bh_eurocode'];
   if (p === 'dørrute' || p === 'dør') return ['dor_fv_eurocode', 'dor_fh_eurocode', 'dor_bv_eurocode', 'dor_bh_eurocode'];
   return [];
 }
@@ -230,9 +271,17 @@ function getGroundTruthColumnForUpsert(position: string): string | null {
   const p = position.toLowerCase().trim();
   if (p === 'frontrute') return 'frontrute_eurocode';
   if (p === 'bakrute') return 'bakrute_eurocode';
+  if (p === 'dørrute-fv' || p === 'dør-fv') return 'dor_fv_eurocode';
+  if (p === 'dørrute-fh' || p === 'dør-fh') return 'dor_fh_eurocode';
+  if (p === 'dørrute-bv' || p === 'dør-bv') return 'dor_bv_eurocode';
+  if (p === 'dørrute-bh' || p === 'dør-bh') return 'dor_bh_eurocode';
   if (p === 'dørrute-frem' || p === 'dør-frem') return 'dor_fv_eurocode';
   if (p === 'dørrute-bak' || p === 'dør-bak') return 'dor_bv_eurocode';
-  if (p === 'siderute') return 'sideglass_fv_eurocode';
+  if (p === 'sideglass-fv' || p === 'siderute-fv') return 'sideglass_fv_eurocode';
+  if (p === 'sideglass-fh' || p === 'siderute-fh') return 'sideglass_fh_eurocode';
+  if (p === 'sideglass-bv' || p === 'siderute-bv') return 'sideglass_bv_eurocode';
+  if (p === 'sideglass-bh' || p === 'siderute-bh') return 'sideglass_bh_eurocode';
+  if (p === 'siderute' || p === 'sideglass' || p === 'ventilrute') return 'sideglass_fv_eurocode';
   if (p === 'dørrute' || p === 'dør') return 'dor_fv_eurocode';
   return null;
 }
@@ -245,7 +294,13 @@ function buildEquipmentQuestion(
 ): { field: string; question: string; nextAction: string } | null {
   const isFront = position === 'frontrute' || position === 'glass';
   const isBack = position === 'bakrute';
-  const glassType = isBack ? 'bakruten' : isFront ? 'frontruten' : 'glasset';
+  const isDoor = position?.startsWith('dørrute-') || position === 'dørrute' || position === 'dør';
+  const isSide = position?.startsWith('sideglass-') || position === 'siderute' || position === 'sideglass' || position === 'ventilrute';
+  let glassType = 'glasset';
+  if (isBack) glassType = 'bakruten';
+  else if (isFront) glassType = 'frontruten';
+  else if (isDoor) glassType = 'dørruten';
+  else if (isSide) glassType = 'sideruten';
 
   const priority: Array<{ field: EquipmentField; question: string; nextAction: string; frontOnly?: boolean }> = [
     { field: 'adas', question: `Har bilen ADAS-kamera i ${glassType}? Dette er et kamera bak frontruten som brukes til trafikkskiltgjenkjenning og adaptiv cruisekontroll.`, nextAction: 'ask_adas', frontOnly: true },
@@ -279,12 +334,8 @@ function buildEquipmentQuestion(
 
 /** Ekstraher posisjon fra melding (fallback når NER ikke er kjørt) */
 function extractPositionFromMessage(message: string): string {
-  const lower = message.toLowerCase();
-  if (lower.includes('frontrute') || lower.includes('vindskjerm')) return 'frontrute';
-  if (lower.includes('bakrute') || lower.includes('bakvindu')) return 'bakrute';
-  if (lower.includes('dørrute') || lower.includes('sidedør')) return 'dørrute';
-  if (lower.includes('siderute') || lower.includes('sidevindu')) return 'siderute';
-  return 'glass';
+  const parsed = parsePositionAnswer(message);
+  return parsed || 'glass';
 }
 
 /** Merge LLM-extracted fields into equipment answers */
@@ -371,9 +422,9 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         candidates = candidates.filter((c: Candidate) => {
           const cat = String(c.category || '').toLowerCase();
           if (positionAnswer === 'frontrute') return cat.includes('front');
-          if (positionAnswer === 'bakrute') return cat.includes('bak');
-          if (positionAnswer === 'dørrute' || positionAnswer === 'dør') return cat.includes('dør') || cat.includes('dor');
-          if (positionAnswer === 'siderute') return cat.includes('side');
+          if (positionAnswer === 'bakrute') return cat.includes('bak') && !cat.includes('dør') && !cat.includes('dor');
+          if (positionAnswer?.startsWith('dørrute-') || positionAnswer === 'dørrute' || positionAnswer === 'dør') return cat.includes('dør') || cat.includes('dor');
+          if (positionAnswer?.startsWith('sideglass-') || positionAnswer === 'siderute' || positionAnswer === 'sideglass' || positionAnswer === 'ventilrute') return cat.includes('side');
           return true;
         });
       }
@@ -487,9 +538,9 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         candidates = candidates.filter((c: Candidate) => {
           const cat = String(c.category || '').toLowerCase();
           if (pos === 'frontrute') return cat.includes('front');
-          if (pos === 'bakrute') return cat.includes('bak');
-          if (pos === 'dørrute-frem' || pos === 'dørrute-bak') return cat.includes('dør');
-          if (pos === 'siderute') return cat.includes('side');
+          if (pos === 'bakrute') return cat.includes('bak') && !cat.includes('dør') && !cat.includes('dor');
+          if (pos?.startsWith('dørrute-') || pos === 'dørrute' || pos === 'dør') return cat.includes('dør') || cat.includes('dor');
+          if (pos?.startsWith('sideglass-') || pos === 'siderute' || pos === 'sideglass' || pos === 'ventilrute') return cat.includes('side');
           return true;
         });
       }
@@ -509,7 +560,10 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     let useLlmDialogue = false;
     let pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
 
-    if (candidates.length > 0 && confidence >= 0.3) {
+    // If user explicitly chose "Annet", we need more info — don't try to match
+    if (pos === 'annet') {
+      useLlmDialogue = false;
+    } else if (candidates.length > 0 && confidence >= 0.3) {
       const posKnown = pos !== 'glass' || session.answers?.position;
       if (posKnown) {
         useLlmDialogue = true;

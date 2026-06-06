@@ -27,8 +27,22 @@ interface Candidate {
   [key: string]: unknown;
 }
 
+export type PositionValue =
+  | 'frontrute'
+  | 'bakrute'
+  | 'dørrute-fv'
+  | 'dørrute-fh'
+  | 'dørrute-bv'
+  | 'dørrute-bh'
+  | 'sideglass-fv'
+  | 'sideglass-fh'
+  | 'sideglass-bv'
+  | 'sideglass-bh'
+  | 'ventilrute'
+  | 'annet';
+
 export interface ExtractedFields {
-  position?: 'frontrute' | 'bakrute' | 'dørrute' | 'siderute';
+  position?: PositionValue;
   adas?: 'ja' | 'nei' | 'vet_ikke';
   ldw?: 'ja' | 'nei' | 'vet_ikke';
   heated?: 'ja' | 'nei' | 'vet_ikke';
@@ -65,7 +79,16 @@ const DIALOGUE_SCHEMA = {
     extracted: {
       type: "object",
       properties: {
-        position: { type: ["string", "null"], enum: ["frontrute", "bakrute", "dørrute", "siderute", null] },
+        position: {
+          type: ["string", "null"],
+          enum: [
+            "frontrute", "bakrute",
+            "dørrute-fv", "dørrute-fh", "dørrute-bv", "dørrute-bh",
+            "sideglass-fv", "sideglass-fh", "sideglass-bv", "sideglass-bh",
+            "ventilrute", "annet",
+            null,
+          ],
+        },
         adas: { type: ["string", "null"], enum: ["ja", "nei", "vet_ikke", null] },
         ldw: { type: ["string", "null"], enum: ["ja", "nei", "vet_ikke", null] },
         heated: { type: ["string", "null"], enum: ["ja", "nei", "vet_ikke", null] },
@@ -271,7 +294,7 @@ export function determineDialogueState(
   candidates: Candidate[],
   extracted: Record<string, string>
 ): SessionContext['dialogueState'] {
-  if (!extracted.position) {
+  if (!extracted.position || extracted.position === 'annet') {
     return 'needs_position';
   }
   if (candidates.length <= 3) {

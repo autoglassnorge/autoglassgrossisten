@@ -14,6 +14,19 @@ const EXAMPLE_PROMPTS = [
   'Jeg trenger bakrute med varme til Volvo XC60',
 ];
 
+const POSITION_OPTIONS = [
+  { label: 'Frontrute', value: 'frontrute' },
+  { label: 'Bakrute', value: 'bakrute' },
+  { label: 'Dørrute førerside', value: 'dørrute-fv', subtitle: 'Foran venstre' },
+  { label: 'Dørrute passasjerside', value: 'dørrute-fh', subtitle: 'Foran høyre' },
+  { label: 'Dørrute førerside bak', value: 'dørrute-bv', subtitle: 'Bak venstre' },
+  { label: 'Dørrute passasjerside bak', value: 'dørrute-bh', subtitle: 'Bak høyre' },
+  { label: 'Siderute førerside', value: 'sideglass-fv', subtitle: 'Venstre side' },
+  { label: 'Siderute passasjerside', value: 'sideglass-fh', subtitle: 'Høyre side' },
+  { label: 'Ventilrute fører side', value: 'ventilrute', subtitle: 'Ventilasjon' },
+  { label: 'Annet', value: 'annet', isOther: true },
+];
+
 // MVP: hardcoded customer ID until real auth is implemented
 const MVP_CUSTOMER_ID = 1;
 
@@ -22,6 +35,8 @@ export default function ChatWidget() {
   const [input, setInput] = useState('');
   const [feedbackState, setFeedbackState] = useState<'idle' | 'wrong' | 'submitted'>('idle');
   const [correctEurocode, setCorrectEurocode] = useState('');
+  const [otherPosition, setOtherPosition] = useState('');
+  const [showOtherPosition, setShowOtherPosition] = useState(false);
   const {
     messages,
     proactiveSuggestions,
@@ -59,10 +74,12 @@ export default function ChatWidget() {
     }
   }, [isOpen, messages.length, initialMessage, initialRegnr, proactiveSuggestions, isLoading, init, sendUserMessage, clearInitial]);
 
-  // Reset feedback state when a new AI message arrives
+  // Reset feedback and other-position state when a new AI message arrives
   useEffect(() => {
     setFeedbackState('idle');
     setCorrectEurocode('');
+    setShowOtherPosition(false);
+    setOtherPosition('');
   }, [messages.length]);
 
   const handleSend = () => {
@@ -88,6 +105,25 @@ export default function ChatWidget() {
 
   const lastAiMessage = [...messages].reverse().find((m) => m.role === 'ai');
   const isAskingEquipment = lastAiMessage?.nextAction?.startsWith('ask_') ?? false;
+  const isAskingPosition = lastAiMessage?.nextAction === 'ask_position';
+
+  const handlePositionAnswer = (value: string) => {
+    if (value === 'annet') {
+      setShowOtherPosition(true);
+      return;
+    }
+    setShowOtherPosition(false);
+    setOtherPosition('');
+    sendUserMessage(value, MVP_CUSTOMER_ID);
+  };
+
+  const handleOtherPositionSubmit = () => {
+    const text = otherPosition.trim();
+    if (!text) return;
+    setShowOtherPosition(false);
+    setOtherPosition('');
+    sendUserMessage(text, MVP_CUSTOMER_ID);
+  };
   const isShowingRecommendation =
     lastAiMessage?.status === 'recommendation' &&
     lastAiMessage.candidates &&
@@ -217,8 +253,57 @@ export default function ChatWidget() {
                     <AccessorySelector accessories={msg.accessories} />
                   )}
 
+                  {/* Position question buttons */}
+                  {isLastMessage && msg.role === 'ai' && msg.status === 'question' && isAskingPosition && (
+                    <div className="mb-4 mt-2 flex flex-col gap-3">
+                      <p className="text-sm text-gray-500">Velg posisjon:</p>
+                      <div className="grid grid-cols-1 gap-2">
+                        {POSITION_OPTIONS.map((opt) => (
+                          <button
+                            key={opt.value}
+                            onClick={() => handlePositionAnswer(opt.value)}
+                            disabled={isLoading}
+                            className={`min-h-[52px] rounded-xl px-4 py-3 text-left text-base font-medium transition-colors disabled:opacity-50 active:scale-[0.98] ${
+                              opt.isOther
+                                ? 'border-2 border-dashed border-gray-300 bg-white text-gray-600 hover:border-autoglass-blue hover:text-autoglass-blue'
+                                : 'bg-white border border-gray-200 text-gray-800 hover:border-autoglass-blue hover:bg-autoglass-light hover:text-autoglass-blue shadow-sm'
+                            }`}
+                          >
+                            <span className="block">{opt.label}</span>
+                            {opt.subtitle && (
+                              <span className="block text-xs text-gray-400 font-normal">{opt.subtitle}</span>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                      {showOtherPosition && (
+                        <div className="flex flex-col gap-2 rounded-xl border border-autoglass-blue bg-autoglass-light p-3">
+                          <p className="text-sm text-autoglass-blue">Beskriv glasset:</p>
+                          <div className="flex gap-2">
+                            <input
+                              type="text"
+                              value={otherPosition}
+                              onChange={(e) => setOtherPosition(e.target.value)}
+                              onKeyDown={(e) => e.key === 'Enter' && handleOtherPositionSubmit()}
+                              placeholder="F.eks. takluke, soltak..."
+                              className="flex-1 rounded-lg border border-gray-200 bg-white px-3 py-2 text-base outline-none focus:border-autoglass-blue"
+                              autoFocus
+                            />
+                            <button
+                              onClick={handleOtherPositionSubmit}
+                              disabled={!otherPosition.trim() || isLoading}
+                              className="rounded-lg bg-autoglass-blue px-4 py-2 text-white font-medium disabled:opacity-50"
+                            >
+                              Send
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   {/* Equipment question buttons — only on last AI message when status is 'question' */}
-                  {isLastMessage && msg.role === 'ai' && msg.status === 'question' && isAskingEquipment && (
+                  {isLastMessage && msg.role === 'ai' && msg.status === 'question' && isAskingEquipment && !isAskingPosition && (
                     <div className="mb-4 mt-2 flex flex-col gap-2">
                       <p className="text-sm text-gray-500">Velg et alternativ:</p>
                       <div className="flex flex-wrap gap-2">
