@@ -17,6 +17,7 @@ import { handleVinLookup, handleVinLookupStatus } from "./handlers/vin";
 import { handleHealth } from "./handlers/health";
 import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, handleVehicleYears, handleVehicleProducts, handleVehicleDebug } from "./handlers/vehicle";
 import { handleGlassGuide } from "./handlers/glass-guide";
+import { handleOrdremottaker } from "./handlers/ordremottaker";
 import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
 import { fetchSvvEnkeltoppslag } from "./providers/svv";
 
@@ -318,6 +319,12 @@ export default {
     if (path === "/api/vehicle/products") {
       return handleVehicleProducts(request, env);
     }
+
+    // AI Ordremottaker
+    if (path === "/api/ordremottaker" && request.method === "POST") {
+      return handleOrdremottaker(request, env);
+    }
+
     return errorResponse("Ukjent endepunkt", 404);
   },
   
