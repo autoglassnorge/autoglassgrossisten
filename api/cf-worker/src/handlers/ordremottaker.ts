@@ -330,51 +330,52 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     // Equipment answers (start fresh for new searches; preserved when answering pending questions)
     let equipmentAnswers: Record<string, string> = {};
 
-    // ── A: Handle pending question (equipment OR position) ──
-    if (session.pending_question) {
+    // ── A: Handle pending question or restore LLM dialogue state ──
+    if (session.pending_question || session.candidate_data) {
       let answer: string | null = null;
       if (session.pending_question === 'heated_type') {
         answer = parseHeatedTypeAnswer(body.message);
       } else if (session.pending_question === 'position') {
         answer = parsePositionAnswer(body.message);
-      } else {
+      } else if (session.pending_question) {
         answer = parseEquipmentAnswer(body.message);
       }
-      if (answer !== null) {
-        equipmentAnswers = { ...(session.answers || {}) };
+
+      // Load session state for both rigid questions and LLM dialogue turns
+      equipmentAnswers = { ...(session.answers || {}) };
+
+      if (answer !== null && session.pending_question) {
         equipmentAnswers[session.pending_question] = answer;
-
-        // Load stored candidates from previous turn
-        if (session.candidate_data) {
-          try {
-            candidates = JSON.parse(session.candidate_data);
-          } catch {
-            candidates = [];
-          }
-        }
-
-        // If position was just answered, filter candidates by position first
-        if (session.pending_question === 'position' && candidates.length > 0) {
-          const positionAnswer = answer.toLowerCase();
-          candidates = candidates.filter((c: Candidate) => {
-            const cat = String(c.category || '').toLowerCase();
-            if (positionAnswer === 'frontrute') return cat.includes('front');
-            if (positionAnswer === 'bakrute') return cat.includes('bak');
-            if (positionAnswer === 'dørrute' || positionAnswer === 'dør') return cat.includes('dør') || cat.includes('dor');
-            if (positionAnswer === 'siderute') return cat.includes('side');
-            return true;
-          });
-        }
-
-        // Filter by all accumulated equipment answers
-        if (candidates.length > 0) {
-          candidates = filterByEquipment(candidates, equipmentAnswers);
-        }
-
-        vehicleInfo = session.vehicle;
-        confidence = 0.8; // We already had a good search before
       }
-      // If not a valid answer, fall through to normal NER/search (user may have changed topic)
+
+      if (session.candidate_data) {
+        try {
+          candidates = JSON.parse(session.candidate_data);
+        } catch {
+          candidates = [];
+        }
+      }
+
+      // If position was just answered, filter candidates by position first
+      if (session.pending_question === 'position' && candidates.length > 0) {
+        const positionAnswer = answer?.toLowerCase() || '';
+        candidates = candidates.filter((c: Candidate) => {
+          const cat = String(c.category || '').toLowerCase();
+          if (positionAnswer === 'frontrute') return cat.includes('front');
+          if (positionAnswer === 'bakrute') return cat.includes('bak');
+          if (positionAnswer === 'dørrute' || positionAnswer === 'dør') return cat.includes('dør') || cat.includes('dor');
+          if (positionAnswer === 'siderute') return cat.includes('side');
+          return true;
+        });
+      }
+
+      // Filter by all accumulated equipment answers
+      if (candidates.length > 0) {
+        candidates = filterByEquipment(candidates, equipmentAnswers);
+      }
+
+      vehicleInfo = session.vehicle;
+      confidence = 0.8; // We already had a good search before
     }
 
     // ── B: Normal search flow ──
