@@ -38,9 +38,18 @@ interface EquipmentFlags {
   hasAcoustic: boolean;
 }
 
+/** Hjelper for å få lesbar posisjonsbetegnelse */
+function positionLabel(position: string | null): string {
+  if (position === 'bakrute') return 'bakruten';
+  if (position === 'dørrute') return 'dørruten';
+  if (position === 'siderute') return 'sideruten';
+  return 'frontruten';
+}
+
 /** Bygg tilbehørsliste basert på posisjon og equipment */
 function buildAccessories(position: string | null, flags: EquipmentFlags): AccessoryItem[] {
   const accessories: AccessoryItem[] = [];
+  const posLabel = positionLabel(position);
 
   if (position === 'bakrute') {
     accessories.push({ sku: 'LIM-STD', name: 'Lim', price: 189, included: true, removable: false, category: 'required' });
@@ -63,7 +72,7 @@ function buildAccessories(position: string | null, flags: EquipmentFlags): Acces
       included: false,
       removable: false,
       category: 'warning',
-      notes: 'Kalibrering av førerassistentsystemer kreves etter montering av frontrute med kamera/sensor',
+      notes: `Kalibrering av førerassistentsystemer kreves etter montering av ${posLabel} med kamera/sensor`,
     });
   }
 
@@ -99,7 +108,7 @@ function buildAccessories(position: string | null, flags: EquipmentFlags): Acces
       included: false,
       removable: false,
       category: 'warning',
-      notes: 'Head-Up Display krever spesialfrontrute — sjekk at valgt glass støtter HUD-projeksjon',
+      notes: `Head-Up Display krever spesial${posLabel} — sjekk at valgt glass støtter HUD-projeksjon`,
     });
   }
 
@@ -111,7 +120,7 @@ function buildAccessories(position: string | null, flags: EquipmentFlags): Acces
       included: false,
       removable: false,
       category: 'warning',
-      notes: 'Frontruten har integrert antenne — sørg for riktig tilkobling ved montering',
+      notes: `${posLabel.charAt(0).toUpperCase() + posLabel.slice(1)} har integrert antenne — sørg for riktig tilkobling ved montering`,
     });
   }
 
@@ -532,10 +541,6 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         // Merge any new extracted fields
         if (dialogueResult.extracted && Object.keys(dialogueResult.extracted).length > 0) {
           equipmentAnswers = mergeExtractedIntoAnswers(equipmentAnswers, dialogueResult.extracted);
-        }
-
-        // Apply filtering if extracted fields changed
-        if (Object.keys(dialogueResult.extracted).length > 0) {
           candidates = filterByEquipment(candidates, equipmentAnswers);
         }
 
