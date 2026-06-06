@@ -5,7 +5,8 @@
 
 import type { Env, GlassRecord, OrdremottakerRequest, OrdremottakerResponse } from '../types';
 import { jsonResponse, errorResponse } from '../lib/cors';
-import { extractVehicleFromMessage, generateDialogue, buildCartUrl } from '../lib/ordremottaker-llm';
+import { extractVehicleHybrid } from '../lib/ordremottaker-ner';
+import { generateDialogue, buildCartUrl } from '../lib/ordremottaker-llm';
 import { createSession, getSession, updateSession, addMessage } from '../lib/ordremottaker-session';
 import { searchByRegnr } from './search';
 import { queryByBrandAndYear, queryByBrandOnly } from '../lib/db';
@@ -49,15 +50,16 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     // 4. Add user message
     await addMessage(env, sessionToken, 'user', body.message);
 
-    // 5. NER extraction
-    const nerResult = await extractVehicleFromMessage(env, body.message);
+    // 5. NER extraction (hybrid: regex + LLM fallback)
+    const nerResult = await extractVehicleHybrid(env, body.message);
 
     // 6. Search for candidates
     let candidates: GlassRecord[] = [];
     let vehicleInfo: { make: string; model: string; year: number } | undefined;
 
-    if (nerResult) {
+    if (nerResult.confidence >= 0.2) {
       if (nerResult.regnr) {
+        console.log(`[Ordremottaker] Searching by regnr: ${nerResult.regnr}`);
         const searchResult = await searchByRegnr(nerResult.regnr, env);
         if (searchResult.httpStatus === 200) {
           const searchBody = searchResult.body as {
@@ -87,14 +89,18 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
           model: nerResult.model || '',
           year: nerResult.year,
         };
-        let dbCandidates = await queryByBrandAndYear(
-          db,
-          nerResult.make,
-          nerResult.year,
-          nerResult.model || undefined
-        );
+        // Direct SQL (reliable) — try exact brand match first, then case-insensitive
+        const { results } = await db
+          .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
+          .bind(nerResult.make, nerResult.year, nerResult.year)
+          .all();
+        let dbCandidates = (results || []) as GlassRecord[];
         if (dbCandidates.length === 0) {
-          dbCandidates = await queryByBrandOnly(db, nerResult.make, nerResult.model || undefined);
+          const { results: r2 } = await db
+            .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+            .bind(nerResult.make, nerResult.year, nerResult.year)
+            .all();
+          dbCandidates = (r2 || []) as GlassRecord[];
         }
         candidates = dbCandidates.map(normalizeRecord) as GlassRecord[];
       } else if (nerResult.make) {
@@ -110,7 +116,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     }
 
     // 8. Filter by position if specified
-    if (nerResult?.position && candidates.length > 0) {
+    if (nerResult.position && candidates.length > 0) {
       const pos = nerResult.position.toLowerCase();
       candidates = candidates.filter((c: any) => {
         const cat = (c.category || '').toLowerCase();
@@ -122,19 +128,49 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       });
     }
 
-    // 9. Generate dialogue
-    const confidence = nerResult?.confidence ?? 0;
-    const dialogue = await generateDialogue(env, body.message, {
-      vehicle: vehicleInfo,
-      candidates: candidates.length > 0 ? candidates : null,
-      confidence,
-    });
+    // 9. Generate AI response
+    let aiResponse: string;
+    let status: OrdremottakerResponse['status'];
+    let nextAction: string | null = null;
 
-    const aiResponse =
-      dialogue?.ai_response ??
-      'Beklager, jeg kunne ikke forstå forespørselen. Kan du oppgi merke, modell og årsmodell?';
-    const status = (dialogue?.status ?? 'clarification') as OrdremottakerResponse['status'];
-    const nextAction = dialogue?.next_action ?? null;
+    const confidence = nerResult.confidence;
+
+    if (confidence < 0.3) {
+      // Very low confidence - ask for more info
+      aiResponse = 'Hei! For å finne riktig glass trenger jeg å vite: bilmerke, modell, årsmodell, og hvilket glass (frontrute, bakrute, sidedør, etc.). Har du registreringsnummer er det enda bedre!';
+      status = 'clarification';
+      nextAction = 'ask_vehicle_details';
+    } else if (candidates.length === 0 && vehicleInfo) {
+      // We understood vehicle but no glass found
+      aiResponse = `Jeg forstår at du trenger glass til ${vehicleInfo.make} ${vehicleInfo.model} (${vehicleInfo.year}). Dessverre fant jeg ingen glass som passer i katalogen vår. Kan du dobbeltsjekke årsmodellen, eller har du registreringsnummer?`;
+      status = 'clarification';
+      nextAction = 'ask_regnr_or_verify_year';
+    } else if (candidates.length > 0) {
+      // We have candidates - generate smart dialogue
+      const dialogue = await generateDialogue(env, body.message, {
+        vehicle: vehicleInfo,
+        candidates: candidates.length > 0 ? candidates : null,
+        confidence,
+      });
+      aiResponse = dialogue?.ai_response ?? `Jeg fant ${candidates.length} glass som passer. Se forslagene nedenfor.`;
+      status = (dialogue?.status ?? 'recommendation') as OrdremottakerResponse['status'];
+      nextAction = dialogue?.next_action ?? null;
+    } else {
+      // Partial understanding
+      const parts: string[] = [];
+      if (nerResult.make) parts.push(nerResult.make);
+      if (nerResult.model) parts.push(nerResult.model);
+      if (nerResult.year) parts.push(String(nerResult.year));
+      if (nerResult.position) parts.push(nerResult.position);
+
+      if (parts.length > 0) {
+        aiResponse = `Jeg forstår at du trenger ${parts.join(' ')}. For å finne eksakt riktig glass, kan du oppgi registreringsnummer eller bekrefte årsmodellen?`;
+      } else {
+        aiResponse = 'Hei! Jeg hjelper deg å finne riktig bilglass. Kan du oppgi bilmerke, modell, årsmodell og hvilket glass du trenger (frontrute, bakrute, etc.)?';
+      }
+      status = 'clarification';
+      nextAction = 'ask_vehicle_details';
+    }
 
     // 10. Build default accessories
     const accessories = DEFAULT_ACCESSORIES;
@@ -174,7 +210,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       candidates: candidates.slice(0, 5),
       accessories,
       cart_url: cartUrl,
-      confidence: dialogue?.confidence ?? confidence,
+      confidence: confidence,
       next_action: nextAction || undefined,
     };
 
