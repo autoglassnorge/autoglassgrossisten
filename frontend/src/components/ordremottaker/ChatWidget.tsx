@@ -79,7 +79,10 @@ export default function ChatWidget() {
   const handleEquipmentAnswer = (answer: string) => {
     const lastAiMsg = [...messages].reverse().find((m) => m.role === 'ai');
     if (!lastAiMsg?.nextAction) return;
-    recordEquipmentAnswer(lastAiMsg.nextAction, answer);
+    // Only record for rigid equipment questions, not LLM-managed questions
+    if (lastAiMsg.nextAction !== 'ask_llm') {
+      recordEquipmentAnswer(lastAiMsg.nextAction, answer);
+    }
     sendUserMessage(answer, MVP_CUSTOMER_ID);
   };
 
