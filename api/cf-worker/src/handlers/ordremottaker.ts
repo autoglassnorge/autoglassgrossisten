@@ -17,8 +17,20 @@ import { sha256 } from '../lib/learning';
 
 type Candidate = Record<string, unknown> & { properties?: Record<string, unknown> };
 
+interface EquipmentFlags {
+  hasAdas: boolean;
+  hasLdw: boolean;
+  isHeated: boolean;
+  heatedType: 'full' | 'camera' | null;
+  hasHud: boolean;
+  hasAntenna: boolean;
+  hasCoated: boolean;
+  hasRainSensor: boolean;
+  hasAcoustic: boolean;
+}
+
 /** Bygg tilbehørsliste basert på posisjon og equipment */
-function buildAccessories(position: string | null, hasAdas: boolean, isHeated: boolean): AccessoryItem[] {
+function buildAccessories(position: string | null, flags: EquipmentFlags): AccessoryItem[] {
   const accessories: AccessoryItem[] = [];
 
   if (position === 'bakrute') {
@@ -34,7 +46,7 @@ function buildAccessories(position: string | null, hasAdas: boolean, isHeated: b
     accessories.push({ sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true, category: 'required' });
   }
 
-  if (hasAdas) {
+  if (flags.hasAdas || flags.hasLdw) {
     accessories.push({
       sku: 'ADAS-WARN',
       name: 'ADAS-kalibrering',
@@ -46,15 +58,51 @@ function buildAccessories(position: string | null, hasAdas: boolean, isHeated: b
     });
   }
 
-  if (isHeated) {
+  if (flags.isHeated) {
+    if (flags.heatedType === 'camera') {
+      accessories.push({
+        sku: 'LIM-HEAT-CAM',
+        name: 'Spesial-lim (kamera-varme)',
+        price: 299,
+        included: true,
+        removable: true,
+        category: 'recommended',
+        notes: 'Anbefalt for frontrute med varmesone foran kamera — sikrer best isolasjon',
+      });
+    } else {
+      accessories.push({
+        sku: 'LIM-HEAT',
+        name: 'Spesial-lim (varmebestandig)',
+        price: 249,
+        included: true,
+        removable: true,
+        category: 'recommended',
+        notes: 'Anbefalt for oppvarmet glass — tåler høyere temperaturer',
+      });
+    }
+  }
+
+  if (flags.hasHud) {
     accessories.push({
-      sku: 'LIM-HEAT',
-      name: 'Spesial-lim (varmebestandig)',
-      price: 249,
-      included: true,
-      removable: true,
-      category: 'recommended',
-      notes: 'Anbefalt for oppvarmet glass — tåler høyere temperaturer',
+      sku: 'HUD-WARN',
+      name: 'HUD-spesialglass',
+      price: 0,
+      included: false,
+      removable: false,
+      category: 'warning',
+      notes: 'Head-Up Display krever spesialfrontrute — sjekk at valgt glass støtter HUD-projeksjon',
+    });
+  }
+
+  if (flags.hasAntenna) {
+    accessories.push({
+      sku: 'ANT-WARN',
+      name: 'Integrert antenne',
+      price: 0,
+      included: false,
+      removable: false,
+      category: 'warning',
+      notes: 'Frontruten har integrert antenne — sørg for riktig tilkobling ved montering',
     });
   }
 
@@ -67,8 +115,22 @@ function getProp(c: { properties?: Record<string, unknown> }, key: string): unkn
   return props[key];
 }
 
+type EquipmentField = 'adas' | 'ldw' | 'rainSensor' | 'heated' | 'heated_type' | 'hud' | 'antenna' | 'coated' | 'acoustic';
+
 /** Sjekk om kandidater har variasjon i et gitt equipment-felt */
-function hasVariation(candidates: Candidate[], field: 'adas' | 'rainSensor' | 'heated' | 'acoustic'): boolean {
+function hasVariation(candidates: Candidate[], field: EquipmentField): boolean {
+  if (field === 'ldw') {
+    const hasLdw = candidates.some((c) => !!getProp(c, 'lane_assist') || !!getProp(c, 'adas'));
+    const hasNoLdw = candidates.some((c) => !getProp(c, 'lane_assist') && !getProp(c, 'adas'));
+    return hasLdw && hasNoLdw;
+  }
+  if (field === 'heated_type') {
+    const heatedCandidates = candidates.filter((c) => !!getProp(c, 'heated'));
+    if (heatedCandidates.length < 2) return false;
+    const hasFull = heatedCandidates.some((c) => !getProp(c, 'camera'));
+    const hasCamera = heatedCandidates.some((c) => !!getProp(c, 'camera'));
+    return hasFull && hasCamera;
+  }
   const values = new Set<string>();
   for (const c of candidates) {
     const val = String(!!getProp(c, field));
@@ -83,7 +145,21 @@ function filterByEquipment(candidates: Candidate[], answers: Record<string, stri
   return candidates.filter((c) => {
     for (const [field, answer] of Object.entries(answers)) {
       if (answer === 'vet_ikke') continue;
-      if (field === 'adas' || field === 'rainSensor' || field === 'heated' || field === 'acoustic') {
+      if (field === 'ldw') {
+        const hasLdw = !!getProp(c, 'lane_assist') || !!getProp(c, 'adas');
+        const expected = answer === 'ja';
+        if (hasLdw !== expected) return false;
+        continue;
+      }
+      if (field === 'heated_type') {
+        if (answer === 'full') {
+          if (!getProp(c, 'heated') || !!getProp(c, 'camera')) return false;
+        } else if (answer === 'camera') {
+          if (!getProp(c, 'heated') || !getProp(c, 'camera')) return false;
+        }
+        continue;
+      }
+      if (field === 'adas' || field === 'rainSensor' || field === 'heated' || field === 'hud' || field === 'antenna' || field === 'coated' || field === 'acoustic') {
         const expected = answer === 'ja' ? 'true' : answer === 'nei' ? 'false' : answer;
         if (String(!!getProp(c, field)) !== expected) return false;
       }
@@ -98,6 +174,14 @@ function parseEquipmentAnswer(message: string): 'ja' | 'nei' | 'vet_ikke' | null
   if (lower === 'ja' || lower === 'yes' || lower === 'true' || lower === 'jepp' || lower === 'joda' || lower === 'jo' || lower === 'y' || lower === '1') return 'ja';
   if (lower === 'nei' || lower === 'no' || lower === 'false' || lower === 'nope' || lower === 'niks' || lower === 'n' || lower === '0') return 'nei';
   if (lower === 'vet ikke' || lower === 'vetikke' || lower === 'usikker' || lower === 'ikke sikker' || lower === 'maybe' || lower === 'kanskje' || lower === '?') return 'vet_ikke';
+  return null;
+}
+
+/** Parse heated_type-svar: full vs kamera-sone */
+function parseHeatedTypeAnswer(message: string): 'full' | 'camera' | null {
+  const lower = message.toLowerCase().trim();
+  if (lower.includes('full') || lower.includes('hele') || lower.includes('alt') || lower.includes('alt sammen')) return 'full';
+  if (lower.includes('kamera') || lower.includes('cam') || lower.includes('bare') || lower.includes('sone') || lower.includes('zone')) return 'camera';
   return null;
 }
 
@@ -135,16 +219,30 @@ function buildEquipmentQuestion(
   const isBack = position === 'bakrute';
   const glassType = isBack ? 'bakruten' : isFront ? 'frontruten' : 'glasset';
 
-  const priority = [
-    { field: 'adas', question: `Har bilen ADAS-kamera i ${glassType}?`, nextAction: 'ask_adas' },
+  const priority: Array<{ field: EquipmentField; question: string; nextAction: string; frontOnly?: boolean }> = [
+    { field: 'adas', question: `Har bilen ADAS-kamera i ${glassType}? Dette er et kamera bak frontruten som brukes til trafikkskiltgjenkjenning og adaptiv cruisekontroll.`, nextAction: 'ask_adas', frontOnly: true },
+    { field: 'ldw', question: `Har bilen filholderassistent (Lane Assist / LDW)? Dette hjelper deg å holde deg i filen.`, nextAction: 'ask_ldw', frontOnly: true },
     { field: 'heated', question: `Har bilen oppvarmet ${glassType}?`, nextAction: 'ask_heated' },
-    { field: 'rainSensor', question: 'Har bilen regnsensor?', nextAction: 'ask_rain_sensor' },
-    { field: 'acoustic', question: `Ønsker du akustisk (støydempet) ${glassType}?`, nextAction: 'ask_acoustic' },
+    { field: 'heated_type', question: `Er det full varme i hele frontruten, eller bare en varmesone foran kameraet?`, nextAction: 'ask_heated_type', frontOnly: true },
+    { field: 'hud', question: `Har bilen Head-Up Display (HUD)? Dette projiserer hastighet og info i frontruten.`, nextAction: 'ask_hud', frontOnly: true },
+    { field: 'antenna', question: `Har bilen antenne integrert i ${glassType}?`, nextAction: 'ask_antenna', frontOnly: true },
+    { field: 'coated', question: `Ønsker du varmereflekterende (solar/coated) ${glassType}? Dette holder varmen ute om sommeren.`, nextAction: 'ask_coated' },
+    { field: 'rainSensor', question: 'Har bilen regnsensor som aktiverer vindusviskerne automatisk?', nextAction: 'ask_rain_sensor' },
+    { field: 'acoustic', question: `Ønsker du akustisk (støydempet) ${glassType}? Dette gir deg en stillere kabin.`, nextAction: 'ask_acoustic' },
   ];
 
   for (const item of priority) {
     if (answers[item.field] !== undefined) continue;
-    if (hasVariation(candidates, item.field as 'adas' | 'rainSensor' | 'heated' | 'acoustic')) {
+    if (item.frontOnly && !isFront) continue;
+
+    // heated_type is a follow-up only after user confirms heated=ja
+    if (item.field === 'heated_type') {
+      if (answers['heated'] !== 'ja') continue;
+      if (!hasVariation(candidates, 'heated_type')) continue;
+      return item;
+    }
+
+    if (hasVariation(candidates, item.field)) {
       return item;
     }
   }
@@ -193,7 +291,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     await addMessage(env, sessionToken, 'user', body.message);
 
     // 3. State variables
-    let candidates: any[] = [];
+    let candidates: Candidate[] = [];
     let vehicleInfo: { make: string; model: string; year: number } | undefined;
     let aiResponse: string;
     let status: OrdremottakerResponse['status'];
@@ -206,7 +304,12 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
 
     // ── A: Handle pending equipment question ──
     if (session.pending_question) {
-      const answer = parseEquipmentAnswer(body.message);
+      let answer: string | null = null;
+      if (session.pending_question === 'heated_type') {
+        answer = parseHeatedTypeAnswer(body.message);
+      } else {
+        answer = parseEquipmentAnswer(body.message);
+      }
       if (answer !== null) {
         equipmentAnswers = { ...(session.answers || {}) };
         equipmentAnswers[session.pending_question] = answer;
@@ -268,13 +371,13 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
           const searchResult = await searchByRegnr(nerResult.regnr, env);
           if (searchResult.httpStatus === 200) {
             const searchBody = searchResult.body as {
-              candidates?: any[];
+              candidates?: Candidate[];
               vehicle?: { make: string; model: string; year: number };
             };
             const searchCandidates = searchBody.candidates || [];
             // Merge search candidates, avoiding duplicates with ground truth
             for (const sc of searchCandidates) {
-              if (!gtEurocodes.has(sc.eurocode)) {
+              if (!gtEurocodes.has(sc.eurocode as string)) {
                 candidates.push(sc);
               }
             }
@@ -291,7 +394,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
             if (dbCandidates.length === 0) {
               dbCandidates = await queryByBrandOnly(db, vinData.make, vinData.generation);
             }
-            candidates = dbCandidates.map(normalizeRecord) as GlassRecord[];
+            candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
           }
         } else if (nerResult.make && nerResult.year) {
           const db = env.GLASS_CATALOG_D1;
@@ -312,7 +415,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
               .all();
             dbCandidates = (r2 || []) as unknown as GlassRecord[];
           }
-          candidates = dbCandidates.map(normalizeRecord) as GlassRecord[];
+          candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
         } else if (nerResult.make) {
           const db = env.GLASS_CATALOG_D1;
           vehicleInfo = {
@@ -321,15 +424,15 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
             year: nerResult.year || new Date().getFullYear(),
           };
           const dbCandidates = await queryByBrandOnly(db, nerResult.make, nerResult.model || undefined);
-          candidates = dbCandidates.map(normalizeRecord) as GlassRecord[];
+          candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
         }
       }
 
       // Filter by position if specified
       if (nerResult?.position && candidates.length > 0) {
         const pos = nerResult.position.toLowerCase();
-        candidates = candidates.filter((c: any) => {
-          const cat = (c.category || '').toLowerCase();
+        candidates = candidates.filter((c: Candidate) => {
+          const cat = String(c.category || '').toLowerCase();
           if (pos === 'frontrute') return cat.includes('front');
           if (pos === 'bakrute') return cat.includes('bak');
           if (pos === 'dørrute-frem' || pos === 'dørrute-bak') return cat.includes('dør');
@@ -420,17 +523,27 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     // Build position-based accessories
     const pos = nerResult?.position || extractPositionFromMessage(body.message);
     const hasAdas = candidates.some((c: Candidate) => !!getProp(c, 'adas')) || equipmentAnswers['adas'] === 'ja';
+    const hasLdw = candidates.some((c: Candidate) => !!getProp(c, 'lane_assist') || !!getProp(c, 'adas')) || equipmentAnswers['ldw'] === 'ja';
     const isHeated = candidates.some((c: Candidate) => !!getProp(c, 'heated')) || equipmentAnswers['heated'] === 'ja';
-    const accessories = buildAccessories(pos, hasAdas, isHeated);
+    const heatedType = (equipmentAnswers['heated_type'] as 'full' | 'camera' | undefined) || null;
+    const hasHud = candidates.some((c: Candidate) => !!getProp(c, 'hud')) || equipmentAnswers['hud'] === 'ja';
+    const hasAntenna = candidates.some((c: Candidate) => !!getProp(c, 'antenna')) || equipmentAnswers['antenna'] === 'ja';
+    const hasCoated = candidates.some((c: Candidate) => !!getProp(c, 'coated')) || equipmentAnswers['coated'] === 'ja';
+    const hasRainSensor = candidates.some((c: Candidate) => !!getProp(c, 'rainSensor')) || equipmentAnswers['rainSensor'] === 'ja';
+    const hasAcoustic = candidates.some((c: Candidate) => !!getProp(c, 'acoustic')) || equipmentAnswers['acoustic'] === 'ja';
+    const accessories = buildAccessories(pos, {
+      hasAdas, hasLdw, isHeated, heatedType,
+      hasHud, hasAntenna, hasCoated, hasRainSensor, hasAcoustic
+    });
 
     // Build cart URL if recommendation and candidates exist
     let cartUrl: string | undefined;
     if (status === 'recommendation' && candidates.length > 0) {
-      const topCandidate = candidates[0] as any;
+      const topCandidate = candidates[0] as Candidate;
       const sku =
-        topCandidate.supplier_sku ||
-        topCandidate.articleNumber ||
-        topCandidate.eurocode ||
+        (topCandidate.supplier_sku as string | undefined) ||
+        (topCandidate.articleNumber as string | undefined) ||
+        (topCandidate.eurocode as string | undefined) ||
         String(topCandidate.id);
       const includedAccessories = accessories.filter((a) => a.included && !a.removable);
       const cartItems = [
@@ -442,12 +555,23 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
 
     // Update session
     const pendingQuestionField = nextAction?.startsWith('ask_')
-      ? (nextAction.replace('ask_', '') === 'rain_sensor' ? 'rainSensor' : nextAction.replace('ask_', ''))
+      ? (() => {
+          const field = nextAction.replace('ask_', '');
+          const mapping: Record<string, string> = {
+            rain_sensor: 'rainSensor',
+            heated_type: 'heated_type',
+            ldw: 'ldw',
+            hud: 'hud',
+            antenna: 'antenna',
+            coated: 'coated',
+          };
+          return mapping[field] || field;
+        })()
       : null;
 
     await updateSession(env, sessionToken, {
       vehicle: vehicleInfo,
-      candidates: candidates.map((c: any) => c.id).filter((id: number) => typeof id === 'number'),
+      candidates: candidates.map((c: Candidate) => c.id).filter((id): id is number => typeof id === 'number'),
       status: status === 'recommendation' ? 'completed' : 'active',
       pending_question: pendingQuestionField,
       candidate_data: status === 'question' ? JSON.stringify(candidates) : undefined,
@@ -476,7 +600,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       status,
       ai_response: aiResponse,
       session_token: sessionToken,
-      candidates: candidates.slice(0, 5),
+      candidates: candidates.slice(0, 5) as unknown as GlassRecord[],
       accessories,
       cart_url: cartUrl,
       confidence: confidence,
