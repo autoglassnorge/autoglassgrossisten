@@ -3,7 +3,7 @@ import { PageMeta } from '@/components/seo/PageMeta';
 import { JsonLd } from '@/components/seo/JsonLd';
 
 // Redesign seksjoner
-import { HeroWithSearch } from '@/components/home/HeroWithSearch';
+import { HeroProfessor } from '@/components/home/HeroProfessor';
 import { TrustBar } from '@/components/home/TrustBar';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import { PopularBrands } from '@/components/home/PopularBrands';
@@ -122,8 +122,8 @@ export default function HomePage() {
       />
 
       <main>
-        {/* 1. HERO — Direct regnr search */}
-        <HeroWithSearch />
+        {/* 1. HERO — Professor Autoglass primary entry */}
+        <HeroProfessor />
 
         {/* 2. TRUST — Manufacturer bar */}
         <TrustBar />
