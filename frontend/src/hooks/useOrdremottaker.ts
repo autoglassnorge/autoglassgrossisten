@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { sendMessage, type OrdremottakerResponse, type ProactiveSuggestion } from '@/api/ordremottaker';
+import { sendMessage, sendFeedback, type OrdremottakerResponse, type ProactiveSuggestion, type FeedbackPayload } from '@/api/ordremottaker';
 
 interface ChatMessage {
   id: string;
@@ -9,6 +9,8 @@ interface ChatMessage {
   candidates?: OrdremottakerResponse['candidates'];
   accessories?: OrdremottakerResponse['accessories'];
   cartUrl?: string;
+  status?: OrdremottakerResponse['status'];
+  nextAction?: OrdremottakerResponse['next_action'];
   timestamp: number;
 }
 
@@ -16,6 +18,7 @@ export function useOrdremottaker() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [sessionToken, setSessionToken] = useState<string>('');
   const [proactiveSuggestions, setProactiveSuggestions] = useState<ProactiveSuggestion[] | undefined>();
+  const [equipmentAnswers, setEquipmentAnswers] = useState<Record<string, string>>({});
 
   const mutation = useMutation({
     mutationFn: async ({ message, customerId }: { message: string; customerId?: number }) => {
@@ -36,9 +39,17 @@ export function useOrdremottaker() {
           candidates: response.candidates,
           accessories: response.accessories,
           cartUrl: response.cart_url,
+          status: response.status,
+          nextAction: response.next_action,
           timestamp: Date.now(),
         },
       ]);
+    },
+  });
+
+  const feedbackMutation = useMutation({
+    mutationFn: async (payload: FeedbackPayload) => {
+      return sendFeedback(payload);
     },
   });
 
@@ -67,19 +78,29 @@ export function useOrdremottaker() {
     [mutation]
   );
 
+  const recordEquipmentAnswer = useCallback((question: string, answer: string) => {
+    setEquipmentAnswers((prev) => ({ ...prev, [question]: answer }));
+  }, []);
+
   const reset = useCallback(() => {
     setMessages([]);
     setSessionToken('');
     setProactiveSuggestions(undefined);
+    setEquipmentAnswers({});
   }, []);
 
   return {
     messages,
     proactiveSuggestions,
+    sessionToken,
+    equipmentAnswers,
     sendUserMessage,
     init,
     isLoading: mutation.isPending,
     error: mutation.error,
     reset,
+    sendFeedback: feedbackMutation.mutateAsync,
+    isFeedbackLoading: feedbackMutation.isPending,
+    recordEquipmentAnswer,
   };
 }

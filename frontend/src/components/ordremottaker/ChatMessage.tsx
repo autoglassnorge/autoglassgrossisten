@@ -1,4 +1,4 @@
-import { User, Bot } from 'lucide-react';
+import { User, GraduationCap } from 'lucide-react';
 import type { OrdremottakerResponse } from '@/api/ordremottaker';
 
 interface ChatMessageProps {
@@ -15,7 +15,7 @@ export default function ChatMessage({ role, content }: ChatMessageProps) {
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-3`}>
       <div
-        className={`flex max-w-[85%] items-start gap-2 rounded-2xl px-4 py-3 ${
+        className={`flex max-w-[90%] md:max-w-[85%] items-start gap-2 rounded-2xl px-4 py-3 ${
           isUser
             ? 'bg-autoglass-blue text-white'
             : 'bg-gray-100 text-gray-800'
@@ -25,7 +25,7 @@ export default function ChatMessage({ role, content }: ChatMessageProps) {
           {isUser ? (
             <User className="h-4 w-4" />
           ) : (
-            <Bot className="h-4 w-4 text-autoglass-blue" />
+            <GraduationCap className="h-4 w-4 text-autoglass-blue" />
           )}
         </div>
         <p className="whitespace-pre-wrap text-sm leading-relaxed">{content}</p>

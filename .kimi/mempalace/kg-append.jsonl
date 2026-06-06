@@ -127,3 +127,19 @@
 {"subject":"ordremottaker-llm-agent","predicate":"input-methods","object":"regnr-vin-bilmerke-beskrivelse","validFrom":"2026-06-06T02:38:28.279Z"}
 {"subject":"ordremottaker-llm-agent","predicate":"goal","object":"zero-click-order-completion","validFrom":"2026-06-06T02:38:28.279Z"}
 {"subject":"ordremottaker-llm-agent","predicate":"owner-expertise","object":"30-years-order-receiving","validFrom":"2026-06-06T02:38:28.279Z"}
+{"subject":"ordremottaker","predicate":"supports","object":"ja-nei-vet_ikke-answers","validFrom":"2026-06-06T04:39:40.073Z"}
+{"subject":"ordremottaker","predicate":"branding","object":"Professor Autoglass","validFrom":"2026-06-06T04:39:40.075Z"}
+{"subject":"ordremottaker","predicate":"design_priority","object":"mobile-first-60-percent","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"ordremottaker","predicate":"has_feature","object":"feedback-loop","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"ordremottaker","predicate":"has_feature","object":"auto-ground-truth","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"ordremottaker","predicate":"equipment_priority","object":"ADAS-LDW-Varme-HUD-Antenne-Coated-Rain-Acoustic","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"equipment","predicate":"question_format","object":"ja-nei-vet_ikke","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"equipment","predicate":"has_followup","object":"heated_type-full-vs-camera","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"ground_truth","predicate":"builds_from","object":"feedback_log","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"feedback_log","predicate":"asks","object":"Var dette riktig glass?","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"domain_expert","predicate":"experience","object":"30-year-ordremottaker","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"domain_expert","predicate":"insight","object":"customers-forget-ADAS-antenna-LDW-HUD-coated","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"domain_expert","predicate":"insight","object":"heated-glass-has-camera-zone-variant","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"Moonshot-Kimi","predicate":"can_finetune","object":"false","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"search","predicate":"integrates_with","object":"AI-chat-at-REG-VIN","validFrom":"2026-06-06T04:39:40.079Z"}
+{"subject":"mobile","predicate":"traffic_share","object":"60-percent","validFrom":"2026-06-06T04:39:40.079Z"}

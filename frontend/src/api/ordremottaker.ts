@@ -48,6 +48,15 @@ export interface OrdremottakerResponse {
   proactive_suggestions?: ProactiveSuggestion[];
 }
 
+export interface FeedbackPayload {
+  session_token: string;
+  position: string;
+  recommended_eurocode: string | null;
+  chosen_eurocode?: string;
+  was_correct: 1 | 0 | -1;
+  equipment_answers: Record<string, string>;
+}
+
 export async function sendMessage(
   message: string,
   sessionToken?: string,
@@ -63,6 +72,21 @@ export async function sendMessage(
       channel: 'chat',
       language: 'no',
     }),
+  });
+
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new OrdremottakerError(body.error || `Feil (${res.status})`, res.status);
+  }
+
+  return res.json();
+}
+
+export async function sendFeedback(payload: FeedbackPayload): Promise<{ success: boolean }> {
+  const res = await fetch(`${API_BASE}/api/ordremottaker/feedback`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
