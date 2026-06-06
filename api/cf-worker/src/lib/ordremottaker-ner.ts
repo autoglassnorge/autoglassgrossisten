@@ -122,19 +122,22 @@ function extractModel(text: string, brand: string | null): string | null {
 
   // Get text after brand
   const afterBrand = text.slice(brandPos + brand.length);
-  // Match model: one or more words (can include numbers, dashes)
-  const modelMatch = afterBrand.match(/^\s*([A-Za-z0-9\-]+(?:\s+[A-Za-z0-9\-]+){0,2})/);
+  // Match model: word(s) after brand, but STOP before year numbers
+  // Pattern: match words, but exclude trailing year numbers
+  const modelMatch = afterBrand.match(/^\s*([A-Za-z][A-Za-z0-9\-]*(?:\s+[A-Za-z][A-Za-z0-9\-]*){0,2})/);
   if (modelMatch) {
-    const model = modelMatch[1].trim();
+    let model = modelMatch[1].trim();
+    // Remove trailing year if present (e.g., "Transporter 2019" → "Transporter")
+    model = model.replace(/\s+(19|20)\d{2}$/, '').trim();
     // Filter out common non-model words
     if (/^(jeg|har|en|ett|trenger|med|til|år|modell|type|variant)$/i.test(model)) {
       return null;
     }
-    // Filter out year numbers (4 digits that look like years)
+    // Filter out standalone year numbers
     if (/^(19|20)\d{2}$/.test(model)) {
       return null;
     }
-    return model;
+    return model || null;
   }
   return null;
 }

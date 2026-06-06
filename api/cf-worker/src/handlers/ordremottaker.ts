@@ -146,15 +146,36 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       status = 'clarification';
       nextAction = 'ask_regnr_or_verify_year';
     } else if (candidates.length > 0) {
-      // We have candidates - generate smart dialogue
-      const dialogue = await generateDialogue(env, body.message, {
-        vehicle: vehicleInfo,
-        candidates: candidates.length > 0 ? candidates : null,
-        confidence,
-      });
-      aiResponse = dialogue?.ai_response ?? `Jeg fant ${candidates.length} glass som passer. Se forslagene nedenfor.`;
-      status = (dialogue?.status ?? 'recommendation') as OrdremottakerResponse['status'];
-      nextAction = dialogue?.next_action ?? null;
+      // We have candidates — use natural templates instead of LLM for common cases
+      const pos = nerResult.position || 'glass';
+      const make = vehicleInfo?.make || nerResult.make || '';
+      const model = vehicleInfo?.model || nerResult.model || '';
+      const year = vehicleInfo?.year || nerResult.year || '';
+      const count = candidates.length;
+
+      // Build vehicle description without duplicates
+      const modelWithoutMake = model && model.toUpperCase().startsWith(make.toUpperCase())
+        ? model.slice(make.length).trim()
+        : model;
+      const vehicleDesc = [
+        make,
+        modelWithoutMake && modelWithoutMake !== make ? modelWithoutMake : '',
+        year && String(year) !== modelWithoutMake ? `(${year})` : ''
+      ].filter(Boolean).join(' ');
+
+      if (nerResult.regnr) {
+        aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Her er glassene som passer basert på regnr ${nerResult.regnr}:`;
+      } else if (nerResult.vin) {
+        aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Her er glassene som passer:`;
+      } else if (make && year && year < 2030) {
+        aiResponse = `Forstått — ${vehicleDesc}, ${pos}. Jeg har ${count} alternativer. Velg OEM eller aftermarket:`;
+      } else if (make) {
+        aiResponse = `Forstått — ${make}, ${pos}. Jeg har ${count} alternativer. Sjekk at det stemmer:`;
+      } else {
+        aiResponse = `Her er ${count} glass som kan passe. Sjekk at merke og modell stemmer:`;
+      }
+      status = 'recommendation';
+      nextAction = 'show_candidates';
     } else {
       // Partial understanding
       const parts: string[] = [];

@@ -135,19 +135,28 @@ export async function extractVehicleFromMessage(
   message: string
 ): Promise<ExtractedVehicle | null> {
   const systemPrompt =
-    `Du er en erfaren ordremottaker hos Autoglass AS med 30 års erfaring.\n` +
-    `Les kundens melding og ekstraher følgende felter.\n` +
-    `- make: bilmerke (f.eks. "Jaguar", "VW", "Audi")\n` +
-    `- model: modell (f.eks. "E-Pace", "Transporter", "A4")\n` +
-    `- year: årsmodell som tall\n` +
-    `- regnr: norsk registreringsnummer (2 bokstaver + 4-5 tall)\n` +
-    `- vin: 17-sifret understellsnummer\n` +
-    `- position: glassposisjon\n` +
-    `- adas: har bilen ADAS/kamera?\n` +
-    `- rain_sensor: har bilen regnsensor?\n` +
-    `- heated: har bilen oppvarmet frontrute?\n` +
-    `- intent: hva vil kunden?\n` +
-    `- confidence: 0.0-1.0 hvor sikker er du?\n` +
+    `Du er en erfaren bilglass-ordremottaker. Les kundens melding og ekstraher kjøretøydata.\n` +
+    `\n` +
+    `FELTER:\n` +
+    `- make: bilmerke (Jaguar, VW, Audi, BMW, Mercedes, Toyota, etc.)\n` +
+    `- model: modell (E-Pace, Transporter, A4, X5, C-Klasse, etc.)\n` +
+    `- year: årsmodell som tall (f.eks. 2019)\n` +
+    `- regnr: norsk regnr (AB12345 eller AB123456)\n` +
+    `- vin: 17-tegns understellsnummer\n` +
+    `- position: frontrute / bakrute / dørrute-frem / dørrute-bak / siderute / annet\n` +
+    `- adas: true hvis ADAS, kamera, filskiftevarsel, eller lane assist nevnes\n` +
+    `- rain_sensor: true hvis regnsensor eller automatisk vindusvisker nevnes\n` +
+    `- heated: true hvis oppvarmet frontrute eller varme i ruta nevnes\n` +
+    `- intent: bestill / prisforespørsel / support / uklart\n` +
+    `- confidence: 0.0-1.0\n` +
+    `\n` +
+    `VIKTIGE REGLER FOR NER:\n` +
+    `- "Jeg har en XC60" → make: "VOLVO", model: "XC60" (kjente modeller uten merke)\n` +
+    `- "T5" alene er IKKE en modell, det er en motor\n` +
+    `- "2020-modell" → year: 2020\n` +
+    `- "ruta" = frontrute hvis ikke annet er spesifisert\n` +
+    `- "siderute" = dørrute-frem h ikke side er spesifisert\n` +
+    `\n` +
     `Svar KUN med JSON. Ingen forklaring.`;
 
   const messages: LlmMessage[] = [
@@ -164,7 +173,7 @@ interface DialogueContext {
   confidence: number;
 }
 
-/** Generate AI dialogue response based on extracted vehicle and candidates */
+/** Generate AI dialogue response — uses TEXT mode for natural conversation */
 export async function generateDialogue(
   env: Env,
   message: string,
@@ -177,25 +186,58 @@ export async function generateDialogue(
   const uncertainty = context.confidence < 0.7 ? "Høy" : "Lav";
 
   const systemPrompt =
-    `Du er ordremottaker hos Autoglass AS. Du snakker norsk.\n` +
-    `Hjelp B2B-kunder (verksteder) med å finne riktig bilglass.\n` +
-    `REGLER:\n` +
-    `- Hvis du har funnet glass: vis OEM og Aftermarket side om side (ikke sorter).\n` +
-    `- Foreslå tilbehør: list, lim, klips.\n` +
-    `- Avslutt med direkte link til handlekurv når alt er klart.\n` +
-    `- Vær kort og konsis. Maks 3 setninger.\n` +
-    `- Hvis usikker: still ETT spørsmål.\n` +
-    `NÅVÆRENDE KONTEKST:\n` +
+    `Du er Tomar, ordremottaker hos Autoglass AS. 30 års erfaring.\n` +
+    `Du snakker med B2B-kunder (verksteder, mekanikere).\n` +
+    `\n` +
+    `STIL:\n` +
+    `- Kort og direkte. Maks 2 setninger.\n` +
+    `- Oppsummer det du har forstått, så still spørsmål eller vis resultater.\n` +
+    `- Aldri "Beklager, jeg kunne ikke..." — si heller hva du trenger.\n` +
+    `- Bruk naturlig norsk, ikke robotspråk.\n` +
+    `\n` +
+    `EKSEMPLER PÅ GODE SVAR:\n` +
+    `"Forstått — VW Transporter 2019, frontrute. Har bilen ADAS-kamera?"\n` +
+    `"Bra. Da er dette ADAS-glasset du trenger. OEM til 4.850 kr, Pilkington til 3.200 kr."\n` +
+    `"Hei! Jeg trenger merke, modell, år og hvilket glass for å hjelpe deg. Regnr er best."\n` +
+    `\n` +
+    `KONTEKST:\n` +
     `Kjøretøy: ${vehicleStr}\n` +
-    `Kandidater: ${candidateCount} glass funnet\n` +
-    `Usikkerhet: ${uncertainty}`;
+    `Glass funnet: ${candidateCount}\n` +
+    `Usikkerhet: ${uncertainty}\n` +
+    `\n` +
+    `Svar kort og naturlig. Ikke bruk punktlister eller markdown.`;
 
-  const messages: LlmMessage[] = [
-    { role: "system", content: systemPrompt },
-    { role: "user", content: message },
-  ];
+  try {
+    const result = await env.AI.run("@cf/moonshotai/kimi-k2.5", {
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: message }
+      ],
+      max_tokens: 256,
+      temperature: 0.4,
+    });
 
-  return callKimiJson<DialogueResult>(env, messages, DIALOGUE_SCHEMA);
+    const response = (result as { response?: string }).response || "";
+    if (!response) return null;
+
+    // Determine status from response content
+    let status: DialogueResult["status"] = "clarification";
+    if (candidateCount > 0 && !response.includes("?")) {
+      status = "recommendation";
+    } else if (candidateCount > 0 && response.includes("?")) {
+      status = "question";
+    }
+
+    return {
+      ai_response: response.trim(),
+      status,
+      next_action: null,
+      confidence: context.confidence,
+    };
+  } catch (e) {
+    console.error("[Dialogue] Error:", e);
+    return null;
+  }
 }
 
 /** Build checkout URL from cart items */
