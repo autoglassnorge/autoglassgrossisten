@@ -1,0 +1,188 @@
+/**
+ * AI Ordremottaker handler
+ * POST /api/ordremottaker
+ */
+
+import type { Env, GlassRecord, OrdremottakerRequest, OrdremottakerResponse } from '../types';
+import { jsonResponse, errorResponse } from '../lib/cors';
+import { extractVehicleFromMessage, generateDialogue, buildCartUrl } from '../lib/ordremottaker-llm';
+import { createSession, getSession, updateSession, addMessage } from '../lib/ordremottaker-session';
+import { searchByRegnr } from './search';
+import { queryByBrandAndYear, queryByBrandOnly } from '../lib/db';
+import { normalizeRecord } from '../lib/normalize';
+import { decodeVin } from '../lib/vin-decoder';
+
+const DEFAULT_ACCESSORIES = [
+  { sku: 'LIST-STD', name: 'List', price: 245, included: true, removable: false },
+  { sku: 'LIM-STD', name: 'Lim', price: 189, included: true, removable: false },
+  { sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true },
+];
+
+export async function handleOrdremottaker(request: Request, env: Env): Promise<Response> {
+  if (request.method !== 'POST') {
+    return errorResponse('Kun POST støttet', 405);
+  }
+
+  let body: OrdremottakerRequest;
+  try {
+    body = await request.json();
+  } catch {
+    return errorResponse('Ugyldig JSON', 400);
+  }
+
+  if (!body.message || typeof body.message !== 'string') {
+    return errorResponse('Mangler message', 400);
+  }
+
+  try {
+    // 3. Get or create session
+    let sessionToken = body.session_token || '';
+    let session = sessionToken ? await getSession(env, sessionToken) : null;
+    if (!session) {
+      sessionToken = await createSession(env);
+      session = await getSession(env, sessionToken);
+    }
+    if (!session) {
+      return errorResponse('Kunne ikke opprette session', 500);
+    }
+
+    // 4. Add user message
+    await addMessage(env, sessionToken, 'user', body.message);
+
+    // 5. NER extraction
+    const nerResult = await extractVehicleFromMessage(env, body.message);
+
+    // 6. Search for candidates
+    let candidates: GlassRecord[] = [];
+    let vehicleInfo: { make: string; model: string; year: number } | undefined;
+
+    if (nerResult) {
+      if (nerResult.regnr) {
+        const searchResult = await searchByRegnr(nerResult.regnr, env);
+        if (searchResult.httpStatus === 200) {
+          const searchBody = searchResult.body as {
+            candidates?: GlassRecord[];
+            vehicle?: { make: string; model: string; year: number };
+          };
+          candidates = searchBody.candidates || [];
+          vehicleInfo = searchBody.vehicle;
+        }
+      } else if (nerResult.vin) {
+        const vinData = decodeVin(nerResult.vin);
+        if (vinData) {
+          const make = vinData.make.charAt(0).toUpperCase() + vinData.make.slice(1);
+          const year = vinData.modelYear || new Date().getFullYear();
+          vehicleInfo = { make, model: vinData.generation, year };
+          const db = env.GLASS_CATALOG_D1;
+          let dbCandidates = await queryByBrandAndYear(db, vinData.make, year);
+          if (dbCandidates.length === 0) {
+            dbCandidates = await queryByBrandOnly(db, vinData.make, vinData.generation);
+          }
+          candidates = dbCandidates.map(normalizeRecord) as GlassRecord[];
+        }
+      } else if (nerResult.make && nerResult.year) {
+        const db = env.GLASS_CATALOG_D1;
+        vehicleInfo = {
+          make: nerResult.make,
+          model: nerResult.model || '',
+          year: nerResult.year,
+        };
+        let dbCandidates = await queryByBrandAndYear(
+          db,
+          nerResult.make,
+          nerResult.year,
+          nerResult.model || undefined
+        );
+        if (dbCandidates.length === 0) {
+          dbCandidates = await queryByBrandOnly(db, nerResult.make, nerResult.model || undefined);
+        }
+        candidates = dbCandidates.map(normalizeRecord) as GlassRecord[];
+      } else if (nerResult.make) {
+        const db = env.GLASS_CATALOG_D1;
+        vehicleInfo = {
+          make: nerResult.make,
+          model: nerResult.model || '',
+          year: nerResult.year || new Date().getFullYear(),
+        };
+        const dbCandidates = await queryByBrandOnly(db, nerResult.make, nerResult.model || undefined);
+        candidates = dbCandidates.map(normalizeRecord) as GlassRecord[];
+      }
+    }
+
+    // 8. Filter by position if specified
+    if (nerResult?.position && candidates.length > 0) {
+      const pos = nerResult.position.toLowerCase();
+      candidates = candidates.filter((c: any) => {
+        const cat = (c.category || '').toLowerCase();
+        if (pos === 'frontrute') return cat.includes('front');
+        if (pos === 'bakrute') return cat.includes('bak');
+        if (pos === 'dørrute-frem' || pos === 'dørrute-bak') return cat.includes('dør');
+        if (pos === 'siderute') return cat.includes('side');
+        return true;
+      });
+    }
+
+    // 9. Generate dialogue
+    const confidence = nerResult?.confidence ?? 0;
+    const dialogue = await generateDialogue(env, body.message, {
+      vehicle: vehicleInfo,
+      candidates: candidates.length > 0 ? candidates : null,
+      confidence,
+    });
+
+    const aiResponse =
+      dialogue?.ai_response ??
+      'Beklager, jeg kunne ikke forstå forespørselen. Kan du oppgi merke, modell og årsmodell?';
+    const status = (dialogue?.status ?? 'clarification') as OrdremottakerResponse['status'];
+    const nextAction = dialogue?.next_action ?? null;
+
+    // 10. Build default accessories
+    const accessories = DEFAULT_ACCESSORIES;
+
+    // 11. Build cart URL if recommendation and candidates exist
+    let cartUrl: string | undefined;
+    if (status === 'recommendation' && candidates.length > 0) {
+      const topCandidate = candidates[0] as any;
+      const sku =
+        topCandidate.supplier_sku ||
+        topCandidate.articleNumber ||
+        topCandidate.eurocode ||
+        String(topCandidate.id);
+      const includedAccessories = accessories.filter((a) => a.included && !a.removable);
+      const cartItems = [
+        { sku, qty: 1 },
+        ...includedAccessories.map((a) => ({ sku: a.sku, qty: 1 })),
+      ];
+      cartUrl = buildCartUrl(cartItems);
+    }
+
+    // 12. Update session
+    await updateSession(env, sessionToken, {
+      vehicle: vehicleInfo,
+      candidates: candidates.map((c: any) => c.id).filter((id: number) => typeof id === 'number'),
+      status: status === 'recommendation' ? 'completed' : 'active',
+    });
+
+    // 13. Add AI message
+    await addMessage(env, sessionToken, 'ai', aiResponse);
+
+    // 14. Return response
+    const response: OrdremottakerResponse = {
+      status,
+      ai_response: aiResponse,
+      session_token: sessionToken,
+      candidates: candidates.slice(0, 5),
+      accessories,
+      cart_url: cartUrl,
+      confidence: dialogue?.confidence ?? confidence,
+      next_action: nextAction || undefined,
+    };
+
+    return jsonResponse(response);
+  } catch (e) {
+    console.error(
+      `[Ordremottaker] Handler error: ${e instanceof Error ? e.message : String(e)}`
+    );
+    return errorResponse('Intern feil i ordremottaker', 500);
+  }
+}
