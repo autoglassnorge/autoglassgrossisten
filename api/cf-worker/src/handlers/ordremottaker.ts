@@ -168,6 +168,16 @@ function filterByEquipment(candidates: Candidate[], answers: Record<string, stri
   });
 }
 
+/** Parse posisjon-svar fra bruker */
+function parsePositionAnswer(message: string): string | null {
+  const lower = message.toLowerCase().trim();
+  if (lower.includes('frontrute') || lower.includes('vindskjerm') || lower.includes('front')) return 'frontrute';
+  if (lower.includes('bakrute') || lower.includes('bakvindu') || lower.includes('bak')) return 'bakrute';
+  if (lower.includes('dørrute') || lower.includes('sidedør') || lower.includes('dør')) return 'dørrute';
+  if (lower.includes('siderute') || lower.includes('sidevindu') || lower.includes('side')) return 'siderute';
+  return null;
+}
+
 /** Parse equipment-svar fra bruker: ja / nei / vet_ikke */
 function parseEquipmentAnswer(message: string): 'ja' | 'nei' | 'vet_ikke' | null {
   const lower = message.toLowerCase().trim();
@@ -293,8 +303,8 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     // 3. State variables
     let candidates: Candidate[] = [];
     let vehicleInfo: { make: string; model: string; year: number } | undefined;
-    let aiResponse: string;
-    let status: OrdremottakerResponse['status'];
+    let aiResponse = '';
+    let status: OrdremottakerResponse['status'] = 'clarification';
     let nextAction: string | null = null;
     let confidence = 0;
     let nerResult: any = null;
@@ -302,11 +312,13 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     // Equipment answers (start fresh for new searches; preserved when answering pending questions)
     let equipmentAnswers: Record<string, string> = {};
 
-    // ── A: Handle pending equipment question ──
+    // ── A: Handle pending question (equipment OR position) ──
     if (session.pending_question) {
       let answer: string | null = null;
       if (session.pending_question === 'heated_type') {
         answer = parseHeatedTypeAnswer(body.message);
+      } else if (session.pending_question === 'position') {
+        answer = parsePositionAnswer(body.message);
       } else {
         answer = parseEquipmentAnswer(body.message);
       }
@@ -323,7 +335,20 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
           }
         }
 
-        // Filter by all accumulated answers
+        // If position was just answered, filter candidates by position first
+        if (session.pending_question === 'position' && candidates.length > 0) {
+          const pos = answer.toLowerCase();
+          candidates = candidates.filter((c: Candidate) => {
+            const cat = String(c.category || '').toLowerCase();
+            if (pos === 'frontrute') return cat.includes('front');
+            if (pos === 'bakrute') return cat.includes('bak');
+            if (pos === 'dørrute' || pos === 'dør') return cat.includes('dør') || cat.includes('dor');
+            if (pos === 'siderute') return cat.includes('side');
+            return true;
+          });
+        }
+
+        // Filter by all accumulated equipment answers
         if (candidates.length > 0) {
           candidates = filterByEquipment(candidates, equipmentAnswers);
         }
@@ -331,7 +356,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         vehicleInfo = session.vehicle;
         confidence = 0.8; // We already had a good search before
       }
-      // If not a valid equipment answer, fall through to normal NER/search (user may have changed topic)
+      // If not a valid answer, fall through to normal NER/search (user may have changed topic)
     }
 
     // ── B: Normal search flow ──
@@ -464,14 +489,28 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       status = 'clarification';
       nextAction = 'ask_regnr_or_verify_year';
     } else if (candidates.length > 0) {
-      // We have candidates — check for equipment variations first
+      // We have candidates
       const pos = nerResult?.position || extractPositionFromMessage(body.message);
-      const eqQuestion = candidates.length > 3 ? buildEquipmentQuestion(candidates, equipmentAnswers, pos) : null;
 
-      if (eqQuestion) {
-        aiResponse = eqQuestion.question;
-        status = 'question';
-        nextAction = eqQuestion.nextAction;
+      // If position is unknown and candidates have mixed categories, ask position FIRST
+      const posKnown = pos !== 'glass';
+      if (!posKnown && !session.answers?.position) {
+        const categories = new Set(candidates.map((c: Candidate) => String(c.category || '').toLowerCase()));
+        if (categories.size > 1) {
+          aiResponse = `Flott — jeg fant ${candidates.length} glass som passer. Hvilket glass trenger du? (frontrute, bakrute, siderute, eller dørrute)`;
+          status = 'question';
+          nextAction = 'ask_position';
+        }
+      }
+
+      // If position is known (or only one category), check equipment variations
+      if (status !== 'question') {
+        const eqQuestion = candidates.length > 3 ? buildEquipmentQuestion(candidates, equipmentAnswers, pos) : null;
+
+        if (eqQuestion) {
+          aiResponse = eqQuestion.question;
+          status = 'question';
+          nextAction = eqQuestion.nextAction;
       } else {
         // Show results
         const make = vehicleInfo?.make || nerResult?.make || '';
@@ -503,6 +542,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         status = 'recommendation';
         nextAction = 'show_candidates';
       }
+    }
     } else {
       // Partial understanding
       const parts: string[] = [];
