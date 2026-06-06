@@ -3,7 +3,7 @@
  * POST /api/ordremottaker
  */
 
-import type { Env, GlassRecord, OrdremottakerRequest, OrdremottakerResponse } from '../types';
+import type { Env, GlassRecord, OrdremottakerRequest, OrdremottakerResponse, AccessoryItem } from '../types';
 import { jsonResponse, errorResponse } from '../lib/cors';
 import { extractVehicleHybrid } from '../lib/ordremottaker-ner';
 import { generateDialogue, buildCartUrl } from '../lib/ordremottaker-llm';
@@ -13,11 +13,70 @@ import { queryByBrandAndYear, queryByBrandOnly } from '../lib/db';
 import { normalizeRecord } from '../lib/normalize';
 import { decodeVin } from '../lib/vin-decoder';
 
-const DEFAULT_ACCESSORIES = [
-  { sku: 'LIST-STD', name: 'List', price: 245, included: true, removable: false },
-  { sku: 'LIM-STD', name: 'Lim', price: 189, included: true, removable: false },
-  { sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true },
-];
+function buildAccessories(
+  position?: string,
+  hasAdas = false,
+  isHeated = false
+): AccessoryItem[] {
+  const accessories: AccessoryItem[] = [];
+  const pos = (position || '').toLowerCase();
+
+  const isFront = pos.includes('front');
+  const isBack = pos.includes('bak');
+  const isDoor = pos.includes('dør');
+  const isSide = pos.includes('side');
+
+  if (isFront) {
+    accessories.push(
+      { sku: 'LIST-FRONT', name: 'Pyntelist', price: 245, included: true, removable: false, category: 'required' },
+      { sku: 'LIM-FRONT', name: 'Lim', price: 189, included: true, removable: false, category: 'required' },
+      { sku: 'KLIPS-FRONT', name: 'Klips', price: 89, included: true, removable: true, category: 'required' }
+    );
+  } else if (isBack) {
+    accessories.push(
+      { sku: 'LIM-BACK', name: 'Lim', price: 189, included: true, removable: false, category: 'required' },
+      { sku: 'KLIPS-BACK', name: 'Klips', price: 89, included: true, removable: true, category: 'required' }
+    );
+  } else if (isDoor || isSide) {
+    accessories.push(
+      { sku: 'KLIPS-DOOR', name: 'Klips', price: 89, included: true, removable: true, category: 'required' },
+      { sku: 'TETNING-DOOR', name: 'Tetningslist', price: 129, included: true, removable: false, category: 'required' }
+    );
+  } else {
+    // Fallback: generic set for unknown positions
+    accessories.push(
+      { sku: 'LIST-STD', name: 'Pyntelist', price: 245, included: true, removable: false, category: 'required' },
+      { sku: 'LIM-STD', name: 'Lim', price: 189, included: true, removable: false, category: 'required' },
+      { sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true, category: 'required' }
+    );
+  }
+
+  if (hasAdas) {
+    accessories.push({
+      sku: 'ADAS-WARN',
+      name: 'ADAS-kalibrering',
+      price: 0,
+      included: true,
+      removable: false,
+      category: 'warning',
+      notes: 'Husk: ADAS-kalibrering kreves etter montering',
+    });
+  }
+
+  if (isHeated) {
+    accessories.push({
+      sku: 'LIM-HEAT',
+      name: 'Spesial-lim (varmebestandig)',
+      price: 249,
+      included: true,
+      removable: false,
+      category: 'recommended',
+      notes: 'Krever varmebestandig lim',
+    });
+  }
+
+  return accessories;
+}
 
 export async function handleOrdremottaker(request: Request, env: Env): Promise<Response> {
   if (request.method !== 'POST') {
@@ -193,18 +252,20 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       nextAction = 'ask_vehicle_details';
     }
 
-    // 10. Build default accessories
-    const accessories = DEFAULT_ACCESSORIES;
+    // 10. Build position-based accessories
+    const topCandidate = candidates[0] as GlassRecord | undefined;
+    const hasAdas = topCandidate ? topCandidate.adas === 1 : false;
+    const isHeated = topCandidate ? topCandidate.heated === 1 : false;
+    const accessories: AccessoryItem[] = buildAccessories(nerResult.position || undefined, hasAdas, isHeated);
 
     // 11. Build cart URL if recommendation and candidates exist
     let cartUrl: string | undefined;
     if (status === 'recommendation' && candidates.length > 0) {
-      const topCandidate = candidates[0] as any;
       const sku =
-        topCandidate.supplier_sku ||
-        topCandidate.articleNumber ||
-        topCandidate.eurocode ||
-        String(topCandidate.id);
+        topCandidate?.supplier_sku ||
+        topCandidate?.article_number ||
+        topCandidate?.eurocode ||
+        String(topCandidate?.id);
       const includedAccessories = accessories.filter((a) => a.included && !a.removable);
       const cartItems = [
         { sku, qty: 1 },

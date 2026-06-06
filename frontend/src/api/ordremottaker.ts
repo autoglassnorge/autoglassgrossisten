@@ -18,6 +18,8 @@ export interface AccessoryItem {
   price: number;
   included: boolean;
   removable: boolean;
+  notes?: string;
+  category?: 'required' | 'recommended' | 'warning';
 }
 
 export interface OrdremottakerResponse {

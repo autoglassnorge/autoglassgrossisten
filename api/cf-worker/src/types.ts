@@ -252,6 +252,22 @@ export interface AccessoryItem {
   price: number;
   included: boolean;
   removable: boolean;
+  notes?: string;
+  category?: "required" | "recommended" | "warning";
+}
+
+export interface ProactiveSuggestionItem {
+  sku: string;
+  name: string;
+  lastOrdered: string;
+  qty: number;
+  product?: GlassRecord;
+}
+
+export interface ProactiveSuggestion {
+  type: "last_order" | "frequent_item" | "reorder_prompt";
+  message: string;
+  items: ProactiveSuggestionItem[];
 }
 
 export interface OrdremottakerResponse {
@@ -263,6 +279,7 @@ export interface OrdremottakerResponse {
   cart_url?: string;
   confidence: number;
   next_action?: string;
+  proactive_suggestions?: ProactiveSuggestion[];
 }
 
 export interface AiSession {

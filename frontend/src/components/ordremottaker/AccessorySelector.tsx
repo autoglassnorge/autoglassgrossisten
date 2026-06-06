@@ -30,33 +30,82 @@ export default function AccessorySelector({ accessories }: AccessorySelectorProp
       .reduce((sum, a) => sum + a.price, 0);
   }, [accessories, selected]);
 
+  const getCategoryStyles = (category?: AccessoryItem['category']) => {
+    switch (category) {
+      case 'warning':
+        return 'bg-yellow-50 border-yellow-200';
+      case 'recommended':
+        return 'bg-blue-50 border-blue-200';
+      case 'required':
+      default:
+        return 'bg-white border-gray-100';
+    }
+  };
+
+  const getCheckboxStyles = (category?: AccessoryItem['category']) => {
+    switch (category) {
+      case 'warning':
+        return 'text-yellow-600 focus:ring-yellow-500';
+      case 'recommended':
+        return 'text-blue-600 focus:ring-blue-500';
+      case 'required':
+      default:
+        return 'text-autoglass-blue focus:ring-autoglass-blue';
+    }
+  };
+
   return (
     <div className="mb-4 rounded-lg border border-gray-200 bg-white p-4">
       <h4 className="mb-3 text-sm font-semibold text-gray-700">Tilbehør</h4>
       <div className="space-y-2">
         {accessories.map((a) => {
           const isChecked = selected.has(a.sku);
+          const isWarning = a.category === 'warning';
           return (
-            <label
+            <div
               key={a.sku}
-              className={`flex items-center justify-between rounded-md px-2 py-2 ${
-                a.removable ? 'cursor-pointer hover:bg-gray-50' : 'cursor-default opacity-70'
-              }`}
+              className={`rounded-md border ${getCategoryStyles(a.category)}`}
             >
-              <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  checked={isChecked}
-                  onChange={() => toggle(a.sku, a.removable)}
-                  disabled={!a.removable}
-                  className="h-4 w-4 rounded border-gray-300 text-autoglass-blue focus:ring-autoglass-blue"
-                />
-                <span className="text-sm text-gray-800">{a.name}</span>
-              </div>
-              <span className="text-sm font-medium text-gray-600">
-                {a.price.toLocaleString('no-NO')} kr
-              </span>
-            </label>
+              <label
+                className={`flex items-center justify-between rounded-md px-3 py-2.5 ${
+                  a.removable ? 'cursor-pointer hover:opacity-80' : 'cursor-default opacity-70'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={isChecked}
+                    onChange={() => toggle(a.sku, a.removable)}
+                    disabled={!a.removable}
+                    className={`h-4 w-4 rounded border-gray-300 ${getCheckboxStyles(a.category)}`}
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-gray-800">
+                      {a.name}
+                      {a.category === 'required' && (
+                        <span className="ml-1.5 text-xs font-normal text-gray-400">(obligatorisk)</span>
+                      )}
+                      {a.category === 'recommended' && (
+                        <span className="ml-1.5 text-xs font-normal text-blue-600">(anbefalt)</span>
+                      )}
+                    </span>
+                  </div>
+                </div>
+                <span className="text-sm font-medium text-gray-600">
+                  {a.price > 0 ? `${a.price.toLocaleString('no-NO')} kr` : '—'}
+                </span>
+              </label>
+              {a.notes && (
+                <div className={`px-3 pb-2.5 text-xs ${isWarning ? 'text-yellow-800 font-medium' : 'text-gray-500'}`}>
+                  {isWarning && (
+                    <span className="mr-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-yellow-400 text-xs text-white">
+                      !
+                    </span>
+                  )}
+                  {a.notes}
+                </div>
+              )}
+            </div>
           );
         })}
       </div>
