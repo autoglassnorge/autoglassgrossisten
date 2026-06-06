@@ -197,15 +197,15 @@ export default function ChatWidget() {
                     accessories={msg.accessories}
                     cartUrl={msg.cartUrl}
                   />
-                  {msg.role === 'ai' && msg.candidates && msg.candidates.length > 0 && (
+                  {msg.role === 'ai' && msg.status === 'recommendation' && msg.candidates && msg.candidates.length > 0 && (
                     <GlassSuggestion candidates={msg.candidates} />
                   )}
-                  {msg.role === 'ai' && msg.accessories && msg.accessories.length > 0 && (
+                  {msg.role === 'ai' && msg.status === 'recommendation' && msg.accessories && msg.accessories.length > 0 && (
                     <AccessorySelector accessories={msg.accessories} />
                   )}
 
-                  {/* Equipment question buttons — only on last AI message */}
-                  {isLastMessage && msg.role === 'ai' && isAskingEquipment && (
+                  {/* Equipment question buttons — only on last AI message when status is 'question' */}
+                  {isLastMessage && msg.role === 'ai' && msg.status === 'question' && isAskingEquipment && (
                     <div className="mb-4 mt-2 flex flex-col gap-2">
                       <p className="text-sm text-gray-500">Velg et alternativ:</p>
                       <div className="flex flex-wrap gap-2">
