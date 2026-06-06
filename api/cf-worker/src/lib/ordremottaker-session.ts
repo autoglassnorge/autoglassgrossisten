@@ -15,6 +15,8 @@ export interface SessionContext {
   answers: Record<string, string>;
   cartItems: { sku: string; qty: number }[];
   status: "active" | "completed" | "escalated";
+  pending_question?: string | null;
+  candidate_data?: string; // JSON-serialiserte kandidater (for equipment oppfølging)
 }
 
 const SESSION_PREFIX = "ai_session:";
