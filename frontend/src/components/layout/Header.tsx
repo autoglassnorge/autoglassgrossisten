@@ -1,26 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { Search, ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/stores/cartStore';
+import { useChatStore } from '@/stores/chatStore';
+import ProfessorAvatar from '@/components/ordremottaker/ProfessorAvatar';
 
 export function Header() {
-  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const cartItems = useCartStore((s) => s.items);
   const cartTotal = cartItems.reduce((sum, i) => sum + i.quantity, 0);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/sok?regnr=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery('');
-      setMobileOpen(false);
-      setSearchOpen(false);
-    }
-  };
+  const { openChat } = useChatStore();
 
   const navLinks = [
     { label: 'Katalog', href: '/bla' },
@@ -44,19 +34,16 @@ export function Header() {
             />
           </Link>
 
-          {/* Desktop search */}
-          <form onSubmit={handleSearch} className="hidden md:block flex-1 max-w-md ml-4">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Reg.nr eller VIN..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-md border border-gray-200 bg-gray-50 py-2 pl-9 pr-3 text-sm outline-none focus:border-autoglass-blue focus:ring-1 focus:ring-autoglass-blue"
-              />
-            </div>
-          </form>
+          {/* Desktop: Spør Professor Autoglass */}
+          <div className="hidden md:block flex-1 max-w-md ml-4">
+            <button
+              onClick={() => openChat()}
+              className="w-full flex items-center gap-2 rounded-md border border-gray-200 bg-gray-50 py-2 px-3 text-sm text-gray-500 hover:border-autoglass-blue hover:bg-autoglass-light hover:text-autoglass-blue transition-colors"
+            >
+              <ProfessorAvatar size="sm" className="!h-6 !w-6" />
+              <span>Spør Professor Autoglass...</span>
+            </button>
+          </div>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1 ml-auto">
@@ -86,10 +73,10 @@ export function Header() {
               variant="ghost"
               size="sm"
               className="min-h-[44px] min-w-[44px] px-2"
-              onClick={() => setSearchOpen(true)}
-              aria-label="Søk"
+              onClick={() => openChat()}
+              aria-label="Spør Professor Autoglass"
             >
-              <Search className="h-5 w-5" />
+              <ProfessorAvatar size="sm" className="!h-6 !w-6" />
             </Button>
             <Link to="/kasse" aria-label="Handlekurv">
               <Button
@@ -138,32 +125,7 @@ export function Header() {
         )}
       </header>
 
-      {/* Mobile search overlay */}
-      {searchOpen && (
-        <div className="fixed inset-0 z-[70] bg-white md:hidden animate-fade-in">
-          <div className="flex items-center gap-2 px-3 py-2 border-b">
-            <form onSubmit={handleSearch} className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Reg.nr eller VIN..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                  className="w-full rounded-md border border-gray-200 bg-gray-50 py-3 pl-10 pr-3 text-base outline-none focus:border-autoglass-blue focus:ring-1 focus:ring-autoglass-blue"
-                />
-              </div>
-            </form>
-            <Button variant="ghost" size="sm" className="min-h-[44px] px-3" onClick={() => setSearchOpen(false)}>
-              Avbryt
-            </Button>
-          </div>
-          <div className="p-4 text-sm text-gray-500">
-            <p>Tast inn registreringsnummer eller VIN for å finne riktig glass.</p>
-          </div>
-        </div>
-      )}
+
     </>
   );
 }
