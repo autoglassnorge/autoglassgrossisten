@@ -18,8 +18,22 @@ export interface AccessoryItem {
   price: number;
   included: boolean;
   removable: boolean;
-  notes?: string;
   category?: 'required' | 'recommended' | 'warning';
+  notes?: string;
+}
+
+export interface ProactiveSuggestionItem {
+  sku: string;
+  name: string;
+  lastOrdered: string;
+  qty: number;
+  product?: Product;
+}
+
+export interface ProactiveSuggestion {
+  type: 'last_order' | 'frequent_item' | 'reorder_prompt';
+  message: string;
+  items: ProactiveSuggestionItem[];
 }
 
 export interface OrdremottakerResponse {
@@ -31,11 +45,13 @@ export interface OrdremottakerResponse {
   cart_url?: string;
   confidence: number;
   next_action?: string;
+  proactive_suggestions?: ProactiveSuggestion[];
 }
 
 export async function sendMessage(
   message: string,
-  sessionToken?: string
+  sessionToken?: string,
+  customerId?: number
 ): Promise<OrdremottakerResponse> {
   const res = await fetch(`${API_BASE}/api/ordremottaker`, {
     method: 'POST',
@@ -43,6 +59,7 @@ export async function sendMessage(
     body: JSON.stringify({
       message,
       session_token: sessionToken,
+      customer_id: customerId,
       channel: 'chat',
       language: 'no',
     }),

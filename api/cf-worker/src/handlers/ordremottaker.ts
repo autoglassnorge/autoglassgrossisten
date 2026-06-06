@@ -12,6 +12,7 @@ import { searchByRegnr } from './search';
 import { queryByBrandAndYear, queryByBrandOnly } from '../lib/db';
 import { normalizeRecord } from '../lib/normalize';
 import { decodeVin } from '../lib/vin-decoder';
+import { getCustomerHistory } from '../lib/customer-history';
 
 const DEFAULT_ACCESSORIES = [
   { sku: 'LIST-STD', name: 'List', price: 245, included: true, removable: false },
@@ -343,6 +344,20 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       answers: equipmentAnswers,
     });
 
+    // Fetch proactive suggestions for known B2B customers
+    let proactiveSuggestions: OrdremottakerResponse['proactive_suggestions'];
+    if (body.customer_id && typeof body.customer_id === 'number') {
+      try {
+        const db = env.GLASS_CATALOG_D1;
+        proactiveSuggestions = (await getCustomerHistory(db, body.customer_id)) || undefined;
+      } catch (err) {
+        console.error(
+          `[Ordremottaker] Failed to load customer history for ${body.customer_id}:`,
+          err instanceof Error ? err.message : String(err)
+        );
+      }
+    }
+
     // Add AI message
     await addMessage(env, sessionToken, 'ai', aiResponse);
 
@@ -356,6 +371,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       cart_url: cartUrl,
       confidence: confidence,
       next_action: nextAction || undefined,
+      proactive_suggestions: proactiveSuggestions,
     };
 
     return jsonResponse(response);

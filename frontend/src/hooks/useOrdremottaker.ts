@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { sendMessage, type OrdremottakerResponse } from '@/api/ordremottaker';
+import { sendMessage, type OrdremottakerResponse, type ProactiveSuggestion } from '@/api/ordremottaker';
 
 interface ChatMessage {
   id: string;
@@ -15,14 +15,18 @@ interface ChatMessage {
 export function useOrdremottaker() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [sessionToken, setSessionToken] = useState<string>('');
+  const [proactiveSuggestions, setProactiveSuggestions] = useState<ProactiveSuggestion[] | undefined>();
 
   const mutation = useMutation({
-    mutationFn: async (message: string) => {
-      const response = await sendMessage(message, sessionToken || undefined);
+    mutationFn: async ({ message, customerId }: { message: string; customerId?: number }) => {
+      const response = await sendMessage(message, sessionToken || undefined, customerId);
       if (response.session_token) setSessionToken(response.session_token);
       return response;
     },
     onSuccess: (response) => {
+      if (response.proactive_suggestions) {
+        setProactiveSuggestions(response.proactive_suggestions);
+      }
       setMessages((prev) => [
         ...prev,
         {
@@ -38,8 +42,17 @@ export function useOrdremottaker() {
     },
   });
 
+  const init = useCallback(
+    (customerId?: number) => {
+      // Send a hidden init message to fetch proactive suggestions
+      // without showing a user message bubble
+      mutation.mutate({ message: 'Hei', customerId });
+    },
+    [mutation]
+  );
+
   const sendUserMessage = useCallback(
-    (text: string) => {
+    (text: string, customerId?: number) => {
       setMessages((prev) => [
         ...prev,
         {
@@ -49,7 +62,7 @@ export function useOrdremottaker() {
           timestamp: Date.now(),
         },
       ]);
-      mutation.mutate(text);
+      mutation.mutate({ message: text, customerId });
     },
     [mutation]
   );
@@ -57,11 +70,14 @@ export function useOrdremottaker() {
   const reset = useCallback(() => {
     setMessages([]);
     setSessionToken('');
+    setProactiveSuggestions(undefined);
   }, []);
 
   return {
     messages,
+    proactiveSuggestions,
     sendUserMessage,
+    init,
     isLoading: mutation.isPending,
     error: mutation.error,
     reset,

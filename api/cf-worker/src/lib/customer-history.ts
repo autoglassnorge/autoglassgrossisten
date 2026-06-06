@@ -2,7 +2,6 @@
  * Customer order history lookup for proactive suggestions.
  */
 
-import type { D1Database } from "@cloudflare/workers-types";
 import type { ProactiveSuggestion, GlassRecord } from "../types";
 import { normalizeRecord } from "./normalize";
 
@@ -22,15 +21,6 @@ interface OrderRow {
 
 interface CustomerRow {
   name: string;
-}
-
-function tryParseJson<T>(raw: string | null): T | null {
-  if (!raw) return null;
-  try {
-    return JSON.parse(raw) as T;
-  } catch {
-    return null;
-  }
 }
 
 function daysAgoLabel(dateStr: string): string {
@@ -225,7 +215,7 @@ async function fetchCustomerName(db: D1Database, customerId: number): Promise<st
     .all();
 
   if (!results || results.length === 0) return null;
-  return (results[0] as CustomerRow).name;
+  return (results[0] as unknown as CustomerRow).name;
 }
 
 /**

@@ -4,6 +4,7 @@ import { useOrdremottaker } from '@/hooks/useOrdremottaker';
 import ChatMessage from './ChatMessage';
 import GlassSuggestion from './GlassSuggestion';
 import AccessorySelector from './AccessorySelector';
+import ProactiveSuggestions from './ProactiveSuggestions';
 
 const EXAMPLE_PROMPTS = [
   'Jeg har en VW Transporter 2019 som trenger ny frontrute',
@@ -11,10 +12,14 @@ const EXAMPLE_PROMPTS = [
   'Jeg trenger bakrute med varme til Volvo XC60',
 ];
 
+// MVP: hardcoded customer ID until real auth is implemented
+const MVP_CUSTOMER_ID = 1;
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
-  const { messages, sendUserMessage, isLoading, error, reset } = useOrdremottaker();
+  const { messages, proactiveSuggestions, sendUserMessage, init, isLoading, error, reset } =
+    useOrdremottaker();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,11 +28,18 @@ export default function ChatWidget() {
     }
   }, [messages, isLoading, open]);
 
+  // Trigger proactive suggestions when chat opens and we have no prior context
+  useEffect(() => {
+    if (open && messages.length === 0 && !proactiveSuggestions && !isLoading) {
+      init(MVP_CUSTOMER_ID);
+    }
+  }, [open, messages.length, proactiveSuggestions, isLoading, init]);
+
   const handleSend = () => {
     const text = input.trim();
     if (!text || isLoading) return;
     setInput('');
-    sendUserMessage(text);
+    sendUserMessage(text, MVP_CUSTOMER_ID);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -87,7 +99,7 @@ export default function ChatWidget() {
                       key={prompt}
                       onClick={() => {
                         setInput('');
-                        sendUserMessage(prompt);
+                        sendUserMessage(prompt, MVP_CUSTOMER_ID);
                       }}
                       className="w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-left text-sm text-gray-700 transition-colors hover:border-autoglass-blue hover:bg-autoglass-light hover:text-autoglass-blue"
                     >
@@ -96,6 +108,11 @@ export default function ChatWidget() {
                   ))}
                 </div>
               </div>
+            )}
+
+            {/* Proactive suggestions shown above first AI response when available */}
+            {messages.length === 0 && proactiveSuggestions && proactiveSuggestions.length > 0 && (
+              <ProactiveSuggestions suggestions={proactiveSuggestions} />
             )}
 
             {messages.map((msg) => (
