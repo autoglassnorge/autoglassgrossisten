@@ -195,3 +195,21 @@
 {"subject":"biluppgifter-api","predicate":"status","object":"key-expired","validFrom":"2026-06-07"}
 {"subject":"tecalliance-idp-api","predicate":"recommended_as","object":"long-term-ktype-source","validFrom":"2026-06-07"}
 {"subject":"ktype-pipeline","predicate":"status","object":"bovsoft-credits-depleted","validFrom":"2026-06-07"}
+{"subject":"svv-api","predicate":"status","object":"nøkkel-utløpt-401","validFrom":"2026-06-07"}
+{"subject":"svv-api","predicate":"endpoint","object":"https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata","validFrom":"2026-06-07T18:48:12.145Z"}
+{"subject":"svv-api","predicate":"rate-limit","object":"50000-kall-per-dag-gratis","validFrom":"2026-06-07T18:48:12.145Z"}
+{"subject":"svv-api","predicate":"fornyelse-url","object":"https://www.vegvesen.no/fag/teknologi/apne-data/et-utvalg-apne-data/api-for-tekniske-kjoretoyopplysninger/","validFrom":"2026-06-07T18:48:12.145Z"}
+{"subject":"svv-api","predicate":"fornyelse-prosess","object":"bankid-login-pa-vegvesen-no-sok-api-nokkel-automatisk-behandling","validFrom":"2026-06-07T18:48:12.145Z"}
+{"subject":"svv-api","predicate":"alternativ-kilde","object":"biluppgifter-api-betalt","validFrom":"2026-06-07T18:48:12.146Z"}
+{"subject":"svv-api","predicate":"alternativ-kilde","object":"bovsoft-api-credits-utløpt","validFrom":"2026-06-07T18:48:12.146Z"}
+{"subject":"svv-api","predicate":"alternativ-kilde","object":"finn-no-scraping-gratis","validFrom":"2026-06-07T18:48:12.146Z"}
+{"subject":"ktype-registry","predicate":"d1-count","object":"80183","validFrom":"2026-06-07T18:48:12.146Z"}
+{"subject":"ktype-registry","predicate":"tecdoc-dump-count","object":"91284-total-70891-unike","validFrom":"2026-06-07T18:48:12.146Z"}
+{"subject":"ktype-registry","predicate":"coverage-gap","object":"svv-api-nøkkel-utløpt-begrenser-regnr-oppslag","validFrom":"2026-06-07T18:48:12.146Z"}
+{"subject":"svv-api","predicate":"auth_changed_to","object":"oauth2-tls-client-cert-bound","validFrom":"2026-06-07"}
+{"subject":"svv-api","predicate":"base_url","object":"https://akfell-datautlevering.atlas.vegvesen.no/enkeltoppslag/kjoretoydata","validFrom":"2026-06-07"}
+{"subject":"svv-api","predicate":"auth_header","object":"SVV-Authorization: Apikey {nøkkel}","validFrom":"2026-06-07"}
+{"subject":"svv-api","predicate":"status","object":"fungerer-200-ok","validFrom":"2026-06-07"}
+{"subject":"svv-api","predicate":"common_mistake","object":"ApiKey-med-stor-K-gir-401","validFrom":"2026-06-07"}
+{"subject":"svv-api","predicate":"owner","object":"TOM-ARNE-JENSEN","validFrom":"2026-06-07"}
+{"subject":"svv-api","predicate":"rate_limit","object":"0-av-50000-per-dag","validFrom":"2026-06-07"}

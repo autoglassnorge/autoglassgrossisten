@@ -46,7 +46,7 @@ export async function scrapeVegvesen(regnr: string): Promise<VegvesenScrapeResul
     
     // Alternative: Bruk deres API-endepunkt hvis tilgjengelig
     const apiRes = await fetch(
-      `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(cleanRegnr)}`,
+      `https://akfell-datautlevering.atlas.vegvesen.no/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(cleanRegnr)}`,
       {
         headers: {
           "Accept": "application/json",

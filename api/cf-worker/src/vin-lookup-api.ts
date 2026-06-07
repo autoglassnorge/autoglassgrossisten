@@ -52,7 +52,7 @@ const REGNR_PATTERN = /^[A-Z]{2}\d{4,5}$/;
 const VIN_PATTERN = /^[A-HJ-NPR-Z0-9]{17}$/i;
 
 const SVV_API_URL =
-  "https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata";
+  "https://akfell-datautlevering.atlas.vegvesen.no/enkeltoppslag/kjoretoydata";
 
 /**
  * Main handler for POST /api/vin-lookup

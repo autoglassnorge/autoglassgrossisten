@@ -271,6 +271,9 @@ npm run scrape:pilkington
 npm run scrape:pilkington:v2:loop
 npm run scrape:finn-targeted       # Målrettet Finn.no scraper (Hella Gutmann)
 npm run scrape:finn-targeted:test  # Test-modus (10 spørringer)
+npm run scrape:finn-broad          # Bred Finn.no scraper (ALLE annonser)
+npm run scrape:finn-broad:test     # Test-modus (3 sider)
+npm run scrape:finn-broad:resume   # Gjenoppta avbrutt scraping
 
 # kType-pipeline
 npm run verify:bovsoft             # Verifiser regnr mot Bovsoft API
@@ -335,7 +338,8 @@ regnr → SVV Enkeltoppslag → kjøretøy-data (merke, modell, år)
 Finn.no → Bovsoft → ktype_registry → Worker API → Frontend
 ```
 
-- **Finn.no:** Målrettet scraping av Hella Gutmann-annonser (`scrape:finn-targeted`)
+- **Finn.no (targeted):** Målrettet scraping av Hella Gutmann-annonser (`scrape:finn-targeted`)
+- **Finn.no (broad):** Bred scraping av ALLE norske bilannonser for regnr (`scrape:finn-broad`)
 - **Bovsoft:** Regnr-verifisering og kType-oppslag (`verify:bovsoft`)
 - **ktype_registry:** D1-tabell for kType → kjøretøy-mapping
 - **Worker API:** Oppslag mot `ktype_registry` før prefix4-fallback
@@ -480,7 +484,8 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 | Apify TecDoc Actor | $69/mnd + usage, parts-catalog | — | ⚠️ Ikke kType-lookup |
 | TecAlliance IDP API | Offisiell TecDoc API, lansert mai 2026 | Lisens | ✅ **Anbefalt langsiktig** |
 | Autodoc scraping | Blokkert av Cloudflare | — | ❌ Ikke viable |
-| Finn.no scraping | ~25 timer for 503 queries | Gratis | ⚠️ For tregt, parkert |
+| Finn.no (targeted) | ~25 timer for 503 queries | Gratis | ⚠️ For tregt, parkert |
+| Finn.no (broad) | Uendelig sider, 1 req/sek | Gratis | ✅ Ny scraper: `scrape:finn-broad` |
 
 **Resultat:** 68 nye kTypes fra Bovsoft v2 deployet til D1 `ktype_registry`. Total: 80,183 rader.
 **Anbefaling:** Kontakt TecAlliance (tecalliance.com) for IDP Data Receiver API-pristilbud. Tilbyr KTypes, delta-sync, offisiell støtte. Alternativ: avvent Bovsoft credit-reset.

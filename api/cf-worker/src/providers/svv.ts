@@ -185,7 +185,7 @@ export async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Prom
   }
   try {
     const res = await fetchWithTimeout(
-      `https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(regnr)}`,
+      `https://akfell-datautlevering.atlas.vegvesen.no/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(regnr)}`,
       {
         headers: {
           "Accept": "application/json",
