@@ -33,6 +33,200 @@ const KNOWN_BRANDS = [
   "DODGE", "HUMMER", "LINCOLN", "CADILLAC", "BUICK", "GMC",
 ];
 
+// Common misspellings → correct brand
+const BRAND_ALIASES: Record<string, string> = {
+  // Peugeot
+  "PEUGOT": "PEUGEOT",
+  "PEUGET": "PEUGEOT",
+  "PEUGEO": "PEUGEOT",
+  "PEUGOET": "PEUGEOT",
+  // Skoda
+  "SKOODA": "SKODA",
+  "SCHODA": "SKODA",
+  "SKOD": "SKODA",
+  // Volkswagen
+  "VOLKSWAGON": "VW",
+  "VOLKS.WAGEN": "VW",
+  "FOLKSWAGEN": "VW",
+  "VOKSWAGEN": "VW",
+  // Mercedes
+  "MERCEDEZ": "MERCEDES",
+  "MERCEDESS": "MERCEDES",
+  "MERCEDEZ-BENZ": "MERCEDES",
+  "MERCEDESBENZ": "MERCEDES",
+  // Hyundai
+  "HUNDAI": "HYUNDAI",
+  "HYNDAI": "HYUNDAI",
+  "HIUNDAI": "HYUNDAI",
+  // Mitsubishi
+  "MITSUBISHI": "MITSUBISHI",
+  "MITSUBISH": "MITSUBISHI",
+  "MITSUBISI": "MITSUBISHI",
+  // SsangYong
+  "SSANGYONG": "SSANGYONG",
+  "SANGYONG": "SSANGYONG",
+  "SSANG-YONG": "SSANGYONG",
+  // Chevrolet
+  "CHEVROLET": "CHEVROLET",
+  "CHEVY": "CHEVROLET",
+  "SHEVROLET": "CHEVROLET",
+  // Chrysler
+  "CHRYSLER": "CHRYSLER",
+  "CHRISLER": "CHRYSLER",
+  // Citroen
+  "CITROEN": "CITROEN",
+  "CITROËN": "CITROEN",
+  "CITRON": "CITROEN",
+  // Renault
+  "RENAUT": "RENAULT",
+  "RENAULD": "RENAULT",
+  // Porsche
+  "PORSCH": "PORSCHE",
+  "PORCHE": "PORSCHE",
+  // Mazda
+  "MAZDA": "MAZDA",
+  "MASDA": "MAZDA",
+  // Nissan
+  "NISSAN": "NISSAN",
+  "NISSON": "NISSAN",
+  "NESSAN": "NISSAN",
+  // Toyota
+  "TOYATA": "TOYOTA",
+  "TOYTOA": "TOYOTA",
+  "TOYOYA": "TOYOTA",
+  // Honda
+  "HONDA": "HONDA",
+  "HONDAH": "HONDA",
+  // Ford
+  "FORD": "FORD",
+  "FORd": "FORD",
+  // Opel
+  "OPEL": "OPEL",
+  "OOPPEL": "OPEL",
+  // Kia
+  "KIA": "KIA",
+  "KEA": "KIA",
+  // Seat
+  "SEAT": "SEAT",
+  "SEET": "SEAT",
+  // Fiat
+  "FIAT": "FIAT",
+  "FIET": "FIAT",
+  // Subaru
+  "SUBARU": "SUBARU",
+  "SUBARO": "SUBARU",
+  // Land Rover
+  "LANDROVER": "LAND ROVER",
+  "LAND-ROVER": "LAND ROVER",
+  "LANDROBER": "LAND ROVER",
+  // Alfa Romeo
+  "ALFAROMEO": "ALFA ROMEO",
+  "ALFA-ROMEO": "ALFA ROMEO",
+  // Daihatsu
+  "DAIHATSU": "DAIHATSU",
+  "DAIHASU": "DAIHATSU",
+  // Isuzu
+  "ISUZU": "ISUZU",
+  "ISUSU": "ISUZU",
+  // Infiniti
+  "INFINITY": "INFINITI",
+  "INFINITI": "INFINITI",
+  // Maserati
+  "MASERATTI": "MASERATI",
+  "MASERATI": "MASERATI",
+  // Polestar
+  "POLESTAR": "POLESTAR",
+  "POLSTAR": "POLESTAR",
+  // Cupra
+  "CUPRA": "CUPRA",
+  "CUPRAH": "CUPRA",
+  // Dacia
+  "DACIA": "DACIA",
+  "DATCHA": "DACIA",
+  // Scania
+  "SCANIA": "SCANIA",
+  "SKANIA": "SCANIA",
+  // Iveco
+  "IVECO": "IVECO",
+  "IVEKO": "IVECO",
+  // DAF
+  "DAF": "DAF",
+  "DAFF": "DAF",
+  // Mini
+  "MINI": "MINI",
+  "MINNI": "MINI",
+  // Suzuki
+  "SUZUKI": "SUZUKI",
+  "SUZUKY": "SUZUKI",
+  // Jeep
+  "JEEP": "JEEP",
+  "JEAP": "JEEP",
+  // Dodge
+  "DODGE": "DODGE",
+  "DODG": "DODGE",
+  // Hummer
+  "HUMMER": "HUMMER",
+  "HUMER": "HUMMER",
+  // Lincoln
+  "LINCOLN": "LINCOLN",
+  "LINKOLN": "LINCOLN",
+  // Cadillac
+  "CADILLAC": "CADILLAC",
+  "CADILAC": "CADILLAC",
+  // Buick
+  "BUICK": "BUICK",
+  "BUIK": "BUICK",
+  // GMC
+  "GMC": "GMC",
+  "GMV": "GMC",
+  // Daewoo
+  "DAEWOO": "DAEWOO",
+  "DAEWU": "DAEWOO",
+  // Saab
+  "SAAB": "SAAB",
+  "SAAHB": "SAAB",
+  // Tesla
+  "TESLA": "TESLA",
+  "TESLAH": "TESLA",
+  // Lexus
+  "LEXUS": "LEXUS",
+  "LEXUZ": "LEXUS",
+  // Jaguar
+  "JAGUAR": "JAGUAR",
+  "JAGUARH": "JAGUAR",
+  // Volvo
+  "VOLVO": "VOLVO",
+  "VOLVVO": "VOLVO",
+  // Audi
+  "AUDI": "AUDI",
+  "AUDY": "AUDI",
+  // BMW
+  "BMW": "BMW",
+  "BWM": "BMW",
+  "BMV": "BMW",
+};
+
+/** Levenshtein distance for fuzzy matching */
+function levenshtein(a: string, b: string): number {
+  const m = a.length, n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  const matrix: number[][] = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+  for (let i = 0; i <= m; i++) matrix[i][0] = i;
+  for (let j = 0; j <= n; j++) matrix[0][j] = j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + cost
+      );
+    }
+  }
+  return matrix[m][n];
+}
+
 // Position keywords in Norwegian
 const POSITION_KEYWORDS: Record<string, string> = {
   "frontrute": "frontrute",
@@ -91,19 +285,54 @@ function extractYear(text: string): number | null {
 
 /**
  * Extract brand from known brands list
+ * 1. Exact match on known brands
+ * 2. Check BRAND_ALIASES for common misspellings
+ * 3. Fuzzy match with Levenshtein distance (max 2 edits for short words)
  */
 function extractBrand(text: string): string | null {
   const upper = text.toUpperCase();
+
+  // Step 1: Exact match on known brands
   for (const brand of KNOWN_BRANDS) {
     if (upper.includes(brand)) {
-      // Normalize common variants
-      if (brand === "VW" || brand === "VOLKSWAGEN") return "VW";
-      if (brand === "LAND ROVER" || brand === "LANDROVER") return "LAND ROVER";
-      if (brand === "ALFA ROMEO" || brand === "ALFA") return "ALFA ROMEO";
-      return brand;
+      return normalizeBrand(brand);
     }
   }
+
+  // Step 2: Check known misspellings/aliases
+  for (const [alias, correct] of Object.entries(BRAND_ALIASES)) {
+    if (upper.includes(alias)) {
+      return normalizeBrand(correct);
+    }
+  }
+
+  // Step 3: Fuzzy match — find words that are close to known brands
+  // Extract all potential words (2-15 chars)
+  const words = upper.match(/\b[A-Z]{2,15}\b/g) || [];
+  for (const word of words) {
+    for (const brand of KNOWN_BRANDS) {
+      const brandWords = brand.split(/\s+/);
+      for (const bw of brandWords) {
+        if (bw.length < 3) continue; // Skip short words
+        const dist = levenshtein(word, bw);
+        const threshold = bw.length <= 5 ? 1 : 2;
+        if (dist <= threshold) {
+          return normalizeBrand(brand);
+        }
+      }
+    }
+  }
+
   return null;
+}
+
+/** Normalize brand to canonical form */
+function normalizeBrand(brand: string): string {
+  const upper = brand.toUpperCase();
+  if (upper === "VW" || upper === "VOLKSWAGEN") return "VW";
+  if (upper === "LAND ROVER" || upper === "LANDROVER") return "LAND ROVER";
+  if (upper === "ALFA ROMEO" || upper === "ALFA") return "ALFA ROMEO";
+  return upper;
 }
 
 /**
@@ -156,12 +385,40 @@ function extractPosition(text: string): ExtractedVehicle["position"] {
 /**
  * Detect equipment mentions
  */
-function extractEquipment(text: string): { adas: boolean | null; rain_sensor: boolean | null; heated: boolean | null } {
+export function extractEquipment(text: string): {
+  adas: boolean | null;
+  rain_sensor: boolean | null;
+  heated: boolean | null;
+  antenna: boolean | null;
+  coated: boolean | null;
+} {
   const lower = text.toLowerCase();
+
+  // Helper: check if feature is mentioned, considering negation
+  // "med X" / "har X" → true
+  // "uten X" / "ikke X" / "ingen X" → false
+  function detectFeature(keywords: string[]): boolean | null {
+    const hasPositive = keywords.some(k => lower.includes(k));
+    if (!hasPositive) return null;
+
+    // Check for negation within 15 chars before the keyword
+    for (const kw of keywords) {
+      const idx = lower.indexOf(kw);
+      if (idx === -1) continue;
+      const before = lower.slice(Math.max(0, idx - 15), idx);
+      if (/\b(uten|ikke|ingen|no|not)\b/.test(before)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   return {
-    adas: lower.includes("adas") || lower.includes("kamera") || lower.includes("filskifte") || lower.includes("lane") ? true : null,
-    rain_sensor: lower.includes("regn") || lower.includes("rain") ? true : null,
-    heated: lower.includes("oppvarm") || lower.includes("varme") || lower.includes("heated") ? true : null,
+    adas: detectFeature(["adas", "kamera", "filskifte", "lane", "adaptiv"]),
+    rain_sensor: detectFeature(["regn", "rain", "regnsensor"]),
+    heated: detectFeature(["oppvarm", "varme", "heated", "varmetråder"]),
+    antenna: detectFeature(["antenne", "antenna", "radio"]),
+    coated: detectFeature(["coated", "coating", "akustisk", "acoustic"]),
   };
 }
 

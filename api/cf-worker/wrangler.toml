@@ -24,6 +24,7 @@ binding = "AI"
 #    wrangler secret put BOVSOFT_CLIENT_ID
 #    wrangler secret put BOVSOFT_SECCODE
 #    wrangler secret put BILUPPGIFTER_API_KEY
+#    wrangler secret put GROQ_API_KEY
 #
 #  Secrets settes ÉN GANG og ved rotasjon. IKKE i deploy-pipeline.
 

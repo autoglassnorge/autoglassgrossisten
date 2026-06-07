@@ -304,6 +304,15 @@ export default {
     if (path.startsWith("/api/vehicle/debug/")) {
       return handleVehicleDebug(request, env);
     }
+    if (path === "/api/debug/tecdoc-resolve") {
+      const url = new URL(request.url);
+      const brand = url.searchParams.get("brand") || "";
+      const model = url.searchParams.get("model") || "";
+      const year = parseInt(url.searchParams.get("year") || "0", 10);
+      const { resolveTecDocKType } = await import("./lib/tecdoc-resolver");
+      const result = resolveTecDocKType(brand, model, year || undefined);
+      return jsonResponse({ brand, model, year, result });
+    }
     if (path.startsWith("/api/vehicle/ktype/")) {
       return handleVehicleKtypeLookup(request, env);
     }

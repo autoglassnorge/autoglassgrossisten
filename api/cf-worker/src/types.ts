@@ -15,6 +15,7 @@ export interface Env {
   VINCARIO_SECRET_KEY?: string;
   MACS_VIS_API_KEY?: string;
   AGM_API_KEY?: string;
+  GROQ_API_KEY?: string;
   ENVIRONMENT?: "development" | "production";
 }
 

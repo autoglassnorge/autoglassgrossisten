@@ -1,0 +1,131 @@
+{
+  "config": {
+    "sources": {
+      "tecdoc-resolver-resolved": {
+        "priority": 8,
+        "minScore": 0.75
+      },
+      "tecdoc-resolver-ambiguous": {
+        "priority": 5,
+        "minScore": 0.55
+      }
+    },
+    "maxEurocodesPerKtype": 150,
+    "absoluteMinScore": 0.4
+  },
+  "stats": {
+    "resolverCount": 25874,
+    "mergedCount": 19551,
+    "safeCount": 17690,
+    "collisionCount": 6,
+    "collisionExcluded": 1861,
+    "scoreBins": {
+      "0.9+": 8884,
+      "0.8-0.9": 80,
+      "0.7-0.8": 1456,
+      "0.6-0.7": 7269,
+      "0.5-0.6": 1,
+      "0.4-0.5": 0
+    },
+    "coveragePct": "65.2"
+  },
+  "collisions": [
+    {
+      "ktype": 12611,
+      "count": 863,
+      "eurocodes": [
+        "2402GNM",
+        "2422BLAM",
+        "2422BLM",
+        "2422GYAM",
+        "2422GYM",
+        "2481CSGYELM",
+        "2481GYELM",
+        "2542BLM",
+        "2542GYM",
+        "2542GYMG"
+      ]
+    },
+    {
+      "ktype": 7536,
+      "count": 288,
+      "eurocodes": [
+        "2625GY",
+        "2664GB",
+        "2664GBM",
+        "27047GN",
+        "27048GN",
+        "27049YP",
+        "27050YP",
+        "27051YP",
+        "27052YP",
+        "27053YP"
+      ]
+    },
+    {
+      "ktype": 26150,
+      "count": 195,
+      "eurocodes": [
+        "3597ACDCHMVZ",
+        "3597ACDCHMVZ1E",
+        "3597AGACHMVZ",
+        "3597AGACHMVZ1E",
+        "3597BYPRAI",
+        "3597LGRR5FDKW",
+        "3597LGSR5FD",
+        "3597LYPR5RD",
+        "3597LYPR5RQZ",
+        "3597RGRR5FDKW"
+      ]
+    },
+    {
+      "ktype": 3050,
+      "count": 177,
+      "eurocodes": [
+        "2117CSGY",
+        "2117GY",
+        "2168CSGY",
+        "2168GY",
+        "22063GN",
+        "22063GNS",
+        "2259CSGY",
+        "2259GY",
+        "2260CSGY",
+        "2260GY"
+      ]
+    },
+    {
+      "ktype": 32349,
+      "count": 171,
+      "eurocodes": [
+        "AJ16BGSRO",
+        "AJ16BYPRO",
+        "AJ16LGSR5FD",
+        "AJ16LGSR5RD",
+        "AJ16LGSR5RQ",
+        "AJ16LGSR5RVZ",
+        "AJ16LYPR5RD",
+        "AJ16LYPR5RQ",
+        "AJ16LYPR5RVZ",
+        "AJ16RGSR5FD"
+      ]
+    },
+    {
+      "ktype": 24914,
+      "count": 167,
+      "eurocodes": [
+        "25864GD",
+        "25864GD2",
+        "30013GN",
+        "30014GN",
+        "30015GN",
+        "30016GN",
+        "30017GN",
+        "30017GP",
+        "30018GN",
+        "30018GP"
+      ]
+    }
+  ],
+  "timestamp": "2026-06-06T15:45:09.909Z"
+}

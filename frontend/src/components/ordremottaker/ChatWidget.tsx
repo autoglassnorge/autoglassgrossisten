@@ -14,18 +14,43 @@ const EXAMPLE_PROMPTS = [
   'Jeg trenger bakrute med varme til Volvo XC60',
 ];
 
-const POSITION_OPTIONS = [
+// ── Hierarchical Position Wizard ──
+// Step 1: Choose main category
+// Step 2 (for door/side): Choose side (driver/passenger)
+// Step 3 (for door/side): Choose front/back
+
+interface PositionStep {
+  label: string;
+  value: string;
+}
+
+const POSITION_CATEGORIES: PositionStep[] = [
   { label: 'Frontrute', value: 'frontrute' },
   { label: 'Bakrute', value: 'bakrute' },
-  { label: 'Dørrute førerside', value: 'dørrute-fv', subtitle: 'Foran venstre' },
-  { label: 'Dørrute passasjerside', value: 'dørrute-fh', subtitle: 'Foran høyre' },
-  { label: 'Dørrute førerside bak', value: 'dørrute-bv', subtitle: 'Bak venstre' },
-  { label: 'Dørrute passasjerside bak', value: 'dørrute-bh', subtitle: 'Bak høyre' },
-  { label: 'Siderute førerside', value: 'sideglass-fv', subtitle: 'Venstre side' },
-  { label: 'Siderute passasjerside', value: 'sideglass-fh', subtitle: 'Høyre side' },
-  { label: 'Ventilrute fører side', value: 'ventilrute', subtitle: 'Ventilasjon' },
-  { label: 'Annet', value: 'annet', isOther: true },
+  { label: 'Dørrute', value: 'dørrute' },
+  { label: 'Siderute', value: 'siderute' },
+  { label: 'Ventilrute', value: 'ventilrute' },
+  { label: 'Annet', value: 'annet' },
 ];
+
+const SIDE_OPTIONS: PositionStep[] = [
+  { label: 'Førerside', value: 'fv' },
+  { label: 'Passasjerside', value: 'fh' },
+];
+
+const PLACEMENT_OPTIONS: PositionStep[] = [
+  { label: 'Foran', value: 'foran' },
+  { label: 'Bak', value: 'bak' },
+];
+
+// For dørrute/siderute: side (fv/fh) + placement (foran/bak) → final code
+// fv + foran = fv, fv + bak = bv
+// fh + foran = fh, fh + bak = bh
+function getFinalSideCode(side: string, placement: string): string {
+  if (side === 'fv') return placement === 'bak' ? 'bv' : 'fv';
+  if (side === 'fh') return placement === 'bak' ? 'bh' : 'fh';
+  return side;
+}
 
 // MVP: hardcoded customer ID until real auth is implemented
 const MVP_CUSTOMER_ID = 1;
@@ -36,7 +61,12 @@ export default function ChatWidget() {
   const [feedbackState, setFeedbackState] = useState<'idle' | 'wrong' | 'submitted'>('idle');
   const [correctEurocode, setCorrectEurocode] = useState('');
   const [otherPosition, setOtherPosition] = useState('');
-  const [showOtherPosition, setShowOtherPosition] = useState(false);
+  // Position wizard state
+  const [positionWizard, setPositionWizard] = useState<{
+    step: 'category' | 'side' | 'placement' | 'other';
+    category?: string;
+    side?: string;
+  }>({ step: 'category' });
   const {
     messages,
     proactiveSuggestions,
@@ -78,7 +108,7 @@ export default function ChatWidget() {
   useEffect(() => {
     setFeedbackState('idle');
     setCorrectEurocode('');
-    setShowOtherPosition(false);
+    setPositionWizard({ step: 'category' });
     setOtherPosition('');
   }, [messages.length]);
 
@@ -104,23 +134,62 @@ export default function ChatWidget() {
   };
 
   const lastAiMessage = [...messages].reverse().find((m) => m.role === 'ai');
-  const isAskingEquipment = lastAiMessage?.nextAction?.startsWith('ask_') ?? false;
+  const isAskingEquipment = (lastAiMessage?.nextAction?.startsWith('ask_') &&
+    lastAiMessage?.nextAction !== 'ask_llm' &&
+    lastAiMessage?.nextAction !== 'ask_position' &&
+    lastAiMessage?.nextAction !== 'ask_vehicle_details') || false;
   const isAskingPosition = lastAiMessage?.nextAction === 'ask_position';
 
   const handlePositionAnswer = (value: string) => {
     if (value === 'annet') {
-      setShowOtherPosition(true);
+      setPositionWizard({ step: 'other' });
       return;
     }
-    setShowOtherPosition(false);
     setOtherPosition('');
     sendUserMessage(value, MVP_CUSTOMER_ID);
+    // Reset wizard for next time
+    setPositionWizard({ step: 'category' });
+  };
+
+  const handleCategorySelect = (category: string) => {
+    if (category === 'annet') {
+      setPositionWizard({ step: 'other' });
+      return;
+    }
+    if (category === 'dørrute' || category === 'siderute') {
+      setPositionWizard({ step: 'side', category });
+    } else {
+      // Frontrute, bakrute, ventilrute — final answer
+      handlePositionAnswer(category);
+    }
+  };
+
+  const handleSideSelect = (side: string) => {
+    setPositionWizard((prev) => ({ ...prev, step: 'placement', side }));
+  };
+
+  const handlePlacementSelect = (placement: string) => {
+    const { category, side } = positionWizard;
+    if (!category || !side) return;
+    const finalSide = getFinalSideCode(side, placement);
+    const finalValue = category === 'dørrute'
+      ? `dørrute-${finalSide}`
+      : `sideglass-${finalSide}`;
+    handlePositionAnswer(finalValue);
+  };
+
+  const handleWizardBack = () => {
+    setPositionWizard((prev) => {
+      if (prev.step === 'placement') return { step: 'side', category: prev.category };
+      if (prev.step === 'side') return { step: 'category' };
+      return { step: 'category' };
+    });
   };
 
   const handleOtherPositionSubmit = () => {
     const text = otherPosition.trim();
     if (!text) return;
-    setShowOtherPosition(false);
+    setPositionWizard({ step: 'category' });
     setOtherPosition('');
     sendUserMessage(text, MVP_CUSTOMER_ID);
   };
@@ -154,6 +223,14 @@ export default function ChatWidget() {
     await handleFeedback(0);
   };
 
+  const handleReset = () => {
+    reset();
+    setPositionWizard({ step: 'category' });
+    setOtherPosition('');
+    setFeedbackState('idle');
+    setCorrectEurocode('');
+  };
+
   return (
     <>
       {/* Floating button */}
@@ -179,7 +256,7 @@ export default function ChatWidget() {
             </div>
             <div className="flex items-center gap-1">
               <button
-                onClick={reset}
+                onClick={handleReset}
                 className="rounded p-2 md:p-1 transition-colors hover:bg-white/20 min-h-[44px] min-w-[44px] md:min-h-0 md:min-w-0 flex items-center justify-center"
                 title="Ny chat"
                 aria-label="Ny chat"
@@ -253,32 +330,103 @@ export default function ChatWidget() {
                     <AccessorySelector accessories={msg.accessories} />
                   )}
 
-                  {/* Position question buttons */}
+                  {/* Position question buttons — Hierarchical Wizard */}
                   {isLastMessage && msg.role === 'ai' && msg.status === 'question' && isAskingPosition && (
                     <div className="mb-4 mt-2 flex flex-col gap-3">
-                      <p className="text-sm text-gray-500">Velg posisjon:</p>
-                      <div className="grid grid-cols-1 gap-2">
-                        {POSITION_OPTIONS.map((opt) => (
-                          <button
-                            key={opt.value}
-                            onClick={() => handlePositionAnswer(opt.value)}
-                            disabled={isLoading}
-                            className={`min-h-[52px] rounded-xl px-4 py-3 text-left text-base font-medium transition-colors disabled:opacity-50 active:scale-[0.98] ${
-                              opt.isOther
-                                ? 'border-2 border-dashed border-gray-300 bg-white text-gray-600 hover:border-autoglass-blue hover:text-autoglass-blue'
-                                : 'bg-white border border-gray-200 text-gray-800 hover:border-autoglass-blue hover:bg-autoglass-light hover:text-autoglass-blue shadow-sm'
-                            }`}
-                          >
-                            <span className="block">{opt.label}</span>
-                            {opt.subtitle && (
-                              <span className="block text-xs text-gray-400 font-normal">{opt.subtitle}</span>
-                            )}
-                          </button>
-                        ))}
-                      </div>
-                      {showOtherPosition && (
+                      {/* Step 1: Choose main category */}
+                      {positionWizard.step === 'category' && (
+                        <>
+                          <p className="text-sm text-gray-500">Velg glass:</p>
+                          <div className="grid grid-cols-2 gap-2">
+                            {POSITION_CATEGORIES.map((opt) => (
+                              <button
+                                key={opt.value}
+                                onClick={() => handleCategorySelect(opt.value)}
+                                disabled={isLoading}
+                                className={`min-h-[64px] rounded-xl px-3 py-3 text-center text-base font-medium transition-colors disabled:opacity-50 active:scale-[0.98] ${
+                                  opt.value === 'annet'
+                                    ? 'border-2 border-dashed border-gray-300 bg-white text-gray-600 hover:border-autoglass-blue hover:text-autoglass-blue'
+                                    : 'bg-white border border-gray-200 text-gray-800 hover:border-autoglass-blue hover:bg-autoglass-light hover:text-autoglass-blue shadow-sm'
+                                }`}
+                              >
+                                <span className="block">{opt.label}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+
+                      {/* Step 2: Choose side (driver/passenger) */}
+                      {positionWizard.step === 'side' && positionWizard.category && (
+                        <>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={handleWizardBack}
+                              className="text-sm text-gray-400 hover:text-autoglass-blue transition-colors"
+                            >
+                              ← Tilbake
+                            </button>
+                            <p className="text-sm text-gray-500">
+                              {POSITION_CATEGORIES.find(c => c.value === positionWizard.category)?.label} — Velg side:
+                            </p>
+                          </div>
+                          <div className="grid grid-cols-2 gap-2">
+                            {SIDE_OPTIONS.map((opt) => (
+                              <button
+                                key={opt.value}
+                                onClick={() => handleSideSelect(opt.value)}
+                                disabled={isLoading}
+                                className="min-h-[64px] rounded-xl bg-white border border-gray-200 px-3 py-3 text-center text-base font-medium text-gray-800 transition-colors hover:border-autoglass-blue hover:bg-autoglass-light hover:text-autoglass-blue shadow-sm disabled:opacity-50 active:scale-[0.98]"
+                              >
+                                {opt.label}
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+
+                      {/* Step 3: Choose front/back */}
+                      {positionWizard.step === 'placement' && positionWizard.category && positionWizard.side && (
+                        <>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={handleWizardBack}
+                              className="text-sm text-gray-400 hover:text-autoglass-blue transition-colors"
+                            >
+                              ← Tilbake
+                            </button>
+                            <p className="text-sm text-gray-500">
+                              {POSITION_CATEGORIES.find(c => c.value === positionWizard.category)?.label},{' '}
+                              {SIDE_OPTIONS.find(s => s.value === positionWizard.side)?.label} — Foran eller bak?
+                            </p>
+                          </div>
+                          <div className="grid grid-cols-2 gap-2">
+                            {PLACEMENT_OPTIONS.map((opt) => (
+                              <button
+                                key={opt.value}
+                                onClick={() => handlePlacementSelect(opt.value)}
+                                disabled={isLoading}
+                                className="min-h-[64px] rounded-xl bg-white border border-gray-200 px-3 py-3 text-center text-base font-medium text-gray-800 transition-colors hover:border-autoglass-blue hover:bg-autoglass-light hover:text-autoglass-blue shadow-sm disabled:opacity-50 active:scale-[0.98]"
+                              >
+                                {opt.label}
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+
+                      {/* Other / Annet */}
+                      {positionWizard.step === 'other' && (
                         <div className="flex flex-col gap-2 rounded-xl border border-autoglass-blue bg-autoglass-light p-3">
-                          <p className="text-sm text-autoglass-blue">Beskriv glasset:</p>
+                          <div className="flex items-center gap-2">
+                            <button
+                              onClick={handleWizardBack}
+                              className="text-sm text-autoglass-blue hover:underline"
+                            >
+                              ← Tilbake
+                            </button>
+                            <p className="text-sm text-autoglass-blue">Beskriv glasset:</p>
+                          </div>
                           <div className="flex gap-2">
                             <input
                               type="text"

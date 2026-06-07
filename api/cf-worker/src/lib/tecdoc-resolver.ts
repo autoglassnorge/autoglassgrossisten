@@ -21,7 +21,7 @@ export interface TecDocResult {
   candidates: TecDocCandidate[];
 }
 
-/* ── Index unpacking ──────────────────────────────────────── */
+/* ── Index unpacking (lazy) ───────────────────────────────── */
 interface IndexEntry {
   ktype: number;
   brandId: number;
@@ -30,37 +30,53 @@ interface IndexEntry {
   yearTo: number;
 }
 
-const brandNames: string[] = [];
-for (const [name, id] of Object.entries(IDX.brands)) {
-  brandNames[id] = name;
-}
+let _initialized = false;
+let brandNames: string[] = [];
+let modelNames: string[] = [];
+let entries: IndexEntry[] = [];
+let canonicalBrands: string[] = [];
+let entriesByCanonicalBrand = new Map<string, IndexEntry[]>();
 
-const modelNames: string[] = [];
-for (const [name, id] of Object.entries(IDX.models)) {
-  modelNames[id] = name;
-}
-
-const entries: IndexEntry[] = IDX.entries.map((e) => ({
-  ktype: e[0],
-  brandId: e[1],
-  modelId: e[2],
-  yearFrom: e[3],
-  yearTo: e[4],
-}));
-
-/* ── Pre-compute canonical brands per entry ───────────────── */
-const canonicalBrands: string[] = brandNames.map((b) => normalizeBrand(b));
-
-/* ── Pre-group entries by canonical brand for fast filtering ─ */
-const entriesByCanonicalBrand = new Map<string, IndexEntry[]>();
-for (const entry of entries) {
-  const cb = canonicalBrands[entry.brandId];
-  const list = entriesByCanonicalBrand.get(cb);
-  if (list) {
-    list.push(entry);
-  } else {
-    entriesByCanonicalBrand.set(cb, [entry]);
+function ensureInitialized() {
+  if (_initialized) return;
+  for (const [name, id] of Object.entries(IDX.brands)) {
+    brandNames[id] = name;
   }
+  for (const [name, id] of Object.entries(IDX.models)) {
+    modelNames[id] = name;
+  }
+  entries = IDX.entries.map((e) => ({
+    ktype: e[0],
+    brandId: e[1],
+    modelId: e[2],
+    yearFrom: e[3],
+    yearTo: e[4],
+  }));
+  canonicalBrands = brandNames.map((b) => normalizeBrand(b));
+  for (const entry of entries) {
+    const cb = canonicalBrands[entry.brandId];
+    const list = entriesByCanonicalBrand.get(cb);
+    if (list) {
+      list.push(entry);
+    } else {
+      entriesByCanonicalBrand.set(cb, [entry]);
+    }
+  }
+  // Pre-compute model metadata
+  modelMeta = new Array(modelNames.length);
+  for (let i = 0; i < modelNames.length; i++) {
+    const normText = normalizeModelText(modelNames[i]);
+    const tokens = extractTokens(modelNames[i]);
+    const chassis = extractChassisCodes(modelNames[i]);
+    modelMeta[i] = {
+      normText,
+      tokens,
+      tokenSet: new Set(tokens),
+      chassis,
+      chassisSet: new Set(chassis),
+    };
+  }
+  _initialized = true;
 }
 
 /* ── Model normalization helpers ──────────────────────────── */
@@ -205,51 +221,87 @@ const NOISE_WORDS = new Set([
 ]);
 
 const MODEL_ALIASES: Record<string, string> = {
-  "3 SERIES": "3",
-  "5 SERIES": "5",
-  "7 SERIES": "7",
-  "1 SERIES": "1",
-  "2 SERIES": "2",
-  "4 SERIES": "4",
-  "6 SERIES": "6",
-  "8 SERIES": "8",
-  "C-CLASS": "C CLASS",
-  "E-CLASS": "E CLASS",
-  "S-CLASS": "S CLASS",
-  "A-CLASS": "A CLASS",
-  "B-CLASS": "B CLASS",
-  "G-CLASS": "G CLASS",
-  "M-CLASS": "M CLASS",
-  "R-CLASS": "R CLASS",
-  "X-CLASS": "X CLASS",
-  "CL-CLASS": "CL CLASS",
-  "CLK-CLASS": "CLK CLASS",
-  "CLS-CLASS": "CLS CLASS",
-  "SL-CLASS": "SL CLASS",
-  "SLK-CLASS": "SLK CLASS",
-  "GL-CLASS": "GL CLASS",
-  "GLA-CLASS": "GLA CLASS",
-  "GLB-CLASS": "GLB CLASS",
-  "GLC-CLASS": "GLC CLASS",
-  "GLE-CLASS": "GLE CLASS",
-  "GLS-CLASS": "GLS CLASS",
-  "CR-V": "CRV",
-  "CX-3": "CX3",
-  "CX-5": "CX5",
-  "CX-7": "CX7",
-  "CX-9": "CX9",
-  "MX-5": "MX5",
-  "MX-3": "MX3",
-  "MX-6": "MX6",
-  "RX-7": "RX7",
-  "RX-8": "RX8",
-  "HI-LUX": "HILUX",
-  "LAND-CRUISER": "LAND CRUISER",
-  "LANDCRUISER": "LAND CRUISER",
-  "X-TRAIL": "XTRAIL",
-  "CMAX": "C-MAX",
-  "BMAX": "B-MAX",
-  "SMAX": "S-MAX",
+  // BMW Series
+  "3 SERIES": "3", "5 SERIES": "5", "7 SERIES": "7",
+  "1 SERIES": "1", "2 SERIES": "2", "4 SERIES": "4",
+  "6 SERIES": "6", "8 SERIES": "8",
+  // Mercedes Classes
+  "C-CLASS": "C CLASS", "E-CLASS": "E CLASS", "S-CLASS": "S CLASS",
+  "A-CLASS": "A CLASS", "B-CLASS": "B CLASS", "G-CLASS": "G CLASS",
+  "M-CLASS": "M CLASS", "R-CLASS": "R CLASS", "X-CLASS": "X CLASS",
+  "CL-CLASS": "CL CLASS", "CLK-CLASS": "CLK CLASS", "CLS-CLASS": "CLS CLASS",
+  "SL-CLASS": "SL CLASS", "SLK-CLASS": "SLK CLASS",
+  "GL-CLASS": "GL CLASS", "GLA-CLASS": "GLA CLASS", "GLB-CLASS": "GLB CLASS",
+  "GLC-CLASS": "GLC CLASS", "GLE-CLASS": "GLE CLASS", "GLS-CLASS": "GLS CLASS",
+  // Mazda / Honda
+  "CR-V": "CRV", "CX-3": "CX3", "CX-5": "CX5", "CX-7": "CX7", "CX-9": "CX9",
+  "MX-5": "MX5", "MX-3": "MX3", "MX-6": "MX6",
+  "RX-7": "RX7", "RX-8": "RX8",
+  // Toyota
+  "HI-LUX": "HILUX", "LAND-CRUISER": "LAND CRUISER",
+  "LANDCRUISER": "LAND CRUISER", "X-TRAIL": "XTRAIL",
+  // Ford
+  "CMAX": "C-MAX", "BMAX": "B-MAX", "SMAX": "S-MAX",
+  // VW numeric → Roman
+  "GOLF 7": "GOLF VII", "GOLF 6": "GOLF VI", "GOLF 5": "GOLF V", "GOLF 4": "GOLF IV",
+  "POLO 6": "POLO 6R", "POLO 5": "POLO 9N",
+  "PASSAT 8": "PASSAT B8", "PASSAT 7": "PASSAT B7", "PASSAT 6": "PASSAT B6",
+  "TOURAN 2": "TOURAN 5T", "TOURAN 1": "TOURAN 1T",
+  "TIGUAN 2": "TIGUAN AD", "TIGUAN 1": "TIGUAN 5N",
+  "TRANSPORTER T6": "TRANSPORTER T6", "TRANSPORTER T5": "TRANSPORTER T5",
+  // Audi
+  "A4 B8": "A4 B8", "A4 B9": "A4 B9", "A4 B7": "A4 B7", "A4 B6": "A4 B6",
+  "A6 C7": "A6 C7", "A6 C8": "A6 C8", "A6 C6": "A6 C6",
+  "A3 8P": "A3 8P", "A3 8V": "A3 8V",
+  // BMW chassis shorthand
+  "3 E90": "3 E90", "3 F30": "3 F30", "3 G20": "3 G20",
+  "5 E60": "5 E60", "5 F10": "5 F10", "5 G30": "5 G30",
+  // Mercedes chassis shorthand
+  "C W204": "C CLASS W204", "C W205": "C CLASS W205",
+  "E W212": "E CLASS W212", "E W213": "E CLASS W213",
+  // Peugeot/Citroen platform codes
+  "208 1": "208", "208 2": "208 II",
+  "308 1": "308", "308 2": "308 II", "308 3": "308 III",
+  "3008 1": "3008", "3008 2": "3008 II",
+  // Volvo
+  "V70 2": "V70 II", "V70 3": "V70 III",
+  "XC60 1": "XC60", "XC60 2": "XC60 II",
+  "XC90 1": "XC90", "XC90 2": "XC90 II",
+  // Opel/Vauxhall
+  "ASTRA J": "ASTRA J", "ASTRA K": "ASTRA K", "ASTRA H": "ASTRA H",
+  "CORSA D": "CORSA D", "CORSA E": "CORSA E", "CORSA F": "CORSA F",
+  // Nissan
+  "QASHQAI 1": "QASHQAI J10", "QASHQAI 2": "QASHQAI J11",
+  "X-TRAIL 1": "X-TRAIL T30", "X-TRAIL 2": "X-TRAIL T31", "X-TRAIL 3": "X-TRAIL T32",
+};
+
+// Chassis generation bonus — verified year ranges for known chassis codes
+const CHASSIS_GENERATIONS: Record<string, { brand: string; model: string; years: [number, number] }> = {
+  "E90": { brand: "BMW", model: "3", years: [2005, 2013] },
+  "E46": { brand: "BMW", model: "3", years: [1998, 2007] },
+  "E39": { brand: "BMW", model: "5", years: [1995, 2004] },
+  "E60": { brand: "BMW", model: "5", years: [2003, 2010] },
+  "F30": { brand: "BMW", model: "3", years: [2012, 2019] },
+  "F10": { brand: "BMW", model: "5", years: [2010, 2017] },
+  "G20": { brand: "BMW", model: "3", years: [2019, 2025] },
+  "G30": { brand: "BMW", model: "5", years: [2017, 2025] },
+  "W204": { brand: "MERCEDES", model: "C CLASS", years: [2007, 2014] },
+  "W205": { brand: "MERCEDES", model: "C CLASS", years: [2014, 2021] },
+  "W212": { brand: "MERCEDES", model: "E CLASS", years: [2009, 2016] },
+  "W213": { brand: "MERCEDES", model: "E CLASS", years: [2016, 2023] },
+  "B8": { brand: "AUDI", model: "A4", years: [2008, 2015] },
+  "B9": { brand: "AUDI", model: "A4", years: [2015, 2023] },
+  "C7": { brand: "AUDI", model: "A6", years: [2011, 2018] },
+  "C8": { brand: "AUDI", model: "A6", years: [2018, 2025] },
+  "8P": { brand: "AUDI", model: "A3", years: [2003, 2012] },
+  "8V": { brand: "AUDI", model: "A3", years: [2012, 2020] },
+  "5G1": { brand: "VOLKSWAGEN", model: "GOLF", years: [2013, 2020] },
+  "1K1": { brand: "VOLKSWAGEN", model: "GOLF", years: [2004, 2013] },
+  "1J1": { brand: "VOLKSWAGEN", model: "GOLF", years: [1998, 2005] },
+  "AD": { brand: "VOLKSWAGEN", model: "TIGUAN", years: [2016, 2025] },
+  "5N": { brand: "VOLKSWAGEN", model: "TIGUAN", years: [2008, 2016] },
+  "J10": { brand: "NISSAN", model: "QASHQAI", years: [2007, 2013] },
+  "J11": { brand: "NISSAN", model: "QASHQAI", years: [2014, 2021] },
 };
 
 function applyAliases(text: string): string {
@@ -302,7 +354,7 @@ function extractChassisCodes(text: string): string[] {
   return codes;
 }
 
-/* ── Pre-compute model metadata ───────────────────────────── */
+/* ── Pre-compute model metadata (lazy) ────────────────────── */
 interface ModelMeta {
   normText: string;
   tokens: string[];
@@ -311,19 +363,7 @@ interface ModelMeta {
   chassisSet: Set<string>;
 }
 
-const modelMeta: ModelMeta[] = new Array(modelNames.length);
-for (let i = 0; i < modelNames.length; i++) {
-  const normText = normalizeModelText(modelNames[i]);
-  const tokens = extractTokens(modelNames[i]);
-  const chassis = extractChassisCodes(modelNames[i]);
-  modelMeta[i] = {
-    normText,
-    tokens,
-    tokenSet: new Set(tokens),
-    chassis,
-    chassisSet: new Set(chassis),
-  };
-}
+let modelMeta: ModelMeta[] = [];
 
 /* ── Year compatibility ───────────────────────────────────── */
 function isYearCompatible(year: number, from: number, to: number): boolean {
@@ -372,6 +412,27 @@ function scoreEntry(
     if (common > 0) {
       score += 0.35;
       reasons.push("exact chassis match");
+    }
+  }
+
+  // Chassis generation bonus — if input chassis matches known generation
+  // and the candidate's year range aligns, give extra confidence
+  if (inputChassis.size > 0 && year !== undefined) {
+    for (const chassis of inputChassis) {
+      const gen = CHASSIS_GENERATIONS[chassis];
+      if (!gen) continue;
+      // Check if candidate brand/model aligns with generation expectation
+      const candidateBrand = canonicalBrands[entry.brandId];
+      if (candidateBrand === gen.brand) {
+        const normModel = meta.normText;
+        if (normModel.includes(gen.model)) {
+          // Year alignment check
+          if (year >= gen.years[0] - 1 && year <= gen.years[1] + 1) {
+            score += 0.15;
+            reasons.push("chassis generation confirmed");
+          }
+        }
+      }
     }
   }
 
@@ -424,6 +485,7 @@ export function resolveTecDocKType(
   model: string,
   year?: number
 ): TecDocResult {
+  ensureInitialized();
   const normBrand = normalizeBrand(make);
   const inputNorm = normalizeModelText(model);
   const inputTokens = new Set(extractTokens(model));

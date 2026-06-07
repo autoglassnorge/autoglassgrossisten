@@ -4,6 +4,7 @@
  */
 
 import type { Env } from "../types";
+import { resolveTecDocKType } from "./tecdoc-resolver";
 
 interface KtypeResult {
   ktype: number;
@@ -43,6 +44,38 @@ function parseRegnrSeries(regnr: string): { prefix: string; series: string } | n
   if (!yearRange) return null;
   
   return { prefix, series: `${prefix}${number.toString().padStart(5, '0')}` };
+}
+
+/**
+ * Query TecDoc in-memory resolver as fast fallback
+ */
+function queryTecDocResolverFallback(
+  brand: string,
+  model: string,
+  year: number
+): KtypeResult | null {
+  try {
+    const result = resolveTecDocKType(brand, model, year);
+    if (result.status === 'no_match' || result.candidates.length === 0) {
+      return null;
+    }
+    const best = result.candidates[0];
+    if (result.status === 'resolved' || best.score >= 0.6) {
+      return {
+        ktype: best.ktype,
+        brand: best.brand,
+        model: best.model,
+        yearFrom: best.yearFrom,
+        yearTo: best.yearTo,
+        source: 'tecdoc',
+        confidence: best.score,
+      };
+    }
+    return null;
+  } catch (e) {
+    console.error('[TecDoc Resolver Fallback] Error:', e);
+    return null;
+  }
 }
 
 /**
@@ -225,8 +258,20 @@ export async function resolveKtype(
       console.log(`[resolveKtype] Bovsoft kType ${bovsoftKtype} invalid, trying TecDoc fallback`);
     }
     
-    // Try TecDoc fallback
-    console.log(`[resolveKtype] Trying TecDoc fallback for ${bovsoftVehicle.brand} ${bovsoftVehicle.model} ${bovsoftVehicle.year}`);
+    // Try TecDoc in-memory resolver FIRST (fast, no D1 round-trip)
+    console.log(`[resolveKtype] Trying TecDoc resolver for ${bovsoftVehicle.brand} ${bovsoftVehicle.model} ${bovsoftVehicle.year}`);
+    const resolverResult = queryTecDocResolverFallback(
+      bovsoftVehicle.brand,
+      bovsoftVehicle.model,
+      bovsoftVehicle.year
+    );
+    if (resolverResult) {
+      console.log(`[resolveKtype] TecDoc resolver found kType ${resolverResult.ktype} (score ${resolverResult.confidence})`);
+      return resolverResult;
+    }
+    
+    // Fallback to D1-based TecDoc query
+    console.log(`[resolveKtype] Resolver missed, trying D1 fallback`);
     const tecdocResult = await queryTecDocFallback(
       env.GLASS_CATALOG_D1,
       bovsoftVehicle.brand,

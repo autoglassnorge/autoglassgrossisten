@@ -5,7 +5,7 @@
 
 import type { Env, GlassRecord, OrdremottakerRequest, OrdremottakerResponse, AccessoryItem, GroundTruthRecord } from '../types';
 import { jsonResponse, errorResponse } from '../lib/cors';
-import { extractVehicleHybrid } from '../lib/ordremottaker-ner';
+import { extractVehicleHybrid, extractEquipment } from '../lib/ordremottaker-ner';
 import { generateDialogue, buildCartUrl } from '../lib/ordremottaker-llm';
 import { createSession, getSession, updateSession, addMessage } from '../lib/ordremottaker-session';
 import { searchByRegnr } from './search';
@@ -229,12 +229,30 @@ function parsePositionAnswer(message: string): string | null {
   return null;
 }
 
-/** Parse equipment-svar fra bruker: ja / nei / vet_ikke */
+/** Parse equipment-svar fra bruker: ja / nei / vet_ikke
+ *  Støtter naturlige svar som "ja den har regnsensor", "uten regnsensor", "bare antenne"
+ */
 function parseEquipmentAnswer(message: string): 'ja' | 'nei' | 'vet_ikke' | null {
   const lower = message.toLowerCase().trim();
-  if (lower === 'ja' || lower === 'yes' || lower === 'true' || lower === 'jepp' || lower === 'joda' || lower === 'jo' || lower === 'y' || lower === '1') return 'ja';
-  if (lower === 'nei' || lower === 'no' || lower === 'false' || lower === 'nope' || lower === 'niks' || lower === 'n' || lower === '0') return 'nei';
-  if (lower === 'vet ikke' || lower === 'vetikke' || lower === 'usikker' || lower === 'ikke sikker' || lower === 'maybe' || lower === 'kanskje' || lower === '?') return 'vet_ikke';
+
+  // Nei-svar — sjekk først for å unngå at "jada, nei" blir tolket som ja
+  if (/\b(nei|no|false|nope|niks|n)\b/.test(lower)) return 'nei';
+
+  // Ja-svar — matcher helord med word boundaries
+  if (/\b(ja|yes|true|jepp|joda|jo|jada|y)\b/.test(lower)) return 'ja';
+
+  // "uten X" / "ikke X" / "ingen X" → nei
+  if (/\b(uten\s|ikke\s|ingen\s)/.test(lower)) return 'nei';
+
+  // "bare X" / "kun X" / "only X" → ja (bruker bekrefter dette spesifikke)
+  if (/\b(bare|kun|only|må ha|trenger)\b/.test(lower)) return 'ja';
+
+  // "har X" / "med X" → ja
+  if (/\b(har\s|med\s)/.test(lower)) return 'ja';
+
+  // Vet ikke
+  if (/\b(vet ikke|vetikke|usikker|ikke sikker|maybe|kanskje)\b/.test(lower)) return 'vet_ikke';
+
   return null;
 }
 
@@ -387,8 +405,8 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     let confidence = 0;
     let nerResult: any = null;
 
-    // Equipment answers (start fresh for new searches; preserved when answering pending questions)
-    let equipmentAnswers: Record<string, string> = {};
+    // Equipment answers — always restore from session so LLM dialogue state persists
+    let equipmentAnswers: Record<string, string> = { ...(session.answers || {}) };
 
     // ── A: Handle pending question or restore LLM dialogue state ──
     if (session.pending_question || session.candidate_data) {
@@ -401,11 +419,28 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         answer = parseEquipmentAnswer(body.message);
       }
 
-      // Load session state for both rigid questions and LLM dialogue turns
-      equipmentAnswers = { ...(session.answers || {}) };
-
+      // Add parsed answer to already-restored equipment answers
       if (answer !== null && session.pending_question) {
         equipmentAnswers[session.pending_question] = answer;
+      }
+
+      // ALSO scan the message for ANY equipment mentions (user may answer multiple at once)
+      // e.g. "ja, med varme" or "uten regnsensor, med antenne"
+      const equipmentFromMessage = extractEquipment(body.message);
+      if (equipmentFromMessage.rain_sensor !== null) {
+        equipmentAnswers['rainSensor'] = equipmentFromMessage.rain_sensor ? 'ja' : 'nei';
+      }
+      if (equipmentFromMessage.heated !== null) {
+        equipmentAnswers['heated'] = equipmentFromMessage.heated ? 'ja' : 'nei';
+      }
+      if (equipmentFromMessage.adas !== null) {
+        equipmentAnswers['adas'] = equipmentFromMessage.adas ? 'ja' : 'nei';
+      }
+      if (equipmentFromMessage.antenna !== null) {
+        equipmentAnswers['antenna'] = equipmentFromMessage.antenna ? 'ja' : 'nei';
+      }
+      if (equipmentFromMessage.coated !== null) {
+        equipmentAnswers['coated'] = equipmentFromMessage.coated ? 'ja' : 'nei';
       }
 
       if (session.candidate_data) {
@@ -440,11 +475,40 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
 
     // ── B: Normal search flow ──
     if (candidates.length === 0) {
-      // NER extraction (hybrid: regex + LLM fallback)
-      nerResult = await extractVehicleHybrid(env, body.message);
-      confidence = nerResult.confidence;
+      // Check if user is answering a simple yes/no/don't-know in an active LLM dialogue
+      const simpleAnswer = parseEquipmentAnswer(body.message);
+      if (simpleAnswer && session.answers?.position && session.vehicle) {
+        console.log(`[Ordremottaker] Simple answer "${body.message}" in active dialogue — skipping NER, using session vehicle`);
+        vehicleInfo = session.vehicle;
+        const db = env.GLASS_CATALOG_D1;
+        const { results } = await db
+          .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
+          .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
+          .all();
+        let dbCandidates = (results || []) as unknown as GlassRecord[];
+        if (dbCandidates.length === 0) {
+          const { results: r2 } = await db
+            .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+            .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
+            .all();
+          dbCandidates = (r2 || []) as unknown as GlassRecord[];
+        }
+        candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
+        confidence = 0.8;
+      } else {
+        // NER extraction (hybrid: regex + LLM fallback)
+        nerResult = await extractVehicleHybrid(env, body.message);
+        confidence = nerResult.confidence;
 
-      if (nerResult.confidence >= 0.2) {
+        // If we have partial info from session (e.g., position from previous turn),
+        // combine with new NER results to build a complete picture
+        if (session.answers?.position && !nerResult?.position) {
+          console.log(`[Ordremottaker] Combining session.position=${session.answers.position} with new NER results`);
+          nerResult = { ...nerResult, position: session.answers.position };
+        }
+      }
+
+      if (nerResult && nerResult.confidence >= 0.2) {
         if (nerResult.regnr) {
           console.log(`[Ordremottaker] Searching by regnr: ${nerResult.regnr}`);
 
@@ -532,9 +596,33 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         }
       }
 
-      // Filter by position if specified
-      if (nerResult?.position && candidates.length > 0) {
-        const pos = nerResult.position.toLowerCase();
+      // Fallback: NER found nothing but we have vehicle from session
+      // (LLM dialogue continuation — user answered a question, not a new search)
+      if (candidates.length === 0 && session.vehicle) {
+        console.log(`[Ordremottaker] NER found no vehicle, using session.vehicle: ${session.vehicle.make} ${session.vehicle.model} (${session.vehicle.year})`);
+        vehicleInfo = session.vehicle;
+        const db = env.GLASS_CATALOG_D1;
+        const { results } = await db
+          .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
+          .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
+          .all();
+        let dbCandidates = (results || []) as unknown as GlassRecord[];
+        if (dbCandidates.length === 0) {
+          const { results: r2 } = await db
+            .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+            .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
+            .all();
+          dbCandidates = (r2 || []) as unknown as GlassRecord[];
+        }
+        candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
+        confidence = 0.8;
+      }
+
+      // Filter by position if specified (from NER or accumulated answers)
+      const positionFromAnswers = equipmentAnswers.position;
+      const positionToFilter = nerResult?.position || positionFromAnswers;
+      if (positionToFilter && candidates.length > 0) {
+        const pos = positionToFilter.toLowerCase();
         candidates = candidates.filter((c: Candidate) => {
           const cat = String(c.category || '').toLowerCase();
           if (pos === 'frontrute') return cat.includes('front');
@@ -546,9 +634,13 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       }
 
       // Auto-apply equipment from NER (user mentioned it explicitly)
-      if (nerResult?.adas !== null) equipmentAnswers['adas'] = nerResult.adas ? 'ja' : 'nei';
-      if (nerResult?.rain_sensor !== null) equipmentAnswers['rainSensor'] = nerResult.rain_sensor ? 'ja' : 'nei';
-      if (nerResult?.heated !== null) equipmentAnswers['heated'] = nerResult.heated ? 'ja' : 'nei';
+      // ALWAYS store position from NER so follow-up messages can use it
+      if (nerResult?.position) {
+        equipmentAnswers['position'] = nerResult.position;
+      }
+      if (nerResult && nerResult.adas !== null) equipmentAnswers['adas'] = nerResult.adas ? 'ja' : 'nei';
+      if (nerResult && nerResult.rain_sensor !== null) equipmentAnswers['rainSensor'] = nerResult.rain_sensor ? 'ja' : 'nei';
+      if (nerResult && nerResult.heated !== null) equipmentAnswers['heated'] = nerResult.heated ? 'ja' : 'nei';
     }
 
     // Apply all accumulated equipment answers to filter candidates
@@ -568,6 +660,10 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       if (posKnown) {
         useLlmDialogue = true;
       }
+    } else if (session.answers && Object.keys(session.answers).length > 0 && session.answers.position) {
+      // We have accumulated answers from previous turns (LLM dialogue in progress)
+      // Continue with LLM even if candidates filtered to 0 — LLM can explain no matches
+      useLlmDialogue = true;
     }
 
     if (useLlmDialogue) {
@@ -617,7 +713,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
             break;
           case 'clarify':
             status = 'clarification';
-            nextAction = 'ask_vehicle_details';
+            nextAction = 'ask_llm'; // Keep LLM dialogue flowing
             break;
         }
       } else {
@@ -628,8 +724,14 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
 
     if (!useLlmDialogue) {
       // === RIGID FALLBACK (ORIGINAL LOGIC) ===
-      if (confidence < 0.3 && candidates.length === 0) {
+      if (confidence < 0.3 && candidates.length === 0 && !equipmentAnswers.position) {
+        // No info at all — ask for everything
         aiResponse = 'Hei! For å finne riktig glass trenger jeg å vite: bilmerke, modell, årsmodell, og hvilket glass (frontrute, bakrute, sidedør, etc.). Har du registreringsnummer er det enda bedre!';
+        status = 'clarification';
+        nextAction = 'ask_vehicle_details';
+      } else if (confidence < 0.3 && candidates.length === 0 && equipmentAnswers.position) {
+        // We have position from this turn but missing vehicle info — ask specifically for that
+        aiResponse = `Du har valgt ${equipmentAnswers.position}. For å finne riktig glass trenger jeg å vite bilmerke, modell og årsmodell (f.eks. "Volvo XC60 2018"). Har du registreringsnummer er det enda bedre!`;
         status = 'clarification';
         nextAction = 'ask_vehicle_details';
       } else if (candidates.length === 0 && vehicleInfo) {
@@ -759,7 +861,9 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       candidates: candidates.map((c: Candidate) => c.id).filter((id): id is number => typeof id === 'number'),
       status: status === 'recommendation' ? 'completed' : 'active',
       pending_question: pendingQuestionField,
-      candidate_data: status === 'question' ? JSON.stringify(candidates) : undefined,
+      // Don't store candidate_data for LLM-managed dialogue — next turn should
+      // go through normal flow + LLM dialogue, not rigid pending-question logic
+      candidate_data: (status === 'question' && nextAction !== 'ask_llm') ? JSON.stringify(candidates) : undefined,
       answers: equipmentAnswers,
       dialogueState: determineDialogueState(candidates, equipmentAnswers),
     });

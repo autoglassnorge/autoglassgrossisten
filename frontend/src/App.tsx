@@ -27,6 +27,7 @@ const IdentifiserePage = lazy(() => import('@/pages/bilglassguide/IdentifiserePa
 const FlereFrontruterPage = lazy(() => import('@/pages/bilglassguide/FlereFrontruterPage'))
 const AkustiskPage = lazy(() => import('@/pages/bilglassguide/AkustiskPage'))
 const VariantMatchingPage = lazy(() => import('@/pages/bilglassguide/VariantMatchingPage'))
+const ProdusenterPage = lazy(() => import('@/pages/bilglassguide/ProdusenterPage'))
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path="/bilglassguide/flere-frontruter-samme-modell" element={<FlereFrontruterPage />} />
             <Route path="/bilglassguide/akustisk-bilglass" element={<AkustiskPage />} />
             <Route path="/bilglassguide/variantmatching" element={<VariantMatchingPage />} />
+            <Route path="/bilglassguide/produsenter" element={<ProdusenterPage />} />
             <Route path="/sok" element={<SearchPage />} />
             <Route path="/glass-guide" element={<GlassGuidePage />} />
             <Route path="/kasse" element={<CartPage />} />

@@ -6,6 +6,7 @@
 import type { Env } from "../types";
 import type { SessionContext } from './ordremottaker-session';
 import { decodeEurocode } from "./eurocode-decoder";
+import { callLLM } from "./ai-gateway";
 
 interface LlmMessage {
   role: "system" | "user" | "assistant";
@@ -142,6 +143,23 @@ REGELVERK FOR BESTILLING:
 6. Spør MINST mulig — hvis bare 1-3 kandidater etter filtrering, vis dem med en gang
 7. "Vet ikke" er OK — ikke press brukeren
 8. Vær vennlig, profesjonell og effektiv
+9. HVIS 0 KANDIDATER ETTER FILTRERING: Forklar at ingen glass matcher ALLE kriteriene. Foreslå å fjerne ett filter eller bekrefte at kravene er riktige. Bruk action "clarify".
+
+VIKTIG — EKSTRAHÉR ALLTID FRA BRUKERENS SVAR:
+- "med regnsensor" / "har regnsensor" / "ja, den har regnsensor" → extracted.rain_sensor = "ja"
+- "uten regnsensor" / "ikke regnsensor" / "har ikke regnsensor" / "ingen regnsensor" → extracted.rain_sensor = "nei"
+- "med varme" / "oppvarmet" / "har varme" → extracted.heated = "ja"
+- "uten varme" / "ikke oppvarmet" / "ikke varme" / "ingen varme" → extracted.heated = "nei"
+- "med antenne" / "har antenne" → extracted.antenna = "ja"
+- "uten antenne" / "ikke antenne" / "ingen antenne" → extracted.antenna = "nei"
+- "med coating" / "coated" / "har coating" → extracted.coated = "ja"
+- "uten coating" / "ikke coated" → extracted.coated = "nei"
+- "med ADAS" / "lane assist" / "har ADAS" → extracted.adas = "ja"
+- "uten ADAS" / "ikke ADAS" / "ingen lane assist" → extracted.adas = "nei"
+- Brukeren kan svare på FLERE ting samtidig, f.eks. "uten regnsensor, med antenne" → ekstrahér BEGGE.
+- Hvis brukeren sier "BARE antenne" → det betyr antenne=ja, alt annet=nei.
+- Hvis brukeren sier "uten noe ekstra" / "ingen spesialfunksjoner" → alt = "nei".
+- Hvis brukeren spør deg om å "sjekke en gang til" → se på kandidatene på nytt og forklar hva du fant.
 
 EUROCODE-KODER DU KJENNER:
 Farger: ${COLOR_CODES_TEXT}
@@ -190,6 +208,10 @@ function buildUserPrompt(context: DialogueContext): string {
 
   const historyText = context.history.slice(-6).map(h => `${h.role}: ${h.content}`).join('\n');
 
+  const zeroCandidatesNote = context.candidates.length === 0 && Object.keys(context.extracted).length > 0
+    ? '\n⚠️ VIKTIG: Ingen kandidater matcher ALLE kriteriene over. Brukeren må enten bekrefte at kravene er riktige, eller du må foreslå å fjerne ett filter.'
+    : '';
+
   return `NÅVÆRENDE KANDIDATER (${context.candidates.length}):
 ${candidateDescriptions || 'Ingen kandidater funnet ennå'}
 
@@ -198,15 +220,16 @@ ALLEREDE KJENT: ${knownFields}
 KJØRETØY: ${context.vehicle ? `${context.vehicle.make} ${context.vehicle.model} (${context.vehicle.year})` : 'Ukjent'}
 
 SAMTALEHISTORIKK (siste 6 meldinger):
-${historyText}
+${historyText}${zeroCandidatesNote}
 
 INSTRUKS: Analyser situasjonen. Hva vet du? Hva mangler? Hva er neste naturlige steg?
 Returner JSON med message, action, extracted, confidence.`;
 }
 
 // Using @cf/moonshotai/moonshot-auto for faster responses and lower cost
-// compared to kimi-k2.5, while maintaining good JSON schema adherence
-/** Call Workers AI with JSON schema mode for dialogue */
+// compared to kimi-k2.5, while maintaining good JSON schema adherence.
+// Falls back to Groq (llama-3.3-70b-versatile) if Workers AI quota is exhausted.
+/** Call AI via gateway (Workers AI → Groq fallback) with JSON schema mode for dialogue */
 async function callDialogueLlm(
   env: Env,
   context: DialogueContext
@@ -217,7 +240,7 @@ async function callDialogueLlm(
       { role: "user", content: buildUserPrompt(context) },
     ];
 
-    const result = await env.AI.run("@cf/moonshotai/moonshot-auto", {
+    const result = await callLLM(env, {
       messages,
       max_tokens: 512,
       temperature: 0.3,
@@ -231,9 +254,9 @@ async function callDialogueLlm(
       },
     });
 
-    const response = (result as { response?: string }).response || "";
+    const response = result.response;
     if (!response) {
-      console.error("[DialogueEngine] Empty response from Workers AI");
+      console.error(`[DialogueEngine] Empty response from ${result.provider}`);
       return null;
     }
 
@@ -250,26 +273,24 @@ async function callDialogueLlm(
       return null;
     }
   } catch (e) {
-    console.error("[DialogueEngine] Workers AI error:", e instanceof Error ? e.message : String(e));
+    console.error("[DialogueEngine] AI gateway error:", e instanceof Error ? e.message : String(e));
     return null;
   }
 }
 
-/** Generate the next dialogue turn using LLM */
+/** Generate the next dialogue turn using LLM
+ *  Handles 0 candidates gracefully — LLM can explain no matches and suggest relaxing filters
+ */
 export async function generateDialogueTurn(
   env: Env,
   context: DialogueContext
 ): Promise<LlmDialogueResponse | null> {
-  if (context.candidates.length === 0) {
-    return null;
-  }
-
   const response = await callDialogueLlm(env, context);
   if (!response) {
     return null;
   }
 
-  console.log(`[DialogueEngine] action=${response.action}, confidence=${response.confidence}, extracted=${JSON.stringify(response.extracted)}`);
+  console.log(`[DialogueEngine] action=${response.action}, confidence=${response.confidence}, extracted=${JSON.stringify(response.extracted)}, candidates=${context.candidates.length}`);
   return response;
 }
 

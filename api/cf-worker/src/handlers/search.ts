@@ -35,6 +35,7 @@ import { sha256, saveSearchResult, getLearnedEquipment, getLearnedByVinPrefix } 
 import { normalizeRecord } from "../lib/normalize";
 import { lookupNagsByVehicle } from "../nags-by-vehicle";
 import { resolveGlass, upsertGlassRule } from "../vin-glass-resolver";
+import { resolveTecDocKType } from "../lib/tecdoc-resolver";
 
 export type { SearchResult };
 
@@ -248,7 +249,24 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       }
     }
 
-    // 3d. Cross-validate brand
+    // 3d. TecDoc in-memory resolver fallback (fast, no external API call)
+    if (!resolvedKtype && vehicle.make && vehicle.model) {
+      try {
+        const tecdocResult = resolveTecDocKType(vehicle.make, vehicle.model, vehicle.year);
+        if (tecdocResult.status !== 'no_match' && tecdocResult.candidates.length > 0) {
+          const best = tecdocResult.candidates[0];
+          if (tecdocResult.status === 'resolved' || best.score >= 0.6) {
+            resolvedKtype = best.ktype;
+            ktypeSource = 'tecdoc_resolver';
+            console.log(`[kType] TecDoc resolver hit for ${regnr}: kType=${resolvedKtype}, brand=${best.brand}, model=${best.model}, score=${best.score.toFixed(2)}`);
+          }
+        }
+      } catch (e) {
+        console.warn(`[kType] TecDoc resolver failed for ${regnr}:`, e);
+      }
+    }
+
+    // 3f. Cross-validate brand
     if (bovsoftVehicle && bovsoftVehicle.brand && vehicle.make) {
       const bovBrand = bovsoftVehicle.brand.toLowerCase().replace(/[^a-z]/g, "");
       const svvBrand = vehicle.make.toLowerCase().replace(/[^a-z]/g, "");
@@ -257,7 +275,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       }
     }
 
-    // 3e. Merge kType into vehicle + save to glass_rules
+    // 3f. Merge kType into vehicle + save to glass_rules
     if (resolvedKtype && resolvedKtype > 0) {
       vehicle.k_type = resolvedKtype;
       try {
@@ -282,7 +300,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       }
     }
 
-    // 3f. Save SVV vehicle data to vin_decode_cache
+    // 3g. Save SVV vehicle data to vin_decode_cache
     if (vehicle.vin) {
       try {
         await db.prepare(`
