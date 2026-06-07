@@ -272,7 +272,7 @@ export interface ProactiveSuggestion {
 }
 
 export interface OrdremottakerResponse {
-  status: "question" | "recommendation" | "order_ready" | "escalated" | "clarification";
+  status: "question" | "recommendation" | "order_ready" | "escalated" | "clarification" | "knowledge";
   ai_response: string;
   session_token: string;
   candidates?: GlassRecord[];

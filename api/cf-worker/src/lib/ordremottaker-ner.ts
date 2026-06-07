@@ -16,7 +16,7 @@ export interface ExtractedVehicle {
   adas: boolean | null;
   rain_sensor: boolean | null;
   heated: boolean | null;
-  intent: "bestill" | "prisforespørsel" | "support" | "uklart";
+  intent: "bestill" | "prisforespørsel" | "support" | "kunnskap" | "uklart";
   confidence: number;
 }
 
@@ -254,6 +254,18 @@ const PRICE_KEYWORDS = [
   "pris", "hva koster", "prisen", "kostnad", "hvor mye",
 ];
 
+const KNOWLEDGE_KEYWORDS = [
+  "hva er", "hva betyr", "hvordan", "hvorfor", "forklar", "forskjell", "forskjellen",
+  "når", "hvor", "hvilken", "hvem", "kan jeg", "får jeg", "trekker", "betyr",
+  "garanti", "reklamasjon", "retur", "bytte", "levering", "lager", "sporing",
+  "tracking", "faktura", "ehf", "mva", "avtale", "rabatt", "kontakt", "telefon",
+  "e-post", "leveringstid", "import", "oem", "aftermarket", "pilkington",
+  "glavista", "euroglass", "eurocode", "e-code", "laminert", "herdet", "akustisk",
+  "hud", "adas", "kalibrering", "regnsensor", "oppvarmet", "varme", "verksted",
+  "grossist", "leverandør", "b2b", "explain", "what is", "how", "why", "when",
+  "where", "which", "difference", "does", "can i", "do i need",
+];
+
 /**
  * Extract Norwegian registration number (2 letters + 4-5 digits)
  */
@@ -427,8 +439,29 @@ export function extractEquipment(text: string): {
  */
 function extractIntent(text: string): ExtractedVehicle["intent"] {
   const lower = text.toLowerCase();
-  if (ORDER_KEYWORDS.some(k => lower.includes(k))) return "bestill";
-  if (PRICE_KEYWORDS.some(k => lower.includes(k))) return "prisforespørsel";
+
+  // Check for knowledge questions first (they often overlap with order words)
+  const hasKnowledgeKw = KNOWLEDGE_KEYWORDS.some(k => lower.includes(k));
+  const hasOrderKw = ORDER_KEYWORDS.some(k => lower.includes(k));
+  const hasPriceKw = PRICE_KEYWORDS.some(k => lower.includes(k));
+
+  // Strong knowledge indicators: starts with question words or contains explanatory keywords
+  const strongKnowledge =
+    /^\s*(hva|hvordan|hvorfor|når|hvor|hvilken|hvem|forklar|what|how|why|when|where|which|explain|does)\b/i.test(text) ||
+    /\b(garanti|reklamasjon|retur|bytte|leveringstid|lagerstatus|sporing|faktura|ehf|mva|avtalepris|kontakt|telefon|e-post|oem|aftermarket|pilkington|glavista|euroglass|eurocode|laminert|herdet|akustisk|hud|adas\s+kalibrering|regnsensor|oppvarmet|verksted|grossist|leverandør|b2b)\b/i.test(text);
+
+  if (strongKnowledge && !hasOrderKw && !hasPriceKw) {
+    return "kunnskap";
+  }
+
+  // If it has knowledge keywords but no clear order/price keywords
+  if (hasKnowledgeKw && !hasOrderKw && !hasPriceKw) {
+    return "kunnskap";
+  }
+
+  if (hasOrderKw) return "bestill";
+  if (hasPriceKw) return "prisforespørsel";
+  if (hasKnowledgeKw) return "kunnskap";
   return "uklart";
 }
 
@@ -542,8 +575,15 @@ Ekstraher følgende. Sett null hvis ukjent.
 - adas: true hvis ADAS/kamera nevnes
 - rain_sensor: true hvis regnsensor nevnes  
 - heated: true hvis oppvarmet frontrute nevnes
-- intent: bestill, prisforespørsel, support, eller uklart
+- intent: bestill, prisforespørsel, support, kunnskap, eller uklart
 - confidence: 0.0-1.0
+
+REGEL FOR INTENT:
+- "kunnskap" = kunden spør OM noe (hva er..., hvordan..., forskjellen på..., garanti, levering, priser, etc.)
+- "bestill" = kunden vil BESTILLE/HA et glass (trenger, skal ha, bestille, etc.)
+- "prisforespørsel" = kunden spør om PRIS på et spesifikt glass
+- "support" = kunden har et problem eller klage
+- "uklart" = kan ikke avgjøre
 
 Svar KUN med gyldig JSON. Eksempel:
 {"make":"Jaguar","model":"E-Pace","year":2022,"regnr":null,"vin":null,"position":"frontrute","adas":null,"rain_sensor":null,"heated":null,"intent":"bestill","confidence":0.9}`;

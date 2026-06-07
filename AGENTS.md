@@ -427,6 +427,7 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 | 2026-05-21 | Daglig pris-sjekk fra auto-glass.no | Godkjent |
 | 2026-05-24 | Bovsoft kType-bootstrap over prefix4-matching | Godkjent |
 | 2026-06-05 | Wrangler action + caching + manuell secret-håndtering | Godkjent |
+| 2026-06-07 | TecDoc v16 full D1 synkronisering — catalog-prod.json → D1 med kType | Godkjent |
 
 ---
 
@@ -438,6 +439,14 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 **Dekning:** 498 produkter (1.26%) med direkte ktype i `glass_catalog`. 26 merker representert.
 **Verktøy:** `scripts/discover-regnr-by-series.mjs` + `scripts/process-discovered-regnr.mjs`.
 **Lærdom:** Prefix4-matching er for grov — mange ktyper matcher samme eurocode. Dedupe-script (hit_count-ratio > 0.5) nødvendig.
+
+### TecDoc kType Deploy v16 (2026-06-07)
+**Fase 1 — v16 SQL:** Deploy TecDoc 1Q2019 kType-mapping til D1 via genererte SQL-filer. ktype_registry (80,040 rader) og glass_rules (1,568 rader) allerede deployet. glass_catalog fikk 935 nye kType-mappinger (4.52% dekning). v16-SQL ble generert mot 33,215-produkt katalog, men D1 hadde bare 20,693 — lav treffrate.
+
+**Fase 2 — Full D1 synkronisering:** Siden v16-SQL traff lite, ble `catalog-prod.json` (27,184 records, 1,099 med kType fra Bovsoft + TecDoc eurocode-mapping) brukt som master og synkronisert til D1. 45 records manglet eurocode og ble filtrert ut. Resultat: 27,139 records i D1, 1,099 med kType (4.05% dekning).
+**Verktøy:** `scripts/sync-catalog-to-d1.mjs` genererer chunked SQL → kombinert til én 16MB fil. Viktig: fjern `COMMIT;` statements før D1-deploy (Wrangler D1 støtter ikke transaksjoner).
+**Resultat:** Worker deployet (v0978a808), røyktest 6/6 OK. Andre tabeller intakte: ktype_registry (80,115), tecdoc_ktype_registry (908), glass_rules (1,667), ktype_matches (815).
+**Lærdom:** Når SQL-generert mapping gir lav dekning, synkroniser master JSON-katalog til D1 direkte. Bruk catalog-prod.json som SSoT. D1 støtter ikke `COMMIT;` i SQL.
 
 ### loadCatalog-buggen (2026-05-18)
 **Feil:** `loadCatalog()` sjekket `catalog_records` (metadata-objekt) som om det var `GlassRecord[]`.
@@ -460,6 +469,23 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 **Kommandoer:** `npm run eurocode:pipeline` (enrich + D1 sync).
 **Lærdom:** auto-glass.no er den primære eurocode-kilden — ikke Autodoc/TecDoc. Berik data derfra først.
 
+### kType Kilde-Evaluering (2026-06-07)
+**Bakgrunn:** Bovsoft credits tømt (402-feil). Søkt etter alternative regnr→kType kilder.
+**Testet kilder:**
+| Kilde | Status | Pris | Konklusjon |
+|---|---|---|---|
+| Bovsoft v2 | Credits tømt, men 68 kTypes deployet | Pay-as-you-go | ✅ Beste hittil, avvent credit-reset |
+| RapidAPI K-Type Finder | **Fjernet** fra RapidAPI (Autoways nedlagt 2026-05-21) | — | ❌ Utilgjengelig |
+| Biluppgifter API | Nøkkel utløpt (`Invalid token`) | Abonnement | ❌ Krever fornyelse |
+| Apify TecDoc Actor | $69/mnd + usage, parts-catalog | — | ⚠️ Ikke kType-lookup |
+| TecAlliance IDP API | Offisiell TecDoc API, lansert mai 2026 | Lisens | ✅ **Anbefalt langsiktig** |
+| Autodoc scraping | Blokkert av Cloudflare | — | ❌ Ikke viable |
+| Finn.no scraping | ~25 timer for 503 queries | Gratis | ⚠️ For tregt, parkert |
+
+**Resultat:** 68 nye kTypes fra Bovsoft v2 deployet til D1 `ktype_registry`. Total: 80,183 rader.
+**Anbefaling:** Kontakt TecAlliance (tecalliance.com) for IDP Data Receiver API-pristilbud. Tilbyr KTypes, delta-sync, offisiell støtte. Alternativ: avvent Bovsoft credit-reset.
+**Lærdom:** Regnr→kType er en knapp ressurs. Bovsoft fungerer men er uforutsigbar. Offisiell TecDoc API er eneste skalerbare langsiktige løsning.
+
 ---
 
 ### Wrangler/GitHub Optimalisering (2026-06-05)
@@ -478,5 +504,5 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 
 ---
 
-**Sist oppdatert:** 2026-06-04  
-**Versjon:** 2.7 (+Ordremottaker LLM-agent)
+**Sist oppdatert:** 2026-06-07  
+**Versjon:** 2.9 (+kType kilde-evaluering, Bovsoft v2 deploy)

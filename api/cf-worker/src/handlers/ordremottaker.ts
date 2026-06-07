@@ -16,6 +16,7 @@ import { getCustomerHistory } from '../lib/customer-history';
 import { sha256 } from '../lib/learning';
 import { decodeEurocode } from '../lib/eurocode-decoder';
 import { generateDialogueTurn, normalizeExtracted, determineDialogueState, type ExtractedFields } from '../lib/ordremottaker-llm-dialogue';
+import { searchFaq, looksLikeKnowledgeQuestion, isGreeting, buildGreetingResponse } from '../lib/ordremottaker-knowledge';
 
 type Candidate = Record<string, unknown> & { properties?: Record<string, unknown>; decoded_description?: string | null };
 
@@ -505,6 +506,64 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         if (session.answers?.position && !nerResult?.position) {
           console.log(`[Ordremottaker] Combining session.position=${session.answers.position} with new NER results`);
           nerResult = { ...nerResult, position: session.answers.position };
+        }
+      }
+
+      // === GREETING HANDLING ===
+      // Pure greetings ("hei", "hallo", etc.) get a friendly response
+      if (isGreeting(body.message)) {
+        const greetingResponse = buildGreetingResponse();
+        console.log('[Ordremottaker] Greeting detected');
+        await updateSession(env, sessionToken, { status: 'active' });
+        await addMessage(env, sessionToken, 'ai', greetingResponse);
+        return jsonResponse({
+          status: 'knowledge',
+          ai_response: greetingResponse,
+          session_token: sessionToken,
+          confidence: 0.95,
+        });
+      }
+
+      // === KNOWLEDGE ROUTING ===
+      // If intent is knowledge (or looks like a knowledge question), search FAQ and answer directly.
+      // We search FAQ even if NER found a make (LLM can hallucinate brands), but NOT if we have a regnr.
+      const isKnowledge = nerResult?.intent === 'kunnskap' || looksLikeKnowledgeQuestion(body.message);
+      if (isKnowledge && !nerResult?.regnr) {
+        const faqResult = searchFaq(body.message);
+        if (faqResult && faqResult.score >= 0.5) {
+          console.log(`[Ordremottaker] Knowledge question matched FAQ: ${faqResult.article.id} (score: ${faqResult.score.toFixed(2)})`);
+          const knowledgeResponse = faqResult.article.answer;
+
+          await updateSession(env, sessionToken, {
+            status: 'active',
+            pending_question: null,
+            answers: {},
+          });
+          await addMessage(env, sessionToken, 'ai', knowledgeResponse);
+
+          const response: OrdremottakerResponse = {
+            status: 'knowledge',
+            ai_response: knowledgeResponse,
+            session_token: sessionToken,
+            confidence: 0.95,
+            next_action: undefined,
+          };
+          return jsonResponse(response);
+        }
+
+        // Knowledge question with weak/no FAQ match — only give general help if no make was found
+        if (!nerResult?.make) {
+          console.log('[Ordremottaker] Knowledge question, no FAQ match — giving general help');
+          const generalHelp = "Jeg er Professor Autoglass, din ekspert på bilglass hos Autoglass AS. Jeg kan hjelpe deg med to ting: (1) Finne riktig glass til din kunde — oppgi regnr, så finner jeg eksakt glass med utstyr og eurocode. Alternativt merke, modell, år og posisjon. (2) Svare på spørsmål om produkter, garanti, levering, OEM vs aftermarket, ADAS-kalibrering, priser, lagerstatus, og mer. Hva trenger du hjelp med?";
+          await updateSession(env, sessionToken, { status: 'active' });
+          await addMessage(env, sessionToken, 'ai', generalHelp);
+          return jsonResponse({
+            status: 'knowledge',
+            ai_response: generalHelp,
+            session_token: sessionToken,
+            confidence: 0.8,
+            next_action: undefined,
+          });
         }
       }
 
