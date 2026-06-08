@@ -372,7 +372,7 @@ const FAQ_ARTICLES: FaqArticle[] = [
     category: "teknisk",
     question: "Hvordan fungerer varmetråder i bilglass?",
     answer: "Varmetråder er tynne tungsten-tråder (15–25 mikrometer) integrert i bakruten eller frontruten. De har en motstand på 0,5–2,5 ohm og trekker 5–15A ved 12V. Når verkstedet kobler ruten til defroster-kretsen, avgir trådene varme som fjerner is og dug. Sjekk alltid at utskiftingen dekker hele defroster-sonen, ellers får du reklamasjon.",
-    keywords: ["varmetråder", "tungsten", "defroster", "bakrute", "elektrisk oppvarming"]
+    keywords: ["tungsten", "defroster", "bakrute", "elektrisk oppvarming"]
   },
   {
     id: "glass-antenne-integrert",
@@ -736,9 +736,9 @@ export function looksLikeKnowledgeQuestion(message: string): boolean {
     "rabatt", "kontakt", "telefon", "e-post", "leveringstid", "import",
     "oem", "aftermarket", "pilkington", "glavista", "euroglass",
     "eurocode", "e-code", "laminert", "herdet", "akustisk", "hud",
-    "adas", "kalibrering", "regnsensor", "oppvarmet", "varme",
+    "adas", "kalibrering", 
     "verksted", "grossist", "leverandør", "b2b", "ece", "montering",
-    "primer", "tørketid", "pvb", "varmetråder", "target-plate",
+    "primer", "tørketid", "pvb", "target-plate",
     "encapsulated", "solar", "coated", "steinsprut", "lekkasje",
     "vindstøy", "klips", "tetningslist", "pyntelist"
   ];

@@ -528,6 +528,14 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
           console.log(`[Ordremottaker] Combining session.position=${session.answers.position} with new NER results`);
           nerResult = { ...nerResult, position: session.answers.position };
         }
+
+        // Year correction: user says "it's a 2022 model" without repeating make/model
+        if (nerResult?.year && !nerResult?.make && session.vehicle) {
+          console.log(`[Ordremottaker] Year correction: ${session.vehicle.year} → ${nerResult.year}`);
+          session.vehicle.year = nerResult.year;
+          vehicleInfo = session.vehicle;
+          await updateSession(env, sessionToken, { vehicle: session.vehicle });
+        }
       }
 
       // === GREETING HANDLING ===
@@ -548,7 +556,14 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       // === KNOWLEDGE ROUTING ===
       // If intent is knowledge (or looks like a knowledge question), search FAQ and answer directly.
       // We search FAQ even if NER found a make (LLM can hallucinate brands), but NOT if we have a regnr.
-      const isKnowledge = nerResult?.intent === 'kunnskap' || looksLikeKnowledgeQuestion(body.message);
+      // Also NOT if user is in an active ordering dialogue (they're answering questions, not asking).
+      const isActiveDialog = !!session.vehicle && (
+        session.dialogueState === 'filtering' ||
+        session.dialogueState === 'needs_position' ||
+        session.dialogueState === 'ready_to_show' ||
+        session.dialogueState === 'showing_results'
+      );
+      const isKnowledge = !isActiveDialog && (nerResult?.intent === 'kunnskap' || looksLikeKnowledgeQuestion(body.message));
       if (isKnowledge && !nerResult?.regnr) {
         const faqResult = searchFaq(body.message);
         if (faqResult && faqResult.score >= 0.5) {
