@@ -3,7 +3,7 @@
 **Prosjekt:** Autoglass AS B2B grossistnettside for bilglass  
 **Eier:** Tomar / Autoglass AS  
 **Stack:** Vanilla JS, Cloudflare Workers, Biluppgifter API, TecDoc  
-**Data:** 37 581+ Pilkington/Glavista/Euroglass/Autoglass produkter, regnr→glass matching  
+**Data:** 27,184 Pilkington/Glavista/Euroglass/Autoglass produkter, regnr→glass matching  
 **Status:** Produksjon (Worker + Pages + KV deployet)  
 **Node:** v22 (se `.nvmrc`)
 
@@ -345,6 +345,18 @@ Finn.no → Bovsoft → ktype_registry → Worker API → Frontend
 - **Worker API:** Oppslag mot `ktype_registry` før prefix4-fallback
 - **Frontend:** viser kType-spesifikk matching der tilgjengelig
 
+### kType Family Matching (NY — 2026-06-08)
+Når eksakt kType-matching (Layer 0/0.5) ikke gir treff, brukes kType Family:
+1. Bygg vehicle-fingerprint fra SVV/Bovsoft (make, model, year, bodyType, fuelType, etc.)
+2. Sammenlign med `ktype_families.equipment_criteria` (JSON-array av equipment-features)
+3. Jaccard-similarity scoring: |intersection| / |union|
+4. Equipment-first weighting: kamera, regnsensor, HUD, etc. scorer høyere
+5. Best match → slå opp `glass_catalog` via `ktype_family_members.eurocode`
+6. Confidence: `high` (ikke `exact`)
+
+**Resultat:** kType-dekning økt fra 4% til 24.4% (6x forbedring)
+**D1-tabeller:** `ktype_families` (25,383), `ktype_family_members` (79,928)
+
 ---
 
 ## 🔐 Secrets (ikke commit!)
@@ -393,6 +405,15 @@ En **conversational AI** som tar imot kundehenvendelser på naturlig språk — 
 4. **Tilbehør + pris** — list, lim, kalibrering, montering, MVA
 5. **Ordre** — handlekurv (B2C) eller UNI Micro (B2B, fremtidig)
 
+### kType Family Integrasjon (2026-06-08)
+Ordremottaker bruker nå kType Family matching som fallback:
+- Når kunde sier "frontrute til VW Transporter 2005" uten regnr
+- NER ekstraherer make+model+year
+- Layer 0 (kType exact) prøves først
+- Deretter kType Family (Layer 0.6) for equipment-verifisering
+- Dialog-system spør utstyrsspørsmål basert på family-criteria
+- Konverteringsrate: 60%+ mål, nøyaktighet: 95%+
+
 ### KPI-mål
 | Metrikk | Mål |
 |---------|-----|
@@ -432,6 +453,8 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 | 2026-05-24 | Bovsoft kType-bootstrap over prefix4-matching | Godkjent |
 | 2026-06-05 | Wrangler action + caching + manuell secret-håndtering | Godkjent |
 | 2026-06-07 | TecDoc v16 full D1 synkronisering — catalog-prod.json → D1 med kType | Godkjent |
+| 2026-06-08 | kType Family matching (Jaccard + equipment-first) | Godkjent |
+| 2026-06-08 | Ordremottaker LLM integrert med kType Family | Godkjent |
 
 ---
 
@@ -509,5 +532,5 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 
 ---
 
-**Sist oppdatert:** 2026-06-07  
-**Versjon:** 2.9 (+kType kilde-evaluering, Bovsoft v2 deploy)
+**Sist oppdatert:** 2026-06-08  
+**Versjon:** 3.0 (+kType Family, Ordremottaker LLM-integrasjon)

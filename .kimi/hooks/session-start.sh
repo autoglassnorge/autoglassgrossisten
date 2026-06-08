@@ -91,10 +91,12 @@ const entries = lines.slice(-5).map(l => {
   try { return JSON.parse(l); } catch { return null; }
 }).filter(Boolean);
 entries.forEach(e => {
-  const ts = e.timestamp ? e.timestamp.slice(0, 16).replace('T', ' ') : '?';
+  const ts = e.ts ? e.ts.slice(0, 16).replace('T', ' ') : '?';
   const agent = e.agent || 'unknown';
-  const event = e.event || 'unknown';
-  console.log('  [' + ts + '] ' + agent + ' — ' + event);
+  const task = e.task || 'unknown';
+  const type = e.type || 'AUTO';
+  const status = e.status || '?';
+  console.log('  [' + ts + '] ' + agent + ' | ' + type + ' | ' + status + ' — ' + task.slice(0, 60));
 });
 " 2>/dev/null || echo "  (kunne ikke lese diary)"
 else

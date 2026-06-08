@@ -14,9 +14,9 @@
 | Repo path | `/Users/taj/bilglass` |
 | Stack | Cloudflare Worker + D1 + KV + Pages |
 | Owner | Tom Arne Jensen (post@klarpakke.no) |
-| Last updated | 2026-05-30 10:30 CEST |
+| Last updated | 2026-06-08 20:42 CEST |
 | Last updated by | kimi-cli |
-| Worker version | v2.4 (TecDoc fallback Layer 0.5, collision-gated, 80k+ kType registry) |
+| Worker version | v2.5 (kType Family + Ordremottaker LLM) |
 
 ---
 
@@ -30,8 +30,12 @@
 - **Confidence levels:** `exact` | `high` | `medium` | `low` | `none`
 - **Target SLA:** 100% eksakt frontrute-matching (samme glass som fabrikkoriginal)
 - **Learning engine:** D1 `glass_rules` + `search_results` (VIN-prefix → equipment læring)
+- **kType Family matching:** Når exact+kType registry ikke gir treff, brukes Jaccard-similarity på `ktype_families.equipment_criteria` vs vehicle-fingerprint. Equipment-first scoring. Confidence: `high`.
+- **Ordremottaker LLM:** 6-steg pipeline med NER → Glass-oppslag (Layer 0→0.6) → Equipment-dialog → Tilbehør → Pris → Ordre. Integrert med kType Family for fuzzy matching.
 - **Nord Glass:** 9,524 rader importert til D1 staging (OK: 8,629, REVIEW: 888, HOLD: 7)
-- **kType coverage:** D1 remote: `ktype_registry` **80,115** rader, `tecdoc_ktype_registry` **908** rader, `glass_rules` **1,639** rader, `glass_catalog` **33,215** rader
+- **kType coverage:** D1 remote: `ktype_registry` **69,893** rader, `tecdoc_ktype_registry` **908** rader, `glass_rules` **1,639** rader, `glass_catalog` **27,139** rader
+- **kType families:** `ktype_families` **25,383** families, `ktype_family_members` **79,928** rows
+- **kType exact + family matching:** 24.4% dekning (6x forbedring fra 4%)
 - **TecDoc 1Q2019:** GitHub `tecdocSQL/tecdocdatabase1Q2019` — 69,871 kType mappings parsed from manufacturers+models+passengercars CSVs
 - **Bovsoft:** 118 verified results, 333 remaining searches (~$0.12/search). Port 150 (gratis, regnr→kType)
 - **Biluppgifter.se:** API-nøkkel placeholder (`din_biluppgifter_nokkell_her`). Unused `GET /api/v1/tecdoc/regno/{regnr}?country_code=NO` endpoint returns `tecdoc_id` (kType)
@@ -45,7 +49,8 @@
 |---|---|---|
 | P1 | **Biluppgifter.se:** API-nøkkel mangler — ubrukt `tecdoc/regno` endpoint som gir kType direkte | Åpen |
 | P2 | Bovsoft: 333 remaining searches — strategisk bruk på high-value unmatched models | Åpen |
-| P2 | Ingen overvåkning av kType-læringskurven | Ikke startet |
+| P2 | kType Family: Jaccard-threshold (0.6) monitorere accuracy | Overvåkning |
+| P2 | Ingen overvåkning av kType-læringskurven | Delvis løst — Family matching gir 6x dekning |
 | P3 | Ingen `exact_match` flagg i API-respons | Planlagt |
 
 > Historiske blockers (✅): SVV 401, Bovsoft 403, glass_variants duplikater, MAX-merge for boolske felt, ktype_matches GDPR, Bovsoft logging, **Remote deploy** (D1 data er nå på plass).
@@ -67,6 +72,19 @@
 ---
 
 ## Recent activity
+
+### 2026-06-08 (Kimi CLI — kType Family matching + Ordremottaker LLM-integrasjon)
+- **kType Family matching:** Bygget fra TecDoc 1Q2019 equipment-criteria
+  - `ktype_families`: 25,383 families med equipment-criteria JSON
+  - `ktype_family_members`: 79,928 kType → eurocode mappings
+  - Jaccard-similarity scoring med equipment-first weighting
+  - Deployet til remote D1
+- **Ordremottaker LLM:** Integrert med kType Family som fallback
+  - NER + equipment-dialog + year-korrigering
+  - Equipment-svar tolkes som kunnskap (ikke bare bekreftelse)
+  - Session-state i `glass_resolution_requests`
+- **Resultat:** kType-dekning 4% → 24.4% (6x forbedring)
+- **Deploy:** Worker v2.5 deployet
 
 ### 2026-05-30 (Kimi CLI — Git cleanup, PROJECT_STATE sync, MemPalace wing-fix)
 - **Git cleanup:** Commited 48 endringer i 3 commits + .gitignore-oppdatering
@@ -220,6 +238,9 @@ api/cf-worker/
 ├── src/handlers/search.ts                # Layer 0.5 TecDoc fallback
 ├── src/lib/db.ts                         # D1 queries (incl. TecDoc)
 ├── src/lib/tecdoc-resolver.ts            # TecDoc kType collision gating
+├── src/lib/ktype-family-matcher.ts       # kType Family Jaccard-matching
+├── src/handlers/ordremottaker.ts         # Ordremottaker LLM-endepunkt
+├── src/lib/ordremottaker-dialog.ts       # Equipment-dialog engine
 ├── src/providers/svv.ts                  # Ekstrahert SVV-klient (discriminated union)
 ├── schema.sql                            # D1 base schema
 ├── migrations/

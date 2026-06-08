@@ -1,6 +1,6 @@
 ---
 name: autoglass
-version: 1.2.0
+version: 1.3.0 (+kType Family, Ordremottaker)
 description: Autoglass AS B2B bilglass-grossist — prosjektkunnskap, stack, regler, verktøy, og Superpowers-prosessdisiplin.
 author: Autoglass AS
 tags: [autoglass, bilglass, b2b, cloudflare, worker, scraper, tecdoc, wrangler, superpowers]
@@ -19,24 +19,25 @@ tags: [autoglass, bilglass, b2b, cloudflare, worker, scraper, tecdoc, wrangler, 
 | Datakilder | SVV Enkeltoppslag, Biluppgifter TecDoc, Bovsoft REGNUM, Pilkington, Glavista, Euroglass.ru, Autoglass.ru, Nord Glass, Hella Gutmann CSC |
 | Node | v22 |
 
-## Katalog (per 2026-05-29)
+## Katalog (per 2026-06-08)
 
-- **Totalt:** 37,581+ produkter
-- **Frontrute:** ~8,500
-- **Annet:** ~25,000
-- **Bakrute:** ~60
-- **Dørglass:** ~3,500
-- **Sideglass:** ~10
+- **Totalt:** 27,184 produkter
 - **Kilder:** Pilkington, Glavista, Euroglass, Autoglass, Nord Glass
+- Se katalog for detaljer
 
 ## D1-tabeller
 
 | Tabell | Formål |
 |--------|--------|
-| `glass_catalog` | 37,581+ produkter — eurocode, brand, model, year, ktype, pris, equipment |
+| `glass_catalog` | 27,184 produkter — eurocode, brand, model, year, ktype, pris, equipment |
 | `ktype_matches` | (ktype, eurocode) frequency aggregation — statistisk læring |
 | `ktype_registry` | Bovsoft-verifiserte ktyper fra Finn.no scraping |
 | `tecdoc_ktype_registry` | **NY** — TecDoc 1Q2019 collision-gated mappings (908 rows, 412 kTypes) |
+| `ktype_families` | **NY** — Equipment-criteria grupper for Jaccard-matching (25,383 families) |
+| `ktype_family_members` | **NY** — kType → eurocode mappings per family (79,928 rows) |
+| `glass_match_candidates` | **NY** — Midlertidige match-kandidater fra family-matching |
+| `glass_resolution_requests` | **NY** — Ordremottaker session-state |
+| `pending_ktype_matches` | **NY** — kType-matches som venter på verifisering |
 | `glass_rules` | brand:model:year → kType regler |
 | `search_history` | Lært equipment per vehicle (make, model, year) |
 | `ground_truth` | Verifiserte vehicle-to-glass mappings |
@@ -52,6 +53,7 @@ tags: [autoglass, bilglass, b2b, cloudflare, worker, scraper, tecdoc, wrangler, 
 Layer -1: Ground truth (regnr_hash → verifisert mapping)
 Layer 0:  kType exact match (D1 eller KV)
 Layer 0.5: TecDoc fallback (collision-gated, unik kType → eurocode)
+Layer 0.6: kType Family matching (Jaccard-similarity, equipment-first)
 Layer 1:  brand + model + year + equipment scoring
 Layer 2:  brand + model + year (uten equipment)
 Layer 3:  brand + model + year-range
@@ -63,6 +65,12 @@ Layer 4:  brand + model (fallback)
 - Sjekker `tecdoc_ktype_registry` for unik/low-collision kType (`collision_group_size ≤ 5`)
 - Hvis én kType matcher vehicle → brukes som fallback
 - Confidence: `high` (ikke `exact`)
+
+### kType Family Layer 0.6
+- Kjøres når Layer 0 og 0.5 ikke gir treff
+- Sammenligner vehicle-fingerprint mot `ktype_families.equipment_criteria`
+- Jaccard-similarity + equipment-first scoring
+- Confidence: `high`
 
 ## Deploy-pipeline (Wrangler-only)
 
@@ -112,6 +120,7 @@ cd api/cf-worker && wrangler deploy
 | `kimi glass-ops` | ops-agent | CI/CD, secrets, monitor | Deploy, workflows, secrets |
 | `kimi glass-arch` | architect-agent | ADR, refaktorering, plan | >3 filer, nye integrasjoner |
 | `kimi glass-ktype` | ktype-agent | Bovsoft, SVV, TecDoc, matching | kType-mapping, D1-enrichment |
+| `kimi glass-ordre` | ordremottaker-agent | Conversational AI, automatisert ordremottak | Kundehenvendelser, chat, telefon |
 | `kimi glass-orchestrator` | **orchestrator-agent** | **Task-routing, Superpowers-prosess, verifikasjon** | **UKLAR oppgave, >1 domene, debugging, deploy** |
 
 > **Regel:** Start ALLTID med `kimi glass-orchestrator` hvis du er usikker på hvilken agent som er riktig.
@@ -161,7 +170,7 @@ cd api/cf-worker && wrangler deploy
 - `api/cf-worker/src/handlers/search.ts` — Søke-logikk med Layer 0.5
 - `api/cf-worker/wrangler.toml` — Worker-konfig
 - `api/cf-worker/schema.sql` — D1 schema (inkl. `tecdoc_ktype_registry`)
-- `data/catalog-prod.json` — Produksjonskatalog (37,581+ records)
+- `data/catalog-prod.json` — Produksjonskatalog (27,184 records)
 - `data/tecdoc-import/tecdoc-ktype-registry-safe.sql` — TecDoc data
 - `scripts/deploy-full-wrangler.mjs` — Full deploy-pipeline
 - `scripts/upload-catalog-wrangler.mjs` — KV-upload via Wrangler

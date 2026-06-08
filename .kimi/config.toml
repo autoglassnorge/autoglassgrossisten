@@ -13,7 +13,7 @@ max_retries_per_step = 3
 max_ralph_iterations = 0
 reserved_context_size = 30000
 # 0.11.0: default 0.92, men vi bruker 0.82 for å kompakte tidligere
-compaction_trigger_ratio = 0.82
+compaction_trigger_ratio = 0.88
 
 [background]
 # 0.11.0: flere background tasks for parallelle subagents

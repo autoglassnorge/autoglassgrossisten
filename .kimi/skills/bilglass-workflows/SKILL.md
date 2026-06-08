@@ -21,6 +21,7 @@ Container skill for alle operasjonelle workflows i Bilglass AS-prosjektet.
 | `deploy` | `/bilglass-workflows/deploy` | Deploy med pre-flight, migration, smoke-test |
 | `test` | `/bilglass-workflows/test` | Kjør 4-lags test-suite |
 | `pricing` | `/bilglass-workflows/pricing` | Oppdater prisdatabase med dry-run |
+| `ordremottaker` | `/bilglass-workflows/ordremottaker` | Ordremottaker LLM — konfigurasjon, testing, deploy |
 
 > **Tips:** Skriv `/bilglass-workflows` i KIMI CLI for å se alle tilgjengelige workflows.
 

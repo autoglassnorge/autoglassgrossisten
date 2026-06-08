@@ -120,14 +120,27 @@ if [ "$SMOKE_RESULT" = "FAIL" ] || [ "$VALIDATE_RESULT" = "BLOCK" ]; then DIARY_
 DIARY_FILE="$REPO_ROOT/.kimi/mempalace/data/diary.jsonl"
 mkdir -p "$(dirname "$DIARY_FILE")"
 
+# Pre-compute rating in bash
+RATING=3
+if [ "$SMOKE_RESULT" = "PASS" ] && [ "$VALIDATE_RESULT" != "BLOCK" ]; then
+  RATING=4
+fi
+# Ensure FILE_COUNT has a default
+FILE_COUNT=${FILE_COUNT:-0}
+# Lowercase TASK_TYPE for tags
+TASK_TYPE_LOWER=$(echo "$TASK_TYPE" | tr '[:upper:]' '[:lower:]')
+
 node -e "
 const fs = require('fs');
 const entry = {
-  timestamp: new Date().toISOString(),
-  agent: 'autoglass-orchestrator',
-  event: 'session_end_${TIMESTAMP}',
-  summary: 'Session ${TIMESTAMP} — ${FILE_COUNT} filer endret (smoke=${SMOKE_RESULT}, validate=${VALIDATE_RESULT})',
-  details: 'Type: ${TASK_TYPE}\nStatus: ${DIARY_STATUS}\nSmoke-test: ${SMOKE_RESULT}\nValidate: ${VALIDATE_RESULT}\nFiler: ${FILE_COUNT}'
+  ts: new Date().toISOString(),
+  agent: 'kimi',
+  type: '${TASK_TYPE}',
+  task: 'Session ${TIMESTAMP} — ${FILE_COUNT} filer endret (smoke=${SMOKE_RESULT}, validate=${VALIDATE_RESULT})',
+  status: '${DIARY_STATUS}',
+  rating: ${RATING},
+  files: ${FILE_COUNT},
+  tags: ['session_end', '${TASK_TYPE_LOWER}']
 };
 fs.appendFileSync('$DIARY_FILE', JSON.stringify(entry) + '\n');
 console.log('  ✅ Diary entry lagret');

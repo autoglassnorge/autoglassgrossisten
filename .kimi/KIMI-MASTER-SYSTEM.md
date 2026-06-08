@@ -27,8 +27,9 @@ Hvis Klarpakke-kontekst lekker inn — avvis den.
 | Deploy | Cloudflare (Worker + Pages), GitHub Actions CI/CD |
 | Datakilder | SVV Enkeltoppslag, Biluppgifter.se, Bovsoft REGNUM, Pilkington, Glavista, Nord Glass, TecDoc 1Q2019 |
 | Node | v22 (se `.nvmrc`, oppgradert fra v20 mai 2026) |
-| D1 Tabeller | `glass_catalog`, `ktype_matches`, `glass_rules`, `search_results`, `vin_decode_cache`, `provider_calls`, `ground_truth`, `glass_variants`, `tecdoc_ktype_registry`, `vehicle_fingerprints`, `vin_glass_rules`, `quote_requests` |
-| Matching | Layer -1 (ground truth) → Layer 0 (kType exact) → Layer 0.5 (TecDoc fallback, collision-gated) → Layer 1-4 (brand/model/year/equipment scoring) |
+| Ordremottaker | Conversational AI — 6-steg pipeline med NER → Glass → Equipment → Tilbehør → Pris → Ordre |
+| D1 Tabeller | `glass_catalog` (27,139), `ktype_registry` (69,893), `glass_rules`, `ktype_matches`, `tecdoc_ktype_registry`, `ground_truth`, `vin_decode_cache`, `quote_requests`, `provider_calls`, `search_history`, `glass_variants`, `vehicle_fingerprints`, `ktype_families` (25,383), `ktype_family_members` (79,928), `glass_match_candidates`, `glass_resolution_requests`, `pending_ktype_matches`, `search_feedback`, `scrape_jobs`, `scrape_results` |
+| Matching | Layer -1 (ground truth) → Layer 0 (kType exact) → Layer 0.5 (TecDoc fallback, collision-gated) → Layer 0.6 (kType Family matching, Jaccard-similarity på equipment-criteria) → Layer 1-4 (brand/model/year/equipment scoring) |
 | Learning | D1 `search_results` (VIN-prefix → equipment), `glass_rules` (brand:model:year → kType), `ktype_matches` (regnr→kType→eurocode statistikk) |
 
 ---
@@ -191,7 +192,7 @@ Prosjektet bruker **KIMI Code 0.11.0 sub-skill discovery** (`KIMI_CODE_EXPERIMEN
 | `api/cf-worker/src/vin-glass-resolver.ts` | Hybrid VIN→Glass/KType resolver (vPIC, Vincario, MACS VIS) | Ved VIN/matching-endringer |
 | `api/cf-worker/wrangler.toml` | Worker-konfigurasjon, KV-binding | ALLTID ved infra-endringer |
 | `api/cf-worker/schema.sql` | D1 base schema | Ved database-endringer |
-| `data/catalog-prod.json` | Produksjonskatalog (39,458 records) | Ved katalog-endringer |
+| `data/catalog-prod.json` | Produksjonskatalog (27,184 records) | Ved katalog-endringer |
 | `api/scrapers/merge-catalogs.ts` | Katalog-merge-logikk | ALLTID ved data-endringer |
 | `scripts/batch-bovsoft-local.mjs` | Bovsoft batch runner (regnr→kType→eurocode) | Ved kType-bootstrap |
 | `scripts/apify-tecdoc-scraper.mjs` | TecDoc equipment criteria scrape | Ved TecDoc-beriking |
@@ -205,5 +206,5 @@ Prosjektet bruker **KIMI Code 0.11.0 sub-skill discovery** (`KIMI_CODE_EXPERIMEN
 
 ---
 
-**Sist oppdatert:** 2026-06-05
-**Versjon:** 1.3 (+KIMI Code 0.11.0 optimalisering)
+**Sist oppdatert:** 2026-06-08
+**Versjon:** 1.4 (+kType Family, Ordremottaker LLM)
