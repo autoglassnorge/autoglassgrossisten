@@ -706,14 +706,19 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
           }
           candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
         } else if (nerResult.make) {
-          const db = env.GLASS_CATALOG_D1;
+          // Make found but year missing — store partial info and ask for year
+          // instead of defaulting to current year (which gives wrong results)
           vehicleInfo = {
             make: nerResult.make,
             model: nerResult.model || '',
-            year: nerResult.year || new Date().getFullYear(),
+            year: 0, // No year yet — will be filled in by user's next message
           };
-          const dbCandidates = await queryByBrandOnly(db, nerResult.make, nerResult.model || undefined);
-          candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
+          // Don't query DB yet — we need year for accurate kType/brand+year matching
+          aiResponse = nerResult.model
+            ? `Jeg fant ${nerResult.make} ${nerResult.model}. For å finne riktig glass trenger jeg årsmodellen — hvilket år er bilen fra?`
+            : `Jeg fant ${nerResult.make}. For å finne riktig glass trenger jeg årsmodellen — hvilket år er bilen fra?`;
+          status = 'clarification';
+          nextAction = 'ask_year';
         }
       }
 
@@ -722,10 +727,19 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       if (candidates.length === 0 && session.vehicle) {
         console.log(`[Ordremottaker] NER found no vehicle, using session.vehicle: ${session.vehicle.make} ${session.vehicle.model} (${session.vehicle.year})`);
         vehicleInfo = session.vehicle;
-        const db = env.GLASS_CATALOG_D1;
 
-        // Try kType family lookup first if session has model
-        let dbCandidates: GlassRecord[] = [];
+        // If year is still missing (year=0 placeholder), ask for it before querying
+        if (session.vehicle.year === 0) {
+          aiResponse = session.vehicle.model
+            ? `Jeg fant ${session.vehicle.make} ${session.vehicle.model}. For å finne riktig glass trenger jeg årsmodellen — hvilket år er bilen fra?`
+            : `Jeg fant ${session.vehicle.make}. For å finne riktig glass trenger jeg årsmodellen — hvilket år er bilen fra?`;
+          status = 'clarification';
+          nextAction = 'ask_year';
+        } else {
+          const db = env.GLASS_CATALOG_D1;
+
+          // Try kType family lookup first if session has model
+          let dbCandidates: GlassRecord[] = [];
         if (session.vehicle.model) {
           const ktypeResult = await findKtypeByVehicle(db, session.vehicle.make, session.vehicle.model, session.vehicle.year);
           if (ktypeResult.ktypes.length > 0) {
@@ -757,6 +771,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         }
         candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
         confidence = 0.8;
+        }
       }
 
       // Filter by position if specified (from NER or accumulated answers)
@@ -866,7 +881,10 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
 
     if (!useLlmDialogue) {
       // === RIGID FALLBACK (ORIGINAL LOGIC) ===
-      if (confidence < 0.3 && candidates.length === 0 && !equipmentAnswers.position) {
+      // If aiResponse already set (e.g., year-missing case), skip rigid fallback
+      if (aiResponse) {
+        // keep existing aiResponse, status, nextAction — already handled above
+      } else if (confidence < 0.3 && candidates.length === 0 && !equipmentAnswers.position) {
         // No info at all — ask for everything
         aiResponse = 'Hei! For å finne riktig glass trenger jeg å vite: bilmerke, modell, årsmodell, og hvilket glass (frontrute, bakrute, sidedør, etc.). Har du registreringsnummer er det enda bedre!';
         status = 'clarification';
