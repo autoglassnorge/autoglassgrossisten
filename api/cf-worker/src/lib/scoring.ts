@@ -151,90 +151,98 @@ export function scoreCandidate(
   // Infer equipment from DB columns + description parsing
   const recordFlags = inferRecordEquipment(c);
 
-  // Equipment matching (high weight when we know vehicle equipment)
-  if (flags.adas && recordFlags.adas) score += 20;
-  if (flags.camera && recordFlags.camera) score += 18;
-  if (flags.rainSensor && recordFlags.rainSensor) score += 14;
-  if (flags.heated && recordFlags.heated) score += 10;
-  if (flags.hud && recordFlags.hud) score += 10;
-  if (flags.acoustic && recordFlags.acoustic) score += 8;
-  if (flags.antenna && recordFlags.antenna) score += 6;
-  // Penalize if record has equipment the vehicle doesn't have
-  if (!flags.adas && recordFlags.adas) score -= 8;
-  if (!flags.camera && recordFlags.camera) score -= 6;
-  if (!flags.hud && recordFlags.hud) score -= 4;
-  if (!flags.rainSensor && recordFlags.rainSensor) score -= 3;
-  if (!flags.heated && recordFlags.heated) score -= 2;
-  if (!flags.acoustic && recordFlags.acoustic) score -= 1;
-
-  // Category scoring — boost windshields, penalize unknown/annet
-  const cat = c.category?.toLowerCase() || detectCategoryFromDescription(c.description);
-  if (cat === "frontrute") {
-    score += 10;
-  } else if (cat === "annet" || cat === "unknown" || !cat) {
-    score -= 5;
+  // === kType GATE — dominates everything ===
+  // If we know the vehicle's kType, exact kType match is the strongest signal
+  const vehicleKtype = (vehicle as any).k_type as number | undefined;
+  if (vehicleKtype && vehicleKtype > 0 && c.ktype) {
+    if (c.ktype === vehicleKtype) {
+      score += 1000; // Same kType — massive boost
+    } else {
+      score -= 1000; // Different kType — massive penalty
+    }
   }
 
-  // Year compatibility scoring
+  // === Equipment matching — primary discriminator within same kType ===
+  // These weights are intentionally high because equipment determines the exact glass variant
+  if (flags.adas && recordFlags.adas) score += 50;
+  if (flags.camera && recordFlags.camera) score += 40;
+  if (flags.rainSensor && recordFlags.rainSensor) score += 30;
+  if (flags.hud && recordFlags.hud) score += 25;
+  if (flags.heated && recordFlags.heated) score += 20;
+  if (flags.acoustic && recordFlags.acoustic) score += 15;
+  if (flags.antenna && recordFlags.antenna) score += 10;
+  // Penalize if record has equipment the vehicle doesn't have (avoids wrong variant)
+  if (!flags.adas && recordFlags.adas) score -= 50;
+  if (!flags.camera && recordFlags.camera) score -= 30;
+  if (!flags.hud && recordFlags.hud) score -= 20;
+  if (!flags.rainSensor && recordFlags.rainSensor) score -= 15;
+  if (!flags.heated && recordFlags.heated) score -= 10;
+  if (!flags.acoustic && recordFlags.acoustic) score -= 5;
+  if (!flags.antenna && recordFlags.antenna) score -= 3;
+
+  // === Year compatibility — hard gate, not soft score ===
+  // A glass must be year-compatible; if not, it's massively penalized
   const vehicleYear = vehicle.year;
   const yr = parseYearRangeFromDescription(c.description);
+  let yearCompatible = true;
   if (yr.from && yr.to) {
-    if (vehicleYear >= yr.from && vehicleYear <= yr.to) {
-      score += 20;
-    } else if (vehicleYear >= yr.from - 2 && vehicleYear <= yr.to + 2) {
-      score += 5;
-    } else if (vehicleYear < yr.from - 5 || vehicleYear > yr.to + 5) {
-      score -= 30;
+    if (vehicleYear < yr.from - 2 || vehicleYear > yr.to + 2) {
+      yearCompatible = false;
     }
   } else if (yr.from && !yr.to) {
-    if (vehicleYear >= yr.from - 2) {
-      score += 10;
-    } else if (vehicleYear < yr.from - 10) {
-      score -= 30;
+    if (vehicleYear < yr.from - 10) {
+      yearCompatible = false;
     }
   }
+  if (!yearCompatible) {
+    score -= 500;
+  }
 
-  // Fingerprint-based model/generation scoring
+  // === Category scoring — small boost for windshields ===
+  const cat = c.category?.toLowerCase() || detectCategoryFromDescription(c.description);
+  if (cat === "frontrute") {
+    score += 5;
+  } else if (cat === "annet" || cat === "unknown" || !cat) {
+    score -= 3;
+  }
+
+  // === Fingerprint-based model/generation scoring (secondary) ===
   const fp = (vehicle as any)._fingerprint as { model_hint: string | null; models: string; year_from: number | null; year_to: number | null; sample_count: number } | undefined;
   if (fp && fp.model_hint) {
     const fpModel = fp.model_hint.toLowerCase();
     const desc = (c.description + " " + (c.model || "")).toLowerCase();
     if (desc.includes(fpModel)) {
-      score += 15;
+      score += 5;
     }
     if (c.model && c.model.toLowerCase().includes(fpModel)) {
-      score += 10;
+      score += 3;
     }
     const fpModels = JSON.parse(fp.models || "[]") as string[];
     for (const m of fpModels) {
       if (m && desc.includes(m.toLowerCase())) {
-        score += 8;
+        score += 2;
         break;
       }
     }
   }
 
-  // VIN model year verification (works for ALL makes)
+  // === VIN cross-checks (secondary) ===
   if (unifiedVin?.modelYear && c.year_from) {
     const vinYear = unifiedVin.modelYear;
     if (Math.abs(vinYear - c.year_from) <= 1) {
-      score += 15;
-    } else if (Math.abs(vinYear - c.year_from) <= 3) {
       score += 5;
     } else if (Math.abs(vinYear - c.year_from) > 5) {
       score -= 20;
     }
   }
 
-  // VIN generation cross-check with description
   if (unifiedVin?.generation) {
     const descGen = parseGenerationFromDescription(c.description) || parseGenerationFromDescription(c.model);
     if (descGen && unifiedVin.generation.toUpperCase() === descGen.toUpperCase()) {
-      score += 30;
+      score += 10;
     }
   }
 
-  // VIN body type cross-check with description
   if (unifiedVin?.body) {
     const desc = (c.description + " " + (c.model || "")).toLowerCase();
     const vinBody = unifiedVin.body.toLowerCase();
@@ -248,24 +256,24 @@ export function scoreCandidate(
     };
     const keywords = bodyKeywords[vinBody] || [];
     const hasBodyMatch = keywords.some((k) => desc.includes(k));
-    if (hasBodyMatch) score += 12;
+    if (hasBodyMatch) score += 5;
   }
 
-  // kType generation verification bonus
+  // kType generation verification bonus (small)
   if (bovsoftInfo) {
     const bovGen = inferGenerationFromYearRange(c.brand || "", c.model || "", bovsoftInfo.yearFrom, bovsoftInfo.yearTo);
     const recordGen = parseGenerationFromDescription(c.description) || parseGenerationFromDescription(c.model);
     if (bovGen && recordGen && bovGen === recordGen) {
-      score += 25;
+      score += 5;
     }
   }
 
   // Body / chassis compatibility (VIN + SVV data + Bovsoft body)
   score += scoreBodyCompatibility(c, vehicle, vinInfo, bovsoftInfo?.body);
 
-  // Prefix4 consensus bonus
+  // Prefix4 consensus bonus (small)
   if (dominantPrefix4 && c.prefix4 === dominantPrefix4) {
-    score += 8;
+    score += 3;
   }
 
   return score;
