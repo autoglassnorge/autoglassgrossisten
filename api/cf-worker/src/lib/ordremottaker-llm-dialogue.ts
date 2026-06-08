@@ -62,11 +62,18 @@ export interface LlmDialogueResponse {
   confidence: number;
 }
 
+interface KtypeFamilyInfo {
+  canonicalModel: string;
+  ktypes: number[];
+  confidence: number;
+}
+
 interface DialogueContext {
   candidates: Candidate[];
   history: Array<{ role: 'user' | 'ai'; content: string }>;
   extracted: Record<string, string>;
   vehicle: { make: string; model: string; year: number } | null;
+  ktypeFamily?: KtypeFamilyInfo | null;
 }
 
 const DIALOGUE_SCHEMA = {
@@ -212,12 +219,16 @@ function buildUserPrompt(context: DialogueContext): string {
     ? '\n⚠️ VIKTIG: Ingen kandidater matcher ALLE kriteriene over. Brukeren må enten bekrefte at kravene er riktige, eller du må foreslå å fjerne ett filter.'
     : '';
 
+  const ktypeFamilyNote = context.ktypeFamily
+    ? `\nKTYE-FAMILIE: ${context.ktypeFamily.canonicalModel} (${context.ktypeFamily.ktypes.length} ktyper, confidence=${context.ktypeFamily.confidence.toFixed(2)})\nDette betyr at vi har eksakt kType-match fra TecDoc for dette kjøretøyet. Glassene som vises er spesifikke for denne familien.`
+    : '';
+
   return `NÅVÆRENDE KANDIDATER (${context.candidates.length}):
 ${candidateDescriptions || 'Ingen kandidater funnet ennå'}
 
 ALLEREDE KJENT: ${knownFields}
 
-KJØRETØY: ${context.vehicle ? `${context.vehicle.make} ${context.vehicle.model} (${context.vehicle.year})` : 'Ukjent'}
+KJØRETØY: ${context.vehicle ? `${context.vehicle.make} ${context.vehicle.model} (${context.vehicle.year})` : 'Ukjent'}${ktypeFamilyNote}
 
 SAMTALEHISTORIKK (siste 6 meldinger):
 ${historyText}${zeroCandidatesNote}

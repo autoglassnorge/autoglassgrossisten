@@ -17,6 +17,7 @@ import { sha256 } from '../lib/learning';
 import { decodeEurocode } from '../lib/eurocode-decoder';
 import { generateDialogueTurn, normalizeExtracted, determineDialogueState, type ExtractedFields } from '../lib/ordremottaker-llm-dialogue';
 import { searchFaq, looksLikeKnowledgeQuestion, isGreeting, buildGreetingResponse } from '../lib/ordremottaker-knowledge';
+import { findKtypeByVehicle, queryByKtype } from '../lib/ktype-family-lookup';
 
 type Candidate = Record<string, unknown> & { properties?: Record<string, unknown>; decoded_description?: string | null };
 
@@ -405,6 +406,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
     let nextAction: string | null = null;
     let confidence = 0;
     let nerResult: any = null;
+    let ktypeFamilyInfo: { canonicalModel: string; ktypes: number[]; confidence: number } | null = null;
 
     // Equipment answers — always restore from session so LLM dialogue state persists
     let equipmentAnswers: Record<string, string> = { ...(session.answers || {}) };
@@ -482,17 +484,36 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         console.log(`[Ordremottaker] Simple answer "${body.message}" in active dialogue — skipping NER, using session vehicle`);
         vehicleInfo = session.vehicle;
         const db = env.GLASS_CATALOG_D1;
-        const { results } = await db
-          .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
-          .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
-          .all();
-        let dbCandidates = (results || []) as unknown as GlassRecord[];
+
+        // Try kType family lookup first
+        let dbCandidates: GlassRecord[] = [];
+        if (session.vehicle.model) {
+          const ktypeResult = await findKtypeByVehicle(db, session.vehicle.make, session.vehicle.model, session.vehicle.year);
+          if (ktypeResult.ktypes.length > 0) {
+            ktypeFamilyInfo = {
+              canonicalModel: ktypeResult.canonicalModel!,
+              ktypes: ktypeResult.ktypes,
+              confidence: ktypeResult.confidence,
+            };
+            (vehicleInfo as any).k_type = ktypeResult.ktypes[0];
+            const rawKtypeCandidates = await queryByKtype(db, ktypeResult.ktypes, session.answers.position);
+            dbCandidates = rawKtypeCandidates as unknown as GlassRecord[];
+          }
+        }
+
         if (dbCandidates.length === 0) {
-          const { results: r2 } = await db
-            .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+          const { results } = await db
+            .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
             .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
             .all();
-          dbCandidates = (r2 || []) as unknown as GlassRecord[];
+          dbCandidates = (results || []) as unknown as GlassRecord[];
+          if (dbCandidates.length === 0) {
+            const { results: r2 } = await db
+              .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+              .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
+              .all();
+            dbCandidates = (r2 || []) as unknown as GlassRecord[];
+          }
         }
         candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
         confidence = 0.8;
@@ -630,17 +651,43 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
             model: nerResult.model || '',
             year: nerResult.year,
           };
-          const { results } = await db
-            .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
-            .bind(nerResult.make, nerResult.year, nerResult.year)
-            .all();
-          let dbCandidates = (results || []) as unknown as GlassRecord[];
-          if (dbCandidates.length === 0) {
-            const { results: r2 } = await db
-              .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+
+          // ── kType Family Lookup (primary) ──────────────────────────
+          // If we have make+model+year, try exact kType matching via families
+          let ktypeCandidates: GlassRecord[] = [];
+          if (nerResult.model) {
+            const ktypeResult = await findKtypeByVehicle(db, nerResult.make, nerResult.model, nerResult.year);
+            if (ktypeResult.ktypes.length > 0) {
+              console.log(`[Ordremottaker] kType family match: ${ktypeResult.canonicalModel} (${ktypeResult.ktypes.length} ktypes, confidence=${ktypeResult.confidence.toFixed(2)})`);
+              ktypeFamilyInfo = {
+                canonicalModel: ktypeResult.canonicalModel!,
+                ktypes: ktypeResult.ktypes,
+                confidence: ktypeResult.confidence,
+              };
+              // Store k_type in vehicleInfo so scoring.ts can use it
+              (vehicleInfo as any).k_type = ktypeResult.ktypes[0];
+              const rawKtypeCandidates = await queryByKtype(db, ktypeResult.ktypes, nerResult.position);
+              ktypeCandidates = rawKtypeCandidates as unknown as GlassRecord[];
+            }
+          }
+
+          // ── Fallback: brand+year query ─────────────────────────────
+          let dbCandidates: GlassRecord[] = [];
+          if (ktypeCandidates.length > 0) {
+            dbCandidates = ktypeCandidates;
+          } else {
+            const { results } = await db
+              .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
               .bind(nerResult.make, nerResult.year, nerResult.year)
               .all();
-            dbCandidates = (r2 || []) as unknown as GlassRecord[];
+            dbCandidates = (results || []) as unknown as GlassRecord[];
+            if (dbCandidates.length === 0) {
+              const { results: r2 } = await db
+                .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+                .bind(nerResult.make, nerResult.year, nerResult.year)
+                .all();
+              dbCandidates = (r2 || []) as unknown as GlassRecord[];
+            }
           }
           candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
         } else if (nerResult.make) {
@@ -661,17 +708,37 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         console.log(`[Ordremottaker] NER found no vehicle, using session.vehicle: ${session.vehicle.make} ${session.vehicle.model} (${session.vehicle.year})`);
         vehicleInfo = session.vehicle;
         const db = env.GLASS_CATALOG_D1;
-        const { results } = await db
-          .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
-          .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
-          .all();
-        let dbCandidates = (results || []) as unknown as GlassRecord[];
+
+        // Try kType family lookup first if session has model
+        let dbCandidates: GlassRecord[] = [];
+        if (session.vehicle.model) {
+          const ktypeResult = await findKtypeByVehicle(db, session.vehicle.make, session.vehicle.model, session.vehicle.year);
+          if (ktypeResult.ktypes.length > 0) {
+            console.log(`[Ordremottaker] Session fallback kType match: ${ktypeResult.canonicalModel} (${ktypeResult.ktypes.length} ktypes)`);
+            ktypeFamilyInfo = {
+              canonicalModel: ktypeResult.canonicalModel!,
+              ktypes: ktypeResult.ktypes,
+              confidence: ktypeResult.confidence,
+            };
+            (vehicleInfo as any).k_type = ktypeResult.ktypes[0];
+            const rawKtypeCandidates = await queryByKtype(db, ktypeResult.ktypes, undefined);
+            dbCandidates = rawKtypeCandidates as unknown as GlassRecord[];
+          }
+        }
+
         if (dbCandidates.length === 0) {
-          const { results: r2 } = await db
-            .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+          const { results } = await db
+            .prepare("SELECT * FROM glass_catalog WHERE brand = ? AND year_from <= ? AND year_to >= ? LIMIT 100")
             .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
             .all();
-          dbCandidates = (r2 || []) as unknown as GlassRecord[];
+          dbCandidates = (results || []) as unknown as GlassRecord[];
+          if (dbCandidates.length === 0) {
+            const { results: r2 } = await db
+              .prepare("SELECT * FROM glass_catalog WHERE UPPER(brand) = UPPER(?) AND year_from <= ? AND year_to >= ? LIMIT 100")
+              .bind(session.vehicle.make, session.vehicle.year, session.vehicle.year)
+              .all();
+            dbCandidates = (r2 || []) as unknown as GlassRecord[];
+          }
         }
         candidates = dbCandidates.map(normalizeRecord) as unknown as Candidate[];
         confidence = 0.8;
@@ -744,6 +811,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         history,
         extracted: equipmentAnswers,
         vehicle: vehicleInfo || null,
+        ktypeFamily: ktypeFamilyInfo || undefined,
       });
 
       if (dialogueResult) {
