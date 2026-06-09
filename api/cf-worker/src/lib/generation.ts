@@ -150,9 +150,15 @@ export function parseGenerationFromDescription(desc: string | null): string | nu
 export function expectedGeneration(brand: string, model: string, year: number): string | null {
   const key = `${brand} ${model}`.toLowerCase();
   // VW Transporter generations
-  if (key.includes("volkswagen") && key.includes("transporter")) {
+  const isVw = key.includes("volkswagen") || key.includes("vw");
+  const isVwTFamily =
+    key.includes("transporter") ||
+    key.includes("caravelle") ||
+    key.includes("multivan") ||
+    key.includes("california");
+  if (isVw && isVwTFamily) {
     if (year <= 1991) return "T3";
-    if (year <= 2003) return "T4";
+    if (year <= 2002) return "T4";
     if (year <= 2015) return "T5";
     return "T6";
   }
