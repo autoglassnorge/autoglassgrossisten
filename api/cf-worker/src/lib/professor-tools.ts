@@ -441,3 +441,112 @@ function generateAutoSummary(
 
   return parts.join(". ");
 }
+
+// ── Tool Response Generation (Fase 3A) ────────────────────────────────────
+
+/**
+ * Generate a human-readable AI response from tool execution results.
+ * Template-based (not LLM) — fast, deterministic, no extra API cost.
+ */
+export function generateResponseFromToolResults(
+  toolResults: ToolResult[],
+  sessionContext?: {
+    vehicle?: { make: string; model: string; year: number };
+    candidates?: GlassRecord[];
+  }
+): string {
+  const parts: string[] = [];
+  const vehicle = sessionContext?.vehicle;
+  const vehicleDesc = vehicle
+    ? `${vehicle.make} ${vehicle.model} (${vehicle.year})`
+    : "bilen din";
+
+  for (const result of toolResults) {
+    if (!result.success) {
+      parts.push(`Beklager, noe gikk galt: ${result.error || "Ukjent feil"}.`);
+      continue;
+    }
+
+    switch (result.tool) {
+      case "search": {
+        const data = result.data as {
+          searchResult?: { ok: boolean; results?: Array<unknown>; error?: { message: string } };
+        } | undefined;
+        const searchResult = data?.searchResult;
+        if (searchResult?.ok) {
+          const count = searchResult.results?.length || 0;
+          if (count > 0) {
+            parts.push(`Jeg fant ${count} glass som passer til ${vehicleDesc}.`);
+          } else {
+            parts.push(`Jeg fant dessverre ingen glass som passer til ${vehicleDesc}. Kan du dobbeltsjekke opplysningene?`);
+          }
+        } else {
+          parts.push(`Beklager, søket feilet: ${searchResult?.error?.message || "Ukjent feil"}.`);
+        }
+        break;
+      }
+
+      case "faq": {
+        const data = result.data as { answer?: string } | null;
+        if (data?.answer) {
+          parts.push(data.answer);
+        }
+        break;
+      }
+
+      case "buildQuote": {
+        const draft = result.data as QuoteDraft | undefined;
+        if (draft) {
+          const itemCount = draft.items.length;
+          const total = draft.total;
+          parts.push(
+            `Her er tilbudskladden din: ${itemCount} produkt(er), total ${total.toLocaleString("no-NO")} kr.`
+          );
+        }
+        break;
+      }
+
+      case "handoff": {
+        const summary = result.data as HandoffSummary | undefined;
+        if (summary) {
+          parts.push("Jeg overfører deg nå til en av våre ordremottakere. Et øyeblikk...");
+        }
+        break;
+      }
+    }
+  }
+
+  if (parts.length === 0) {
+    return "Jeg forstod ikke helt hva du mente. Kan du prøve å formulere det annerledes?";
+  }
+
+  return parts.join("\n\n");
+}
+
+/**
+ * Determine OrdremottakerResponse status from tool results.
+ */
+export function determineStatusFromTools(
+  toolResults: ToolResult[]
+): "question" | "recommendation" | "order_ready" | "escalated" | "clarification" | "knowledge" {
+  for (const result of toolResults) {
+    if (!result.success) continue;
+    switch (result.tool) {
+      case "faq":
+        return "knowledge";
+      case "buildQuote":
+        return "order_ready";
+      case "handoff": {
+        const data = result.data as HandoffSummary | undefined;
+        if (data?.reason === "customer_request") return "escalated";
+        return "clarification";
+      }
+      case "search": {
+        const data = result.data as { searchResult?: { ok: boolean } } | undefined;
+        if (data?.searchResult?.ok) return "recommendation";
+        return "clarification";
+      }
+    }
+  }
+  return "clarification";
+}
