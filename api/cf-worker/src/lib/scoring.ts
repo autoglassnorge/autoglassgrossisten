@@ -283,17 +283,144 @@ export function modelMatches(vehicleModel: string, recordModel: string | null, v
   if (!recordModel || recordModel.trim() === "") return false;
   const vm = vehicleModel.toLowerCase().trim();
   const rm = recordModel.toLowerCase().trim();
-  if (vm.includes(rm) || rm.includes(vm)) return true;
+
+  // Top-level substring match with guard against short-code traps (A3 inside A30)
+  if (vm.includes(rm) || rm.includes(vm)) {
+    const shorter = vm.length <= rm.length ? vm : rm;
+    const longer = vm.length <= rm.length ? rm : vm;
+    // If one is contained in the other, require good length ratio or safe boundary
+    if (longer.includes(shorter)) {
+      const ratio = shorter.length / longer.length;
+      if (ratio >= 0.8 || shorter.length >= 4) return true;
+      // Reject if shorter ends with a digit and longer continues with a digit
+      // (e.g. "A3" inside "A30", "CX5" inside "CX50") — different models
+      const idx = longer.indexOf(shorter);
+      const after = longer.slice(idx + shorter.length);
+      if (/\d$/.test(shorter) && /^\d/.test(after)) {
+        // Fall through to brand-specific / token logic below
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
 
   const make = (vehicleMake || "").toLowerCase();
-  if (make.includes("volkswagen")) {
+
+  // ── VW T-family variants (Transporter/Multivan/Caravelle/California)
+  if (make.includes("volkswagen") || make === "vw") {
     const vwModels = ["transporter", "multivan", "caravelle", "california"];
     const vmIsVw = vwModels.some((m) => vm.includes(m));
     const rmIsVw = vwModels.some((m) => rm.includes(m));
     if (vmIsVw && rmIsVw) {
       const vmGen = vm.match(/\b(t[456])\b/);
       const rmGen = rm.match(/\b(t[456])\b/);
+      if (vmGen && rmGen && vmGen[1] !== rmGen[1]) return false;
       if (!vmGen || !rmGen || vmGen[1] === rmGen[1]) return true;
+    }
+  }
+
+  // ── Volvo XC/S/V/C models: D1 uses space ("XC 60"), SVV sends no space ("XC60")
+  // Also handles 700/800/900 series: "740_760-80 SERIE" → match 740, 760, 780
+  if (make === "volvo") {
+    const volvoPatterns = [
+      /^xc\s?(\d+)$/,
+      /^s\s?(\d+)$/,
+      /^v\s?(\d+)$/,
+      /^c\s?(\d+)$/,
+    ];
+    for (const pattern of volvoPatterns) {
+      const vmMatch = vm.match(pattern);
+      const rmMatch = rm.match(pattern);
+      if (vmMatch && rmMatch && vmMatch[1] === rmMatch[1]) return true;
+    }
+    // Volvo 700/800/900 series: D1 uses "740_760-80 SERIE", SVV sends "780"
+    const vmNum = vm.match(/^(\d{3})$/);
+    if (vmNum) {
+      const n = vmNum[1];
+      // Check if the 3-digit number appears literally in the D1 model string
+      if (rm.includes(n)) return true;
+      // Extract all 2-3 digit numbers from D1 model
+      const allNums = (rm.match(/\d{2,3}/g) || []) as string[];
+      if (allNums.includes(n)) return true;
+      // Special case: Volvo range notation like "740_760-80" means 740, 760, 780, 940, 960
+      // Match by last 2 digits + first digit prefix validation
+      const lastTwo = n.slice(1);
+      if (rm.includes(lastTwo) && rm.includes(n[0])) return true;
+    }
+  }
+
+  // ── Mercedes W-series vs class name (e.g. "C-Klasse" vs "SERIE W203/W204/W205/W206")
+  if (make === "mercedes" || make.includes("mercedes")) {
+    const mercedesSeries: Record<string, string[]> = {
+      "a-klasse": ["w168", "w169", "w176", "w177"],
+      "b-klasse": ["w245", "w246", "w247"],
+      "c-klasse": ["w203", "w204", "w205", "w206"],
+      "e-klasse": ["w210", "w211", "w212", "w213", "w214"],
+      "s-klasse": ["w220", "w221", "w222", "w223"],
+      "m-klasse": ["w163", "w164", "w166"],
+      "gle-klasse": ["w166", "w167"],
+      "gle": ["w166", "w167"],
+      "glc": ["x253", "c253", "x254", "c254"],
+      "glb": ["x247"],
+      "gla": ["x156", "h247"],
+      "cla": ["c117", "c118"],
+      "slk": ["r170", "r171", "r172", "w170"],
+      "sl": ["r129", "r230", "r231", "w230"],
+      "clk": ["c208", "c209", "w208", "w209"],
+      "cls": ["c218", "c219", "c257", "w219"],
+      "g-klasse": ["w463", "w464"],
+    };
+    // Extract class name from vehicle model
+    const vmClass = Object.keys(mercedesSeries).find((cls) => vm.includes(cls));
+    const rmClass = Object.keys(mercedesSeries).find((cls) => rm.includes(cls));
+    // Special case: G-Klasse vs GELANDEWAGEN (D1 uses German name)
+    if ((vm.includes("g-klasse") || vm.includes("gelandewagen")) &&
+        (rm.includes("g-klasse") || rm.includes("gelandewagen"))) {
+      return true;
+    }
+    // If one side has a class name and the other has a W-code, check compatibility
+    if (vmClass || rmClass) {
+      const extractWcodes = (s: string) => {
+        const matches = s.match(/\b(w|x|c|r)\d{3}[a-z]?\b/g);
+        return matches ? matches.map((m) => m.replace(/[a-z]$/, "")) : [];
+      };
+      const vmCodes = extractWcodes(vm);
+      const rmCodes = extractWcodes(rm);
+      // Direct class match (both mention same class)
+      if (vmClass && rmClass && vmClass === rmClass) return true;
+      // Class + W-code match
+      if (vmClass && rmCodes.length > 0) {
+        const allowedCodes = mercedesSeries[vmClass];
+        if (allowedCodes && rmCodes.some((c) => allowedCodes.includes(c))) return true;
+      }
+      if (rmClass && vmCodes.length > 0) {
+        const allowedCodes = mercedesSeries[rmClass];
+        if (allowedCodes && vmCodes.some((c) => allowedCodes.includes(c))) return true;
+      }
+    }
+  }
+
+  // ── General fuzzy match: ignore spaces and hyphens for alphanumeric model codes
+  // This catches: "XC 60" vs "XC60", "3 SERIE" vs "3-SERIE", "F-150" vs "F150"
+  const normalizeModelCode = (s: string) => s.replace(/[^a-z0-9]+/g, "").toLowerCase();
+  const vmNorm = normalizeModelCode(vm);
+  const rmNorm = normalizeModelCode(rm);
+  if (vmNorm.length >= 3 && rmNorm.length >= 3 && (vmNorm.includes(rmNorm) || rmNorm.includes(vmNorm))) {
+    // Guard against short-code substring traps: A3 matching A30, A4 matching A40, etc.
+    // Require that the matched substring is at least 80% of the longer string's length,
+    // OR that the shorter string is >= 4 chars, OR that there's a digit boundary.
+    const shorter = vmNorm.length <= rmNorm.length ? vmNorm : rmNorm;
+    const longer = vmNorm.length <= rmNorm.length ? rmNorm : vmNorm;
+    const isContained = longer.includes(shorter);
+    if (isContained) {
+      const ratio = shorter.length / longer.length;
+      // Allow if ratio is good, or shorter is long enough, or there's a clear digit boundary
+      const hasDigitBoundary = /\d/.test(shorter) && longer.replace(shorter, "").match(/^\d/);
+      if (ratio >= 0.8 || shorter.length >= 4 || hasDigitBoundary) return true;
+    } else {
+      return true; // overlapping but not contained (e.g. "transporter" vs "caravelle")
     }
   }
 

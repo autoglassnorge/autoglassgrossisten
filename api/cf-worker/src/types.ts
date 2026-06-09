@@ -66,6 +66,8 @@ export interface GlassRecord {
   typeCodeDesc?: string;
   position?: "driver" | "passenger" | "both" | null;
   nagsCodes?: string[];
+  /** Normalized properties bag (set by normalizeRecord) */
+  properties?: Record<string, unknown>;
 }
 
 export interface VehicleFingerprint {

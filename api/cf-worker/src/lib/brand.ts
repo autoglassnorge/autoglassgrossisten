@@ -7,6 +7,8 @@ const BRAND_MAP: Record<string, string> = {
   "VW TRUCKS": "VW",
   "MERCEDES-BENZ": "MERCEDES",
   "MERCEDES BENZ": "MERCEDES",
+  "MERCEDES-AMG": "MERCEDES",
+  "MERCEDES AMG": "MERCEDES",
   "LAND ROVER": "LANDROVER",
   "ROLLS ROYCE": "ROLLS ROYCE",
   VAUXHALL: "OPEL",
@@ -118,6 +120,19 @@ const BRAND_MAP: Record<string, string> = {
   "JAC (CH)": "JAC (CH)",
   "LYNK & CO": "LYNK & CO",
   MAN: "MAN",
+  "FORD TRUCKS": "FORD",
+  "TOYOTA TRUCKS": "TOYOTA",
+  "PEUGEOT TRUCKS": "PEUGEOT",
+  "CITROEN TRUCKS": "CITROEN",
+  "MERCEDES TRUCKS": "MERCEDES",
+  "VOLVO TRUCKS": "VOLVO",
+  "AUDI TRUCKS": "AUDI",
+  "BMW TRUCKS": "BMW",
+  "NISSAN TRUCKS": "NISSAN",
+  "FIAT TRUCKS": "FIAT",
+  "RENAULT TRUCKS": "RENAULT",
+  "MITSUBISHI TRUCKS": "MITSUBISHI",
+  "MAZDA TRUCKS": "MAZDA",
   SCANIA: "SCANIA TRUCKS",
   DAF: "DAF",
   IVECO: "IVECO (FIAT) TRUCKS",
@@ -141,5 +156,21 @@ export function normalizeBrand(brand: string): string {
 export function getBrandAliases(brand: string): string[] {
   const normalized = normalizeBrand(brand);
   const aliases = ALIAS_REVERSE.get(normalized);
-  return aliases ? Array.from(aliases) : [normalized];
+  const result = aliases ? Array.from(aliases) : [normalized];
+  // Mini models are stored under BMW in D1 glass_catalog — cross-search both brands
+  if (normalized === "MINI" && !result.includes("BMW")) result.push("BMW");
+  if (normalized === "BMW" && !result.includes("MINI")) result.push("MINI");
+  // American brands consolidated under USA CARS in D1 — cross-search both
+  const USA_CARS_BRANDS = ["CHEVROLET", "FORD", "JEEP", "CHRYSLER", "DODGE", "CADILLAC", "GMC", "HUMMER"];
+  const rawUpper = brand.toUpperCase().trim();
+  // Check BOTH normalized and raw brand against USA_CARS list (CHEVROLET normalizes to DAEWOO)
+  if ((USA_CARS_BRANDS.includes(normalized) || USA_CARS_BRANDS.includes(rawUpper)) && !result.includes("USA CARS")) {
+    result.push("USA CARS");
+  }
+  if (normalized === "USA CARS") {
+    for (const b of USA_CARS_BRANDS) {
+      if (!result.includes(b)) result.push(b);
+    }
+  }
+  return result;
 }

@@ -65,7 +65,7 @@ export function generateTitle(r: GlassRecord): string {
     title += ' · ' + eqParts.join(', ');
   }
 
-  return title || `${r.brand || ''} ${r.model || ''}`.trim() || r.eurocode;
+  return title || `${r.brand || ''} ${r.model || ''}`.trim() || r.eurocode || '';
 }
 
 /** Generate a standardized human-readable description with full technical details */

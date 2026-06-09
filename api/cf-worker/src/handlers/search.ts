@@ -9,12 +9,14 @@ import { fetchBiluppgifterVehicle } from "../providers/biluppgifter-svv-backup";
 import { getCachedSvvVehicle, cacheSvvVehicle } from "../lib/svv-cache";
 import { getCachedBovsoftVehicle, fetchBovsoftVehicle, cacheBovsoftVehicle } from "../lib/bovsoft";
 import { normalizeBrand, getBrandAliases } from "../lib/brand";
+import { findKtypeByVehicle } from "../lib/ktype-family-lookup";
 import {
   queryByEurocode,
   queryVehicleFingerprint,
   queryByBrandAndYear,
   queryByBrandOnly,
   queryByKtype,
+  queryByKtypes,
   queryKtypeRegistry,
   queryKtypeMapping,
   insertKtypeMatch,
@@ -24,6 +26,7 @@ import {
   queryFuzzyBrandYear,
   queryTecdocByKtype,
   queryTecdocKtypeByVehicle,
+  querySvvTecdocMatch,
   KTYPE_CONFIDENCE_THRESHOLD,
 } from "../lib/db";
 import { fetchBiluppgifterEquipment, inferRecordEquipment, detectFlagsFromOem, computeEquipmentMatch } from "../lib/equipment";
@@ -75,9 +78,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       let bovsoftUsed = false;
       if (svvResult.status !== "ok") {
         const bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
-        console.log(`[DEBUG] Bovsoft cache for ${regnr}:`, JSON.stringify(bovsoftVehicle));
         if (bovsoftVehicle && bovsoftVehicle.brand && bovsoftVehicle.yearFrom > 0) {
-          console.log(`[Backup] Using Bovsoft cache for ${regnr}: ${bovsoftVehicle.brand} ${bovsoftVehicle.model} ${bovsoftVehicle.yearFrom}`);
           svvResult = {
             status: "ok",
             vehicle: {
@@ -89,12 +90,13 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
               typeCode: "",
               fuelCode: "",
               engineCode: "",
-              length: null,
-              seats: null,
-              gvwr: null,
-              firstRegDate: null,
-              lastRegDate: null,
+              length: undefined,
+              seats: undefined,
+              gvwr: undefined,
+              firstRegDate: undefined,
+              lastRegDate: undefined,
               status: "Registrert",
+              k_type: 0,
             } as TecdocVehicle,
           };
           bovsoftUsed = true;
@@ -164,19 +166,48 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       // vehicle_fingerprints table might not exist yet
     }
 
-    // 2. Check ground_truth database FIRST (layer -1)
+    // === Layer 0.5: SVV→TecDoc fuzzy match cache ===
+    const LEGACY_REGNR = new Set([
+      "CL500","EV400","PV544","SA105","MC040","MC105",
+      "NV200","SL500","OM642","OM651","OM668",
+      "EU0628","EU2028"
+    ]);
+    const isLegacy = LEGACY_REGNR.has(regnr.toUpperCase());
+
+    let svvTecdocMatch = await querySvvTecdocMatch(db, regnr);
+    if (svvTecdocMatch) {
+      console.log(`[Layer 0.5] svv_tecdoc_matches hit for ${regnr}: ${svvTecdocMatch.confidence_level} (ktype=${svvTecdocMatch.ktype})`);
+    }
+
+    // High-confidence shortcut: exact/high → direct kType lookup, skip ground_truth + layers
+    let layer05Candidates: GlassRecord[] | null = null;
+    let layer05Confidence = "none";
+    if (svvTecdocMatch && svvTecdocMatch.ktype && svvTecdocMatch.ktype > 0 &&
+        (svvTecdocMatch.confidence_level === 'exact' || svvTecdocMatch.confidence_level === 'high')) {
+      const ktypeDirect = await queryByKtype(db, svvTecdocMatch.ktype);
+      if (ktypeDirect.length > 0) {
+        vehicle.k_type = svvTecdocMatch.ktype;
+        layer05Candidates = ktypeDirect;
+        layer05Confidence = svvTecdocMatch.confidence_level;
+        console.log(`[Layer 0.5] Using cached kType ${svvTecdocMatch.ktype} for ${regnr}, skipping ground_truth`);
+      }
+    }
+
+    // 2. Check ground_truth database FIRST (layer -1) — skip if Layer 0.5 hit
     let groundTruth: GroundTruthRecord | null = null;
     let gtCandidates: GlassRecord[] = [];
-    try {
-      groundTruth = await queryGroundTruth(db, regnr);
-      if (!groundTruth) {
-        groundTruth = await queryGroundTruthByVehicle(db, vehicle.make, vehicle.model, vehicle.year);
+    if (!layer05Candidates) {
+      try {
+        groundTruth = await queryGroundTruth(db, regnr);
+        if (!groundTruth) {
+          groundTruth = await queryGroundTruthByVehicle(db, vehicle.make, vehicle.model, vehicle.year);
+        }
+        if (groundTruth) {
+          gtCandidates = await groundTruthToCandidates(db, groundTruth);
+        }
+      } catch {
+        // Ground truth table might not exist yet
       }
-      if (groundTruth) {
-        gtCandidates = await groundTruthToCandidates(db, groundTruth);
-      }
-    } catch {
-      // Ground truth table might not exist yet
     }
 
     // 3. Hybrid kType resolution
@@ -328,21 +359,29 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
     let layer = 4;
     let confidence: string = "none";
 
+    // === Layer 0.5: SVV→TecDoc cache (pre-empts ground_truth) ===
+    if (layer05Candidates) {
+      candidates.push(...layer05Candidates);
+      layer05Candidates.forEach((c) => { if (c.eurocode) if (c.eurocode) candidateCodes.add(c.eurocode); });
+      layer = 0;
+      confidence = layer05Confidence;
+    }
+
     // === Layer -1: Ground truth ===
-    if (gtCandidates.length > 0) {
+    if (!layer05Candidates && gtCandidates.length > 0) {
       candidates.push(...gtCandidates);
-      gtCandidates.forEach((c) => candidateCodes.add(c.eurocode));
+      gtCandidates.forEach((c) => { if (c.eurocode) candidateCodes.add(c.eurocode); });
       layer = -1;
       confidence = "exact";
     }
 
     // === Layer 0: kType exact match ===
-    if (layer !== -1 && vehicle.k_type > 0) {
+    if (!layer05Candidates && layer !== -1 && vehicle.k_type > 0) {
       const ktypeDirect = await queryByKtype(db, vehicle.k_type);
       for (const c of ktypeDirect) {
-        if (!candidateCodes.has(c.eurocode)) {
+        if (c.eurocode && !candidateCodes.has(c.eurocode)) {
           candidates.push(c);
-          candidateCodes.add(c.eurocode);
+          if (c.eurocode) candidateCodes.add(c.eurocode);
         }
       }
       if (ktypeDirect.length > 0) {
@@ -356,7 +395,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           const topMapping = ktypeMappings[0];
           if (topMapping.frequency >= KTYPE_CONFIDENCE_THRESHOLD) {
             const mappedRecord = await queryByEurocode(db, topMapping.eurocode);
-            if (mappedRecord && !candidateCodes.has(mappedRecord.eurocode)) {
+            if (mappedRecord && mappedRecord.eurocode && !candidateCodes.has(mappedRecord.eurocode)) {
               const brands = getBrandAliases(vehicle.make);
               const brandMatch = brands.some((b) => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
               const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
@@ -373,7 +412,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
     }
 
     // === Layer 0.5: TecDoc fallback (collision-gated) ===
-    if (layer !== -1 && layer > 0) {
+    if (!layer05Candidates && layer !== -1 && layer > 0) {
       try {
         const tecdocKtypes = await queryTecdocKtypeByVehicle(db, vehicle.make, vehicle.model, vehicle.year, 5);
         if (tecdocKtypes.length === 1) {
@@ -386,9 +425,9 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           // Re-run Layer 0 with the resolved kType
           const ktypeDirect = await queryByKtype(db, vehicle.k_type);
           for (const c of ktypeDirect) {
-            if (!candidateCodes.has(c.eurocode)) {
+            if (c.eurocode && !candidateCodes.has(c.eurocode)) {
               candidates.push(c);
-              candidateCodes.add(c.eurocode);
+              if (c.eurocode) candidateCodes.add(c.eurocode);
             }
           }
           if (ktypeDirect.length > 0) {
@@ -409,14 +448,87 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
     let debugL3Total = 0, debugL3Compatible = 0, debugL3bTotal = 0, debugL3bCompatible = 0, debugL3bModel = 0;
     let debugFuzzyCount = 0;
 
-    if (layer !== -1) {
+    if (!layer05Candidates && layer !== -1) {
       let modelHint = vehicle.model.length >= 3 ? vehicle.model.toLowerCase() : undefined;
       let extraHints: string[] | undefined;
-      if (vehicle.make.toLowerCase().includes("volkswagen")) {
+      const makeLower = vehicle.make.toLowerCase();
+      if (makeLower.includes("volkswagen") || makeLower === "vw") {
         const vwVariants = ["transporter", "multivan", "caravelle", "california"];
-        if (vwVariants.some((v) => vehicle.model.toLowerCase().includes(v))) {
-          extraHints = vwVariants.filter((v) => !vehicle.model.toLowerCase().includes(v));
+        const matchedVariant = vwVariants.find((v) => vehicle.model.toLowerCase().includes(v));
+        if (matchedVariant) {
+          // All VW van variants share the same chassis family — use "transporter" as canonical
+          // for D1 lookup since that's the model name used in glass_catalog
+          if (matchedVariant !== "transporter") {
+            modelHint = "transporter";
+          }
+          extraHints = vwVariants.filter((v) => v !== matchedVariant && v !== "transporter");
         }
+      }
+
+      // Volvo XC/S/V/C: D1 uses space ("XC 60"), SVV sends no space ("XC60")
+      // Normalize to D1 format for SQL LIKE matching
+      if (makeLower === "volvo") {
+        const volvoModel = vehicle.model.toLowerCase();
+        const volvoMatch = volvoModel.match(/^(xc|s|v|c)(\d+)$/);
+        if (volvoMatch) {
+          // "XC60" → "XC 60" to match D1 format
+          modelHint = `${volvoMatch[1]} ${volvoMatch[2]}`;
+          // Also search without space as fallback
+          extraHints = [volvoModel];
+        }
+      }
+
+      // Mercedes class names: D1 uses "SERIE W205", SVV sends "C-Klasse"
+      // Generate extra hints with known W-codes for better SQL matching
+      if (makeLower === "mercedes" || makeLower.includes("mercedes")) {
+        const mercedesClassMap: Record<string, string[]> = {
+          "c-klasse": ["w203", "w204", "w205", "w206"],
+          "e-klasse": ["w210", "w211", "w212", "w213", "w214"],
+          "s-klasse": ["w220", "w221", "w222", "w223"],
+          "a-klasse": ["w168", "w169", "w176", "w177"],
+          "b-klasse": ["w245", "w246", "w247"],
+          "m-klasse": ["w163", "w164", "w166"],
+          "gle-klasse": ["w166", "w167"],
+          "g-klasse": ["w463", "w464"],
+          "glc": ["x253", "c253", "x254", "c254"],
+          "glb": ["x247"],
+          "gla": ["x156", "h247"],
+          "cla": ["c117", "c118"],
+          "slk": ["r170", "r171", "r172"],
+          "sl": ["r129", "r230", "r231"],
+          "clk": ["c208", "c209"],
+          "cls": ["c218", "c219", "c257"],
+        };
+        const mercedesModel = vehicle.model.toLowerCase();
+        for (const [className, wCodes] of Object.entries(mercedesClassMap)) {
+          if (mercedesModel.includes(className)) {
+            extraHints = [...(extraHints || []), ...wCodes];
+            break;
+          }
+        }
+      }
+
+      // ── Generic modelHint variant generation ────────────────────────────
+      // D1 uses supplier conventions that often differ from SVV naming:
+      //   "CX 5" (space)  vs  "CX-5" (hyphen)  vs  "CX5" (none)
+      //   "MODEL 3"       vs  "Model3"
+      //   "F-150"         vs  "F150"
+      // Generate multiple variants and search them all for better coverage.
+      function hintVariants(raw: string): string[] {
+        const base = raw.toLowerCase().trim();
+        const variants = new Set<string>();
+        variants.add(base);
+        variants.add(base.replace(/\s+/g, ""));          // no spaces
+        variants.add(base.replace(/-/g, ""));            // no hyphens
+        variants.add(base.replace(/\s+/g, "-"));         // spaces → hyphens
+        variants.add(base.replace(/-/g, " "));            // hyphens → spaces
+        variants.add(base.replace(/[^a-z0-9]+/g, ""));   // strip all non-alnum
+        return Array.from(variants).filter((v) => v.length >= 2);
+      }
+      // Always add generic variants as extraHints (deduplicated)
+      if (modelHint) {
+        const genericVariants = hintVariants(vehicle.model);
+        extraHints = [...new Set([...(extraHints || []), ...genericVariants])];
       }
 
       // Extract body type hint from Bovsoft for better filtering
@@ -432,7 +544,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       }
       const l1All = [...l1, ...l1Extra];
       const seen = new Set<string>();
-      const l1Deduped = l1All.filter((r) => { if (seen.has(r.eurocode)) return false; seen.add(r.eurocode); return true; });
+      const l1Deduped = l1All.filter((r) => { if (!r.eurocode) return false; if (seen.has(r.eurocode)) return false; seen.add(r.eurocode); return true; });
       debugL1Total = l1Deduped.length;
 
       const l1Compatible = l1Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
@@ -442,17 +554,17 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
 
       if (l1Model.length > 0) {
         for (const c of l1Model) {
-          if (!candidateCodes.has(c.eurocode)) {
+          if (c.eurocode && !candidateCodes.has(c.eurocode)) {
             candidates.push(c);
-            candidateCodes.add(c.eurocode);
+            if (c.eurocode) candidateCodes.add(c.eurocode);
           }
         }
         if (layer > 1) { layer = 1; confidence = "high"; }
       } else if (l1Compatible.length > 0) {
         for (const c of l1Compatible) {
-          if (!candidateCodes.has(c.eurocode)) {
+          if (c.eurocode && !candidateCodes.has(c.eurocode)) {
             candidates.push(c);
-            candidateCodes.add(c.eurocode);
+            if (c.eurocode) candidateCodes.add(c.eurocode);
           }
         }
         if (layer > 2) { layer = 2; confidence = "medium"; }
@@ -467,13 +579,13 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
         }
         const l3All = [...l3, ...l3Extra];
         const seen3 = new Set<string>();
-        const l3Deduped = l3All.filter((r) => { if (seen3.has(r.eurocode)) return false; seen3.add(r.eurocode); return true; });
+        const l3Deduped = l3All.filter((r) => { if (!r.eurocode) return false; if (seen3.has(r.eurocode)) return false; seen3.add(r.eurocode); return true; });
         const l3Compatible = l3Deduped.filter((r) => yearCompatible(r, vehicle.year, vehicle.make, vehicle.model));
         if (l3Compatible.length > 0) {
           for (const c of l3Compatible) {
-            if (!candidateCodes.has(c.eurocode)) {
+            if (c.eurocode && !candidateCodes.has(c.eurocode)) {
               candidates.push(c);
-              candidateCodes.add(c.eurocode);
+              if (c.eurocode) candidateCodes.add(c.eurocode);
             }
           }
           if (layer > 3) { layer = 3; confidence = "medium"; }
@@ -487,22 +599,57 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           debugL3bModel = l3bModel.length;
           if (l3bModel.length > 0) {
             for (const c of l3bModel) {
-              if (!candidateCodes.has(c.eurocode)) {
+              if (c.eurocode && !candidateCodes.has(c.eurocode)) {
                 candidates.push(c);
-                candidateCodes.add(c.eurocode);
+                if (c.eurocode) candidateCodes.add(c.eurocode);
               }
             }
             if (layer > 3) { layer = 3; confidence = "medium"; }
           } else if (l3bCompatible.length > 0) {
             for (const c of l3bCompatible) {
-              if (!candidateCodes.has(c.eurocode)) {
+              if (c.eurocode && !candidateCodes.has(c.eurocode)) {
                 candidates.push(c);
-                candidateCodes.add(c.eurocode);
+                if (c.eurocode) candidateCodes.add(c.eurocode);
               }
             }
             if (layer > 3) { layer = 3; confidence = "low"; }
           }
         }
+      }
+    }
+
+    // === Layer 2.5: kType Family Matching fallback ===
+    // When no exact kType match (Layer 0/0.5) but brand+model+year gives a family,
+    // use family members to find candidates. This covers modern premium models
+    // not directly in glass_catalog but with family siblings that are.
+    let debugFamilyMatch: { familyId: number | null; ktypes: number[]; confidence: number; found: number } | null = null;
+    if (!layer05Candidates && layer !== -1 && layer >= 2 && vehicle.make && vehicle.model && vehicle.year > 0) {
+      try {
+        const familyResult = await findKtypeByVehicle(db, vehicle.make, vehicle.model, vehicle.year);
+        if (familyResult.ktypes.length > 0) {
+          const familyCandidates = await queryByKtypes(db, familyResult.ktypes);
+          let added = 0;
+          for (const c of familyCandidates) {
+            if (c.eurocode && !candidateCodes.has(c.eurocode)) {
+              candidates.push(c);
+              if (c.eurocode) candidateCodes.add(c.eurocode);
+              added++;
+            }
+          }
+          if (added > 0) {
+            layer = 2;
+            confidence = "medium";
+            console.log(`[Layer 2.5] Family match for ${regnr}: familyId=${familyResult.familyId}, ktypes=${familyResult.ktypes.length}, added=${added}, conf=${familyResult.confidence.toFixed(2)}`);
+          }
+          debugFamilyMatch = {
+            familyId: familyResult.familyId,
+            ktypes: familyResult.ktypes,
+            confidence: familyResult.confidence,
+            found: added,
+          };
+        }
+      } catch (e) {
+        console.warn(`[Layer 2.5] Family lookup failed for ${regnr}:`, e instanceof Error ? e.message : String(e));
       }
     }
 
@@ -513,7 +660,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       const fuzzyResults = await queryFuzzyBrandYear(db, vehicle.make, vehicle.year, vehicle.model, 50);
       debugFuzzyCount = fuzzyResults.length;
       for (const { record, score } of fuzzyResults) {
-        if (!candidateCodes.has(record.eurocode)) {
+        if (record.eurocode && !candidateCodes.has(record.eurocode)) {
           (record as any)._fuzzyScore = score;
           candidates.push(record);
           candidateCodes.add(record.eurocode);
@@ -851,6 +998,7 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           fuzzyCount: debugFuzzyCount,
           totalCandidatesBeforeScoring: candidates.length,
           tecdocFallback: ktypeSource === "tecdoc_fallback",
+          familyMatch: debugFamilyMatch,
         },
         confidenceInfo: {
           score: layer === -1 ? 100 : layer === 0 ? 95 : layer === 1 ? 85 : layer === 2 ? 65 : layer === 3 ? 45 : 25,
@@ -864,7 +1012,9 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
               : layer === 1
                 ? ["Match på merke, modell og årsmodell"]
                 : layer === 2
-                  ? ["Match på merke og årsmodell", "Verifiser modell før bestilling"]
+                  ? debugFamilyMatch && debugFamilyMatch.found > 0
+                    ? ["Match på kjøretøyfamilie (ikke eksakt modell)", "Verifiser utstyr før bestilling"]
+                    : ["Match på merke og årsmodell", "Verifiser modell før bestilling"]
                   : layer === 3
                     ? ["Kun match på merke", "Sterkt anbefalt å verifisere modell og år"]
                     : ["Begrenset data tilgjengelig"],
@@ -891,6 +1041,9 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
         ),
         ktypeInfo: ktypeRegistryInfo,
         sources: [source, bovsoftVehicle ? "bovsoft" : ktypeSource === "tecdoc_fallback" ? "tecdoc_fallback" : "none", effectiveEquipment.source],
+        legacyWarning: isLegacy && (!svvTecdocMatch || svvTecdocMatch.confidence_level === 'none')
+          ? "Dette kjøretøyet er registrert som eldre/klassisk modell. Resultatene kan være begrenset."
+          : undefined,
       },
     };
   } catch (e) {

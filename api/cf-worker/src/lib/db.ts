@@ -68,6 +68,19 @@ export async function queryBySupplierSku(db: D1Database, sku: string): Promise<G
   }
 }
 
+export async function queryByOemNumber(db: D1Database, oem: string): Promise<GlassRecord[]> {
+  try {
+    const { results } = await db
+      .prepare("SELECT * FROM glass_catalog WHERE oem_numbers LIKE ? COLLATE NOCASE LIMIT 10")
+      .bind(`%${oem}%`)
+      .all();
+    return (results || []) as unknown as GlassRecord[];
+  } catch (e) {
+    console.error(`queryByOemNumber failed: ${e instanceof Error ? e.message : String(e)}`);
+    return [];
+  }
+}
+
 export async function queryByKtype(db: D1Database, ktype: number): Promise<GlassRecord[]> {
   try {
     const { results } = await db
@@ -77,6 +90,21 @@ export async function queryByKtype(db: D1Database, ktype: number): Promise<Glass
     return (results || []) as unknown as GlassRecord[];
   } catch (e) {
     console.error(`queryByKtype failed: ${e instanceof Error ? e.message : String(e)}`);
+    return [];
+  }
+}
+
+export async function queryByKtypes(db: D1Database, ktypes: number[]): Promise<GlassRecord[]> {
+  if (!ktypes.length) return [];
+  try {
+    const placeholders = ktypes.map(() => "?").join(",");
+    const { results } = await db
+      .prepare(`SELECT * FROM glass_catalog WHERE ktype IN (${placeholders}) LIMIT 50`)
+      .bind(...ktypes)
+      .all();
+    return (results || []) as unknown as GlassRecord[];
+  } catch (e) {
+    console.error(`queryByKtypes failed: ${e instanceof Error ? e.message : String(e)}`);
     return [];
   }
 }
@@ -724,6 +752,77 @@ export async function queryTecdocKtypeByVehicle(
   } catch (e) {
     console.error(`queryTecdocKtypeByVehicle failed: ${e instanceof Error ? e.message : String(e)}`);
     return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// SVV→TecDoc fuzzy match cache (Layer 0.5)
+// ---------------------------------------------------------------------------
+
+export interface SvvTecdocMatch {
+  regnr: string;
+  regnr_hash: string;
+  make: string;
+  model: string;
+  year: number | null;
+  normalized_make: string;
+  normalized_model: string;
+  ktype: number | null;
+  tecdoc_brand: string | null;
+  tecdoc_model: string | null;
+  tecdoc_year_from: number | null;
+  tecdoc_year_to: number | null;
+  confidence_score: number | null;
+  confidence_level: string;
+  match_reasons: string | null;
+  svv_status: string;
+  svv_source: string;
+  created_at: string;
+}
+
+/**
+ * Query svv_tecdoc_matches by regnr_hash.
+ * Returns the most recent match for the given regnr.
+ */
+export async function querySvvTecdocMatch(db: D1Database, regnr: string): Promise<SvvTecdocMatch | null> {
+  const hash = await sha256(regnr);
+  try {
+    const row = await db
+      .prepare(`
+        SELECT regnr, regnr_hash, make, model, year, normalized_make, normalized_model,
+               ktype, tecdoc_brand, tecdoc_model, tecdoc_year_from, tecdoc_year_to,
+               confidence_score, confidence_level, match_reasons, svv_status, svv_source, created_at
+        FROM svv_tecdoc_matches
+        WHERE regnr_hash = ?
+        ORDER BY created_at DESC
+        LIMIT 1
+      `)
+      .bind(hash)
+      .first();
+    if (!row) return null;
+    return {
+      regnr: (row as any).regnr,
+      regnr_hash: (row as any).regnr_hash,
+      make: (row as any).make,
+      model: (row as any).model,
+      year: (row as any).year,
+      normalized_make: (row as any).normalized_make,
+      normalized_model: (row as any).normalized_model,
+      ktype: (row as any).ktype,
+      tecdoc_brand: (row as any).tecdoc_brand,
+      tecdoc_model: (row as any).tecdoc_model,
+      tecdoc_year_from: (row as any).tecdoc_year_from,
+      tecdoc_year_to: (row as any).tecdoc_year_to,
+      confidence_score: (row as any).confidence_score,
+      confidence_level: (row as any).confidence_level,
+      match_reasons: (row as any).match_reasons,
+      svv_status: (row as any).svv_status,
+      svv_source: (row as any).svv_source,
+      created_at: (row as any).created_at,
+    };
+  } catch (e) {
+    console.error(`querySvvTecdocMatch failed: ${e instanceof Error ? e.message : String(e)}`);
+    return null;
   }
 }
 

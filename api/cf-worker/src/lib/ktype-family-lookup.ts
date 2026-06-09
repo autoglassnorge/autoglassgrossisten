@@ -75,9 +75,24 @@ const NOISE_TOKENS = new Set([
   "NO", "RAM", "CLASS", "SERIES",
 ]);
 
+// Model synonyms: Norwegian/English variants that should be normalized
+const MODEL_SYNONYMS: Record<string, string> = {
+  "KLASSE": "CLASS",
+  "KASSEVOGN": "VAN",
+  "VAREBIL": "VAN",
+  "STASJONSVOGN": "WAGON",
+  "KOMBI": "COMBI",
+  // VW T-family: Caravelle, Multivan, California share Transporter chassis
+  "CARAVELLE": "TRANSPORTER",
+  "MULTIVAN": "TRANSPORTER",
+  "CALIFORNIA": "TRANSPORTER",
+};
+
 function isEngineToken(token: string): boolean {
   if (/^\d+\.\d+$/.test(token)) return true;
-  if (/^[VLI]\d{1,2}$/i.test(token)) return true;
+  // Only treat as engine code if it's clearly an engine designation
+  // Skip common model names like I4 (BMW i4), V8 (model names)
+  if (/^[VL]\d{1,2}$/i.test(token)) return true;
   if (/^(TDI|TSI|FSI|CDI|HDI|DCI|TCE|GDI|MPI|TFSI|TWINAIR|MULTIJET|JTDM|JTD|HPI|SPI|VVTI|VVT-I|D-4D|D4D|D-CAT|DCAT|I-DTEC|IDTEC|CDTI|TDCI|SDI|XDI|E-TEC|ETEC|ECOTEC|ECOBOOST|SKYACTIV|MIVEC|VTEC|I-VTEC|IVTEC)$/i.test(token)) return true;
   if (/^(D|TD|T)$/i.test(token)) return true;
   return false;
@@ -99,21 +114,26 @@ function cleanModel(model: string, brand: string): string {
   if (text.startsWith("CHEVROLET ")) text = text.slice(11).trim();
 
   text = text.replace(/\s*\([^)]*\)\s*/g, " ");
+  // Split on both whitespace and hyphens for better tokenization
+  text = text.replace(/-/g, " ");
 
   const tokens = text.split(/\s+/).filter((t) => t.length > 0);
   const kept: string[] = [];
   for (const token of tokens) {
-    if (NOISE_TOKENS.has(token)) continue;
-    if (isEngineToken(token)) continue;
-    kept.push(token);
+    // Apply synonyms
+    const normalizedToken = MODEL_SYNONYMS[token] || token;
+    if (NOISE_TOKENS.has(normalizedToken)) continue;
+    if (isEngineToken(normalizedToken)) continue;
+    kept.push(normalizedToken);
   }
   return kept.join(" ").trim();
 }
 
-/** Token-based Jaccard similarity */
+/** Token-based Jaccard similarity — normalizes hyphens to spaces */
 function jaccard(a: string, b: string): number {
-  const sa = new Set(a.split(/\s+/).filter(Boolean));
-  const sb = new Set(b.split(/\s+/).filter(Boolean));
+  const normalize = (s: string) => s.replace(/-/g, " ").split(/\s+/).filter(Boolean);
+  const sa = new Set(normalize(a));
+  const sb = new Set(normalize(b));
   if (sa.size === 0 || sb.size === 0) return 0;
   const intersection = new Set([...sa].filter((x) => sb.has(x)));
   const union = new Set([...sa, ...sb]);
@@ -184,8 +204,8 @@ export async function findKtypeByVehicle(
       }
     }
 
-    // Threshold: require at least 30% token overlap
-    if (!bestFamily || bestScore < 0.3) {
+    // Threshold: require at least 20% token overlap (lowered for better coverage)
+    if (!bestFamily || bestScore < 0.2) {
       return { ktypes: [], familyId: null, canonicalModel: null, confidence: bestScore };
     }
 

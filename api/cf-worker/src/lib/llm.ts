@@ -118,7 +118,7 @@ function buildUserPrompt(
 async function callKimiJson<T>(
   env: Env,
   messages: LlmMessage[],
-  schema: object
+  schema: Record<string, unknown>
 ): Promise<T | null> {
   try {
     const result = await env.AI.run("@cf/moonshotai/kimi-k2.5", {
