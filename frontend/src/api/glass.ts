@@ -1,4 +1,4 @@
-import type { SearchResult } from '@/types/api';
+import type { SearchResult, CatalogResponse } from '@/types/api';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
@@ -34,6 +34,42 @@ export async function searchByRegnr(regnr: string): Promise<SearchResult> {
       body.code,
       body.backupUrl
     );
+  }
+  return res.json();
+}
+
+export async function searchByEurocode(eurocode: string): Promise<{ query: { eurocode: string }; count: number; results: unknown[] }> {
+  const res = await fetch(`${API_BASE}/api/glass?eurocode=${encodeURIComponent(eurocode)}`);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new SearchError(body.error ?? `Eurocode-søk feilet (${res.status})`, res.status);
+  }
+  return res.json();
+}
+
+export async function searchBySku(sku: string): Promise<{ query: { supplier_sku: string }; count: number; results: unknown[] }> {
+  const res = await fetch(`${API_BASE}/api/glass?supplier_sku=${encodeURIComponent(sku)}`);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new SearchError(body.error ?? `SKU-søk feilet (${res.status})`, res.status);
+  }
+  return res.json();
+}
+
+export async function searchByOem(oem: string): Promise<{ query: { oem: string }; count: number; results: unknown[] }> {
+  const res = await fetch(`${API_BASE}/api/glass?oem=${encodeURIComponent(oem)}`);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new SearchError(body.error ?? `OE-søk feilet (${res.status})`, res.status);
+  }
+  return res.json();
+}
+
+export async function searchCatalogText(query: string): Promise<CatalogResponse> {
+  const res = await fetch(`${API_BASE}/api/catalog/search?q=${encodeURIComponent(query)}`);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error ?? `Katalogsøk feilet (${res.status})`);
   }
   return res.json();
 }
