@@ -1,7 +1,5 @@
 /browse/* /browse/:splat 200
 /videos/* /videos/:splat 200
-
-# API passthrough (proxy til Worker — 200 = transparent proxy, ingen CORS)
-/api/* https://autoglass-glass-sok.autoglassnorge.workers.dev/api/:splat 200
+/bilglassguide/adas-kamera /bilglassguide/frontrute-adas-kamera 301
 
 /* /index.html 200

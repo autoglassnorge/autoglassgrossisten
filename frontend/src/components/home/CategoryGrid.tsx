@@ -45,7 +45,7 @@ export function CategoryGrid() {
     {
       key: 'adas',
       icon: <AdasCameraIcon className="h-8 w-8" />,
-      href: '/bilglassguide/adas-kamera',
+      href: '/bilglassguide/frontrute-adas-kamera',
     },
   ];
 

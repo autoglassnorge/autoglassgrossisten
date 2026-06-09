@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Loader2, Package, Filter } from 'lucide-react';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { Button } from '@/components/ui/Button';
@@ -53,7 +54,19 @@ type BrowseStep = {
   description: string;
 };
 
+// Mapping from ?category= query param to typeCode matcher
+const CATEGORY_FILTERS: Record<string, (typeCode: string) => boolean> = {
+  'frontrute': (tc) => tc === 'Frontrute',
+  'bakrute': (tc) => tc === 'Bakrute',
+  'dørglass-frem': (tc) => tc.startsWith('Dørrute fremre'),
+  'dørglass-bak': (tc) => tc.startsWith('Dørrute bakre'),
+  'sideglass': (tc) => tc.includes('Siderute') || tc.includes('Ventil'),
+};
+
 export default function BrowsePage() {
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
+
   const [brands, setBrands] = useState<BrandInfo[]>([]);
   const [selectedBrand, setSelectedBrand] = useState<string>('');
   const [brandData, setBrandData] = useState<BrowseBrandData | null>(null);
@@ -77,7 +90,7 @@ export default function BrowsePage() {
   // Load brands list from KV via Worker API
   useEffect(() => {
     setApiError(null);
-    fetch('/api/browse/brands')
+    fetch('/browse/brands.json')
       .then(r => {
         if (!r.ok) {
           throw new Error(`HTTP ${r.status}: ${r.statusText}`);
@@ -111,7 +124,7 @@ export default function BrowsePage() {
     setApiError(null);
 
     const safeName = selectedBrand.replace(/\//g, '-').replace(/ /g, '_');
-    fetch(`/api/browse/${safeName}.json`)
+    fetch(`/browse/${safeName}.json`)
       .then(r => {
         if (!r.ok) {
           throw new Error(`HTTP ${r.status}: ${r.statusText}`);
@@ -172,6 +185,27 @@ export default function BrowsePage() {
     if (!brandData || !selectedModel || !selectedYear) return [];
     return brandData.models[selectedModel]?.[selectedYear]?.products || [];
   }, [brandData, selectedModel, selectedYear]);
+
+  // Auto-select category filter from ?category= URL param when products load
+  useEffect(() => {
+    if (!categoryParam) return;
+    if (!currentProducts.length) return;
+    if (selectedCategories.length > 0) return; // Don't override manual selection
+
+    const matcher = CATEGORY_FILTERS[categoryParam];
+    if (!matcher) return;
+
+    const matchedTypeCodes = [...new Set(
+      currentProducts
+        .map(p => p.typeCode)
+        .filter((tc): tc is string => Boolean(tc))
+        .filter(tc => matcher(tc))
+    )];
+
+    if (matchedTypeCodes.length > 0) {
+      setSelectedCategories(matchedTypeCodes);
+    }
+  }, [currentProducts, categoryParam, selectedCategories.length]);
 
   // === FILTER LOGIKK FOR PRODUKTER ===
   const filteredProducts = useMemo(() => {
@@ -405,7 +439,7 @@ export default function BrowsePage() {
                   <ProductCard 
                     product={product}
                     onQuickView={() => setQuickViewProduct(product)}
-                    onAddToCart={() => console.log('Legg til handlekurv:', product)}
+                    onAddToCart={() => {}}
                     isInComparison={isSelected(product)}
                     onToggleComparison={() => toggleProduct(product)}
                   />
@@ -457,7 +491,7 @@ export default function BrowsePage() {
         product={quickViewProduct} 
         isOpen={!!quickViewProduct} 
         onClose={() => setQuickViewProduct(null)} 
-        onAddToCart={() => quickViewProduct && console.log('Legg til handlekurv:', quickViewProduct)}
+        onAddToCart={() => {}}
         isInComparison={quickViewProduct ? isSelected(quickViewProduct) : false}
         onToggleComparison={() => quickViewProduct && toggleProduct(quickViewProduct)}
       />
@@ -468,7 +502,7 @@ export default function BrowsePage() {
         products={selectedProducts}
         onClose={() => setIsCompareModalOpen(false)}
         onRemove={removeProduct}
-        onSelectProduct={(p) => console.log('Valgt:', p)}
+        onSelectProduct={() => {}}
       />
 
       {/* CompareBar */}

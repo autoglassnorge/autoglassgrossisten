@@ -13,7 +13,7 @@ interface BrandInfo {
 }
 
 async function fetchBrands(): Promise<BrandInfo[]> {
-  const res = await fetch('/api/browse/brands');
+  const res = await fetch('/browse/brands.json');
   if (!res.ok) throw new Error('Failed to fetch brands');
   const data = await res.json() as { brands: BrandInfo[] };
   return data.brands.slice(0, 8); // Top 8 brands

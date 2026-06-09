@@ -21,9 +21,9 @@ export default function ProfessorAvatar({ size = 'md', className = '' }: Profess
   return (
     <div className={`relative ${sizeClass} ${className}`}>
       <img
-        src="/professor-avatar.svg"
+        src="/hero-autoglass.png"
         alt="Professor Autoglass"
-        className="h-full w-full rounded-full object-cover border-2 border-autoglass-blue shadow-md"
+        className="h-full w-full rounded-full object-cover object-[50%_15%] border-2 border-autoglass-blue shadow-md"
         onError={(e) => {
           const img = e.currentTarget;
           img.style.display = 'none';

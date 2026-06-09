@@ -70,8 +70,8 @@ export default function PersonvernPage() {
             </p>
             <div className="bg-gray-50 rounded-lg p-4 text-gray-600">
               <p><strong>Autoglass AS</strong></p>
-              <p>E-post: post@autoglass.no</p>
-              <p>Telefon: +47 22 90 50 00</p>
+              <p>E-post: post@alfa-glass.no</p>
+              <p>Telefon: +47 21 37 83 90</p>
             </div>
 
             <h2 className="text-xl font-bold mt-8 mb-4">6. Endringer i erklæringen</h2>

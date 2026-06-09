@@ -34,11 +34,11 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-gray-600">
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
-                <span>+47 22 90 50 00</span>
+                <span>+47 21 37 83 90</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <span>post@autoglass.no</span>
+                <span>post@alfa-glass.no</span>
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />

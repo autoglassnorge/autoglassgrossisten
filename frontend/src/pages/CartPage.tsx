@@ -376,16 +376,16 @@ export default function CartPage() {
                   href="tel:+4722905000"
                   className="text-autoglass-blue hover:underline"
                 >
-                  +47 22 90 50 00
+                  +47 21 37 83 90
                 </a>
               </p>
               <p>
                 eller send e-post til{' '}
                 <a
-                  href="mailto:post@autoglass.no"
+                  href="mailto:post@alfa-glass.no"
                   className="text-autoglass-blue hover:underline"
                 >
-                  post@autoglass.no
+                  post@alfa-glass.no
                 </a>
               </p>
             </div>

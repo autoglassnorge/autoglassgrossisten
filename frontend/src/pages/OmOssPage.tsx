@@ -141,7 +141,7 @@ export default function OmOssPage() {
               href="tel:+4722905000"
               className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition"
             >
-              +47 22 90 50 00
+              +47 21 37 83 90
             </a>
           </div>
         </div>

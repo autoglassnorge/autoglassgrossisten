@@ -24,7 +24,7 @@ export default function KontaktPage() {
     <div className="min-h-screen bg-white">
       <PageMeta
         title="Kontakt — Autoglass AS"
-        description="Kontakt Autoglass AS for bestilling, support eller for å bli kunde. Telefon +47 22 90 50 00, e-post post@autoglass.no."
+        description="Kontakt Autoglass AS for bestilling, support eller for å bli kunde. Telefon +47 21 37 83 90, e-post post@alfa-glass.no."
         canonicalPath="/kontakt"
       />
 
@@ -52,7 +52,7 @@ export default function KontaktPage() {
                   <div>
                     <div className="font-medium">Telefon</div>
                     <a href="tel:+4722905000" className="text-autoglass-blue hover:underline">
-                      +47 22 90 50 00
+                      +47 21 37 83 90
                     </a>
                   </div>
                 </div>
@@ -63,8 +63,8 @@ export default function KontaktPage() {
                   </div>
                   <div>
                     <div className="font-medium">E-post</div>
-                    <a href="mailto:post@autoglass.no" className="text-autoglass-blue hover:underline">
-                      post@autoglass.no
+                    <a href="mailto:post@alfa-glass.no" className="text-autoglass-blue hover:underline">
+                      post@alfa-glass.no
                     </a>
                   </div>
                 </div>

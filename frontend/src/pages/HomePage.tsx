@@ -6,7 +6,6 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroProfessor } from '@/components/home/HeroProfessor';
 import { TrustBar } from '@/components/home/TrustBar';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
-import { PopularBrands } from '@/components/home/PopularBrands';
 import { WhyChooseUs } from '@/components/home/WhyChooseUs';
 import { AdasSection } from '@/components/home/AdasSection';
 import { CtaBanner } from '@/components/home/CtaBanner';
@@ -131,10 +130,7 @@ export default function HomePage() {
         {/* 3. CATEGORIES — Product categories */}
         <CategoryGrid />
 
-        {/* 4. POPULAR BRANDS — Top brands from KV */}
-        <PopularBrands />
-
-        {/* 5. WHY CHOOSE US — Trust points + stats */}
+        {/* 4. WHY CHOOSE US — Trust points + stats */}
         <WhyChooseUs />
 
         {/* 6. ADAS — Calibration competence */}
