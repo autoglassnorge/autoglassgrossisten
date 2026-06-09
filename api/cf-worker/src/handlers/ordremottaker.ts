@@ -826,8 +826,23 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
       });
 
       if (toolCalls.length > 0) {
-        useToolCalling = true;
-        toolResults = [];
+        // Gate: don't use tool-calling if position is unknown and candidates
+        // span multiple categories, or if equipment questions remain.
+        // Let existing LLM/rigid flow handle the question.
+        const pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
+        const posKnown = pos !== 'glass' || session.answers?.position;
+        const categories = new Set(candidates.map((c) => String(c.category || '').toLowerCase()));
+        const needsPosition = !posKnown && categories.size > 1;
+        const needsEquipment = candidates.length > 3
+          ? buildEquipmentQuestion(candidates, equipmentAnswers, pos) !== null
+          : false;
+
+        if (needsPosition || needsEquipment) {
+          console.log(`[Ordremottaker] Tool-calling gated: needsPosition=${needsPosition}, needsEquipment=${needsEquipment}`);
+          // Fall through to existing LLM/rigid flow below
+        } else {
+          useToolCalling = true;
+          toolResults = [];
         for (const toolCall of toolCalls) {
           let result: import('../types').ToolResult;
           if (toolCall.tool === 'search') {
@@ -864,6 +879,7 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
         nextAction = null;
         console.log(`[Ordremottaker] Tool-calling used: ${toolResults.map((r) => `${r.tool}(${r.success ? 'OK' : 'FAIL'})`).join(', ')}`);
       }
+    }
     }
 
     // ── D: Build response — Dual flow: LLM Dialogue Engine (primary) or rigid fallback ──
