@@ -35,7 +35,9 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
     if (categoryFilter) cacheKeyParams.category = categoryFilter;
 
     // Cache key should include fields param for proper cache isolation
-    const compressionCacheKey = cacheKey("glass-v2", {
+    // Bump cache namespace when search matching semantics change.
+    // glass-v2 may contain stale pre-kType-compatibility responses.
+    const compressionCacheKey = cacheKey("glass-v3-ktype-compat", {
       ...cacheKeyParams,
       _fields: fieldsParam || "default",
     });
