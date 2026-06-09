@@ -44,8 +44,8 @@ interface EquipmentFlags {
 /** Hjelper for å få lesbar posisjonsbetegnelse */
 function positionLabel(position: string | null): string {
   if (position === 'bakrute') return 'bakruten';
-  if (position === 'dørrute') return 'dørruten';
-  if (position === 'siderute') return 'sideruten';
+  if (position === 'dørrute' || position?.startsWith('dørrute-')) return 'dørruten';
+  if (position === 'siderute' || position === 'sideglass' || position?.startsWith('sideglass-')) return 'sideruten';
   return 'frontruten';
 }
 
@@ -54,10 +54,17 @@ function buildAccessories(position: string | null, flags: EquipmentFlags): Acces
   const accessories: AccessoryItem[] = [];
   const posLabel = positionLabel(position);
 
+  const isDoorGlass = position === 'dørrute' || position?.startsWith('dørrute-');
+  const isSideGlass =
+    position === 'siderute' ||
+    position === 'sideglass' ||
+    position === 'ventilrute' ||
+    position?.startsWith('sideglass-');
+
   if (position === 'bakrute') {
     accessories.push({ sku: 'LIM-STD', name: 'Lim', price: 189, included: true, removable: false, category: 'required' });
     accessories.push({ sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true, category: 'required' });
-  } else if (position === 'dørrute' || position === 'siderute') {
+  } else if (isDoorGlass || isSideGlass) {
     accessories.push({ sku: 'KLIPS-STD', name: 'Klips', price: 89, included: true, removable: true, category: 'required' });
     accessories.push({ sku: 'TETNING-STD', name: 'Tetningslist', price: 145, included: true, removable: false, category: 'required' });
   } else {
@@ -134,6 +141,27 @@ function buildAccessories(position: string | null, flags: EquipmentFlags): Acces
 function getProp(c: { properties?: Record<string, unknown> }, key: string): unknown {
   const props = c.properties || {};
   return props[key];
+}
+
+export function buildAccessoriesForContext(
+  position: string | null | undefined,
+  candidates: Array<{ properties?: Record<string, unknown> }>,
+  equipmentAnswers: Record<string, string>
+): AccessoryItem[] {
+  const hasAdas = candidates.some((c) => !!getProp(c, 'adas')) || equipmentAnswers['adas'] === 'ja';
+  const hasLdw = candidates.some((c) => !!getProp(c, 'lane_assist') || !!getProp(c, 'adas')) || equipmentAnswers['ldw'] === 'ja';
+  const isHeated = candidates.some((c) => !!getProp(c, 'heated')) || equipmentAnswers['heated'] === 'ja';
+  const heatedType = (equipmentAnswers['heated_type'] as 'full' | 'camera' | undefined) || null;
+  const hasHud = candidates.some((c) => !!getProp(c, 'hud')) || equipmentAnswers['hud'] === 'ja';
+  const hasAntenna = candidates.some((c) => !!getProp(c, 'antenna')) || equipmentAnswers['antenna'] === 'ja';
+  const hasCoated = candidates.some((c) => !!getProp(c, 'coated')) || equipmentAnswers['coated'] === 'ja';
+  const hasRainSensor = candidates.some((c) => !!getProp(c, 'rainSensor')) || equipmentAnswers['rainSensor'] === 'ja';
+  const hasAcoustic = candidates.some((c) => !!getProp(c, 'acoustic')) || equipmentAnswers['acoustic'] === 'ja';
+
+  return buildAccessories(position || null, {
+    hasAdas, hasLdw, isHeated, heatedType,
+    hasHud, hasAntenna, hasCoated, hasRainSensor, hasAcoustic
+  });
 }
 
 type EquipmentField = 'adas' | 'ldw' | 'rainSensor' | 'heated' | 'heated_type' | 'hud' | 'antenna' | 'coated' | 'acoustic';
@@ -805,6 +833,11 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
       candidates = filterByEquipment(candidates, equipmentAnswers);
     }
 
+    // Needed before tool-calling so buildQuote sees the same accessory context
+    // that response/cart will expose when tool-calling is used.
+    let pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
+    const toolAccessories = buildAccessoriesForContext(pos, candidates, equipmentAnswers);
+
     // ── C: Tool-Calling Copilot (Fase 3A) — opt-in, replaces LLM dialogue for actionable intents ──
     let toolResults: import('../types').ToolResult[] | undefined;
     let useToolCalling = false;
@@ -863,6 +896,7 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
                 vehicle: session.vehicle || undefined,
                 equipmentAnswers: { ...equipmentAnswers },
                 candidates: candidates as unknown as GlassRecord[],
+                accessories: toolAccessories,
               }
             );
           }
@@ -884,7 +918,6 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
 
     // ── D: Build response — Dual flow: LLM Dialogue Engine (primary) or rigid fallback ──
     let useLlmDialogue = false;
-    let pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
     if (!useToolCalling) {
 
     // If user explicitly chose "Annet", we need more info — don't try to match
@@ -1045,21 +1078,13 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
     }
     }
 
-    // Build position-based accessories
+    // Build position-based accessories. Recompute after LLM/rigid flow because
+    // equipmentAnswers may have been updated there; tool-calling keeps the
+    // precomputed list so QuoteDraft and response use the same accessory set.
     pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
-    const hasAdas = candidates.some((c: Candidate) => !!getProp(c, 'adas')) || equipmentAnswers['adas'] === 'ja';
-    const hasLdw = candidates.some((c: Candidate) => !!getProp(c, 'lane_assist') || !!getProp(c, 'adas')) || equipmentAnswers['ldw'] === 'ja';
-    const isHeated = candidates.some((c: Candidate) => !!getProp(c, 'heated')) || equipmentAnswers['heated'] === 'ja';
-    const heatedType = (equipmentAnswers['heated_type'] as 'full' | 'camera' | undefined) || null;
-    const hasHud = candidates.some((c: Candidate) => !!getProp(c, 'hud')) || equipmentAnswers['hud'] === 'ja';
-    const hasAntenna = candidates.some((c: Candidate) => !!getProp(c, 'antenna')) || equipmentAnswers['antenna'] === 'ja';
-    const hasCoated = candidates.some((c: Candidate) => !!getProp(c, 'coated')) || equipmentAnswers['coated'] === 'ja';
-    const hasRainSensor = candidates.some((c: Candidate) => !!getProp(c, 'rainSensor')) || equipmentAnswers['rainSensor'] === 'ja';
-    const hasAcoustic = candidates.some((c: Candidate) => !!getProp(c, 'acoustic')) || equipmentAnswers['acoustic'] === 'ja';
-    const accessories = buildAccessories(pos, {
-      hasAdas, hasLdw, isHeated, heatedType,
-      hasHud, hasAntenna, hasCoated, hasRainSensor, hasAcoustic
-    });
+    const accessories = useToolCalling
+      ? toolAccessories
+      : buildAccessoriesForContext(pos, candidates, equipmentAnswers);
 
     // Build cart URL if recommendation and candidates exist
     let cartUrl: string | undefined;
@@ -1131,7 +1156,7 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
       ai_response: aiResponse,
       session_token: sessionToken,
       candidates: status === 'recommendation' ? addDecodedDescription(candidates.slice(0, 5)) as unknown as GlassRecord[] : undefined,
-      accessories: status === 'recommendation' ? accessories : undefined,
+      accessories: status === 'recommendation' || status === 'order_ready' ? accessories : undefined,
       cart_url: cartUrl,
       confidence: confidence,
       next_action: nextAction || undefined,
