@@ -353,3 +353,51 @@ export interface UnifiedSearchResponse {
   };
   nextActions: Array<{ action: string; label: string; href?: string }>;
 }
+
+// ---------------------------------------------------------------------------
+// Professor Autoglass 2.0 — Tool-Calling types (Fase 3A)
+// ---------------------------------------------------------------------------
+
+export type ProfessorTool = 'search' | 'faq' | 'buildQuote' | 'handoff';
+
+export interface ToolCall {
+  tool: ProfessorTool;
+  params: Record<string, unknown>;
+  id: string;
+}
+
+export interface ToolResult {
+  tool: string;
+  id: string;
+  success: boolean;
+  data?: unknown;
+  error?: string;
+}
+
+export interface MatchExplanation {
+  layer: number;
+  layerName: string;
+  confidence: 'exact' | 'high' | 'medium' | 'low' | 'none';
+  reasons: string[];
+  vehicle?: { make: string; model: string; year: number; regnr?: string };
+}
+
+export interface QuoteDraftItem {
+  product: GlassRecord;
+  qty: number;
+  accessories: AccessoryItem[];
+}
+
+export interface QuoteDraft {
+  items: QuoteDraftItem[];
+  subtotal: number;
+  accessoryTotal: number;
+  total: number;
+  notes?: string;
+}
+
+export interface HandoffSummary {
+  reason: 'no_match' | 'low_confidence' | 'multiple_vehicles' | 'customer_request' | 'equipment_unclear';
+  summary: string;
+  sessionToken?: string;
+}
