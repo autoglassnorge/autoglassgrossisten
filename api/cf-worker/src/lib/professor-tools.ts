@@ -141,13 +141,17 @@ export function synthesizeSearchToolResult(
     ? (confidence && confidence >= 0.7 ? 'high' : confidence && confidence >= 0.4 ? 'medium' : 'low')
     : 'none';
 
+  const input = (toolCall.params as { input?: string }).input || '';
+  // VIN = 17 chars; regnr otherwise
+  const detectedType: import('../types').InputType = input.length === 17 ? 'vin' : 'regnr';
+
   const searchResult: UnifiedSearchResponse = {
     ok: hasResults,
     error: hasResults ? undefined : { code: 'NO_MATCH', message: 'Ingen glass funnet i katalogen' },
     input: {
-      raw: (toolCall.params as { input?: string }).input || '',
-      detectedType: 'regnr',
-      normalized: (toolCall.params as { input?: string }).input || '',
+      raw: input,
+      detectedType,
+      normalized: input,
     },
     vehicle: vehicleInfo
       ? {
@@ -190,15 +194,16 @@ export function synthesizeSearchToolResult(
       }
     : undefined;
 
+  // success=true always — the tool executed correctly. no-match is a valid
+  // search result (catalog has no glass), not a tool failure.
   return {
     tool: 'search',
     id: toolCall.id,
-    success: hasResults,
+    success: true,
     data: {
       searchResult,
       matchExplanation,
     },
-    error: hasResults ? undefined : 'Ingen glass funnet i katalogen',
   };
 }
 
@@ -550,7 +555,10 @@ export function generateResponseFromToolResults(
           searchResult?: { ok: boolean; results?: Array<unknown>; error?: { message: string } };
         } | undefined;
         const searchResult = data?.searchResult;
-        if (searchResult?.ok) {
+        if (searchResult?.ok === false) {
+          // No-match is a valid result — not a tool failure
+          parts.push(`Jeg fant dessverre ingen glass som passer til ${vehicleDesc} i katalogen vår. Kan du dobbeltsjekke opplysningene, eller prøve med registreringsnummer?`);
+        } else if (searchResult?.ok) {
           const count = searchResult.results?.length || 0;
           if (count > 0) {
             parts.push(`Jeg fant ${count} glass som passer til ${vehicleDesc}.`);

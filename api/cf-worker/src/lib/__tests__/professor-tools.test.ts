@@ -452,15 +452,19 @@ describe('synthesizeSearchToolResult', () => {
     expect(data.searchResult.results).toHaveLength(1);
   });
 
-  it('synthesizes no-match result when candidates are empty', () => {
+  it('synthesizes no-match result when candidates are empty (success=true, searchResult.ok=false)', () => {
     const toolCall: ToolCall = {
       tool: 'search',
       params: { input: 'SU18018' },
       id: 'synth-2',
     };
     const result = synthesizeSearchToolResult(toolCall, []);
-    expect(result.success).toBe(false);
-    expect(result.error).toContain('Ingen glass funnet');
+    // Tool executed correctly — no-match is a valid result, not a failure
+    expect(result.success).toBe(true);
+    expect(result.error).toBeUndefined();
+    const data = result.data as { searchResult: { ok: boolean; error?: { message: string } } };
+    expect(data.searchResult.ok).toBe(false);
+    expect(data.searchResult.error?.message).toContain('Ingen glass funnet');
   });
 
   it('uses vehicleInfo for response text, not generic "bilen din"', () => {
@@ -481,5 +485,55 @@ describe('synthesizeSearchToolResult', () => {
     });
     expect(response).toContain('VW Transporter (2019)');
     expect(response).not.toContain('bilen din');
+  });
+
+  it('detects VIN input (17 chars) and sets detectedType="vin"', () => {
+    const toolCall: ToolCall = {
+      tool: 'search',
+      params: { input: 'WVWZZZ7HZ8D123456' },
+      id: 'synth-vin',
+    };
+    const result = synthesizeSearchToolResult(toolCall, [mockGlass()]);
+    const data = result.data as { searchResult: { input: { detectedType: string } } };
+    expect(data.searchResult.input.detectedType).toBe('vin');
+  });
+
+  it('detects regnr input (not 17 chars) and sets detectedType="regnr"', () => {
+    const toolCall: ToolCall = {
+      tool: 'search',
+      params: { input: 'SU18018' },
+      id: 'synth-regnr',
+    };
+    const result = synthesizeSearchToolResult(toolCall, [mockGlass()]);
+    const data = result.data as { searchResult: { input: { detectedType: string } } };
+    expect(data.searchResult.input.detectedType).toBe('regnr');
+  });
+});
+
+describe('generateResponseFromToolResults — no-match regression', () => {
+  it('returns helpful no-match text, not generic error', () => {
+    const results = [{
+      tool: 'search' as const,
+      id: 'nm-1',
+      success: true,
+      data: { searchResult: { ok: false, error: { message: 'Ingen glass funnet' } } },
+    }];
+    const response = generateResponseFromToolResults(results, {
+      vehicle: { make: 'VW', model: 'Transporter', year: 2019 },
+    });
+    expect(response).toContain('dessverre ingen glass');
+    expect(response).toContain('VW Transporter (2019)');
+    expect(response).not.toContain('noe gikk galt');
+  });
+
+  it('suggests trying regnr for no-match', () => {
+    const results = [{
+      tool: 'search' as const,
+      id: 'nm-2',
+      success: true,
+      data: { searchResult: { ok: false } },
+    }];
+    const response = generateResponseFromToolResults(results);
+    expect(response).toContain('registreringsnummer');
   });
 });
