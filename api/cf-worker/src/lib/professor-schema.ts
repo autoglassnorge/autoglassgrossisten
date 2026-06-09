@@ -137,7 +137,7 @@ export function buildToolDefinitionsText(): string {
    Eksempel: { "tool": "faq", "params": { "query": "Hva er OEM?" } }
 
 3. buildQuote — Bygg tilbudskladd
-   Parametere: { "items": [{"productId": number, "qty": number, "accessories": [{"sku": string, "qty": number}]}] }
+   Parametere: { "items": [{"productId": number, "qty": number, "accessories": [{"sku": string}]}] }
    Bruk når: brukeren vil ha tilbud/quote og vi har produkter i session
    Eksempel: { "tool": "buildQuote", "params": { "items": [{"productId": 123, "qty": 1}] } }
 

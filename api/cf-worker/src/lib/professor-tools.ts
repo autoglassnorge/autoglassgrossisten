@@ -169,7 +169,7 @@ function executeBuildQuote(
     items?: Array<{
       productId?: number;
       qty?: number;
-      accessories?: Array<{ sku: string; qty: number }>;
+      accessories?: Array<{ sku: string }>;
     }>;
   };
 
