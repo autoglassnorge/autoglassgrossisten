@@ -199,6 +199,36 @@ describe('executeTool — buildQuote', () => {
     expect(result.success).toBe(false);
     expect(result.error).toContain('No candidates');
   });
+
+  it('selects accessories by sku without qty contract', async () => {
+    const candidate = mockGlass({ id: 123, price: 3200 });
+    const sessionAccessories = [
+      mockAccessory({ sku: 'LIM', price: 189 }),
+      mockAccessory({ sku: 'KLIPS', price: 89 }),
+      mockAccessory({ sku: 'KAL', price: 450 }),
+    ];
+    const toolCall: ToolCall = {
+      tool: 'buildQuote',
+      params: {
+        items: [
+          {
+            productId: 123,
+            qty: 1,
+            accessories: [{ sku: 'LIM' }, { sku: 'KAL' }], // no qty per accessory
+          },
+        ],
+      },
+      id: 'test-5b',
+    };
+    const result = await executeTool(toolCall, mockEnv, mockCtx, {
+      candidates: [candidate],
+      accessories: sessionAccessories,
+    });
+    expect(result.success).toBe(true);
+    const draft = result.data as { items: Array<{ accessories: Array<{ sku: string }> }> };
+    expect(draft.items[0].accessories).toHaveLength(2);
+    expect(draft.items[0].accessories.map((a) => a.sku)).toEqual(['LIM', 'KAL']);
+  });
 });
 
 describe('executeTool — handoff', () => {
