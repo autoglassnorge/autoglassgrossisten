@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { routeTools, executeTool } from '../professor-tools';
+import { routeTools, executeTool, generateResponseFromToolResults, determineStatusFromTools } from '../professor-tools';
 import type { Env, ToolCall, GlassRecord, AccessoryItem } from '../../types';
 
 const mockEnv = {} as Env;
@@ -304,5 +304,103 @@ describe('executeTool — unknown tool', () => {
     const result = await executeTool(toolCall, mockEnv, mockCtx);
     expect(result.success).toBe(false);
     expect(result.error).toContain('Unknown tool');
+  });
+});
+
+describe('generateResponseFromToolResults', () => {
+  it('generates search success response', () => {
+    const results = [{
+      tool: 'search' as const,
+      id: 'r1',
+      success: true,
+      data: { searchResult: { ok: true, results: [{}, {}, {}] } },
+    }];
+    const response = generateResponseFromToolResults(results, {
+      vehicle: { make: 'VW', model: 'Transporter', year: 2019 },
+    });
+    expect(response).toContain('fant 3 glass');
+    expect(response).toContain('VW Transporter (2019)');
+  });
+
+  it('generates faq response with answer text', () => {
+    const results = [{
+      tool: 'faq' as const,
+      id: 'r2',
+      success: true,
+      data: { answer: 'OEM er originalt glass.' },
+    }];
+    const response = generateResponseFromToolResults(results);
+    expect(response).toBe('OEM er originalt glass.');
+  });
+
+  it('generates buildQuote response with total', () => {
+    const results = [{
+      tool: 'buildQuote' as const,
+      id: 'r3',
+      success: true,
+      data: { items: [{}], total: 4689 },
+    }];
+    const response = generateResponseFromToolResults(results);
+    expect(response).toContain('tilbudskladden');
+    expect(response).toContain('total');
+    expect(response).toContain('kr.');
+  });
+
+  it('generates handoff response', () => {
+    const results = [{
+      tool: 'handoff' as const,
+      id: 'r4',
+      success: true,
+      data: { reason: 'customer_request', summary: 'Test' },
+    }];
+    const response = generateResponseFromToolResults(results);
+    expect(response).toContain('overfører');
+  });
+
+  it('returns fallback for empty results', () => {
+    const response = generateResponseFromToolResults([]);
+    expect(response).toContain('forstod ikke helt');
+  });
+
+  it('includes error message for failed tool', () => {
+    const results = [{
+      tool: 'search' as const,
+      id: 'r5',
+      success: false,
+      error: 'DB timeout',
+    }];
+    const response = generateResponseFromToolResults(results);
+    expect(response).toContain('noe gikk galt');
+    expect(response).toContain('DB timeout');
+  });
+});
+
+describe('determineStatusFromTools', () => {
+  it('returns knowledge for faq', () => {
+    expect(determineStatusFromTools([{ tool: 'faq', id: '1', success: true }])).toBe('knowledge');
+  });
+
+  it('returns order_ready for buildQuote', () => {
+    expect(determineStatusFromTools([{ tool: 'buildQuote', id: '2', success: true }])).toBe('order_ready');
+  });
+
+  it('returns escalated for customer_request handoff', () => {
+    expect(determineStatusFromTools([{ tool: 'handoff', id: '3', success: true, data: { reason: 'customer_request' } }])).toBe('escalated');
+  });
+
+  it('returns clarification for equipment_unclear handoff', () => {
+    expect(determineStatusFromTools([{ tool: 'handoff', id: '4', success: true, data: { reason: 'equipment_unclear' } }])).toBe('clarification');
+  });
+
+  it('returns recommendation for successful search', () => {
+    expect(determineStatusFromTools([{ tool: 'search', id: '5', success: true, data: { searchResult: { ok: true } } }])).toBe('recommendation');
+  });
+
+  it('returns clarification for failed search', () => {
+    expect(determineStatusFromTools([{ tool: 'search', id: '6', success: false }])).toBe('clarification');
+  });
+
+  it('returns clarification for empty results', () => {
+    expect(determineStatusFromTools([])).toBe('clarification');
   });
 });

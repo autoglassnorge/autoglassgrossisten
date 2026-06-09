@@ -283,6 +283,8 @@ export interface OrdremottakerResponse {
   confidence: number;
   next_action?: string;
   proactive_suggestions?: ProactiveSuggestion[];
+  /** Tool execution results (Fase 3A) — included when tool-calling copilot was used */
+  tool_results?: ToolResult[];
 }
 
 export interface AiSession {

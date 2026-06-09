@@ -332,7 +332,7 @@ export default {
 
     // AI Ordremottaker
     if (path === "/api/ordremottaker" && request.method === "POST") {
-      return handleOrdremottaker(request, env);
+      return handleOrdremottaker(request, env, ctx);
     }
     if (path === "/api/ordremottaker/feedback" && request.method === "POST") {
       return handleOrdremottakerFeedback(request, env);

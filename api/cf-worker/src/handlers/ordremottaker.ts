@@ -18,6 +18,7 @@ import { decodeEurocode } from '../lib/eurocode-decoder';
 import { generateDialogueTurn, normalizeExtracted, determineDialogueState, type ExtractedFields } from '../lib/ordremottaker-llm-dialogue';
 import { searchFaq, looksLikeKnowledgeQuestion, isGreeting, buildGreetingResponse } from '../lib/ordremottaker-knowledge';
 import { findKtypeByVehicle, queryByKtype } from '../lib/ktype-family-lookup';
+import { routeTools, executeTool, generateResponseFromToolResults, determineStatusFromTools } from '../lib/professor-tools';
 
 type Candidate = Record<string, unknown> & { properties?: Record<string, unknown>; decoded_description?: string | null };
 
@@ -367,7 +368,7 @@ function mergeExtractedIntoAnswers(
   return { ...existing, ...normalized };
 }
 
-export async function handleOrdremottaker(request: Request, env: Env): Promise<Response> {
+export async function handleOrdremottaker(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   if (request.method !== 'POST') {
     return errorResponse('Kun POST støttet', 405);
   }
@@ -804,9 +805,55 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       candidates = filterByEquipment(candidates, equipmentAnswers);
     }
 
-    // ── C: Build response — Dual flow: LLM Dialogue Engine (primary) or rigid fallback ──
+    // ── C: Tool-Calling Copilot (Fase 3A) — opt-in, replaces LLM dialogue for actionable intents ──
+    let toolResults: import('../types').ToolResult[] | undefined;
+    let useToolCalling = false;
+
+    // Activate tool-calling when we have enough context to route to a tool
+    const canRoute =
+      (!!nerResult?.regnr || !!nerResult?.vin || (!!nerResult?.make && !!nerResult?.year)) ||
+      (nerResult?.intent === 'kunnskap' && !nerResult?.regnr && !nerResult?.vin) ||
+      (candidates.length > 0 && session.vehicle);
+
+    if (canRoute && !isGreeting(body.message)) {
+      const toolCalls = routeTools(nerResult || {}, body.message, {
+        vehicle: session.vehicle || undefined,
+        candidates: candidates as unknown as GlassRecord[],
+        dialogueState: session.dialogueState,
+      });
+
+      if (toolCalls.length > 0) {
+        useToolCalling = true;
+        toolResults = [];
+        for (const toolCall of toolCalls) {
+          const result = await executeTool(
+            toolCall,
+            env,
+            ctx,
+            {
+              vehicle: session.vehicle || undefined,
+              equipmentAnswers: { ...equipmentAnswers },
+              candidates: candidates as unknown as GlassRecord[],
+            }
+          );
+          toolResults.push(result);
+        }
+
+        // Build AI response from tool results
+        aiResponse = generateResponseFromToolResults(toolResults, {
+          vehicle: session.vehicle || undefined,
+          candidates: candidates as unknown as GlassRecord[],
+        });
+        status = determineStatusFromTools(toolResults);
+        nextAction = null;
+        console.log(`[Ordremottaker] Tool-calling used: ${toolResults.map((r) => `${r.tool}(${r.success ? 'OK' : 'FAIL'})`).join(', ')}`);
+      }
+    }
+
+    // ── D: Build response — Dual flow: LLM Dialogue Engine (primary) or rigid fallback ──
     let useLlmDialogue = false;
     let pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
+    if (!useToolCalling) {
 
     // If user explicitly chose "Annet", we need more info — don't try to match
     if (pos === 'annet') {
@@ -964,6 +1011,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
         nextAction = 'ask_vehicle_details';
       }
     }
+    }
 
     // Build position-based accessories
     pos = equipmentAnswers.position || nerResult?.position || extractPositionFromMessage(body.message);
@@ -1056,6 +1104,7 @@ export async function handleOrdremottaker(request: Request, env: Env): Promise<R
       confidence: confidence,
       next_action: nextAction || undefined,
       proactive_suggestions: proactiveSuggestions,
+      tool_results: toolResults,
     };
 
     return jsonResponse(response);
