@@ -516,6 +516,51 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 
 ---
 
+### Normaliserings-Audit: SVV↔D1 Model Name Mismatch (2026-06-09)
+**Bakgrunn:** VW Caravelle/Transporter-feilen (2026-06-08) avdekket et systemisk mønster: SVV sender ett modellnavn, D1 bruker et annet for samme kjøretøy → false negatives i `modelMatches()` og `queryByBrandAndYear()`.
+
+**Audit-metode:** Systematisk scan av `scoring.ts`, `search.ts`, `ktype-family-lookup.ts`, `brand.ts` + D1 `glass_catalog` queries for modellnavn per merke. Testet `modelMatches()` med 25 SVV→D1-par.
+
+**Funnet og fikset feil:**
+
+| # | Feil | SVV-navn | D1-navn | Produkter påvirket | Fiks |
+|---|---|---|---|---|---|
+| 1 | **Volvo mellomrom** | `XC60`, `S80`, `V70` | `XC 60`, `S 80`, `V 70` | 437 | `search.ts`: normaliser til D1-format + `scoring.ts`: regex-match på serie+tall |
+| 2 | **BMW/Mini merke** | `MINI` | `BMW` (Mini under BMW i D1) | 74 | `brand.ts`: `getBrandAliases()` returnerer nå `MINI`+`BMW` for kryss-søk |
+| 3 | **Mercedes W-koder** | `C-Klasse` | `SERIE W203` (ingen klasse i navnet) | 212 | `scoring.ts`: mapping-tabell `C-Klasse`→`[W203,W204,W205,W206]` + `search.ts`: ekstra W-kode hints |
+| 4 | **Generell bindestrek/mellomrom** | `3-serie`, `F-150`, `CX-5` | `3 SERIE`, `F150`, `CX 5` | ~1000+ | `scoring.ts`: `normalizeModelCode()` fjerner alle spaces/hyphens før substring-match |
+| 5 | **Ford F-serie** | `F-150`, `F-250` | `F150`, `F250` | ~50 | Dekket av generell normalisering (#4) |
+
+**Runde 2 — Dyp audit med subagenter (2026-06-09):**
+
+| # | Feil | SVV-navn | D1-navn | Produkter | Fiks |
+|---|---|---|---|---|---|
+| 6 | **VW T-generasjon** | `Transporter T5` | `Transporter T6` | ~50 | `scoring.ts`: eksplisitt `return false` når T-generasjoner er forskjellige |
+| 7 | **Volvo 700/900-serie** | `780` | `740_760-80 SERIE` | 88 | `scoring.ts`: range-parsing av Volvo kombinerte modellnavn |
+| 8 | **Mercedes GLE vs W167** | `GLE` | `SERIE W167` | 43 | `scoring.ts`: la til `"gle"` som nøkkel i mapping-tabellen |
+| 9 | **Mercedes G-Klasse vs GELANDEWAGEN** | `G-Klasse` | `GELANDEWAGEN` | ~15 | `scoring.ts`: spesiell håndtering for tysk navn |
+| 10 | **Mercedes CLK/CLS/SL/SLK W-koder** | `CLK` | `SERIE W208` (ikke C208) | ~100 | `scoring.ts`: utvidet mapping til å inkludere W-kodene D1 faktisk bruker |
+| 11 | **Manglende TRUCKS-aliases** | `Nissan` | `NISSAN TRUCKS` | ~350 | `brand.ts`: la til Nissan, Fiat, Renault, Mitsubishi, Mazda TRUCKS |
+| 12 | **USA CARS reverse alias** | `Chevrolet` | `USA CARS` | ~515 | `brand.ts`: `getBrandAliases()` kryss-søker USA CARS ↔ amerikanske merker |
+| 13 | **Generell SQL-pre-filter degradering** | `CX-5` | `CX 5` | ~1000+ | `search.ts`: `hintVariants()` genererer 6 varianter per modell for SQL `LIKE` |
+| 14 | **A3↔A30 substring-felle** | `A3` | `A30` | — | `scoring.ts`: guard som avviser når kort kode + siffer fortsetter |
+
+**Verifisering:**
+- Enhetstest: **68/68 tester passert** (scoring.test.ts 52 + brand.test.ts 16)
+- Tester funnet 14 reelle feil, alle fikset
+- Deploy: `04abe77e-602d-486e-89f1-2724d1e0a16d`
+- Regression: eksisterende regnr (SU18018, BR77770, HB82058, BS78335) fungerer uendret
+
+**Lærdom:**
+1. D1 `glass_catalog` modellnavn følger leverandør-konvensjoner (auto-glass.no), ikke SVV-konvensjoner.
+2. `modelMatches()` bør ha merke-spesifikk logikk for populære modellfamilier (VW T-familie, Volvo XC/S/V/C/700/900, Mercedes W-serie).
+3. SQL `LIKE` pre-filtering er den svakeste leddet — generer ALLTID multiple hint-varianter (no-spaces, no-hyphens, space↔hyphen).
+4. Substring-match i `modelMatches()` er farlig for korte koder (A3↔A30). Guard med siffer-grensesjekk.
+5. Brand-alias-tabellen må ha både TRUCKS-varianter og reverse-mapping for konsoliderte merker (USA CARS).
+6. `tecdoc-resolver.ts` har 50+ `MODEL_ALIASES` som er isolert fra hovedsøket — bør konsolideres.
+
+---
+
 ### Wrangler/GitHub Optimalisering (2026-06-05)
 **Problem:** Deploy-pipeline brukte `npm install -g wrangler` (tregt, ukontrollert versjon) og `wrangler secret put` i hver deploy (30-40s ekstra, rate limiting).
 **Løsning:**
@@ -532,5 +577,5 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 
 ---
 
-**Sist oppdatert:** 2026-06-08  
-**Versjon:** 3.0 (+kType Family, Ordremottaker LLM-integrasjon)
+**Sist oppdatert:** 2026-06-09  
+**Versjon:** 3.2 (+Dyp normaliserings-audit v2, 14 feil funnet og fikset, 68 enhetstester, TRUCKS+USA CARS aliases, generell hint-variant-generering)

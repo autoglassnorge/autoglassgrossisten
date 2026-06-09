@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  lint-and-typecheck:
+  worker-typecheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,15 +31,44 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
 
-      - name: Installer avhengigheter
+      - name: Installer Worker-avhengigheter
         run: cd api/cf-worker && npm ci
 
-      - name: TypeScript sjekk
+      - name: Worker TypeScript sjekk
         working-directory: api/cf-worker
         run: npx tsc --noEmit
 
+  frontend-build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            frontend/node_modules
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
+      - name: Installer frontend-avhengigheter
+        run: cd frontend && npm ci
+
+      - name: Frontend build
+        working-directory: frontend
+        run: npm run build
+
+      - name: Frontend test
+        working-directory: frontend
+        run: npm test -- --run
+
   smoke-test:
-    needs: lint-and-typecheck
+    needs: [worker-typecheck, frontend-build-test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

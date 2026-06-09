@@ -1,0 +1,118 @@
+name: Daily SVV Bruteforce + kType Enrichment
+
+# Kjører daglig kl 02:00 CET (00:00 UTC) — før daily-scrape
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Antall SVV calls'
+        required: true
+        default: '5000'
+        type: string
+
+env:
+  NODE_VERSION: "22"
+
+permissions:
+  contents: read
+
+jobs:
+  svv-bruteforce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
+      - name: Installer avhengigheter
+        run: npm ci
+
+      - name: 🚗 Kjør SVV bruteforce
+        run: node scripts/norwegian-regnr-bruteforce.mjs
+        env:
+          SVV_API_KEY: ${{ secrets.SVV_API_KEY }}
+          MAX_PER_RUN: ${{ github.event.inputs.batch_size || '5000' }}
+        timeout-minutes: 30
+
+      - name: 🔍 Fuzzy match mot kType registry
+        run: node scripts/process-bruteforce-results.mjs
+
+      - name: 📊 Generer rapport
+        run: |
+          echo "## SVV Bruteforce Rapport $(date +%Y-%m-%d)" > data/finn-no-regnr/svv-bruteforce-report.md
+          echo "" >> data/finn-no-regnr/svv-bruteforce-report.md
+          node -e "
+          const fs = require('fs');
+          try {
+            const r = JSON.parse(fs.readFileSync('data/tecdoc-import/bruteforce-process-report.json'));
+            console.log(\`- Totalt prosessert: \${r.total_results}\`);
+            console.log(\`- Matched: \${r.matched} (\${(r.success_rate*100).toFixed(1)}%)\`);
+            console.log(\`- Unike kTypes: \${r.unique_ktypes}\`);
+            console.log(\`- Generert: \${r.generated_at}\`);
+          } catch(e) {
+            console.log('Ingen rapport funnet');
+          }
+          " >> data/finn-no-regnr/svv-bruteforce-report.md
+
+      - name: 💾 Last opp artefakter
+        uses: actions/upload-artifact@v4
+        with:
+          name: svv-bruteforce-${{ github.run_id }}
+          path: |
+            data/finn-no-regnr/regnr-bruteforce-checkpoint.json
+            data/finn-no-regnr/regnr-bruteforce-results.ndjson
+            data/tecdoc-import/bruteforce-ground-truth-inserts.sql
+            data/tecdoc-import/bruteforce-process-report.json
+            data/finn-no-regnr/svv-bruteforce-report.md
+          retention-days: 30
+
+      - name: 📝 Opprett PR med resultater
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "📊 Daglig SVV bruteforce $(date +%Y-%m-%d)"
+          title: "📊 SVV Bruteforce: $(date +%Y-%m-%d)"
+          body: |
+            Auto-generert SQL for ground_truth inserts fra SVV bruteforce.
+
+            ## Instruksjoner
+            1. Review SQL-filen: `data/tecdoc-import/bruteforce-ground-truth-inserts.sql`
+            2. Kjør: `wrangler d1 execute glass-catalog-db --remote --file=...`
+            3. Merge denne PR-en etter import
+          branch: svv-bruteforce-${{ github.run_id }}
+          add-paths: |
+            data/finn-no-regnr/regnr-bruteforce-checkpoint.json
+            data/finn-no-regnr/regnr-bruteforce-results.ndjson
+            data/tecdoc-import/bruteforce-ground-truth-inserts.sql
+            data/tecdoc-import/bruteforce-process-report.json
+            data/finn-no-regnr/svv-bruteforce-report.md
+
+  notify-on-failure:
+    needs: svv-bruteforce
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 SVV Bruteforce feilet — ${new Date().toISOString().split('T')[0]}`,
+              body: `SVV bruteforce workflow feilet. Sjekk loggene for detaljer.`,
+              labels: ['bug', 'data-pipeline', 'automated', 'svv']
+            });

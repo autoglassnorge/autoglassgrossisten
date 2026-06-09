@@ -52,7 +52,9 @@
     "catalog:enrich:eurocode": "node scripts/merge-eurocode-enrichment.mjs",
     "catalog:sync:d1": "node scripts/sync-catalog-to-d1.mjs --local",
     "catalog:sync:d1:sql": "node scripts/sync-catalog-to-d1.mjs --sql /tmp/d1-sync",
-    "eurocode:pipeline": "npm run catalog:enrich:eurocode && npm run catalog:sync:d1"
+    "eurocode:pipeline": "npm run catalog:enrich:eurocode && npm run catalog:sync:d1",
+    "fuzzy:svv-tecdoc": "node scripts/fuzzy-match-svv-tecdoc.mjs",
+    "fuzzy:svv-tecdoc:sql": "node scripts/fuzzy-match-svv-tecdoc.mjs > data/fuzzy-match-output.sql"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
