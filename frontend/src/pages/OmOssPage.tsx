@@ -7,7 +7,7 @@ export default function OmOssPage() {
     <div className="min-h-screen bg-white">
       <PageMeta
         title="Om oss — Autoglass AS"
-        description="Norges ledende bilglass-grossist siden 1992. 130 000+ ruter på lager i Oslo. Leverer til 500+ verksteder i Norge, Sverige og Europa."
+        description="Norges ledende bilglass-grossist siden 1992. 133 000+ glass på lager i Oslo. Leverer til 500+ verksteder i Norge, Sverige og Europa."
         canonicalPath="/om-oss"
       />
 
@@ -26,7 +26,7 @@ export default function OmOssPage() {
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-autoglass-blue mb-1">130 000+</div>
+              <div className="text-3xl font-bold text-autoglass-blue mb-1">133 000+</div>
               <div className="text-sm text-gray-600">Ruter på lager</div>
             </div>
             <div>
@@ -67,7 +67,7 @@ export default function OmOssPage() {
                 <h2 className="text-xl font-bold">Hovedlager i Oslo</h2>
               </div>
               <p className="text-gray-600 mb-4">
-                Vårt hovedlager i Oslo har en lagerbeholdning på over 130 000 ruter. 
+                Vårt hovedlager i Oslo har en lagerbeholdning på over 133 000 glass. 
                 Dette gjør oss i stand til å levere bilglass til over 500 verksteder 
                 med kort varsel — ofte neste dag.
               </p>

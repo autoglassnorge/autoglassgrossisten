@@ -21,8 +21,8 @@ export default function FlereFrontruterPage() {
   return (
     <>
       <PageMeta title={PAGE_TITLE} description={PAGE_DESC} canonicalPath={CANONICAL} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'Article', headline: PAGE_TITLE, description: PAGE_DESC, datePublished: '2025-05-28', dateModified: '2025-05-28', author: { '@type': 'Organization', name: 'Autoglass AS' }, publisher: { '@type': 'Organization', name: 'Autoglass AS', logo: { '@type': 'ImageObject', url: 'https://autoglass-frontend.pages.dev/logo.png' } }, mainEntityOfPage: { '@type': 'WebPage', '@id': `https://autoglass-frontend.pages.dev${CANONICAL}` } }} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Forsiden', item: 'https://autoglass-frontend.pages.dev/' }, { '@type': 'ListItem', position: 2, name: 'Bilglassguide', item: 'https://autoglass-frontend.pages.dev/bilglassguide' }, { '@type': 'ListItem', position: 3, name: 'Hvorfor samme modell kan ha flere frontruter', item: `https://autoglass-frontend.pages.dev${CANONICAL}` }] }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'Article', headline: PAGE_TITLE, description: PAGE_DESC, datePublished: '2025-05-28', dateModified: '2025-05-28', author: { '@type': 'Organization', name: 'Autoglass AS' }, publisher: { '@type': 'Organization', name: 'Autoglass AS', logo: { '@type': 'ImageObject', url: 'https://autoglass.finnbilglass.no/logo.png' } }, mainEntityOfPage: { '@type': 'WebPage', '@id': `https://autoglass.finnbilglass.no${CANONICAL}` } }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Forsiden', item: 'https://autoglass.finnbilglass.no/' }, { '@type': 'ListItem', position: 2, name: 'Bilglassguide', item: 'https://autoglass.finnbilglass.no/bilglassguide' }, { '@type': 'ListItem', position: 3, name: 'Hvorfor samme modell kan ha flere frontruter', item: `https://autoglass.finnbilglass.no${CANONICAL}` }] }} />
 
       <div className="min-h-screen bg-white">
         <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-autoglass-blue text-white">
@@ -35,7 +35,7 @@ export default function FlereFrontruterPage() {
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">Hvorfor samme modell kan ha flere frontruter</h1>
             <p className="text-lg text-slate-200 max-w-2xl leading-relaxed">
               Det er ikke en feil — det er design. Samme bilmodell kan ha opptil 15 ulike frontruter.
-              Her er de faktiske årsakene, forklart med data fra vår katalog på 37 500+ produkter.
+              Her er de faktiske årsakene, forklart med data fra vår katalog på 27 000+ varianter.
             </p>
           </div>
         </section>

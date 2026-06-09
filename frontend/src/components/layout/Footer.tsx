@@ -13,7 +13,7 @@ export function Footer() {
               <span className="text-lg font-bold">Autoglass AS</span>
             </div>
             <p className="text-sm text-gray-600">
-              Norges største bilglass-grossist. 130 000+ ruter på lager. Levering neste dag til over 500 verksteder.
+              Norges største bilglass-grossist. 133 000+ glass på lager. Levering neste dag til over 500 verksteder.
             </p>
           </div>
 

@@ -152,6 +152,9 @@ jobs:
 
       - name: Bygg React/Vite-frontend
         working-directory: frontend
+        env:
+          VITE_FF_AI_FIRST_HERO: 'true'
+          VITE_SITE_URL: https://autoglass.finnbilglass.no
         run: npm run build
 
       - name: Setup _redirects for React SPA
@@ -197,18 +200,18 @@ jobs:
 
       - name: React SPA check (Pages)
         run: |
-          curl -sf https://autoglass-frontend.pages.dev/ | grep -q "<div id=\"root\">" || exit 1
+          curl -sf https://autoglass.finnbilglass.no/ | grep -q "<div id=\"root\">" || exit 1
           echo "✅ React SPA serving OK"
 
       - name: React routing check
         run: |
-          curl -sf https://autoglass-frontend.pages.dev/sok | grep -q "<div id=\"root\">" || exit 1
-          curl -sf https://autoglass-frontend.pages.dev/bla | grep -q "<div id=\"root\">" || exit 1
+          curl -sf https://autoglass.finnbilglass.no/sok | grep -q "<div id=\"root\">" || exit 1
+          curl -sf https://autoglass.finnbilglass.no/bla | grep -q "<div id=\"root\">" || exit 1
           echo "✅ React routing OK"
 
       - name: API proxy via Pages sjekk
         run: |
-          curl -sfL https://autoglass-frontend.pages.dev/api/health | jq -e '.status == "ok"' || exit 1
+          curl -sfL https://autoglass.finnbilglass.no/api/health | jq -e '.status == "ok"' || exit 1
           echo "✅ API proxy via Pages fungerer"
 
       - name: API catalog smoke test

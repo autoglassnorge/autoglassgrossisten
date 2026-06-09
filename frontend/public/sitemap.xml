@@ -4,65 +4,65 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://autoglass-frontend.pages.dev/</loc>
+    <loc>https://autoglass.finnbilglass.no/</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass-frontend.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://autoglass-frontend.pages.dev/?lang=sv"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://autoglass-frontend.pages.dev/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass.finnbilglass.no/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://autoglass.finnbilglass.no/?lang=sv"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://autoglass.finnbilglass.no/?lang=en"/>
   </url>
 
   <!-- Search -->
   <url>
-    <loc>https://autoglass-frontend.pages.dev/sok</loc>
+    <loc>https://autoglass.finnbilglass.no/sok</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass-frontend.pages.dev/sok"/>
-    <xhtml:link rel="alternate" hreflang="sv" href="https://autoglass-frontend.pages.dev/sok?lang=sv"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://autoglass-frontend.pages.dev/sok?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass.finnbilglass.no/sok"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://autoglass.finnbilglass.no/sok?lang=sv"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://autoglass.finnbilglass.no/sok?lang=en"/>
   </url>
 
   <!-- Browse -->
   <url>
-    <loc>https://autoglass-frontend.pages.dev/bla</loc>
+    <loc>https://autoglass.finnbilglass.no/bla</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass-frontend.pages.dev/bla"/>
+    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass.finnbilglass.no/bla"/>
   </url>
 
   <!-- Glass Guide -->
   <url>
-    <loc>https://autoglass-frontend.pages.dev/bilglassguide</loc>
+    <loc>https://autoglass.finnbilglass.no/bilglassguide</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass-frontend.pages.dev/bilglassguide"/>
+    <xhtml:link rel="alternate" hreflang="no" href="https://autoglass.finnbilglass.no/bilglassguide"/>
   </url>
 
   <!-- Guide Subpages -->
   <url>
-    <loc>https://autoglass-frontend.pages.dev/bilglassguide/frontrute</loc>
+    <loc>https://autoglass.finnbilglass.no/bilglassguide/frontrute</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://autoglass-frontend.pages.dev/bilglassguide/sideglass</loc>
+    <loc>https://autoglass.finnbilglass.no/bilglassguide/sideglass</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://autoglass-frontend.pages.dev/bilglassguide/bakglass</loc>
+    <loc>https://autoglass.finnbilglass.no/bilglassguide/bakglass</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://autoglass-frontend.pages.dev/bilglassguide/adas-kalibrering</loc>
+    <loc>https://autoglass.finnbilglass.no/bilglassguide/adas-kalibrering</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -70,7 +70,7 @@
 
   <!-- Cart/Checkout -->
   <url>
-    <loc>https://autoglass-frontend.pages.dev/kasse</loc>
+    <loc>https://autoglass.finnbilglass.no/kasse</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -78,13 +78,13 @@
 
   <!-- Static Pages -->
   <url>
-    <loc>https://autoglass-frontend.pages.dev/bli-kunde</loc>
+    <loc>https://autoglass.finnbilglass.no/bli-kunde</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://autoglass-frontend.pages.dev/kundeservice</loc>
+    <loc>https://autoglass.finnbilglass.no/kundeservice</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

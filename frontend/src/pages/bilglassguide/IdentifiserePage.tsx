@@ -12,7 +12,7 @@ const METHODS = [
   {
     icon: <Car className="h-5 w-5 text-autoglass-blue" />,
     title: 'Registreringsnummer-oppslag',
-    desc: 'Den mest pålitelige metoden. SVV Enkeltoppslag gir kjøretøyets merke, modell, årsmodell, typegodkjenning og VIN. Kombinert med vår D1-database på 37 500+ produkter matcher vi eksakt glass med utstyrsnivå.',
+    desc: 'Den mest pålitelige metoden. SVV Enkeltoppslag gir kjøretøyets merke, modell, årsmodell, typegodkjenning og VIN. Kombinert med vår D1-database på 27 000+ varianter matcher vi eksakt glass med utstyrsnivå.',
     pros: ['Høyest treffsikkerhet', 'Automatisk utstyrsidentifisering', 'Ingen manuell tolking'],
     cons: ['Krever tilgang til SVV-registeret', 'Avregistrerte kjøretøy mangler'],
   },
@@ -36,8 +36,8 @@ export default function IdentifiserePage() {
   return (
     <>
       <PageMeta title={PAGE_TITLE} description={PAGE_DESC} canonicalPath={CANONICAL} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'Article', headline: PAGE_TITLE, description: PAGE_DESC, datePublished: '2025-05-28', dateModified: '2025-05-28', author: { '@type': 'Organization', name: 'Autoglass AS' }, publisher: { '@type': 'Organization', name: 'Autoglass AS', logo: { '@type': 'ImageObject', url: 'https://autoglass-frontend.pages.dev/logo.png' } }, mainEntityOfPage: { '@type': 'WebPage', '@id': `https://autoglass-frontend.pages.dev${CANONICAL}` } }} />
-      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Forsiden', item: 'https://autoglass-frontend.pages.dev/' }, { '@type': 'ListItem', position: 2, name: 'Bilglassguide', item: 'https://autoglass-frontend.pages.dev/bilglassguide' }, { '@type': 'ListItem', position: 3, name: 'Hvordan identifisere riktig bilglass', item: `https://autoglass-frontend.pages.dev${CANONICAL}` }] }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'Article', headline: PAGE_TITLE, description: PAGE_DESC, datePublished: '2025-05-28', dateModified: '2025-05-28', author: { '@type': 'Organization', name: 'Autoglass AS' }, publisher: { '@type': 'Organization', name: 'Autoglass AS', logo: { '@type': 'ImageObject', url: 'https://autoglass.finnbilglass.no/logo.png' } }, mainEntityOfPage: { '@type': 'WebPage', '@id': `https://autoglass.finnbilglass.no${CANONICAL}` } }} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Forsiden', item: 'https://autoglass.finnbilglass.no/' }, { '@type': 'ListItem', position: 2, name: 'Bilglassguide', item: 'https://autoglass.finnbilglass.no/bilglassguide' }, { '@type': 'ListItem', position: 3, name: 'Hvordan identifisere riktig bilglass', item: `https://autoglass.finnbilglass.no${CANONICAL}` }] }} />
 
       <div className="min-h-screen bg-white">
         <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-autoglass-blue text-white">
@@ -131,7 +131,7 @@ export default function IdentifiserePage() {
         <section className="py-12 sm:py-16 bg-slate-50">
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Prøv vår datadrevne matching</h2>
-            <p className="text-gray-600 mb-6">Søk med registreringsnummer — vi kombinerer SVV-data, eurokode, typeCode og 37 500+ produkter for å finne eksakt glass.</p>
+            <p className="text-gray-600 mb-6">Søk med registreringsnummer — vi kombinerer SVV-data, eurokode, typeCode og 27 000+ varianter for å finne eksakt glass.</p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link to="/sok"><Button size="lg" className="gap-2 bg-autoglass-blue text-white hover:bg-autoglass-blue/90"><Search className="h-4 w-4" /> Søk med reg.nr.</Button></Link>
               <Link to="/bilglassguide"><Button size="lg" variant="outline" className="gap-2"><ArrowRight className="h-4 w-4" /> Tilbake til guiden</Button></Link>

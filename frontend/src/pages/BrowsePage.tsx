@@ -266,7 +266,7 @@ export default function BrowsePage() {
       <>
         <PageMeta
           title="Bla i katalogen — merke og modell"
-          description="Finn bilglass etter merke, modell og årsmodell. 37 500+ produkter på lager."
+          description="Finn bilglass etter merke, modell og årsmodell. 27 000+ varianter på lager."
           canonicalPath="/bla"
         />
       <div className="mx-auto max-w-7xl px-3 py-20 flex items-center justify-center">
@@ -279,7 +279,7 @@ export default function BrowsePage() {
     <>
       <PageMeta
         title="Bla i katalogen — merke og modell"
-        description="Finn bilglass etter merke, modell og årsmodell. 37 500+ produkter på lager."
+        description="Finn bilglass etter merke, modell og årsmodell. 27 000+ varianter på lager."
         canonicalPath="/bla"
       />
       

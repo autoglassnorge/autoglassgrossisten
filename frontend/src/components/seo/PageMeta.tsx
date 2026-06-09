@@ -5,7 +5,7 @@ import { useEffect } from 'react';
    Minste robuste løsning uten react-helmet dependency.
    ======================================================================== */
 
-const SITE_URL = 'https://autoglass-frontend.pages.dev';
+const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://autoglass.finnbilglass.no';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/logo.png`;
 
 interface PageMetaProps {

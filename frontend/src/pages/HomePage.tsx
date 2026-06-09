@@ -82,7 +82,7 @@ export default function HomePage() {
         title="Autoglass AS — B2B grossist av bilglass i Norge"
         description="Norges største grossist av bilglass. 133 000+ glass på lager, 27 000+ forskjellige varianter: frontruter, bakruter, sidedørruter, takvinduer. Neste-dag-levering, ADAS-kompatibilitet og OEM-kvalitet. Søk med registreringsnummer."
         canonicalPath="/"
-        ogImage="https://autoglass-frontend.pages.dev/logo.png"
+        ogImage="https://autoglass.finnbilglass.no/logo.png"
         ogType="website"
         twitterCard="summary_large_image"
       />
@@ -92,27 +92,27 @@ export default function HomePage() {
           '@graph': [
             {
               '@type': 'Organization',
-              '@id': 'https://autoglass-frontend.pages.dev/#organization',
+              '@id': 'https://autoglass.finnbilglass.no/#organization',
               name: 'Autoglass AS',
-              url: 'https://autoglass-frontend.pages.dev/',
+              url: 'https://autoglass.finnbilglass.no/',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://autoglass-frontend.pages.dev/logo.png',
+                url: 'https://autoglass.finnbilglass.no/logo.png',
               },
               description: 'Norges største B2B-grossist av bilglass.',
               sameAs: [],
             },
             {
               '@type': 'WebSite',
-              '@id': 'https://autoglass-frontend.pages.dev/#website',
-              url: 'https://autoglass-frontend.pages.dev/',
+              '@id': 'https://autoglass.finnbilglass.no/#website',
+              url: 'https://autoglass.finnbilglass.no/',
               name: 'Autoglass AS',
-              publisher: { '@id': 'https://autoglass-frontend.pages.dev/#organization' },
+              publisher: { '@id': 'https://autoglass.finnbilglass.no/#organization' },
               potentialAction: {
                 '@type': 'SearchAction',
                 target: {
                   '@type': 'EntryPoint',
-                  urlTemplate: 'https://autoglass-frontend.pages.dev/sok?regnr={search_term_string}',
+                  urlTemplate: 'https://autoglass.finnbilglass.no/sok?regnr={search_term_string}',
                 },
                 'query-input': 'required name=search_term_string',
               },
