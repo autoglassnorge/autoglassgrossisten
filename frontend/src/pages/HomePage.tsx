@@ -78,7 +78,7 @@ export default function HomePage() {
     <>
       <PageMeta
         title="Autoglass AS — B2B grossist av bilglass i Norge"
-        description="Norges største grossist av bilglass. 27 000+ produkter: frontruter, bakruter, sidedørruter, takvinduer. Neste-dag-levering, ADAS-kompatibilitet og OEM-kvalitet. Søk med registreringsnummer."
+        description="Norges største grossist av bilglass. 133 000+ glass på lager, 27 000+ forskjellige varianter: frontruter, bakruter, sidedørruter, takvinduer. Neste-dag-levering, ADAS-kompatibilitet og OEM-kvalitet. Søk med registreringsnummer."
         canonicalPath="/"
         ogImage="https://autoglass-frontend.pages.dev/logo.png"
         ogType="website"

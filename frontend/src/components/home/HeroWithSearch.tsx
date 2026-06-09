@@ -7,6 +7,7 @@ import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, Clock, X, Car, MessageCircle } from 'lucide-react';
 import { useChatStore } from '@/stores/chatStore';
+import { BUSINESS_METRICS, formatCompact, formatFull } from '@/constants/businessMetrics';
 
 const RECENT_SEARCHES_KEY = 'ag_recent_searches';
 
@@ -82,7 +83,8 @@ export function HeroWithSearch() {
 
         <p className="text-center text-base sm:text-lg text-carbon-300 mb-10 max-w-xl mx-auto">
           Søk med registreringsnummer for å finne kompatibelt bilglass.
-          27 000+ produkter på lager fra ledende produsenter.
+          {formatFull(BUSINESS_METRICS.GLASS_IN_STOCK)}+ glass på lager.{' '}
+          {formatFull(BUSINESS_METRICS.VARIANTS)}+ forskjellige varianter.
         </p>
 
         {/* Search form */}
@@ -161,15 +163,19 @@ export function HeroWithSearch() {
         {/* Quick stats */}
         <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-10 text-center">
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">27k+</div>
-            <div className="text-sm text-carbon-400">Produkter</div>
+            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">{formatCompact(BUSINESS_METRICS.GLASS_IN_STOCK)}+</div>
+            <div className="text-sm text-carbon-400">Glass på lager</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">82</div>
+            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">{formatCompact(BUSINESS_METRICS.VARIANTS)}+</div>
+            <div className="text-sm text-carbon-400">Varianter</div>
+          </div>
+          <div>
+            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">{BUSINESS_METRICS.BRANDS}</div>
             <div className="text-sm text-carbon-400">Merker</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">24t</div>
+            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">{BUSINESS_METRICS.DELIVERY_HOURS}t</div>
             <div className="text-sm text-carbon-400">Levering</div>
           </div>
         </div>

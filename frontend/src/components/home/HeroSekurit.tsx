@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Car, ScanLine, Sparkles } from 'lucide-react';
 import { HeroVideo } from './HeroVideo';
 import { HeroSearch } from './HeroSearch';
+import { BUSINESS_METRICS, formatCompact, formatFull } from '@/constants/businessMetrics';
 
 /**
  * HeroSekurit - Inspirert av Sekurit Service design
@@ -52,7 +53,8 @@ export function HeroSekurit() {
 
         <p className="text-center text-lg text-carbon-300 mb-10 max-w-2xl mx-auto">
           Søk med registreringsnummer for å finde kompatibelt bilglass.
-          27 000+ produkter på lager.
+          {formatFull(BUSINESS_METRICS.GLASS_IN_STOCK)}+ glass på lager.{' '}
+          {formatFull(BUSINESS_METRICS.VARIANTS)}+ forskjellige varianter.
         </p>
 
         {/* Search mode toggle */}
@@ -124,15 +126,19 @@ export function HeroSekurit() {
         {/* Quick stats */}
         <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mt-10 text-center">
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">27k+</div>
-            <div className="text-sm text-carbon-400">Produkter</div>
+            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">{formatCompact(BUSINESS_METRICS.GLASS_IN_STOCK)}+</div>
+            <div className="text-sm text-carbon-400">Glass på lager</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">88</div>
+            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">{formatCompact(BUSINESS_METRICS.VARIANTS)}+</div>
+            <div className="text-sm text-carbon-400">Varianter</div>
+          </div>
+          <div>
+            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">{BUSINESS_METRICS.BRANDS}</div>
             <div className="text-sm text-carbon-400">Merker</div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">24t</div>
+            <div className="text-2xl sm:text-3xl font-bold text-glass-cyan">{BUSINESS_METRICS.DELIVERY_HOURS}t</div>
             <div className="text-sm text-carbon-400">Levering</div>
           </div>
         </div>

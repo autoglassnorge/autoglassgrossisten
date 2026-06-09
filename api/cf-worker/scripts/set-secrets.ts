@@ -31,8 +31,13 @@ async function main() {
   }
 
   // Set SVV API Key (open API, NOT Maskinporten)
-  // Key: a578e3c7-f27b-4b73-8938-af26edd89d68
-  await setSecret("SVV_API_KEY", "a578e3c7-f27b-4b73-8938-af26edd89d68");
+  // NEVER hardcode secrets — set via environment or wrangler secret put
+  const svvApiKey = process.env.SVV_API_KEY;
+  if (!svvApiKey) {
+    console.error("❌ SVV_API_KEY environment variable is required");
+    process.exit(1);
+  }
+  await setSecret("SVV_API_KEY", svvApiKey);
 }
 
 main().catch(console.error);

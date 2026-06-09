@@ -4,14 +4,15 @@
  */
 
 import { ShieldCheck, Truck, Clock, Headphones } from 'lucide-react';
+import { BUSINESS_METRICS, formatFull } from '@/constants/businessMetrics';
 
 const POINTS = [
   {
     icon: ShieldCheck,
     title: 'OEM Kvalitet',
     description: 'Originale glass fra Pilkington, Sekurit, PGW og Glavista. Livstidsgaranti mot produksjonsfeil.',
-    stat: '27 000+',
-    statLabel: 'produkter',
+    stat: `${formatFull(BUSINESS_METRICS.VARIANTS)}+`,
+    statLabel: 'varianter',
   },
   {
     icon: Truck,
