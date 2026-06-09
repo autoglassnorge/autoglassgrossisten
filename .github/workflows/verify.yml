@@ -38,6 +38,31 @@ jobs:
         working-directory: api/cf-worker
         run: npx tsc --noEmit
 
+  worker-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            api/cf-worker/node_modules
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('api/cf-worker/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
+      - name: Installer Worker-avhengigheter
+        run: cd api/cf-worker && npm ci
+
+      - name: Worker tester
+        working-directory: api/cf-worker
+        run: npm test
+
   frontend-build-test:
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +93,7 @@ jobs:
         run: npm test -- --run
 
   smoke-test:
-    needs: [worker-typecheck, frontend-build-test]
+    needs: [worker-typecheck, worker-test, frontend-build-test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

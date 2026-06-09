@@ -340,7 +340,7 @@ export default {
 
     // Unified search (regnr / VIN / eurocode / OEM / SKU / text)
     if (path === "/api/search" && request.method === "POST") {
-      return handleUnifiedSearch(request, env);
+      return handleUnifiedSearch(request, env, ctx);
     }
 
     return errorResponse("Ukjent endepunkt", 404);

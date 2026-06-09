@@ -42,25 +42,33 @@ function normalizeForType(raw: string, type: InputType): string {
   }
 }
 
-/** Minimal ExecutionContext stub for calling handleVinLookup without a real ctx. */
-function createMockExecutionContext(): ExecutionContext {
-  return {
-    waitUntil: (_promise: Promise<unknown>): void => {
-      /* no-op — unified search does not background-enrich */
-    },
-    passThroughOnException: (): void => {
-      /* no-op */
-    },
-  } as unknown as ExecutionContext;
-}
 
-/** Build a successful catalog-lookup UnifiedSearchResponse. */
+
+/** Build a catalog-lookup UnifiedSearchResponse (handles 0 hits gracefully). */
 function buildCatalogResponse(
   rawInput: string,
   detectedType: InputType,
   normalized: string,
   records: GlassRecord[]
 ): UnifiedSearchResponse {
+  if (records.length === 0) {
+    return {
+      ok: true,
+      input: { raw: rawInput, detectedType, normalized },
+      results: [],
+      confidence: {
+        level: "none",
+        score: 0,
+        layer: 99,
+        reasons: ["Ingen treff i katalogen for denne identifikatoren"],
+      },
+      nextActions: [
+        { action: "search_catalog", label: "Søk i katalog" },
+        { action: "ask_professor", label: "Spør Professor Autoglass" },
+      ],
+    };
+  }
+
   return {
     ok: true,
     input: { raw: rawInput, detectedType, normalized },
@@ -361,7 +369,8 @@ async function buildVinResponse(
 
 export async function handleUnifiedSearch(
   request: Request,
-  env: Env
+  env: Env,
+  ctx: ExecutionContext
 ): Promise<Response> {
   try {
     let body: unknown;
@@ -422,7 +431,7 @@ export async function handleUnifiedSearch(
         const vinResponse = await handleVinLookup(
           syntheticRequest,
           env,
-          createMockExecutionContext()
+          ctx
         );
         const unified = await buildVinResponse(
           rawInput,
