@@ -18,7 +18,7 @@ import { decodeEurocode } from '../lib/eurocode-decoder';
 import { generateDialogueTurn, normalizeExtracted, determineDialogueState, type ExtractedFields } from '../lib/ordremottaker-llm-dialogue';
 import { searchFaq, looksLikeKnowledgeQuestion, isGreeting, buildGreetingResponse } from '../lib/ordremottaker-knowledge';
 import { findKtypeByVehicle, queryByKtype } from '../lib/ktype-family-lookup';
-import { routeTools, executeTool, generateResponseFromToolResults, determineStatusFromTools } from '../lib/professor-tools';
+import { routeTools, executeTool, generateResponseFromToolResults, determineStatusFromTools, synthesizeSearchToolResult } from '../lib/professor-tools';
 
 type Candidate = Record<string, unknown> & { properties?: Record<string, unknown>; decoded_description?: string | null };
 
@@ -809,9 +809,12 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
     let toolResults: import('../types').ToolResult[] | undefined;
     let useToolCalling = false;
 
-    // Activate tool-calling when we have enough context to route to a tool
+    // Activate tool-calling when we have enough context to route to a tool.
+    // NOTE: make/model/year does NOT activate search-tool here because
+    // /api/search text-input is still a placeholder. Existing ordremottaker
+    // search (DB query) is source of truth for make/year.
     const canRoute =
-      (!!nerResult?.regnr || !!nerResult?.vin || (!!nerResult?.make && !!nerResult?.year)) ||
+      (!!nerResult?.regnr || !!nerResult?.vin) ||
       (nerResult?.intent === 'kunnskap' && !nerResult?.regnr && !nerResult?.vin) ||
       (candidates.length > 0 && session.vehicle);
 
@@ -826,22 +829,35 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
         useToolCalling = true;
         toolResults = [];
         for (const toolCall of toolCalls) {
-          const result = await executeTool(
-            toolCall,
-            env,
-            ctx,
-            {
-              vehicle: session.vehicle || undefined,
-              equipmentAnswers: { ...equipmentAnswers },
-              candidates: candidates as unknown as GlassRecord[],
-            }
-          );
+          let result: import('../types').ToolResult;
+          if (toolCall.tool === 'search') {
+            // Synthesize search result from existing ordremottaker data
+            // to avoid double lookup (regnr already searched above)
+            result = synthesizeSearchToolResult(
+              toolCall,
+              candidates as unknown as GlassRecord[],
+              vehicleInfo,
+              confidence
+            );
+          } else {
+            result = await executeTool(
+              toolCall,
+              env,
+              ctx,
+              {
+                vehicle: session.vehicle || undefined,
+                equipmentAnswers: { ...equipmentAnswers },
+                candidates: candidates as unknown as GlassRecord[],
+              }
+            );
+          }
           toolResults.push(result);
         }
 
-        // Build AI response from tool results
+        // Build AI response from tool results — use vehicleInfo (live search result)
+        // not just session.vehicle, so first-time searches show the actual vehicle
         aiResponse = generateResponseFromToolResults(toolResults, {
-          vehicle: session.vehicle || undefined,
+          vehicle: vehicleInfo || session.vehicle || undefined,
           candidates: candidates as unknown as GlassRecord[],
         });
         status = determineStatusFromTools(toolResults);

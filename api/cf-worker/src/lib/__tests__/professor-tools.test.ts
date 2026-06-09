@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { routeTools, executeTool, generateResponseFromToolResults, determineStatusFromTools } from '../professor-tools';
+import { routeTools, executeTool, generateResponseFromToolResults, determineStatusFromTools, synthesizeSearchToolResult } from '../professor-tools';
 import type { Env, ToolCall, GlassRecord, AccessoryItem } from '../../types';
 
 const mockEnv = {} as Env;
@@ -392,8 +392,13 @@ describe('determineStatusFromTools', () => {
     expect(determineStatusFromTools([{ tool: 'handoff', id: '4', success: true, data: { reason: 'equipment_unclear' } }])).toBe('clarification');
   });
 
-  it('returns recommendation for successful search', () => {
-    expect(determineStatusFromTools([{ tool: 'search', id: '5', success: true, data: { searchResult: { ok: true } } }])).toBe('recommendation');
+  it('returns recommendation for successful search with results and confidence', () => {
+    expect(determineStatusFromTools([{
+      tool: 'search',
+      id: '5',
+      success: true,
+      data: { searchResult: { ok: true, results: [{}, {}], confidence: { level: 'high' } } },
+    }])).toBe('recommendation');
   });
 
   it('returns clarification for failed search', () => {
@@ -402,5 +407,79 @@ describe('determineStatusFromTools', () => {
 
   it('returns clarification for empty results', () => {
     expect(determineStatusFromTools([])).toBe('clarification');
+  });
+
+  // Regression: search ok=true but results=[] must be clarification, not recommendation
+  it('returns clarification for search with ok=true but empty results', () => {
+    expect(determineStatusFromTools([{
+      tool: 'search',
+      id: '7',
+      success: true,
+      data: { searchResult: { ok: true, results: [], confidence: { level: 'none' } } },
+    }])).toBe('clarification');
+  });
+
+  // Regression: search ok=true + results + none confidence must be clarification
+  it('returns clarification for search with confidence=none despite results', () => {
+    expect(determineStatusFromTools([{
+      tool: 'search',
+      id: '8',
+      success: true,
+      data: { searchResult: { ok: true, results: [{}], confidence: { level: 'none' } } },
+    }])).toBe('clarification');
+  });
+});
+
+describe('synthesizeSearchToolResult', () => {
+  it('synthesizes search result from existing candidates without external call', () => {
+    const candidates = [mockGlass({ id: 1, brand: 'VW', model: 'Transporter', price: 3200 })];
+    const toolCall: ToolCall = {
+      tool: 'search',
+      params: { input: 'SU18018' },
+      id: 'synth-1',
+    };
+    const result = synthesizeSearchToolResult(
+      toolCall,
+      candidates,
+      { make: 'VW', model: 'Transporter', year: 2019 },
+      0.85
+    );
+    expect(result.tool).toBe('search');
+    expect(result.success).toBe(true);
+    expect(result.data).toBeDefined();
+    const data = result.data as { searchResult: { results: unknown[]; ok: boolean } };
+    expect(data.searchResult.ok).toBe(true);
+    expect(data.searchResult.results).toHaveLength(1);
+  });
+
+  it('synthesizes no-match result when candidates are empty', () => {
+    const toolCall: ToolCall = {
+      tool: 'search',
+      params: { input: 'SU18018' },
+      id: 'synth-2',
+    };
+    const result = synthesizeSearchToolResult(toolCall, []);
+    expect(result.success).toBe(false);
+    expect(result.error).toContain('Ingen glass funnet');
+  });
+
+  it('uses vehicleInfo for response text, not generic "bilen din"', () => {
+    const candidates = [mockGlass()];
+    const toolCall: ToolCall = {
+      tool: 'search',
+      params: { input: 'SU18018' },
+      id: 'synth-3',
+    };
+    const result = synthesizeSearchToolResult(
+      toolCall,
+      candidates,
+      { make: 'VW', model: 'Transporter', year: 2019 },
+      0.85
+    );
+    const response = generateResponseFromToolResults([result], {
+      vehicle: { make: 'VW', model: 'Transporter', year: 2019 },
+    });
+    expect(response).toContain('VW Transporter (2019)');
+    expect(response).not.toContain('bilen din');
   });
 });
