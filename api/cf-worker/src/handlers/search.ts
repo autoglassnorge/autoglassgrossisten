@@ -42,6 +42,19 @@ import { resolveTecDocKType } from "../lib/tecdoc-resolver";
 
 export type { SearchResult };
 
+export function filterKtypeCandidatesForVehicle(
+  candidates: GlassRecord[],
+  vehicle: Pick<TecdocVehicle, "make" | "model" | "year">
+): GlassRecord[] {
+  const brands = getBrandAliases(vehicle.make).map((b) => b.toUpperCase());
+  return candidates.filter((candidate) => {
+    const brand = (candidate.brand || "").toUpperCase();
+    if (!brands.includes(brand)) return false;
+    if (!yearCompatible(candidate, vehicle.year, vehicle.make, vehicle.model)) return false;
+    return modelMatches(vehicle.model, candidate.model, vehicle.make);
+  });
+}
+
 export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): Promise<SearchResult> {
   try {
     // 1. Lookup vehicle via SVV
@@ -185,11 +198,14 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
     if (svvTecdocMatch && svvTecdocMatch.ktype && svvTecdocMatch.ktype > 0 &&
         (svvTecdocMatch.confidence_level === 'exact' || svvTecdocMatch.confidence_level === 'high')) {
       const ktypeDirect = await queryByKtype(db, svvTecdocMatch.ktype);
-      if (ktypeDirect.length > 0) {
+      const compatibleKtypeDirect = filterKtypeCandidatesForVehicle(ktypeDirect, vehicle);
+      if (compatibleKtypeDirect.length > 0) {
         vehicle.k_type = svvTecdocMatch.ktype;
-        layer05Candidates = ktypeDirect;
+        layer05Candidates = compatibleKtypeDirect;
         layer05Confidence = svvTecdocMatch.confidence_level;
         console.log(`[Layer 0.5] Using cached kType ${svvTecdocMatch.ktype} for ${regnr}, skipping ground_truth`);
+      } else if (ktypeDirect.length > 0) {
+        console.warn(`[Layer 0.5] Ignoring cached kType ${svvTecdocMatch.ktype} for ${regnr}: ${ktypeDirect.length} catalog rows failed vehicle compatibility`);
       }
     }
 
@@ -306,7 +322,21 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
       }
     }
 
-    // 3f. Merge kType into vehicle + save to glass_rules
+    // 3f. Validate kType against catalog rows before trusting it.
+    // External/cached kType sources can be stale or mapped to another vehicle family.
+    // If catalog rows exist for the kType but none match vehicle brand/model/year, do
+    // not attach it to the vehicle; otherwise later scoring would penalize correct
+    // brand/model candidates as "different kType".
+    if (resolvedKtype && resolvedKtype > 0) {
+      const ktypeRows = await queryByKtype(db, resolvedKtype);
+      if (ktypeRows.length > 0 && filterKtypeCandidatesForVehicle(ktypeRows, vehicle).length === 0) {
+        console.warn(`[kType] Rejecting ${ktypeSource} kType ${resolvedKtype} for ${regnr}: ${ktypeRows.length} catalog rows failed vehicle compatibility`);
+        resolvedKtype = null;
+        ktypeSource = "none";
+      }
+    }
+
+    // 3g. Merge kType into vehicle + save to glass_rules
     if (resolvedKtype && resolvedKtype > 0) {
       vehicle.k_type = resolvedKtype;
       try {
@@ -378,18 +408,21 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
     // === Layer 0: kType exact match ===
     if (!layer05Candidates && layer !== -1 && vehicle.k_type > 0) {
       const ktypeDirect = await queryByKtype(db, vehicle.k_type);
-      for (const c of ktypeDirect) {
+      const compatibleKtypeDirect = filterKtypeCandidatesForVehicle(ktypeDirect, vehicle);
+      for (const c of compatibleKtypeDirect) {
         if (c.eurocode && !candidateCodes.has(c.eurocode)) {
           candidates.push(c);
           if (c.eurocode) candidateCodes.add(c.eurocode);
         }
       }
-      if (ktypeDirect.length > 0) {
+      if (compatibleKtypeDirect.length > 0) {
         layer = 0;
         confidence = "exact";
+      } else if (ktypeDirect.length > 0) {
+        console.warn(`[kType] Ignoring kType ${vehicle.k_type} for ${regnr}: ${ktypeDirect.length} catalog rows failed vehicle compatibility`);
       }
 
-      if (ktypeDirect.length === 0) {
+      if (compatibleKtypeDirect.length === 0) {
         const ktypeMappings = await queryKtypeMapping(db, vehicle.k_type);
         if (ktypeMappings.length > 0) {
           const topMapping = ktypeMappings[0];
@@ -424,15 +457,18 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
 
           // Re-run Layer 0 with the resolved kType
           const ktypeDirect = await queryByKtype(db, vehicle.k_type);
-          for (const c of ktypeDirect) {
+          const compatibleKtypeDirect = filterKtypeCandidatesForVehicle(ktypeDirect, vehicle);
+          for (const c of compatibleKtypeDirect) {
             if (c.eurocode && !candidateCodes.has(c.eurocode)) {
               candidates.push(c);
               if (c.eurocode) candidateCodes.add(c.eurocode);
             }
           }
-          if (ktypeDirect.length > 0) {
+          if (compatibleKtypeDirect.length > 0) {
             layer = 0;
             confidence = "exact";
+          } else if (ktypeDirect.length > 0) {
+            console.warn(`[kType] Ignoring TecDoc fallback kType ${vehicle.k_type} for ${regnr}: ${ktypeDirect.length} catalog rows failed vehicle compatibility`);
           }
         } else if (tecdocKtypes.length > 1) {
           // Multiple TecDoc matches — do not auto-resolve, but log for telemetry
