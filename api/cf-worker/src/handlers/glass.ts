@@ -36,8 +36,8 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
 
     // Cache key should include fields param for proper cache isolation
     // Bump cache namespace when search matching semantics change.
-    // glass-v2 may contain stale pre-kType-compatibility responses.
-    const compressionCacheKey = cacheKey("glass-v3-ktype-compat", {
+    // glass-v2/v3 may contain stale pre-kType/generation-compatibility responses.
+    const compressionCacheKey = cacheKey("glass-v4-ktype-generation-compat", {
       ...cacheKeyParams,
       _fields: fieldsParam || "default",
     });
