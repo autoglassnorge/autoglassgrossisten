@@ -5,6 +5,7 @@
 
 import { useChatStore } from '@/stores/chatStore';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { BUSINESS_METRICS, formatCompact } from '@/constants/businessMetrics';
 
 export function HeroProfessor() {
   const { openChat } = useChatStore();
@@ -37,12 +38,12 @@ export function HeroProfessor() {
           {/* Stats */}
           <div className="mt-6 md:mt-8 grid grid-cols-3 gap-4 md:gap-8 max-w-lg mx-auto">
             <div>
-              <div className="text-xl md:text-3xl font-bold">30+</div>
+              <div className="text-xl md:text-3xl font-bold">{BUSINESS_METRICS.YEARS_EXPERIENCE}+</div>
               <div className="text-xs md:text-sm text-blue-200">Års erfaring</div>
             </div>
             <div>
-              <div className="text-xl md:text-3xl font-bold">37k+</div>
-              <div className="text-xs md:text-sm text-blue-200">Produkter</div>
+              <div className="text-xl md:text-3xl font-bold">{formatCompact(BUSINESS_METRICS.VARIANTS)}+</div>
+              <div className="text-xs md:text-sm text-blue-200">Varianter</div>
             </div>
             <div>
               <div className="text-xl md:text-3xl font-bold">24/7</div>

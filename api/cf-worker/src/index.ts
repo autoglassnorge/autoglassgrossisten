@@ -18,6 +18,7 @@ import { handleHealth } from "./handlers/health";
 import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, handleVehicleYears, handleVehicleProducts, handleVehicleDebug } from "./handlers/vehicle";
 import { handleGlassGuide } from "./handlers/glass-guide";
 import { handleOrdremottaker, handleFeedback as handleOrdremottakerFeedback } from "./handlers/ordremottaker";
+import { handleUnifiedSearch } from "./handlers/unified-search";
 import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
 import { fetchSvvEnkeltoppslag } from "./providers/svv";
 
@@ -335,6 +336,11 @@ export default {
     }
     if (path === "/api/ordremottaker/feedback" && request.method === "POST") {
       return handleOrdremottakerFeedback(request, env);
+    }
+
+    // Unified search (regnr / VIN / eurocode / OEM / SKU / text)
+    if (path === "/api/search" && request.method === "POST") {
+      return handleUnifiedSearch(request, env, ctx);
     }
 
     return errorResponse("Ukjent endepunkt", 404);

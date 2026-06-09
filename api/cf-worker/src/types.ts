@@ -295,3 +295,61 @@ export interface AiSession {
   created_at: string;
   updated_at: string;
 }
+
+// ---------------------------------------------------------------------------
+// Unified Search types
+// ---------------------------------------------------------------------------
+
+export type InputType = 'regnr' | 'vin' | 'oem' | 'eurocode' | 'sku' | 'text';
+
+export interface UnifiedSearchRequest {
+  input: string;
+  type?: InputType;
+  category?: string;
+}
+
+export interface UnifiedSearchResponse {
+  ok: boolean;
+  error?: { code: string; message: string };
+  input: {
+    raw: string;
+    detectedType: InputType;
+    normalized: string;
+  };
+  vehicle?: {
+    make?: string;
+    model?: string;
+    year?: number;
+    vin?: string;
+    regnr?: string;
+    kType?: number;
+  };
+  results: Array<{
+    id: number;
+    eurocode: string | null;
+    brand: string;
+    model: string | null;
+    category: string;
+    description: string;
+    price: number | null;
+    stockStatus: number | null;
+    score: number;
+    equipmentMatch?: unknown;
+    equipmentDiff?: unknown;
+    _equipment?: unknown;
+    nagsCodes?: string[];
+  }>;
+  confidence: {
+    level: 'exact' | 'high' | 'medium' | 'low' | 'none';
+    score: number;
+    layer: number;
+    reasons: string[];
+  };
+  groupedByType?: Record<string, unknown[]>;
+  bestMatch?: unknown;
+  equipmentVerifier?: {
+    required: boolean;
+    questions?: Array<{ key: string; label: string; description?: string }>;
+  };
+  nextActions: Array<{ action: string; label: string; href?: string }>;
+}
