@@ -328,7 +328,7 @@ export default function VariantMatchingPage() {
               </h2>
               <p className="text-carbon-300 mb-8 max-w-xl mx-auto">
                 Bruk vår VIN-baserte søketjeneste for å finne eksakt riktig glass til din bil. 
-                Vi matcher mot 37 500+ produkter i katalogen.
+                Vi matcher mot 27 000+ varianter i katalogen.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link

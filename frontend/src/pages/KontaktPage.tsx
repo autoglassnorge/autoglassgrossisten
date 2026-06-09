@@ -112,7 +112,7 @@ export default function KontaktPage() {
                   </a>
                 </li>
                 <li>
-                  <a href="https://autoglass-frontend.pages.dev/" className="text-autoglass-blue hover:underline">
+                  <a href="https://autoglass.finnbilglass.no/" className="text-autoglass-blue hover:underline">
                     → Ny B2B-portal
                   </a>
                 </li>

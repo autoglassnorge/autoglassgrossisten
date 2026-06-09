@@ -66,9 +66,9 @@ export default function AdasKameraPage() {
           publisher: {
             '@type': 'Organization',
             name: 'Autoglass AS',
-            logo: { '@type': 'ImageObject', url: 'https://autoglass-frontend.pages.dev/logo.png' },
+            logo: { '@type': 'ImageObject', url: 'https://autoglass.finnbilglass.no/logo.png' },
           },
-          mainEntityOfPage: { '@type': 'WebPage', '@id': `https://autoglass-frontend.pages.dev${CANONICAL}` },
+          mainEntityOfPage: { '@type': 'WebPage', '@id': `https://autoglass.finnbilglass.no${CANONICAL}` },
         }}
       />
       <JsonLd
@@ -76,9 +76,9 @@ export default function AdasKameraPage() {
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
           itemListElement: [
-            { '@type': 'ListItem', position: 1, name: 'Forsiden', item: 'https://autoglass-frontend.pages.dev/' },
-            { '@type': 'ListItem', position: 2, name: 'Bilglassguide', item: 'https://autoglass-frontend.pages.dev/bilglassguide' },
-            { '@type': 'ListItem', position: 3, name: 'Frontrute med ADAS-kamera', item: `https://autoglass-frontend.pages.dev${CANONICAL}` },
+            { '@type': 'ListItem', position: 1, name: 'Forsiden', item: 'https://autoglass.finnbilglass.no/' },
+            { '@type': 'ListItem', position: 2, name: 'Bilglassguide', item: 'https://autoglass.finnbilglass.no/bilglassguide' },
+            { '@type': 'ListItem', position: 3, name: 'Frontrute med ADAS-kamera', item: `https://autoglass.finnbilglass.no${CANONICAL}` },
           ],
         }}
       />
