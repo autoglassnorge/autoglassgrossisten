@@ -54,6 +54,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const root = resolve(__dirname, '../..');
 
+function envFlag(name, fallback) {
+  const value = process.env[name];
+  if (value === undefined || value === '') return fallback;
+  return ['1', 'true', 'yes', 'on'].includes(String(value).toLowerCase());
+}
+
 // ─── KONFIGURASJON ───
 const CONFIG = {
   version: '3.5.0',
@@ -64,7 +70,7 @@ const CONFIG = {
   batchSize: 50,
   kgBatchSize: 100,
   indexCachePath: '.kimi/mempalace/data/index-cache-v3.json',
-  enableFileWatcher: true,   // PÅ med smart debounce
+  enableFileWatcher: envFlag('MEMPALACE_ENABLE_FILE_WATCHER', !envFlag('MEMPALACE_DISABLE_FILE_WATCHER', false)),   // PÅ med smart debounce, men kan skrus av i Codex
   fileWatcherPaths: ['docs', '.kimi/mempalace/rooms', '.kimi/plans'], // kun disse paths
   fileWatcherDebounceMs: 2000, // 2s debounce for å unngå reindex-storm
   indexPaths: [
@@ -592,9 +598,24 @@ function setupFileWatchers() {
           incrementalReindex();
         }, CONFIG.fileWatcherDebounceMs || 2000);
       });
+      w.on('error', (e) => {
+        log('warn', `File watcher disabled for ${basePath}: ${e.message}`);
+        try { w.close(); } catch {}
+        watchers = watchers.filter(existing => existing !== w);
+        if (e.code === 'EMFILE' || e.code === 'ENOSPC') {
+          CONFIG.enableFileWatcher = false;
+          for (const existing of watchers.splice(0)) {
+            try { existing.close(); } catch {}
+          }
+        }
+      });
       watchers.push(w);
     } catch (e) {
       log('warn', `Could not watch ${basePath}: ${e.message}`);
+      if (e.code === 'EMFILE' || e.code === 'ENOSPC') {
+        CONFIG.enableFileWatcher = false;
+        break;
+      }
     }
   }
 }
