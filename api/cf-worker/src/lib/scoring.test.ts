@@ -220,6 +220,12 @@ describe("yearCompatible", () => {
   it("T4 record (1990-2003) NOT compatible with 2010", () => {
     expect(yearCompatible(makeRecord("Transporter T4 90-03", 1990, 2003), 2010, "VW", "Transporter")).toBe(false);
   });
+  it("Caravelle 2003 rejects T6 records even when catalog year range is broad", () => {
+    expect(yearCompatible(makeRecord("Transporter T6 16-", 2003, 2015), 2003, "VW", "CARAVELLE V BUSS (7HB)")).toBe(false);
+  });
+  it("Caravelle 2003 accepts T5 records", () => {
+    expect(yearCompatible(makeRecord("Transporter T5 03-15", 2003, 2015), 2003, "VW", "CARAVELLE V BUSS (7HB)")).toBe(true);
+  });
   it("Open-ended range compatible with 2020", () => {
     expect(yearCompatible(makeRecord("Model 2015-", 2015, null), 2020, "VW", "Golf")).toBe(true);
   });
