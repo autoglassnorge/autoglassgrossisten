@@ -1,9 +1,11 @@
 import { useI18n } from '@/i18n/I18nProvider';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { isEnabled, FEATURE_FLAGS } from '@/lib/featureFlags';
 
 // Redesign seksjoner
 import { HeroProfessor } from '@/components/home/HeroProfessor';
+import { HeroAiFirst } from '@/components/home/HeroAiFirst';
 import { TrustBar } from '@/components/home/TrustBar';
 import { CategoryGrid } from '@/components/home/CategoryGrid';
 import { WhyChooseUs } from '@/components/home/WhyChooseUs';
@@ -121,8 +123,8 @@ export default function HomePage() {
       />
 
       <main>
-        {/* 1. HERO — Professor Autoglass primary entry */}
-        <HeroProfessor />
+        {/* 1. HERO — AI-first when flag is on, otherwise Professor */}
+        {isEnabled(FEATURE_FLAGS.AI_FIRST_HERO) ? <HeroAiFirst /> : <HeroProfessor />}
 
         {/* 2. TRUST — Manufacturer bar */}
         <TrustBar />
