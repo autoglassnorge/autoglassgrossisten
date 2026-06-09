@@ -36,8 +36,76 @@ export interface ProactiveSuggestion {
   items: ProactiveSuggestionItem[];
 }
 
+export interface MatchExplanation {
+  layer: number;
+  layerName: string;
+  confidence: 'exact' | 'high' | 'medium' | 'low' | 'none';
+  reasons: string[];
+  vehicle?: {
+    make: string;
+    model: string;
+    year: number;
+    regnr?: string;
+  };
+}
+
+export interface QuoteDraftProduct {
+  id: number;
+  supplier_sku?: string;
+  article_number?: string | null;
+  eurocode: string | null;
+  brand: string;
+  model: string | null;
+  category: string;
+  description: string;
+  price: number | null;
+}
+
+export interface QuoteDraftItem {
+  product: QuoteDraftProduct;
+  qty: number;
+  accessories: AccessoryItem[];
+}
+
+export interface QuoteDraft {
+  items: QuoteDraftItem[];
+  subtotal: number;
+  accessoryTotal: number;
+  total: number;
+  notes?: string;
+}
+
+export interface HandoffSummary {
+  reason: 'no_match' | 'low_confidence' | 'multiple_vehicles' | 'customer_request' | 'equipment_unclear';
+  summary: string;
+  sessionToken?: string;
+}
+
+export interface UnifiedSearchToolData {
+  searchResult?: {
+    ok: boolean;
+    error?: { code?: string; message: string };
+    results?: Product[];
+    confidence?: {
+      level: MatchExplanation['confidence'];
+      score: number;
+      layer: number;
+      reasons: string[];
+    };
+  };
+  matchExplanation?: MatchExplanation;
+}
+
+export interface ToolResult {
+  tool: 'search' | 'faq' | 'buildQuote' | 'handoff' | string;
+  id: string;
+  success: boolean;
+  data?: UnifiedSearchToolData | QuoteDraft | HandoffSummary | Record<string, unknown> | null;
+  error?: string;
+}
+
 export interface OrdremottakerResponse {
-  status: 'question' | 'recommendation' | 'order_ready' | 'escalated' | 'clarification';
+  status: 'question' | 'recommendation' | 'order_ready' | 'escalated' | 'clarification' | 'knowledge';
   ai_response: string;
   session_token: string;
   candidates?: Product[];
@@ -46,6 +114,7 @@ export interface OrdremottakerResponse {
   confidence: number;
   next_action?: string;
   proactive_suggestions?: ProactiveSuggestion[];
+  tool_results?: ToolResult[];
 }
 
 export interface FeedbackPayload {

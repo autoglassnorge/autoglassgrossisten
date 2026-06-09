@@ -11,6 +11,7 @@ interface ChatMessage {
   cartUrl?: string;
   status?: OrdremottakerResponse['status'];
   nextAction?: OrdremottakerResponse['next_action'];
+  toolResults?: OrdremottakerResponse['tool_results'];
   timestamp: number;
 }
 
@@ -41,6 +42,7 @@ export function useOrdremottaker() {
           cartUrl: response.cart_url,
           status: response.status,
           nextAction: response.next_action,
+          toolResults: response.tool_results,
           timestamp: Date.now(),
         },
       ]);
