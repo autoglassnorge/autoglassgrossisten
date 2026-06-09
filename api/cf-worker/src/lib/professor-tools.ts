@@ -125,6 +125,83 @@ async function executeSearch(
   }
 }
 
+/**
+ * Synthesize a search ToolResult from existing ordremottaker data.
+ * Use this INSTEAD of executeSearch when the search has already been done
+ * by the existing ordremottaker flow — avoids double lookup.
+ */
+export function synthesizeSearchToolResult(
+  toolCall: ToolCall,
+  candidates: GlassRecord[],
+  vehicleInfo?: { make: string; model: string; year: number },
+  confidence?: number
+): ToolResult {
+  const hasResults = candidates.length > 0;
+  const level: 'exact' | 'high' | 'medium' | 'low' | 'none' = hasResults
+    ? (confidence && confidence >= 0.7 ? 'high' : confidence && confidence >= 0.4 ? 'medium' : 'low')
+    : 'none';
+
+  const searchResult: UnifiedSearchResponse = {
+    ok: hasResults,
+    error: hasResults ? undefined : { code: 'NO_MATCH', message: 'Ingen glass funnet i katalogen' },
+    input: {
+      raw: (toolCall.params as { input?: string }).input || '',
+      detectedType: 'regnr',
+      normalized: (toolCall.params as { input?: string }).input || '',
+    },
+    vehicle: vehicleInfo
+      ? {
+          make: vehicleInfo.make,
+          model: vehicleInfo.model,
+          year: vehicleInfo.year,
+        }
+      : undefined,
+    results: candidates.slice(0, 5).map((c) => ({
+      id: c.id,
+      eurocode: c.eurocode,
+      brand: c.brand,
+      model: c.model,
+      category: c.category,
+      description: c.description,
+      price: c.price,
+      stockStatus: c.stock_status,
+      score: 1.0,
+    })),
+    confidence: {
+      level,
+      score: confidence || 0,
+      layer: -1,
+      reasons: hasResults ? ['Syntetisert fra eksisterende søk'] : ['Ingen treff i katalogen'],
+    },
+    nextActions: hasResults
+      ? [{ action: 'select', label: 'Velg glass' }]
+      : [{ action: 'clarify', label: 'Gi mer info' }],
+  };
+
+  const matchExplanation: MatchExplanation | undefined = hasResults
+    ? {
+        layer: -1,
+        layerName: 'ground_truth',
+        confidence: level,
+        reasons: ['Syntetisert fra eksisterende ordremottaker-søk'],
+        vehicle: vehicleInfo
+          ? { make: vehicleInfo.make, model: vehicleInfo.model, year: vehicleInfo.year }
+          : undefined,
+      }
+    : undefined;
+
+  return {
+    tool: 'search',
+    id: toolCall.id,
+    success: hasResults,
+    data: {
+      searchResult,
+      matchExplanation,
+    },
+    error: hasResults ? undefined : 'Ingen glass funnet i katalogen',
+  };
+}
+
 /** Execute FAQ tool — delegates to searchFaq */
 function executeFaq(toolCall: ToolCall): ToolResult {
   const params = toolCall.params as { query?: string };
@@ -542,8 +619,18 @@ export function determineStatusFromTools(
         return "clarification";
       }
       case "search": {
-        const data = result.data as { searchResult?: { ok: boolean } } | undefined;
-        if (data?.searchResult?.ok) return "recommendation";
+        const data = result.data as {
+          searchResult?: { ok: boolean; results?: unknown[]; confidence?: { level: string } };
+        } | undefined;
+        const sr = data?.searchResult;
+        if (
+          sr?.ok &&
+          sr.results &&
+          sr.results.length > 0 &&
+          sr.confidence?.level !== "none"
+        ) {
+          return "recommendation";
+        }
         return "clarification";
       }
     }
