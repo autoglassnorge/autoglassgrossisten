@@ -7,6 +7,7 @@ import GlassSuggestion from './GlassSuggestion';
 import AccessorySelector from './AccessorySelector';
 import ProactiveSuggestions from './ProactiveSuggestions';
 import ProfessorAvatar from './ProfessorAvatar';
+import ToolResultsPanel from './ToolResultsPanel';
 
 const EXAMPLE_PROMPTS = [
   'Jeg har en VW Transporter 2019 som trenger ny frontrute',
@@ -323,10 +324,13 @@ export default function ChatWidget() {
                     accessories={msg.accessories}
                     cartUrl={msg.cartUrl}
                   />
+                  {msg.role === 'ai' && (
+                    <ToolResultsPanel results={msg.toolResults} />
+                  )}
                   {msg.role === 'ai' && msg.status === 'recommendation' && msg.candidates && msg.candidates.length > 0 && (
                     <GlassSuggestion candidates={msg.candidates} />
                   )}
-                  {msg.role === 'ai' && msg.status === 'recommendation' && msg.accessories && msg.accessories.length > 0 && (
+                  {msg.role === 'ai' && (msg.status === 'recommendation' || msg.status === 'order_ready') && msg.accessories && msg.accessories.length > 0 && (
                     <AccessorySelector accessories={msg.accessories} />
                   )}
 
