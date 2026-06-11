@@ -33,9 +33,9 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <img
-              src="/logo.png"
+              src="/logo-light.png"
               alt="Autoglass"
-              className="h-10 w-auto object-contain brightness-0 invert"
+              className="h-10 w-auto object-contain"
             />
           </Link>
 
