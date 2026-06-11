@@ -1,5 +1,6 @@
-import { Check, Crosshair } from 'lucide-react';
+import { Check, Crosshair, ArrowRight, BookOpen } from 'lucide-react';
 import { useI18n } from '@/i18n/I18nProvider';
+import { Link } from 'react-router-dom';
 
 export function AdasSection() {
   const { t } = useI18n();
@@ -42,6 +43,15 @@ export function AdasSection() {
                 </li>
               ))}
             </ul>
+
+            <Link
+              to="/bilglassguide/kalibrering"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-glass-cyan hover:text-glass-cyanLight transition-colors"
+            >
+              <BookOpen className="h-4 w-4" />
+              Les kalibreringsguiden for verksteder
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
 
           {/* Technical spec card — replaces generic diagram */}

@@ -99,10 +99,10 @@ export function HeroAiFirst() {
 
     switch (activeTab) {
       case 'regnr':
-        navigate(`/sok?regnr=${encodeURIComponent(normalizeRegnr(trimmed))}`);
+        navigate(`/sok?q=${encodeURIComponent(normalizeRegnr(trimmed))}`);
         break;
       case 'vin':
-        navigate(`/sok?vin=${encodeURIComponent(trimmed.toUpperCase())}`);
+        navigate(`/sok?q=${encodeURIComponent(trimmed.toUpperCase())}`);
         break;
       case 'oem':
         navigate(`/sok?q=${encodeURIComponent(trimmed)}`);

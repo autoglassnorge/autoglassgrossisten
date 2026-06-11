@@ -13,7 +13,7 @@ export const BUSINESS_METRICS = {
   VARIANTS: 27_000,
   BRANDS: 82,
   DELIVERY_HOURS: 24,
-  YEARS_EXPERIENCE: 30,
+  YEARS_EXPERIENCE: 35,  // Founded 1991
 } as const;
 
 /** Format a large number as a compact string, e.g. 133000 → "133k" */

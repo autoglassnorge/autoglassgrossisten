@@ -223,4 +223,44 @@ describe("yearCompatible", () => {
   it("Open-ended range compatible with 2020", () => {
     expect(yearCompatible(makeRecord("Model 2015-", 2015, null), 2020, "VW", "Golf")).toBe(true);
   });
+  it("SU18018 Caravelle V registered in 2005 matches T5 records", () => {
+    expect(yearCompatible(
+      makeRecord("VW TRANSP+CARAVELLE T5 2003- FRONTRUTE", 2003, 2015),
+      2005,
+      "VW",
+      "CARAVELLE V BUSS (7HB, 7HJ, 7EB, 7EJ, 7EF, 7EG, 7HF, 7EC)"
+    )).toBe(true);
+  });
+  it("SU18018 Caravelle V registered in 2005 rejects older T4 records", () => {
+    expect(yearCompatible(
+      makeRecord("VW TRANSPORTER T4 91-02 FRONTRUTE", 1991, 2003),
+      2005,
+      "VW",
+      "CARAVELLE V BUSS (7HB, 7HJ, 7EB, 7EJ, 7EF, 7EG, 7HF, 7EC)"
+    )).toBe(false);
+  });
+  it("SU18018 Caravelle V registered in 2005 rejects older 91-03 records without explicit T4 token", () => {
+    expect(yearCompatible(
+      makeRecord("VW TRANSPORTER 91-03 FRONTRUTE", 1991, 2003),
+      2005,
+      "VW",
+      "CARAVELLE V BUSS (7HB, 7HJ, 7EB, 7EJ, 7EF, 7EG, 7HF, 7EC)"
+    )).toBe(false);
+  });
+  it("SU18018 Caravelle V registered in 2005 rejects newer T6 records despite broad catalog years", () => {
+    expect(yearCompatible(
+      makeRecord("VW TRANSPORTER T6 16- FRONTRUTE", 2003, 2015),
+      2005,
+      "VW",
+      "CARAVELLE V BUSS (7HB, 7HJ, 7EB, 7EJ, 7EF, 7EG, 7HF, 7EC)"
+    )).toBe(false);
+  });
+  it("SU18018 Caravelle V registered in 2005 rejects newer open-ended 22- records without catalog years", () => {
+    expect(yearCompatible(
+      makeRecord("VW ID BUZZ VAN 22- FR+AKU+LDW+DUGG+SENS+GN", null, null),
+      2005,
+      "VW",
+      "CARAVELLE V BUSS (7HB, 7HJ, 7EB, 7EJ, 7EF, 7EG, 7HF, 7EC)"
+    )).toBe(false);
+  });
 });

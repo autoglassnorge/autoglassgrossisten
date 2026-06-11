@@ -6,7 +6,42 @@ import type { GlassRecord, FactoryEquipment } from "../types";
 import { fetchWithTimeout } from "../providers/svv";
 
 /**
+ * Check if a token is in a negated context (e.g. "IKKE ANT", "NOT HEATED", "NO CAMERA").
+ * Looks for negation words within ±3 tokens of the target.
+ */
+function isNegated(tokens: string[], targetIndex: number): boolean {
+  const negationWords = new Set(["IKKE", "NOT", "NO", "NB", "WITHOUT", "UTEN", "INGEN", "NEI"]);
+  const window = 3;
+  for (let i = Math.max(0, targetIndex - window); i <= Math.min(tokens.length - 1, targetIndex + window); i++) {
+    if (i === targetIndex) continue;
+    if (negationWords.has(tokens[i])) {
+      // Check if negation is before the target (more reliable)
+      if (i < targetIndex) return true;
+      // If negation is after, only count if it's immediately after (e.g. "ANT, IKKE")
+      if (i === targetIndex + 1) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Check if a regex match in the description is in a negated context.
+ * Finds the word position of the match and checks nearby tokens for negation.
+ */
+function isRegexMatchNegated(d: string, regex: RegExp, tokens: string[]): boolean {
+  const match = regex.exec(d);
+  if (!match) return false;
+  // Find which token contains the matched text
+  const matchedText = match[0];
+  const beforeMatch = d.slice(0, match.index);
+  const wordsBefore = beforeMatch.split(/[\s;,.\[\]()+-]+/).filter(t => t.length >= 1);
+  const matchTokenIndex = wordsBefore.length;
+  return isNegated(tokens, matchTokenIndex);
+}
+
+/**
  * Detect equipment flags from product description text.
+ * Handles negation: "IKKE ANT" → antenna: false, "+ANT" → antenna: true.
  */
 export function detectFlagsFromDescription(description: string | null): {
   adas: boolean;
@@ -25,36 +60,73 @@ export function detectFlagsFromDescription(description: string | null): {
   const tokens = d.split(/[\s;,.\[\]()+-]+/).filter((t) => t.length >= 1);
   const s = new Set(tokens);
 
+  // Helper: check if a token exists AND is not negated
+  const hasToken = (token: string): boolean => {
+    const idx = tokens.indexOf(token);
+    if (idx === -1) return false;
+    return !isNegated(tokens, idx);
+  };
+
+  // Helper: regex match that also checks for negation context
+  const rx = (pattern: RegExp): boolean => {
+    const m = pattern.exec(d);
+    if (!m) return false;
+    const before = d.slice(0, m.index);
+    const wordsBefore = before.split(/[\s;,.\[\]()+-]+/).filter((t) => t.length >= 1);
+    return !isNegated(tokens, wordsBefore.length);
+  };
+
   const rainSensor =
-    s.has("RSN") || s.has("RSNL") || s.has("RSNLSN") ||
-    s.has("REGN") || s.has("REGNS") || s.has("REGNSEN") || s.has("REGNSENSOR") ||
-    /\bRAIN\b|\bAUTOMATIC\s+WIPER\b|\bVINDRUTETORKARE\b|\bLYS\/REGN\b|\bLYS\/REGNS\b/.test(d);
+    (s.has("RSN") && !isNegated(tokens, tokens.indexOf("RSN"))) ||
+    (s.has("RSNL") && !isNegated(tokens, tokens.indexOf("RSNL"))) ||
+    (s.has("RSNLSN") && !isNegated(tokens, tokens.indexOf("RSNLSN"))) ||
+    (s.has("REGN") && !isNegated(tokens, tokens.indexOf("REGN"))) ||
+    (s.has("REGNS") && !isNegated(tokens, tokens.indexOf("REGNS"))) ||
+    (s.has("REGNSEN") && !isNegated(tokens, tokens.indexOf("REGNSEN"))) ||
+    (s.has("REGNSENSOR") && !isNegated(tokens, tokens.indexOf("REGNSENSOR"))) ||
+    rx(/\bRAIN\b|\bAUTOMATIC\s+WIPER\b|\bVINDRUTETORKARE\b|\bLYS\/REGN\b|\bLYS\/REGNS\b/);
 
   const heated =
-    s.has("HTD") || s.has("HT") || s.has("UHTD") || s.has("ELEK") || s.has("VARM") ||
-    /\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b/.test(d) ||
-    /(?:^|[\s+])(EL)(?:[\s+.]|[+-]|$)/.test(d);
+    (s.has("HTD") && !isNegated(tokens, tokens.indexOf("HTD"))) ||
+    (s.has("HT") && !isNegated(tokens, tokens.indexOf("HT"))) ||
+    (s.has("UHTD") && !isNegated(tokens, tokens.indexOf("UHTD"))) ||
+    (s.has("ELEK") && !isNegated(tokens, tokens.indexOf("ELEK"))) ||
+    (s.has("VARM") && !isNegated(tokens, tokens.indexOf("VARM"))) ||
+    rx(/\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b/) ||
+    rx(/(?:^|[\s+])(EL)(?:[\s+.]|[+-]|$)/);
 
   const acoustic =
-    s.has("ACO") || s.has("AKU") ||
-    /\bACOUSTIC\b|\bAKUSTIK\b|\bQUIET\b|\bST[\u00d8O]YDEMP\b|\bSILENT\b/.test(d);
+    (s.has("ACO") && !isNegated(tokens, tokens.indexOf("ACO"))) ||
+    (s.has("AKU") && !isNegated(tokens, tokens.indexOf("AKU"))) ||
+    rx(/\bACOUSTIC\b|\bAKUSTIK\b|\bQUIET\b|\bST[\u00d8O]YDEMP\b|\bSILENT\b/);
 
-  const antenna =
-    s.has("ANT") || s.has("GNAG") ||
-    /\bANTENNA\b|\bANTENNE\b|\bGPS\b|\bRADIO\b|\bFM\b|\bDAB\b|\bAERIAL\b/.test(d);
+  // Antenna: check for "ANT" or "ANTENNE" token, but only if not negated
+  // Also check for explicit "+ANT" (positive indicator)
+  const antennaIdx = tokens.indexOf("ANT");
+  const antenneIdx = tokens.indexOf("ANTENNE");
+  const hasAntToken = antennaIdx !== -1 && !isNegated(tokens, antennaIdx);
+  const hasAntenneToken = antenneIdx !== -1 && !isNegated(tokens, antenneIdx);
+  const hasExplicitPlusAnt = /\+ANT\b/.test(d);
+  const antenna = hasAntToken || hasAntenneToken || hasExplicitPlusAnt ||
+    s.has("GNAG") ||
+    rx(/\bANTENNA\b|\bANTENNE\b|\bGPS\b|\bRADIO\b|\bFM\b|\bDAB\b|\bAERIAL\b/);
 
-  const hasCam = s.has("CAMERA") || s.has("CAM") || /\bKAMERA\b|\bBACKUP\b|\bREVERSING\b|\b360\b/.test(d);
+  const hasCam = (s.has("CAMERA") && !isNegated(tokens, tokens.indexOf("CAMERA"))) ||
+    (s.has("CAM") && !isNegated(tokens, tokens.indexOf("CAM"))) ||
+    rx(/\bKAMERA\b|\bBACKUP\b|\bREVERSING\b|\b360\b/);
   const hasLdw = /\bLDW\b/.test(d);
   const hasAdasText =
-    s.has("ADAS") || s.has("FILSKIFTE") ||
-    /\bLANE\s+ASSIST\b|\bLANE\s+DEPARTURE\b|\bCOLLISION\b|\bAUTO\s+BRAKE\b|\bEMERGENCY\s+BRAKE\b|\bDRIVE\s+ASSIST\b|\bPRO\s+PILOT\b|\bAUTOPILOT\b|\bTRAFFIC\s+ASSIST\b|\bCITY\s+SAFETY\b/.test(d);
+    (s.has("ADAS") && !isNegated(tokens, tokens.indexOf("ADAS"))) ||
+    (s.has("FILSKIFTE") && !isNegated(tokens, tokens.indexOf("FILSKIFTE"))) ||
+    rx(/\bLANE\s+ASSIST\b|\bLANE\s+DEPARTURE\b|\bCOLLISION\b|\bAUTO\s+BRAKE\b|\bEMERGENCY\s+BRAKE\b|\bDRIVE\s+ASSIST\b|\bPRO\s+PILOT\b|\bAUTOPILOT\b|\bTRAFFIC\s+ASSIST\b|\bCITY\s+SAFETY\b/);
   const sensWithAdas = (s.has("SENS") || s.has("SENSOR")) && (hasLdw || hasCam || s.has("HUD") || s.has("H.U.D"));
   const camera = hasCam || hasLdw || hasAdasText || sensWithAdas;
   const adas = hasAdasText || hasLdw || hasCam || sensWithAdas;
 
   const hud =
-    s.has("HUD") || s.has("H.U.D") ||
-    /\bHEAD\s*UP\b|\bHEADUP\b|\bPROJEKSJON\b|\bPROJECTION\b|\bWINDSHIELD\s+DISPLAY\b/.test(d);
+    (s.has("HUD") && !isNegated(tokens, tokens.indexOf("HUD"))) ||
+    (s.has("H.U.D") && !isNegated(tokens, tokens.indexOf("H.U.D"))) ||
+    rx(/\bHEAD\s*UP\b|\bHEADUP\b|\bPROJEKSJON\b|\bPROJECTION\b|\bWINDSHIELD\s+DISPLAY\b/);
 
   return { adas, rainSensor, heated, acoustic, antenna, camera, hud };
 }
@@ -90,26 +162,14 @@ export function inferRecordEquipment(record: GlassRecord): {
   klipsRequired: boolean;
   klipsType: string | null;
 } {
-  if (record.rain_sensor || record.heated || record.acoustic || record.antenna || record.camera || record.adas || record.shade) {
-    return {
-      adas: !!record.adas,
-      rainSensor: !!record.rain_sensor,
-      heated: !!record.heated,
-      acoustic: !!record.acoustic,
-      antenna: !!record.antenna,
-      camera: !!record.camera,
-      hud: !!record.hud,
-      shade: !!record.shade,
-      hasList: false,
-      listRequired: false,
-      listIncluded: false,
-      listType: null,
-      hasKlips: false,
-      klipsRequired: false,
-      klipsType: null,
-    };
-  }
-  const flags = detectFlagsFromDescription(record.description);
+  // Always parse description for equipment flags (with negation handling).
+  // Description is the ground truth — it reflects the supplier's own labeling.
+  // DB columns may be stale or incorrect (e.g. "IKKE ANT" in description
+  // but antenna=1 in DB due to upstream data errors).
+  const descFlags = detectFlagsFromDescription(record.description);
+
+  // For list/klips/shade, we still rely on description parsing since
+  // these are not stored in DB equipment columns.
   const d = (record.description || "").toUpperCase();
   const tokens = d.split(/[\s;,.\[\]()]+/).filter((t) => t.length >= 2);
   const s = new Set(tokens);
@@ -139,7 +199,7 @@ export function inferRecordEquipment(record: GlassRecord): {
   let klipsType: string | null = null;
   if (hasKlips) klipsType = "klips";
 
-  return { ...flags, shade, hasList, listRequired, listIncluded, listType, hasKlips, klipsRequired, klipsType };
+  return { ...descFlags, shade, hasList, listRequired, listIncluded, listType, hasKlips, klipsRequired, klipsType };
 }
 
 /**
@@ -187,6 +247,86 @@ export async function fetchBiluppgifterEquipment(regno: string, apiKey: string):
     console.error(`Biluppgifter equipment fetch failed for ${regno}: ${e instanceof Error ? e.message : String(e)}`);
     return null;
   }
+}
+
+/**
+ * User-confirmed equipment answers.
+ * `true` = user confirmed this equipment is present
+ * `false` = user confirmed this equipment is NOT present
+ * `undefined` = user has not answered / unknown
+ */
+export interface UserEquipmentAnswers {
+  adas?: boolean;
+  rainSensor?: boolean;
+  heated?: boolean;
+  acoustic?: boolean;
+  antenna?: boolean;
+  camera?: boolean;
+  hud?: boolean;
+}
+
+/**
+ * Apply HARD equipment filter based on user-confirmed answers.
+ *
+ * Rules:
+ * - If user answers `true` to a field → candidate MUST have that field
+ * - If user answers `false` to a field → candidate MUST NOT have that field
+ * - If user answers `undefined` → no filter applied for that field
+ *
+ * Returns { exact: candidates that match all confirmed fields,
+ *           uncertain: candidates that violate at least one confirmed field }
+ */
+export function applyEquipmentFilter<
+  T extends {
+    adas?: boolean | number;
+    rain_sensor?: boolean | number;
+    rainSensor?: boolean | number;
+    heated?: boolean | number;
+    acoustic?: boolean | number;
+    antenna?: boolean | number;
+    camera?: boolean | number;
+    hud?: boolean | number;
+  }
+>(
+  candidates: T[],
+  answers: UserEquipmentAnswers
+): { exact: T[]; uncertain: T[] } {
+  const exact: T[] = [];
+  const uncertain: T[] = [];
+
+  for (const candidate of candidates) {
+    let violations = 0;
+
+    // Helper to read boolean-ish field (supports both snake_case and camelCase)
+    const has = (key: keyof UserEquipmentAnswers): boolean => {
+      const val =
+        key === "rainSensor"
+          ? (candidate.rainSensor ?? candidate.rain_sensor)
+          : candidate[key as keyof T];
+      return !!val;
+    };
+
+    for (const [field, userAnswer] of Object.entries(answers) as [
+      keyof UserEquipmentAnswers,
+      boolean | undefined
+    ][]) {
+      if (userAnswer === undefined) continue;
+      const candidateHas = has(field);
+      if (userAnswer === true && !candidateHas) {
+        violations++;
+      } else if (userAnswer === false && candidateHas) {
+        violations++;
+      }
+    }
+
+    if (violations === 0) {
+      exact.push(candidate);
+    } else {
+      uncertain.push(candidate);
+    }
+  }
+
+  return { exact, uncertain };
 }
 
 /** Compute equipment match quality between a record and factory data */

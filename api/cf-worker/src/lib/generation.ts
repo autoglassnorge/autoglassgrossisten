@@ -22,13 +22,21 @@ export function parseYearRangeFromDescription(desc: string | null): { from: numb
     return { from, to };
   }
 
-  // Pattern 3: "2009-" or "2015- " (open-ended)
+  // Pattern 3: "03-" or "22-" (open-ended 2-digit years)
+  const m3TwoDigit = d.match(/(?:^|\s|\()(\d{2})\s*[-–]\s*[;\)\s]/);
+  if (m3TwoDigit) {
+    let from = parseInt(m3TwoDigit[1], 10);
+    if (from < 50) from += 2000; else from += 1900;
+    return { from, to: null };
+  }
+
+  // Pattern 4: "2009-" or "2015- " (open-ended)
   const m3 = d.match(/(?:^|\s|\()(\d{4})\s*[-–]\s*[;\)\s]/);
   if (m3) {
     return { from: parseInt(m3[1], 10), to: null };
   }
 
-  // Pattern 4: "2015;" or " 2016 " or "(2017)"
+  // Pattern 5: "2015;" or " 2016 " or "(2017)"
   const m4 = d.match(/(?:^|\s|\()(19\d{2}|20\d{2})(?:\s*[;\)\s]|$)/);
   if (m4) {
     return { from: parseInt(m4[1], 10), to: null };
@@ -51,6 +59,12 @@ export function parseGenerationFromDescription(desc: string | null): string | nu
   // VW: T1-T6 (Transporter)
   const vw = desc.match(/\b(T[1-6])\b/i);
   if (vw) return vw[1].toUpperCase();
+  // VW Transporter/Caravelle/Multivan chassis codes used by SVV and TecDoc.
+  // 7H/7E is the T5/T5.1 family (2003-2015). SVV often sends
+  // "CARAVELLE V BUSS (7HB, 7HJ, 7EB...)" without the literal T5 token.
+  if (/\b(7H[A-Z]?|7E[A-Z]?)\b/i.test(desc)) return "T5";
+  if (/\b(CARAVELLE|MULTIVAN|TRANSPORTER|CALIFORNIA)\s+V\b/i.test(desc)) return "T5";
+  if (/\b(CARAVELLE|MULTIVAN|TRANSPORTER|CALIFORNIA)\s+IV\b/i.test(desc)) return "T4";
 
   // BMW 3-series: E30, E36, E46, E90, F30, G20
   const bmw3 = desc.match(/\b(E30|E36|E46|E90|F30|G20)\b/i);
@@ -149,10 +163,19 @@ export function parseGenerationFromDescription(desc: string | null): string | nu
 
 export function expectedGeneration(brand: string, model: string, year: number): string | null {
   const key = `${brand} ${model}`.toLowerCase();
+  const explicitGeneration = parseGenerationFromDescription(model);
+  if (explicitGeneration) return explicitGeneration;
+
   // VW Transporter generations
-  if (key.includes("volkswagen") && key.includes("transporter")) {
+  const isVw = key.includes("volkswagen") || /\bvw\b/.test(key);
+  const isVwCommercial =
+    key.includes("transporter") ||
+    key.includes("caravelle") ||
+    key.includes("multivan") ||
+    key.includes("california");
+  if (isVw && isVwCommercial) {
     if (year <= 1991) return "T3";
-    if (year <= 2003) return "T4";
+    if (year < 2003) return "T4";
     if (year <= 2015) return "T5";
     return "T6";
   }
@@ -481,7 +504,13 @@ export function expectedGeneration(brand: string, model: string, year: number): 
 
 export function inferGenerationFromYearRange(brand: string, model: string, from: number, to: number): string | null {
   const key = `${brand} ${model}`.toLowerCase();
-  if (key.includes("volkswagen") && key.includes("transporter")) {
+  const isVw = key.includes("volkswagen") || /\bvw\b/.test(key);
+  const isVwCommercial =
+    key.includes("transporter") ||
+    key.includes("caravelle") ||
+    key.includes("multivan") ||
+    key.includes("california");
+  if (isVw && isVwCommercial) {
     if (to <= 1991) return "T3";
     if (from >= 1990 && to <= 2003) return "T4";
     if (from >= 2003 && to <= 2015) return "T5";

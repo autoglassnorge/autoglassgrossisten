@@ -12,7 +12,7 @@ import type {
   GlassRecord,
 } from "../types";
 import type { InputType, DetectedInput } from "../lib/input-detector";
-import { detectInputType, validateInput } from "../lib/input-detector";
+import { detectInputType, normalizeRegnr, normalizeVin, validateInput } from "../lib/input-detector";
 import { searchByRegnr } from "./search";
 import { handleVinLookup } from "./vin";
 import {
@@ -29,8 +29,9 @@ function normalizeForType(raw: string, type: InputType): string {
   const trimmed = raw.trim();
   switch (type) {
     case "regnr":
+      return normalizeRegnr(trimmed);
     case "vin":
-      return trimmed.toUpperCase().replace(/\s+/g, "");
+      return normalizeVin(trimmed);
     case "eurocode":
     case "oem":
     case "sku":

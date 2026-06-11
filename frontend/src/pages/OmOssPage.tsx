@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { Truck, Globe, Award, Users, Building2, Phone, Clock } from 'lucide-react';
+import { COMPANY } from '@/config/company.config';
 
 export default function OmOssPage() {
   return (
@@ -138,10 +139,10 @@ export default function OmOssPage() {
               Kontakt oss
             </Link>
             <a
-              href="tel:+4722905000"
+              href={`tel:${COMPANY.PHONE_RAW}`}
               className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition"
             >
-              +47 21 37 83 90
+              {COMPANY.PHONE}
             </a>
           </div>
         </div>

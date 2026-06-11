@@ -8,15 +8,72 @@ import { getCache, setCache, cacheKey } from "../lib/cache";
 import { queryByPrefix4, queryByEurocode, queryBySupplierSku, queryByOemNumber } from "../lib/db";
 import { normalizeRecord } from "../lib/normalize";
 import { searchByRegnr } from "./search";
+import { handleVinLookup } from "./vin";
+import { normalizeRegnr, normalizeVin, REGNR_PATTERN, VIN_PATTERN } from "../lib/input-detector";
 import {
   compressSearchResponse,
   parseFieldsParam,
   type CompressOptions,
 } from "../lib/response-compressor";
+import type { UserEquipmentAnswers } from "../lib/equipment";
 
-export async function handleGlass(request: Request, env: Env): Promise<Response> {
+const EQUIPMENT_FIELDS = ["adas", "rainSensor", "heated", "acoustic", "antenna", "camera", "hud"] as const;
+const POSITION_FILTERS = ["driver", "passenger", "center", "both"] as const;
+
+function parseBooleanParam(value: string | null): boolean | undefined {
+  if (value === null) return undefined;
+  const normalized = value.trim().toLowerCase();
+  if (["1", "true", "yes", "ja"].includes(normalized)) return true;
+  if (["0", "false", "no", "nei"].includes(normalized)) return false;
+  return undefined;
+}
+
+function parseEquipmentAnswers(url: URL): UserEquipmentAnswers | undefined {
+  const answers: UserEquipmentAnswers = {};
+
+  for (const field of EQUIPMENT_FIELDS) {
+    const value = parseBooleanParam(url.searchParams.get(`eq_${field}`));
+    if (value !== undefined) {
+      answers[field] = value;
+    }
+  }
+
+  const packed = url.searchParams.get("equipment");
+  if (packed) {
+    for (const part of packed.split(",")) {
+      const [rawKey, rawValue] = part.split(":");
+      const key = rawKey?.trim() as typeof EQUIPMENT_FIELDS[number];
+      if (!EQUIPMENT_FIELDS.includes(key)) continue;
+      const value = parseBooleanParam(rawValue ?? null);
+      if (value !== undefined) {
+        answers[key] = value;
+      }
+    }
+  }
+
+  return Object.keys(answers).length > 0 ? answers : undefined;
+}
+
+function serializeEquipmentAnswers(answers: UserEquipmentAnswers | undefined): string | undefined {
+  if (!answers) return undefined;
+  const parts = EQUIPMENT_FIELDS
+    .filter((field) => answers[field] !== undefined)
+    .map((field) => `${field}:${answers[field] ? "1" : "0"}`);
+  return parts.length > 0 ? parts.join(",") : undefined;
+}
+
+function parsePositionFilter(value: string | null): typeof POSITION_FILTERS[number] | undefined {
+  if (!value) return undefined;
+  const normalized = value.trim().toLowerCase();
+  return POSITION_FILTERS.includes(normalized as typeof POSITION_FILTERS[number])
+    ? normalized as typeof POSITION_FILTERS[number]
+    : undefined;
+}
+
+export async function handleGlass(request: Request, env: Env, ctx?: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
   const regnr = url.searchParams.get("regnr");
+  const vin = url.searchParams.get("vin");
   const prefix4 = url.searchParams.get("prefix4");
   const eurocode = url.searchParams.get("eurocode");
   const supplierSku = url.searchParams.get("supplier_sku");
@@ -30,9 +87,18 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
   const includeDebug = debugParam === "true" || (debugParam !== "false" && isDevelopment);
 
   if (regnr) {
+    const normalizedRegnr = normalizeRegnr(regnr);
+    if (!REGNR_PATTERN.test(normalizedRegnr)) {
+      return errorResponse("Ugyldig registreringsnummer. Forventet 2 bokstaver og 4-5 sifre.", 400);
+    }
     const categoryFilter = url.searchParams.get("category") || undefined;
-    const cacheKeyParams: Record<string, string> = { regnr };
+    const positionFilter = parsePositionFilter(url.searchParams.get("position"));
+    const equipmentAnswers = parseEquipmentAnswers(url);
+    const equipmentKey = serializeEquipmentAnswers(equipmentAnswers);
+    const cacheKeyParams: Record<string, string> = { regnr: normalizedRegnr };
     if (categoryFilter) cacheKeyParams.category = categoryFilter;
+    if (positionFilter) cacheKeyParams.position = positionFilter;
+    if (equipmentKey) cacheKeyParams.equipment = equipmentKey;
 
     // Cache key should include fields param for proper cache isolation
     const compressionCacheKey = cacheKey("glass-v2", {
@@ -43,7 +109,7 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
     const cached = await getCache<unknown>(env.GLASS_CATALOG, compressionCacheKey);
     if (cached) return jsonResponse(cached);
 
-    const result = await searchByRegnr(regnr, env, categoryFilter);
+    const result = await searchByRegnr(normalizedRegnr, env, categoryFilter, equipmentAnswers, positionFilter);
 
     // Apply compression to successful responses
     let responseBody = result.body;
@@ -66,6 +132,41 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
     const extraHeaders: Record<string, string> = {};
     if (result.retryAfter) extraHeaders["Retry-After"] = String(result.retryAfter);
     return jsonResponse(responseBody, result.httpStatus, extraHeaders);
+  }
+
+  if (vin) {
+    const normalizedVin = normalizeVin(vin);
+    if (!VIN_PATTERN.test(normalizedVin)) {
+      return errorResponse("Ugyldig VIN. Forventet 17 tegn uten I, O eller Q.", 400);
+    }
+
+    const compressionCacheKey = cacheKey("glass-v2", {
+      vin: normalizedVin,
+      _fields: fieldsParam || "default",
+    });
+    const cached = await getCache<unknown>(env.GLASS_CATALOG, compressionCacheKey);
+    if (cached) return jsonResponse(cached);
+
+    const syntheticRequest = new Request("http://internal/api/vin-lookup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        vin: normalizedVin,
+        opening: "windshield",
+        market: "EU",
+        mode: "auto",
+      }),
+    });
+    const vinResponse = await handleVinLookup(syntheticRequest, env, ctx ?? {
+      waitUntil() {},
+      passThroughOnException() {},
+      props: {},
+    } as ExecutionContext);
+    const data = await vinResponse.json();
+    if (vinResponse.status === 200) {
+      await setCache(env.GLASS_CATALOG, compressionCacheKey, data, 300);
+    }
+    return jsonResponse(data, vinResponse.status);
   }
 
   if (prefix4) {
@@ -136,5 +237,5 @@ export async function handleGlass(request: Request, env: Env): Promise<Response>
     return jsonResponse(data);
   }
 
-  return errorResponse("Mangler parameter: regnr, prefix4, eurocode, supplier_sku eller oem");
+  return errorResponse("Mangler parameter: regnr, vin, prefix4, eurocode, supplier_sku eller oem");
 }

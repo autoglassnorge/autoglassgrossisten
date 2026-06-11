@@ -146,11 +146,11 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
       {/* Content */}
       <CardContent className="flex-1 pt-3 px-3 sm:px-4">
         <div className="flex items-center gap-2 mb-1">
-          <span className="inline-flex items-center rounded bg-slate-100 border border-slate-200 px-1.5 py-0.5">
-            <span className="text-[9px] font-medium text-slate-500 uppercase tracking-wider mr-1">
+          <span className="inline-flex items-center rounded bg-carbon-900 border border-carbon-700 px-2 py-1">
+            <span className="text-[9px] font-medium text-carbon-400 uppercase tracking-wider mr-1.5">
               {product.eurocode ? 'Eurokode' : 'Varenr'}
             </span>
-            <span className="text-[11px] sm:text-sm font-mono font-bold text-slate-800">
+            <span className="text-sm font-mono font-bold text-glass-cyan">
               {product.eurocode || product.articleNumber}
             </span>
           </span>
@@ -213,9 +213,11 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
             {formatPrice(product.price)}
           </div>
           <div className="text-[10px] text-gray-400">eks. mva</div>
-          <div className="flex items-center gap-1 text-xs text-gray-500 mt-0.5">
-            <span className={`inline-block h-1.5 w-1.5 rounded-full ${stockDot}`} />
-            <span className="truncate">{stockText}</span>
+          <div className="flex items-center gap-1.5 text-xs mt-1">
+            <span className={`inline-flex h-2 w-2 rounded-full ${stockDot}`} />
+            <span className={product.stockStatus > 0 ? 'text-signal-green font-medium' : 'text-signal-amber'}>
+              {stockText}
+            </span>
           </div>
         </div>
         <Button
@@ -223,10 +225,10 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
           variant={inCart ? 'secondary' : 'default'}
           onClick={handleAddToCart}
           className="gap-1 min-h-[44px] px-3 sm:px-4 flex-shrink-0"
-          aria-label={inCart ? 'Lagt i handlekurv' : 'Legg i handlekurv'}
+          aria-label={inCart ? 'Lagt til i ordre' : 'Legg til i ordre'}
         >
           {inCart ? <Check className="h-4 w-4" /> : <ShoppingCart className="h-4 w-4" />}
-          <span className="hidden sm:inline">{inCart ? 'Lagt til' : 'Legg i handlekurv'}</span>
+          <span className="hidden sm:inline">{inCart ? 'Lagt til i ordre' : 'Legg til i ordre'}</span>
         </Button>
       </CardFooter>
     </Card>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { PageMeta } from '@/components/seo/PageMeta';
+import { COMPANY } from '@/config/company.config';
 
 export default function PersonvernPage() {
   return (
@@ -69,9 +70,9 @@ export default function PersonvernPage() {
               kan du kontakte oss på:
             </p>
             <div className="bg-gray-50 rounded-lg p-4 text-gray-600">
-              <p><strong>Autoglass AS</strong></p>
-              <p>E-post: post@alfa-glass.no</p>
-              <p>Telefon: +47 21 37 83 90</p>
+              <p><strong>{COMPANY.NAME}</strong></p>
+              <p>E-post: {COMPANY.EMAIL}</p>
+              <p>Telefon: {COMPANY.PHONE}</p>
             </div>
 
             <h2 className="text-xl font-bold mt-8 mb-4">6. Endringer i erklæringen</h2>

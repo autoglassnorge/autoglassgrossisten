@@ -15,6 +15,7 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import { API_BASE } from '@/api/client';
+import { COMPANY } from '@/config/company.config';
 
 interface QuoteForm {
   name: string;
@@ -134,13 +135,13 @@ export default function CartPage() {
     return (
       <div className="min-h-screen bg-white">
         <PageMeta
-          title="Handlekurv — Autoglass AS"
-          description="Din handlekurv hos Autoglass AS. Bestill bilglass for B2B."
+          title="Ordre — Autoglass AS"
+          description="Din ordre hos Autoglass AS. Bestill bilglass for B2B."
           canonicalPath="/kasse"
         />
         <div className="mx-auto max-w-2xl px-4 py-20 text-center">
           <ShoppingCart className="mx-auto h-16 w-16 text-gray-300 mb-6" />
-          <h1 className="text-2xl font-bold mb-4">Handlekurven er tom</h1>
+          <h1 className="text-2xl font-bold mb-4">Ordren er tom</h1>
           <p className="text-gray-600 mb-8">
             Du har ikke lagt til noen produkter ennå. Bruk søket eller katalogen
             for å finne riktig bilglass.
@@ -168,15 +169,15 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-white">
       <PageMeta
-        title="Handlekurv — Autoglass AS"
-        description={`${totalItems} produkt${totalItems !== 1 ? 'er' : ''} i handlekurven. Send tilbudsforespørsel til Autoglass AS.`}
+        title="Ordre — Autoglass AS"
+        description={`${totalItems} produkt${totalItems !== 1 ? 'er' : ''} i ordren. Send tilbudsforespørsel til Autoglass AS.`}
         canonicalPath="/kasse"
       />
 
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold mb-8 flex items-center gap-3">
           <ShoppingCart className="h-6 w-6" />
-          Handlekurv
+          Ordre
           <span className="text-sm font-normal text-gray-500">
             ({totalItems} {totalItems === 1 ? 'produkt' : 'produkter'})
           </span>
@@ -260,7 +261,7 @@ export default function CartPage() {
                     <button
                       onClick={() => removeItem(item.product.id)}
                       className="p-2 text-gray-400 hover:text-red-500 transition flex-shrink-0"
-                      aria-label="Fjern fra handlekurv"
+                      aria-label="Fjern fra ordre"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -321,7 +322,7 @@ export default function CartPage() {
               className="text-sm text-gray-500 hover:text-red-500 transition flex items-center gap-1"
             >
               <Trash2 className="h-3 w-3" />
-              Tøm handlekurv
+              Tøm ordre
             </button>
           </div>
 
@@ -373,19 +374,19 @@ export default function CartPage() {
               <p className="mb-2">
                 Ring oss på{' '}
                 <a
-                  href="tel:+4722905000"
+                  href={`tel:${COMPANY.PHONE_RAW}`}
                   className="text-autoglass-blue hover:underline"
                 >
-                  +47 21 37 83 90
+                  {COMPANY.PHONE}
                 </a>
               </p>
               <p>
                 eller send e-post til{' '}
                 <a
-                  href="mailto:post@alfa-glass.no"
+                  href={`mailto:${COMPANY.EMAIL}`}
                   className="text-autoglass-blue hover:underline"
                 >
-                  post@alfa-glass.no
+                  {COMPANY.EMAIL}
                 </a>
               </p>
             </div>

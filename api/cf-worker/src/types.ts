@@ -64,7 +64,7 @@ export interface GlassRecord {
   created_at: string | null;
   typeCode?: string;
   typeCodeDesc?: string;
-  position?: "driver" | "passenger" | "both" | null;
+  position?: "driver" | "passenger" | "center" | "both" | null;
   nagsCodes?: string[];
   /** Normalized properties bag (set by normalizeRecord) */
   properties?: Record<string, unknown>;

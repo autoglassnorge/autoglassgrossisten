@@ -22,7 +22,7 @@ export type FeatureFlag = (typeof FEATURE_FLAGS)[keyof typeof FEATURE_FLAGS];
  * Priority:
  *   1. Build-time env var `VITE_FF_<FLAG>` (true/false)
  *   2. localStorage key `ff_<flag>` (true/false)
- *   3. Default: false
+ *   3. Default: true for AI-first homepage hero
  */
 export function isEnabled(flag: FeatureFlag): boolean {
   const envKey = `VITE_FF_${flag.toUpperCase()}`;
@@ -33,6 +33,8 @@ export function isEnabled(flag: FeatureFlag): boolean {
   const lsVal = localStorage.getItem(`ff_${flag}`);
   if (lsVal === 'true' || lsVal === '1') return true;
   if (lsVal === 'false' || lsVal === '0') return false;
+
+  if (flag === FEATURE_FLAGS.AI_FIRST_HERO) return true;
 
   return false;
 }

@@ -22,16 +22,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            api/cf-worker/node_modules
-          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('api/cf-worker/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+          cache: 'npm'
+          cache-dependency-path: api/cf-worker/package-lock.json
 
       - name: Installer Worker-avhengigheter
         working-directory: api/cf-worker
@@ -59,16 +51,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            api/cf-worker/node_modules
-          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('api/cf-worker/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+          cache: 'npm'
+          cache-dependency-path: api/cf-worker/package-lock.json
 
       - name: Installer Worker-avhengigheter
         working-directory: api/cf-worker
@@ -135,16 +119,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            frontend/node_modules
-          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Installer frontend-avhengigheter
         working-directory: frontend

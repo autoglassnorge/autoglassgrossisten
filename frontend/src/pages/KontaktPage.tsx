@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { Phone, Mail, MapPin, Clock, CheckCircle, AlertCircle } from 'lucide-react';
+import { COMPANY } from '@/config/company.config';
 
 export default function KontaktPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -24,7 +25,7 @@ export default function KontaktPage() {
     <div className="min-h-screen bg-white">
       <PageMeta
         title="Kontakt — Autoglass AS"
-        description="Kontakt Autoglass AS for bestilling, support eller for å bli kunde. Telefon +47 21 37 83 90, e-post post@alfa-glass.no."
+        description={`Kontakt ${COMPANY.NAME} for bestilling, support eller for å bli kunde. Telefon ${COMPANY.PHONE}, e-post ${COMPANY.EMAIL}.`}
         canonicalPath="/kontakt"
       />
 
@@ -51,8 +52,8 @@ export default function KontaktPage() {
                   </div>
                   <div>
                     <div className="font-medium">Telefon</div>
-                    <a href="tel:+4722905000" className="text-autoglass-blue hover:underline">
-                      +47 21 37 83 90
+                    <a href={`tel:${COMPANY.PHONE_RAW}`} className="text-autoglass-blue hover:underline">
+                      {COMPANY.PHONE}
                     </a>
                   </div>
                 </div>
@@ -63,8 +64,8 @@ export default function KontaktPage() {
                   </div>
                   <div>
                     <div className="font-medium">E-post</div>
-                    <a href="mailto:post@alfa-glass.no" className="text-autoglass-blue hover:underline">
-                      post@alfa-glass.no
+                    <a href={`mailto:${COMPANY.EMAIL}`} className="text-autoglass-blue hover:underline">
+                      {COMPANY.EMAIL}
                     </a>
                   </div>
                 </div>
@@ -76,8 +77,8 @@ export default function KontaktPage() {
                   <div>
                     <div className="font-medium">Adresse</div>
                     <p className="text-gray-600">
-                      Autoglass AS<br />
-                      Oslo, Norge
+                      {COMPANY.NAME}<br />
+                      {COMPANY.ADDRESS.CITY}, {COMPANY.ADDRESS.COUNTRY}
                     </p>
                   </div>
                 </div>
@@ -89,8 +90,8 @@ export default function KontaktPage() {
                   <div>
                     <div className="font-medium">Åpningstider</div>
                     <p className="text-gray-600">
-                      Man–Fre: 07:00 – 16:00<br />
-                      Lør–Søn: Stengt
+                      {COMPANY.OPENING_HOURS.WEEKDAYS}<br />
+                      {COMPANY.OPENING_HOURS.WEEKEND}
                     </p>
                   </div>
                 </div>

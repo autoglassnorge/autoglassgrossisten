@@ -1,4 +1,4 @@
-import type { SearchResult, CatalogResponse } from '@/types/api';
+import type { SearchResult, CatalogResponse, UserEquipmentAnswers } from '@/types/api';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
@@ -14,8 +14,29 @@ export class SearchError extends Error {
   }
 }
 
-export async function searchByRegnr(regnr: string): Promise<SearchResult> {
-  const res = await fetch(`${API_BASE}/api/glass?regnr=${encodeURIComponent(regnr)}`);
+const EQUIPMENT_FIELDS = ['adas', 'rainSensor', 'heated', 'acoustic', 'antenna', 'camera', 'hud'] as const;
+
+function appendEquipmentAnswers(params: URLSearchParams, answers?: UserEquipmentAnswers) {
+  if (!answers) return;
+  for (const field of EQUIPMENT_FIELDS) {
+    const value = answers[field];
+    if (value !== undefined) {
+      params.set(`eq_${field}`, value ? '1' : '0');
+    }
+  }
+}
+
+export async function searchByRegnr(
+  regnr: string,
+  equipmentAnswers?: UserEquipmentAnswers,
+  position?: 'driver' | 'passenger' | 'center' | 'both'
+): Promise<SearchResult> {
+  const params = new URLSearchParams({ regnr });
+  appendEquipmentAnswers(params, equipmentAnswers);
+  if (position) {
+    params.set('position', position);
+  }
+  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     

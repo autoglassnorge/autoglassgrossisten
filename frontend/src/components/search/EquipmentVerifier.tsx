@@ -5,6 +5,7 @@ import type { Product } from '@/types/api';
 interface Props {
   products: Product[];
   onFilter: (filtered: Product[]) => void;
+  onAnswersChange?: (answers: Record<string, boolean | undefined>) => void;
 }
 
 const FEATURES = [
@@ -22,6 +23,11 @@ const FEATURES = [
  * Matches the backend detectFlagsFromDescription logic.
  */
 function productHasFeature(product: Product, key: string): boolean {
+  const properties = product.properties as Record<string, unknown> | undefined;
+  if (properties && key in properties) {
+    return properties[key] === true || properties[key] === 1;
+  }
+
   const d = (product.description || '').toUpperCase();
   const tokens = d.split(/[\s;,.\[\]()+-]+/).filter(t => t.length >= 1);
   const s = new Set(tokens);
@@ -58,7 +64,7 @@ function productHasFeature(product: Product, key: string): boolean {
   }
 }
 
-export function EquipmentVerifier({ products, onFilter }: Props) {
+export function EquipmentVerifier({ products, onFilter, onAnswersChange }: Props) {
   const [answers, setAnswers] = useState<Record<string, boolean | null>>({});
   const [showAll, setShowAll] = useState(false);
 
@@ -75,6 +81,13 @@ export function EquipmentVerifier({ products, onFilter }: Props) {
   const handleAnswer = (key: string, value: boolean | null) => {
     const next = { ...answers, [key]: value };
     setAnswers(next);
+    onAnswersChange?.(
+      Object.fromEntries(
+        Object.entries(next)
+          .filter(([, answer]) => answer !== null && answer !== undefined)
+          .map(([field, answer]) => [field, answer])
+      ) as Record<string, boolean | undefined>
+    );
 
     // Filter products based on answers
     const filtered = products.filter(p => {
@@ -87,7 +100,7 @@ export function EquipmentVerifier({ products, onFilter }: Props) {
       return true;
     });
 
-    onFilter(filtered.length > 0 ? filtered : products);
+    onFilter(filtered);
   };
 
   const filtered = products.filter(p => {

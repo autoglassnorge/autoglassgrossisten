@@ -1,46 +1,65 @@
 #!/usr/bin/env bash
-# KIMI Session Start Hook — Autoglass AS v2.0
-# Forbedret med kontekst fra forrige session, D1/KV metrikker, og uavklarte blockers
+# KIMI Session Start Hook — Autoglass AS v2.1 (Token-optimalisert)
+# v2.1: Cacher blockers i JSON for raskere oppstart, komprimert output
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 STATE_FILE="$REPO_ROOT/.kimi/PROJECT_STATE.md"
+BLOCKER_CACHE="$REPO_ROOT/.kimi/blocker-cache.json"
 SUMMARY_DIR="$REPO_ROOT/.kimi/session-summaries"
 
 echo ""
 echo "🚀 Autoglass AS — Session Start"
 echo "═══════════════════════════════════════════════════════"
 
-# 1. AKTIVE BLOCKERS (fra PROJECT_STATE.md)
+# 1. AKTIVE BLOCKERS (cached JSON for rask parsing)
 echo ""
 echo "🚨 AKTIVE BLOCKERS:"
-echo "───────────────────────────────────────────────────────"
 
-if [ -f "$STATE_FILE" ]; then
-  awk '/## Current blockers/,/## Open technical debt/' "$STATE_FILE" | \
-    grep "^| P" | \
-    while IFS='|' read -r _ prio blocker status _; do
-      prio=$(echo "$prio" | xargs)
-      blocker=$(echo "$blocker" | xargs)
-      status=$(echo "$status" | xargs)
-      if [ "$status" != "✅" ] && [ -n "$blocker" ]; then
-        echo "  [$prio] $blocker — $status"
-      fi
-    done
+# Rebuild cache hvis PROJECT_STATE.md er nyere enn cache
+if [ ! -f "$BLOCKER_CACHE" ] || [ "$STATE_FILE" -nt "$BLOCKER_CACHE" ]; then
+  if [ -f "$STATE_FILE" ]; then
+    node -e "
+const fs = require('fs');
+const content = fs.readFileSync('$STATE_FILE', 'utf8');
+const blockers = [];
+const match = content.match(/## Current blockers([\s\S]*?)## Open technical debt/);
+if (match) {
+  const lines = match[1].split('\n').filter(l => l.startsWith('| P'));
+  for (const line of lines) {
+    const parts = line.split('|').map(s => s.trim()).filter(Boolean);
+    if (parts.length >= 3 && parts[2] !== '✅') {
+      blockers.push({ prio: parts[0], blocker: parts[1], status: parts[2] });
+    }
+  }
+}
+fs.writeFileSync('$BLOCKER_CACHE', JSON.stringify(blockers));
+" 2>/dev/null
+  fi
+fi
+
+if [ -f "$BLOCKER_CACHE" ]; then
+  node -e "
+const fs = require('fs');
+const blockers = JSON.parse(fs.readFileSync('$BLOCKER_CACHE', 'utf8'));
+if (blockers.length === 0) {
+  console.log('  ✅ Ingen aktive blockers');
+} else {
+  blockers.forEach(b => {
+    console.log('  [' + b.prio + '] ' + b.blocker.slice(0, 70) + ' — ' + b.status);
+  });
+}
+" 2>/dev/null || echo "  (kunne ikke lese blocker-cache)"
 else
   echo "  ⚠️  PROJECT_STATE.md ikke funnet"
 fi
 
-# 2. SISTE SESSION-SUMMARY
+# 2. SISTE SESSION (kun filnavn, ikke hele diff)
 echo ""
 echo "📝 SISTE SESSION:"
-echo "───────────────────────────────────────────────────────"
-
 if [ -d "$SUMMARY_DIR" ]; then
   LATEST=$(ls -t "$SUMMARY_DIR"/session-*.md 2>/dev/null | head -1)
   if [ -n "$LATEST" ]; then
     echo "  $(basename "$LATEST")"
-    # Vis git diff-stat fra siste session
-    awk '/## Endrede filer/,/## D1 lokal status/' "$LATEST" | grep -v "^##" | head -10
   else
     echo "  (ingen tidligere session-summaries)"
   fi
@@ -48,85 +67,48 @@ else
   echo "  (ingen session-summaries-mappe)"
 fi
 
-# 3. D1 METRIKKER (lokal)
+# 3. KOMPAKT STATUS (D1 + Katalog + Diary + PRs på én linje hver)
 echo ""
-echo "🗄️  D1 LOKAL STATUS:"
-echo "───────────────────────────────────────────────────────"
+echo "📊 STATUS:"
 
-cd "$REPO_ROOT/api/cf-worker"
-D1_OUTPUT=$(npx wrangler d1 execute glass-catalog-db --local \
-  --command="SELECT 'glass_catalog' as t, COUNT(*) as c FROM glass_catalog UNION ALL SELECT 'ktype_registry', COUNT(*) FROM ktype_registry UNION ALL SELECT 'glass_rules', COUNT(*) FROM glass_rules UNION ALL SELECT 'ktype_matches', COUNT(*) FROM ktype_matches UNION ALL SELECT 'tecdoc_ktype_registry', COUNT(*) FROM tecdoc_ktype_registry" 2>/dev/null)
-
-if [ $? -eq 0 ]; then
-  echo "$D1_OUTPUT" | grep -E "glass_catalog|ktype_registry|glass_rules|ktype_matches|tecdoc" | sed 's/^/  /'
+# D1 (kun hvis wrangler dev kjører)
+D1_FILE="$REPO_ROOT/api/cf-worker/.wrangler/state/v3/d1/miniflare-D1DatabaseObject"
+if [ -d "$D1_FILE" ]; then
+  echo "  🗄️  D1: tilgjengelig (lokal)"
 else
-  echo "  ⚠️  D1 ikke tilgjengelig (kjør 'wrangler dev' først?)"
+  echo "  🗄️  D1: ikke tilgjengelig (kjør 'wrangler dev')"
 fi
 
-# 4. KATALOG-STATUS
-echo ""
-echo "📦 KATALOG:"
-echo "───────────────────────────────────────────────────────"
-
+# Katalog
 CATALOG_FILE="$REPO_ROOT/data/catalog-prod.json"
 if [ -f "$CATALOG_FILE" ]; then
   CATALOG_SIZE=$(stat -f%z "$CATALOG_FILE" 2>/dev/null || stat -c%s "$CATALOG_FILE" 2>/dev/null)
-  CATALOG_MTIME=$(stat -f%Sm "$CATALOG_FILE" 2>/dev/null || stat -c%y "$CATALOG_FILE" 2>/dev/null)
-  echo "  catalog-prod.json: $(echo "$CATALOG_SIZE" | awk '{printf "%.1f MB", $1/1024/1024}') — sist endret: $CATALOG_MTIME"
+  echo "  📦 Katalog: $(echo "$CATALOG_SIZE" | awk '{printf "%.1f MB", $1/1024/1024}')"
 else
-  echo "  ⚠️  catalog-prod.json ikke funnet"
+  echo "  📦 Katalog: ikke funnet"
 fi
 
-# 5. SISTE MEMPALACE DIARY-ENTRIES (prediktiv kontekst)
-echo ""
-echo "🧠 SISTE AKTIVITETER (MemPalace diary):"
-echo "───────────────────────────────────────────────────────"
-
+# Siste diary (kun siste entry)
 DIARY_FILE="$REPO_ROOT/.kimi/mempalace/data/diary.jsonl"
 if [ -f "$DIARY_FILE" ]; then
-  node -e "
-const fs = require('fs');
-const lines = fs.readFileSync('$DIARY_FILE', 'utf8').trim().split('\n').filter(Boolean);
-const entries = lines.slice(-5).map(l => {
-  try { return JSON.parse(l); } catch { return null; }
-}).filter(Boolean);
-entries.forEach(e => {
-  const ts = e.ts ? e.ts.slice(0, 16).replace('T', ' ') : '?';
-  const agent = e.agent || 'unknown';
-  const task = e.task || 'unknown';
-  const type = e.type || 'AUTO';
-  const status = e.status || '?';
-  console.log('  [' + ts + '] ' + agent + ' | ' + type + ' | ' + status + ' — ' + task.slice(0, 60));
-});
-" 2>/dev/null || echo "  (kunne ikke lese diary)"
-else
-  echo "  (ingen diary funnet)"
+  LAST_ENTRY=$(tail -1 "$DIARY_FILE" 2>/dev/null)
+  if [ -n "$LAST_ENTRY" ]; then
+    TASK=$(echo "$LAST_ENTRY" | node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8')); console.log((d.task||'?').slice(0,50))" 2>/dev/null)
+    STATUS=$(echo "$LAST_ENTRY" | node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8')); console.log(d.status||'?')" 2>/dev/null)
+    echo "  🧠 Siste: $TASK — $STATUS"
+  fi
 fi
 
-# 6. ÅPNE PRs (hvis gh CLI er tilgjengelig)
-echo ""
-echo "🔀 ÅPNE PULL REQUESTS:"
-echo "───────────────────────────────────────────────────────"
-
+# PRs (kun antall)
 if command -v gh &> /dev/null; then
-  cd "$REPO_ROOT"
-  gh pr list --limit 5 2>/dev/null | sed 's/^/  /' || echo "  (ingen åpne PRs eller ikke logget inn)"
+  PR_COUNT=$(cd "$REPO_ROOT" && gh pr list --limit 20 2>/dev/null | wc -l | tr -d ' ')
+  if [ "$PR_COUNT" -gt 0 ]; then
+    echo "  🔀 PRs: $PR_COUNT åpne"
+  else
+    echo "  🔀 PRs: ingen åpne"
+  fi
 else
-  echo "  (gh CLI ikke installert)"
-fi
-
-# 7. AGENT-KONSISTENS-SJEKK
-echo ""
-echo "🤖 AGENT-KONSISTENS:"
-echo "───────────────────────────────────────────────────────"
-
-VALIDATE_OUTPUT=$(cd "$REPO_ROOT" && node scripts/validate-agents.mjs --quick 2>&1)
-VALIDATE_EXIT=$?
-
-if [ $VALIDATE_EXIT -eq 0 ]; then
-  echo "  ✅ Agent-instruksjoner stemmer med kodebasen"
-else
-  echo "  ⚠️  AGENT-FEIL FUNNET — kjør 'node scripts/validate-agents.mjs' for detaljer"
+  echo "  🔀 PRs: gh CLI ikke installert"
 fi
 
 echo ""

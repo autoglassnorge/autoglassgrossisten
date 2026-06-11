@@ -59,7 +59,21 @@ const FEATURE_CHECKS: FeatureCheck[] = [
 ];
 
 function getProductFeatures(product: Product): Record<string, boolean> {
-  return extractFeaturesExtended(product.description) as unknown as Record<string, boolean>;
+  const features = extractFeaturesExtended(product.description) as unknown as Record<string, boolean>;
+  const properties = product.properties as Record<string, unknown> | undefined;
+  if (properties) {
+    for (const key of ['hud', 'heated', 'rainSensor', 'camera', 'adas', 'acoustic', 'antenna']) {
+      if (key in properties) {
+        features[key] = properties[key] === true || properties[key] === 1;
+      }
+    }
+    features.sensor = features.rainSensor;
+    features.kamera = features.camera;
+    features.varme = features.heated;
+    features.akustisk = features.acoustic;
+    features.antenne = features.antenna;
+  }
+  return features;
 }
 
 function scoreProduct(product: Product, answers: Record<string, boolean | null>): number {
@@ -100,8 +114,18 @@ export function WindshieldVerifier({ products, onFilter }: Props) {
     const next = { ...answers, [key]: value };
     setAnswers(next);
 
-    // Auto-filter
-    const scored = products.map(p => ({
+    const matched = products.filter(p => {
+      for (const [k, answer] of Object.entries(next)) {
+        if (answer === null) continue;
+        const has = getProductFeatures(p)[k] || false;
+        if (answer === true && !has) return false;
+        if (answer === false && has) return false;
+      }
+      return true;
+    });
+
+    const source = matched.length > 0 ? matched : products;
+    const scored = source.map(p => ({
       product: p,
       score: scoreProduct(p, next),
     })).sort((a, b) => b.score - a.score);

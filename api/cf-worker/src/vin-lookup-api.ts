@@ -21,6 +21,7 @@
 
 import { resolveGlass, upsertGlassRule, GlassMatch } from "./vin-glass-resolver";
 import { decodeVinVincario, VincarioConfig } from "./providers/vincario";
+import { normalizeRegnr, normalizeVin, REGNR_PATTERN, VIN_PATTERN } from "./lib/input-detector";
 
 export interface VinLookupRequest {
   regnr?: string;
@@ -48,11 +49,18 @@ export interface VinLookupResponse {
   providerCost?: number;
 }
 
-const REGNR_PATTERN = /^[A-Z]{2}\d{4,5}$/;
-const VIN_PATTERN = /^[A-HJ-NPR-Z0-9]{17}$/i;
-
 const SVV_API_URL =
   "https://akfell-datautlevering.atlas.vegvesen.no/enkeltoppslag/kjoretoydata";
+
+interface VinDecodeCacheRow {
+  vin: string;
+  make: string | null;
+  model: string | null;
+  year: number | null;
+  normalized_key: string | null;
+  confidence: number;
+  expires_at: string;
+}
 
 /**
  * Main handler for POST /api/vin-lookup
@@ -76,19 +84,27 @@ export async function handleVinLookup(
     return jsonError("Invalid JSON body", 400);
   }
 
-  const { regnr, vin: inputVin, opening = "windshield", features = {}, mode = "auto" } = body;
+  const {
+    regnr: rawRegnr,
+    vin: rawInputVin,
+    opening = "windshield",
+    features = {},
+    mode = "auto",
+  } = body;
+  const regnr = rawRegnr ? normalizeRegnr(rawRegnr) : undefined;
+  const inputVin = rawInputVin ? normalizeVin(rawInputVin) : undefined;
 
   // Validate input
   if (!regnr && !inputVin) {
     return jsonError("Either regnr or vin is required", 400);
   }
 
-  if (regnr && !REGNR_PATTERN.test(regnr.toUpperCase())) {
-    return jsonError(`Invalid regnr format: ${regnr}`, 400);
+  if (regnr && !REGNR_PATTERN.test(regnr)) {
+    return jsonError(`Invalid regnr format: ${rawRegnr}`, 400);
   }
 
   if (inputVin && !VIN_PATTERN.test(inputVin)) {
-    return jsonError(`Invalid VIN format: ${inputVin}`, 400);
+    return jsonError(`Invalid VIN format: ${rawInputVin}`, 400);
   }
 
   const db = env.GLASS_CATALOG_D1;
@@ -99,6 +115,7 @@ export async function handleVinLookup(
     let vehicleMake = "";
     let vehicleModel = "";
     let vehicleYear = 0;
+    let vehicleSource = regnr && !resolvedVin ? "svv" : "vin";
 
     if (regnr && !resolvedVin) {
       const svvResult = await fetchSvv(regnr, env.SVV_API_KEY);
@@ -109,10 +126,21 @@ export async function handleVinLookup(
       vehicleMake = svvResult.make;
       vehicleModel = svvResult.model;
       vehicleYear = svvResult.year;
+      vehicleSource = "svv";
     }
 
     if (!resolvedVin || resolvedVin.length !== 17) {
       return jsonError("Could not resolve VIN", 404);
+    }
+
+    if ((!vehicleMake || !vehicleModel || !vehicleYear) && resolvedVin) {
+      const cachedVin = await lookupVinDecodeCache(db, resolvedVin);
+      if (cachedVin) {
+        vehicleMake = vehicleMake || cachedVin.make || "";
+        vehicleModel = vehicleModel || cachedVin.model || "";
+        vehicleYear = vehicleYear || cachedVin.year || 0;
+        vehicleSource = cachedVin.make || cachedVin.model || cachedVin.year ? "vin_decode_cache" : vehicleSource;
+      }
     }
 
     // ── Step 2: Check glass_rules synchronously (Layer 0) ──
@@ -147,7 +175,7 @@ export async function handleVinLookup(
           vin: resolvedVin,
           kType: ruleResult.ktype,
         },
-        resolutionPath: ["svv", "glass_rules"],
+        resolutionPath: [vehicleSource, "glass_rules"],
         paidLookupUsed: false,
       });
     }
@@ -170,7 +198,7 @@ export async function handleVinLookup(
           vin: resolvedVin,
           kType: ruleResult.ktype,
         },
-        resolutionPath: ["svv", "glass_rules"],
+        resolutionPath: [vehicleSource, "glass_rules"],
         paidLookupUsed: false,
       });
     }
@@ -198,6 +226,17 @@ export async function handleVinLookup(
   } catch (err) {
     console.error("[vin-lookup] Error:", err);
     return jsonError(err instanceof Error ? err.message : "Internal error", 500);
+  }
+}
+
+async function lookupVinDecodeCache(db: D1Database, vin: string): Promise<VinDecodeCacheRow | null> {
+  try {
+    return await db
+      .prepare("SELECT vin, make, model, year, normalized_key, confidence, expires_at FROM vin_decode_cache WHERE vin = ? AND expires_at > datetime('now')")
+      .bind(vin)
+      .first<VinDecodeCacheRow>();
+  } catch {
+    return null;
   }
 }
 
