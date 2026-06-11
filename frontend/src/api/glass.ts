@@ -59,7 +59,13 @@ export async function searchByRegnr(
   return res.json();
 }
 
-export async function searchByEurocode(eurocode: string): Promise<{ query: { eurocode: string }; count: number; results: unknown[] }> {
+export interface IdentifierSearchResponse {
+  query: Record<string, string>;
+  count: number;
+  results: unknown[];
+}
+
+export async function searchByEurocode(eurocode: string): Promise<IdentifierSearchResponse> {
   const res = await fetch(`${API_BASE}/api/glass?eurocode=${encodeURIComponent(eurocode)}`);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
@@ -68,7 +74,7 @@ export async function searchByEurocode(eurocode: string): Promise<{ query: { eur
   return res.json();
 }
 
-export async function searchBySku(sku: string): Promise<{ query: { supplier_sku: string }; count: number; results: unknown[] }> {
+export async function searchBySku(sku: string): Promise<IdentifierSearchResponse> {
   const res = await fetch(`${API_BASE}/api/glass?supplier_sku=${encodeURIComponent(sku)}`);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
@@ -77,7 +83,7 @@ export async function searchBySku(sku: string): Promise<{ query: { supplier_sku:
   return res.json();
 }
 
-export async function searchByOem(oem: string): Promise<{ query: { oem: string }; count: number; results: unknown[] }> {
+export async function searchByOem(oem: string): Promise<IdentifierSearchResponse> {
   const res = await fetch(`${API_BASE}/api/glass?oem=${encodeURIComponent(oem)}`);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));

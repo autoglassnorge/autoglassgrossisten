@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense, useRef, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Loader2, Car, Wrench, X, AlertTriangle } from 'lucide-react';
+import { Loader2, Car, X } from 'lucide-react';
 import { useChatStore } from '@/stores/chatStore';
 
 import { Skeleton } from '@/components/ui/Skeleton';
@@ -20,9 +20,15 @@ import {
 } from '@/components/icons/SearchIcons';
 import { ResultSkeleton } from '@/components/search/ResultSkeleton';
 
-const RegnrResults = lazy(() => import('@/components/search/results/RegnrResults'));
-const IdentifierResults = lazy(() => import('@/components/search/results/IdentifierResults'));
-const CatalogResults = lazy(() => import('@/components/search/results/CatalogResults'));
+const RegnrResults = lazy(() =>
+  import('@/components/search/results/RegnrResults').then((m) => ({ default: m.RegnrResults }))
+);
+const IdentifierResults = lazy(() =>
+  import('@/components/search/results/IdentifierResults').then((m) => ({ default: m.IdentifierResults }))
+);
+const CatalogResults = lazy(() =>
+  import('@/components/search/results/CatalogResults').then((m) => ({ default: m.CatalogResults }))
+);
 const VehicleWizard = lazy(() => import('@/components/search/VehicleWizard').then((m) => ({ default: m.VehicleWizard })));
 const ProductDetail = lazy(() => import('@/components/catalog/ProductDetail').then((m) => ({ default: m.ProductDetail })));
 
