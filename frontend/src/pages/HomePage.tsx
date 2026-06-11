@@ -1,35 +1,24 @@
 import { useI18n } from '@/i18n/I18nProvider';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { isEnabled, FEATURE_FLAGS } from '@/lib/featureFlags';
 
 // Redesign seksjoner
-import { HeroProfessor } from '@/components/home/HeroProfessor';
-import { HeroAiFirst } from '@/components/home/HeroAiFirst';
-import { TrustBar } from '@/components/home/TrustBar';
-import { CategoryGrid } from '@/components/home/CategoryGrid';
+import { HeroB2B } from '@/components/home/HeroB2B';
+import { VehicleTypeGrid } from '@/components/home/VehicleTypeGrid';
+import { ManufacturerLogos } from '@/components/home/ManufacturerLogos';
 import { WhyChooseUs } from '@/components/home/WhyChooseUs';
+import { HowItWorksSection } from '@/components/home/HowItWorksSection';
+import { SupportSection } from '@/components/home/SupportSection';
 import { AdasSection } from '@/components/home/AdasSection';
 import { CtaBanner } from '@/components/home/CtaBanner';
-
-/**
- * HomePage - Hybrid design: Sekurit layout + Autoglass identitet
- * 
- * Layout-sekvens:
- * 1. HeroSekurit - Mørk hero med stort søkefelt
- * 2. TrustSection - Produsenter og garantier
- * 3. CategoryGrid - Produktkategorier
- * 4. LiveStats - Statistikk
- * 5. Testimonials - Kundeuttalelser
- * 6. AdasSection - ADAS-kompetanse
- * 7. QuickActions - Hurtigvalg CTA
- * 8. CtaBanner - Avsluttende call-to-action
- */
+import { StickySearchBar } from '@/components/search/StickySearchBar';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { ARTICLES } from '@/data/bilglassguide/content';
 
 export default function HomePage() {
   const { t: _t } = useI18n();
 
-  // FAQ-strukturert data for SEO
   const faqData = {
     '@type': 'FAQPage',
     mainEntity: [
@@ -123,22 +112,74 @@ export default function HomePage() {
       />
 
       <main>
-        {/* 1. HERO — AI-first when flag is on, otherwise Professor */}
-        {isEnabled(FEATURE_FLAGS.AI_FIRST_HERO) ? <HeroAiFirst /> : <HeroProfessor />}
+        {/* 1. HERO — Regnr search as primary CTA */}
+        <HeroB2B />
 
-        {/* 2. TRUST — Manufacturer bar */}
-        <TrustBar />
+        {/* 2. STICKY SEARCH — Follows on scroll */}
+        <StickySearchBar />
 
-        {/* 3. CATEGORIES — Product categories */}
-        <CategoryGrid />
+        {/* 3. MANUFACTURER LOGOS — Trust bar */}
+        <ManufacturerLogos />
 
-        {/* 4. WHY CHOOSE US — Trust points + stats */}
+        {/* 4. VEHICLE TYPES — Vehicle type showcase */}
+        <VehicleTypeGrid />
+
+        {/* 5. ARTICLES — Technical content hub */}
+        <section className="bg-white py-16 sm:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight">
+                  Fagartikler om bilglass
+                </h2>
+                <p className="mt-3 max-w-2xl text-base text-gray-600">
+                  Teknisk kunnskap om frontruter, ADAS, HUD, produsenter og variantmatching.
+                </p>
+              </div>
+              <Link
+                to="/bilglassguide"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-autoglass-blue hover:underline"
+              >
+                Se alle artikler
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {ARTICLES.slice(0, 6).map((article) => (
+                <Link
+                  key={article.slug}
+                  to={`/bilglassguide/${article.slug}`}
+                  className="group rounded-lg border border-gray-200 bg-white p-5 transition-colors hover:border-autoglass-blue hover:bg-blue-50/40"
+                >
+                  <div className="text-xs font-semibold uppercase tracking-wide text-autoglass-blue">
+                    {article.category}
+                  </div>
+                  <h3 className="mt-2 text-base font-semibold text-gray-900 group-hover:text-autoglass-blue">
+                    {article.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">
+                    {article.description}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 6. HOW IT WORKS — B2B workflow for all visitors */}
+        <HowItWorksSection />
+
+        {/* 7. WHY CHOOSE US — Trust points + stats */}
         <WhyChooseUs />
 
-        {/* 6. ADAS — Calibration competence */}
+        {/* 8. SUPPORT — "Snakk med glassteamet" */}
+        <SupportSection />
+
+        {/* 8. ADAS — Calibration competence */}
         <AdasSection />
 
-        {/* 7. CTA — Closing call-to-action */}
+        {/* 9. CTA — Closing call-to-action */}
         <CtaBanner />
       </main>
     </>

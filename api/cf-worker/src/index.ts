@@ -175,7 +175,7 @@ export default {
 
     // Glass search
     if (path === "/api/glass") {
-      const response = await handleGlass(request, env);
+      const response = await handleGlass(request, env, ctx);
       
       // Enterprise telemetry (async)
       const latency = Date.now() - startTime;

@@ -34,6 +34,18 @@ describe('detectInputType', () => {
       expect(result.type).toBe('regnr');
       expect(result.normalized).toBe('AB1234');
     });
+
+    it('regnr with dash separator', () => {
+      const result = detectInputType('AB-12345');
+      expect(result.type).toBe('regnr');
+      expect(result.normalized).toBe('AB12345');
+    });
+
+    it('regnr with dot separator', () => {
+      const result = detectInputType('AB.12345');
+      expect(result.type).toBe('regnr');
+      expect(result.normalized).toBe('AB12345');
+    });
   });
 
   describe('vin', () => {
@@ -54,6 +66,12 @@ describe('detectInputType', () => {
 
     it('VIN with spaces', () => {
       const result = detectInputType('1HGBH 41JX MN109 186');
+      expect(result.type).toBe('vin');
+      expect(result.normalized).toBe('1HGBH41JXMN109186');
+    });
+
+    it('VIN with dash grouping', () => {
+      const result = detectInputType('1HGBH-41JX-MN109186');
       expect(result.type).toBe('vin');
       expect(result.normalized).toBe('1HGBH41JXMN109186');
     });

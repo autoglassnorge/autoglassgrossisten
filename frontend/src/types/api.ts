@@ -20,7 +20,7 @@ export interface Product {
   // NEW: type code & position fields
   typeCode: string;
   typeCodeDesc: string;
-  position: 'driver' | 'passenger' | 'center' | null;
+  position: 'driver' | 'passenger' | 'center' | 'both' | null;
   typeDescription?: string;
   properties: {
     heated: boolean;
@@ -111,6 +111,10 @@ export interface EquipmentFlags {
   laneAssist: boolean;
 }
 
+export type UserEquipmentAnswers = Partial<
+  Pick<EquipmentFlags, 'adas' | 'rainSensor' | 'heated' | 'acoustic' | 'antenna' | 'hud' | 'camera'>
+>;
+
 export interface ConfidenceInfo {
   score: number;
   label: string;
@@ -167,4 +171,12 @@ export interface SearchResult {
   // NEW: structured confidence + grouped results
   confidenceInfo?: ConfidenceInfo;
   resultsByType?: Record<string, Product[]>;
+  equipmentFilter?: {
+    applied: boolean;
+    answers?: UserEquipmentAnswers;
+    exactCount?: number;
+    uncertainCount?: number;
+    showingUncertainFallback?: boolean;
+    message?: string;
+  };
 }

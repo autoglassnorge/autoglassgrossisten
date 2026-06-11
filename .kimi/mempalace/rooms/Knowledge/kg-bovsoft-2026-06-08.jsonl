@@ -1,0 +1,49 @@
+{"subject": "bovsoft_bulk", "predicate": "session_completed", "object": "2026-06-08", "validFrom": "2026-06-08"}
+{"subject": "bovsoft_bulk", "predicate": "total_regnr_processed", "object": "92", "validFrom": "2026-06-08"}
+{"subject": "bovsoft_bulk", "predicate": "total_unique_ktypes_discovered", "object": "50", "validFrom": "2026-06-08"}
+{"subject": "bovsoft_bulk", "predicate": "credits_used", "object": "92", "validFrom": "2026-06-08"}
+{"subject": "bovsoft_bulk", "predicate": "credits_remaining", "object": "189", "validFrom": "2026-06-08"}
+{"subject": "catalog_fixes", "predicate": "total_products_fixed", "object": "230", "validFrom": "2026-06-08"}
+{"subject": "catalog_fixes", "predicate": "tesla_model_names_fixed", "object": "138", "validFrom": "2026-06-08"}
+{"subject": "catalog_fixes", "predicate": "polestar_3_ktype_assigned", "object": "150670", "validFrom": "2026-06-08"}
+{"subject": "ktype_coverage", "predicate": "percentage", "object": "24.9", "validFrom": "2026-06-08"}
+{"subject": "ktype_coverage", "predicate": "unique_ktypes_in_catalog", "object": "250", "validFrom": "2026-06-08"}
+{"subject": "bmw_i4", "predicate": "ktype", "object": "144689", "validFrom": "2026-06-08"}
+{"subject": "bmw_i4", "predicate": "products_in_catalog", "object": "0", "validFrom": "2026-06-08"}
+{"subject": "ford_mach_e", "predicate": "ktypes", "object": "143871,143873,157623,157624", "validFrom": "2026-06-08"}
+{"subject": "ford_mach_e", "predicate": "products_in_catalog", "object": "0", "validFrom": "2026-06-08"}
+{"subject": "ford_mach_e", "predicate": "nags_entries_found", "object": "3", "validFrom": "2026-06-08"}
+{"subject": "ktype_800829", "predicate": "maps_to", "object": "Tesla Model Y 2024", "validFrom": "2026-06-08"}
+{"subject": "ktype_145787", "predicate": "maps_to", "object": "Tesla Model Y 2021", "validFrom": "2026-06-08"}
+{"subject": "ktype_140981", "predicate": "maps_to", "object": "Tesla Model Y 2019", "validFrom": "2026-06-08"}
+{"subject": "ktype_140980", "predicate": "maps_to", "object": "Tesla Model Y 2019", "validFrom": "2026-06-08"}
+{"subject": "ktype_158557", "predicate": "maps_to", "object": "Tesla Model 3 2023", "validFrom": "2026-06-08"}
+{"subject": "ktype_135951", "predicate": "maps_to", "object": "Tesla Model 3 2018", "validFrom": "2026-06-08"}
+{"subject": "ktype_145757", "predicate": "maps_to", "object": "Tesla Model 3", "validFrom": "2026-06-08"}
+{"subject": "ktype_135952", "predicate": "maps_to", "object": "Tesla Model 3 2018", "validFrom": "2026-06-08"}
+{"subject": "ktype_136487", "predicate": "maps_to", "object": "Tesla Model 3 2019", "validFrom": "2026-06-08"}
+{"subject": "ktype_120532", "predicate": "maps_to", "object": "Tesla Model S", "validFrom": "2026-06-08"}
+{"subject": "ktype_144689", "predicate": "maps_to", "object": "BMW i4 2021", "validFrom": "2026-06-08"}
+{"subject": "ktype_154763", "predicate": "maps_to", "object": "Volvo EX30 2023", "validFrom": "2026-06-08"}
+{"subject": "ktype_154762", "predicate": "maps_to", "object": "Volvo EX30 2023", "validFrom": "2026-06-08"}
+{"subject": "ktype_141537", "predicate": "maps_to", "object": "VW ID.3 2019", "validFrom": "2026-06-08"}
+{"subject": "ktype_800000", "predicate": "maps_to", "object": "VW ID.3 2024", "validFrom": "2026-06-08"}
+{"subject": "ktype_156261", "predicate": "maps_to", "object": "Audi Q4 e-tron 2023", "validFrom": "2026-06-08"}
+{"subject": "ktype_144202", "predicate": "maps_to", "object": "Audi Q4 e-tron 2021", "validFrom": "2026-06-08"}
+{"subject": "ktype_145083", "predicate": "maps_to", "object": "Audi Q4 e-tron 2021", "validFrom": "2026-06-08"}
+{"subject": "ktype_156263", "predicate": "maps_to", "object": "Audi Q4 e-tron 2023", "validFrom": "2026-06-08"}
+{"subject": "ktype_158148", "predicate": "maps_to", "object": "Audi Q6 2024", "validFrom": "2026-06-08"}
+{"subject": "ktype_150670", "predicate": "maps_to", "object": "Polestar 3", "validFrom": "2026-06-08"}
+{"subject": "ktype_157624", "predicate": "maps_to", "object": "Ford Mustang Mach-E 2023", "validFrom": "2026-06-08"}
+{"subject": "ktype_143871", "predicate": "maps_to", "object": "Ford Mustang Mach-E 2021", "validFrom": "2026-06-08"}
+{"subject": "ktype_157623", "predicate": "maps_to", "object": "Ford Mustang Mach-E 2022", "validFrom": "2026-06-08"}
+{"subject": "ktype_143873", "predicate": "maps_to", "object": "Ford Mustang Mach-E 2021", "validFrom": "2026-06-08"}
+{"subject":"glass_catalog","predicate":"model_coverage_pct","object":"99.98","validFrom":"2026-06-08"}
+{"subject":"glass_catalog","predicate":"products_with_model","object":"26984","validFrom":"2026-06-08"}
+{"subject":"glass_catalog","predicate":"total_products","object":"26990","validFrom":"2026-06-08"}
+{"subject":"glass_catalog","predicate":"empty_models_remaining","object":"6","validFrom":"2026-06-08"}
+{"subject":"glass_catalog","predicate":"duplicates_deleted","object":"139","validFrom":"2026-06-08"}
+{"subject":"data_quality","predicate":"usa_cars_bug_fixed","object":"1971_products_reassigned","validFrom":"2026-06-08"}
+{"subject":"data_quality","predicate":"american_models_parsed","object":"1336_products","validFrom":"2026-06-08"}
+{"subject":"data_quality","predicate":"all_brands_parsed","object":"484_products_across_all_brands","validFrom":"2026-06-08"}
+{"subject":"data_quality","predicate":"cross_references_deleted","object":"46_products","validFrom":"2026-06-08"}

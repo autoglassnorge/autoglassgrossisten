@@ -70,6 +70,7 @@ export function extractEquipment(description: string): Record<string, boolean> {
 export function extractFeaturesExtended(description?: string | null): EquipmentFlags & {
   sensor: boolean;
   kamera: boolean;
+  antenne: boolean;
   varme: boolean;
   akustisk: boolean;
   coated: boolean;
@@ -79,6 +80,7 @@ export function extractFeaturesExtended(description?: string | null): EquipmentF
     ...base,
     sensor: base.rainSensor,
     kamera: base.camera,
+    antenne: base.antenna,
     varme: base.heated,
     akustisk: base.acoustic,
     coated: false,

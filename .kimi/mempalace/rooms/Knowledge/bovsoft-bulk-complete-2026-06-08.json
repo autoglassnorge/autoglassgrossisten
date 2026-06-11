@@ -1,0 +1,47 @@
+{
+  "session_date": "2026-06-08",
+  "bovsoft_bulk": {
+    "batch1": { "regnr": 62, "success": 62, "unique_ktypes": 23, "credits_used": 62 },
+    "batch2": { "regnr": 30, "success": 28, "unique_ktypes": 27, "credits_used": 30 },
+    "total": { "regnr": 92, "success": 90, "unique_ktypes": 50, "credits_used": 92, "credits_remaining": 189 },
+    "models_discovered": [
+      "Tesla Model Y (4 kTypes)", "Tesla Model 3 (5 kTypes)", "Tesla Model S (1 kType)",
+      "BMW i4", "BMW 5 (G60)", "BMW X1 (F48)", "BMW X3 (E83)",
+      "Ford Mustang Mach-E (4 kTypes)", "Ford Fiesta",
+      "Volvo EX30 (2 kTypes)", "Volvo C40", "Volvo XC90 II", "Volvo XC70 II", "Volvo V60 I",
+      "Audi Q4 e-tron (4 kTypes)", "Audi Q6", "Audi e-tron",
+      "VW ID.3 (2 kTypes)", "VW Golf VII", "VW Tiguan", "VW UP",
+      "Polestar 3", "Toyota Auris", "Toyota RAV4", "Toyota HiAce",
+      "Mitsubishi Outlander III", "Mercedes E-Klasse", "Subaru Forester",
+      "Honda HR-V", "Opel Astra", "Citroën C4", "Aston Martin DB9", "Nissan 310 GX"
+    ]
+  },
+  "catalog_fixes": {
+    "audi_q4_q6": { "products": 53, "old_ktype": "43077/43808", "new_ktype": "144202/158148" },
+    "volvo_ex30": { "products": 14, "old_ktype": "14187", "new_ktype": "154763" },
+    "vw_id3": { "products": 16, "old_ktype": "37838", "new_ktype": "141537" },
+    "tesla_all_models": { "products": 138, "fix_type": "model_name_parsed_from_description", "ktypes_assigned": 135 },
+    "polestar_3": { "products": 9, "new_ktype": 150670 },
+    "total_products_fixed": 230,
+    "total_new_ktypes_in_catalog": 50
+  },
+  "coverage": {
+    "total_products": 27139,
+    "with_ktype_before": 6622,
+    "with_ktype_after": 6766,
+    "percentage_before": 24.4,
+    "percentage_after": 24.9,
+    "unique_ktypes": 250
+  },
+  "missing_from_catalog": {
+    "bmw_i4": { "ktype": 144689, "products_in_catalog": 0, "sources_checked": ["NAGS", "auto-glass.no", "Sekurit", "AGC", "CSC"] },
+    "ford_mustang_mach_e": { "ktypes": [143871, 143873, 157623, 157624], "products_in_catalog": 0, "nags_found": 3, "sources_checked": ["NAGS", "auto-glass.no", "Sekurit", "AGC", "CSC"] }
+  },
+  "next_steps": [
+    "MyGrant API: NAGS DW02779/DW02780/DW02697 → eurocodes",
+    "Pilkington direct: Contact Ireland for BMW i4 OEM numbers",
+    "Biluppgifter API renewal: VIN lookup for OEM glass numbers",
+    "Nordglass/norsk importør: Check stock for Mach-E/i4",
+    "Bovsoft batch 3: Use remaining 189 credits on more Finn.no regnr"
+  ]
+}

@@ -11,6 +11,7 @@ import {
 import {
   CATEGORY_CARDS,
   POPULAR_TOPICS,
+  ARTICLES,
   FAQS,
 } from '@/data/bilglassguide/content';
 
@@ -152,6 +153,52 @@ export default function BilglassguidePage() {
                     {topic.title}
                   </span>
                   <ArrowRight className="h-4 w-4 text-gray-400 ml-auto flex-shrink-0" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========== ALLE ARTIKLER ========== */}
+        <section className="py-12 sm:py-16 bg-white">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                  Alle artikler
+                </h2>
+                <p className="text-gray-600 mt-2 max-w-xl">
+                  Samlet oversikt over tekniske artikler om bilglass, variantmatching, produsenter og kalibrering.
+                </p>
+              </div>
+              <span className="text-sm font-medium text-autoglass-blue">
+                {ARTICLES.length} artikler
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {ARTICLES.map((article) => (
+                <Link
+                  key={article.slug}
+                  to={`/bilglassguide/${article.slug}`}
+                  className="group rounded-xl border border-gray-200 bg-white p-5 hover:border-autoglass-blue hover:bg-blue-50/40 transition-colors"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 rounded-lg bg-blue-50 p-2 text-autoglass-blue group-hover:bg-white">
+                      <ArrowRight className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-autoglass-blue">
+                        {article.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+                        {article.description}
+                      </p>
+                      <div className="mt-3 text-xs font-medium uppercase tracking-wide text-gray-400">
+                        {article.category}
+                      </div>
+                    </div>
+                  </div>
                 </Link>
               ))}
             </div>

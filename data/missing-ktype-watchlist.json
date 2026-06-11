@@ -1,0 +1,8756 @@
+{
+  "generated_at": "2026-06-08T03:07:18.017Z",
+  "total_rows": 3078,
+  "total_combos": 1458,
+  "note": "These are make/model/year combos that could not be matched to kType. Priority for future enrichment via Bovsoft or TecDoc updates.",
+  "combos": [
+    {
+      "make": "TESLA",
+      "model": "Model Y",
+      "year": 2023,
+      "cnt": 28
+    },
+    {
+      "make": "AUDI",
+      "model": "Q6 SUV e-tron quattro",
+      "year": 2025,
+      "cnt": 26
+    },
+    {
+      "make": "SUBARU",
+      "model": "SOLTERRA",
+      "year": 2022,
+      "cnt": 26
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 50 E TRON",
+      "year": 2021,
+      "cnt": 21
+    },
+    {
+      "make": "BMW",
+      "model": "i4 M50",
+      "year": 2022,
+      "cnt": 20
+    },
+    {
+      "make": "TESLA",
+      "model": "Model 3",
+      "year": 2019,
+      "cnt": 20
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4 E-Hybrid",
+      "year": 2018,
+      "cnt": 19
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 50 E TRON",
+      "year": 2022,
+      "cnt": 17
+    },
+    {
+      "make": "TESLA",
+      "model": "Model Y",
+      "year": 2022,
+      "cnt": 17
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2014,
+      "cnt": 16
+    },
+    {
+      "make": "FORD",
+      "model": "Mustang Mach-E",
+      "year": 2023,
+      "cnt": 15
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2015,
+      "cnt": 15
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2017,
+      "cnt": 15
+    },
+    {
+      "make": "SUBARU",
+      "model": "SOLTERRA",
+      "year": 2025,
+      "cnt": 15
+    },
+    {
+      "make": "SUBARU",
+      "model": "SOLTERRA",
+      "year": 2024,
+      "cnt": 14
+    },
+    {
+      "make": "TESLA",
+      "model": "Model 3",
+      "year": 2021,
+      "cnt": 14
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PRO 150 KW",
+      "year": 2025,
+      "cnt": 14
+    },
+    {
+      "make": "VOLVO",
+      "model": "EX30",
+      "year": 2024,
+      "cnt": 14
+    },
+    {
+      "make": "TESLA",
+      "model": "Model 3",
+      "year": 2020,
+      "cnt": 13
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron 50",
+      "year": 2020,
+      "cnt": 12
+    },
+    {
+      "make": "BMW",
+      "model": "320d xDRIVE",
+      "year": 2014,
+      "cnt": 12
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA3",
+      "year": 2014,
+      "cnt": 12
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2016,
+      "cnt": 12
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2018,
+      "cnt": 12
+    },
+    {
+      "make": "SUBARU",
+      "model": "SOLTERRA",
+      "year": 2023,
+      "cnt": 12
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA RAV4",
+      "year": 2023,
+      "cnt": 12
+    },
+    {
+      "make": "AUDI",
+      "model": "Q6 SUV e-tron quattro",
+      "year": 2024,
+      "cnt": 11
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2019,
+      "cnt": 11
+    },
+    {
+      "make": "TOYOTA",
+      "model": "BZ4X",
+      "year": 2023,
+      "cnt": 11
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA BZ4X",
+      "year": 2024,
+      "cnt": 11
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA COROLLA",
+      "year": 2024,
+      "cnt": 11
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA RAV4",
+      "year": 2020,
+      "cnt": 11
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron 55",
+      "year": 2020,
+      "cnt": 10
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron 55",
+      "year": 2021,
+      "cnt": 10
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda6",
+      "year": 2016,
+      "cnt": 10
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2011,
+      "cnt": 10
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 80X",
+      "year": 2022,
+      "cnt": 10
+    },
+    {
+      "make": "TESLA",
+      "model": "Model Y",
+      "year": 2021,
+      "cnt": 10
+    },
+    {
+      "make": "TESLA",
+      "model": "Model Y",
+      "year": 2025,
+      "cnt": 10
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.7 TOURER GTX",
+      "year": 2025,
+      "cnt": 10
+    },
+    {
+      "make": "VOLVO",
+      "model": "EX30",
+      "year": 2025,
+      "cnt": 10
+    },
+    {
+      "make": "BMW",
+      "model": "iX1 xDrive30",
+      "year": 2023,
+      "cnt": 9
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne S e-hybrid",
+      "year": 2016,
+      "cnt": 9
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne S e-hybrid",
+      "year": 2017,
+      "cnt": 9
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan 4",
+      "year": 2021,
+      "cnt": 9
+    },
+    {
+      "make": "TESLA",
+      "model": "Model 3",
+      "year": 2024,
+      "cnt": 9
+    },
+    {
+      "make": "TESLA",
+      "model": "Model Y",
+      "year": 2024,
+      "cnt": 9
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2010,
+      "cnt": 9
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron",
+      "year": 2019,
+      "cnt": 8
+    },
+    {
+      "make": "FORD",
+      "model": "Mustang Mach-E",
+      "year": 2021,
+      "cnt": 8
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 6e",
+      "year": 2025,
+      "cnt": 8
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2026,
+      "cnt": 8
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2010,
+      "cnt": 8
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI+2",
+      "year": 2010,
+      "cnt": 8
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 2",
+      "year": 2022,
+      "cnt": 8
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 2",
+      "year": 2025,
+      "cnt": 8
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2024,
+      "cnt": 8
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2007,
+      "cnt": 8
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PRO 150 KW",
+      "year": 2023,
+      "cnt": 8
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron Sportback 50",
+      "year": 2020,
+      "cnt": 7
+    },
+    {
+      "make": "BMW",
+      "model": "330e xDrive",
+      "year": 2020,
+      "cnt": 7
+    },
+    {
+      "make": "CITROEN",
+      "model": "E-C4",
+      "year": 2021,
+      "cnt": 7
+    },
+    {
+      "make": "FORD",
+      "model": "Mustang Mach-E",
+      "year": 2022,
+      "cnt": 7
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 3",
+      "year": 2014,
+      "cnt": 7
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda6",
+      "year": 2015,
+      "cnt": 7
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQS 450 4MATIC",
+      "year": 2023,
+      "cnt": 7
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQS 450 4MATIC",
+      "year": 2024,
+      "cnt": 7
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 40kWh",
+      "year": 2018,
+      "cnt": 7
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2013,
+      "cnt": 7
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 40kWh",
+      "year": 2018,
+      "cnt": 7
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2022,
+      "cnt": 7
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE DIESEL",
+      "year": 2012,
+      "cnt": 7
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2020,
+      "cnt": 7
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 80",
+      "year": 2021,
+      "cnt": 7
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2008,
+      "cnt": 7
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2012,
+      "cnt": 7
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA RAV4",
+      "year": 2021,
+      "cnt": 7
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PRO 150 KW",
+      "year": 2020,
+      "cnt": 7
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 45 E TRON",
+      "year": 2022,
+      "cnt": 6
+    },
+    {
+      "make": "BMW",
+      "model": "225xe iPerformance",
+      "year": 2019,
+      "cnt": 6
+    },
+    {
+      "make": "BMW",
+      "model": "320d xDrive",
+      "year": 2015,
+      "cnt": 6
+    },
+    {
+      "make": "BMW",
+      "model": "320d xDrive",
+      "year": 2016,
+      "cnt": 6
+    },
+    {
+      "make": "BMW",
+      "model": "520D",
+      "year": 2011,
+      "cnt": 6
+    },
+    {
+      "make": "BMW",
+      "model": "520d xDRIVE",
+      "year": 2014,
+      "cnt": 6
+    },
+    {
+      "make": "BMW",
+      "model": "iX xDrive40",
+      "year": 2022,
+      "cnt": 6
+    },
+    {
+      "make": "BMW",
+      "model": "iX2 xDrive30",
+      "year": 2025,
+      "cnt": 6
+    },
+    {
+      "make": "BMW",
+      "model": "iX3",
+      "year": 2021,
+      "cnt": 6
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda6",
+      "year": 2018,
+      "cnt": 6
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 350 e",
+      "year": 2016,
+      "cnt": 6
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 350 e 4MATIC",
+      "year": 2017,
+      "cnt": 6
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN ARIYA",
+      "year": 2023,
+      "cnt": 6
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF",
+      "year": 2013,
+      "cnt": 6
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI      NISSANNENV",
+      "year": 2008,
+      "cnt": 6
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI+2",
+      "year": 2009,
+      "cnt": 6
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2021,
+      "cnt": 6
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2018,
+      "cnt": 6
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2025,
+      "cnt": 6
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4 E-Hybrid",
+      "year": 2017,
+      "cnt": 6
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4 E-Hybrid",
+      "year": 2020,
+      "cnt": 6
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 80X",
+      "year": 2023,
+      "cnt": 6
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2021,
+      "cnt": 6
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA RAV4",
+      "year": 2019,
+      "cnt": 6
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 GTX 220 KW",
+      "year": 2022,
+      "cnt": 6
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 GTX 220 KW",
+      "year": 2023,
+      "cnt": 6
+    },
+    {
+      "make": "VOLVO",
+      "model": "EX90",
+      "year": 2025,
+      "cnt": 6
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 55 e-tron",
+      "year": 2025,
+      "cnt": 5
+    },
+    {
+      "make": "BMW",
+      "model": "316I",
+      "year": 2006,
+      "cnt": 5
+    },
+    {
+      "make": "BMW",
+      "model": "520D",
+      "year": 2012,
+      "cnt": 5
+    },
+    {
+      "make": "BMW",
+      "model": "i4 M50",
+      "year": 2023,
+      "cnt": 5
+    },
+    {
+      "make": "BMW",
+      "model": "i5 xDrive40",
+      "year": 2025,
+      "cnt": 5
+    },
+    {
+      "make": "BMW",
+      "model": "iX2 xDrive30",
+      "year": 2024,
+      "cnt": 5
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda6",
+      "year": 2017,
+      "cnt": 5
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQA 250",
+      "year": 2021,
+      "cnt": 5
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQC 400 4MATIC",
+      "year": 2022,
+      "cnt": 5
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF",
+      "year": 2015,
+      "cnt": 5
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 62kWh",
+      "year": 2023,
+      "cnt": 5
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2012,
+      "cnt": 5
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2012,
+      "cnt": 5
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2018,
+      "cnt": 5
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI      NISSANNENV",
+      "year": 2007,
+      "cnt": 5
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 40kWh",
+      "year": 2019,
+      "cnt": 5
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 62kWh",
+      "year": 2020,
+      "cnt": 5
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2022,
+      "cnt": 5
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2017,
+      "cnt": 5
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 2",
+      "year": 2023,
+      "cnt": 5
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2021,
+      "cnt": 5
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2022,
+      "cnt": 5
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne Turbo E-Hybrid",
+      "year": 2024,
+      "cnt": 5
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan 4",
+      "year": 2022,
+      "cnt": 5
+    },
+    {
+      "make": "SUZUKI",
+      "model": "GRAND VITARA",
+      "year": 2006,
+      "cnt": 5
+    },
+    {
+      "make": "TESLA MOTORS",
+      "model": "MODEL S",
+      "year": 2014,
+      "cnt": 5
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2015,
+      "cnt": 5
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2017,
+      "cnt": 5
+    },
+    {
+      "make": "TOYOTA",
+      "model": "C-HR",
+      "year": 2022,
+      "cnt": 5
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2016,
+      "cnt": 5
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA COROLLA",
+      "year": 2020,
+      "cnt": 5
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.5 GTX 220 KW",
+      "year": 2022,
+      "cnt": 5
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 45 E TRON",
+      "year": 2023,
+      "cnt": 4
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 50 E TRON",
+      "year": 2023,
+      "cnt": 4
+    },
+    {
+      "make": "AUDI",
+      "model": "Q6 SB e-tron quattro",
+      "year": 2025,
+      "cnt": 4
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron 50",
+      "year": 2021,
+      "cnt": 4
+    },
+    {
+      "make": "BMW",
+      "model": "330e iPerformance",
+      "year": 2017,
+      "cnt": 4
+    },
+    {
+      "make": "BMW",
+      "model": "330e xDrive",
+      "year": 2021,
+      "cnt": 4
+    },
+    {
+      "make": "BMW",
+      "model": "520D",
+      "year": 2013,
+      "cnt": 4
+    },
+    {
+      "make": "BMW",
+      "model": "i4 M50",
+      "year": 2024,
+      "cnt": 4
+    },
+    {
+      "make": "BMW",
+      "model": "i4 M50 xDrive",
+      "year": 2024,
+      "cnt": 4
+    },
+    {
+      "make": "BMW",
+      "model": "iX1 xDrive30",
+      "year": 2025,
+      "cnt": 4
+    },
+    {
+      "make": "CITROEN",
+      "model": "E-C4",
+      "year": 2022,
+      "cnt": 4
+    },
+    {
+      "make": "KIA",
+      "model": "EV6",
+      "year": 2022,
+      "cnt": 4
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA3",
+      "year": 2019,
+      "cnt": 4
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA6",
+      "year": 2013,
+      "cnt": 4
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda3",
+      "year": 2016,
+      "cnt": 4
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 250 e",
+      "year": 2016,
+      "cnt": 4
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 CDI",
+      "year": 2011,
+      "cnt": 4
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 d",
+      "year": 2017,
+      "cnt": 4
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLE 350 de 4MATIC",
+      "year": 2021,
+      "cnt": 4
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN ARIYA",
+      "year": 2022,
+      "cnt": 4
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF",
+      "year": 2012,
+      "cnt": 4
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF",
+      "year": 2014,
+      "cnt": 4
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 30kWh",
+      "year": 2017,
+      "cnt": 4
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI+2",
+      "year": 2012,
+      "cnt": 4
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN X-TRAIL      NISSANNENV",
+      "year": 2008,
+      "cnt": 4
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Qashqai",
+      "year": 2020,
+      "cnt": 4
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2023,
+      "cnt": 4
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2020,
+      "cnt": 4
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 2",
+      "year": 2020,
+      "cnt": 4
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 3",
+      "year": 2025,
+      "cnt": 4
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne Turbo S E-Hybrid",
+      "year": 2020,
+      "cnt": 4
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA 4",
+      "year": 2012,
+      "cnt": 4
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4 E-Hybrid",
+      "year": 2019,
+      "cnt": 4
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan 4S",
+      "year": 2020,
+      "cnt": 4
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 80",
+      "year": 2023,
+      "cnt": 4
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2002,
+      "cnt": 4
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift",
+      "year": 2017,
+      "cnt": 4
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Vitara",
+      "year": 2016,
+      "cnt": 4
+    },
+    {
+      "make": "TESLA",
+      "model": "Model S",
+      "year": 2018,
+      "cnt": 4
+    },
+    {
+      "make": "TESLA MOTORS",
+      "model": "Model S",
+      "year": 2017,
+      "cnt": 4
+    },
+    {
+      "make": "TESLA MOTORS",
+      "model": "Model X",
+      "year": 2017,
+      "cnt": 4
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2018,
+      "cnt": 4
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2009,
+      "cnt": 4
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER",
+      "year": 2006,
+      "cnt": 4
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2017,
+      "cnt": 4
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA BZ4X",
+      "year": 2023,
+      "cnt": 4
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2008,
+      "cnt": 4
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2009,
+      "cnt": 4
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2010,
+      "cnt": 4
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 PRO 150 KW",
+      "year": 2021,
+      "cnt": 4
+    },
+    {
+      "make": "ALFA ROMEO",
+      "model": "STELVIO QUADRIFOGLIO",
+      "year": 2018,
+      "cnt": 3
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 45 e-tron",
+      "year": 2024,
+      "cnt": 3
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 45 e-tron",
+      "year": 2025,
+      "cnt": 3
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 SPORTBACK 50 E TRON",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "AUDI",
+      "model": "Q6 SUV e-tron quattro",
+      "year": 2026,
+      "cnt": 3
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron 55",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron Sportback 50",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron Sportback 55",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "BMW",
+      "model": "116D",
+      "year": 2012,
+      "cnt": 3
+    },
+    {
+      "make": "BMW",
+      "model": "118D",
+      "year": 2010,
+      "cnt": 3
+    },
+    {
+      "make": "BMW",
+      "model": "225xe iPerformance",
+      "year": 2018,
+      "cnt": 3
+    },
+    {
+      "make": "BMW",
+      "model": "320I",
+      "year": 2010,
+      "cnt": 3
+    },
+    {
+      "make": "BMW",
+      "model": "320i xDRIVE",
+      "year": 2014,
+      "cnt": 3
+    },
+    {
+      "make": "BMW",
+      "model": "iX xDrive40",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "BMW I",
+      "model": "i3s",
+      "year": 2018,
+      "cnt": 3
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4 CACTUS",
+      "year": 2019,
+      "cnt": 3
+    },
+    {
+      "make": "JEEP",
+      "model": "AVENGER",
+      "year": 2023,
+      "cnt": 3
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 2",
+      "year": 2012,
+      "cnt": 3
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA3",
+      "year": 2020,
+      "cnt": 3
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA6",
+      "year": 2014,
+      "cnt": 3
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda2",
+      "year": 2015,
+      "cnt": 3
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda3",
+      "year": 2017,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 180",
+      "year": 2019,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "AMG EQE 43 4MATIC",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180 CDI",
+      "year": 2012,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 350 e",
+      "year": 2017,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLA 180",
+      "year": 2016,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 CDI",
+      "year": 2012,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2009,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQC 400 4MATIC",
+      "year": 2020,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQC 400 4MATIC",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQS 450 4MATIC",
+      "year": 2025,
+      "cnt": 3
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 350 e 4MATIC",
+      "year": 2018,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN ARIYA",
+      "year": 2025,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 30kWh",
+      "year": 2016,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 40kWh",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2011,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2016,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2008,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 40kWh",
+      "year": 2020,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 40kWh",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Qashqai",
+      "year": 2019,
+      "cnt": 3
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2019,
+      "cnt": 3
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "308",
+      "year": 2008,
+      "cnt": 3
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "308",
+      "year": 2014,
+      "cnt": 3
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "5008",
+      "year": 2018,
+      "cnt": 3
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "508",
+      "year": 2011,
+      "cnt": 3
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "508",
+      "year": 2015,
+      "cnt": 3
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 2",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 4",
+      "year": 2025,
+      "cnt": 3
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER",
+      "year": 2008,
+      "cnt": 3
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE DIESEL 211 HK",
+      "year": 2012,
+      "cnt": 3
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2023,
+      "cnt": 3
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA 4S",
+      "year": 2011,
+      "cnt": 3
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan 4S",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan Turbo",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "RENAULT",
+      "model": "ZOE",
+      "year": 2016,
+      "cnt": 3
+    },
+    {
+      "make": "RENAULT",
+      "model": "ZOE",
+      "year": 2019,
+      "cnt": 3
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 80",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 85X",
+      "year": 2024,
+      "cnt": 3
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2015,
+      "cnt": 3
+    },
+    {
+      "make": "SUBARU",
+      "model": "SOLTERRA",
+      "year": 2026,
+      "cnt": 3
+    },
+    {
+      "make": "SUBARU",
+      "model": "XV",
+      "year": 2017,
+      "cnt": 3
+    },
+    {
+      "make": "SUZUKI",
+      "model": "VITARA",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "TESLA",
+      "model": "Model S",
+      "year": 2019,
+      "cnt": 3
+    },
+    {
+      "make": "TESLA",
+      "model": "Model X",
+      "year": 2018,
+      "cnt": 3
+    },
+    {
+      "make": "TESLA",
+      "model": "Model X",
+      "year": 2019,
+      "cnt": 3
+    },
+    {
+      "make": "TESLA MOTORS",
+      "model": "Model S",
+      "year": 2016,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2007,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2010,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "BZ4X",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2006,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2023,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS",
+      "year": 2012,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2007,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2018,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA BZ4X",
+      "year": 2025,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA COROLLA",
+      "year": 2021,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS CROSS",
+      "year": 2024,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS CROSS",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS HYBRID",
+      "year": 2016,
+      "cnt": 3
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PRO 150 KW",
+      "year": 2024,
+      "cnt": 3
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 PRO 150 KW",
+      "year": 2022,
+      "cnt": 3
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.5 GTX 220 KW",
+      "year": 2023,
+      "cnt": 3
+    },
+    {
+      "make": "VOLVO",
+      "model": "EX30 Cross Country",
+      "year": 2025,
+      "cnt": 3
+    },
+    {
+      "make": "",
+      "model": "",
+      "year": 0,
+      "cnt": 2
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 35 E TRON",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 SPORTBACK 50 E TRON",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 Sportback 55 e-tron",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "AUDI",
+      "model": "SQ6 SUV e-tron",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron GT",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron S",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron Sportback 55",
+      "year": 2020,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "120D",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "218d Active Tourer",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "225xe Active Tourer",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "225xe iPerformance",
+      "year": 2020,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "316D",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "316D",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "316I",
+      "year": 2008,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "316i",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "320d",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "320i",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "320i xDRIVE",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "320i xDrive",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "320i xDrive",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "330e",
+      "year": 2020,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "520D",
+      "year": 2007,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "520D",
+      "year": 2008,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "520D",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "520d xDrive",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "525D",
+      "year": 2009,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "525D",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "525D XDRIVE",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "525I",
+      "year": 2005,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "530d xDRIVE",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "530e iPerformance",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "530e iPerformance",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "530e iPerformance",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "540d xDrive",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "i4 M50 xDrive",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "iX xDrive50",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "iX1 xDrive30",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "BMW",
+      "model": "iX3",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "BYD",
+      "model": "SEALION",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "BYD",
+      "model": "Seal AWD",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "BERLINGO",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "C3",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "C3 AIRCROSS",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4 AIRCROSS",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5",
+      "year": 2008,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5 X",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "E-C4",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "e-C4",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "CITROEN",
+      "model": "e-C4",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "CUPRA",
+      "model": "BORN 150 KW 58/62 KWH",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "CUPRA",
+      "model": "TAVASCAN",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "FAW",
+      "model": "EHS9",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "FORD-CNG-TECHNIK",
+      "model": "Mondeo Hybrid",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "HONDA",
+      "model": "CIVIC 5DR",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "HONDA",
+      "model": "CIVIC 5DR",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "JAGUAR",
+      "model": "Jaguar I-PACE",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "JAGUAR",
+      "model": "Jaguar XE",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "JAGUAR LAND ROVER LIMITED",
+      "model": "DISCOVERY",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "JAGUAR LAND ROVER LIMITED",
+      "model": "Jaguar XE",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "KIA",
+      "model": "EV6",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "KIA",
+      "model": "EV6",
+      "year": 2026,
+      "cnt": 2
+    },
+    {
+      "make": "KIA",
+      "model": "EV9",
+      "year": 2026,
+      "cnt": 2
+    },
+    {
+      "make": "LEXUS",
+      "model": "CT200H",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "LEXUS",
+      "model": "NX300H",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 2",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 3",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 3",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 3",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 5",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 6",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA2 HYBRID",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA3",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda2",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda2",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda3",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 180",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 180",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 200",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 180 CDI",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200 CDI",
+      "year": 2008,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200 CDI",
+      "year": 2009,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200 CDI",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 220 CDI",
+      "year": 2008,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 CDI",
+      "year": 2009,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 CDI",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2007,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 d",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 d 4MATIC AllTerrain",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 300 de 4MATIC",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 350 e",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQA 250",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQA 300 4MATIC",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQB 300 4MATIC",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQE 350 4MATIC",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 300 e 4MATIC",
+      "year": 2020,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 300 e 4MATIC",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 350 e 4MATIC",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLE 350 de 4MATIC",
+      "year": 2020,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLK 220 CDI 4MATIC",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLK 220 CDI 4MATIC",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "V-Klasse",
+      "year": 2020,
+      "cnt": 2
+    },
+    {
+      "make": "MG",
+      "model": "MG4 Electric",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "I-MIEV",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "LEAF",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "LEAF",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "MICRA TIQUE 16 VALVE",
+      "year": 1996,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN ARIYA",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 40kWh",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 40kWh",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2009,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI+2",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI+2",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN X-TRAIL",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 62kWh",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2020,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "206",
+      "year": 2004,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "207",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "207",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2020,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "307",
+      "year": 2007,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "308",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "308",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "308",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "5008",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "5008",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "508",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "PEUGEOT 108",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 2",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "POLESTAR",
+      "model": "Polestar 3",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Cayman GT4 RS",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Cayman S",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "924",
+      "year": 1986,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "987",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER",
+      "year": 2009,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE DIESEL",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE TURBO",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne E-Hybrid",
+      "year": 2026,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan 4",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA 4",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA S E-HYBRID",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA TURBO S",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4 E-Hybrid",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4S",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera Turbo",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan 4S",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "RENAULT",
+      "model": "CAPTUR (E-TECH PLUG-IN HYBRID)",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "RENAULT",
+      "model": "CLIO",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "RENAULT",
+      "model": "MEGANE",
+      "year": 2006,
+      "cnt": 2
+    },
+    {
+      "make": "RENAULT",
+      "model": "ZOE",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "RENAULT",
+      "model": "ZOE",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 60",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 60",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ RS",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2004,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2006,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2008,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2009,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "IMPREZA",
+      "year": 2001,
+      "cnt": 2
+    },
+    {
+      "make": "SUBARU",
+      "model": "LEGACY",
+      "year": 2009,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SWIFT",
+      "year": 2007,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SWIFT",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4 S-Cross",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "VITARA",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "VITARA",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Vitara",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "TESLA",
+      "model": "Model 3",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "TESLA",
+      "model": "Model 3",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "TESLA",
+      "model": "Model S",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "TESLA",
+      "model": "Model X",
+      "year": 2017,
+      "cnt": 2
+    },
+    {
+      "make": "TESLA MOTORS",
+      "model": "Model S",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2009,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2005,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Auris",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Avensis",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "C-HR",
+      "year": 2018,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "HILUX 4WD",
+      "year": 2006,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER",
+      "year": 2007,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS PLUS",
+      "year": 2016,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2000,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2003,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2008,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AURIS",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AURIS",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AURIS",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AVENSIS",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AYGO",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA C-HR",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA C-HR",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA COROLLA",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA RAV4",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS HYBRID",
+      "year": 2019,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "URBAN CRUISER",
+      "year": 2010,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "URBAN CRUISER",
+      "year": 2012,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "VERSO-S",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2004,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2006,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2007,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS CROSS",
+      "year": 2023,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS HYBRID",
+      "year": 2013,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS HYBRID",
+      "year": 2015,
+      "cnt": 2
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Yaris",
+      "year": 2014,
+      "cnt": 2
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "CARAVELLE",
+      "year": 2011,
+      "cnt": 2
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PRO S 150 KW",
+      "year": 2022,
+      "cnt": 2
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PURE 125 KW",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 GTX 220 KW",
+      "year": 2021,
+      "cnt": 2
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 GTX 250KW",
+      "year": 2024,
+      "cnt": 2
+    },
+    {
+      "make": "VOLVO",
+      "model": "EC40",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "VOLVO",
+      "model": "ES90",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "VOLVO",
+      "model": "EX40",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "XPENG",
+      "model": "G9",
+      "year": 2025,
+      "cnt": 2
+    },
+    {
+      "make": "ALFA ROMEO",
+      "model": "156 BERLINA",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "ALFA ROMEO",
+      "model": "ALFA GIULIETTA",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "ALFA ROMEO",
+      "model": "ALFA GIULIETTA",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "ALFA ROMEO",
+      "model": "ALFA GIULIETTA",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "ALFA ROMEO",
+      "model": "STELVIO QUADRIFOGLIO",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "ALFA ROMEO",
+      "model": "TONALE",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "ALPINA",
+      "model": "BMW Alpina B4 Biturbi Cab",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "AMERICAN MOTORS",
+      "model": "CJ-5 2 DØRERS",
+      "year": 1976,
+      "cnt": 1
+    },
+    {
+      "make": "ASTON MARTIN",
+      "model": "DB9",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 40 E TRON",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 40 E TRON",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 45 e-tron",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 50 e-tron",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 55 e-tron",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 SPORTBACK 45 E TRON",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "Q4 SPORTBACK 50 E TRON",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "SQ6 SB e-tron",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "SQ6 SUV e-tron",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron GT",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron S",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron Sportback 50",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron Sportback 55",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "AUDI",
+      "model": "e-tron Sportback 55",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "AUSTIN",
+      "model": "1800 MK II",
+      "year": 1972,
+      "cnt": 1
+    },
+    {
+      "make": "BMC",
+      "model": "MINI 1000",
+      "year": 1976,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "-",
+      "year": 1982,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "-",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "-",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "---",
+      "year": 1986,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116D",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116I",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116I",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116I",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116d",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116d",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116ed",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116ed",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "116i",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "118D",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "118D",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "118D",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "118D",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "118D",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "118I",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "118i",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "120D",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "218i Active Tourer",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "218i Active Tourer",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "220d xDrive Active Tourer",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "220d xDrive Gran Tourer",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "225e xDrive Active Tourer",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "225xe iPerformance",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "316D",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "316I",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "316I",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "316I",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318CI",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318D",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318D",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318D",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318I",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318I",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318d",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318d",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318d",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318d xDrive",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318i",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "318i",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320CD",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320CI",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D XDRIVE",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D XDRIVE",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D XDRIVE",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D XDRIVE",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320D XDRIVE",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320I",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320I",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320d xDRIVE",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320d xDrive",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320d xDrive",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "320i",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "325IA CAB",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "330d xDRIVE",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "330d xDrive",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "330e",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "330e",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "330e iPerformance",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "330i xDrive",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "335i",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "335i xDRIVE",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "420d xDrive",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "435i",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "520D",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "520D",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "520I",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "520d",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "520d",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "520d xDRIVE",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "520d xDRIVE",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "520d xDrive",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "525D",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "525D XDRIVE",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "525D XDRIVE",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "525D XDRIVE",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "525D XDRIVE",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "525XD",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "530D",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "530D",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "530D XDRIVE",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "530d xDrive",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "530e xDrive",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "530e xDrive iPerformance",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "530e xDrive iPerformance",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "550I",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "630d xDrive",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "640D XDRIVE",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "730d xDRIVE",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "730d xDrive",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "745I",
+      "year": 2002,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "M 550D XDRIVE",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "M 550D XDRIVE",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "M 550d xDrive",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "M140i",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "X7 xDrive30d",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "i4 M60 xDrive",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "i4 M60 xDrive",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "i5 M60 xDrive",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "i7 xDrive60",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "iX xDrive50",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "iX xDrive60",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "iX1 xDrive30",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "iX1 xDrive30",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "iX3",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "BMW",
+      "model": "iX3 50 xDrive",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "BMW I",
+      "model": "i3s",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "BMW I",
+      "model": "i3s",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "BMW I",
+      "model": "i3s",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "BYD",
+      "model": "ATTO 3",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "BYD",
+      "model": "ATTO 3 EVO",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "BYD",
+      "model": "Dolphin",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "BYD",
+      "model": "HAN",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "BYD",
+      "model": "SEAL U",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "BYD",
+      "model": "Seal AWD",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "BYGG MC",
+      "model": "Lyder",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "CADILLAC",
+      "model": "-",
+      "year": 1999,
+      "cnt": 1
+    },
+    {
+      "make": "CADILLAC",
+      "model": "ELDORADO COUPE",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "CADILLAC",
+      "model": "FLEETWOOD ELDORADO",
+      "year": 1997,
+      "cnt": 1
+    },
+    {
+      "make": "CADILLAC",
+      "model": "SEVILLE",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "CAPRON",
+      "model": "SOLIFER A 695",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "CATERHAM",
+      "model": "SUPER7",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "CAMARO",
+      "year": 1985,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "CAPRICE",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "CAPTIVA",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "CORVAIR MONZA 600",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "CORVETTE",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "CORVETTE",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "CORVETTE",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "CORVETTE STINGRAY",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Camaro",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Camaro",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Camaro SS",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Chevrolet Spark",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Convertible",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Corvette",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Corvette",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "Corvette",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "EXPRESS 3500",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "TAHOE LT",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "CHEVROLET",
+      "model": "TAHOE LT 1500",
+      "year": 1997,
+      "cnt": 1
+    },
+    {
+      "make": "CHRYSLER",
+      "model": "GRAND VOYAGER",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "CHRYSLER",
+      "model": "NEON",
+      "year": 1998,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "-",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "2 CV 6",
+      "year": 1983,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "5",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "BERLINGO",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "BX",
+      "year": 1987,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "Berlingo",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C-CROSSER",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C-ZERO",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C-ZERO",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C-ZERO",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C3",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C3",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4 CACTUS",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4 PICASSO",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4 PICASSO",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4 PICASSO",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4 PICASSO",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C4 PICASSO",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5 AIRCROSS",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5 AIRCROSS",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "C5 AIRCROSS",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "DS 3",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "DS3",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "DS3 CABRIO",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "DS5",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "GSA",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "Jumpy SpaceTourer",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "Spacetourer",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "ZX 1.4 I",
+      "year": 1996,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "e-C3",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "CITROEN",
+      "model": "e-C4",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "CUPRA",
+      "model": "BORN",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "CUPRA",
+      "model": "BORN 150 KW 58/62 KWH",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "TERIOS",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "DAIHATSU",
+      "model": "TERIOS",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "DANGEL",
+      "model": "PARTNER TEPEE  4X4",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "DATSUN",
+      "model": "CHERRY GL",
+      "year": 1979,
+      "cnt": 1
+    },
+    {
+      "make": "DS",
+      "model": "DS3",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "DS",
+      "model": "DS3 CROSSBACK",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "DS",
+      "model": "DS4",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "FERRARI",
+      "model": "F 430",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "FIAT",
+      "model": "Hobby 550 AK",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "-",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "CAPRI 2.0",
+      "year": 1981,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "EXCURISON 4X4 LIMITED",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "MUSTANG BOSS 302",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "MUSTANG MACH 1",
+      "year": 1975,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "Mustang GT",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "Mustang GT",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "Mustang Mach-E",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "SIERRA 2.0 I S",
+      "year": 1985,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "SIERRA 2.0 I S",
+      "year": 1986,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "TORINO",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "TRANSIT 110 T300 GLX",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "TRANSIT 140 SPORT",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "TRANSIT 300M",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "TRANSIT 350L",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "TRANSIT 350L",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "FORD",
+      "model": "TRANSIT 430EL",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "FORD-CNG-TECHNIK",
+      "model": "FOCUS ELECTRIC",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "FORD-CNG-TECHNIK",
+      "model": "FOCUS ELECTRIC",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "HONDA",
+      "model": "CIVIC 4DR",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "HONDA",
+      "model": "CIVIC 5DR",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "HONDA",
+      "model": "e:Ny1",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "HYUNDAI",
+      "model": "SANTA71V",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "ISUZU",
+      "model": "D-MAX 3.0 TD 4WD LS",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "JAC",
+      "model": "ES4",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "2.7D PREMIUM LUXURY",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "3.0 D LUXURY",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "3.0 V6 D PORTFOLIO",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "E-PACE",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "I-PACE",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "JAGUAR I-PACE",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "JAGUAR XF",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "Jaguar I-PACE",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "Jaguar XE SV Project 8",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "SOVEREIGN",
+      "year": 1992,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "XF",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "XF",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "XJ 6",
+      "year": 1996,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "XJR 4.0",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR",
+      "model": "XK8",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "JAGUAR LAND ROVER LIMITED",
+      "model": "RANGE ROVER SPORT",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "JEEP",
+      "model": "-",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "JEEP",
+      "model": "WRANGLER  4.0L",
+      "year": 1994,
+      "cnt": 1
+    },
+    {
+      "make": "KIA",
+      "model": "BL",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "KIA",
+      "model": "BL",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "KIA",
+      "model": "EV6",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "KIA",
+      "model": "EV6",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "KIA",
+      "model": "EV9",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "KIA",
+      "model": "EV9",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "LANCIA",
+      "model": "GRAND VOYAGER",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "LAND ROVER",
+      "model": "DISCOVERY 4 TD V6",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "LAND ROVER",
+      "model": "Defender",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "LAND ROVER",
+      "model": "Discovery 4",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "GS450H",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "LS600H",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "NX300H",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "NX450H+",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "RC300H",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "UX250H",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "UX250H",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "UX300E",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "LEXUS",
+      "model": "UX300E",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MASERATI",
+      "model": "4200 CAMBIOCORSA",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "626 2.5I V6",
+      "year": 1992,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 2",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 5",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 6",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA 6",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA3",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA3",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "MAZDA6",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda3",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MAZDA",
+      "model": "Mazda6",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT 63 S 4MATIC+",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT 63 S E Performance",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT R",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT R",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT S",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT S",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT S",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT S",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "AMG GT S",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "C 32 AMG",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "CLS 63 AMG",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "E 55 AMG",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "E 63 AMG",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-AMG",
+      "model": "E63 AMG 4MATIC",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "-",
+      "year": 1983,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "-",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "129",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "190 E  2.O",
+      "year": 1997,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "211 CDI",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "220 D",
+      "year": 1974,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "230 CE",
+      "year": 2002,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "240D",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "300 D",
+      "year": 1990,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "300 SL",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "300CE",
+      "year": 1989,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "315/37 KA BU",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "380 SE",
+      "year": 1988,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "380 SL",
+      "year": 1986,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "412 D/40",
+      "year": 1998,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 150",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 160",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 160 CDI",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 160 CDI",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 170 CDI",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 180",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 180",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 250 e",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 250 e",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "A 45 AMG 4MATIC",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "AMG A 45",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "AMG A 45 S",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "AMG CLA 45 S",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "AMG EQE 53 4MATIC+",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 150",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 150",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 170",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 180",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 180",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 180 CDI",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 180 CDI",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 200",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 200 CDI",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 220 4MATIC",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 220 4MATIC",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "B 250 e",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "BINZ AMBULANSE 2000",
+      "year": 1982,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180 CDI",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180 CDI",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180 CDI",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180 KOMPRESSOR",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 180 KOMPRESSOR",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200",
+      "year": 1997,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200 4MATIC",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200 CDI",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200 CDI",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200 CDI",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 200 CDI",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 220 BLUETEC",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 220 CDI",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 220 CDI",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 220 d 4MATIC",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 220 d 4MATIC",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 250 d 4MATIC",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 250 d 4MATIC",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 300 de",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 300 de",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "C 350 e",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CL 180K",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CL 500",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLA 180",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLA 180",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLA 180",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLA 180",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLA 250 e",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLA 350 4MATIC",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLK 200 KOMPRESSOR",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLK 220 CDI",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLK 320",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLK 320",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLK 320 CDI",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLS 220 BLUETEC",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLS 250 CDI",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "CLS 350 CDI 4MATIC",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "Citan Tourer/T-Class",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "Citan Tourer/T-Class",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 CDI",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 CDI",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 CDI",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 KOMPRESSOR",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 KOMPRESSOR",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 KOMPRESSOR",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 200 KOMPRESSOR",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2002,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 CDI",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 d 4MATIC",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 d 4MATIC AllTerrain",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 220 d 4MATIC AllTerrain",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 250 BLUETEC 4MATIC",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 250 CDI",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 250 CDI",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 250 CDI 4MATIC",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 270 CDI",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 280 CDI",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 280 CDI 4MATIC",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 300 de",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 300 e",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 320",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 320",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 320",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 350 CDI 4MATIC",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 350 CDI 4MATIC",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 400 CDI",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "E 400 d 4 MATIC",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQA 300 4MATIC",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQA 300 4MATIC",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQA 350 4MATIC",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQA 350 4MATIC",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQB 250+",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQB 250+",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQB 300 4MATIC",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQB 300 4MATIC",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQE 350 4MATIC",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQE 350 4MATIC",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQE 350 4matic",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQE 500 4MATIC",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQS 450 4MATIC",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQS 450 4MATIC",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQS 580 4MATIC",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQS 580 4MATIC",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQV",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "EQV",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "G 350 Bluetec",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "G 400 d",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "G 55 AMG KOMPRESSOR",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "G 580",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GELANDEWAGEN DIESEL",
+      "year": 1987,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GL 320 CDI 4MATIC",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GL320 CDI 4MATIC",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLA 180",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLA 200 CDI 4MATIC",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLA 200 d 4MATIC",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLA 220 CDI 4MATIC",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLA 45 AMG 4MATIC",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 220 d 4MATIC",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 220 d 4MATIC",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 250 d 4MATIC",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLC 400 d 4MATIC",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLE 350 d 4MATIC",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLE 350 de 4MATIC",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLE 400 d 4MATIC",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLE 500 e 4MATIC",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLE 500 e 4MATIC",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLK 220 CDI 4MATIC",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLK 220 CDI 4MATIC",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLK 220 CDI 4MATIC",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLK 220 CDI 4MATIC",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLS 400 d 4MATIC",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "GLS 450 d 4MATIC",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "ML 250 BLUETEC 4MATIC",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "ML 250 BLUETEC 4MATIC",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "ML 270 CDI",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "ML 320 CDI",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "ML 350 BLUETEC 4MATIC",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "R 320 CDI 4-MATIC",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "R 320 CDI 4MATIC",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 320",
+      "year": 2002,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 320 CDI",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 320 CDI 4MATIC",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 350",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 350",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 400 4MATIC",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 400 HYBRID",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 500",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 600",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "S 63 AMG 4MATIC",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "SL 55 AMG",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "SL 55K AMG",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "SLK 200 KOMPRESSOR",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "SLK 200 KOMPRESSOR",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "V-KLASSE",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "V-Klasse",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VIANO CDI 2.2",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VIANO CDI 3.0",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VITO",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VITO",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VITO",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VITO 109 CDI",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VITO 111 CDI",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VITO 111 CDI",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VITO 115 CDI 4X4",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "VITO TOURER",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "Vito Tourer",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "MERCEDES-BENZ",
+      "model": "Vito Tourer",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "MG",
+      "model": "1975",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "MG",
+      "model": "IM 6",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MG",
+      "model": "MG4 Electric",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "MG",
+      "model": "MG5 Electric",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "MG",
+      "model": "MG5 Electric",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "-",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "CABRIOLET",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "MITSUBISHI",
+      "model": "JUNIOR 460",
+      "year": 1986,
+      "cnt": 1
+    },
+    {
+      "make": "MORGAN",
+      "model": "-",
+      "year": 1996,
+      "cnt": 1
+    },
+    {
+      "make": "MORGAN",
+      "model": "4/4",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "350Z",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "LEAF",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "LEAF",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "LEAF",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Leaf",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "MICRA",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "MICRA",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "MICRA",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "MICRA",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN JUKE",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 30kWh",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 40kWh",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN LEAF 62kWh",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA        NISSANNENV",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MICRA        NISSANNENV",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN MURANO",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN PATHFINDER   NISSANNENV",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN PATROL       NISSANNENV",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN PULSAR",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN QASHQAI      NISSANNENV",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN X-TRAIL",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN X-TRAIL",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "NISSAN X-TRAIL      NISSANNENV",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 24kWh",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 30kWh",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 30kWh",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 30kWh",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 40kWh",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 40kWh",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Leaf 62kWh",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "Nissan Qashqai",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "PATROL GR",
+      "year": 1998,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "PATROL GR 3.0 DI",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "PATROL GR SE",
+      "year": 1999,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "PRIMERA",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "TERRANO II 2.7TDI",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "X-TRAIL",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "X-TRAIL",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "X-TRAIL",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "NISSAN",
+      "model": "X-TRAIL",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "OLDSMOBILE",
+      "model": "CUTLASS SUPREME",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "OPEL",
+      "model": "ASCONA 1.9 S AUT",
+      "year": 1978,
+      "cnt": 1
+    },
+    {
+      "make": "OPEL",
+      "model": "ASCONA 16",
+      "year": 1972,
+      "cnt": 1
+    },
+    {
+      "make": "OPEL",
+      "model": "ASTRA 1.6",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "OPEL",
+      "model": "EXPERT TRAVELLER",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "OPEL",
+      "model": "KADETT 31216",
+      "year": 1970,
+      "cnt": 1
+    },
+    {
+      "make": "OPEL",
+      "model": "MANTA 2.0S BERLINETT",
+      "year": 1982,
+      "cnt": 1
+    },
+    {
+      "make": "OPEL",
+      "model": "MOVANO 2,5",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "OPEL",
+      "model": "OMEGA 2.5 V6 GL",
+      "year": 1994,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "107",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "108",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "2008",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "206",
+      "year": 2002,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "206",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "207",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "208",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "3008",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "304-CABRIOLET",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "307",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "307",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "308",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "308",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "308",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "404",
+      "year": 1968,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "5008",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "5008",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "5008",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "5008",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "5008",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "508",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "508",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "508",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "508",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "807 HDI",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "Expert Traveller",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "ION",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "ION",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "PEUGEOT 107",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "PEUGEOT 107",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "RCZ",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "RCZ",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PEUGEOT",
+      "model": "e-Rifter",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PONTIAC",
+      "model": "FIREBIRD",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PONTIAC",
+      "model": "FIREBIRD FORMULA",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "PONTIAC",
+      "model": "Fiero",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PONTIAC",
+      "model": "Trans Am",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Boxster S",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Cayman",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Cayman GT4",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Cayman GT4",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Cayman GT4 RS",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Cayman T",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "718 Cayman T",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 CARRERA 4",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 Carrera",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 Carrera 4 GTS",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 Carrera 4S",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 GT3",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 GT3",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 GT3",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "911 GT3 RS",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "914",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "928",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "987",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER",
+      "year": 2000,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER S",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXSTER S",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "BOXTER S",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Boxster",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Boxster",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Boxster S",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Boxter S",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE DIESEL",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE DIESEL",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE DIESEL",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE S DIESEL",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE S HYBRID",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE TURBO",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE TURBO",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE TURBO",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE TURBO",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYENNE TURBO",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "CAYMAN GTS",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne Diesel",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne GTS",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne S",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne S",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne S e-hybrid",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne Turbo",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne Turbo GT",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayenne Turbo S",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayman",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayman GTS",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Cayman S",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "MACAN",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan S",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan S Diesel",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan S Diesel",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan Turbo",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan Turbo",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan Turbo",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan Turbo",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Macan Turbo",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA 4",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA 4",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA 4S",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA 4S",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA 4S",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA DIESEL 211 HK",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA GTS",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA TURBO",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "PANAMERA TURBO",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4 E-Hybrid",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4 E-Hybrid",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4S Diesel",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera 4S E-Hybrid",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera S E-Hybrid",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera S E-Hybrid",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera Turbo E-Hybrid",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera Turbo E-Hybrid",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera Turbo S E-Hybrid",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Panamera Turbo S E-Hybrid",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan Turbo",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan Turbo",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan Turbo S",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "PORSCHE",
+      "model": "Taycan Turbo S",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "QUATTRO",
+      "model": "R8 Quattro 4,2 fsi",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "CAPTUR",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "CAPTUR",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "CAPTUR",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "CAPTUR",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "CAPTUR",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "CLIO",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "CLIO",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "KADJAR",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "MEGANE",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "MEGANE",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "MEGANE E-TECH ELECTRIC",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "MEGANE E-TECH ELECTRIC",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "MEGANE E-TECH ELECTRIC",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "MEGANE E-TECH PLUG-IN HYBRID",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "RENAULT 4 E-TECH ELECTRIC",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "RENAULT 5 E-TECH ELECTRIC",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "SCENIC E-TECH ELECTRIC",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "SCENIC E-TECH ELECTRIC",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "ZOE",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "RENAULT",
+      "model": "ZOE",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "RIMOR",
+      "model": "aka63a3",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "ROVER",
+      "model": "RANGE ROVER",
+      "year": 1982,
+      "cnt": 1
+    },
+    {
+      "make": "SAAB",
+      "model": "9-3 2,0T Convertible",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "SKODA",
+      "model": "ELROQ 50",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "SKODA",
+      "model": "ELROQ 50",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "SKODA",
+      "model": "ELROQ RS",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 80X",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ 85X",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ RS",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ RS",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "SKODA",
+      "model": "ENYAQ RS",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "SSANGYONG",
+      "model": "KORANDO e-Motion",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "SSANGYONG",
+      "model": "REXTON RX270 XDI",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "FORESTER",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "IMPREZA",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "IMPREZA",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "IMPREZA",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "IMPREZA WRX",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "LEGACY",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "LEGACY",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "LEVORG",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "OUTBACK",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "OUTBACK",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "OUTBACK",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "OUTBACK",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "OUTBACK",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "XV",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "XV",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "SUBARU",
+      "model": "XV",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Across",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "GRAND VITARA",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "GRAND VITARA",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "GRAND VITARA",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "GRAND VITARA",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "GRAND VITARA 2.0 TD",
+      "year": 1999,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "GRAND VITARA XL-7 2.0 TD",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "IGNIS",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "IGNIS",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Ignis",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "JIMNY",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "LIANA",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "LIANA",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "S-Cross",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SWIFT",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SWIFT",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SWIFT",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SWIFT",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SWIFT",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SWIFT",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4 S-Cross",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "SX4 S-Cross",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Swift",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "Vitara",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "e VITARA",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "SUZUKI",
+      "model": "e VITARA",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "TESLA",
+      "model": "Model 3",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "TESLA",
+      "model": "Model S",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "TESLA",
+      "model": "Model X",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "TESLA",
+      "model": "Model X",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "TESLA",
+      "model": "Model Y",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "TESLA MOTORS",
+      "model": "MODEL S",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "86",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AURIS",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AVENSIS",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AYGO",
+      "year": 2007,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AYGO",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "AYGO",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Auris",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "C-HR",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "C-HR",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "CAMRY",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "CARINA",
+      "year": 1980,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "CELICA",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2002,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA VERSO",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "COROLLA VERSO",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "CORONA MARK II 1900",
+      "year": 1971,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "GR YARIS",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "HIACE 4WD",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "HIACE 4WD",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "HILUX 2.4D",
+      "year": 1993,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "IQ",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "IQ",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER (120SERIES)",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER D4D",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER LC5A",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUISER LC5A",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "LAND CRUSER",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Land Cruiser LC5A",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS",
+      "year": 2008,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS PHV",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PRIUS PLUS",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "PROACE",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Proace",
+      "year": 2017,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RA4A",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RA4A 4WD",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RA4A 4WD",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "RAV4",
+      "year": 2015,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "STARLET",
+      "year": 1998,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "SUPRA MK IV",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Supra",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AURIS",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AURIS",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AURIS",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA AVENSIS",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA C-HR",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA C-HR",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA C-HR",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA CAMRY",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA COROLLA",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA GR YARIS",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA GR YARIS",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA LAND CRUISER(150 SERIES)",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA PRIUS",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA PRIUS",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA PRIUS",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA PRIUS PHV",
+      "year": 2019,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA PRIUS PLUS",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA URBAN CRUISER",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS",
+      "year": 2011,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS HYBRID",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA YARIS HYBRID",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "TOYOTA Z",
+      "year": 2014,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "Toyota Supra",
+      "year": 2020,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "URBAN CRUISER",
+      "year": 2009,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "URBAN CRUISER",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2002,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2012,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2016,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS HYBRID",
+      "year": 2018,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS VERSO",
+      "year": 2004,
+      "cnt": 1
+    },
+    {
+      "make": "TOYOTA",
+      "model": "YARIS VERSO",
+      "year": 2005,
+      "cnt": 1
+    },
+    {
+      "make": "TRI-STAR",
+      "model": "SUBURBAN",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "TRUCKMASTER",
+      "model": "DORADO AVALANCHE 1500",
+      "year": 2003,
+      "cnt": 1
+    },
+    {
+      "make": "TRUCKMASTER",
+      "model": "SUBURBAN CK2500",
+      "year": 2001,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "CARAVELLE",
+      "year": 1998,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "CARAVELLE",
+      "year": 2002,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "CARAVELLE",
+      "year": 2010,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "CARAVELLE C",
+      "year": 1986,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "CARAVELLE TDI",
+      "year": 1998,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID. BUZZ GTX LR 250 kW",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PRO S 150 KW",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PRO S 150 KW",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.3 PURE 110 KW",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 PRO 150 KW",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 PRO 4MOTION 210KW",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 PURE 109 KW",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.4 PURE 125 KW",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.5 PRO 150 KW",
+      "year": 2022,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.7 PRO 210KW",
+      "year": 2023,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.7 PRO 210KW",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.7 TOURER GTX",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.7 TOURER GTX",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "ID.7 TOURER PRO",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "TRANSPORTER 253",
+      "year": 1986,
+      "cnt": 1
+    },
+    {
+      "make": "VOLKSWAGEN",
+      "model": "VW 1500",
+      "year": 1969,
+      "cnt": 1
+    },
+    {
+      "make": "VOLVO",
+      "model": "131341 T",
+      "year": 2013,
+      "cnt": 1
+    },
+    {
+      "make": "VOLVO",
+      "model": "EX40",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "VOLVO",
+      "model": "EX90",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "VOLVO",
+      "model": "V70XC",
+      "year": 2006,
+      "cnt": 1
+    },
+    {
+      "make": "XPENG",
+      "model": "G6",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "XPENG",
+      "model": "G9",
+      "year": 2024,
+      "cnt": 1
+    },
+    {
+      "make": "XPENG",
+      "model": "G9",
+      "year": 2026,
+      "cnt": 1
+    },
+    {
+      "make": "XPENG",
+      "model": "P7",
+      "year": 2021,
+      "cnt": 1
+    },
+    {
+      "make": "ZEEKR",
+      "model": "001",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "ZEEKR",
+      "model": "X",
+      "year": 2025,
+      "cnt": 1
+    },
+    {
+      "make": "ZEEKR",
+      "model": "X",
+      "year": 2026,
+      "cnt": 1
+    }
+  ]
+}

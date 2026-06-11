@@ -6,6 +6,17 @@ export interface DetectedInput {
   confidence: number;
 }
 
+export const REGNR_PATTERN = /^[A-Z]{2}\d{4,5}$/;
+export const VIN_PATTERN = /^[A-HJ-NPR-Z0-9]{17}$/;
+
+export function normalizeRegnr(raw: string): string {
+  return raw.trim().toUpperCase().replace(/[\s.-]+/g, '');
+}
+
+export function normalizeVin(raw: string): string {
+  return raw.trim().toUpperCase().replace(/[\s-]+/g, '');
+}
+
 export function detectInputType(raw: string): DetectedInput {
   const trimmed = raw.trim();
 
@@ -13,19 +24,27 @@ export function detectInputType(raw: string): DetectedInput {
     return { type: 'text', normalized: '', confidence: 0.5 };
   }
 
-  // If input contains whitespace, only strict patterns (regnr / vin) may match
-  // after whitespace removal. Everything else with whitespace is natural language.
-  if (/\s/.test(trimmed)) {
-    const noSpaces = trimmed.toUpperCase().replace(/\s+/g, '');
+  // If input contains separators, only strict patterns (regnr / vin) may match
+  // after separator removal. Everything else with whitespace remains natural language.
+  if (/[\s.-]/.test(trimmed)) {
+    const compact = trimmed.toUpperCase().replace(/[\s.-]+/g, '');
 
-    if (/^[A-Z]{2}\d{4,5}$/.test(noSpaces)) {
-      return { type: 'regnr', normalized: noSpaces, confidence: 1.0 };
+    if (REGNR_PATTERN.test(compact)) {
+      return { type: 'regnr', normalized: compact, confidence: 1.0 };
     }
 
-    if (/^[A-HJ-NPR-Z0-9]{17}$/.test(noSpaces)) {
-      return { type: 'vin', normalized: noSpaces, confidence: 1.0 };
+    if (VIN_PATTERN.test(compact)) {
+      return { type: 'vin', normalized: compact, confidence: 1.0 };
     }
 
+    if (/\s/.test(trimmed)) {
+      return { type: 'text', normalized: trimmed, confidence: 0.5 };
+    }
+    // Hyphenated catalog identifiers can still be SKUs.
+    const normalizedWithSeparators = trimmed.toUpperCase();
+    if (/^[A-Z0-9\-]{4,30}$/.test(normalizedWithSeparators)) {
+      return { type: 'sku', normalized: normalizedWithSeparators, confidence: 0.8 };
+    }
     return { type: 'text', normalized: trimmed, confidence: 0.5 };
   }
 
@@ -33,12 +52,12 @@ export function detectInputType(raw: string): DetectedInput {
   const normalized = trimmed.toUpperCase();
 
   // regnr
-  if (/^[A-Z]{2}\d{4,5}$/.test(normalized)) {
+  if (REGNR_PATTERN.test(normalized)) {
     return { type: 'regnr', normalized, confidence: 1.0 };
   }
 
   // vin
-  if (/^[A-HJ-NPR-Z0-9]{17}$/.test(normalized)) {
+  if (VIN_PATTERN.test(normalized)) {
     return { type: 'vin', normalized, confidence: 1.0 };
   }
 
@@ -67,7 +86,7 @@ export function detectInputType(raw: string): DetectedInput {
 export function validateInput(detected: DetectedInput): { valid: boolean; error?: string } {
   switch (detected.type) {
     case 'regnr': {
-      if (!/^[A-Z]{2}\d{4,5}$/.test(detected.normalized)) {
+      if (!REGNR_PATTERN.test(detected.normalized)) {
         return {
           valid: false,
           error: 'Invalid Norwegian registration number format. Expected 2 letters followed by 4-5 digits.',
@@ -80,7 +99,7 @@ export function validateInput(detected: DetectedInput): { valid: boolean; error?
       if (detected.normalized.length !== 17) {
         return { valid: false, error: 'Invalid VIN format. Must be exactly 17 characters.' };
       }
-      if (/[IOQ]/.test(detected.normalized)) {
+      if (!VIN_PATTERN.test(detected.normalized)) {
         return { valid: false, error: 'Invalid VIN format. Must not contain I, O, or Q.' };
       }
       return { valid: true };

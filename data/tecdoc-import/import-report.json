@@ -1,0 +1,133 @@
+{
+  "total_tecdoc_ktypes": 69870,
+  "existing_ktypes": 70891,
+  "missing_ktypes": 22589,
+  "top_brands": [
+    [
+      "CHEVROLET",
+      2381
+    ],
+    [
+      "FORD USA",
+      1505
+    ],
+    [
+      "GMC",
+      1222
+    ],
+    [
+      "DODGE",
+      901
+    ],
+    [
+      "TOYOTA",
+      787
+    ],
+    [
+      "MERCEDES-BENZ",
+      653
+    ],
+    [
+      "BMW",
+      556
+    ],
+    [
+      "NISSAN",
+      550
+    ],
+    [
+      "FORD",
+      510
+    ],
+    [
+      "PONTIAC",
+      504
+    ],
+    [
+      "VW",
+      500
+    ],
+    [
+      "HYUNDAI",
+      354
+    ],
+    [
+      "FORD AUSTRALIA",
+      352
+    ],
+    [
+      "AUDI",
+      323
+    ],
+    [
+      "HOLDEN",
+      319
+    ],
+    [
+      "MITSUBISHI",
+      306
+    ],
+    [
+      "RENAULT",
+      298
+    ],
+    [
+      "MAZDA",
+      295
+    ],
+    [
+      "HONDA",
+      283
+    ],
+    [
+      "OLDSMOBILE",
+      283
+    ],
+    [
+      "KIA",
+      274
+    ],
+    [
+      "OPEL",
+      265
+    ],
+    [
+      "FIAT",
+      259
+    ],
+    [
+      "MERCURY",
+      259
+    ],
+    [
+      "BUICK",
+      249
+    ],
+    [
+      "PEUGEOT",
+      247
+    ],
+    [
+      "CHRYSLER",
+      242
+    ],
+    [
+      "SUZUKI",
+      240
+    ],
+    [
+      "PLYMOUTH",
+      238
+    ],
+    [
+      "IVECO",
+      201
+    ]
+  ],
+  "sources": {
+    "passengercars": 69870,
+    "commercialvehicles": 0,
+    "motorbikes": 0
+  },
+  "generated_at": "2026-06-08T00:36:58.216Z"
+}

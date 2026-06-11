@@ -183,9 +183,10 @@ export async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Prom
     console.error("SVV: SVV_API_KEY not configured");
     return { status: "not_configured" };
   }
+  const normalizedRegnr = regnr.trim().toUpperCase().replace(/[\s.-]+/g, "");
   try {
     const res = await fetchWithTimeout(
-      `https://akfell-datautlevering.atlas.vegvesen.no/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(regnr)}`,
+      `https://akfell-datautlevering.atlas.vegvesen.no/enkeltoppslag/kjoretoydata?kjennemerke=${encodeURIComponent(normalizedRegnr)}`,
       {
         headers: {
           "Accept": "application/json",
@@ -216,7 +217,7 @@ export async function fetchSvvEnkeltoppslag(regnr: string, apiKey: string): Prom
       return { status: "parse_error" };
     }
 
-    const vehicle = parseSvvVehicle(data, regnr);
+    const vehicle = parseSvvVehicle(data, normalizedRegnr);
     if (!vehicle) {
       return { status: "not_found" };
     }

@@ -24,9 +24,11 @@ const DEFAULT_CANDIDATE_FIELDS = [
   "category",
   "typeCode",
   "typeCodeDesc",
+  "position",
   "price",
   "description",
   "_score",
+  "_uncertain",
   "properties",
   "equipmentMatch",
   "equipmentDiff",
@@ -216,6 +218,7 @@ export function compressSearchResponse(
     "resultsByType",
     "prefix4Hints",
     "ktypeInfo",
+    "equipmentFilter",
     "sources",
   ];
 

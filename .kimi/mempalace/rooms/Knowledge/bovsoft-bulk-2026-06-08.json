@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-06-08T04:43:04.910Z",
+  "bovsoft_bulk": {
+    "batch1_regnr": 62,
+    "batch1_ktypes": 23,
+    "batch2_regnr": 30,
+    "batch2_ktypes": 27,
+    "total_regnr": 92,
+    "total_unique_ktypes": 50,
+    "credits_used": 92,
+    "credits_remaining": 189
+  },
+  "catalog_fixes": {
+    "audi_q4_q6": 53,
+    "volvo_ex30": 14,
+    "vw_id3": 16,
+    "tesla_models_fixed": 138,
+    "tesla_ktypes_assigned": 135,
+    "polestar_3": 9,
+    "total_products_with_new_ktype": "~221"
+  },
+  "coverage": {
+    "total_products": 27139,
+    "with_ktype": 6766,
+    "percentage": 24.9,
+    "unique_ktypes": 250
+  },
+  "missing_models": {
+    "bmw_i4": {
+      "has_ktype": true,
+      "ktype": 144689,
+      "has_products": false
+    },
+    "ford_mustang_mach_e": {
+      "has_ktype": true,
+      "ktypes": [
+        143871,
+        143873,
+        157623,
+        157624
+      ],
+      "has_products": false
+    }
+  },
+  "models_discovered": [
+    "Tesla Model Y",
+    "Tesla Model 3",
+    "Tesla Model S",
+    "Tesla Model X",
+    "BMW i4",
+    "BMW 5 (G60)",
+    "BMW X1 (F48)",
+    "BMW X3 (E83)",
+    "Ford Mustang Mach-E",
+    "Ford Fiesta",
+    "Volvo EX30",
+    "Volvo C40",
+    "Volvo XC90 II",
+    "Volvo XC70 II",
+    "Volvo V60 I",
+    "Audi Q4 e-tron",
+    "Audi Q6",
+    "Audi e-tron",
+    "VW ID.3",
+    "VW Golf VII",
+    "VW Tiguan",
+    "VW UP",
+    "Polestar 3",
+    "Toyota Auris",
+    "Toyota RAV4",
+    "Toyota HiAce",
+    "Mitsubishi Outlander III",
+    "Mercedes E-Klasse",
+    "Subaru Forester",
+    "Honda HR-V",
+    "Opel Astra",
+    "Citroën C4",
+    "Aston Martin DB9",
+    "Nissan 310 GX"
+  ]
+}

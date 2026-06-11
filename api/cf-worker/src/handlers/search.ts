@@ -29,7 +29,7 @@ import {
   querySvvTecdocMatch,
   KTYPE_CONFIDENCE_THRESHOLD,
 } from "../lib/db";
-import { fetchBiluppgifterEquipment, inferRecordEquipment, detectFlagsFromOem, computeEquipmentMatch } from "../lib/equipment";
+import { fetchBiluppgifterEquipment, inferRecordEquipment, detectFlagsFromOem, computeEquipmentMatch, applyEquipmentFilter } from "../lib/equipment";
 import { decodeVwTransporterBody, decodeVin, inferBodyFromSvvData } from "../lib/vin-decoder";
 import { parseGenerationFromDescription } from "../lib/generation";
 import { scoreCandidate, modelMatches, yearCompatible, guessEquipment } from "../lib/scoring";
@@ -55,7 +55,80 @@ export function filterKtypeCandidatesForVehicle(
   });
 }
 
-export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: string): Promise<SearchResult> {
+const DRIVER_TYPE_CODES = new Set(["DFF", "DFB", "DFFV", "DFBV", "SFB1", "SFB2", "SFB3"]);
+const PASSENGER_TYPE_CODES = new Set(["DPF", "DPB", "DPFV", "DPBV", "SPB1", "SPB2", "SPB3"]);
+
+function normalizedRecordCategory(record: GlassRecord): string {
+  const category = (record.category || "").toLowerCase();
+  const typeCode = (record.typeCode || "").toUpperCase();
+  const text = `${record.typeCodeDesc || ""} ${record.description || ""}`.toLowerCase();
+
+  if (category === "frontrute") return "frontrute";
+  if (category === "bakrute") return "bakrute";
+  if (category.includes("dør") || category.includes("dor")) return "dørglass";
+  if (category.includes("side") || category.includes("siderute") || category.includes("ventil")) return "sideglass";
+
+  if (typeCode === "F" || text.includes("frontrute")) return "frontrute";
+  if (typeCode === "B" || text.includes("bakrute")) return "bakrute";
+  if (typeCode.startsWith("D") || text.includes("dørrute") || text.includes("dorrute")) return "dørglass";
+  if (typeCode.startsWith("S") || text.includes("siderute") || text.includes("ventilrute")) return "sideglass";
+  return category || "annet";
+}
+
+function normalizedPosition(record: GlassRecord): "driver" | "passenger" | "center" | "both" | null {
+  if (record.position === "driver" || record.position === "passenger" || record.position === "center" || record.position === "both") {
+    return record.position;
+  }
+
+  const typeCode = (record.typeCode || "").toUpperCase();
+  if (DRIVER_TYPE_CODES.has(typeCode)) return "driver";
+  if (PASSENGER_TYPE_CODES.has(typeCode)) return "passenger";
+
+  const text = `${record.typeCodeDesc || ""} ${record.description || ""}`.toLowerCase();
+  if (text.includes("førerside") || text.includes("foererside") || text.includes("venstre") ||
+      text.includes("fører") || text.includes("foerer") || text.includes("fv") ||
+      text.includes("v.s") || text.includes("v/s") || text.includes("v.s.") ||
+      /\bvs\b/.test(text) || /\bfv\b/.test(text) || /\bv\.s\b/.test(text)) return "driver";
+  if (text.includes("passasjer") || text.includes("passasjerside") || text.includes("høyre") ||
+      text.includes("hoyre") || text.includes("fh") || text.includes("h.s") ||
+      text.includes("h/s") || text.includes("h.s.") ||
+      /\bhs\b/.test(text) || /\bfh\b/.test(text) || /\bh\.s\b/.test(text)) return "passenger";
+  return null;
+}
+
+export function recordMatchesGlassSelection(
+  record: GlassRecord,
+  categoryFilter?: string,
+  positionFilter?: "driver" | "passenger" | "center" | "both"
+): boolean {
+  if (categoryFilter) {
+    const wanted = categoryFilter.toLowerCase();
+    const category = normalizedRecordCategory(record);
+    if (wanted === "siderute" || wanted === "sideglass") {
+      if (category !== "sideglass") return false;
+    } else if (wanted === "dørrute" || wanted === "dørglass" || wanted === "dorute" || wanted === "dorglass") {
+      if (category !== "dørglass") return false;
+    } else if (category !== wanted) {
+      return false;
+    }
+  }
+
+  if (positionFilter) {
+    const position = normalizedPosition(record);
+    if (!position) return false;
+    if (position !== "both" && position !== positionFilter) return false;
+  }
+
+  return true;
+}
+
+export async function searchByRegnr(
+  regnr: string,
+  env: Env,
+  categoryFilter?: string,
+  userEquipmentAnswers?: import("../lib/equipment").UserEquipmentAnswers,
+  positionFilter?: "driver" | "passenger" | "center" | "both"
+): Promise<SearchResult> {
   try {
     // 1. Lookup vehicle via SVV
     let svvCacheHit = false;
@@ -848,45 +921,72 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
     candidates.forEach((c) => { if (c.prefix4) prefix4Counts.set(c.prefix4, (prefix4Counts.get(c.prefix4) || 0) + 1); });
     const dominantPrefix4 = Array.from(prefix4Counts.entries()).sort((a, b) => b[1] - a[1])[0]?.[0];
 
-    // Score and sort
-    const scored = candidates
-      .map((c) => ({ c, score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined, unifiedVin || undefined, dominantPrefix4) }))
-      .sort((a, b) => b.score - a.score);
+    // === HARD EQUIPMENT FILTER (v2025-06-11) ===
+    // If user has confirmed equipment answers, split candidates into exact vs uncertain
+    let exactCandidates: GlassRecord[] = candidates;
+    let uncertainCandidates: GlassRecord[] = [];
+    const hasUserEquipment = userEquipmentAnswers && Object.values(userEquipmentAnswers).some((v) => v !== undefined);
 
-    // Optional category filter
-    const filteredScored = categoryFilter
-      ? scored.filter((s) => {
-          const cat = s.c.category?.toLowerCase() || inferTypeCodeFromRecord(s.c);
-          return cat === categoryFilter.toLowerCase();
-        })
-      : scored;
-
-    // Return all candidates sorted by score (no per-type limits)
-    const selected = filteredScored;
-
-    const candidatesWithEquipment = selected.map((s) => {
-      const record = s.c;
-      const nagsCodes = lookupNagsByVehicle(
-        record.brand || '',
-        record.model || '',
-        record.year_from,
-        record.year_to,
-        record.category || inferTypeCodeFromRecord(record) || 'annet'
+    if (hasUserEquipment) {
+      const { exact, uncertain } = applyEquipmentFilter(candidates, userEquipmentAnswers);
+      exactCandidates = exact;
+      uncertainCandidates = uncertain;
+      console.log(
+        `[EquipmentFilter] ${regnr}: exact=${exact.length}, uncertain=${uncertain.length}, answers=${JSON.stringify(userEquipmentAnswers)}`
       );
-      const recordEquipment = inferRecordEquipment(record);
-      const { match: equipmentMatch, diff: equipmentDiff } = computeEquipmentMatch(
-        recordEquipment,
-        effectiveEquipment
+    }
+
+    // Score and sort — prioritize exact candidates
+    const scoreAndEnrich = (records: GlassRecord[], isUncertain: boolean) => {
+      const scored = records
+        .map((c) => ({
+          c,
+          score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined, unifiedVin || undefined, dominantPrefix4)
+            + (isUncertain ? -200 : 0), // penalize uncertain candidates
+        }))
+        .sort((a, b) => b.score - a.score);
+
+      // Optional category filter
+      const filtered = scored.filter((s) =>
+        recordMatchesGlassSelection(s.c, categoryFilter, positionFilter)
       );
-      return {
-        ...normalizeRecord(record),
-        _score: s.score,
-        _equipment: recordEquipment,
-        equipmentMatch,
-        equipmentDiff,
-        nagsCodes: nagsCodes.length > 0 ? nagsCodes : undefined,
-      };
-    });
+
+      return filtered.map((s) => {
+        const record = s.c;
+        const nagsCodes = lookupNagsByVehicle(
+          record.brand || '',
+          record.model || '',
+          record.year_from,
+          record.year_to,
+          record.category || inferTypeCodeFromRecord(record) || 'annet'
+        );
+        const recordEquipment = inferRecordEquipment(record);
+        const { match: equipmentMatch, diff: equipmentDiff } = computeEquipmentMatch(
+          recordEquipment,
+          effectiveEquipment
+        );
+        return {
+          ...normalizeRecord(record),
+          _score: s.score,
+          _equipment: recordEquipment,
+          equipmentMatch,
+          equipmentDiff,
+          nagsCodes: nagsCodes.length > 0 ? nagsCodes : undefined,
+          _uncertain: isUncertain,
+        };
+      });
+    };
+
+    const exactWithEquipment = scoreAndEnrich(exactCandidates, false);
+    const uncertainWithEquipment = scoreAndEnrich(uncertainCandidates, true);
+
+    // HARD filter: when confirmed equipment has exact matches, normal candidates
+    // must only contain those exact matches. Uncertain alternatives are exposed
+    // only when there are zero exact matches, and are marked with _uncertain.
+    const showUncertainAsFallback = !!hasUserEquipment && exactWithEquipment.length === 0;
+    const candidatesWithEquipment = showUncertainAsFallback
+      ? uncertainWithEquipment
+      : exactWithEquipment;
 
     // Prefer frontrute as top pick when no category filter specified
     let topPick = candidatesWithEquipment[0] || null;
@@ -1058,6 +1158,19 @@ export async function searchByRegnr(regnr: string, env: Env, categoryFilter?: st
           groundTruth: layer === -1,
         },
         resultsByType: groupByTypeCode(candidatesWithEquipment as unknown as GlassRecord[]),
+        equipmentFilter: hasUserEquipment
+          ? {
+              applied: true,
+              answers: userEquipmentAnswers,
+              exactCount: exactWithEquipment.length,
+              uncertainCount: uncertainWithEquipment.length,
+              showingUncertainFallback: showUncertainAsFallback,
+              message:
+                exactWithEquipment.length === 0
+                  ? "Ingen eksakte treff med valgte utstyr. Viser usikre alternativer."
+                  : undefined,
+            }
+          : { applied: false },
         prefix4Hints: (() => {
           const counts = new Map<string, number>();
           candidatesWithEquipment.forEach((c: any) => {

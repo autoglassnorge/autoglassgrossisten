@@ -29,6 +29,7 @@ export function normalizeRecord(r: GlassRecord): any {
   const title = getCached(titleCache, r.id, () => generateTitle(r));
   const standardDescription = getCached(descCache, r.id, () => generateDescription(r));
   const eq = inferRecordEquipment(r);
+  const row = r as GlassRecord & { type_code?: string; type_code_desc?: string; type_description?: string };
 
   return {
     id: r.id,
@@ -81,8 +82,8 @@ export function normalizeRecord(r: GlassRecord): any {
     brandOriginal: r.brand_original,
     ktype: r.ktype,
     createdAt: r.created_at,
-    typeCode: r.typeCode,
-    typeCodeDesc: r.typeCodeDesc,
+    typeCode: r.typeCode ?? row.type_code,
+    typeCodeDesc: r.typeCodeDesc ?? row.type_code_desc ?? row.type_description,
     position: r.position,
   };
 }

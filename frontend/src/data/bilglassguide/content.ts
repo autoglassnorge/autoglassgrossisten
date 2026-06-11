@@ -31,9 +31,9 @@ export interface FaqItem {
 
 export const CATEGORY_CARDS: CategoryCard[] = [
   { slug: 'frontrute', title: 'Frontrute', desc: 'Konstruksjon, laminering, smartglass og kompatibilitet.', iconKey: 'CarFront' },
-  { slug: 'adas-sensorer', title: 'ADAS og sensorer', desc: 'Kamera, radar, filskifteassistent og regnsensorer.', iconKey: 'Shield' },
-  { slug: 'hud-oppvarming', title: 'HUD og oppvarming', desc: 'Head-up display, varmekabler og akustiske ruter.', iconKey: 'Eye' },
-  { slug: 'kalibrering', title: 'Kalibrering', desc: 'Hvorfor og hvordan ADAS kalibreres etter ruteskift.', iconKey: 'Wrench' },
+  { slug: 'frontrute-adas-kamera', title: 'ADAS og sensorer', desc: 'Kamera, radar, filskifteassistent og regnsensorer.', iconKey: 'Shield' },
+  { slug: 'frontrute-hud', title: 'HUD og oppvarming', desc: 'Head-up display, varmekabler og akustiske ruter.', iconKey: 'Eye' },
+  { slug: 'kalibrering-etter-ruteskift', title: 'Kalibrering', desc: 'Hvorfor og hvordan ADAS kalibreres etter ruteskift.', iconKey: 'Wrench' },
   { slug: 'oem-vs-aftermarket', title: 'OEM vs aftermarket', desc: 'Forskjellen på original, OEM og kvalitetsaftermarket.', iconKey: 'Layers' },
   { slug: 'produsenter', title: 'Bilglassprodusenter', desc: 'AGC, Pilkington, Saint-Gobain, Fuyao og andre.', iconKey: 'Factory' },
   { slug: 'variantmatching', title: 'Variantmatching', desc: 'Hvorfor samme modell kan ha flere frontruter.', iconKey: 'Search' },
@@ -157,6 +157,14 @@ export const ARTICLES: ArticleMeta[] = [
     title: 'Akustisk bilglass — dB-dempering og frekvensrespons',
     description: 'Teknisk innhold om akustisk bilglass: PVB-tykkelse, dB-dempering, frekvensrespons og forskjellene mellom standard og premium laminering.',
     category: 'frontrute',
+    publishedAt: '2025-05-28',
+    modifiedAt: '2025-05-28',
+  },
+  {
+    slug: 'produsenter',
+    title: 'Bilglassprodusenter — OEM, OEE og kvalitet',
+    description: 'Oversikt over AGC, Pilkington, Saint-Gobain, Fuyao, Guardian, NordGlass og hvordan produsentvalg påvirker kvalitet, ADAS og pris.',
+    category: 'produsenter',
     publishedAt: '2025-05-28',
     modifiedAt: '2025-05-28',
   },

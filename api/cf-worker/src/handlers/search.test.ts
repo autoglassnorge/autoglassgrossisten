@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { GlassRecord } from "../types";
-import { filterKtypeCandidatesForVehicle } from "./search";
+import { filterKtypeCandidatesForVehicle, recordMatchesGlassSelection } from "./search";
 
 function record(overrides: Partial<GlassRecord>): GlassRecord {
   return {
@@ -55,7 +55,7 @@ describe("filterKtypeCandidatesForVehicle", () => {
   const su18018Vehicle = {
     make: "VW",
     model: "CARAVELLE V BUSS (7HB, 7HJ, 7EB, 7EJ, 7EF, 7EG, 7HF, 7EC)",
-    year: 2003,
+    year: 2005,
   };
 
   it("rejects stale kType rows from other VW models and years", () => {
@@ -99,5 +99,61 @@ describe("filterKtypeCandidatesForVehicle", () => {
     ];
 
     expect(filterKtypeCandidatesForVehicle(rows, su18018Vehicle)).toHaveLength(1);
+  });
+});
+
+describe("recordMatchesGlassSelection", () => {
+  it("matches dørglass by category", () => {
+    expect(recordMatchesGlassSelection(record({
+      category: "dørglass",
+      typeCode: "DFF",
+      position: "driver",
+      description: "VW TRANSPORTER DØRRUTE FREMME",
+    }), "dørglass")).toBe(true);
+  });
+
+  it("does not include sideglass when dørglass is selected", () => {
+    expect(recordMatchesGlassSelection(record({
+      category: "sideglass",
+      typeCode: "SFB1",
+      position: "driver",
+      description: "VW TRANSPORTER SIDERUTE BAK",
+    }), "dørglass")).toBe(false);
+  });
+
+  it("keeps structured sideglass category even when description says dørrute", () => {
+    expect(recordMatchesGlassSelection(record({
+      category: "sideglass",
+      typeCode: "",
+      position: "driver",
+      description: "VW TRANSPORTER T5 03- DØRRUTE SKYVEDØR FAST VS",
+    }), "dørglass")).toBe(false);
+  });
+
+  it("matches driver side from type code fallback", () => {
+    expect(recordMatchesGlassSelection(record({
+      category: "sideglass",
+      typeCode: "SFB1",
+      position: null,
+      description: "VW TRANSPORTER SIDERUTE BAK",
+    }), "sideglass", "driver")).toBe(true);
+  });
+
+  it("rejects passenger side when driver side is selected", () => {
+    expect(recordMatchesGlassSelection(record({
+      category: "sideglass",
+      typeCode: "SPB1",
+      position: null,
+      description: "VW TRANSPORTER SIDERUTE BAK",
+    }), "sideglass", "driver")).toBe(false);
+  });
+
+  it("rejects unknown side when a specific side is selected", () => {
+    expect(recordMatchesGlassSelection(record({
+      category: "sideglass",
+      typeCode: "",
+      position: null,
+      description: "VW TRANSPORTER SIDERUTE BAK",
+    }), "sideglass", "driver")).toBe(false);
   });
 });

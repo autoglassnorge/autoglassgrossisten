@@ -1,0 +1,150 @@
+{
+  "total_results": 12361,
+  "matched": 6184,
+  "unmatched": 6177,
+  "success_rate": 0.5002831486125718,
+  "unique_ktypes": 220,
+  "sample_matches": [
+    {
+      "regnr": "BS 10000",
+      "svv": "BMW X1 XDRIVE 18D 2010",
+      "matched": "BMW X1 2009-2015",
+      "ktype": 26980,
+      "score": 0.95
+    },
+    {
+      "regnr": "BS 10026",
+      "svv": "VOLVO XC90 2010",
+      "matched": "VOLVO XC90 I 2002-2014",
+      "ktype": 128129,
+      "score": 0.9
+    },
+    {
+      "regnr": "BS 10027",
+      "svv": "AUDI A3 2010",
+      "matched": "AUDI A3 2010-2012",
+      "ktype": 33251,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10028",
+      "svv": "AUDI A4 2010",
+      "matched": "AUDI A4 2008-2010",
+      "ktype": 122334,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10029",
+      "svv": "VOLKSWAGEN PASSAT 2010",
+      "matched": "VW PASSAT 2007-2010",
+      "ktype": 27544,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10030",
+      "svv": "VOLKSWAGEN GOLF 2010",
+      "matched": "VW GOLF 2008-null",
+      "ktype": 127863,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10033",
+      "svv": "VOLVO S80 2010",
+      "matched": "VOLVO S80 II 2010-null",
+      "ktype": 6274,
+      "score": 0.9
+    },
+    {
+      "regnr": "BS 10038",
+      "svv": "VOLKSWAGEN GOLF 2010",
+      "matched": "VW GOLF 2008-null",
+      "ktype": 127863,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10039",
+      "svv": "AUDI A8 2010",
+      "matched": "AUDI A8 2007-2010",
+      "ktype": 23189,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10041",
+      "svv": "AUDI AUDI Q5 2010",
+      "matched": "AUDI Q5 2009-null",
+      "ktype": 31955,
+      "score": 0.95
+    },
+    {
+      "regnr": "BS 10041",
+      "svv": "AUDI AUDI Q5 2010",
+      "matched": "AUDI Q5 2009-null",
+      "ktype": 31955,
+      "score": 0.95
+    },
+    {
+      "regnr": "BS 10048",
+      "svv": "AUDI A4 2010",
+      "matched": "AUDI A4 2008-2010",
+      "ktype": 122334,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10050",
+      "svv": "AUDI A8 2010",
+      "matched": "AUDI A8 2007-2010",
+      "ktype": 23189,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10052",
+      "svv": "VOLKSWAGEN POLO 2010",
+      "matched": "VW POLO 2008-2012",
+      "ktype": 100609,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10053",
+      "svv": "VOLKSWAGEN GOLF 2010",
+      "matched": "VW GOLF 2008-null",
+      "ktype": 127863,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10054",
+      "svv": "BMW X5 3.0D 2010",
+      "matched": "BMW X5 2008-2010",
+      "ktype": 16499,
+      "score": 0.95
+    },
+    {
+      "regnr": "BS 10055",
+      "svv": "SKODA SUPERB 2010",
+      "matched": "SKODA SUPERB II 2008-2015",
+      "ktype": 28252,
+      "score": 0.9
+    },
+    {
+      "regnr": "BS 10059",
+      "svv": "SEAT LEON 2010",
+      "matched": "SEAT LEON 2010-2012",
+      "ktype": 33250,
+      "score": 1
+    },
+    {
+      "regnr": "BS 10066",
+      "svv": "VOLKSWAGEN TOURAN 2010",
+      "matched": "VW TOURAN 2006-2010",
+      "ktype": 19651,
+      "score": 1
+    },
+    {
+      "regnr": "RK 92248",
+      "svv": "BMW X6 XDRIVE30D 2010",
+      "matched": "BMW X6 2008-2014",
+      "ktype": 127004,
+      "score": 0.95
+    }
+  ],
+  "generated_at": "2026-06-08T02:14:41.602Z"
+}

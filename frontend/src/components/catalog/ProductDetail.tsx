@@ -250,7 +250,7 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
               className="gap-2 min-h-[48px] px-6"
             >
               {inCart ? <Check className="h-5 w-5" /> : <ShoppingCart className="h-5 w-5" />}
-              {inCart ? 'Lagt til' : 'Legg i handlekurv'}
+              {inCart ? 'Lagt til i ordre' : 'Legg til i ordre'}
             </Button>
           </div>
         </div>

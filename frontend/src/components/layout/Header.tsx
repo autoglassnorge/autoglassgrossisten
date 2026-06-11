@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, LogIn, User } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/stores/cartStore';
 import { useChatStore } from '@/stores/chatStore';
+import { useAuthStore } from '@/stores/authStore';
+import { preloadPage, PAGE_IMPORTS } from '@/hooks/useRoutePreload';
 import ProfessorAvatar from '@/components/ordremottaker/ProfessorAvatar';
 
 export function Header() {
@@ -11,26 +13,29 @@ export function Header() {
   const cartItems = useCartStore((s) => s.items);
   const cartTotal = cartItems.reduce((sum, i) => sum + i.quantity, 0);
   const { openChat } = useChatStore();
+  const { isAuthenticated, user, logout } = useAuthStore();
 
   const navLinks = [
-    { label: 'Katalog', href: '/bla' },
-    { label: 'Bilglassguide', href: '/bilglassguide' },
+    { label: 'Katalog', href: '/bla', preload: PAGE_IMPORTS.browse },
+    { label: 'Bilglassguide', href: '/bilglassguide', preload: PAGE_IMPORTS.bilglassguide },
     { label: 'Om oss', href: '/om-oss' },
-    { label: 'Kontakt', href: '/kontakt' },
+    { label: 'Kontakt', href: '/kontakt', preload: PAGE_IMPORTS.kontakt },
   ];
 
-  const authLink = { label: 'Min konto', href: '/konto' };
+  const authLink = isAuthenticated
+    ? { label: user?.name ? `Hei, ${user.name.split(' ')[0]}` : 'Min side', href: '/konto', preload: PAGE_IMPORTS.account }
+    : { label: 'Logg inn', href: '/konto', preload: PAGE_IMPORTS.account };
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
+      <header className="sticky top-0 z-50 border-b border-carbon-800 bg-carbon-950 shadow-sm">
         <div className="mx-auto flex h-14 sm:h-16 max-w-7xl items-center gap-3 px-3 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <img
               src="/logo.png"
               alt="Autoglass"
-              className="h-10 w-auto object-contain"
+              className="h-10 w-auto object-contain brightness-0 invert"
             />
           </Link>
 
@@ -38,33 +43,62 @@ export function Header() {
           <div className="hidden md:block flex-1 max-w-md ml-4">
             <button
               onClick={() => openChat()}
-              className="w-full flex items-center gap-2 rounded-md border border-gray-200 bg-gray-50 py-2 px-3 text-sm text-gray-500 hover:border-autoglass-blue hover:bg-autoglass-light hover:text-autoglass-blue transition-colors"
+              className="w-full flex items-center gap-2 rounded-md border border-carbon-700 bg-carbon-900 py-2 px-3 text-sm text-carbon-400 hover:border-glass-cyan/40 hover:bg-carbon-800 hover:text-glass-cyan transition-colors"
             >
               <ProfessorAvatar size="sm" className="!h-6 !w-6" />
-              <span>Spør Professor Autoglass...</span>
+              <span>Spør vårt glassteam...</span>
             </button>
           </div>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1 ml-auto">
             {navLinks.map((link) => (
-              <Link key={link.href} to={link.href}>
-                <Button variant="ghost" size="sm">{link.label}</Button>
+              <Link
+                key={link.href}
+                to={link.href}
+                onMouseEnter={() => link.preload && preloadPage(link.preload)}
+              >
+                <Button variant="ghost" size="sm" className="text-carbon-300 hover:text-white hover:bg-carbon-800">
+                  {link.label}
+                </Button>
               </Link>
             ))}
-            <Link to="/kasse">
-              <Button variant="ghost" size="sm" className="relative min-h-[44px] min-w-[44px]">
+            <Link to="/kasse" onMouseEnter={() => preloadPage(PAGE_IMPORTS.cart)}>
+              <Button variant="ghost" size="sm" className="relative min-h-[44px] min-w-[44px] text-carbon-300 hover:text-white hover:bg-carbon-800">
                 <ShoppingCart className="h-5 w-5" />
                 {cartTotal > 0 && (
-                  <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                  <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-glass-cyan text-[10px] font-bold text-carbon-950">
                     {cartTotal}
                   </span>
                 )}
               </Button>
             </Link>
-            <Link to={authLink.href}>
-              <Button variant="default" size="sm" className="min-h-[44px]">{authLink.label}</Button>
-            </Link>
+            {isAuthenticated ? (
+              <div className="flex items-center gap-1">
+                <Link to={authLink.href} onMouseEnter={() => preloadPage(authLink.preload!)}>
+                  <Button variant="default" size="sm" className="min-h-[44px] bg-glass-cyan text-carbon-950 hover:bg-glass-cyanLight gap-1.5">
+                    <User className="h-4 w-4" />
+                    {authLink.label}
+                  </Button>
+                </Link>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={logout}
+                  className="min-h-[44px] text-carbon-400 hover:text-white hover:bg-carbon-800"
+                  title="Logg ut"
+                >
+                  <LogIn className="h-4 w-4 rotate-180" />
+                </Button>
+              </div>
+            ) : (
+              <Link to={authLink.href} onMouseEnter={() => preloadPage(authLink.preload!)}>
+                <Button variant="default" size="sm" className="min-h-[44px] bg-glass-cyan text-carbon-950 hover:bg-glass-cyanLight gap-1.5">
+                  <LogIn className="h-4 w-4" />
+                  {authLink.label}
+                </Button>
+              </Link>
+            )}
           </nav>
 
           {/* Mobile actions */}
@@ -72,21 +106,21 @@ export function Header() {
             <Button
               variant="ghost"
               size="sm"
-              className="min-h-[44px] min-w-[44px] px-2"
+              className="min-h-[44px] min-w-[44px] px-2 text-carbon-300 hover:text-white hover:bg-carbon-800"
               onClick={() => openChat()}
-              aria-label="Spør Professor Autoglass"
+              aria-label="Spør vårt glassteam"
             >
               <ProfessorAvatar size="sm" className="!h-6 !w-6" />
             </Button>
-            <Link to="/kasse" aria-label="Handlekurv">
+            <Link to="/kasse" aria-label="Ordre">
               <Button
                 variant="ghost"
                 size="sm"
-                className="relative min-h-[44px] min-w-[44px] px-2"
+                className="relative min-h-[44px] min-w-[44px] px-2 text-carbon-300 hover:text-white hover:bg-carbon-800"
               >
                 <ShoppingCart className="h-5 w-5" />
                 {cartTotal > 0 && (
-                  <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                  <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-glass-cyan text-[10px] font-bold text-carbon-950">
                     {cartTotal}
                   </span>
                 )}
@@ -95,7 +129,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="sm"
-              className="min-h-[44px] min-w-[44px] px-2"
+              className="min-h-[44px] min-w-[44px] px-2 text-carbon-300 hover:text-white hover:bg-carbon-800"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Meny"
             >
@@ -106,26 +140,39 @@ export function Header() {
 
         {/* Mobile menu dropdown */}
         {mobileOpen && (
-          <div className="md:hidden border-t bg-white px-4 py-3 space-y-2 animate-fade-in">
+          <div className="md:hidden border-t border-carbon-800 bg-carbon-950 px-4 py-3 space-y-2 animate-fade-in">
             {navLinks.map((link) => (
               <Link key={link.href} to={link.href} className="block" onClick={() => setMobileOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start min-h-[44px]">{link.label}</Button>
+                <Button variant="ghost" className="w-full justify-start min-h-[44px] text-carbon-300 hover:text-white hover:bg-carbon-800">
+                  {link.label}
+                </Button>
               </Link>
             ))}
             <Link to="/kasse" className="block" onClick={() => setMobileOpen(false)}>
-              <Button variant="ghost" className="w-full justify-start min-h-[44px]">
+              <Button variant="ghost" className="w-full justify-start min-h-[44px] text-carbon-300 hover:text-white hover:bg-carbon-800">
                 <ShoppingCart className="h-4 w-4 mr-2" />
-                Handlekurv {cartTotal > 0 && `(${cartTotal})`}
+                Ordre {cartTotal > 0 && `(${cartTotal})`}
               </Button>
             </Link>
+            {isAuthenticated && (
+              <Button
+                variant="ghost"
+                className="w-full justify-start min-h-[44px] text-carbon-300 hover:text-white hover:bg-carbon-800"
+                onClick={() => { logout(); setMobileOpen(false); }}
+              >
+                <LogIn className="h-4 w-4 mr-2 rotate-180" />
+                Logg ut
+              </Button>
+            )}
             <Link to={authLink.href} className="block" onClick={() => setMobileOpen(false)}>
-              <Button variant="default" className="w-full justify-start min-h-[44px]">{authLink.label}</Button>
+              <Button variant="default" className="w-full justify-start min-h-[44px] bg-glass-cyan text-carbon-950 hover:bg-glass-cyanLight">
+                {isAuthenticated ? <User className="h-4 w-4 mr-2" /> : <LogIn className="h-4 w-4 mr-2" />}
+                {authLink.label}
+              </Button>
             </Link>
           </div>
         )}
       </header>
-
-
     </>
   );
 }

@@ -1,0 +1,170 @@
+{
+  "total_pending": 3377,
+  "matched": 299,
+  "unmatched": 3078,
+  "low_confidence_rejected": 42,
+  "success_rate": 0.08854012437074327,
+  "sample_matches": [
+    {
+      "id": 1,
+      "regnr_hash": "6955704444223201023e21653d233affb191ae96d23c9cd276fbe5f7bdf6fc8f",
+      "svv": "VW Golf 2020",
+      "matched": "VW GOLF 2008-null",
+      "ktype": 127863,
+      "score": 1
+    },
+    {
+      "id": 58,
+      "regnr_hash": "a37e16da249ebf59",
+      "svv": "HYUNDAI IONIQ5 2021",
+      "matched": "HYUNDAI IONIQ 2016-null",
+      "ktype": 120519,
+      "score": 0.9
+    },
+    {
+      "id": 64,
+      "regnr_hash": "eddd384d05d95cac",
+      "svv": "AUDI AUDI 100 LS 1975",
+      "matched": "AUDI 100 1975-1976",
+      "ktype": 1146,
+      "score": 0.9
+    },
+    {
+      "id": 66,
+      "regnr_hash": "b45404d20fd291d5",
+      "svv": "HYUNDAI IONIQ5 2021",
+      "matched": "HYUNDAI IONIQ 2016-null",
+      "ktype": 120519,
+      "score": 0.9
+    },
+    {
+      "id": 83,
+      "regnr_hash": "747ca129618c6057",
+      "svv": "FORD GRANADA 2300 1972",
+      "matched": "FORD GRANADA 1972-1975",
+      "ktype": 14968,
+      "score": 0.9
+    },
+    {
+      "id": 86,
+      "regnr_hash": "27e5474929f224aa",
+      "svv": "BMW X3 2.0D 2004",
+      "matched": "BMW X3 2004-2006",
+      "ktype": 35786,
+      "score": 0.95
+    },
+    {
+      "id": 239,
+      "regnr_hash": "0b44f83522e2e3c6",
+      "svv": "FORD Explorer 2022",
+      "matched": "FORD USA EXPLORER 2002-null",
+      "ktype": 27583,
+      "score": 1
+    },
+    {
+      "id": 246,
+      "regnr_hash": "a20cc620d76e4ecc",
+      "svv": "HYUNDAI IONIQ5 2023",
+      "matched": "HYUNDAI IONIQ 2016-null",
+      "ktype": 120519,
+      "score": 0.9
+    },
+    {
+      "id": 349,
+      "regnr_hash": "a8a2de24ff4cd625",
+      "svv": "LAND ROVER RANGE ROVER 2022",
+      "matched": "LANDROVER LAND ROVER RANGE ROVER IV 2017-null",
+      "ktype": 129658,
+      "score": 0.9
+    },
+    {
+      "id": 357,
+      "regnr_hash": "a0d14bdd10cdb464",
+      "svv": "OPEL MERIVA-A 2003",
+      "matched": "OPEL MERIVA A MPV 2003-2010",
+      "ktype": 17203,
+      "score": 0.9
+    },
+    {
+      "id": 470,
+      "regnr_hash": "192e4c908f796d8a",
+      "svv": "HYUNDAI IONIQ5 2022",
+      "matched": "HYUNDAI IONIQ 2016-null",
+      "ktype": 120519,
+      "score": 0.9
+    },
+    {
+      "id": 512,
+      "regnr_hash": "8db383fdf9c98a05",
+      "svv": "FORD F-150 Lightning 2024",
+      "matched": "FORD USA F-150 1998-null",
+      "ktype": 13394,
+      "score": 0.9
+    },
+    {
+      "id": 531,
+      "regnr_hash": "066b1c7c3c3bdd6c",
+      "svv": "BMW X3 2.0D 2008",
+      "matched": "BMW X3 2005-2008",
+      "ktype": 19033,
+      "score": 0.95
+    },
+    {
+      "id": 593,
+      "regnr_hash": "43500482c4a0f514",
+      "svv": "BMW X5 3.0D 2012",
+      "matched": "BMW X5 2007-2012",
+      "ktype": 121846,
+      "score": 0.95
+    },
+    {
+      "id": 615,
+      "regnr_hash": "e879151f9b2ec535",
+      "svv": "LAND ROVER FREELANDER 2 2007",
+      "matched": "LANDROVER LAND ROVER FREELANDER 2 2006-2014",
+      "ktype": 19755,
+      "score": 0.9
+    },
+    {
+      "id": 616,
+      "regnr_hash": "a4997db2eeb5ed63",
+      "svv": "JEEP CHEROKEE 2.5L TURBOD 1995",
+      "matched": "JEEP CHEROKEE 1984-2001",
+      "ktype": 7753,
+      "score": 0.9
+    },
+    {
+      "id": 786,
+      "regnr_hash": "53f29c11d500202d",
+      "svv": "BMW X5 3.0D 2004",
+      "matched": "BMW X5 2000-2006",
+      "ktype": 106008,
+      "score": 0.95
+    },
+    {
+      "id": 805,
+      "regnr_hash": "e9952415625c21d0",
+      "svv": "OPEL CORSA-E 2015",
+      "matched": "OPEL CORSA E 2014-null",
+      "ktype": 107793,
+      "score": 1
+    },
+    {
+      "id": 950,
+      "regnr_hash": "ba42440b42a77f33",
+      "svv": "HYUNDAI IONIQ5 2022",
+      "matched": "HYUNDAI IONIQ 2016-null",
+      "ktype": 120519,
+      "score": 0.9
+    },
+    {
+      "id": 991,
+      "regnr_hash": "15576d526e4784ba",
+      "svv": "HYUNDAI IONIQ5 2022",
+      "matched": "HYUNDAI IONIQ 2016-null",
+      "ktype": 120519,
+      "score": 0.9
+    }
+  ],
+  "generated_at": "2026-06-08T00:43:11.371Z"
+}

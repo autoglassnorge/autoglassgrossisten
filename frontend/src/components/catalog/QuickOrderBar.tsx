@@ -161,7 +161,7 @@ export function QuickOrderBar({ onLookup }: QuickOrderBarProps) {
               <ShoppingCart className="h-4 w-4" />
               Legg til alle
               {alreadyInCart.length > 0 && (
-                <span className="text-xs opacity-75">({alreadyInCart.length} allerede i kurv)</span>
+                <span className="text-xs opacity-75">({alreadyInCart.length} allerede i ordre)</span>
               )}
             </Button>
           </div>

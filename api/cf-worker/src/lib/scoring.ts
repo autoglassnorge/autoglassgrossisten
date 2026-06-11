@@ -180,22 +180,46 @@ export function scoreCandidate(
   if (!flags.acoustic && recordFlags.acoustic) score -= 5;
   if (!flags.antenna && recordFlags.antenna) score -= 3;
 
-  // === Year compatibility — hard gate, not soft score ===
-  // A glass must be year-compatible; if not, it's massively penalized
+  // === Year compatibility — hard gate + graded penalty ===
+  // A glass must be year-compatible; if not, it's massively penalized.
+  // Graduated penalty: closer mismatch = smaller penalty.
   const vehicleYear = vehicle.year;
   const yr = parseYearRangeFromDescription(c.description);
   let yearCompatible = true;
+  let yearPenalty = 0;
   if (yr.from && yr.to) {
-    if (vehicleYear < yr.from - 2 || vehicleYear > yr.to + 2) {
+    const rangeMid = (yr.from + yr.to) / 2;
+    const rangeHalf = (yr.to - yr.from) / 2;
+    const yearDiff = Math.abs(vehicleYear - rangeMid);
+    if (yearDiff > rangeHalf + 5) {
+      // Far outside range: massive penalty
       yearCompatible = false;
+      yearPenalty = 500;
+    } else if (yearDiff > rangeHalf + 2) {
+      // Slightly outside range: moderate penalty
+      yearPenalty = 200;
+    } else if (yearDiff > rangeHalf) {
+      // Just outside range: small penalty
+      yearPenalty = 50;
     }
   } else if (yr.from && !yr.to) {
     if (vehicleYear < yr.from - 10) {
       yearCompatible = false;
+      yearPenalty = 500;
+    } else if (vehicleYear < yr.from - 5) {
+      yearPenalty = 200;
+    } else if (vehicleYear < yr.from - 2) {
+      yearPenalty = 50;
     }
   }
   if (!yearCompatible) {
-    score -= 500;
+    score -= yearPenalty;
+  } else if (yearPenalty > 0) {
+    score -= yearPenalty;
+  }
+  // Bonus for exact year match
+  if (c.year_from === vehicleYear || c.year_to === vehicleYear) {
+    score += 10;
   }
 
   // === Category scoring — small boost for windshields ===
