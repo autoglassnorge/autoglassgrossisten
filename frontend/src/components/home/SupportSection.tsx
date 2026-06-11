@@ -4,7 +4,6 @@
  */
 
 import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Phone, MessageCircle, ArrowRight } from 'lucide-react';
 import { useChatStore } from '@/stores/chatStore';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
@@ -14,7 +13,6 @@ export function SupportSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useScrollReveal(sectionRef);
   const { openChat } = useChatStore();
-  const navigate = useNavigate();
 
   return (
     <section
