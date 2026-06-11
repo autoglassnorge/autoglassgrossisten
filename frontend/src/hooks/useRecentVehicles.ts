@@ -1,4 +1,4 @@
-/"
+/**
  * useRecentVehicles — Persist recently searched vehicles in localStorage.
  * Enriched with make/model/year from search results.
  */
