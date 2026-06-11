@@ -5,6 +5,7 @@
  */
 import * as fs from "fs";
 import * as path from "path";
+import { fetchWithRetry } from "./config";
 
 function pLimit(concurrency: number) {
   const queue: Array<() => void> = [];
@@ -48,20 +49,6 @@ const OUTPUT_FILE = path.join(OUTPUT_DIR, "autoglass-ru-products.json");
 const CHECKPOINT_FILE = path.join(OUTPUT_DIR, "autoglass-ru-checkpoint.json");
 
 const limit = pLimit(CONCURRENCY);
-
-async function fetchWithTimeout(url: string, timeoutMs: number): Promise<string> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(timer);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.text();
-  } catch (e) {
-    clearTimeout(timer);
-    throw e;
-  }
-}
 
 function parseModelPage(html: string, url: string): AutoglassProduct[] {
   const products: AutoglassProduct[] = [];
@@ -125,7 +112,8 @@ function parseModelPage(html: string, url: string): AutoglassProduct[] {
 
 async function getModelUrls(): Promise<string[]> {
   console.log("📥 Fetching sitemap...");
-  const xml = await fetchWithTimeout(`${BASE_URL}/sitemap.xml`, FETCH_TIMEOUT);
+  const sitemapRes = await fetchWithRetry(`${BASE_URL}/sitemap.xml`, {}, FETCH_TIMEOUT);
+  const xml = await sitemapRes.text();
   const urls: string[] = [];
   const matches = xml.matchAll(/<loc>(.+?)<\/loc>/g);
   for (const m of matches) {
@@ -169,7 +157,8 @@ async function main() {
     remaining.map((url) =>
       limit(async () => {
         try {
-          const html = await fetchWithTimeout(url, FETCH_TIMEOUT);
+          const pageRes = await fetchWithRetry(url, {}, FETCH_TIMEOUT);
+          const html = await pageRes.text();
           const pageProducts = parseModelPage(html, url);
           products.push(...pageProducts);
           completed.add(url);

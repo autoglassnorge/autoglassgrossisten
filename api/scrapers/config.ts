@@ -38,7 +38,7 @@ export const SCRAPER_CONFIG = {
 export function fetchWithTimeout(
   url: string,
   options: RequestInit = {},
-  timeoutMs = SCRAPER_CONFIG.requestTimeoutMs
+  timeoutMs: number = SCRAPER_CONFIG.requestTimeoutMs
 ): Promise<Response> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -58,13 +58,14 @@ export function fetchWithTimeout(
  */
 export async function fetchWithRetry(
   url: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  timeoutMs: number = SCRAPER_CONFIG.requestTimeoutMs
 ): Promise<Response> {
   let lastError: Error | null = null;
 
   for (let i = 0; i < SCRAPER_CONFIG.retry.maxAttempts; i++) {
     try {
-      const res = await fetchWithTimeout(url, options);
+      const res = await fetchWithTimeout(url, options, timeoutMs);
       if (res.ok) return res;
       lastError = new Error(`HTTP ${res.status}: ${res.statusText}`);
     } catch (e) {

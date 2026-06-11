@@ -5,6 +5,7 @@
  */
 import * as fs from "fs";
 import * as path from "path";
+import { fetchWithRetry } from "./config";
 // Use built-in fetch (Node 20+)
 
 // Simple p-limit implementation
@@ -53,20 +54,6 @@ const OUTPUT_FILE = path.join(OUTPUT_DIR, "euroglass-ru-products.json");
 const CHECKPOINT_FILE = path.join(OUTPUT_DIR, "euroglass-ru-checkpoint.json");
 
 const limit = pLimit(CONCURRENCY);
-
-async function fetchWithTimeout(url: string, timeoutMs: number): Promise<string> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(timer);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.text();
-  } catch (e) {
-    clearTimeout(timer);
-    throw e;
-  }
-}
 
 function parseProductPage(html: string, url: string): EuroglassProduct | null {
   // Extract Eurocode from meta or page title
@@ -150,7 +137,8 @@ async function getProductUrls(): Promise<string[]> {
   const urls: string[] = [];
   for (const sitemap of ["sitemap-shop-1.xml", "sitemap-shop-2.xml"]) {
     console.log(`📥 Fetching ${sitemap}...`);
-    const xml = await fetchWithTimeout(`${BASE_URL}/${sitemap}`, FETCH_TIMEOUT);
+    const sitemapRes = await fetchWithRetry(`${BASE_URL}/${sitemap}`, {}, FETCH_TIMEOUT);
+    const xml = await sitemapRes.text();
     const matches = xml.matchAll(/<loc>(.+?)<\/loc>/g);
     for (const m of matches) {
       const url = m[1];
@@ -190,7 +178,8 @@ async function main() {
     remaining.map((url) =>
       limit(async () => {
         try {
-          const html = await fetchWithTimeout(url, FETCH_TIMEOUT);
+          const pageRes = await fetchWithRetry(url, {}, FETCH_TIMEOUT);
+          const html = await pageRes.text();
           const product = parseProductPage(html, url);
           if (product) {
             products.push(product);

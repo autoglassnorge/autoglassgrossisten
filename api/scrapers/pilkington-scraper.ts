@@ -12,6 +12,7 @@
 
 import * as fs from "fs";
 import * as path from "path";
+import { fetchWithRetry } from "./config";
 // Simple p-limit implementation (avoids ESM/CJS conflict with p-limit v6+)
 function pLimit(concurrency: number) {
   const queue: Array<() => void> = [];
@@ -44,7 +45,6 @@ const SITEMAP_URL = `${BASE_URL}/sitemap.xml`;
 const BATCH_LIMIT = 1000;        // Products per run
 const CONCURRENCY = 10;          // Parallel fetches
 const FETCH_TIMEOUT_MS = 10000;
-const RETRY_DELAY_MS = 2000;
 const OUTPUT_DIR = path.join(process.cwd(), "data", "scrapers");
 
 // ─── File paths ─────────────────────────────────────────────────
@@ -183,35 +183,21 @@ function migrateIfNeeded(): boolean {
   return true;
 }
 
-// ─── Fetch with retry ───────────────────────────────────────────
-async function fetchWithRetry(url: string, retries = 2): Promise<string> {
-  for (let i = 0; i < retries; i++) {
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-      const res = await fetch(url, {
-        headers: {
-          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
-          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-          "Accept-Language": "en-GB,en;q=0.9",
-        },
-        signal: controller.signal,
-      });
-      clearTimeout(timeout);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.text();
-    } catch (e: any) {
-      if (i === retries - 1) throw e;
-      await new Promise(r => setTimeout(r, RETRY_DELAY_MS * (i + 1)));
-    }
-  }
-  throw new Error("Unreachable");
-}
-
 // ─── Parse sitemap for product IDs ──────────────────────────────
 async function parseSitemap(): Promise<number[]> {
   console.log("📥 Henter sitemap...");
-  const xml = await fetchWithRetry(SITEMAP_URL);
+  const sitemapRes = await fetchWithRetry(
+    SITEMAP_URL,
+    {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-GB,en;q=0.9",
+      },
+    },
+    FETCH_TIMEOUT_MS
+  );
+  const xml = await sitemapRes.text();
   const ids: number[] = [];
   const regex = /products\/id-(\d+)\.html/g;
   let match;
@@ -348,7 +334,18 @@ function parseProductPage(html: string, id: number): PilkingtonProduct | null {
 // ─── Scrape single product ──────────────────────────────────────
 async function scrapeOne(id: number): Promise<PilkingtonProduct | null> {
   try {
-    const html = await fetchWithRetry(`${BASE_URL}/products/id-${id}.html`, 2);
+    const productRes = await fetchWithRetry(
+      `${BASE_URL}/products/id-${id}.html`,
+      {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "Accept-Language": "en-GB,en;q=0.9",
+        },
+      },
+      FETCH_TIMEOUT_MS
+    );
+    const html = await productRes.text();
     return parseProductPage(html, id);
   } catch {
     return null;
