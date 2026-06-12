@@ -56,9 +56,9 @@ export async function handleBuildKtypeMapping(request: Request, env: Env): Promi
     const year = row.year_from || 2000;
     const result = resolveTecDocKType(row.brand, row.model, year);
 
-    if (result.status === "resolved" && result.candidates.length === 1) {
+    if (result.status === "resolved" && result.candidates.length >= 1) {
       const candidate = result.candidates[0];
-      if (candidate.score >= 0.5) {
+      if (candidate.score >= 0.3) {
         mappings.push({
           id: row.id,
           eurocode: row.eurocode,
@@ -71,24 +71,6 @@ export async function handleBuildKtypeMapping(request: Request, env: Env): Promi
         });
       } else {
         skipped.push({ id: row.id, eurocode: row.eurocode, brand: row.brand, model: row.model, reason: `score too low: ${candidate.score.toFixed(2)}` });
-      }
-    } else if (result.status === "resolved" && result.candidates.length > 1) {
-      // Multiple candidates — take best if score is significantly higher
-      const best = result.candidates[0];
-      const second = result.candidates[1];
-      if (best.score >= 0.6 && best.score - second.score >= 0.15) {
-        mappings.push({
-          id: row.id,
-          eurocode: row.eurocode,
-          brand: row.brand,
-          model: row.model,
-          year,
-          ktype: best.ktype,
-          score: best.score,
-          reasons: best.reasons,
-        });
-      } else {
-        skipped.push({ id: row.id, eurocode: row.eurocode, brand: row.brand, model: row.model, reason: `ambiguous: ${result.candidates.length} candidates` });
       }
     } else {
       skipped.push({ id: row.id, eurocode: row.eurocode, brand: row.brand, model: row.model, reason: result.status });
