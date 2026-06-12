@@ -164,11 +164,7 @@ export interface SearchResult {
   equipment?: EquipmentFlags;
   regnr?: string;
   calibrationRequirements?: CalibrationRequirement[];
-
-  // NEW: kType enrichment from Bovsoft/Finn.no
   ktypeInfo?: KtypeInfo;
-
-  // NEW: structured confidence + grouped results
   confidenceInfo?: ConfidenceInfo;
   resultsByType?: Record<string, Product[]>;
   equipmentFilter?: {
@@ -179,4 +175,11 @@ export interface SearchResult {
     showingUncertainFallback?: boolean;
     message?: string;
   };
+  accessories?: Array<{
+    sku: string;
+    name: string;
+    price: number;
+    category: string;
+    sourceUrl?: string;
+  }>;
 }

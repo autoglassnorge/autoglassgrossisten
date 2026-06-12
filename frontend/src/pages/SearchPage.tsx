@@ -119,10 +119,12 @@ export default function SearchPage() {
   /* ---- sync from URL ---- */
   useEffect(() => {
     const urlQ = searchParams.get('q') ?? '';
-    if (urlQ && urlQ !== activeQuery) {
-      setInputValue(urlQ);
-      const detected = detectInputType(urlQ);
-      setActiveQuery(urlQ);
+    const urlRegnr = searchParams.get('regnr') ?? '';
+    const effectiveQuery = urlQ || urlRegnr;
+    if (effectiveQuery && effectiveQuery !== activeQuery) {
+      setInputValue(effectiveQuery);
+      const detected = detectInputType(effectiveQuery);
+      setActiveQuery(effectiveQuery);
       setActiveQueryType(detected.type);
     }
   }, [searchParams, activeQuery]);

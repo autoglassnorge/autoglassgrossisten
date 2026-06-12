@@ -220,6 +220,7 @@ export function compressSearchResponse(
     "ktypeInfo",
     "equipmentFilter",
     "sources",
+    "accessories",
   ];
 
   for (const field of topLevelFields) {

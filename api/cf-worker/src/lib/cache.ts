@@ -4,7 +4,7 @@
 
 import type { CacheEnvelope } from "../types";
 
-export const CACHE_VERSION = "7";
+export const CACHE_VERSION = "9";
 
 export async function getCache<T>(kv: KVNamespace, key: string): Promise<T | null> {
   const cached = await kv.get(key);

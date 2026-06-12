@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS glass_catalog (
   nags_codes TEXT,         -- JSON array as string
   brand_original TEXT,
   ktype INTEGER,              -- TecDoc type ID (for exact matching)
+  accessory_skus TEXT,        -- JSON array of accessory article_numbers linked to this glass
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

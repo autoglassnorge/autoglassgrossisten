@@ -27,6 +27,7 @@ import {
   queryTecdocByKtype,
   queryTecdocKtypeByVehicle,
   querySvvTecdocMatch,
+  queryAccessories,
   KTYPE_CONFIDENCE_THRESHOLD,
 } from "../lib/db";
 import { fetchBiluppgifterEquipment, inferRecordEquipment, detectFlagsFromOem, computeEquipmentMatch, applyEquipmentFilter } from "../lib/equipment";
@@ -496,20 +497,43 @@ export async function searchByRegnr(
       }
 
       if (compatibleKtypeDirect.length === 0) {
-        const ktypeMappings = await queryKtypeMapping(db, vehicle.k_type);
-        if (ktypeMappings.length > 0) {
-          const topMapping = ktypeMappings[0];
-          if (topMapping.frequency >= KTYPE_CONFIDENCE_THRESHOLD) {
-            const mappedRecord = await queryByEurocode(db, topMapping.eurocode);
-            if (mappedRecord && mappedRecord.eurocode && !candidateCodes.has(mappedRecord.eurocode)) {
-              const brands = getBrandAliases(vehicle.make);
-              const brandMatch = brands.some((b) => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
-              const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
-              if (brandMatch && yearMatch) {
-                candidates.push(mappedRecord);
-                candidateCodes.add(mappedRecord.eurocode);
-                layer = 0;
-                confidence = topMapping.frequency >= 10 ? "exact" : "high";
+        // Try TecDoc direct ktype→eurocode mapping FIRST (before statistical learning)
+        const tecdocEntries = await queryTecdocByKtype(db, vehicle.k_type, 5);
+        if (tecdocEntries.length > 0) {
+          // Prefer unique (no collision), then collision_rank=1
+          const tecdocEntry = tecdocEntries.find((e) => e.confidenceTag === "unique") || tecdocEntries.find((e) => e.collisionRank === 1) || tecdocEntries[0];
+          const mappedRecord = await queryByEurocode(db, tecdocEntry.eurocode);
+          if (mappedRecord && mappedRecord.eurocode && !candidateCodes.has(mappedRecord.eurocode)) {
+            const brands = getBrandAliases(vehicle.make);
+            const brandMatch = brands.some((b) => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
+            const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
+            if (brandMatch && yearMatch) {
+              candidates.push(mappedRecord);
+              candidateCodes.add(mappedRecord.eurocode);
+              layer = 0;
+              confidence = tecdocEntry.confidenceTag === "unique" ? "exact" : "high";
+              console.log(`[kType] TecDoc direct match for ${regnr}: kType=${vehicle.k_type} → eurocode=${tecdocEntry.eurocode}, conf=${tecdocEntry.confidenceTag}, collision=${tecdocEntry.collisionRank}`);
+            }
+          }
+        }
+
+        // Fallback: statistical learning from ktype_matches
+        if (layer !== 0) {
+          const ktypeMappings = await queryKtypeMapping(db, vehicle.k_type);
+          if (ktypeMappings.length > 0) {
+            const topMapping = ktypeMappings[0];
+            if (topMapping.frequency >= KTYPE_CONFIDENCE_THRESHOLD) {
+              const mappedRecord = await queryByEurocode(db, topMapping.eurocode);
+              if (mappedRecord && mappedRecord.eurocode && !candidateCodes.has(mappedRecord.eurocode)) {
+                const brands = getBrandAliases(vehicle.make);
+                const brandMatch = brands.some((b) => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
+                const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
+                if (brandMatch && yearMatch) {
+                  candidates.push(mappedRecord);
+                  candidateCodes.add(mappedRecord.eurocode);
+                  layer = 0;
+                  confidence = topMapping.frequency >= 10 ? "exact" : "high";
+                }
               }
             }
           }
@@ -1049,6 +1073,34 @@ export async function searchByRegnr(
       });
     }
 
+    // Lookup accessories for the top candidate
+    let accessories: any[] = [];
+    try {
+      const topSku = topPick?.eurocode || topCandidate?.eurocode;
+      console.log(`[Accessory] regnr=${regnr} topSku=${topSku}`);
+      if (topSku) {
+        const topRecord = await queryByEurocode(db, topSku);
+        console.log(`[Accessory] topRecord=${JSON.stringify(topRecord ? { id: topRecord.id, eurocode: topRecord.eurocode, accessory_skus: topRecord.accessory_skus } : null)}`);
+        if (topRecord?.accessory_skus) {
+          const accSkus = JSON.parse(topRecord.accessory_skus);
+          console.log(`[Accessory] accSkus=${JSON.stringify(accSkus)}`);
+          if (Array.isArray(accSkus) && accSkus.length > 0) {
+            const accRecords = await queryAccessories(db, accSkus);
+            console.log(`[Accessory] accRecords.length=${accRecords.length}`);
+            accessories = accRecords.map((r) => ({
+              sku: r.article_number,
+              name: r.description,
+              price: r.price || 0,
+              category: r.category,
+              sourceUrl: r.source_url,
+            }));
+          }
+        }
+      }
+    } catch (e) {
+      console.warn(`Accessory lookup failed for ${regnr}:`, e);
+    }
+
     return {
       httpStatus: 200,
       body: {
@@ -1158,6 +1210,7 @@ export async function searchByRegnr(
           groundTruth: layer === -1,
         },
         resultsByType: groupByTypeCode(candidatesWithEquipment as unknown as GlassRecord[]),
+        accessories: accessories,
         equipmentFilter: hasUserEquipment
           ? {
               applied: true,

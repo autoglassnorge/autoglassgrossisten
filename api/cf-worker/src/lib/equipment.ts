@@ -286,6 +286,7 @@ export function applyEquipmentFilter<
     antenna?: boolean | number;
     camera?: boolean | number;
     hud?: boolean | number;
+    description?: string | null;
   }
 >(
   candidates: T[],
@@ -297,8 +298,21 @@ export function applyEquipmentFilter<
   for (const candidate of candidates) {
     let violations = 0;
 
+    // Use inferRecordEquipment for accurate equipment detection from description
+    // (handles negation like "IKKE ANT" correctly, unlike raw DB columns)
+    const descFlags = candidate.description ? detectFlagsFromDescription(candidate.description) : null;
+
     // Helper to read boolean-ish field (supports both snake_case and camelCase)
+    // Prioritizes description-inferred values over raw DB columns
     const has = (key: keyof UserEquipmentAnswers): boolean => {
+      // First check description-inferred flags
+      if (descFlags) {
+        const descKey = key === "rainSensor" ? "rainSensor" : key;
+        if (descKey in descFlags) {
+          return !!(descFlags as Record<string, boolean>)[descKey];
+        }
+      }
+      // Fallback to raw DB columns
       const val =
         key === "rainSensor"
           ? (candidate.rainSensor ?? candidate.rain_sensor)

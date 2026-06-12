@@ -2,6 +2,7 @@
  * Autoglass AS — Cloudflare Worker API v2.3 (Modular)
  * ========================================================================
  * Thin router: delegates all logic to handler modules.
+ * BUILD: 2026-06-12-06-35
  */
 
 import type { Env } from "./types";
@@ -19,6 +20,7 @@ import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, han
 import { handleGlassGuide } from "./handlers/glass-guide";
 import { handleOrdremottaker, handleFeedback as handleOrdremottakerFeedback } from "./handlers/ordremottaker";
 import { handleUnifiedSearch } from "./handlers/unified-search";
+import { handleBuildKtypeMapping } from "./handlers/build-ktype-mapping";
 import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
 import { fetchSvvEnkeltoppslag } from "./providers/svv";
 
@@ -266,6 +268,9 @@ export default {
     // Admin
     if (path === "/api/admin/quotes" && request.method === "GET") {
       return handleAdminQuotes(request, env);
+    }
+    if (path === "/api/admin/build-ktype-mapping" && request.method === "POST") {
+      return handleBuildKtypeMapping(request, env);
     }
 
     // Vegvesen Scraper (backup når SVV er nede)
