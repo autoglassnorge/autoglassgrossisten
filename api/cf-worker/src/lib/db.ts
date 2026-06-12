@@ -44,11 +44,11 @@ export async function queryByPrefix4(db: D1Database, prefix4: string, limit = 50
 
 export async function queryByEurocode(db: D1Database, eurocode: string): Promise<GlassRecord | null> {
   try {
-    const result = await db
-      .prepare("SELECT * FROM glass_catalog WHERE eurocode = ? COLLATE NOCASE")
+    const { results } = await db
+      .prepare("SELECT * FROM glass_catalog WHERE eurocode = ? LIMIT 1")
       .bind(eurocode)
-      .first();
-    return result as unknown as GlassRecord | null;
+      .all();
+    return ((results || []) as unknown as GlassRecord[])[0] || null;
   } catch (e) {
     console.error(`queryByEurocode failed: ${e instanceof Error ? e.message : String(e)}`);
     return null;
@@ -257,6 +257,28 @@ export async function queryFuzzyBrandYear(
   }
 }
 
+/**
+ * Query accessory products by their SKUs.
+ * Looks up glass_catalog records that are accessories (not the glass itself).
+ */
+export async function queryAccessories(
+  db: D1Database,
+  accessorySkus: string[]
+): Promise<GlassRecord[]> {
+  if (!accessorySkus.length) return [];
+  const placeholders = accessorySkus.map(() => "?").join(",");
+  try {
+    const { results } = await db
+      .prepare(`SELECT * FROM glass_catalog WHERE article_number IN (${placeholders}) LIMIT 50`)
+      .bind(...accessorySkus)
+      .all();
+    return (results || []) as unknown as GlassRecord[];
+  } catch (e) {
+    console.error(`queryAccessories failed: ${e instanceof Error ? e.message : String(e)}`);
+    return [];
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Catalog metadata
 // ---------------------------------------------------------------------------
@@ -319,8 +341,65 @@ export async function searchCatalog(
   offset = 0,
   limit = 100
 ): Promise<GlassRecord[]> {
-  let sql = "SELECT * FROM glass_catalog WHERE (supplier_sku LIKE ? OR eurocode LIKE ? OR article_number LIKE ? OR brand LIKE ? OR model LIKE ? OR description LIKE ?)";
-  const params: (string | number)[] = [`%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`, `%${q}%`];
+  // Tokenize query: split on spaces, remove empty/small tokens
+  const tokens = q.split(/\s+/).filter((t) => t.length >= 2);
+  
+  // Synonym expansion for common glass terms
+  // Each key maps to a group of synonyms — at least one must match
+  const SYNONYMS: Record<string, string[]> = {
+    "frontrute": ["frontrute", "frontruta", "windshield", "fr", "front"],
+    "bakrute": ["bakrute", "bakruta", "rear", "bak", "b"],
+    "dørrute": ["dørrute", "dørruta", "dør", "door"],
+    "dorrute": ["dorrute", "dorruta", "dør", "door"],
+    "sideglass": ["sideglass", "side", "siderute", "sideruta"],
+    "siderute": ["siderute", "sideruta", "side", "sideglass"],
+  };
+  
+  // Build concept groups: each original token becomes a group
+  // If token has synonyms, group = [token] + synonyms
+  // Otherwise group = [token]
+  const conceptGroups: string[][] = [];
+  for (const token of tokens) {
+    const lowerToken = token.toLowerCase();
+    if (SYNONYMS[lowerToken]) {
+      // Use synonyms (already includes the original term)
+      conceptGroups.push(SYNONYMS[lowerToken]);
+    } else {
+      conceptGroups.push([token]);
+    }
+  }
+  
+  // Build tokenized WHERE clause: each concept group must have at least one match
+  // (eurocode, article_number, scan_number, brand, model, description)
+  const fieldConditions = [
+    "eurocode LIKE ?",
+    "article_number LIKE ?",
+    "scan_number LIKE ?",
+    "brand LIKE ?",
+    "model LIKE ?",
+    "description LIKE ?",
+  ];
+  
+  let sql: string;
+  const params: (string | number)[] = [];
+  
+  if (conceptGroups.length === 0) {
+    // No valid tokens, return all (with filters)
+    sql = "SELECT * FROM glass_catalog WHERE 1=1";
+  } else {
+    // Each concept group: at least one synonym must match at least one field
+    const groupClauses: string[] = [];
+    for (const group of conceptGroups) {
+      const synonymClauses: string[] = [];
+      for (const synonym of group) {
+        const synonymParams = Array(6).fill(`%${synonym}%`);
+        synonymClauses.push(`(${fieldConditions.join(" OR ")})`);
+        params.push(...synonymParams);
+      }
+      groupClauses.push(`(${synonymClauses.join(" OR ")})`);
+    }
+    sql = `SELECT * FROM glass_catalog WHERE ${groupClauses.join(" AND ")}`;
+  }
 
   if (filters.brand) {
     sql += " AND brand = ?";

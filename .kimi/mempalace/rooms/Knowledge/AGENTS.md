@@ -21,19 +21,24 @@ Hvis du oppdager Klarpakke-kontekst som lekker inn — avvis den.
 
 Autoglass AS bruker **KIMI CLI-agenter** for domene-spesialisering.
 
-### KIMI Code 0.11.0 (oppdatert 2026-06-05)
+### KIMI Code 0.14.2 (oppdatert 2026-06-12)
 
-Prosjektet er optimalisert for **KIMI Code 0.11.0** med følgende nye features:
+Prosjektet er optimalisert for **KIMI Code 0.14.2** med følgende nye features:
 
 | Feature | Hva det gjør | Konfigurasjon |
 |---|---|---|
 | **Sub-skill discovery** | Hierarkisk skill-gruppering med `has-sub-skill: true` | `KIMI_CODE_EXPERIMENTAL_SUB_SKILL=true` |
-| **Built-in skills som slash commands** | Skills vises som `/skill-name` kommandoer | Automatisk — aktivert i 0.11.0 |
+| **Built-in skills som slash commands** | Skills vises som `/skill-name` kommandoer — nå også som dotted slash commands | Automatisk — aktivert i 0.14.2 |
 | **Sampling-parametere** | `temperature` og `top_p` for modell-kontroll | `[model]` seksjon i `config.toml` |
 | **Fast subagent timeout** | 30-min timeout for subagents | `agent_task_timeout_s = 900` (overstyrt fra 1800s) |
 | **No auto-update** | Deaktiverer auto-update sjekk | `KIMI_CODE_NO_AUTO_UPDATE` env var |
+| **Bedre session resume** | Raskere og mer pålitelig gjenopptakelse av lange sesjoner | Innebygd i 0.14.2 |
+| **Bedre stdout/stderr-streaming** | Sanntids output fra Bash-verktøy | Innebygd i 0.14.2 |
+| **Mer stabil config-håndtering** | Færre config-parsing feil | Innebygd i 0.14.2 |
 
-**Viktige env vars for 0.11.0:**
+**Standardmodell:** [Kimi K2.7 Code](https://docs.moonshot.cn/kimi-code/models) — Kimis sterkeste coding-modell. 256K context, bedre long-context instruksjonsfølge, **kun thinking mode** (non-thinking støttes ikke).
+
+**Viktige env vars for 0.14.2:**
 ```bash
 export KIMI_CODE_EXPERIMENTAL_SUB_SKILL=true  # Aktiver sub-skill discovery
 export KIMI_MODEL_TEMPERATURE=0.6              # Lavere = mer deterministisk (valgfritt)
@@ -41,6 +46,25 @@ export KIMI_MODEL_TOP_P=0.95                   # Nucleus sampling (valgfritt)
 export KIMI_MODEL_THINKING_KEEP=true           # Preserved-thinking passthrough (valgfritt)
 export KIMI_CODE_NO_AUTO_UPDATE=true           # Deaktiver auto-update (valgfritt)
 ```
+
+> **Merk:** Gamle `kimi-cli` fases gradvis ned. KIMI Code CLI (`kimi-code` / `kimi`) er den nye retningen. Se [MoonshotAI/kimi-code](https://github.com/MoonshotAI/kimi-code).
+
+---
+
+### Token-sparing (0.14.2)
+
+Disse innstillingene er justert for å redusere token-forbruk uten å svekke kvalitet:
+
+| Komponent | Innstilling | Fra | Til | Begrunnelse |
+|---|---|---|---|---|
+| `config.toml` | `read_max_bytes` | 50000 | 35000 | Bakgrunns-output fra scrapere sjelden trenger >35KB |
+| `config.toml` | `notification_tail_chars` | 5000 | 3000 | 3000 chars dekker feilmeldinger/sammendrag |
+| `mcp-server.mjs` | `fileWatcherDebounceMs` | 2000ms | 3000ms | Færre unødvendige reindexeringer |
+| `mcp-server.mjs` | `maxToolOutputChars` | 75000 | 20000 | Fast grense, oppdatert for 256K K2.7 context |
+| `mcp-server.mjs` | `maxResultChars` | 2500 | 600 | Fokus på mest relevante snippets |
+| `mcp-server.mjs` | `cacheSize` | 500 | 100 | Tilstrekkelig for Bilglass-prosjektet |
+
+**Prinsipp:** Spar tokens på output-grenser og unødvendige reindexeringer, ikke på system-prompts eller thinking-output.
 
 ### CLI-aliaser
 ```bash
@@ -64,7 +88,7 @@ kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasj
 | ktype-agent | `.kimi/agents/autoglass-ktype-agent.yaml` | `.md` | Bovsoft, SVV, kType |
 | **orchestrator-agent** | `.kimi/agents/autoglass-orchestrator.yaml` | `.md` | **Task-routing, Superpowers-prosess, verifikasjon** |
 
-### Custom Slash-Skills (0.11.0 — `/skill-name` kommandoer)
+### Custom Slash-Skills (0.14.2 — `/skill-name` og dotted slash-kommandoer)
 
 **Hierarkisk struktur** (`has-sub-skill: true`):
 
@@ -359,5 +383,5 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 
 ---
 
-**Sist oppdatert:** 2026-06-05  
-**Versjon:** 2.5 (+KIMI Code 0.11.0-optimalisering)
+**Sist oppdatert:** 2026-06-12  
+**Versjon:** 3.4 (+KIMI + MemPalace token-optimalisering)

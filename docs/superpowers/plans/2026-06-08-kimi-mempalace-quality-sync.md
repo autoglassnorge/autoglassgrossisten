@@ -6,7 +6,7 @@
 
 **Architecture:** 3 parallelle tracks — (A) Dokumentasjonssynk, (B) Hooks+Config-fiks, (C) Ny skill+KG. Tracks A og B er uavhengige. Track C avhenger av Track A (for riktige tabell-referanser).
 
-**Tech Stack:** Markdown, Bash, Node.js, Cloudflare D1, KIMI Code 0.11.0, MemPalace v3.5.0
+**Tech Stack:** Markdown, Bash, Node.js, Cloudflare D1, KIMI Code 0.14.2, MemPalace v3.5.0
 
 **Kjente fakta (verifisert):**
 - `catalog-prod.json`: 27,184 records

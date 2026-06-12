@@ -14,8 +14,8 @@
 | Repo path | `/Users/taj/bilglass` |
 | Stack | Cloudflare Worker + D1 + KV + Pages |
 | Owner | Tom Arne Jensen (post@klarpakke.no) |
-| Last updated | 2026-06-08 20:42 CEST |
-| Last updated by | kimi-cli |
+| Last updated | 2026-06-12 16:18 CEST |
+| Last updated by | kimi-code |
 | Worker version | v2.5 (kType Family + Ordremottaker LLM) |
 
 ---

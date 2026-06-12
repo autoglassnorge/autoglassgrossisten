@@ -256,7 +256,7 @@ export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsPro
       {/* Accessory suggestions */}
       {selectedType && selectionFilteredProducts.some((p) => (p.typeCode || 'Ukjent') === selectedType) && (
         <Suspense fallback={null}>
-          <AccessorySuggestions typeCode={selectedType} />
+          <AccessorySuggestions typeCode={selectedType} accessories={result?.accessories} />
         </Suspense>
       )}
 

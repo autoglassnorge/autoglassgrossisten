@@ -68,6 +68,8 @@ export interface GlassRecord {
   nagsCodes?: string[];
   /** Normalized properties bag (set by normalizeRecord) */
   properties?: Record<string, unknown>;
+  /** JSON array of accessory SKUs linked to this glass product */
+  accessory_skus?: string | null;
 }
 
 export interface VehicleFingerprint {
