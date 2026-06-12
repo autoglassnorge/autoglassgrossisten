@@ -2,7 +2,7 @@
 
 > Universelle regler for ALLE agenter i Autoglass AS-prosjektet.
 > Injiseres i hver agent-session før domene-spesifikke instruksjoner.
-> **Optimalisert for KIMI Code 0.11.0** — max_steps_per_turn=750, show_thinking_stream, merge_all_available_skills, sub-skill discovery.
+> **Optimalisert for KIMI Code 0.14.2** — max_steps_per_turn=750, show_thinking_stream, merge_all_available_skills, sub-skill discovery, K2.7 Code.
 
 ---
 
@@ -141,9 +141,9 @@ Hver respons skal avsluttes med:
 
 ---
 
-## 🎯 Slash-Skills & Sub-skill Hierarki (0.11.0)
+## 🎯 Slash-Skills & Sub-skill Hierarki (0.14.2)
 
-Prosjektet bruker **KIMI Code 0.11.0 sub-skill discovery** (`KIMI_CODE_EXPERIMENTAL_SUB_SKILL=true`).
+Prosjektet bruker **KIMI Code 0.14.2 sub-skill discovery** (`KIMI_CODE_EXPERIMENTAL_SUB_SKILL=true`), inkludert støtte for dotted slash-kommandoer.
 
 ### Hierarkisk struktur
 
@@ -206,5 +206,5 @@ Prosjektet bruker **KIMI Code 0.11.0 sub-skill discovery** (`KIMI_CODE_EXPERIMEN
 
 ---
 
-**Sist oppdatert:** 2026-06-08
-**Versjon:** 1.4 (+kType Family, Ordremottaker LLM)
+**Sist oppdatert:** 2026-06-12
+**Versjon:** 1.5 (+KIMI Code 0.14.2, K2.7 Code)

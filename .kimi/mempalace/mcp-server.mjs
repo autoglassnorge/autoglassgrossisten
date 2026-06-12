@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * 🏛️ MemPalace MCP Server v3.5.0 — KIMI Code 0.11.0 Optimalisert
+ * 🏛️ MemPalace MCP Server v3.5.0 — KIMI Code 0.14.2 Optimalisert
  *
  * Fikser i v3.5.0:
  * - Output truncation: respekterer KIMI CLI v1.32.0+ 100K tool-output cap
  *   (truncateOutput sikrer at resultater alltid er under ~80K tegn)
- * - 0.11.0-aware: oppdatert for max_steps_per_turn=750, show_thinking_stream, sub-skill discovery
+ * - 0.14.2-aware: oppdatert for max_steps_per_turn=750, show_thinking_stream, sub-skill discovery, K2.7 Code
  * - Forbedret get_status med server-metrikker og cap-warning
  * - Versjon-agnostisk: støtter både v1.44 alias-resolution og v1.43 OAuth
  *
@@ -27,7 +27,7 @@
  * - Forbedret auto_tag: semantiske tags fra KG + expansions, ikke bare filnavn
  * - Forbedret semanticSearch: scorer og ranker resultater
  * - File watcher: fs.watch for inkrementell reindex ved runtime-endringer
- * - Kontekst-vennlig: optimeret for 262k k2.6 + 750 steps/turn
+ * - Kontekst-vennlig: optimeret for 256k K2.7 Code + 750 steps/turn
  *
  * Fikser i v3.2.0:
  * - Inverted index for O(1) token lookup
@@ -38,7 +38,7 @@
  *
  * Versjon: 3.5.0
  * Dato: 2026-05-27
- * For: KIMI Code 0.11.0, k2.6, macOS ARM64
+ * For: KIMI Code 0.14.2, K2.7 Code, macOS ARM64
  */
 
 import {
@@ -66,13 +66,13 @@ const CONFIG = {
   wing: 'autoglass',
   cacheSize: 100,           // redusert fra 500 — tilstrekkelig for Bilglass-prosjektet
   maxResultChars: 600,      // redusert fra 2500 — fokus på mest relevante kontekst
-  maxToolOutputChars: 20000, // redusert fra 75000 — ~8% av 262K kontekst, gir headroom
+  maxToolOutputChars: 20000, // redusert fra 75000 — ~5-8% av 256K K2.7 context, gir headroom
   batchSize: 50,
   kgBatchSize: 100,
   indexCachePath: '.kimi/mempalace/data/index-cache-v3.json',
   enableFileWatcher: envFlag('MEMPALACE_ENABLE_FILE_WATCHER', !envFlag('MEMPALACE_DISABLE_FILE_WATCHER', false)),   // PÅ med smart debounce, men kan skrus av i Codex
   fileWatcherPaths: ['docs', '.kimi/mempalace/rooms', '.kimi/plans'], // kun disse paths
-  fileWatcherDebounceMs: 2000, // 2s debounce for å unngå reindex-storm
+  fileWatcherDebounceMs: 3000, // 3s debounce for å unngå reindex-storm og spare CPU/token-oppstart
   indexPaths: [
     { path: 'docs', label: 'Docs', types: ['md'] },
     { path: '.kimi', label: 'Diary', include: ['diary.jsonl'] },
@@ -102,7 +102,7 @@ const CONFIG = {
     'adas': ['sensor', 'calibration', 'hud', 'rain-sensor', 'camera', 'acoustic', 'heated', 'solar'],
     'svv': ['svv', 'enkeltoppslag', 'regnr', 'kjøretøy', 'vehicle', 'sivil', 'transport'],
     'bovsoft': ['bovsoft', 'ktype', 'tecdoc', 'regnum', 'vin', 'decode'],
-    'kimi': ['cli', 'agent', 'mcp', 'k2.6', 'loop', 'smart'],
+    'kimi': ['cli', 'agent', 'mcp', 'k2.7', 'loop', 'smart'],
     'mempalace': ['memory', 'kg', 'knowledge', 'graph', 'minne', 'kunnskap'],
     'optimize': ['optimalisering', 'optimalisere', 'forbedre', 'forbedring', 'optimize', 'improve', 'enhance'],
     'fix': ['fiks', 'reparere', 'bug', 'error', 'feil', 'crash', 'broken'],
@@ -1497,9 +1497,9 @@ class MempalaceMCP {
           role: 'user',
           content: {
             type: 'text',
-            text: `🧠 SUPERKIMI MODUS AKTIVERT\n\nDu kjører med:\n- 262k kontekst (k2.6)\n- 750 steps per turn\n- Ralph Loop (self-improvement, max 3 iterasjoner)
-- MemPalace v3.4.0 (TF-IDF + Bigram + Cross-lingual + Atomic writes)
-- ${Object.keys(kgData).length} KG entities, ${indexedDocs.length} docs\n\nTenke-disiplin:\n1. Les før du skriver — Grep > ReadFile\n2. Tenk steg-for-steg — forklar plan før handling\n3. Selv-verifiser — "Bryter dette regler?"\n4. Post-change verify — kjør smoke-test ved >3 filer\n5. Kontekst-bevissthet — 262k tokens, vær selektiv\n\nAutomatiser alt som kan automatiseres.`
+            text: `🧠 SUPERKIMI MODUS AKTIVERT\n\nDu kjører med:\n- 256k kontekst (K2.7 Code)\n- 750 steps per turn\n- Ralph Loop (self-improvement, max 3 iterasjoner)
+- MemPalace v3.5.0 (TF-IDF + Bigram + Cross-lingual + Atomic writes)
+- ${Object.keys(kgData).length} KG entities, ${indexedDocs.length} docs\n\nTenke-disiplin:\n1. Les før du skriver — Grep > ReadFile\n2. Tenk steg-for-steg — forklar plan før handling\n3. Selv-verifiser — "Bryter dette regler?"\n4. Post-change verify — kjør smoke-test ved >3 filer\n5. Kontekst-bevissthet — 256k tokens, vær selektiv\n\nAutomatiser alt som kan automatiseres.`
           }
         }];
       }
@@ -1576,7 +1576,7 @@ class MempalaceMCP {
       },
       {
         name: 'kg_batch',
-        description: 'Batch-insert flere KG-fakta på en gang. Effektivt for k2.6 sin store kontekst.',
+        description: 'Batch-insert flere KG-fakta på en gang. Effektivt for K2.7 Code sin store kontekst.',
         inputSchema: {
           type: 'object',
           properties: {
@@ -1795,7 +1795,7 @@ class MempalaceMCP {
           rooms: CONFIG.indexPaths.map(p => p.label),
           criticalRooms: CONFIG.criticalRooms,
           maxToolOutputChars: CONFIG.maxToolOutputChars,
-          kimiCliCompatibility: '0.11.0',
+          kimiCliCompatibility: '0.14.2',
           queryCache: queryCache.getStats()
         };
 
@@ -1913,7 +1913,7 @@ process.stdin.on('data', async (chunk) => {
 });
 
 if (process.env.MEMPALACE_VERBOSE) {
-  console.error('\u{1F3DB}\uFE0F  MemPalace MCP Server v3.5.0 — KIMI Code 0.11.0 Optimalisert');
+  console.error('\u{1F3DB}\uFE0F  MemPalace MCP Server v3.5.0 — KIMI Code 0.14.2 Optimalisert');
   console.error(`   Wing: ${CONFIG.wing}`);
   console.error(`   Backend: in-memory FTS med inverted + bigram index (zero-dep)`);
   console.error(`   Scoring: TF-IDF + Bigram-boost + Kontekst-snippets`);
@@ -1925,6 +1925,6 @@ if (process.env.MEMPALACE_VERBOSE) {
   console.error(`   Prompts: pre_task, post_task, agent_auth, agent_architect, superkimi_boost`);
   console.error(`   KG Write: incremental append + auto-compact`);
   console.error(`   Output cap: ~${Math.round(CONFIG.maxToolOutputChars / 1000)}K chars (KIMI CLI v1.32.0+ 100K cap kompatibel)`);
-  console.error(`   Kontekst: 262k (k2.6-optimized) | max_steps_per_turn=750`);
+  console.error(`   Kontekst: 256k (K2.7-optimized) | max_steps_per_turn=750`);
   console.error(`   Shutdown: SIGTERM/SIGINT graceful (flusher KG + index cache)`);
 }
