@@ -221,11 +221,14 @@ const NOISE_WORDS = new Set([
 ]);
 
 const MODEL_ALIASES: Record<string, string> = {
-  // BMW Series
+  // BMW Series (English + Norwegian)
   "3 SERIES": "3", "5 SERIES": "5", "7 SERIES": "7",
   "1 SERIES": "1", "2 SERIES": "2", "4 SERIES": "4",
   "6 SERIES": "6", "8 SERIES": "8",
-  // Mercedes Classes
+  "3 SERIE": "3", "5 SERIE": "5", "7 SERIE": "7",
+  "1 SERIE": "1", "2 SERIE": "2", "4 SERIE": "4",
+  "6 SERIE": "6", "8 SERIE": "8",
+  // Mercedes Classes (English + Norwegian)
   "C-CLASS": "C CLASS", "E-CLASS": "E CLASS", "S-CLASS": "S CLASS",
   "A-CLASS": "A CLASS", "B-CLASS": "B CLASS", "G-CLASS": "G CLASS",
   "M-CLASS": "M CLASS", "R-CLASS": "R CLASS", "X-CLASS": "X CLASS",
@@ -233,6 +236,8 @@ const MODEL_ALIASES: Record<string, string> = {
   "SL-CLASS": "SL CLASS", "SLK-CLASS": "SLK CLASS",
   "GL-CLASS": "GL CLASS", "GLA-CLASS": "GLA CLASS", "GLB-CLASS": "GLB CLASS",
   "GLC-CLASS": "GLC CLASS", "GLE-CLASS": "GLE CLASS", "GLS-CLASS": "GLS CLASS",
+  "C KLASSE": "C CLASS", "E KLASSE": "E CLASS", "S KLASSE": "S CLASS",
+  "A KLASSE": "A CLASS", "B KLASSE": "B CLASS", "G KLASSE": "G CLASS",
   // Mazda / Honda
   "CR-V": "CRV", "CX-3": "CX3", "CX-5": "CX5", "CX-7": "CX7", "CX-9": "CX9",
   "MX-5": "MX5", "MX-3": "MX3", "MX-6": "MX6",

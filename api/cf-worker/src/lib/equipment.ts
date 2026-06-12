@@ -43,17 +43,19 @@ function isRegexMatchNegated(d: string, regex: RegExp, tokens: string[]): boolea
  * Detect equipment flags from product description text.
  * Handles negation: "IKKE ANT" → antenna: false, "+ANT" → antenna: true.
  */
-export function detectFlagsFromDescription(description: string | null): {
-  adas: boolean;
-  rainSensor: boolean;
-  heated: boolean;
-  acoustic: boolean;
-  antenna: boolean;
-  camera: boolean;
-  hud: boolean;
-} {
+export interface DescriptionEquipmentFlags {
+  adas?: boolean;
+  rainSensor?: boolean;
+  heated?: boolean;
+  acoustic?: boolean;
+  antenna?: boolean;
+  camera?: boolean;
+  hud?: boolean;
+}
+
+export function detectFlagsFromDescription(description: string | null): DescriptionEquipmentFlags | null {
   if (!description) {
-    return { adas: false, rainSensor: false, heated: false, acoustic: false, antenna: false, camera: false, hud: false };
+    return null;
   }
   const d = description.toUpperCase();
 
@@ -128,7 +130,33 @@ export function detectFlagsFromDescription(description: string | null): {
     (s.has("H.U.D") && !isNegated(tokens, tokens.indexOf("H.U.D"))) ||
     rx(/\bHEAD\s*UP\b|\bHEADUP\b|\bPROJEKSJON\b|\bPROJECTION\b|\bWINDSHIELD\s+DISPLAY\b/);
 
-  return { adas, rainSensor, heated, acoustic, antenna, camera, hud };
+  // Build partial result: only include fields that were actually mentioned.
+  // A field is "mentioned" if we saw a token/regex for it (even if negated).
+  const detected: Record<keyof DescriptionEquipmentFlags, boolean> = {
+    adas: s.has("ADAS") || s.has("FILSKIFTE") || s.has("SENS") || s.has("SENSOR") || s.has("LDW") || /\bLANE\s+ASSIST\b|\bLANE\s+DEPARTURE\b|\bCOLLISION\b|\bAUTO\s+BRAKE\b|\bEMERGENCY\s+BRAKE\b|\bDRIVE\s+ASSIST\b|\bPRO\s+PILOT\b|\bAUTOPILOT\b|\bTRAFFIC\s+ASSIST\b|\bCITY\s+SAFETY\b/.test(d),
+    rainSensor: s.has("RSN") || s.has("RSNL") || s.has("RSNLSN") || s.has("REGN") || s.has("REGNS") || s.has("REGNSEN") || s.has("REGNSENSOR") || /\bRAIN\b|\bAUTOMATIC\s+WIPER\b|\bVINDRUTETORKARE\b|\bLYS\/REGN\b|\bLYS\/REGNS\b/.test(d),
+    heated: s.has("HTD") || s.has("HT") || s.has("UHTD") || s.has("ELEK") || s.has("VARM") || /\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b|(?:^|[\s+])(EL)(?:[\s+.]|[+-]|$)/.test(d),
+    acoustic: s.has("ACO") || s.has("AKU") || /\bACOUSTIC\b|\bAKUSTIK\b|\bQUIET\b|\bST[\u00d8O]YDEMP\b|\bSILENT\b/.test(d),
+    antenna: s.has("ANT") || s.has("ANTENNE") || s.has("GNAG") || /\+ANT\b|\bANTENNA\b|\bANTENNE\b|\bGPS\b|\bRADIO\b|\bFM\b|\bDAB\b|\bAERIAL\b/.test(d),
+    camera: s.has("CAMERA") || s.has("CAM") || s.has("LDW") || s.has("SENS") || s.has("SENSOR") || /\bKAMERA\b|\bBACKUP\b|\bREVERSING\b|\b360\b/.test(d),
+    hud: s.has("HUD") || s.has("H.U.D") || /\bHEAD\s*UP\b|\bHEADUP\b|\bPROJEKSJON\b|\bPROJECTION\b|\bWINDSHIELD\s+DISPLAY\b/.test(d),
+  };
+
+  const result: DescriptionEquipmentFlags = {};
+  if (detected.adas) result.adas = adas;
+  if (detected.rainSensor) result.rainSensor = rainSensor;
+  if (detected.heated) result.heated = heated;
+  if (detected.acoustic) result.acoustic = acoustic;
+  if (detected.antenna) result.antenna = antenna;
+  if (detected.camera) result.camera = camera;
+  if (detected.hud) result.hud = hud;
+
+  // If no equipment indicators were found at all, return null so callers can
+  // fall back to structured DB columns.
+  if (Object.keys(result).length === 0) {
+    return null;
+  }
+  return result;
 }
 
 /** Legacy OEM-based detection */
@@ -199,7 +227,25 @@ export function inferRecordEquipment(record: GlassRecord): {
   let klipsType: string | null = null;
   if (hasKlips) klipsType = "klips";
 
-  return { ...descFlags, shade, hasList, listRequired, listIncluded, listType, hasKlips, klipsRequired, klipsType };
+  // Description is ground truth when it mentions a field; otherwise fall back
+  // to structured DB columns so callers always get a complete equipment object.
+  return {
+    adas: descFlags?.adas ?? !!record.adas,
+    rainSensor: descFlags?.rainSensor ?? !!record.rain_sensor,
+    heated: descFlags?.heated ?? !!record.heated,
+    acoustic: descFlags?.acoustic ?? !!record.acoustic,
+    antenna: descFlags?.antenna ?? !!record.antenna,
+    camera: descFlags?.camera ?? !!record.camera,
+    hud: descFlags?.hud ?? !!record.hud,
+    shade,
+    hasList,
+    listRequired,
+    listIncluded,
+    listType,
+    hasKlips,
+    klipsRequired,
+    klipsType,
+  };
 }
 
 /**
