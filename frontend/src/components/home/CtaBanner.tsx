@@ -22,14 +22,14 @@ export function CtaBanner() {
         <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             to="/bli-kunde"
-            className="group inline-flex items-center justify-center gap-2 bg-glass-cyan hover:bg-glass-cyanLight text-carbon-950 font-semibold px-7 py-3.5 rounded-md transition-colors"
+            className="group inline-flex items-center justify-center gap-2 bg-glass-cyan hover:bg-glass-cyanLight text-carbon-950 font-semibold px-7 py-3.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-carbon-950"
           >
             {t('cta.primary')}
             <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link
             to="/kontakt"
-            className="inline-flex items-center justify-center gap-2 border border-carbon-700 hover:border-glass-cyan hover:text-glass-cyan text-white px-7 py-3.5 rounded-md transition-colors"
+            className="inline-flex items-center justify-center gap-2 border border-carbon-700 hover:border-glass-cyan hover:text-glass-cyan text-white px-7 py-3.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-carbon-950"
           >
             <PhoneCall className="h-4 w-4" />
             {t('cta.secondary')}
