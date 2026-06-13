@@ -17,10 +17,8 @@ test.describe('@visual Homepage', () => {
 
   test('manufacturer logos are visible', async ({ page }) => {
     await page.goto('/');
-    const logos = page.locator('section img[alt]');
-    await expect(logos).toHaveCount(9);
     for (const name of ['Pilkington', 'Saint-Gobain Sekurit', 'AGC Automotive', 'PGW Auto Glass', 'Glavista', 'Fuyao', 'XYG', 'NordGlass', 'Euroglass']) {
-      const logo = page.locator(`img[alt="${name}"]`);
+      const logo = page.locator(`section[aria-label="Produsenter"] img[alt="${name}"]:visible`);
       await expect(logo).toBeVisible();
     }
   });

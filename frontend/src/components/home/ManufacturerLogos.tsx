@@ -64,6 +64,7 @@ export function ManufacturerLogos() {
   return (
     <section
       ref={sectionRef}
+      aria-label="Produsenter"
       className={`bg-carbon-950 border-y border-carbon-800 py-8 overflow-hidden scroll-reveal ${isVisible ? 'is-visible' : ''}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

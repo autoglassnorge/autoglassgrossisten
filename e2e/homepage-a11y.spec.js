@@ -53,9 +53,9 @@ test.describe('@a11y Homepage accessibility', () => {
 
   test('manufacturer logo images have non-empty alt text', async ({ page }) => {
     await page.goto('/');
-    const logos = page.locator('section img[alt]');
+    const logos = page.locator('section[aria-label="Produsenter"] img[alt]:visible');
+    await expect(logos).toHaveCount(9);
     const count = await logos.count();
-    expect(count).toBe(9);
     for (let i = 0; i < count; i++) {
       const alt = await logos.nth(i).getAttribute('alt');
       expect(alt).toBeTruthy();
