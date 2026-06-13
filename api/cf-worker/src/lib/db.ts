@@ -135,7 +135,7 @@ export async function queryByBrandAndYear(
   }
   // Note: _bodyHint is used by scoreBodyCompatibility() for post-query scoring,
   // not for SQL filtering (D1 SQLite lacks expressive ORDER BY CASE).
-  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 10000";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 1000";
   try {
     const { results } = await db.prepare(sql).bind(...params).all();
     return (results || []) as unknown as GlassRecord[];
@@ -163,7 +163,7 @@ export async function queryByBrandOnly(
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 500";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 200";
   try {
     const { results } = await db.prepare(sql).bind(...params).all();
     return (results || []) as unknown as GlassRecord[];
@@ -239,7 +239,7 @@ export async function queryFuzzyBrandYear(
 ): Promise<Array<{ record: GlassRecord; score: number }>> {
   const brands = getBrandAliases(brand);
   const placeholders = brands.map(() => "?").join(",");
-  const sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?) ORDER BY year_from DESC NULLS LAST LIMIT 1000`;
+  const sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?) ORDER BY year_from DESC NULLS LAST LIMIT 200`;
   try {
     const { results } = await db.prepare(sql).bind(...brands, year, year).all();
     const records = (results || []) as unknown as GlassRecord[];

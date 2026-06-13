@@ -714,10 +714,10 @@ export async function searchByRegnr(
       const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year, modelHint, undefined, bodyHint);
       let l1Extra: GlassRecord[] = [];
       if (extraHints) {
-        for (const hint of extraHints) {
-          const extra = await queryByBrandAndYear(db, vehicle.make, vehicle.year, hint, undefined, bodyHint);
-          l1Extra.push(...extra);
-        }
+        const l1Extras = await Promise.all(
+          extraHints.map((hint) => queryByBrandAndYear(db, vehicle.make, vehicle.year, hint, undefined, bodyHint))
+        );
+        l1Extra = l1Extras.flat();
       }
       const l1All = [...l1, ...l1Extra];
       const seen = new Set<string>();
@@ -749,10 +749,10 @@ export async function searchByRegnr(
         const l3 = await queryByBrandOnly(db, vehicle.make, modelHint);
         let l3Extra: GlassRecord[] = [];
         if (extraHints) {
-          for (const hint of extraHints) {
-            const extra = await queryByBrandOnly(db, vehicle.make, hint);
-            l3Extra.push(...extra);
-          }
+          const l3Extras = await Promise.all(
+            extraHints.map((hint) => queryByBrandOnly(db, vehicle.make, hint))
+          );
+          l3Extra = l3Extras.flat();
         }
         const l3All = [...l3, ...l3Extra];
         const seen3 = new Set<string>();
