@@ -12,18 +12,19 @@ interface Manufacturer {
   abbr: string;
   logo: string; // path in /public/images/logos/
   color: string; // brand color for fallback text
+  dimensions?: { width: number; height: number }; // intrinsic size for CLS reduction
 }
 
 const MANUFACTURERS: Manufacturer[] = [
-  { name: 'Pilkington', abbr: 'PLK', logo: '/images/logos/pilkington.png', color: '#003B7A' },
-  { name: 'Saint-Gobain Sekurit', abbr: 'SGS', logo: '/images/logos/saint-gobain.svg', color: '#009639' },
-  { name: 'AGC Automotive', abbr: 'AGC', logo: '/images/logos/agc.svg', color: '#0055A4' },
-  { name: 'PGW Auto Glass', abbr: 'PGW', logo: '/images/logos/pgw.svg', color: '#E31837' },
-  { name: 'Glavista', abbr: 'GLA', logo: '/images/logos/glavista.svg', color: '#0047AB' },
-  { name: 'Fuyao', abbr: 'FUY', logo: '/images/logos/fuyao.png', color: '#0066CC' },
-  { name: 'XYG', abbr: 'XYG', logo: '/images/logos/xyg.png', color: '#0066CC' },
-  { name: 'NordGlass', abbr: 'NGL', logo: '/images/logos/nordglass.svg', color: '#003366' },
-  { name: 'Euroglass', abbr: 'EUG', logo: '/images/logos/euroglass.svg', color: '#FF8C00' },
+  { name: 'Pilkington', abbr: 'PLK', logo: '/images/logos/pilkington.png', color: '#003B7A', dimensions: { width: 265, height: 50 } },
+  { name: 'Saint-Gobain Sekurit', abbr: 'SGS', logo: '/images/logos/saint-gobain.svg', color: '#009639', dimensions: { width: 173, height: 73 } },
+  { name: 'AGC Automotive', abbr: 'AGC', logo: '/images/logos/agc.svg', color: '#0055A4', dimensions: { width: 2656, height: 986 } },
+  { name: 'PGW Auto Glass', abbr: 'PGW', logo: '/images/logos/pgw.svg', color: '#E31837', dimensions: { width: 200, height: 50 } },
+  { name: 'Glavista', abbr: 'GLA', logo: '/images/logos/glavista.svg', color: '#0047AB', dimensions: { width: 740, height: 291 } },
+  { name: 'Fuyao', abbr: 'FUY', logo: '/images/logos/fuyao.png', color: '#0066CC', dimensions: { width: 418, height: 239 } },
+  { name: 'XYG', abbr: 'XYG', logo: '/images/logos/xyg.png', color: '#0066CC', dimensions: { width: 200, height: 200 } },
+  { name: 'NordGlass', abbr: 'NGL', logo: '/images/logos/nordglass.svg', color: '#003366', dimensions: { width: 200, height: 40 } },
+  { name: 'Euroglass', abbr: 'EUG', logo: '/images/logos/euroglass.svg', color: '#FF8C00', dimensions: { width: 200, height: 40 } },
 ];
 
 function ManufacturerLogo({ m }: { m: Manufacturer }) {
@@ -52,6 +53,10 @@ function ManufacturerLogo({ m }: { m: Manufacturer }) {
       className="h-9 w-auto object-contain transition motion-safe:group-hover:scale-105 motion-safe:group-hover:brightness-110"
       loading="lazy"
       decoding="async"
+      fetchPriority="low"
+      {...(m.dimensions
+        ? { width: m.dimensions.width, height: m.dimensions.height }
+        : {})}
       onError={() => setFailed(true)}
     />
   );
