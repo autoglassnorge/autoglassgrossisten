@@ -15,6 +15,9 @@ function detectInitialLang(): Lang {
   if (typeof window === 'undefined') return 'no';
   const stored = window.localStorage.getItem(STORAGE_KEY) as Lang | null;
   if (stored && ['no', 'sv', 'en'].includes(stored)) return stored;
+  const browser = navigator.language.toLowerCase();
+  if (browser.startsWith('sv')) return 'sv';
+  if (browser.startsWith('en')) return 'en';
   return 'no';
 }
 

@@ -1,5 +1,8 @@
 const { test, expect } = require('@playwright/test');
 
+// These tests exercise the new ChatWidget behaviour that is not yet deployed.
+test.skip(({ baseURL }) => !baseURL?.includes('localhost'), 'Homepage a11y tests run only against the local dev server');
+
 test.describe('@a11y Homepage accessibility', () => {
   test('chat can be opened, tabbed through, and closed with Escape', async ({ page }) => {
     await page.goto('/');
