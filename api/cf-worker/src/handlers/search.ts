@@ -362,13 +362,15 @@ export async function searchByRegnr(
       // glass_rules table might not exist yet
     }
 
-    // 3b. Bovsoft kType — ALWAYS fetch for body type info even if kType already known
+    // 3b. Bovsoft kType — only fetch when we don't already have exact candidates
     let bovsoftVehicle: BovsoftVehicle | null = null;
-    bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
-    if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
-      bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
-      if (bovsoftVehicle) {
-        await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
+    if (!layer05Candidates) {
+      bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
+      if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
+        bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
+        if (bovsoftVehicle) {
+          await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
+        }
       }
     }
     // Use Bovsoft kType if we don't have one yet, OR if it matches our existing kType (higher confidence)
@@ -383,7 +385,7 @@ export async function searchByRegnr(
     }
 
     // 3c. Fallback: resolveGlass via vPIC or paid APIs
-    if (!resolvedKtype && vehicle.vin) {
+    if (!resolvedKtype && !layer05Candidates && vehicle.vin) {
       try {
         const glassResult = await resolveGlass({
           db,
@@ -833,7 +835,7 @@ export async function searchByRegnr(
     // === Layer 5: Fuzzy Brand+Year fallback ===
     const hasWindshield = candidates.some((c) => c.category === "frontrute");
     const hasEnoughResults = candidates.length >= 15;
-    if (!hasEnoughResults || !hasWindshield) {
+    if (!layer05Candidates && (!hasEnoughResults || !hasWindshield)) {
       const fuzzyResults = await queryFuzzyBrandYear(db, vehicle.make, vehicle.year, vehicle.model, 50);
       debugFuzzyCount = fuzzyResults.length;
       for (const { record, score } of fuzzyResults) {
@@ -850,8 +852,8 @@ export async function searchByRegnr(
     }
 
     // Decode VIN for all supported makes
-    const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
-    const unifiedVin = vehicle.vin ? decodeVin(vehicle.vin, vehicle.length) : null;
+    const vinInfo = !layer05Candidates && vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
+    const unifiedVin = !layer05Candidates && vehicle.vin ? decodeVin(vehicle.vin, vehicle.length) : null;
     // Pass Bovsoft body type (most accurate) to SVV body inference
     const svvBody = inferBodyFromSvvData(vehicle, bovsoftVehicle?.body || undefined);
 
@@ -869,7 +871,7 @@ export async function searchByRegnr(
       guessConfidence?: string;
       guessSource?: string;
     } | null = null;
-    if (env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
+    if (!layer05Candidates && env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
       factoryEquipment = await fetchBiluppgifterEquipment(regnr, env.BILUPPGIFTER_API_KEY);
     }
 
