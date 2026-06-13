@@ -51,9 +51,7 @@ export function HowItWorksSection() {
   return (
     <section
       ref={sectionRef}
-      className={`bg-carbon-50 py-16 sm:py-20 border-y border-carbon-200 transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
+      className={`bg-carbon-50 py-16 sm:py-20 border-y border-carbon-200 scroll-reveal ${isVisible ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">

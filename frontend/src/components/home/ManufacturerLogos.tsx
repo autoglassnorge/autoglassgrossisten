@@ -63,9 +63,7 @@ export function ManufacturerLogos() {
   return (
     <section
       ref={sectionRef}
-      className={`bg-carbon-950 border-y border-carbon-800 py-8 overflow-hidden transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
+      className={`bg-carbon-950 border-y border-carbon-800 py-8 overflow-hidden scroll-reveal ${isVisible ? 'is-visible' : ''}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center text-[11px] text-carbon-500 uppercase tracking-[0.15em] mb-5">

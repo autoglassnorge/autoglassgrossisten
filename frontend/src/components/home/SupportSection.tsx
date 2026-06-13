@@ -17,9 +17,7 @@ export function SupportSection() {
   return (
     <section
       ref={sectionRef}
-      className={`bg-carbon-900 py-16 sm:py-20 border-t border-carbon-800 transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-      }`}
+      className={`bg-carbon-900 py-16 sm:py-20 border-t border-carbon-800 scroll-reveal ${isVisible ? 'is-visible' : ''}`}
     >
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
         {/* Icon */}
@@ -39,7 +37,7 @@ export function SupportSection() {
         <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
           <button
             onClick={() => openChat()}
-            className="group inline-flex items-center justify-center gap-2 bg-glass-cyan hover:bg-glass-cyanLight text-carbon-950 font-semibold px-7 py-3.5 rounded-md transition-colors"
+            className="group inline-flex items-center justify-center gap-2 bg-glass-cyan hover:bg-glass-cyanLight text-carbon-950 font-semibold px-7 py-3.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-carbon-950"
           >
             <MessageCircle className="h-4 w-4" />
             Start chat
@@ -48,7 +46,7 @@ export function SupportSection() {
 
           <a
             href={`tel:${COMPANY.PHONE_RAW}`}
-            className="inline-flex items-center justify-center gap-2 border border-carbon-700 hover:border-glass-cyan hover:text-glass-cyan text-white px-7 py-3.5 rounded-md transition-colors"
+            className="inline-flex items-center justify-center gap-2 border border-carbon-700 hover:border-glass-cyan hover:text-glass-cyan text-white px-7 py-3.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-carbon-950"
           >
             <Phone className="h-4 w-4" />
             {COMPANY.PHONE}
