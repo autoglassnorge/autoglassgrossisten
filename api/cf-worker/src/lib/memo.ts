@@ -83,7 +83,7 @@ export class TimedLruCache<K, V> {
   }
 }
 
-export function memoizeSync<F extends (...args: unknown[]) => unknown>(
+export function memoizeSync<F extends (...args: any[]) => any>(
   fn: F,
   maxSize = 1000
 ): F {
