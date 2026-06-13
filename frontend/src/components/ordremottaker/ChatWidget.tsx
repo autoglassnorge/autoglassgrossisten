@@ -83,6 +83,57 @@ export default function ChatWidget() {
     recordEquipmentAnswer,
   } = useOrdremottaker();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  // Close on Escape + trap Tab focus inside the panel
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const focusables = Array.from(
+      panel.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
+
+    // Focus first usable element (input if available, otherwise first button)
+    const input = focusables.find((el) => el.tagName === 'INPUT');
+    (input ?? focusables[0])?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeChat();
+        return;
+      }
+
+      if (e.key !== 'Tab' || focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, closeChat]);
+
+  // Return focus to the floating trigger when closed
+  useEffect(() => {
+    if (!isOpen) {
+      triggerRef.current?.focus();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -236,8 +287,11 @@ export default function ChatWidget() {
     <>
       {/* Floating button */}
       <button
-        onClick={() => isOpen ? closeChat() : openChat()}
-        className="fixed bottom-6 right-6 z-50 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-autoglass-blue text-white shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-autoglass-blue focus:ring-offset-2"
+        ref={triggerRef}
+        onClick={() => (isOpen ? closeChat() : openChat())}
+        tabIndex={isOpen ? -1 : 0}
+        aria-hidden={isOpen}
+        className="fixed bottom-6 right-6 z-50 flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-autoglass-blue text-white shadow-lg transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-autoglass-blue focus-visible:ring-offset-2"
         aria-label={isOpen ? 'Lukk chat' : 'Åpne chat'}
       >
         {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
@@ -245,7 +299,13 @@ export default function ChatWidget() {
 
       {/* Chat window */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-white animate-fade-in md:bottom-8 md:right-8 md:left-auto md:top-auto md:w-[480px] md:rounded-3xl md:border md:border-gray-200 md:shadow-2xl md:h-[700px] md:max-h-[90vh]">
+        <div
+          ref={panelRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Chat med Professor Autoglass"
+          className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-white animate-fade-in md:bottom-8 md:right-8 md:left-auto md:top-auto md:w-[480px] md:rounded-3xl md:border md:border-gray-200 md:shadow-2xl md:h-[700px] md:max-h-[90vh]"
+        >
           {/* Header */}
           <div className="flex items-center justify-between bg-autoglass-blue px-4 py-3 text-white shrink-0">
             <div className="flex items-center gap-3">
