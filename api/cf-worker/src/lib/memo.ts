@@ -83,7 +83,7 @@ export class TimedLruCache<K, V> {
   }
 }
 
-export function memoizeSync<F extends (...args: any[]) => any>(
+export function memoizeSync<F extends (...args: unknown[]) => unknown>(
   fn: F,
   maxSize = 1000
 ): F {
@@ -97,28 +97,29 @@ export function memoizeSync<F extends (...args: any[]) => any>(
   }) as F;
 }
 
-export function memoizeAsync<F extends (...args: unknown[]) => Promise<unknown>>(
+export function memoizeAsync<F extends (...args: any[]) => Promise<any>>(
   fn: F,
   maxSize = 500,
   ttlMs = 60_000
 ): F {
-  const cache = new TimedLruCache<string, Awaited<ReturnType<F>>>(maxSize, ttlMs);
-  const inFlight = new Map<string, Promise<unknown>>();
+  type Result = Awaited<ReturnType<F>>;
+  const cache = new TimedLruCache<string, Result>(maxSize, ttlMs);
+  const inFlight = new Map<string, Promise<Result>>();
 
-  return (async (...args: unknown[]) => {
+  return (async (...args: Parameters<F>) => {
     const key = JSON.stringify(args);
-    if (cache.has(key)) return cache.get(key) as Awaited<ReturnType<F>>;
-    if (inFlight.has(key)) return (await inFlight.get(key)!) as Awaited<ReturnType<F>>;
+    if (cache.has(key)) return cache.get(key) as Result;
+    if (inFlight.has(key)) return (await inFlight.get(key)!) as Result;
 
     const promise = fn(...args).then((value) => {
-      cache.set(key, value as Awaited<ReturnType<F>>);
+      cache.set(key, value as Result);
       inFlight.delete(key);
       return value;
     }).catch((err) => {
       inFlight.delete(key);
       throw err;
     });
-    inFlight.set(key, promise);
-    return (await promise) as Awaited<ReturnType<F>>;
+    inFlight.set(key, promise as Promise<Result>);
+    return (await promise) as Result;
   }) as F;
 }

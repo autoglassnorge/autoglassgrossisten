@@ -10,6 +10,7 @@ import type {
   VehicleFingerprint,
 } from "../types";
 import { normalizeBrand, getBrandAliases } from "./brand";
+import { memoizeAsync } from "./memo";
 
 // ---------------------------------------------------------------------------
 // Environment-configurable constants
@@ -42,7 +43,7 @@ export async function queryByPrefix4(db: D1Database, prefix4: string, limit = 50
   }
 }
 
-export async function queryByEurocode(db: D1Database, eurocode: string): Promise<GlassRecord | null> {
+async function _queryByEurocode(db: D1Database, eurocode: string): Promise<GlassRecord | null> {
   try {
     const { results } = await db
       .prepare("SELECT * FROM glass_catalog WHERE eurocode = ? LIMIT 1")
@@ -54,6 +55,7 @@ export async function queryByEurocode(db: D1Database, eurocode: string): Promise
     return null;
   }
 }
+export const queryByEurocode = memoizeAsync(_queryByEurocode, 1000, 60_000);
 
 export async function queryBySupplierSku(db: D1Database, sku: string): Promise<GlassRecord | null> {
   try {
@@ -81,7 +83,7 @@ export async function queryByOemNumber(db: D1Database, oem: string): Promise<Gla
   }
 }
 
-export async function queryByKtype(db: D1Database, ktype: number): Promise<GlassRecord[]> {
+async function _queryByKtype(db: D1Database, ktype: number): Promise<GlassRecord[]> {
   try {
     const { results } = await db
       .prepare("SELECT * FROM glass_catalog WHERE ktype = ? LIMIT 20")
@@ -93,6 +95,7 @@ export async function queryByKtype(db: D1Database, ktype: number): Promise<Glass
     return [];
   }
 }
+export const queryByKtype = memoizeAsync(_queryByKtype, 500, 60_000);
 
 export async function queryByKtypes(db: D1Database, ktypes: number[]): Promise<GlassRecord[]> {
   if (!ktypes.length) return [];
@@ -113,7 +116,7 @@ export async function queryByKtypes(db: D1Database, ktypes: number[]): Promise<G
 // Brand + year lookups
 // ---------------------------------------------------------------------------
 
-export async function queryByBrandAndYear(
+async function _queryByBrandAndYear(
   db: D1Database,
   brand: string,
   year: number,
@@ -135,7 +138,7 @@ export async function queryByBrandAndYear(
   }
   // Note: _bodyHint is used by scoreBodyCompatibility() for post-query scoring,
   // not for SQL filtering (D1 SQLite lacks expressive ORDER BY CASE).
-  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 1000";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 10000";
   try {
     const { results } = await db.prepare(sql).bind(...params).all();
     return (results || []) as unknown as GlassRecord[];
@@ -144,8 +147,9 @@ export async function queryByBrandAndYear(
     return [];
   }
 }
+export const queryByBrandAndYear = memoizeAsync(_queryByBrandAndYear, 500, 60_000);
 
-export async function queryByBrandOnly(
+async function _queryByBrandOnly(
   db: D1Database,
   brand: string,
   modelHint?: string,
@@ -163,7 +167,7 @@ export async function queryByBrandOnly(
     sql += " AND prefix4 = ?";
     params.push(prefix4);
   }
-  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 200";
+  sql += " ORDER BY year_from DESC NULLS LAST LIMIT 500";
   try {
     const { results } = await db.prepare(sql).bind(...params).all();
     return (results || []) as unknown as GlassRecord[];
@@ -172,6 +176,7 @@ export async function queryByBrandOnly(
     return [];
   }
 }
+export const queryByBrandOnly = memoizeAsync(_queryByBrandOnly, 500, 60_000);
 
 // ---------------------------------------------------------------------------
 // Fuzzy brand+year search
@@ -230,7 +235,7 @@ function fuzzyModelScore(vehicleModel: string, recordModel: string | null): numb
   return overlapScore * 0.6 + jwScore * 0.4;
 }
 
-export async function queryFuzzyBrandYear(
+async function _queryFuzzyBrandYear(
   db: D1Database,
   brand: string,
   year: number,
@@ -239,7 +244,7 @@ export async function queryFuzzyBrandYear(
 ): Promise<Array<{ record: GlassRecord; score: number }>> {
   const brands = getBrandAliases(brand);
   const placeholders = brands.map(() => "?").join(",");
-  const sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?) ORDER BY year_from DESC NULLS LAST LIMIT 200`;
+  const sql = `SELECT * FROM glass_catalog WHERE brand IN (${placeholders}) AND (year_from IS NULL OR year_from <= ?) AND (year_to IS NULL OR year_to >= ?) ORDER BY year_from DESC NULLS LAST LIMIT 1000`;
   try {
     const { results } = await db.prepare(sql).bind(...brands, year, year).all();
     const records = (results || []) as unknown as GlassRecord[];
@@ -256,6 +261,7 @@ export async function queryFuzzyBrandYear(
     return [];
   }
 }
+export const queryFuzzyBrandYear = memoizeAsync(_queryFuzzyBrandYear, 200, 60_000);
 
 /**
  * Query accessory products by their SKUs.
@@ -578,7 +584,7 @@ export async function queryCalibrationRequirements(
 // kType registry
 // ---------------------------------------------------------------------------
 
-export async function queryKtypeRegistry(db: D1Database, ktype: number): Promise<KtypeRegistryInfo | null> {
+async function _queryKtypeRegistry(db: D1Database, ktype: number): Promise<KtypeRegistryInfo | null> {
   try {
     const row = await db
       .prepare(
@@ -603,6 +609,7 @@ export async function queryKtypeRegistry(db: D1Database, ktype: number): Promise
     return null;
   }
 }
+export const queryKtypeRegistry = memoizeAsync(_queryKtypeRegistry, 1000, 300_000);
 
 // ---------------------------------------------------------------------------
 // kType matches (statistical learning)
@@ -863,7 +870,7 @@ export interface SvvTecdocMatch {
  * Query svv_tecdoc_matches by regnr_hash.
  * Returns the most recent match for the given regnr.
  */
-export async function querySvvTecdocMatch(db: D1Database, regnr: string): Promise<SvvTecdocMatch | null> {
+async function _querySvvTecdocMatch(db: D1Database, regnr: string): Promise<SvvTecdocMatch | null> {
   const hash = await sha256(regnr);
   try {
     const row = await db
@@ -904,6 +911,7 @@ export async function querySvvTecdocMatch(db: D1Database, regnr: string): Promis
     return null;
   }
 }
+export const querySvvTecdocMatch = memoizeAsync(_querySvvTecdocMatch, 5000, 300_000);
 
 // ---------------------------------------------------------------------------
 // Helpers

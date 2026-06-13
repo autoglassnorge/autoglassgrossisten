@@ -4,7 +4,6 @@
 
 import type { GlassRecord, FactoryEquipment } from "../types";
 import { fetchWithTimeout } from "../providers/svv";
-import { memoizeSync } from "./memo";
 
 /**
  * Check if a token is in a negated context (e.g. "IKKE ANT", "NOT HEATED", "NO CAMERA").
@@ -54,7 +53,7 @@ export interface DescriptionEquipmentFlags {
   hud?: boolean;
 }
 
-function _detectFlagsFromDescription(description: string | null): DescriptionEquipmentFlags | null {
+export function detectFlagsFromDescription(description: string | null): DescriptionEquipmentFlags | null {
   if (!description) {
     return null;
   }
@@ -159,7 +158,6 @@ function _detectFlagsFromDescription(description: string | null): DescriptionEqu
   }
   return result;
 }
-export const detectFlagsFromDescription = memoizeSync(_detectFlagsFromDescription, 2000);
 
 /** Legacy OEM-based detection */
 export function detectFlagsFromOem(oemDescriptions: string[]) {
@@ -175,7 +173,7 @@ export function detectFlagsFromOem(oemDescriptions: string[]) {
 }
 
 /** Infer equipment from DB columns + description fallback */
-function _inferRecordEquipment(record: GlassRecord): {
+export function inferRecordEquipment(record: GlassRecord): {
   adas: boolean;
   rainSensor: boolean;
   heated: boolean;
@@ -249,7 +247,6 @@ function _inferRecordEquipment(record: GlassRecord): {
     klipsType,
   };
 }
-export const inferRecordEquipment = memoizeSync(_inferRecordEquipment, 2000);
 
 /**
  * Fetch factory equipment from Biluppgitter API.

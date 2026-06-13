@@ -362,15 +362,13 @@ export async function searchByRegnr(
       // glass_rules table might not exist yet
     }
 
-    // 3b. Bovsoft kType — only fetch when we don't already have exact candidates
+    // 3b. Bovsoft kType — ALWAYS fetch for body type info even if kType already known
     let bovsoftVehicle: BovsoftVehicle | null = null;
-    if (!layer05Candidates) {
-      bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
-      if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
-        bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
-        if (bovsoftVehicle) {
-          await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
-        }
+    bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
+    if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
+      bovsoftVehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
+      if (bovsoftVehicle) {
+        await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, bovsoftVehicle);
       }
     }
     // Use Bovsoft kType if we don't have one yet, OR if it matches our existing kType (higher confidence)
@@ -385,7 +383,7 @@ export async function searchByRegnr(
     }
 
     // 3c. Fallback: resolveGlass via vPIC or paid APIs
-    if (!resolvedKtype && !layer05Candidates && vehicle.vin) {
+    if (!resolvedKtype && vehicle.vin) {
       try {
         const glassResult = await resolveGlass({
           db,
@@ -716,10 +714,10 @@ export async function searchByRegnr(
       const l1 = await queryByBrandAndYear(db, vehicle.make, vehicle.year, modelHint, undefined, bodyHint);
       let l1Extra: GlassRecord[] = [];
       if (extraHints) {
-        const l1Extras = await Promise.all(
-          extraHints.map((hint) => queryByBrandAndYear(db, vehicle.make, vehicle.year, hint, undefined, bodyHint))
-        );
-        l1Extra = l1Extras.flat();
+        for (const hint of extraHints) {
+          const extra = await queryByBrandAndYear(db, vehicle.make, vehicle.year, hint, undefined, bodyHint);
+          l1Extra.push(...extra);
+        }
       }
       const l1All = [...l1, ...l1Extra];
       const seen = new Set<string>();
@@ -751,10 +749,10 @@ export async function searchByRegnr(
         const l3 = await queryByBrandOnly(db, vehicle.make, modelHint);
         let l3Extra: GlassRecord[] = [];
         if (extraHints) {
-          const l3Extras = await Promise.all(
-            extraHints.map((hint) => queryByBrandOnly(db, vehicle.make, hint))
-          );
-          l3Extra = l3Extras.flat();
+          for (const hint of extraHints) {
+            const extra = await queryByBrandOnly(db, vehicle.make, hint);
+            l3Extra.push(...extra);
+          }
         }
         const l3All = [...l3, ...l3Extra];
         const seen3 = new Set<string>();
@@ -835,7 +833,7 @@ export async function searchByRegnr(
     // === Layer 5: Fuzzy Brand+Year fallback ===
     const hasWindshield = candidates.some((c) => c.category === "frontrute");
     const hasEnoughResults = candidates.length >= 15;
-    if (!layer05Candidates && (!hasEnoughResults || !hasWindshield)) {
+    if (!hasEnoughResults || !hasWindshield) {
       const fuzzyResults = await queryFuzzyBrandYear(db, vehicle.make, vehicle.year, vehicle.model, 50);
       debugFuzzyCount = fuzzyResults.length;
       for (const { record, score } of fuzzyResults) {
@@ -852,8 +850,8 @@ export async function searchByRegnr(
     }
 
     // Decode VIN for all supported makes
-    const vinInfo = !layer05Candidates && vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
-    const unifiedVin = !layer05Candidates && vehicle.vin ? decodeVin(vehicle.vin, vehicle.length) : null;
+    const vinInfo = vehicle.vin ? decodeVwTransporterBody(vehicle.vin, vehicle.length) : null;
+    const unifiedVin = vehicle.vin ? decodeVin(vehicle.vin, vehicle.length) : null;
     // Pass Bovsoft body type (most accurate) to SVV body inference
     const svvBody = inferBodyFromSvvData(vehicle, bovsoftVehicle?.body || undefined);
 
@@ -871,7 +869,7 @@ export async function searchByRegnr(
       guessConfidence?: string;
       guessSource?: string;
     } | null = null;
-    if (!layer05Candidates && env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
+    if (env.BILUPPGIFTER_API_KEY && env.BILUPPGIFTER_API_KEY !== "NOT_SET") {
       factoryEquipment = await fetchBiluppgifterEquipment(regnr, env.BILUPPGIFTER_API_KEY);
     }
 
