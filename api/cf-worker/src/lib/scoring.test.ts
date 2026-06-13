@@ -269,4 +269,63 @@ describe("yearCompatible", () => {
       "CARAVELLE V BUSS (7HB, 7HJ, 7EB, 7EJ, 7EF, 7EG, 7HF, 7EC)"
     )).toBe(false);
   });
+
+  // ── Mitsubishi Space Star generation split ───────────────────────────────
+  describe("Mitsubishi Space Star", () => {
+    it("2014 rejects old-generation 1999-2011 door glass record", () => {
+      expect(yearCompatible(
+        makeRecord("MITSUBISHI SPACE STAR (MIRAGE) Dørrute 1999-2011", 1999, 2011),
+        2014,
+        "MITSUBISHI",
+        "SPACE STAR"
+      )).toBe(false);
+    });
+
+    it("2014 rejects old-generation open-ended 1999- record", () => {
+      // Production data sometimes has NULL year_to; without generation gating
+      // this would be accepted for a 2014 vehicle because 2014 >= 1999.
+      expect(yearCompatible(
+        makeRecord("MITSUBISHI SPACE STAR (MIRAGE) Dørrute 1999-", 1999, null),
+        2014,
+        "MITSUBISHI",
+        "SPACE STAR"
+      )).toBe(false);
+    });
+
+    it("2014 accepts new-generation 2013-2025 door glass record", () => {
+      expect(yearCompatible(
+        makeRecord("MITSUBISHI SPACE STAR (MIRAGE) Dørrute 2013-2025", 2013, 2025),
+        2014,
+        "MITSUBISHI",
+        "SPACE STAR"
+      )).toBe(true);
+    });
+
+    it("2014 accepts new-generation open-ended 2013- record", () => {
+      expect(yearCompatible(
+        makeRecord("MITSUBISHI SPACE STAR (MIRAGE) Dørrute 2013-", 2013, null),
+        2014,
+        "MITSUBISHI",
+        "SPACE STAR"
+      )).toBe(true);
+    });
+
+    it("2005 accepts old-generation 1999-2011 record", () => {
+      expect(yearCompatible(
+        makeRecord("MITSUBISHI SPACE STAR (MIRAGE) Dørrute 1999-2011", 1999, 2011),
+        2005,
+        "MITSUBISHI",
+        "SPACE STAR"
+      )).toBe(true);
+    });
+
+    it("2005 rejects new-generation 2013-2025 record", () => {
+      expect(yearCompatible(
+        makeRecord("MITSUBISHI SPACE STAR (MIRAGE) Dørrute 2013-2025", 2013, 2025),
+        2005,
+        "MITSUBISHI",
+        "SPACE STAR"
+      )).toBe(false);
+    });
+  });
 });

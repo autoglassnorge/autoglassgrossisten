@@ -59,6 +59,16 @@ export function filterKtypeCandidatesForVehicle(
 const DRIVER_TYPE_CODES = new Set(["DFF", "DFB", "DFFV", "DFBV", "SFB1", "SFB2", "SFB3"]);
 const PASSENGER_TYPE_CODES = new Set(["DPF", "DPB", "DPFV", "DPBV", "SPB1", "SPB2", "SPB3"]);
 
+type KtypeInfo = {
+  ktype: number;
+  brand: string;
+  model: string;
+  yearFrom: number | null;
+  yearTo: number | null;
+  body?: string | null;
+  source: string;
+};
+
 function normalizedRecordCategory(record: GlassRecord): string {
   const category = (record.category || "").toLowerCase();
   const typeCode = (record.typeCode || "").toUpperCase();
@@ -85,6 +95,10 @@ function normalizedPosition(record: GlassRecord): "driver" | "passenger" | "cent
   if (DRIVER_TYPE_CODES.has(typeCode)) return "driver";
   if (PASSENGER_TYPE_CODES.has(typeCode)) return "passenger";
 
+  const inferredTypeCode = (inferTypeCodeFromRecord(record) || "").toUpperCase();
+  if (DRIVER_TYPE_CODES.has(inferredTypeCode)) return "driver";
+  if (PASSENGER_TYPE_CODES.has(inferredTypeCode)) return "passenger";
+
   const text = `${record.typeCodeDesc || ""} ${record.description || ""}`.toLowerCase();
   if (text.includes("førerside") || text.includes("foererside") || text.includes("venstre") ||
       text.includes("fører") || text.includes("foerer") || text.includes("fv") ||
@@ -95,6 +109,31 @@ function normalizedPosition(record: GlassRecord): "driver" | "passenger" | "cent
       text.includes("h/s") || text.includes("h.s.") ||
       /\bhs\b/.test(text) || /\bfh\b/.test(text) || /\bh\.s\b/.test(text)) return "passenger";
   return null;
+}
+
+function ktypeInfoMatchesVehicle(
+  info: KtypeInfo | null,
+  vehicle: Pick<TecdocVehicle, "make" | "model" | "year">
+): boolean {
+  if (!info) return false;
+  const brands = getBrandAliases(vehicle.make).map((brand) => brand.toUpperCase());
+  if (!brands.includes((info.brand || "").toUpperCase())) return false;
+  if (info.yearFrom && vehicle.year < info.yearFrom) return false;
+  if (info.yearTo && vehicle.year > info.yearTo) return false;
+  return modelMatches(vehicle.model, info.model, vehicle.make);
+}
+
+function bovsoftKtypeInfo(bovsoftVehicle: BovsoftVehicle | null, ktype: number | null): KtypeInfo | null {
+  if (!bovsoftVehicle || !ktype || bovsoftVehicle.ktype !== ktype) return null;
+  return {
+    ktype: bovsoftVehicle.ktype,
+    brand: bovsoftVehicle.brand,
+    model: bovsoftVehicle.model,
+    yearFrom: bovsoftVehicle.yearFrom,
+    yearTo: bovsoftVehicle.yearTo,
+    body: bovsoftVehicle.body,
+    source: "bovsoft",
+  };
 }
 
 export function recordMatchesGlassSelection(
@@ -455,10 +494,15 @@ export async function searchByRegnr(
       }
     }
 
-    const ktypeRegistryInfo = resolvedKtype ? await queryKtypeRegistry(db, resolvedKtype) : null;
+    const rawKtypeRegistryInfo = resolvedKtype ? await queryKtypeRegistry(db, resolvedKtype) : null;
+    let ktypeRegistryInfo: KtypeInfo | null = rawKtypeRegistryInfo;
+    if (!ktypeInfoMatchesVehicle(ktypeRegistryInfo, vehicle)) {
+      const bovsoftInfo = bovsoftKtypeInfo(bovsoftVehicle, resolvedKtype);
+      ktypeRegistryInfo = ktypeInfoMatchesVehicle(bovsoftInfo, vehicle) ? bovsoftInfo : null;
+    }
 
     // Find matching glass in D1
-    const candidates: GlassRecord[] = [];
+    let candidates: GlassRecord[] = [];
     const candidateCodes = new Set<string>();
     let layer = 4;
     let confidence: string = "none";
@@ -940,7 +984,16 @@ export async function searchByRegnr(
       }
     }
 
-    // Compute dominant prefix4
+    // Final hard year/generation gate before scoring.
+    // Fuzzy and family fallbacks can include records whose SQL year filter passed
+    // because year_to is NULL, but whose generation is still wrong for the vehicle.
+    const beforeYearFilter = candidates.length;
+    candidates = candidates.filter((c) => yearCompatible(c, vehicle.year, vehicle.make, vehicle.model));
+    if (candidates.length < beforeYearFilter) {
+      console.log(`[YearFilter] ${regnr}: removed ${beforeYearFilter - candidates.length} candidates by year/generation gate`);
+    }
+
+    // Compute dominant prefix4 from the surviving candidates
     const prefix4Counts = new Map<string, number>();
     candidates.forEach((c) => { if (c.prefix4) prefix4Counts.set(c.prefix4, (prefix4Counts.get(c.prefix4) || 0) + 1); });
     const dominantPrefix4 = Array.from(prefix4Counts.entries()).sort((a, b) => b[1] - a[1])[0]?.[0];

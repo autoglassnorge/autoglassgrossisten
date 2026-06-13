@@ -23,7 +23,7 @@ export function parseYearRangeFromDescription(desc: string | null): { from: numb
   }
 
   // Pattern 3: "03-" or "22-" (open-ended 2-digit years)
-  const m3TwoDigit = d.match(/(?:^|\s|\()(\d{2})\s*[-–]\s*[;\)\s]/);
+  const m3TwoDigit = d.match(/(?:^|\s|\()(\d{2})\s*[-–]\s*(?:[;\)\s]|$)/);
   if (m3TwoDigit) {
     let from = parseInt(m3TwoDigit[1], 10);
     if (from < 50) from += 2000; else from += 1900;
@@ -31,7 +31,7 @@ export function parseYearRangeFromDescription(desc: string | null): { from: numb
   }
 
   // Pattern 4: "2009-" or "2015- " (open-ended)
-  const m3 = d.match(/(?:^|\s|\()(\d{4})\s*[-–]\s*[;\)\s]/);
+  const m3 = d.match(/(?:^|\s|\()(\d{4})\s*[-–]\s*(?:[;\)\s]|$)/);
   if (m3) {
     return { from: parseInt(m3[1], 10), to: null };
   }
@@ -256,6 +256,11 @@ export function expectedGeneration(brand: string, model: string, year: number): 
     if (year <= 2013) return "J10";
     if (year <= 2021) return "J11";
     return "J12";
+  }
+  // Mitsubishi Space Star / Mirage (two distinct body/generation families)
+  if (key.includes("mitsubishi") && (key.includes("space star") || key.includes("mirage"))) {
+    if (year <= 2012) return "SPACE_STAR_A0_OLD";
+    return "SPACE_STAR_A0_NEW";
   }
   // Mazda 3
   if (key.includes("mazda") && key.includes("3")) {
@@ -531,6 +536,10 @@ export function inferGenerationFromYearRange(brand: string, model: string, from:
     if (from >= 2007 && to <= 2014) return "W204";
     if (from >= 2014 && to <= 2021) return "W205";
     if (from >= 2021) return "W206";
+  }
+  if (key.includes("mitsubishi") && (key.includes("space star") || key.includes("mirage"))) {
+    if (to <= 2012) return "SPACE_STAR_A0_OLD";
+    return "SPACE_STAR_A0_NEW";
   }
   return null;
 }
