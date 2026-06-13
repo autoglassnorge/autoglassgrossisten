@@ -33,6 +33,14 @@ export function Footer() {
             <p className="mt-3 text-xs text-carbon-600">
               Org.nr: {COMPANY.ORG_NUMBER}
             </p>
+
+            <a
+              href={`tel:${COMPANY.PHONE_RAW}`}
+              className="md:hidden mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-glass-cyan px-4 py-2.5 text-sm font-semibold text-carbon-950 hover:bg-glass-cyanLight transition-colors"
+            >
+              <Phone className="h-4 w-4" />
+              Ring {COMPANY.PHONE}
+            </a>
           </div>
 
           {/* Navigation */}
@@ -63,7 +71,7 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-4">Besøksadresse</h4>
             <div className="rounded-lg border border-carbon-800 bg-carbon-900 overflow-hidden aspect-video">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000!2d10.8!3d59.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTnCsDU0JzAwLjAiTiAxMMKwNDgnMDAuMCJF!5e0!3m2!1sno!2sno!4v1"
+                src={COMPANY.MAP_EMBED_URL}
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%)' }}

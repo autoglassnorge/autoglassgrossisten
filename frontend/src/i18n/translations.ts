@@ -34,6 +34,18 @@ export const translations: Record<Lang, Dict> = {
     'hero.cta.catalog': 'Bla i katalog',
     'hero.cta.quote': 'Be om tilbud',
 
+    'hero.b2b.eyebrow': 'B2B-grossist · 133 000+ glass på lager · Neste-dag-levering',
+    'hero.b2b.title.line1': 'Finn riktig bilglass',
+    'hero.b2b.title.line2': 'på sekunder',
+    'hero.b2b.subtitle': 'Norges største grossist av bilglass til verksteder. Søk med registreringsnummer og få eksakt match med eurocode, pris og lagerstatus.',
+    'hero.b2b.input.placeholder': 'F.eks. SU18018',
+    'hero.b2b.input.hint': 'Søk med norsk registreringsnummer (f.eks. AB12345)',
+    'hero.b2b.button': 'Finn glass',
+    'hero.b2b.chatCta': 'Eller snakk med vårt erfarne glassteam',
+    'hero.b2b.stat.years.label': 'Års erfaring',
+    'hero.b2b.stat.variants.label': 'Varianter',
+    'hero.b2b.stat.opening.label': 'Man–fre',
+
     'stats.title': 'Drift i sanntid',
     'stats.skus': 'glass på lager',
     'stats.brands': 'Merkevarer',
@@ -63,7 +75,7 @@ export const translations: Record<Lang, Dict> = {
     'vehiclegrid.truck.title': 'Lastebil',
     'vehiclegrid.classic.title': 'Veteran',
     'vehiclegrid.muscle.title': 'Amcar',
-    'vehiclegrid.construction.title': 'Verktøy',
+    'vehiclegrid.construction.title': 'Anlegg',
     'categorygrid.title': 'Finn riktig glass etter kategori',
     'categorygrid.subtitle': 'Bla i vårt komplette utvalg av bilglass',
     'categorygrid.windshield.title': 'Frontrute',
@@ -109,6 +121,13 @@ export const translations: Record<Lang, Dict> = {
     'cta.primary': 'Be om tilbud',
     'cta.secondary': 'Kontakt salg',
 
+    'home.articles.title': 'Fagartikler om bilglass',
+    'home.articles.subtitle': 'Teknisk kunnskap om frontruter, ADAS, HUD, produsenter og variantmatching.',
+    'home.articles.cta': 'Se alle artikler',
+
+    'stickySearch.placeholder': 'Reg.nr — f.eks. SU18018',
+    'stickySearch.button': 'Finn glass',
+
     'footer.tagline': 'Frittstående totalleverandør av bilglass — Norge, Sverige og resten av Europa.',
     'footer.contact': 'Kontakt',
     'footer.links': 'Lenker',
@@ -137,6 +156,18 @@ export const translations: Record<Lang, Dict> = {
     'hero.search.tab.oem': 'OEM-nr',
     'hero.cta.catalog': 'Bläddra i katalog',
     'hero.cta.quote': 'Begär offert',
+
+    'hero.b2b.eyebrow': 'B2B-grossist · 133 000+ glas i lager · Leverans nästa dag',
+    'hero.b2b.title.line1': 'Hitta rätt bilglas',
+    'hero.b2b.title.line2': 'på några sekunder',
+    'hero.b2b.subtitle': 'Sveriges största grossist av bilglas till verkstäder. Sök med registreringsnummer och få exakt match med eurocode, pris och lagerstatus.',
+    'hero.b2b.input.placeholder': 'T.ex. SU18018',
+    'hero.b2b.input.hint': 'Sök med svenskt registreringsnummer (t.ex. ABC123)',
+    'hero.b2b.button': 'Hitta glas',
+    'hero.b2b.chatCta': 'Eller prata med vårt erfarna glastteam',
+    'hero.b2b.stat.years.label': 'Års erfarenhet',
+    'hero.b2b.stat.variants.label': 'Varianter',
+    'hero.b2b.stat.opening.label': 'Mån–fre',
 
     'stats.title': 'Drift i realtid',
     'stats.skus': 'glas i lager',
@@ -167,7 +198,7 @@ export const translations: Record<Lang, Dict> = {
     'vehiclegrid.truck.title': 'Lastbil',
     'vehiclegrid.classic.title': 'Veteran',
     'vehiclegrid.muscle.title': 'Amcar',
-    'vehiclegrid.construction.title': 'Verktyg',
+    'vehiclegrid.construction.title': 'Anläggning',
     'categorygrid.title': 'Hitta rätt glas efter kategori',
     'categorygrid.subtitle': 'Bläddra i vårt kompletta sortiment av bilglas',
     'categorygrid.windshield.title': 'Vindruta',
@@ -213,13 +244,20 @@ export const translations: Record<Lang, Dict> = {
     'cta.primary': 'Begär offert',
     'cta.secondary': 'Kontakta sälj',
 
+    'home.articles.title': 'Fackartiklar om bilglas',
+    'home.articles.subtitle': 'Teknisk kunskap om vindrutor, ADAS, HUD, tillverkare och variantmatchning.',
+    'home.articles.cta': 'Se alla artiklar',
+
+    'stickySearch.placeholder': 'Reg.nr — t.ex. SU18018',
+    'stickySearch.button': 'Hitta glas',
+
     'footer.tagline': 'Fristående helhetsleverantör av bilglas — Norge, Sverige och resten av Europa.',
     'footer.contact': 'Kontakt',
     'footer.links': 'Länkar',
     'footer.legal': 'Org.nr · Moms · EORI',
 
     'quicksearch.popularBrands': 'Populära märken',
-    'quicksearch.recentSearches': 'Dina senaste sökningar',
+    'quicksearch.recentSearches': 'Dina senaste sök',
   },
 
   en: {
@@ -241,6 +279,18 @@ export const translations: Record<Lang, Dict> = {
     'hero.search.tab.oem': 'OEM',
     'hero.cta.catalog': 'Browse catalog',
     'hero.cta.quote': 'Request quote',
+
+    'hero.b2b.eyebrow': 'B2B wholesaler · 133,000+ glass units in stock · Next-day delivery',
+    'hero.b2b.title.line1': 'Find the right auto glass',
+    'hero.b2b.title.line2': 'in seconds',
+    'hero.b2b.subtitle': 'One of Europe’s largest automotive glass wholesalers for workshops. Search by plate/VIN and get an exact eurocode, price and stock match.',
+    'hero.b2b.input.placeholder': 'e.g. SU18018',
+    'hero.b2b.input.hint': 'Search with a Norwegian or Swedish plate number',
+    'hero.b2b.button': 'Find glass',
+    'hero.b2b.chatCta': 'Or talk to our experienced glass team',
+    'hero.b2b.stat.years.label': 'Years experience',
+    'hero.b2b.stat.variants.label': 'Variants',
+    'hero.b2b.stat.opening.label': 'Mon–Fri',
 
     'stats.title': 'Live operations',
     'stats.skus': 'glass units in stock',
@@ -316,6 +366,13 @@ export const translations: Record<Lang, Dict> = {
     'cta.subtitle': 'Open an account for wholesale pricing, credit and a dedicated rep.',
     'cta.primary': 'Request quote',
     'cta.secondary': 'Contact sales',
+
+    'home.articles.title': 'Technical articles on automotive glass',
+    'home.articles.subtitle': 'Technical knowledge on windshields, ADAS, HUD, manufacturers and variant matching.',
+    'home.articles.cta': 'See all articles',
+
+    'stickySearch.placeholder': 'Plate — e.g. SU18018',
+    'stickySearch.button': 'Find glass',
 
     'footer.tagline': 'Independent full-line wholesaler of automotive glass — Norway, Sweden and the rest of Europe.',
     'footer.contact': 'Contact',

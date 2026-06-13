@@ -361,7 +361,7 @@ export default function SearchPage() {
 
         {/* Vehicle Wizard Modal */}
         {showWizard && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setShowWizard(false)}>
+          <div data-testid="vehicle-wizard-modal" className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setShowWizard(false)}>
             <div className="w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-white rounded-2xl shadow-2xl p-4 sm:p-6" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-gray-900">Finn glass via merke og modell</h2>

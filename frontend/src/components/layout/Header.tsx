@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { ShoppingCart, Menu, X, LogIn, User } from 'lucide-react';
+import { ShoppingCart, Menu, X, LogIn, User, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { useCartStore } from '@/stores/cartStore';
 import { useChatStore } from '@/stores/chatStore';
 import { useAuthStore } from '@/stores/authStore';
 import { preloadPage, PAGE_IMPORTS } from '@/hooks/useRoutePreload';
+import { COMPANY } from '@/config/company.config';
 import ProfessorAvatar from '@/components/ordremottaker/ProfessorAvatar';
 
 export function Header() {
@@ -103,6 +104,19 @@ export function Header() {
 
           {/* Mobile actions */}
           <div className="flex items-center gap-1 ml-auto md:hidden">
+            <a
+              href={`tel:${COMPANY.PHONE_RAW}`}
+              aria-label={`Ring ${COMPANY.PHONE}`}
+              className="inline-flex"
+            >
+              <Button
+                variant="ghost"
+                size="sm"
+                className="min-h-[44px] min-w-[44px] px-2 text-carbon-300 hover:text-white hover:bg-carbon-800 focus-visible:ring-2 focus-visible:ring-glass-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-carbon-950"
+              >
+                <Phone className="h-5 w-5" />
+              </Button>
+            </a>
             <Button
               variant="ghost"
               size="sm"

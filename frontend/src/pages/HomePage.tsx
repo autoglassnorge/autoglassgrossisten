@@ -17,7 +17,7 @@ import { ArrowRight } from 'lucide-react';
 import { ARTICLES } from '@/data/bilglassguide/content';
 
 export default function HomePage() {
-  const { t: _t } = useI18n();
+  const { t } = useI18n();
 
   const faqData = {
     '@type': 'FAQPage',
@@ -130,17 +130,17 @@ export default function HomePage() {
             <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight">
-                  Fagartikler om bilglass
+                  {t('home.articles.title')}
                 </h2>
                 <p className="mt-3 max-w-2xl text-base text-gray-600">
-                  Teknisk kunnskap om frontruter, ADAS, HUD, produsenter og variantmatching.
+                  {t('home.articles.subtitle')}
                 </p>
               </div>
               <Link
                 to="/bilglassguide"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-autoglass-blue hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-autoglass-blue hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-autoglass-blue focus-visible:ring-offset-2"
               >
-                Se alle artikler
+                {t('home.articles.cta')}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

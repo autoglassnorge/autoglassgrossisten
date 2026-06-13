@@ -5,7 +5,7 @@ module.exports = defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 2,
   reporter: [
     ['line'],
     ['allure-playwright', {
@@ -15,7 +15,8 @@ module.exports = defineConfig({
     }],
   ],
   use: {
-    baseURL: 'https://autoglass-frontend.pages.dev',
+    baseURL: process.env.E2E_BASE_URL || 'https://autoglass-frontend.pages.dev',
+    locale: 'no-NO',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

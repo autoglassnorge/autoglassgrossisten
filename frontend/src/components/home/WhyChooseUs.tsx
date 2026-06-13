@@ -5,6 +5,7 @@
 
 import { ShieldCheck, Truck, Clock, Headphones } from 'lucide-react';
 import { BUSINESS_METRICS, formatFull } from '@/constants/businessMetrics';
+import { COMPANY } from '@/config/company.config';
 
 const POINTS = [
   {
@@ -46,8 +47,8 @@ export function WhyChooseUs() {
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-carbon-900 tracking-tight">
             Hvorfor velge Autoglass AS?
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-carbon-500">
-            Norges ledende B2B-grossist av bilglass siden 1994
+          <p className="mt-3 text-base sm:text-lg text-carbon-600">
+            Norges ledende B2B-grossist av bilglass siden {COMPANY.FOUNDED_YEAR}
           </p>
         </div>
 
@@ -59,20 +60,20 @@ export function WhyChooseUs() {
               className="group relative rounded-xl border border-carbon-200 bg-carbon-50 p-6 hover:border-glass-cyan/40 hover:bg-white hover:shadow-lg transition-all duration-300"
             >
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-glass-cyan/10 mb-4 group-hover:bg-glass-cyan/20 transition-colors">
-                <point.icon className="h-6 w-6 text-glass-cyan" />
+                <point.icon className="h-6 w-6 text-autoglass-blue" />
               </div>
 
               <div className="font-mono text-2xl font-bold text-autoglass-blue tabular-nums mb-1">
                 {point.stat}
               </div>
-              <div className="text-xs text-carbon-400 uppercase tracking-wider mb-3">
+              <div className="text-xs text-carbon-500 uppercase tracking-wider mb-3">
                 {point.statLabel}
               </div>
 
               <h3 className="text-base font-semibold text-carbon-900 mb-2">
                 {point.title}
               </h3>
-              <p className="text-sm text-carbon-500 leading-relaxed">
+              <p className="text-sm text-carbon-600 leading-relaxed">
                 {point.description}
               </p>
             </div>

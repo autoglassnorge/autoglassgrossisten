@@ -72,6 +72,7 @@ describe("handleVinLookup", () => {
       year: 2008,
       vin: "WVWZZZ7HZ8D123456",
       kType: 17370,
+      bodyClass: "",
     });
     expect(data.resolutionPath).toEqual(["vin_decode_cache", "glass_rules"]);
     expect(data.paidLookupUsed).toBe(false);
