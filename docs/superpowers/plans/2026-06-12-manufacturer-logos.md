@@ -16,12 +16,12 @@
 - **Create:** `frontend/public/images/logos/pilkington.png` — Pilkington logo.
 - **Create:** `frontend/public/images/logos/saint-gobain.svg` — Saint-Gobain logo.
 - **Create:** `frontend/public/images/logos/agc.svg` — AGC logo.
-- **Create:** `frontend/public/images/logos/pgw.jpg` — PGW logo.
+- **Create:** `frontend/public/images/logos/pgw.svg` — PGW logo.
 - **Create:** `frontend/public/images/logos/glavista.svg` — Glavista logo.
 - **Create:** `frontend/public/images/logos/fuyao.png` — Fuyao logo.
 - **Create:** `frontend/public/images/logos/xyg.png` — XYG logo.
 - **Create:** `frontend/public/images/logos/nordglass.svg` — NordGlass fallback wordmark.
-- **Create:** `frontend/public/images/logos/euroglass.png` — Euroglass logo.
+- **Create:** `frontend/public/images/logos/euroglass.svg` — Euroglass logo.
 - **Modify:** `frontend/src/components/home/ManufacturerLogos.tsx` — use logos, add fallback, update styling.
 - **Modify:** `e2e/homepage-visual.spec.js` — add visibility assertion for manufacturer logos.
 - **Modify:** `e2e/homepage-a11y.spec.js` — add assertion that every logo image has a non-empty `alt`.
@@ -57,13 +57,13 @@ git commit -m "chore: add manufacturer logos directory"
 - Create: `frontend/public/images/logos/pilkington.png`
 - Create: `frontend/public/images/logos/saint-gobain.svg`
 - Create: `frontend/public/images/logos/agc.svg`
-- Create: `frontend/public/images/logos/pgw.jpg`
+- Create: `frontend/public/images/logos/pgw.svg`
 - Create: `frontend/public/images/logos/glavista.svg`
 - Create: `frontend/public/images/logos/fuyao.png`
 - Create: `frontend/public/images/logos/xyg.png`
-- Create: `frontend/public/images/logos/euroglass.png`
+- Create: `frontend/public/images/logos/euroglass.svg`
 
-- [ ] **Step 1: Download the logo files**
+- [ ] **Step 1: Download the known official logo files**
 
 Run from `/Users/taj/bilglass`:
 ```bash
@@ -71,11 +71,14 @@ cd frontend/public/images/logos
 curl -sL -o pilkington.png "https://www.pilkington.com/_externalBuilds/NSG.WCM.Pilkington.Core/css/img/rsz_pilkington_logo.png"
 curl -sL -o saint-gobain.svg "https://upload.wikimedia.org/wikipedia/en/d/dc/Saint-Gobain_logo.svg"
 curl -sL -o agc.svg "https://www.agc-automotive.com/static/image/base/agc_logo.svg"
-curl -sL -o pgw.jpg "https://autoglassweek.com/wp-content/uploads/2026/02/PGW_EAG_extra_compact_Color-Copy.jpg"
 curl -sL -o glavista.svg "https://www.glavista.com/img/personalizacion/guardian/base/logo-glavista-blanco.svg"
 curl -sL -o fuyao.png "https://upload.wikimedia.org/wikipedia/en/3/35/Fuyao_Logo.png"
+curl -sL -o xyg.png "https://companieslogo.com/img/orig/0868.HK-718e2c9d.png"
+```
+
+If the XYG URL above is unavailable, try the original source (may be blocked by captcha):
+```bash
 curl -sL -o xyg.png "https://autoglassweek.com/wp-content/uploads/2026/01/XYG-2023-scaled.png"
-curl -sL -o euroglass.png "https://am-assets.pl/themes/light/img/logo/pl_desktop.png"
 ```
 
 - [ ] **Step 2: Verify files are non-empty**
@@ -84,42 +87,67 @@ Run:
 ```bash
 ls -la /Users/taj/bilglass/frontend/public/images/logos/
 ```
-Expected: each file above has size > 0 bytes.
+Expected: each downloaded file has size > 0 bytes.
 
 - [ ] **Step 3: Commit the downloaded logos**
 
 Run:
 ```bash
 cd /Users/taj/bilglass
-git add frontend/public/images/logos/pilkington.png frontend/public/images/logos/saint-gobain.svg frontend/public/images/logos/agc.svg frontend/public/images/logos/pgw.jpg frontend/public/images/logos/glavista.svg frontend/public/images/logos/fuyao.png frontend/public/images/logos/xyg.png frontend/public/images/logos/euroglass.png
+git add frontend/public/images/logos/pilkington.png frontend/public/images/logos/saint-gobain.svg frontend/public/images/logos/agc.svg frontend/public/images/logos/glavista.svg frontend/public/images/logos/fuyao.png frontend/public/images/logos/xyg.png
 git commit -m "feat: add official manufacturer logo assets"
 ```
 
 ---
 
-### Task 3: Create fallback SVG wordmark for NordGlass
+### Task 3: Create fallback SVG wordmarks for PGW, Euroglass, and NordGlass
+
+Official high-quality logos for PGW and Euroglass were not reachable, and NordGlass has no accessible public logo, so we create clean fallback wordmarks.
 
 **Files:**
+- Create: `frontend/public/images/logos/pgw.svg`
+- Create: `frontend/public/images/logos/euroglass.svg`
 - Create: `frontend/public/images/logos/nordglass.svg`
 
-- [ ] **Step 1: Write the fallback SVG**
+- [ ] **Step 1: Write the fallback SVGs**
 
-Create `frontend/public/images/logos/nordglass.svg` with:
+Create `frontend/public/images/logos/pgw.svg`:
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="200" height="50">
+  <text x="50%" y="35%" dominant-baseline="middle" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="bold"
+        fill="#E31837">PGW</text>
+  <text x="50%" y="72%" dominant-baseline="middle" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600"
+        fill="#E31837">Auto Glass</text>
+</svg>
+```
+
+Create `frontend/public/images/logos/euroglass.svg`:
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" width="200" height="40">
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="bold"
+        fill="#FF8C00">Euroglass</text>
+</svg>
+```
+
+Create `frontend/public/images/logos/nordglass.svg` (white text for contrast):
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" width="200" height="40">
   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
         font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold"
-        fill="#003366">NordGlass</text>
+        fill="#ffffff">NordGlass</text>
 </svg>
 ```
 
-- [ ] **Step 2: Commit the fallback logo**
+- [ ] **Step 2: Commit the fallback logos**
 
 Run:
 ```bash
 cd /Users/taj/bilglass
-git add frontend/public/images/logos/nordglass.svg
-git commit -m "feat: add NordGlass fallback wordmark"
+git add frontend/public/images/logos/pgw.svg frontend/public/images/logos/euroglass.svg frontend/public/images/logos/nordglass.svg
+git commit -m "feat: add fallback wordmarks for PGW, Euroglass, and NordGlass"
 ```
 
 ---
@@ -153,12 +181,12 @@ const MANUFACTURERS: Manufacturer[] = [
   { name: 'Pilkington', abbr: 'PLK', logo: '/images/logos/pilkington.png', color: '#003B7A' },
   { name: 'Saint-Gobain Sekurit', abbr: 'SGS', logo: '/images/logos/saint-gobain.svg', color: '#009639' },
   { name: 'AGC Automotive', abbr: 'AGC', logo: '/images/logos/agc.svg', color: '#0055A4' },
-  { name: 'PGW Auto Glass', abbr: 'PGW', logo: '/images/logos/pgw.jpg', color: '#E31837' },
+  { name: 'PGW Auto Glass', abbr: 'PGW', logo: '/images/logos/pgw.svg', color: '#E31837' },
   { name: 'Glavista', abbr: 'GLA', logo: '/images/logos/glavista.svg', color: '#0047AB' },
-  { name: 'Fuyao', abbr: 'FUY', logo: '/images/logos/fuyao.png', color: '#CC0000' },
+  { name: 'Fuyao', abbr: 'FUY', logo: '/images/logos/fuyao.png', color: '#0066CC' },
   { name: 'XYG', abbr: 'XYG', logo: '/images/logos/xyg.png', color: '#0066CC' },
   { name: 'NordGlass', abbr: 'NGL', logo: '/images/logos/nordglass.svg', color: '#003366' },
-  { name: 'Euroglass', abbr: 'EUG', logo: '/images/logos/euroglass.png', color: '#FF8C00' },
+  { name: 'Euroglass', abbr: 'EUG', logo: '/images/logos/euroglass.svg', color: '#FF8C00' },
 ];
 
 function ManufacturerLogo({ m }: { m: Manufacturer }) {

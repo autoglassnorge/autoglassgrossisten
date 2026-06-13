@@ -21,15 +21,16 @@ Logoer plasseres i `frontend/public/images/logos/` som SVG i utgangspunktet, med
 | AGC Automotive | `agc` | agc-automotive.com | `#0055A4` |
 | PGW Auto Glass | `pgw` | pgwautoglass.com | `#E31837` |
 | Glavista | `glavista` | glavista.com | `#0047AB` |
-| Fuyao | `fuyao` | fuyao.com | `#CC0000` |
-| XYG | `xyg` | xinyiglass.com | `#0066CC` |
-| NordGlass | `nordglass` | nordglass.eu | `#003366` |
+| Fuyao | `fuyao` | fuyao.com | `#0066CC` |
+| XYG | `xyg` | xinyiglass.com / companieslogo.com | `#0066CC` |
+| NordGlass | `nordglass` | nordglass.eu | `#003366` (wordmark rendered in white) |
 | Euroglass | `euroglass` | euroglass.pl | `#FF8C00` |
 
 Fallback-strategi:
 1. Prøv å hente offisiell SVG/PNG fra produsentens nettsted, press-kit eller Wikimedia Commons.
-2. Dersom ingen offisiell fil er tilgjengelig, lag en ren SVG-wordmark med merkenavnet i fallback-fargen.
-3. I komponenten skjules ødelagte bilder automatisk og viser dagens badge som siste fallback.
+2. Dersom ingen offisiell fil er tilgjengelig, lag en ren SVG-wordmark med merkenavnet i fallback-fargen. For mørke/blå wordmarks mot den mørke bakgrunnen brukes en lys farge (f.eks. hvit) for å sikre kontrast.
+3. PGW og Euroglass falt tilbake på egne wordmarks fordi offisielle logoer ikke var tilgjengelige.
+4. I komponenten skjules ødelagte bilder automatisk og viser dagens badge som siste fallback.
 
 ## Visuell utforming
 

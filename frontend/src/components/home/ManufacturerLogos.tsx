@@ -20,7 +20,7 @@ const MANUFACTURERS: Manufacturer[] = [
   { name: 'AGC Automotive', abbr: 'AGC', logo: '/images/logos/agc.svg', color: '#0055A4' },
   { name: 'PGW Auto Glass', abbr: 'PGW', logo: '/images/logos/pgw.svg', color: '#E31837' },
   { name: 'Glavista', abbr: 'GLA', logo: '/images/logos/glavista.svg', color: '#0047AB' },
-  { name: 'Fuyao', abbr: 'FUY', logo: '/images/logos/fuyao.png', color: '#CC0000' },
+  { name: 'Fuyao', abbr: 'FUY', logo: '/images/logos/fuyao.png', color: '#0066CC' },
   { name: 'XYG', abbr: 'XYG', logo: '/images/logos/xyg.png', color: '#0066CC' },
   { name: 'NordGlass', abbr: 'NGL', logo: '/images/logos/nordglass.svg', color: '#003366' },
   { name: 'Euroglass', abbr: 'EUG', logo: '/images/logos/euroglass.svg', color: '#FF8C00' },
@@ -88,7 +88,7 @@ export function ManufacturerLogos() {
           {MANUFACTURERS.map((m) => (
             <div
               key={m.name}
-              className="flex-shrink-0 snap-start flex items-center justify-center px-4 py-2 rounded-lg bg-carbon-900/60"
+              className="group flex-shrink-0 snap-start flex items-center justify-center px-4 py-2 rounded-lg bg-carbon-900/60"
               title={m.name}
             >
               <ManufacturerLogo m={m} />
