@@ -41,6 +41,7 @@ export interface VinLookupResponse {
     year: number;
     vin: string;
     kType?: number;
+    bodyClass?: string;
   };
   reasons?: string[];
   error?: string;
@@ -174,6 +175,7 @@ export async function handleVinLookup(
           year: vehicleYear,
           vin: resolvedVin,
           kType: ruleResult.ktype,
+          bodyClass: "",
         },
         resolutionPath: [vehicleSource, "glass_rules"],
         paidLookupUsed: false,
@@ -197,6 +199,7 @@ export async function handleVinLookup(
           year: vehicleYear,
           vin: resolvedVin,
           kType: ruleResult.ktype,
+          bodyClass: "",
         },
         resolutionPath: [vehicleSource, "glass_rules"],
         paidLookupUsed: false,
