@@ -78,7 +78,7 @@ export function VehicleCard({ vehicle, equipment, regnr }: VehicleCardProps) {
                          vehicle.registrationStatus || (vehicle.seatCount && vehicle.seatCount > 0);
 
   return (
-    <div className="rounded-xl border bg-white shadow-sm overflow-hidden">
+    <div className="rounded-xl border bg-white shadow-sm overflow-hidden" data-testid="vehicle-card">
       <div className="flex items-start gap-3 p-4 sm:p-5">
         <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-autoglass-light">
           <Car className="h-5 w-5 text-autoglass-blue" />

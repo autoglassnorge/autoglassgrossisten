@@ -42,6 +42,7 @@ export function StickySearchBar() {
 
       {/* Sticky bar */}
       <div
+        data-testid="sticky-search-bar"
         className={`fixed top-[56px] sm:top-[64px] left-0 right-0 z-40 bg-carbon-950/95 backdrop-blur-md border-b border-carbon-800 transition-transform duration-300 ${
           visible ? 'translate-y-0' : '-translate-y-full'
         }`}

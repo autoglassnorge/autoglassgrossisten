@@ -15,7 +15,7 @@ module.exports = defineConfig({
     }],
   ],
   use: {
-    baseURL: 'https://autoglass-frontend.pages.dev',
+    baseURL: process.env.E2E_BASE_URL || 'https://autoglass-frontend.pages.dev',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

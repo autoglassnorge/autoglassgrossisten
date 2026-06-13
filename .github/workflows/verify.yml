@@ -92,8 +92,82 @@ jobs:
         working-directory: frontend
         run: npm test -- --run
 
+  catalog-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Installer avhengigheter
+        run: npm ci
+
+      - name: Valider katalog
+        run: npm run catalog:validate-prod
+
+  e2e:
+    needs: [worker-typecheck, worker-test, frontend-build-test, catalog-validate]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+
+      - name: Installer avhengigheter
+        run: npm ci
+
+      - name: Installer Playwright-browsere
+        run: npx playwright install --with-deps
+
+      - name: Kjør E2E-tester (produksjon)
+        run: npm run test:e2e
+
+      - name: Last opp Allure-resultater
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results/
+          retention-days: 14
+
+      - name: Last opp Playwright-testresultater
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 7
+
+      - name: Generer Allure-rapport
+        if: always()
+        run: npx allure generate allure-results -o allure-report --clean
+
+      - name: Last opp Allure-rapport
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
+          retention-days: 14
+
   smoke-test:
-    needs: [worker-typecheck, worker-test, frontend-build-test]
+    needs: [worker-typecheck, worker-test, frontend-build-test, catalog-validate, e2e]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

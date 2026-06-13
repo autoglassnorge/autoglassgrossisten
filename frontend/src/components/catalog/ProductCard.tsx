@@ -99,6 +99,7 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
     <Card
       className="group flex flex-col h-full overflow-hidden cursor-pointer"
       onClick={handleDetail}
+      data-testid="product-card"
     >
       {/* Image */}
       <div className="relative aspect-[16/10] bg-gray-100 overflow-hidden">
