@@ -36,6 +36,7 @@ export const translations: Record<Lang, Dict> = {
 
     'vin.title': 'VIN-søk',
     'vin.subtitle': 'Slå opp bilen via understellsnummer (VIN)',
+    'vin.loading.label': 'Laster VIN-søk',
     'vin.status.resolved': 'Kjøretøy funnet',
     'vin.status.pending': 'Vi undersøker VIN-et',
     'vin.status.needs_review': 'VIN-et krever manuell sjekk',
@@ -47,7 +48,10 @@ export const translations: Record<Lang, Dict> = {
     'vin.action.regnr': 'Søk med reg.nr',
     'vin.action.catalog': 'Bla i katalogen',
     'vin.action.showProduct': 'Vis passende glass',
+    'vin.action.reset': 'Søk på nytt',
     'vin.masked': 'VIN: {vin}',
+    'vin.chat.initial': 'VIN: {vin}',
+    'vin.chat.quoteRequest': 'Be om pristilbud for VIN {vin}',
 
     'hero.b2b.eyebrow': 'B2B-grossist · 133 000+ glass på lager · Neste-dag-levering',
     'hero.b2b.title.line1': 'Finn riktig bilglass',
@@ -174,6 +178,7 @@ export const translations: Record<Lang, Dict> = {
 
     'vin.title': 'VIN-sök',
     'vin.subtitle': 'Slå upp fordonet via chassinummer (VIN)',
+    'vin.loading.label': 'Laddar VIN-sök',
     'vin.status.resolved': 'Fordon hittat',
     'vin.status.pending': 'Vi undersöker VIN-numret',
     'vin.status.needs_review': 'VIN-numret kräver manuell kontroll',
@@ -185,7 +190,10 @@ export const translations: Record<Lang, Dict> = {
     'vin.action.regnr': 'Sök med reg.nr',
     'vin.action.catalog': 'Bläddra i katalogen',
     'vin.action.showProduct': 'Visa passande glas',
+    'vin.action.reset': 'Sök igen',
     'vin.masked': 'VIN: {vin}',
+    'vin.chat.initial': 'VIN: {vin}',
+    'vin.chat.quoteRequest': 'Be om prisoffert för VIN {vin}',
 
     'hero.b2b.eyebrow': 'B2B-grossist · 133 000+ glas i lager · Leverans nästa dag',
     'hero.b2b.title.line1': 'Hitta rätt bilglas',
@@ -312,6 +320,7 @@ export const translations: Record<Lang, Dict> = {
 
     'vin.title': 'VIN search',
     'vin.subtitle': 'Look up the vehicle by VIN',
+    'vin.loading.label': 'Loading VIN search',
     'vin.status.resolved': 'Vehicle found',
     'vin.status.pending': 'We are checking the VIN',
     'vin.status.needs_review': 'This VIN needs manual review',
@@ -323,7 +332,10 @@ export const translations: Record<Lang, Dict> = {
     'vin.action.regnr': 'Search by registration number',
     'vin.action.catalog': 'Browse catalog',
     'vin.action.showProduct': 'Show matching glass',
+    'vin.action.reset': 'Search again',
     'vin.masked': 'VIN: {vin}',
+    'vin.chat.initial': 'VIN: {vin}',
+    'vin.chat.quoteRequest': 'Request a quote for VIN {vin}',
 
     'hero.b2b.eyebrow': 'B2B wholesaler · 133,000+ glass units in stock · Next-day delivery',
     'hero.b2b.title.line1': 'Find the right auto glass',
