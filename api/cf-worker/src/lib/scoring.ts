@@ -152,14 +152,15 @@ function _scoreCandidate(
   // Infer equipment from DB columns + description parsing
   const recordFlags = inferRecordEquipment(c);
 
-  // === kType GATE — dominates everything ===
-  // If we know the vehicle's kType, exact kType match is the strongest signal
+  // === kType signal — strong but recoverable ===
+  // If we know the vehicle's kType, exact kType match is a strong signal,
+  // but it should not single-handedly bury a candidate that matches everything else.
   const vehicleKtype = (vehicle as any).k_type as number | undefined;
   if (vehicleKtype && vehicleKtype > 0 && c.ktype) {
     if (c.ktype === vehicleKtype) {
-      score += 1000; // Same kType — massive boost
+      score += 250; // strong but recoverable signal
     } else {
-      score -= 1000; // Different kType — massive penalty
+      score -= 100; // moderate penalty, recoverable
     }
   }
 
