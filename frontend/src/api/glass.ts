@@ -1,4 +1,4 @@
-import type { SearchResult, CatalogResponse, UserEquipmentAnswers } from '@/types/api';
+import type { SearchResult, CatalogResponse, UserEquipmentAnswers, VinLookupResult, VinResolutionStatus, VinLookupVehicle, VinMatch } from '@/types/api';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
@@ -63,6 +63,71 @@ export interface IdentifierSearchResponse {
   query: Record<string, string>;
   count: number;
   results: unknown[];
+}
+
+function toVinStatus(status: string): VinResolutionStatus {
+  if (status === 'resolved' || status === 'pending' || status === 'needs_review' || status === 'failed') {
+    return status;
+  }
+  return 'failed';
+}
+
+export function normalizeVinResponse(data: Record<string, unknown>): VinLookupResult {
+  const vehicleRaw = data.vehicle as Record<string, unknown> | undefined;
+  const matchRaw = data.match as Record<string, unknown> | undefined;
+
+  const vehicle: VinLookupVehicle | undefined = vehicleRaw
+    ? {
+        make: String(vehicleRaw.make ?? ''),
+        model: String(vehicleRaw.model ?? ''),
+        year: Number(vehicleRaw.year ?? 0),
+        vin: String(vehicleRaw.vin ?? ''),
+        kType: vehicleRaw.kType ? Number(vehicleRaw.kType) : undefined,
+        bodyClass: vehicleRaw.bodyClass ? String(vehicleRaw.bodyClass) : undefined,
+      }
+    : undefined;
+
+  const match: VinMatch | undefined = matchRaw
+    ? {
+        ktype: matchRaw.ktype ? Number(matchRaw.ktype) : undefined,
+        eurocode: matchRaw.eurocode ? String(matchRaw.eurocode) : undefined,
+        kba: matchRaw.kba ? String(matchRaw.kba) : undefined,
+        nags: matchRaw.nags ? String(matchRaw.nags) : undefined,
+        oemPartNumber: matchRaw.oemPartNumber ? String(matchRaw.oemPartNumber) : undefined,
+        confidence: Number(matchRaw.confidence ?? 0),
+        source: String(matchRaw.source ?? ''),
+      }
+    : undefined;
+
+  return {
+    status: toVinStatus(String(data.status ?? 'failed')),
+    requestId: typeof data.requestId === 'number' ? data.requestId : undefined,
+    vehicle,
+    match,
+    reasons: Array.isArray(data.reasons) ? data.reasons.map(String) : undefined,
+    message: data.message ? String(data.message) : undefined,
+    resolutionPath: Array.isArray(data.resolutionPath)
+      ? data.resolutionPath.map(String)
+      : undefined,
+    paidLookupUsed: data.paidLookupUsed === true,
+    providerCost: typeof data.providerCost === 'number' ? data.providerCost : undefined,
+    error: data.error ? String(data.error) : undefined,
+  };
+}
+
+export async function searchByVin(vin: string): Promise<VinLookupResult> {
+  const params = new URLSearchParams({ vin });
+  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new SearchError(
+      body.error ?? `VIN-søk feilet (${res.status})`,
+      res.status,
+      body.code
+    );
+  }
+  const data = (await res.json()) as Record<string, unknown>;
+  return normalizeVinResponse(data);
 }
 
 export async function searchByEurocode(eurocode: string): Promise<IdentifierSearchResponse> {
