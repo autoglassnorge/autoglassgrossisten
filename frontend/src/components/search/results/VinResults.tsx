@@ -107,11 +107,6 @@ export function VinResults({ activeQuery, onClear, onDetail }: VinResultsProps) 
     return <VinSkeleton />;
   }
 
-  if (query.error) {
-    // eslint-disable-next-line no-console
-    console.error('VIN search failed:', query.error);
-  }
-
   if (query.error || !query.data) {
     return (
       <VinChoices
