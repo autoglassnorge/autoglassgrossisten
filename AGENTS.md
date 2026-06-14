@@ -76,6 +76,7 @@ kimi glass-arch        # Lead architect — ADR, refaktorering, plan
 kimi glass-ktype       # kType specialist — Bovsoft, SVV, statistisk læring
 kimi glass-ordre       # Ordremottaker LLM — conversational AI, automatisert bestilling
 kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasjon (start ALLTID her)
+kimi glass-vin         # VIN-søk agent — logikk og UX for VIN-oppslag
 ```
 
 ### Agent-filer
@@ -89,6 +90,7 @@ kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasj
 | ktype-agent | `.kimi/agents/autoglass-ktype-agent.yaml` | `.md` | Bovsoft, SVV, kType |
 | **ordremottaker-agent** | `.kimi/agents/autoglass-ordremottaker-agent.yaml` | `.md` | **Conversational AI, automatisert ordremottak** |
 | **orchestrator-agent** | `.kimi/agents/autoglass-orchestrator.yaml` | `.md` | **Task-routing, Superpowers-prosess, verifikasjon** |
+| **vin-agent** | `.kimi/agents/autoglass-vin-agent.yaml` | `.md` | **VIN-søk, UX-beslutninger** |
 
 ### Custom Slash-Skills (0.14.2 — `/skill-name` og dotted slash-kommandoer)
 
@@ -231,7 +233,7 @@ kimi glass-orchestrator # Orchestrator — task-routing, Superpowers, verifikasj
 ```
 ~/bilglass/
 ├── .kimi/                  # Agent-infrastruktur + MemPalace
-│   ├── agents/             # 6 YAML+MD agent-par (inkl. ktype)
+│   ├── agents/             # 9 YAML+MD agent-par (inkl. ktype)
 │   ├── mempalace/          # Isolert MemPalace MCP
 │   │   ├── mcp-server.mjs  # Zero-dep MCP-server (v3.5.0)
 │   │   ├── kg.json         # Knowledge graph

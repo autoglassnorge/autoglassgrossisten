@@ -39,6 +39,11 @@
       "alias": "glass-orchestrator",
       "command": "kimi --agent-file .kimi/agents/autoglass-orchestrator.yaml",
       "description": "Orchestrator — task-routing, Superpowers-prosess, verifikasjons-gate. Start ALLTID her ved usikkerhet."
+    },
+    {
+      "alias": "glass-vin",
+      "command": "kimi --agent-file .kimi/agents/autoglass-vin-agent.yaml",
+      "description": "VIN-søk agent — logikk og UX for VIN-oppslag"
     }
   ]
 }

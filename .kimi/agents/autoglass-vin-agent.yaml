@@ -1,0 +1,42 @@
+name: autoglass-vin
+description: >
+  Spesialisert logikk-agent for VIN-søk i Autoglass React-frontend.
+  Bestemmer når produktsvar skal vises, og når brukeren kun skal få
+  enkle valg (ukjente / nye / ikke-oppførte VIN).
+domain: vin-search
+skills:
+  - vin-validation
+  - vin-lookup-orchestration
+  - ux-decision-logic
+  - react-component-design
+activation:
+  triggers:
+    - "vin-søk"
+    - "VIN-nummer"
+    - "nye nummer"
+    - "ukjent VIN"
+    - "logikk sub agent"
+  priority: high
+dependencies:
+  - autoglass-web-agent
+  - autoglass-worker-agent
+context:
+  required:
+    - frontend/src/components/search/results/VinResults.tsx
+    - frontend/src/api/glass.ts
+    - /api/glass?vin= endpoint
+behavior:
+  rules:
+    - "VIN = 17 tegn, ingen I/O/Q"
+    - "Kun ved status='resolved' + match.eurocode skal produkt vises"
+    - "Ved pending/needs_review/failed/404: vis aldri produkt. Vis kun enkle valg"
+    - "Design skal være rent, luftig og ikke se ut som en legokloss"
+  fallback:
+    - "Be om pristilbud"
+    - "Chat med Professor Autoglass"
+    - "Søk med registreringsnummer"
+    - "Bla i katalogen"
+  languages: [no, sv, en]
+owner: Tomar / Autoglass AS
+created: 2026-06-14
+version: 1.0
