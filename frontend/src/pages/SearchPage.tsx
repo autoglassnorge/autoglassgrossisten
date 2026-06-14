@@ -23,6 +23,9 @@ import { ResultSkeleton } from '@/components/search/ResultSkeleton';
 const RegnrResults = lazy(() =>
   import('@/components/search/results/RegnrResults').then((m) => ({ default: m.RegnrResults }))
 );
+const VinResults = lazy(() =>
+  import('@/components/search/results/VinResults').then((m) => ({ default: m.VinResults }))
+);
 const IdentifierResults = lazy(() =>
   import('@/components/search/results/IdentifierResults').then((m) => ({ default: m.IdentifierResults }))
 );
@@ -329,6 +332,12 @@ export default function SearchPage() {
           </Suspense>
         )}
 
+        {activeQueryType === 'vin' && activeQuery && (
+          <Suspense fallback={<ResultSkeleton />}>
+            <VinResults activeQuery={activeQuery} onClear={handleClear} onDetail={setDetailProduct} />
+          </Suspense>
+        )}
+
         {(activeQueryType === 'eurocode' || activeQueryType === 'sku' || activeQueryType === 'oe') && activeQuery && (
           <Suspense fallback={<ResultSkeleton />}>
             <IdentifierResults
@@ -350,7 +359,7 @@ export default function SearchPage() {
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-8 text-center">
             <SearchLensIcon className="mx-auto h-10 w-10 text-gray-300 mb-3" />
             <p className="text-gray-500">Skriv inn et søkeord for å finne bilglass</p>
-            <p className="text-xs text-gray-400 mt-1">Regnr, Eurocode, OE-nummer, eller beskrivelse</p>
+            <p className="text-xs text-gray-400 mt-1">Regnr, VIN, Eurocode, OE-nummer, eller beskrivelse</p>
           </div>
         )}
 
