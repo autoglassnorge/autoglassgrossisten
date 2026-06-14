@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Car, ChevronDown, ChevronUp, Fuel, Users, CheckCircle, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { VehicleInfo, EquipmentFlags } from '@/types/api';
@@ -66,7 +66,7 @@ function getColorClass(colorName?: string): string {
   return colorMap[normalizedColor] || 'bg-gray-300';
 }
 
-export function VehicleCard({ vehicle, equipment, regnr }: VehicleCardProps) {
+function VehicleCardInner({ vehicle, equipment, regnr }: VehicleCardProps) {
   const [expanded, setExpanded] = useState(false);
 
   const activeEquipment = equipment
@@ -203,3 +203,5 @@ export function VehicleCard({ vehicle, equipment, regnr }: VehicleCardProps) {
     </div>
   );
 }
+
+export const VehicleCard = memo(VehicleCardInner);

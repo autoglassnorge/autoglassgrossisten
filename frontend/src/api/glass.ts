@@ -1,4 +1,4 @@
-import type { SearchResult, CatalogResponse, UserEquipmentAnswers } from '@/types/api';
+import type { SearchResult, CatalogResponse, UserEquipmentAnswers, VinLookupResult, VinResolutionStatus, VinLookupVehicle, VinMatch } from '@/types/api';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '';
 
@@ -29,21 +29,22 @@ function appendEquipmentAnswers(params: URLSearchParams, answers?: UserEquipment
 export async function searchByRegnr(
   regnr: string,
   equipmentAnswers?: UserEquipmentAnswers,
-  position?: 'driver' | 'passenger' | 'center' | 'both'
+  position?: 'driver' | 'passenger' | 'center' | 'both',
+  signal?: AbortSignal
 ): Promise<SearchResult> {
   const params = new URLSearchParams({ regnr });
   appendEquipmentAnswers(params, equipmentAnswers);
   if (position) {
     params.set('position', position);
   }
-  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`);
+  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     
     // Hvis SVV er nede, prøv scraping fra vegvesen.no
-    if (body.code === 'svv_upstream_error') {
+    if (body.code === 'svv_upstream_error' && !signal?.aborted) {
       console.log('SVV nede, prøver scraping...');
-      const scrapeResult = await scrapeVegvesen(regnr);
+      const scrapeResult = await scrapeVegvesen(regnr, signal);
       if (scrapeResult.status === 'ok' && scrapeResult.data) {
         return scrapeResult.data;
       }
@@ -65,8 +66,73 @@ export interface IdentifierSearchResponse {
   results: unknown[];
 }
 
-export async function searchByEurocode(eurocode: string): Promise<IdentifierSearchResponse> {
-  const res = await fetch(`${API_BASE}/api/glass?eurocode=${encodeURIComponent(eurocode)}`);
+function toVinStatus(status: string): VinResolutionStatus {
+  if (status === 'resolved' || status === 'pending' || status === 'needs_review' || status === 'failed') {
+    return status;
+  }
+  return 'failed';
+}
+
+export function normalizeVinResponse(data: Record<string, unknown>): VinLookupResult {
+  const vehicleRaw = data.vehicle as Record<string, unknown> | undefined;
+  const matchRaw = data.match as Record<string, unknown> | undefined;
+
+  const vehicle: VinLookupVehicle | undefined = vehicleRaw
+    ? {
+        make: String(vehicleRaw.make ?? ''),
+        model: String(vehicleRaw.model ?? ''),
+        year: Number(vehicleRaw.year ?? 0),
+        vin: String(vehicleRaw.vin ?? ''),
+        kType: vehicleRaw.kType ? Number(vehicleRaw.kType) : undefined,
+        bodyClass: vehicleRaw.bodyClass ? String(vehicleRaw.bodyClass) : undefined,
+      }
+    : undefined;
+
+  const match: VinMatch | undefined = matchRaw
+    ? {
+        ktype: matchRaw.ktype ? Number(matchRaw.ktype) : undefined,
+        eurocode: matchRaw.eurocode ? String(matchRaw.eurocode) : undefined,
+        kba: matchRaw.kba ? String(matchRaw.kba) : undefined,
+        nags: matchRaw.nags ? String(matchRaw.nags) : undefined,
+        oemPartNumber: matchRaw.oemPartNumber ? String(matchRaw.oemPartNumber) : undefined,
+        confidence: Number(matchRaw.confidence ?? 0),
+        source: String(matchRaw.source ?? ''),
+      }
+    : undefined;
+
+  return {
+    status: toVinStatus(String(data.status ?? 'failed')),
+    requestId: typeof data.requestId === 'number' ? data.requestId : undefined,
+    vehicle,
+    match,
+    reasons: Array.isArray(data.reasons) ? data.reasons.map(String) : undefined,
+    message: data.message ? String(data.message) : undefined,
+    resolutionPath: Array.isArray(data.resolutionPath)
+      ? data.resolutionPath.map(String)
+      : undefined,
+    paidLookupUsed: data.paidLookupUsed === true,
+    providerCost: typeof data.providerCost === 'number' ? data.providerCost : undefined,
+    error: data.error ? String(data.error) : undefined,
+  };
+}
+
+export async function searchByVin(vin: string, signal?: AbortSignal): Promise<VinLookupResult> {
+  const params = new URLSearchParams({ vin });
+  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`, { signal });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new SearchError(
+      body.error ?? `VIN-søk feilet (${res.status})`,
+      res.status,
+      body.code
+    );
+  }
+  const data = (await res.json()) as Record<string, unknown>;
+  return normalizeVinResponse(data);
+}
+
+export async function searchByEurocode(eurocode: string, signal?: AbortSignal): Promise<IdentifierSearchResponse> {
+  const res = await fetch(`${API_BASE}/api/glass?eurocode=${encodeURIComponent(eurocode)}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new SearchError(body.error ?? `Eurocode-søk feilet (${res.status})`, res.status);
@@ -74,8 +140,8 @@ export async function searchByEurocode(eurocode: string): Promise<IdentifierSear
   return res.json();
 }
 
-export async function searchBySku(sku: string): Promise<IdentifierSearchResponse> {
-  const res = await fetch(`${API_BASE}/api/glass?supplier_sku=${encodeURIComponent(sku)}`);
+export async function searchBySku(sku: string, signal?: AbortSignal): Promise<IdentifierSearchResponse> {
+  const res = await fetch(`${API_BASE}/api/glass?supplier_sku=${encodeURIComponent(sku)}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new SearchError(body.error ?? `SKU-søk feilet (${res.status})`, res.status);
@@ -83,8 +149,8 @@ export async function searchBySku(sku: string): Promise<IdentifierSearchResponse
   return res.json();
 }
 
-export async function searchByOem(oem: string): Promise<IdentifierSearchResponse> {
-  const res = await fetch(`${API_BASE}/api/glass?oem=${encodeURIComponent(oem)}`);
+export async function searchByOem(oem: string, signal?: AbortSignal): Promise<IdentifierSearchResponse> {
+  const res = await fetch(`${API_BASE}/api/glass?oem=${encodeURIComponent(oem)}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new SearchError(body.error ?? `OE-søk feilet (${res.status})`, res.status);
@@ -92,8 +158,8 @@ export async function searchByOem(oem: string): Promise<IdentifierSearchResponse
   return res.json();
 }
 
-export async function searchCatalogText(query: string): Promise<CatalogResponse> {
-  const res = await fetch(`${API_BASE}/api/catalog/search?q=${encodeURIComponent(query)}`);
+export async function searchCatalogText(query: string, signal?: AbortSignal): Promise<CatalogResponse> {
+  const res = await fetch(`${API_BASE}/api/catalog/search?q=${encodeURIComponent(query)}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.error ?? `Katalogsøk feilet (${res.status})`);
@@ -101,9 +167,9 @@ export async function searchCatalogText(query: string): Promise<CatalogResponse>
   return res.json();
 }
 
-export async function scrapeVegvesen(regnr: string): Promise<{status: string, data?: SearchResult}> {
+export async function scrapeVegvesen(regnr: string, signal?: AbortSignal): Promise<{status: string, data?: SearchResult}> {
   try {
-    const res = await fetch(`${API_BASE}/api/scrape-vegvesen?regnr=${encodeURIComponent(regnr)}`);
+    const res = await fetch(`${API_BASE}/api/scrape-vegvesen?regnr=${encodeURIComponent(regnr)}`, { signal });
     if (!res.ok) {
       return { status: 'error' };
     }
@@ -152,7 +218,8 @@ export async function guideGlass(
   answers: Record<string, string>,
   categoryFilter?: string,
   mode?: "rule" | "llm",
-  vin?: string
+  vin?: string,
+  signal?: AbortSignal
 ): Promise<GuideState> {
   const body: Record<string, unknown> = { step, answers, categoryFilter, mode };
   if (vin) body.vin = vin;
@@ -162,6 +229,7 @@ export async function guideGlass(
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
+    signal,
   });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
@@ -173,17 +241,21 @@ export async function guideGlass(
   return res.json();
 }
 
-export async function logFeedback(params: {
-  regnr: string;
-  eurocode: string;
-  ktype?: number;
-  layer?: number;
-  score?: number;
-  action: "view" | "cart" | "order";
-}): Promise<void> {
+export async function logFeedback(
+  params: {
+    regnr: string;
+    eurocode: string;
+    ktype?: number;
+    layer?: number;
+    score?: number;
+    action: "view" | "cart" | "order";
+  },
+  signal?: AbortSignal
+): Promise<void> {
   await fetch(`${API_BASE}/api/feedback`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(params),
+    signal,
   });
 }

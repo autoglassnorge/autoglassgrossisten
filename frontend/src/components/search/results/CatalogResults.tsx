@@ -3,6 +3,7 @@
  * Lazy-loaded by SearchShell.
  */
 
+import { memo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AlertTriangle } from 'lucide-react';
 import { searchCatalogText } from '@/api/glass';
@@ -15,12 +16,13 @@ interface CatalogResultsProps {
   onDetail: (product: Product) => void;
 }
 
-export function CatalogResults({ activeQuery, onDetail }: CatalogResultsProps) {
+function CatalogResultsInner({ activeQuery, onDetail }: CatalogResultsProps) {
   const query = useQuery({
     queryKey: ['search', 'text', activeQuery],
-    queryFn: () => searchCatalogText(activeQuery),
+    queryFn: ({ signal }) => searchCatalogText(activeQuery, signal),
     enabled: activeQuery.length >= 3,
     retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   const data = query.data;
@@ -72,3 +74,5 @@ export function CatalogResults({ activeQuery, onDetail }: CatalogResultsProps) {
     </div>
   );
 }
+
+export const CatalogResults = memo(CatalogResultsInner);

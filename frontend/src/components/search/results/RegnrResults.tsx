@@ -3,7 +3,7 @@
  * Lazy-loaded by SearchShell. Self-contained: own query, filters, state.
  */
 
-import { useState, useMemo, Suspense, lazy, useCallback } from 'react';
+import { useState, useMemo, Suspense, lazy, useCallback, memo, useDeferredValue } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { MessageCircle, Sparkles, Wrench, X, AlertTriangle } from 'lucide-react';
@@ -29,6 +29,7 @@ import { EUKontrollReminder } from '@/components/search/EUKontrollReminder';
 import { GlassNeedSelector } from '@/components/search/GlassNeedSelector';
 import { TypeCodeTabs } from '@/components/catalog/TypeCodeTabs';
 import { ProductCard } from '@/components/catalog/ProductCard';
+import { VirtualProductGrid } from '@/components/search/results/VirtualProductGrid';
 
 const EquipmentVerifier = lazy(() =>
   import('@/components/search/EquipmentVerifier').then((m) => ({ default: m.EquipmentVerifier }))
@@ -55,7 +56,7 @@ const CATEGORY_RANK: Record<string, number> = {
   annet: 99,
 };
 
-export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsProps) {
+function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps) {
   const { openChat } = useChatStore();
 
   /* ---- query ---- */
@@ -64,11 +65,13 @@ export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsPro
 
   const query = useQuery({
     queryKey: ['search', 'regnr', activeQuery, equipmentAnswers, selectedPosition],
-    queryFn: () => searchByRegnr(activeQuery, equipmentAnswers, selectedPosition || undefined),
+    queryFn: ({ signal }) => searchByRegnr(activeQuery, equipmentAnswers, selectedPosition || undefined, signal),
     enabled: activeQuery.length >= 2,
     retry: 1,
     staleTime: 1000 * 60 * 2,
     gcTime: 1000 * 60 * 5,
+    placeholderData: (previousData) => previousData,
+    refetchOnWindowFocus: false,
   });
 
   const result = query.data;
@@ -92,7 +95,10 @@ export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsPro
     });
   }, [candidates]);
 
-  const baseProducts = equipmentFiltered ?? sortedCandidates;
+  const baseProducts = useMemo(
+    () => equipmentFiltered ?? sortedCandidates,
+    [equipmentFiltered, sortedCandidates]
+  );
 
   const selectionFilteredProducts = useMemo(() => {
     return baseProducts.filter((p) =>
@@ -107,6 +113,8 @@ export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsPro
     }
     return result;
   }, [selectedType, selectionFilteredProducts]);
+
+  const deferredProducts = useDeferredValue(filteredProducts);
 
   /* ---- handlers ---- */
   const handleCategoryChange = useCallback((category: GlassCategory | null) => {
@@ -326,26 +334,30 @@ export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsPro
       )}
 
       {/* Product grid */}
-      {filteredProducts.length > 0 && (
+      {deferredProducts.length > 0 && (
         <div>
           <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3">
-            {filteredProducts.length} resultat{filteredProducts.length !== 1 ? 'er' : ''}
+            {deferredProducts.length} resultat{deferredProducts.length !== 1 ? 'er' : ''}
           </h3>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredProducts.map((product) => (
+          <VirtualProductGrid
+            products={deferredProducts}
+            getKey={(product) => String(product.id)}
+            renderItem={(product) => (
               <ProductCard
                 key={product.id}
                 product={product}
                 onDetail={onDetail}
-                searchContext={result?.regnr ? { regnr: result.regnr, kType: vehicle?.k_type, layer: result?.layer, score: product._score } : undefined}
+                searchRegnr={result?.regnr}
+                searchKtype={vehicle?.k_type}
+                searchLayer={result?.layer}
               />
-            ))}
-          </div>
+            )}
+          />
         </div>
       )}
 
       {/* No products after filtering */}
-      {filteredProducts.length === 0 && candidates.length > 0 && (
+      {deferredProducts.length === 0 && candidates.length > 0 && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-6 text-center">
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-600 mb-2" />
           <p className="font-medium text-amber-800">Ingen glass i denne kategorien</p>
@@ -384,3 +396,5 @@ export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsPro
     </div>
   );
 }
+
+export const RegnrResults = memo(RegnrResultsInner);

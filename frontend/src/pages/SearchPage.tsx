@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { Loader2, Car, X } from 'lucide-react';
 import { useChatStore } from '@/stores/chatStore';
 
-import { Skeleton } from '@/components/ui/Skeleton';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { Button } from '@/components/ui/Button';
 import type { Product } from '@/types/api';
@@ -22,6 +21,9 @@ import { ResultSkeleton } from '@/components/search/ResultSkeleton';
 
 const RegnrResults = lazy(() =>
   import('@/components/search/results/RegnrResults').then((m) => ({ default: m.RegnrResults }))
+);
+const VinResults = lazy(() =>
+  import('@/components/search/results/VinResults').then((m) => ({ default: m.VinResults }))
 );
 const IdentifierResults = lazy(() =>
   import('@/components/search/results/IdentifierResults').then((m) => ({ default: m.IdentifierResults }))
@@ -44,13 +46,15 @@ function getRecentSearches(): string[] {
   }
 }
 
-function addRecentSearch(query: string) {
-  const normalized = query.trim();
-  if (normalized.length < 2) return;
-  const existing = getRecentSearches().filter((r) => r.toLowerCase() !== normalized.toLowerCase());
-  const next = [normalized, ...existing].slice(0, MAX_RECENT);
-  localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(next));
-}
+const typeBadgeColor: Record<InputType, string> = {
+  regnr: 'bg-amber-50 text-amber-700 border-amber-200',
+  eurocode: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  sku: 'bg-blue-50 text-blue-700 border-blue-200',
+  oe: 'bg-purple-50 text-purple-700 border-purple-200',
+  vin: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+  text: 'bg-gray-50 text-gray-600 border-gray-200',
+  empty: '',
+};
 
 /* ========================================================================
    SearchShell — Lightweight shell. Result components are lazy-loaded.
@@ -70,6 +74,17 @@ export default function SearchPage() {
   const [showWizard, setShowWizard] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
+  const [recentSearches, setRecentSearches] = useState<string[]>(getRecentSearches);
+
+  const addRecentSearch = useCallback((query: string) => {
+    const normalized = query.trim();
+    if (normalized.length < 2) return;
+    setRecentSearches((prev) => {
+      const next = [normalized, ...prev.filter((r) => r.toLowerCase() !== normalized.toLowerCase())].slice(0, MAX_RECENT);
+      localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
 
   /* ---- auto-detect input type ---- */
   useEffect(() => {
@@ -134,22 +149,6 @@ export default function SearchPage() {
     setInputValue(example);
     inputRef.current?.focus();
   }, []);
-
-  const recentSearches = getRecentSearches();
-
-  /* ---- derived loading state ---- */
-  const isLoading = activeQueryType !== 'empty' && activeQuery.length >= 2;
-
-  /* ---- type badge colour ---- */
-  const typeBadgeColor: Record<InputType, string> = {
-    regnr: 'bg-amber-50 text-amber-700 border-amber-200',
-    eurocode: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    sku: 'bg-blue-50 text-blue-700 border-blue-200',
-    oe: 'bg-purple-50 text-purple-700 border-purple-200',
-    vin: 'bg-cyan-50 text-cyan-700 border-cyan-200',
-    text: 'bg-gray-50 text-gray-600 border-gray-200',
-    empty: '',
-  };
 
   return (
     <>
@@ -221,7 +220,7 @@ export default function SearchPage() {
               className="h-14 px-5 sm:px-6 gap-2 flex-shrink-0 rounded-xl"
               disabled={inputValue.trim().length < 2}
             >
-              {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <SearchLensIcon className="h-5 w-5" />}
+              <SearchLensIcon className="h-5 w-5" />
               <span className="hidden sm:inline">Søk</span>
             </Button>
           </form>
@@ -299,26 +298,6 @@ export default function SearchPage() {
           </button>
         </div>
 
-        {/* Loading Skeleton (initial) */}
-        {activeQueryType !== 'empty' && !activeQuery && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                <Skeleton className="h-32 w-full" />
-                <div className="p-4 space-y-3">
-                  <Skeleton className="h-4 w-20" />
-                  <Skeleton className="h-5 w-full" />
-                  <Skeleton className="h-4 w-3/4" />
-                  <div className="flex justify-between items-center pt-2">
-                    <Skeleton className="h-6 w-24" />
-                    <Skeleton className="h-10 w-28" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
         {/* ═══════════════════════════════════════════════════════════
             LAZY-LOADED RESULT COMPONENTS
             ═══════════════════════════════════════════════════════════ */}
@@ -326,6 +305,12 @@ export default function SearchPage() {
         {activeQueryType === 'regnr' && activeQuery && (
           <Suspense fallback={<ResultSkeleton />}>
             <RegnrResults activeQuery={activeQuery} onClear={handleClear} onDetail={setDetailProduct} />
+          </Suspense>
+        )}
+
+        {activeQueryType === 'vin' && activeQuery && (
+          <Suspense fallback={<ResultSkeleton />}>
+            <VinResults activeQuery={activeQuery} onClear={handleClear} onDetail={setDetailProduct} />
           </Suspense>
         )}
 
@@ -350,7 +335,7 @@ export default function SearchPage() {
           <div className="rounded-xl border border-gray-200 bg-gray-50 p-8 text-center">
             <SearchLensIcon className="mx-auto h-10 w-10 text-gray-300 mb-3" />
             <p className="text-gray-500">Skriv inn et søkeord for å finne bilglass</p>
-            <p className="text-xs text-gray-400 mt-1">Regnr, Eurocode, OE-nummer, eller beskrivelse</p>
+            <p className="text-xs text-gray-400 mt-1">Regnr, VIN, Eurocode, OE-nummer, eller beskrivelse</p>
           </div>
         )}
 
