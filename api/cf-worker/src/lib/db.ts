@@ -57,6 +57,23 @@ async function _queryByEurocode(db: D1Database, eurocode: string): Promise<Glass
 }
 export const queryByEurocode = memoizeAsync(_queryByEurocode, 1000, 60_000);
 
+async function _queryByEurocodes(db: D1Database, eurocodes: string[]): Promise<GlassRecord[]> {
+  if (!eurocodes.length) return [];
+  const unique = [...new Set(eurocodes)];
+  const placeholders = unique.map(() => "?").join(",");
+  try {
+    const { results } = await db
+      .prepare(`SELECT * FROM glass_catalog WHERE eurocode IN (${placeholders}) LIMIT 50`)
+      .bind(...unique)
+      .all();
+    return (results || []) as unknown as GlassRecord[];
+  } catch (e) {
+    console.error(`queryByEurocodes failed: ${e instanceof Error ? e.message : String(e)}`);
+    return [];
+  }
+}
+export const queryByEurocodes = memoizeAsync(_queryByEurocodes, 500, 60_000);
+
 export async function queryBySupplierSku(db: D1Database, sku: string): Promise<GlassRecord | null> {
   try {
     const result = await db

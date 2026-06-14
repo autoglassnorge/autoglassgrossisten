@@ -3,7 +3,7 @@
  */
 
 import type { GlassRecord, GroundTruthRecord } from "../types";
-import { queryByEurocode } from "./db";
+import { queryByEurocodes } from "./db";
 
 export const GT_FIELD_TO_TYPE: Record<
   string,
@@ -25,19 +25,26 @@ export async function groundTruthToCandidates(
   db: D1Database,
   gt: GroundTruthRecord
 ): Promise<GlassRecord[]> {
-  const candidates: GlassRecord[] = [];
+  const entries: { eurocode: string; meta: { code: string; desc: string; position: "driver" | "passenger" | null } }[] = [];
   for (const [field, meta] of Object.entries(GT_FIELD_TO_TYPE)) {
     const eurocode = (gt as unknown as Record<string, unknown>)[field] as string | null;
-    if (!eurocode) continue;
-    const rec = await queryByEurocode(db, eurocode);
-    if (rec) {
-      candidates.push({
-        ...rec,
-        typeCode: meta.code,
-        typeCodeDesc: meta.desc,
-        position: meta.position,
-      });
-    }
+    if (eurocode) entries.push({ eurocode, meta });
+  }
+  if (!entries.length) return [];
+
+  const records = await queryByEurocodes(db, entries.map((e) => e.eurocode));
+  const byEurocode = new Map(records.map((r) => [r.eurocode, r]));
+
+  const candidates: GlassRecord[] = [];
+  for (const { eurocode, meta } of entries) {
+    const rec = byEurocode.get(eurocode);
+    if (!rec) continue;
+    candidates.push({
+      ...rec,
+      typeCode: meta.code,
+      typeCodeDesc: meta.desc,
+      position: meta.position,
+    });
   }
   return candidates;
 }

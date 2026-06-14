@@ -83,12 +83,12 @@ export class TimedLruCache<K, V> {
   }
 }
 
-export function memoizeSync<F extends (...args: unknown[]) => unknown>(
+export function memoizeSync<F extends (...args: any[]) => any>(
   fn: F,
   maxSize = 1000
 ): F {
   const cache = new LruCache<string, ReturnType<F>>(maxSize);
-  return ((...args: unknown[]) => {
+  return ((...args: any[]) => {
     const key = JSON.stringify(args);
     if (cache.has(key)) return cache.get(key) as ReturnType<F>;
     const value = fn(...args) as ReturnType<F>;
