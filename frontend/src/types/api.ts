@@ -98,6 +98,7 @@ export interface VehicleInfo {
   registrationStatus?: string; // "Registrert" / "Avregistrert"
   vehicleClass?: string;       // "Personbil", "Varebil", etc.
   seatCount?: number;          // Antall seter
+  bodyClass?: string;          // vPIC bodyClass (e.g. "Sedan")
 }
 
 export interface EquipmentFlags {
@@ -153,6 +154,40 @@ export interface KtypeLookupResponse {
     yearFrom?: number;
     yearTo?: number;
   };
+  error?: string;
+}
+
+export type VinResolutionStatus = 'resolved' | 'pending' | 'needs_review' | 'failed';
+
+export interface VinMatch {
+  ktype?: number;
+  eurocode?: string;
+  kba?: string;
+  nags?: string;
+  oemPartNumber?: string;
+  confidence: number;
+  source: string;
+}
+
+export interface VinLookupVehicle {
+  make: string;
+  model: string;
+  year: number;
+  vin: string;
+  kType?: number;
+  bodyClass?: string;
+}
+
+export interface VinLookupResult {
+  status: VinResolutionStatus;
+  requestId?: number;
+  vehicle?: VinLookupVehicle;
+  match?: VinMatch;
+  reasons?: string[];
+  message?: string;
+  resolutionPath?: string[];
+  paidLookupUsed?: boolean;
+  providerCost?: number;
   error?: string;
 }
 
