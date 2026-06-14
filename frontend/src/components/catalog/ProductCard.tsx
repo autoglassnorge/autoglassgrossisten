@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { ShoppingCart, Check, AlertTriangle, Paperclip, Target } from 'lucide-react';
 import { GlassVisualizer } from './GlassVisualizer';
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
@@ -51,25 +52,41 @@ interface SearchContext {
 interface ProductCardProps {
   product: Product;
   onDetail?: (product: Product) => void;
+  /** @deprecated use searchRegnr/searchKtype/searchLayer instead */
   searchContext?: SearchContext;
+  searchRegnr?: string;
+  searchKtype?: number;
+  searchLayer?: number;
 }
 
 function useInCart(id: number) {
   return useCartStore((s) => s.items.some((i) => i.product.id === id));
 }
 
-export function ProductCard({ product, onDetail, searchContext }: ProductCardProps) {
+function ProductCardInner({
+  product,
+  onDetail,
+  searchContext,
+  searchRegnr,
+  searchKtype,
+  searchLayer,
+}: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
   const inCart = useInCart(product.id);
   const [imgError, setImgError] = useState(false);
 
+  const feedbackRegnr = searchContext?.regnr ?? searchRegnr;
+  const feedbackKtype = searchContext?.kType ?? searchKtype;
+  const feedbackLayer = searchContext?.layer ?? searchLayer;
+  const hasSearchContext = !!(feedbackRegnr || searchContext);
+
   const handleDetail = () => {
-    if (searchContext) {
+    if (hasSearchContext) {
       logFeedback({
-        regnr: searchContext.regnr,
+        regnr: feedbackRegnr ?? '',
         eurocode: product.eurocode || product.articleNumber,
-        ktype: searchContext.kType,
-        layer: searchContext.layer,
+        ktype: feedbackKtype,
+        layer: feedbackLayer,
         score: product._score,
         action: 'view',
       }).catch(() => {}); // fire-and-forget
@@ -79,12 +96,12 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (searchContext) {
+    if (hasSearchContext) {
       logFeedback({
-        regnr: searchContext.regnr,
+        regnr: feedbackRegnr ?? '',
         eurocode: product.eurocode || product.articleNumber,
-        ktype: searchContext.kType,
-        layer: searchContext.layer,
+        ktype: feedbackKtype,
+        layer: feedbackLayer,
         score: product._score,
         action: 'cart',
       }).catch(() => {}); // fire-and-forget
@@ -235,3 +252,5 @@ export function ProductCard({ product, onDetail, searchContext }: ProductCardPro
     </Card>
   );
 }
+
+export const ProductCard = memo(ProductCardInner);

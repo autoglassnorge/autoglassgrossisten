@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { cn } from '@/lib/utils';
 import type { Product } from '@/types/api';
 import { typeCodeShort, typeCodeIcon } from '@/utils/formatters';
@@ -9,7 +9,7 @@ interface TypeCodeTabsProps {
   onSelect: (type: string | null) => void;
 }
 
-export function TypeCodeTabs({ products, activeType, onSelect }: TypeCodeTabsProps) {
+function TypeCodeTabsInner({ products, activeType, onSelect }: TypeCodeTabsProps) {
   const counts = useMemo(() => {
     const map = new Map<string, number>();
     products.forEach((p) => {
@@ -79,3 +79,5 @@ export function TypeCodeTabs({ products, activeType, onSelect }: TypeCodeTabsPro
     </div>
   );
 }
+
+export const TypeCodeTabs = memo(TypeCodeTabsInner);

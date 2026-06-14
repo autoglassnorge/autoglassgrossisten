@@ -92,7 +92,10 @@ export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsPro
     });
   }, [candidates]);
 
-  const baseProducts = equipmentFiltered ?? sortedCandidates;
+  const baseProducts = useMemo(
+    () => equipmentFiltered ?? sortedCandidates,
+    [equipmentFiltered, sortedCandidates]
+  );
 
   const selectionFilteredProducts = useMemo(() => {
     return baseProducts.filter((p) =>
@@ -337,7 +340,9 @@ export function RegnrResults({ activeQuery, onClear, onDetail }: RegnrResultsPro
                 key={product.id}
                 product={product}
                 onDetail={onDetail}
-                searchContext={result?.regnr ? { regnr: result.regnr, kType: vehicle?.k_type, layer: result?.layer, score: product._score } : undefined}
+                searchRegnr={result?.regnr}
+                searchKtype={vehicle?.k_type}
+                searchLayer={result?.layer}
               />
             ))}
           </div>

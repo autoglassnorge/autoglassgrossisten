@@ -3,6 +3,7 @@
  * Shows resolved vehicle info + quick "change vehicle" action.
  */
 
+import { memo } from 'react';
 import { Car, X } from 'lucide-react';
 import type { VehicleInfo } from '@/types/api';
 
@@ -12,7 +13,7 @@ interface StickyVehicleHeaderProps {
   onChange: () => void;
 }
 
-export function StickyVehicleHeader({ vehicle, regnr, onChange }: StickyVehicleHeaderProps) {
+function StickyVehicleHeaderInner({ vehicle, regnr, onChange }: StickyVehicleHeaderProps) {
   const display = [
     vehicle.make,
     vehicle.model,
@@ -23,7 +24,7 @@ export function StickyVehicleHeader({ vehicle, regnr, onChange }: StickyVehicleH
     .join(' ');
 
   return (
-    <div className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm -mx-3 px-3 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 py-2.5">
+    <div className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-200 shadow-sm -mx-3 px-3 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 py-2.5 transform-gpu will-change-transform">
       <div className="flex items-center justify-between gap-3 max-w-5xl mx-auto">
         <div className="flex items-center gap-2.5 min-w-0">
           <div className="flex-shrink-0 w-8 h-8 rounded-full bg-autoglass-blue/10 flex items-center justify-center">
@@ -53,3 +54,5 @@ export function StickyVehicleHeader({ vehicle, regnr, onChange }: StickyVehicleH
     </div>
   );
 }
+
+export const StickyVehicleHeader = memo(StickyVehicleHeaderInner);

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { CarFront, DoorOpen, PanelBottom, Square, Rows3, UserRound, UsersRound, RotateCcw } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { Product } from '@/types/api';
@@ -37,7 +38,7 @@ const doorPlacementOptions: Array<{ key: DoorPlacement; label: string }> = [
   { key: 'rear', label: 'Bak' },
 ];
 
-export function GlassNeedSelector({
+function GlassNeedSelectorInner({
   products,
   activeCategory,
   activePosition,
@@ -162,3 +163,5 @@ export function GlassNeedSelector({
     </section>
   );
 }
+
+export const GlassNeedSelector = memo(GlassNeedSelectorInner);
