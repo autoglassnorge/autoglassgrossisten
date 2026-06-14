@@ -1,4 +1,4 @@
-import { Suspense, lazy, type ElementType } from 'react';
+import { Suspense, lazy, memo, type ElementType } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { Car, MessageCircle, Search, Store, Wrench, AlertCircle } from 'lucide-react';
@@ -93,14 +93,15 @@ function VinChoiceLink({
   );
 }
 
-export function VinResults({ activeQuery, onClear, onDetail }: VinResultsProps) {
+function VinResultsInner({ activeQuery, onClear, onDetail }: VinResultsProps) {
   const { t } = useI18n();
 
   const query = useQuery({
     queryKey: ['search', 'vin', activeQuery],
-    queryFn: () => searchByVin(activeQuery),
+    queryFn: ({ signal }) => searchByVin(activeQuery, signal),
     enabled: activeQuery.length === 17,
     retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   if (query.isLoading) {
@@ -223,3 +224,5 @@ function VinChoices({
     </div>
   );
 }
+
+export const VinResults = memo(VinResultsInner);

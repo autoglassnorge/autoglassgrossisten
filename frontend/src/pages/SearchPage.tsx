@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { Loader2, Car, X } from 'lucide-react';
 import { useChatStore } from '@/stores/chatStore';
 
-import { Skeleton } from '@/components/ui/Skeleton';
 import { PageMeta } from '@/components/seo/PageMeta';
 import { Button } from '@/components/ui/Button';
 import type { Product } from '@/types/api';
@@ -47,13 +46,15 @@ function getRecentSearches(): string[] {
   }
 }
 
-function addRecentSearch(query: string) {
-  const normalized = query.trim();
-  if (normalized.length < 2) return;
-  const existing = getRecentSearches().filter((r) => r.toLowerCase() !== normalized.toLowerCase());
-  const next = [normalized, ...existing].slice(0, MAX_RECENT);
-  localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(next));
-}
+const typeBadgeColor: Record<InputType, string> = {
+  regnr: 'bg-amber-50 text-amber-700 border-amber-200',
+  eurocode: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  sku: 'bg-blue-50 text-blue-700 border-blue-200',
+  oe: 'bg-purple-50 text-purple-700 border-purple-200',
+  vin: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+  text: 'bg-gray-50 text-gray-600 border-gray-200',
+  empty: '',
+};
 
 /* ========================================================================
    SearchShell — Lightweight shell. Result components are lazy-loaded.
@@ -73,6 +74,17 @@ export default function SearchPage() {
   const [showWizard, setShowWizard] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
+  const [recentSearches, setRecentSearches] = useState<string[]>(getRecentSearches);
+
+  const addRecentSearch = useCallback((query: string) => {
+    const normalized = query.trim();
+    if (normalized.length < 2) return;
+    setRecentSearches((prev) => {
+      const next = [normalized, ...prev.filter((r) => r.toLowerCase() !== normalized.toLowerCase())].slice(0, MAX_RECENT);
+      localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
 
   /* ---- auto-detect input type ---- */
   useEffect(() => {
@@ -137,22 +149,6 @@ export default function SearchPage() {
     setInputValue(example);
     inputRef.current?.focus();
   }, []);
-
-  const recentSearches = getRecentSearches();
-
-  /* ---- derived loading state ---- */
-  const isLoading = activeQueryType !== 'empty' && activeQuery.length >= 2;
-
-  /* ---- type badge colour ---- */
-  const typeBadgeColor: Record<InputType, string> = {
-    regnr: 'bg-amber-50 text-amber-700 border-amber-200',
-    eurocode: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    sku: 'bg-blue-50 text-blue-700 border-blue-200',
-    oe: 'bg-purple-50 text-purple-700 border-purple-200',
-    vin: 'bg-cyan-50 text-cyan-700 border-cyan-200',
-    text: 'bg-gray-50 text-gray-600 border-gray-200',
-    empty: '',
-  };
 
   return (
     <>
@@ -224,7 +220,7 @@ export default function SearchPage() {
               className="h-14 px-5 sm:px-6 gap-2 flex-shrink-0 rounded-xl"
               disabled={inputValue.trim().length < 2}
             >
-              {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <SearchLensIcon className="h-5 w-5" />}
+              <SearchLensIcon className="h-5 w-5" />
               <span className="hidden sm:inline">Søk</span>
             </Button>
           </form>
@@ -301,26 +297,6 @@ export default function SearchPage() {
             <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900">Professor</span>
           </button>
         </div>
-
-        {/* Loading Skeleton (initial) */}
-        {activeQueryType !== 'empty' && !activeQuery && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                <Skeleton className="h-32 w-full" />
-                <div className="p-4 space-y-3">
-                  <Skeleton className="h-4 w-20" />
-                  <Skeleton className="h-5 w-full" />
-                  <Skeleton className="h-4 w-3/4" />
-                  <div className="flex justify-between items-center pt-2">
-                    <Skeleton className="h-6 w-24" />
-                    <Skeleton className="h-10 w-28" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
 
         {/* ═══════════════════════════════════════════════════════════
             LAZY-LOADED RESULT COMPONENTS

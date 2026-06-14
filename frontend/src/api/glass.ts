@@ -29,21 +29,22 @@ function appendEquipmentAnswers(params: URLSearchParams, answers?: UserEquipment
 export async function searchByRegnr(
   regnr: string,
   equipmentAnswers?: UserEquipmentAnswers,
-  position?: 'driver' | 'passenger' | 'center' | 'both'
+  position?: 'driver' | 'passenger' | 'center' | 'both',
+  signal?: AbortSignal
 ): Promise<SearchResult> {
   const params = new URLSearchParams({ regnr });
   appendEquipmentAnswers(params, equipmentAnswers);
   if (position) {
     params.set('position', position);
   }
-  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`);
+  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     
     // Hvis SVV er nede, prøv scraping fra vegvesen.no
-    if (body.code === 'svv_upstream_error') {
+    if (body.code === 'svv_upstream_error' && !signal?.aborted) {
       console.log('SVV nede, prøver scraping...');
-      const scrapeResult = await scrapeVegvesen(regnr);
+      const scrapeResult = await scrapeVegvesen(regnr, signal);
       if (scrapeResult.status === 'ok' && scrapeResult.data) {
         return scrapeResult.data;
       }
@@ -115,9 +116,9 @@ export function normalizeVinResponse(data: Record<string, unknown>): VinLookupRe
   };
 }
 
-export async function searchByVin(vin: string): Promise<VinLookupResult> {
+export async function searchByVin(vin: string, signal?: AbortSignal): Promise<VinLookupResult> {
   const params = new URLSearchParams({ vin });
-  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`);
+  const res = await fetch(`${API_BASE}/api/glass?${params.toString()}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new SearchError(
@@ -130,8 +131,8 @@ export async function searchByVin(vin: string): Promise<VinLookupResult> {
   return normalizeVinResponse(data);
 }
 
-export async function searchByEurocode(eurocode: string): Promise<IdentifierSearchResponse> {
-  const res = await fetch(`${API_BASE}/api/glass?eurocode=${encodeURIComponent(eurocode)}`);
+export async function searchByEurocode(eurocode: string, signal?: AbortSignal): Promise<IdentifierSearchResponse> {
+  const res = await fetch(`${API_BASE}/api/glass?eurocode=${encodeURIComponent(eurocode)}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new SearchError(body.error ?? `Eurocode-søk feilet (${res.status})`, res.status);
@@ -139,8 +140,8 @@ export async function searchByEurocode(eurocode: string): Promise<IdentifierSear
   return res.json();
 }
 
-export async function searchBySku(sku: string): Promise<IdentifierSearchResponse> {
-  const res = await fetch(`${API_BASE}/api/glass?supplier_sku=${encodeURIComponent(sku)}`);
+export async function searchBySku(sku: string, signal?: AbortSignal): Promise<IdentifierSearchResponse> {
+  const res = await fetch(`${API_BASE}/api/glass?supplier_sku=${encodeURIComponent(sku)}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new SearchError(body.error ?? `SKU-søk feilet (${res.status})`, res.status);
@@ -148,8 +149,8 @@ export async function searchBySku(sku: string): Promise<IdentifierSearchResponse
   return res.json();
 }
 
-export async function searchByOem(oem: string): Promise<IdentifierSearchResponse> {
-  const res = await fetch(`${API_BASE}/api/glass?oem=${encodeURIComponent(oem)}`);
+export async function searchByOem(oem: string, signal?: AbortSignal): Promise<IdentifierSearchResponse> {
+  const res = await fetch(`${API_BASE}/api/glass?oem=${encodeURIComponent(oem)}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new SearchError(body.error ?? `OE-søk feilet (${res.status})`, res.status);
@@ -157,8 +158,8 @@ export async function searchByOem(oem: string): Promise<IdentifierSearchResponse
   return res.json();
 }
 
-export async function searchCatalogText(query: string): Promise<CatalogResponse> {
-  const res = await fetch(`${API_BASE}/api/catalog/search?q=${encodeURIComponent(query)}`);
+export async function searchCatalogText(query: string, signal?: AbortSignal): Promise<CatalogResponse> {
+  const res = await fetch(`${API_BASE}/api/catalog/search?q=${encodeURIComponent(query)}`, { signal });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.error ?? `Katalogsøk feilet (${res.status})`);
@@ -166,9 +167,9 @@ export async function searchCatalogText(query: string): Promise<CatalogResponse>
   return res.json();
 }
 
-export async function scrapeVegvesen(regnr: string): Promise<{status: string, data?: SearchResult}> {
+export async function scrapeVegvesen(regnr: string, signal?: AbortSignal): Promise<{status: string, data?: SearchResult}> {
   try {
-    const res = await fetch(`${API_BASE}/api/scrape-vegvesen?regnr=${encodeURIComponent(regnr)}`);
+    const res = await fetch(`${API_BASE}/api/scrape-vegvesen?regnr=${encodeURIComponent(regnr)}`, { signal });
     if (!res.ok) {
       return { status: 'error' };
     }
@@ -217,7 +218,8 @@ export async function guideGlass(
   answers: Record<string, string>,
   categoryFilter?: string,
   mode?: "rule" | "llm",
-  vin?: string
+  vin?: string,
+  signal?: AbortSignal
 ): Promise<GuideState> {
   const body: Record<string, unknown> = { step, answers, categoryFilter, mode };
   if (vin) body.vin = vin;
@@ -227,6 +229,7 @@ export async function guideGlass(
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
+    signal,
   });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
@@ -238,17 +241,21 @@ export async function guideGlass(
   return res.json();
 }
 
-export async function logFeedback(params: {
-  regnr: string;
-  eurocode: string;
-  ktype?: number;
-  layer?: number;
-  score?: number;
-  action: "view" | "cart" | "order";
-}): Promise<void> {
+export async function logFeedback(
+  params: {
+    regnr: string;
+    eurocode: string;
+    ktype?: number;
+    layer?: number;
+    score?: number;
+    action: "view" | "cart" | "order";
+  },
+  signal?: AbortSignal
+): Promise<void> {
   await fetch(`${API_BASE}/api/feedback`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(params),
+    signal,
   });
 }

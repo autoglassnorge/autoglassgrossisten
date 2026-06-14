@@ -1,6 +1,7 @@
 import { GlassWater, Phone, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { COMPANY } from '@/config/company.config';
+import { LazyMapEmbed } from '@/components/layout/LazyMapEmbed';
 
 export function Footer() {
   return (
@@ -70,14 +71,8 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-4">Besøksadresse</h4>
             <div className="rounded-lg border border-carbon-800 bg-carbon-900 overflow-hidden aspect-video">
-              <iframe
+              <LazyMapEmbed
                 src={COMPANY.MAP_EMBED_URL}
-                width="100%"
-                height="100%"
-                style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%)' }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
                 title="Autoglass AS lokasjon"
               />
             </div>

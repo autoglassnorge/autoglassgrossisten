@@ -3,6 +3,7 @@
  * Lazy-loaded by SearchShell.
  */
 
+import { memo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AlertTriangle } from 'lucide-react';
 import { searchByEurocode, searchBySku, searchByOem } from '@/api/glass';
@@ -16,16 +17,17 @@ interface IdentifierResultsProps {
   onDetail: (product: Product) => void;
 }
 
-export function IdentifierResults({ activeQuery, queryType, onDetail }: IdentifierResultsProps) {
+function IdentifierResultsInner({ activeQuery, queryType, onDetail }: IdentifierResultsProps) {
   const query = useQuery({
     queryKey: ['search', queryType, activeQuery],
-    queryFn: () => {
-      if (queryType === 'eurocode') return searchByEurocode(activeQuery);
-      if (queryType === 'sku') return searchBySku(activeQuery);
-      return searchByOem(activeQuery);
+    queryFn: ({ signal }) => {
+      if (queryType === 'eurocode') return searchByEurocode(activeQuery, signal);
+      if (queryType === 'sku') return searchBySku(activeQuery, signal);
+      return searchByOem(activeQuery, signal);
     },
     enabled: activeQuery.length >= 4,
     retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   const data = query.data;
@@ -80,3 +82,5 @@ export function IdentifierResults({ activeQuery, queryType, onDetail }: Identifi
     </div>
   );
 }
+
+export const IdentifierResults = memo(IdentifierResultsInner);

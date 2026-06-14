@@ -69,7 +69,7 @@ describe('searchByVin', () => {
 
     const result = await searchByVin('YV1MS7659M2436185');
 
-    expect(global.fetch).toHaveBeenCalledWith(`${API_BASE}/api/glass?vin=YV1MS7659M2436185`);
+    expect(global.fetch).toHaveBeenCalledWith(`${API_BASE}/api/glass?vin=YV1MS7659M2436185`, expect.any(Object));
     expect(result.status).toBe('resolved');
     expect(result.match?.eurocode).toBe('M0080AGNCMV');
   });
