@@ -10,6 +10,7 @@ import { parseYearRangeFromDescription, parseGenerationFromDescription, expected
 import { decodeVwTransporterBody, decodeVin, scoreBodyCompatibility } from "./vin-decoder";
 import { detectCategoryFromDescription } from "./ground-truth";
 import { queryVehicleFingerprint } from "./db";
+import { memoizeSync } from "./memo";
 
 /**
  * Equipment signatures learned from catalog statistics.
@@ -137,7 +138,7 @@ export function guessEquipment(
   };
 }
 
-export function scoreCandidate(
+function _scoreCandidate(
   c: GlassRecord,
   flags: ReturnType<typeof detectFlagsFromOem>,
   vehicle: TecdocVehicle,
@@ -302,8 +303,9 @@ export function scoreCandidate(
 
   return score;
 }
+export const scoreCandidate = memoizeSync(_scoreCandidate, 1000);
 
-export function modelMatches(vehicleModel: string, recordModel: string | null, vehicleMake?: string): boolean {
+function _modelMatches(vehicleModel: string, recordModel: string | null, vehicleMake?: string): boolean {
   if (!recordModel || recordModel.trim() === "") return false;
   const vm = vehicleModel.toLowerCase().trim();
   const rm = recordModel.toLowerCase().trim();
@@ -457,8 +459,9 @@ export function modelMatches(vehicleModel: string, recordModel: string | null, v
   if (rTokens.length === 1 && vTokens.includes(rTokens[0]) && rTokens[0].length >= 3) return true;
   return false;
 }
+export const modelMatches = memoizeSync(_modelMatches, 2000);
 
-export function yearCompatible(record: GlassRecord, vehicleYear: number, vehicleMake: string, vehicleModel: string): boolean {
+function _yearCompatible(record: GlassRecord, vehicleYear: number, vehicleMake: string, vehicleModel: string): boolean {
   const expectedGen = expectedGeneration(vehicleMake, vehicleModel, vehicleYear);
   const recordGen = parseGenerationFromDescription(record.description) || parseGenerationFromDescription(record.model);
   if (expectedGen && recordGen) {
@@ -497,3 +500,4 @@ export function yearCompatible(record: GlassRecord, vehicleYear: number, vehicle
 
   return true;
 }
+export const yearCompatible = memoizeSync(_yearCompatible, 2000);
