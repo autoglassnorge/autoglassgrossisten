@@ -1,0 +1,488 @@
+[
+  {
+    "regnr": "SU18018",
+    "make": "MERCEDES",
+    "model": "EQE (V295-X294)",
+    "year": 2022,
+    "vin": "TESTVINSU18018",
+    "expected": {
+      "frontrute": [
+        "5521AGAGYCHMU1Z"
+      ],
+      "bakrute": [
+        "5521BYPRJX"
+      ],
+      "sideglass": [
+        "5521LYPR5RVZ1M",
+        "5521RYPR5RVZ1M",
+        "5521LYPR5RQZ1D",
+        "5521RYPR5RQZ1D"
+      ],
+      "d\u00f8rglass": [
+        "5521LGAR5FDKW",
+        "5521RGAR5FDKW",
+        "5521LYPR5RDW",
+        "5521RYPR5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "EB21570",
+    "make": "MERCEDES",
+    "model": "CITAN (W415/420)",
+    "year": 2022,
+    "vin": "TESTVINEB21570",
+    "expected": {
+      "frontrute": [
+        "7312AGSIMVZ"
+      ],
+      "bakrute": [
+        "7312BYPV"
+      ],
+      "sideglass": [
+        "7312LYPV4RV",
+        "7312RYPV4RV",
+        "7312LYPV4RQZ",
+        "7312RYPV4RQZ"
+      ],
+      "d\u00f8rglass": [
+        "7312LGSV4FD",
+        "7312RGSV4FD",
+        "7312LYPV4RD",
+        "7312RYPV4RD"
+      ]
+    }
+  },
+  {
+    "regnr": "BT12345",
+    "make": "MERCEDES",
+    "model": "SERIE W206 (C-KLASS)",
+    "year": 2021,
+    "vin": "TESTVINBT12345",
+    "expected": {
+      "frontrute": [
+        "5509AGRCMVZ"
+      ],
+      "bakrute": [
+        "5509BYPSA1F"
+      ],
+      "sideglass": [
+        "5509LYPS4RVWZ1M",
+        "5509RYPS4RVWZ1M",
+        "5509LYPE5RQXZ1D",
+        "5509RYPE5RQXZ1D"
+      ],
+      "d\u00f8rglass": [
+        "5509LGSS4FD",
+        "5509RGSS4FD",
+        "5509LYPS4RD",
+        "5509RYPS4RD"
+      ]
+    }
+  },
+  {
+    "regnr": "CF54321",
+    "make": "SKODA",
+    "model": "ENYAQ",
+    "year": 2021,
+    "vin": "TESTVINCF54321",
+    "expected": {
+      "frontrute": [
+        "7825AGACMVZ"
+      ],
+      "bakrute": [
+        "7825BYPRAIX"
+      ],
+      "sideglass": [
+        "7825LYPR5RVWZ",
+        "7825RYPR5RVWZ",
+        "7825LYPR5RQWZ",
+        "7825RYPR5RQWZ"
+      ],
+      "d\u00f8rglass": [
+        "7829RGAR5FDKW",
+        "7825RGSR5FD",
+        "7825LYPR5RD",
+        "7825RYPR5RD"
+      ]
+    }
+  },
+  {
+    "regnr": "DH98765",
+    "make": "VW",
+    "model": "ID.4 (EL)",
+    "year": 2021,
+    "vin": "TESTVINDH98765",
+    "expected": {
+      "frontrute": [
+        "8658AGACMVZ"
+      ],
+      "bakrute": [
+        "8658BYPRAIX"
+      ],
+      "sideglass": [
+        "8658LGSR5FVWZ",
+        "8658RYPR5RVWZ",
+        "8658LYPR5RQZ",
+        "8658RYPR5RQZ"
+      ],
+      "d\u00f8rglass": [
+        "8658LGSR5FD",
+        "8658RGSR5FD",
+        "8658LYPR5RDW",
+        "8658RYPR5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "EK11111",
+    "make": "AUDI",
+    "model": "Q4",
+    "year": 2021,
+    "vin": "TESTVINEK11111",
+    "expected": {
+      "frontrute": [
+        "8661AGACMVZ"
+      ],
+      "bakrute": [
+        "8661BYPRX2J"
+      ],
+      "sideglass": [
+        "8660LGSR5FVWZ",
+        "8660RGSR5FVWZ",
+        "8661LYPR5RQZ6J",
+        "8661RYPR5RQZ6J"
+      ],
+      "d\u00f8rglass": [
+        "8660LGSR5FD",
+        "8660RGSR5FD",
+        "8661LYPR5RDW1J",
+        "8661RYPR5RDW1J"
+      ]
+    }
+  },
+  {
+    "regnr": "FL22222",
+    "make": "HONDA",
+    "model": "JAZZ",
+    "year": 2020,
+    "vin": "TESTVINFL22222",
+    "expected": {
+      "frontrute": [
+        "4023AGACMV"
+      ],
+      "bakrute": [
+        "4023BYPH"
+      ],
+      "sideglass": [
+        "4023LGSH5FQZ",
+        "4023RGSH5FQZ",
+        "4023LYPH5RQZ",
+        "4023RYPH5RQZ"
+      ],
+      "d\u00f8rglass": [
+        "4023LGSH5FDW",
+        "4023RGSH5FDW",
+        "4023LYPH5RDW",
+        "4023RYPH5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "GM33333",
+    "make": "KIA",
+    "model": "SORENTO",
+    "year": 2020,
+    "vin": "TESTVINGM33333",
+    "expected": {
+      "frontrute": [
+        "4462AGRCMOUV"
+      ],
+      "bakrute": [
+        "4462BYPR"
+      ],
+      "sideglass": [
+        "4462LGNR5FV",
+        "4462RGNR5FV",
+        "4462LYPR5RQZ",
+        "4462RYPR5RQZ"
+      ],
+      "d\u00f8rglass": [
+        "4462LGRR5FDKW1M",
+        "4462RGRR5FDKW1M",
+        "4462LYPR5RDW",
+        "4462RYPR5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "HN44444",
+    "make": "MERCEDES",
+    "model": "SERIE X167(GLS)",
+    "year": 2020,
+    "vin": "TESTVINHN44444",
+    "expected": {
+      "frontrute": [
+        "5503AGACHMVZ1L"
+      ],
+      "bakrute": [
+        "5503BYPRAX1J"
+      ],
+      "sideglass": [
+        "5503LYQR5RVKWZ",
+        "5503RYQR5RVKWZ",
+        "5503LYPR5RQXZ",
+        "5503RYPR5RQXZ"
+      ],
+      "d\u00f8rglass": [
+        "5503LGRR5FDKW",
+        "5503RGRR5FDKW",
+        "5503LYQR5RDKW1J",
+        "5503RYQR5RDKW1J"
+      ]
+    }
+  },
+  {
+    "regnr": "JP55555",
+    "make": "MERCEDES",
+    "model": "SERIE GLB X247",
+    "year": 2020,
+    "vin": "TESTVINJP55555",
+    "expected": {
+      "frontrute": [
+        "5505AGAACJMVZ1L"
+      ],
+      "bakrute": [
+        "5505BYPRAX"
+      ],
+      "sideglass": [
+        "5505LYPR5RVWZ1M",
+        "5505RYPR5RVWZ1M",
+        "5505LYPR5RQXZ2D",
+        "5505RYPR5RQXZ2D"
+      ],
+      "d\u00f8rglass": [
+        "5505LGSR5FD",
+        "5505RGSR5FD",
+        "5505LYPR5RD",
+        "5505RYPR5RD"
+      ]
+    }
+  },
+  {
+    "regnr": "KR66666",
+    "make": "RENAULT",
+    "model": "CAPTUR",
+    "year": 2020,
+    "vin": "TESTVINKR66666",
+    "expected": {
+      "frontrute": [
+        "7311AGACMVZ"
+      ],
+      "bakrute": [
+        "7311BYPRA"
+      ],
+      "sideglass": [
+        "7311LGSR5FVWZ",
+        "7311RGSR5FVWZ",
+        "7311LYPR5RQZ",
+        "7311RYPR5RQZ"
+      ],
+      "d\u00f8rglass": [
+        "7311LYPR5RD",
+        "7311RYPR5RD",
+        "7311LGSR5RD",
+        "7311RGSR5RD"
+      ]
+    }
+  },
+  {
+    "regnr": "LS77777",
+    "make": "VW",
+    "model": "GOLF",
+    "year": 2020,
+    "vin": "TESTVINLS77777",
+    "expected": {
+      "frontrute": [
+        "8650AGAMVZ1D"
+      ],
+      "bakrute": [
+        "8650BYPHAI"
+      ],
+      "sideglass": [
+        "8650LGSH5FQZ1D",
+        "8650RGSH5FQZ1D",
+        "8650LYPE5RQZ",
+        "8650RYPE5RQZ"
+      ],
+      "d\u00f8rglass": [
+        "8650LGSH5FD",
+        "8650RGSH5FD",
+        "8650LYPH5RDW",
+        "8650RYPH5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "MT88888",
+    "make": "VW",
+    "model": "ID.3 (EL)",
+    "year": 2020,
+    "vin": "TESTVINMT88888",
+    "expected": {
+      "frontrute": [
+        "8652AGACMVZ"
+      ],
+      "bakrute": [
+        "8652BYPHAI"
+      ],
+      "sideglass": [
+        "8652LYPH5RVWZ",
+        "8652RYPH5RVWZ",
+        "8652LGSH5FQZ",
+        "8652RGSH5FQZ"
+      ],
+      "d\u00f8rglass": [
+        "8652LGSH5FD",
+        "8652RGSH5FD",
+        "8652LYPH5RDW",
+        "8652RYPH5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "NV99999",
+    "make": "BMW",
+    "model": "3 SERIE",
+    "year": 2019,
+    "vin": "TESTVINNV99999",
+    "expected": {
+      "frontrute": [
+        "2490AGAMVZ"
+      ],
+      "bakrute": [
+        "2490BYPSAZ"
+      ],
+      "sideglass": [
+        "2490LYPS4RVWZ",
+        "2490RYPS4RVWZ",
+        "2490LGSE5RQAZ",
+        "2490RYPE5RQAZ"
+      ],
+      "d\u00f8rglass": [
+        "2490LGSS4FD",
+        "2490RGSS4FD",
+        "2490LYPS4RD",
+        "2490RYPS4RD"
+      ]
+    }
+  },
+  {
+    "regnr": "PX00001",
+    "make": "BMW",
+    "model": "X5",
+    "year": 2019,
+    "vin": "TESTVINPX00001",
+    "expected": {
+      "frontrute": [
+        "2492ASGRT"
+      ],
+      "bakrute": [
+        "2492BYPRAZ"
+      ],
+      "sideglass": [
+        "2492LYQR5RVKZ1M",
+        "2492RYPR5RVZ1M",
+        "2492LYPR5RQAJZ",
+        "2492RYQR5RVKZ1M"
+      ],
+      "d\u00f8rglass": [
+        "2492LGRR5FDKW",
+        "2492RGRR5FDKW",
+        "2492LYQR5RDKW",
+        "2492RYQR5RDKW"
+      ]
+    }
+  },
+  {
+    "regnr": "QY00002",
+    "make": "MERCEDES",
+    "model": "SERIE W167 (GLE-KLASSE)",
+    "year": 2019,
+    "vin": "TESTVINQY00002",
+    "expected": {
+      "frontrute": [
+        "5508AGACHMVZ1L"
+      ],
+      "bakrute": [
+        "5508BYPRAX1E"
+      ],
+      "sideglass": [
+        "5508LYQR5RVKWZ",
+        "5508RYQR5RVKWZ",
+        "5503LYPR5RQXZ",
+        "5503RYPR5RQXZ"
+      ],
+      "d\u00f8rglass": [
+        "5508LGSR5FD",
+        "5508RGSR5FD",
+        "5508LYQR5RDKW",
+        "5508RYQR5RDKW"
+      ]
+    }
+  },
+  {
+    "regnr": "RZ00003",
+    "make": "MERCEDES",
+    "model": "EQC",
+    "year": 2019,
+    "vin": "TESTVINRZ00003",
+    "expected": {
+      "frontrute": [
+        "5504AGACMVZ2L"
+      ],
+      "bakrute": [
+        "5504BYPRAM"
+      ],
+      "sideglass": [
+        "5504LYPR5RVWZ",
+        "5504RYPR5RVWZ",
+        "5504LYPR5RQZ",
+        "5504RYPR5RQZ"
+      ],
+      "d\u00f8rglass": [
+        "5504LGSR5FD",
+        "5504RGSR5FD",
+        "5504LYPR5RD",
+        "5504RYPR5RD"
+      ]
+    }
+  },
+  {
+    "regnr": "ST00004",
+    "make": "SKODA",
+    "model": "KAMIQ",
+    "year": 2019,
+    "vin": "TESTVINST00004",
+    "expected": {
+      "frontrute": [
+        "7823AGACMVZ1L"
+      ],
+      "bakrute": [
+        "7823BGSRAI"
+      ],
+      "sideglass": [
+        "7823LGPR5RVWZ",
+        "7823RGPR5RVWZ",
+        "7823LGDR5RQZ1D",
+        "7823RGDR5RQZ1D"
+      ],
+      "d\u00f8rglass": [
+        "7823LGSR5FD",
+        "7823RGSR5FD",
+        "7823LGPR5RD",
+        "7823RGPR5RD"
+      ]
+    }
+  }
+]

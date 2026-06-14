@@ -7,7 +7,9 @@
     "deploy": "wrangler deploy",
     "tail": "wrangler tail",
     "types": "wrangler types",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:search-accuracy": "vitest run test/search-accuracy/harness.test.ts",
+    "test:search-accuracy:watch": "vitest test/search-accuracy/harness.test.ts"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.16.15",
