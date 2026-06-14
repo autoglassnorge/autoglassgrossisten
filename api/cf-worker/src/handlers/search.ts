@@ -305,7 +305,7 @@ export async function searchByRegnr(
       console.log(`[Layer 0.5] svv_tecdoc_matches hit for ${regnr}: ${svvTecdocMatch.confidence_level} (ktype=${svvTecdocMatch.ktype})`);
     }
 
-    // High-confidence shortcut: exact/high → direct kType lookup, skip ground_truth + layers
+    // High-confidence shortcut: exact/high → direct kType lookup
     let layer05Candidates: GlassRecord[] | null = null;
     let layer05Confidence = "none";
     if (svvTecdocMatch && svvTecdocMatch.ktype && svvTecdocMatch.ktype > 0 &&
@@ -316,27 +316,25 @@ export async function searchByRegnr(
         vehicle.k_type = svvTecdocMatch.ktype;
         layer05Candidates = compatibleKtypeDirect;
         layer05Confidence = svvTecdocMatch.confidence_level;
-        console.log(`[Layer 0.5] Using cached kType ${svvTecdocMatch.ktype} for ${regnr}, skipping ground_truth`);
+        console.log(`[Layer 0.5] Using cached kType ${svvTecdocMatch.ktype} for ${regnr}`);
       } else if (ktypeDirect.length > 0) {
         console.warn(`[Layer 0.5] Ignoring cached kType ${svvTecdocMatch.ktype} for ${regnr}: ${ktypeDirect.length} catalog rows failed vehicle compatibility`);
       }
     }
 
-    // 2. Check ground_truth database FIRST (layer -1) — skip if Layer 0.5 hit
+    // 2. Always fetch ground_truth — it is authoritative and must not be skipped
     let groundTruth: GroundTruthRecord | null = null;
     let gtCandidates: GlassRecord[] = [];
-    if (!layer05Candidates) {
-      try {
-        groundTruth = await queryGroundTruth(db, regnr);
-        if (!groundTruth) {
-          groundTruth = await queryGroundTruthByVehicle(db, vehicle.make, vehicle.model, vehicle.year);
-        }
-        if (groundTruth) {
-          gtCandidates = await groundTruthToCandidates(db, groundTruth);
-        }
-      } catch {
-        // Ground truth table might not exist yet
+    try {
+      groundTruth = await queryGroundTruth(db, regnr);
+      if (!groundTruth) {
+        groundTruth = await queryGroundTruthByVehicle(db, vehicle.make, vehicle.model, vehicle.year);
       }
+      if (groundTruth) {
+        gtCandidates = await groundTruthToCandidates(db, groundTruth);
+      }
+    } catch {
+      // Ground truth table might not exist yet
     }
 
     // 3. Hybrid kType resolution
@@ -507,18 +505,26 @@ export async function searchByRegnr(
     let layer = 4;
     let confidence: string = "none";
 
-    // === Layer 0.5: SVV→TecDoc cache (pre-empts ground_truth) ===
+    // === Layer 0.5: SVV→TecDoc cache ===
     if (layer05Candidates) {
-      candidates.push(...layer05Candidates);
-      layer05Candidates.forEach((c) => { if (c.eurocode) if (c.eurocode) candidateCodes.add(c.eurocode); });
+      for (const c of layer05Candidates) {
+        if (c.eurocode && !candidateCodes.has(c.eurocode)) {
+          candidates.push(c);
+          candidateCodes.add(c.eurocode);
+        }
+      }
       layer = 0;
       confidence = layer05Confidence;
     }
 
-    // === Layer -1: Ground truth ===
-    if (!layer05Candidates && gtCandidates.length > 0) {
-      candidates.push(...gtCandidates);
-      gtCandidates.forEach((c) => { if (c.eurocode) candidateCodes.add(c.eurocode); });
+    // === Layer -1: Ground truth (authoritative, always merged) ===
+    for (const c of gtCandidates) {
+      if (c.eurocode && !candidateCodes.has(c.eurocode)) {
+        candidates.push(c);
+        candidateCodes.add(c.eurocode);
+      }
+    }
+    if (gtCandidates.length > 0) {
       layer = -1;
       confidence = "exact";
     }

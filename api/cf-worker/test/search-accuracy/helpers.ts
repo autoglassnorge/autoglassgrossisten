@@ -160,3 +160,75 @@ export async function cacheSvvVehicleInKV(
     { expirationTtl: 86400 }
   );
 }
+
+async function sha256(text: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text.toUpperCase().trim());
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+export async function seedSvvTecdocMatch(
+  db: D1Database,
+  regnr: string,
+  opts: {
+    make: string;
+    model: string;
+    year: number;
+    ktype: number;
+    confidenceLevel: "exact" | "high";
+  }
+): Promise<void> {
+  // Ensure the table exists; in production this is created by migration 0019.
+  await db.prepare(`
+    CREATE TABLE IF NOT EXISTS svv_tecdoc_matches (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      regnr TEXT,
+      regnr_hash TEXT NOT NULL,
+      make TEXT NOT NULL,
+      model TEXT NOT NULL,
+      year INTEGER,
+      normalized_make TEXT NOT NULL,
+      normalized_model TEXT NOT NULL,
+      ktype INTEGER,
+      tecdoc_brand TEXT,
+      tecdoc_model TEXT,
+      tecdoc_year_from INTEGER,
+      tecdoc_year_to INTEGER,
+      confidence_score REAL,
+      confidence_level TEXT DEFAULT 'none',
+      match_reasons TEXT,
+      svv_status TEXT DEFAULT 'ok',
+      svv_source TEXT DEFAULT 'test',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      expires_at DATETIME
+    )
+  `).run();
+
+  const hash = await sha256(regnr);
+  await db.prepare(`
+    INSERT INTO svv_tecdoc_matches
+      (regnr, regnr_hash, make, model, year, normalized_make, normalized_model,
+       ktype, tecdoc_brand, tecdoc_model, confidence_score, confidence_level,
+       match_reasons, svv_status, svv_source, created_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+  `).bind(
+    regnr,
+    hash,
+    opts.make,
+    opts.model,
+    opts.year,
+    opts.make.toLowerCase(),
+    opts.model.toLowerCase(),
+    opts.ktype,
+    opts.make,
+    opts.model,
+    opts.confidenceLevel === "exact" ? 1.0 : 0.85,
+    opts.confidenceLevel,
+    JSON.stringify(["test"]),
+    "ok",
+    "test"
+  ).run();
+}
