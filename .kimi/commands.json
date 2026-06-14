@@ -44,6 +44,11 @@
       "alias": "glass-vin",
       "command": "kimi --agent-file .kimi/agents/autoglass-vin-agent.yaml",
       "description": "VIN-søk agent — logikk og UX for VIN-oppslag"
+    },
+    {
+      "alias": "glass-search-logic",
+      "command": "kimi --agent-file .kimi/agents/autoglass-search-logic-agent.yaml",
+      "description": "Search accuracy agent — harness, root-cause fixes, performance"
     }
   ]
 }
