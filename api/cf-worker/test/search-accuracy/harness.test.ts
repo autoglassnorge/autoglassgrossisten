@@ -36,6 +36,8 @@ type GoldenFixture = {
   year: number;
   vin?: string;
   expected: Record<string, string[]>;
+  hasCollision?: boolean;
+  collisionGroup?: string;
 };
 
 const goldenFixtures = golden as GoldenFixture[];
@@ -144,6 +146,7 @@ describe("search accuracy harness", () => {
           ktype: body?.vehicle?.kType,
           vin: c.vin,
           vinDecode: (body?.vehicle?.unifiedVin || body?.vehicle?.vinDecode) as { make?: string; generation?: string; body?: string } | undefined,
+          hasCollision: c.hasCollision,
         });
       }
     }
@@ -200,6 +203,7 @@ describe("search accuracy harness", () => {
           topKtype: candidates[0]?.ktype ? Number(candidates[0].ktype) : undefined,
           vin: c.vin,
           vinDecode: (body?.vehicle?.unifiedVin || body?.vehicle?.vinDecode) as { make?: string; generation?: string; body?: string } | undefined,
+          hasCollision: c.hasCollision,
         });
       }
     }
@@ -257,6 +261,7 @@ describe("search accuracy harness", () => {
           topKtype: candidates[0]?.ktype ? Number(candidates[0].ktype) : undefined,
           vin: c.vin,
           vinDecode: (body?.vehicle?.unifiedVin || body?.vehicle?.vinDecode) as { make?: string; generation?: string; body?: string } | undefined,
+          hasCollision: c.hasCollision,
         });
       }
     }
@@ -314,6 +319,7 @@ describe("search accuracy harness", () => {
           topKtype: candidates[0]?.ktype ? Number(candidates[0].ktype) : undefined,
           vin: c.vin,
           vinDecode: (body?.vehicle?.unifiedVin || body?.vehicle?.vinDecode) as { make?: string; generation?: string; body?: string } | undefined,
+          hasCollision: c.hasCollision,
         });
       }
     }

@@ -15,6 +15,7 @@ export interface FailureDetail {
   topKtype?: number;
   vin?: string;
   vinDecode?: { make?: string; generation?: string; body?: string } | null;
+  hasCollision?: boolean;
 }
 
 export interface AccuracyMetrics {
@@ -25,6 +26,8 @@ export interface AccuracyMetrics {
   byCategory: Record<string, { total: number; top1: number; top3: number; top5: number }>;
   failures: FailureDetail[];
   byBucket: Record<string, number>;
+  collision?: AccuracyMetrics;
+  nonCollision?: AccuracyMetrics;
 }
 
 export function classifyFailure(r: FailureDetail): string {
@@ -70,10 +73,9 @@ function normalizeBrandForBucket(brand: string): string {
   return map[brand.toUpperCase()] || brand.toUpperCase();
 }
 
-export function computeMetrics(
-  results: FailureDetail[],
-  total: number
-): AccuracyMetrics {
+function computeBaseMetrics(
+  results: FailureDetail[]
+): Pick<AccuracyMetrics, "total" | "top1" | "top3" | "top5" | "byCategory"> {
   const byCategory: AccuracyMetrics["byCategory"] = {};
   let top1 = 0;
   let top3 = 0;
@@ -104,6 +106,15 @@ export function computeMetrics(
     }
   }
 
+  return { total: results.length, top1, top3, top5, byCategory };
+}
+
+export function computeMetrics(
+  results: FailureDetail[],
+  total: number
+): AccuracyMetrics {
+  const base = computeBaseMetrics(results);
+
   const failures = results.filter((r) => {
     const setExpected = new Set(r.expected);
     return !r.predicted.slice(0, 3).some((p) => setExpected.has(p));
@@ -118,7 +129,25 @@ export function computeMetrics(
     byBucket[f.bucket] = (byBucket[f.bucket] || 0) + 1;
   }
 
-  return { total, top1, top3, top5, byCategory, failures, byBucket };
+  const collisionResults = results.filter((r) => r.hasCollision);
+  const nonCollisionResults = results.filter((r) => !r.hasCollision);
+
+  return {
+    ...base,
+    total,
+    failures,
+    byBucket,
+    collision: {
+      ...computeBaseMetrics(collisionResults),
+      failures: [],
+      byBucket: {},
+    },
+    nonCollision: {
+      ...computeBaseMetrics(nonCollisionResults),
+      failures: [],
+      byBucket: {},
+    },
+  };
 }
 
 export function printReport(metrics: AccuracyMetrics): void {
@@ -146,6 +175,18 @@ export function printReport(metrics: AccuracyMetrics): void {
       `  ${cat}: top-1 ${t1}%, top-3 ${t3}%, top-5 ${t5}% (${m.top1}/${m.total})`
     );
   }
+  if (metrics.collision && metrics.nonCollision) {
+    console.log("\nBy collision group:");
+    const c = metrics.collision;
+    const n = metrics.nonCollision;
+    console.log(
+      `  collision:    top-1 ${((c.top1 / c.total) * 100).toFixed(1)}%, top-3 ${((c.top3 / c.total) * 100).toFixed(1)}%, top-5 ${((c.top5 / c.total) * 100).toFixed(1)}% (${c.total} cases)`
+    );
+    console.log(
+      `  non-collision: top-1 ${((n.top1 / n.total) * 100).toFixed(1)}%, top-3 ${((n.top3 / n.total) * 100).toFixed(1)}%, top-5 ${((n.top5 / n.total) * 100).toFixed(1)}% (${n.total} cases)`
+    );
+  }
+
   console.log(`\nFailures: ${metrics.failures.length}`);
   if (metrics.failures.length > 0) {
     console.log("\nBy bucket:");

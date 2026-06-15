@@ -15,6 +15,7 @@
 
 import fs from "fs";
 import path from "path";
+import type { GlassRecord } from "../../../src/types";
 import {
   modelMatches,
   yearCompatible,
@@ -28,6 +29,7 @@ const OUT_PATH = path.resolve(
 
 // Verified data lives in the main bilglass repo (gitignored there).
 const BOVSOFT_PATH = path.resolve(ROOT, "../../data/finn-no-regnr/verified-bovsoft.ndjson");
+const BOVSOFT_V2_PATH = path.resolve(ROOT, "../../data/finn-no-regnr/verified-bovsoft-v2.ndjson");
 const VERIFIED_REGNR_PATH = path.resolve(ROOT, "../../data/finn-no-regnr/verified-regnr.ndjson");
 const CATALOG_PATH = path.resolve(ROOT, "data/catalog-prod.json");
 
@@ -39,6 +41,14 @@ type Fixture = {
   model: string;
   year: number;
   expected: Record<string, string[]>;
+  hasCollision?: boolean;
+  collisionGroup?: string;
+};
+
+type Source = {
+  path: string;
+  label: "bovsoft" | "bovsoft-v2" | "verified-regnr";
+  useKtypeDedup: boolean;
 };
 
 function normalizeBrand(brand: string): string {
@@ -104,21 +114,21 @@ function loadNdjson<T>(p: string): T[] {
 }
 
 function computeExpected(
-  catalog: any[],
+  catalog: GlassRecord[],
   make: string,
   model: string,
   year: number
 ): Record<string, string[]> | null {
   const expected: Record<string, string[]> = {};
   for (const rec of catalog) {
-    if (!rec.eurocode || !categoryOf(rec) || isCrossReference(rec)) continue;
+    if (!rec.eurocode) continue;
+    const cat = categoryOf(rec);
+    if (!cat || isCrossReference(rec)) continue;
     const recBrand = normalizeBrand(rec.brand || "");
     if (recBrand !== make) continue;
     if (!modelMatches(model, rec.model, make)) continue;
     if (!yearCompatible(rec, year, make, model)) continue;
 
-    const cat = categoryOf(rec);
-    if (!cat) continue;
     if (!expected[cat]) expected[cat] = [];
     expected[cat].push(rec.eurocode);
   }
@@ -131,24 +141,70 @@ function computeExpected(
   return Object.keys(cleaned).length > 0 ? cleaned : null;
 }
 
-function main() {
-  const catalogRaw = loadJson<any>(CATALOG_PATH);
-  const catalog: any[] = Array.isArray(catalogRaw)
-    ? catalogRaw
-    : catalogRaw.records || [];
+function findVariantCollisions(candidates: Candidate[]): Set<string> {
+  const variantsByKey = new Map<string, Set<string>>();
 
-  const sources: { path: string; label: string }[] = [];
-  if (fs.existsSync(BOVSOFT_PATH)) sources.push({ path: BOVSOFT_PATH, label: "bovsoft" });
-  if (fs.existsSync(VERIFIED_REGNR_PATH)) sources.push({ path: VERIFIED_REGNR_PATH, label: "verified-regnr" });
+  for (const c of candidates) {
+    const key = `${c.make}|${c.model.toUpperCase()}|${c.year}`;
+    // For sources with a TecDoc kType, the kType is the strongest disambiguator.
+    // For regnr-only sources, use the raw SVV/model string as the variant id.
+    const variantId = c.ktype ? c.ktype : `${c.source}:${c.model.toUpperCase()}`;
+    if (!variantsByKey.has(key)) variantsByKey.set(key, new Set());
+    variantsByKey.get(key)!.add(variantId);
+  }
+
+  const collisions = new Set<string>();
+  for (const [key, variants] of variantsByKey) {
+    if (variants.size > 1) {
+      collisions.add(key);
+    }
+  }
+  return collisions;
+}
+
+type Candidate = {
+  make: string;
+  model: string;
+  year: number;
+  source: string;
+  useKtypeDedup: boolean;
+  ktype: string;
+};
+
+function main() {
+  const catalogRaw = loadJson<unknown>(CATALOG_PATH);
+  const catalog: GlassRecord[] = Array.isArray(catalogRaw)
+    ? (catalogRaw as GlassRecord[])
+    : ((catalogRaw as any).records || []) as GlassRecord[];
+
+  const sources: Source[] = [];
+  if (fs.existsSync(BOVSOFT_PATH)) {
+    sources.push({
+      path: BOVSOFT_PATH,
+      label: "bovsoft",
+      useKtypeDedup: false,
+    });
+  }
+  if (fs.existsSync(BOVSOFT_V2_PATH)) {
+    sources.push({
+      path: BOVSOFT_V2_PATH,
+      label: "bovsoft-v2",
+      useKtypeDedup: true,
+    });
+  }
+  if (fs.existsSync(VERIFIED_REGNR_PATH)) {
+    sources.push({
+      path: VERIFIED_REGNR_PATH,
+      label: "verified-regnr",
+      useKtypeDedup: false,
+    });
+  }
   if (sources.length === 0) {
     console.error("No input data found");
     process.exit(1);
   }
 
-  const seen = new Set<string>();
-  const fixtures: Fixture[] = [];
-  let counter = 1;
-
+  const candidates: Candidate[] = [];
   for (const source of sources) {
     const rows = loadNdjson<any>(source.path);
     for (const r of rows) {
@@ -156,7 +212,7 @@ function main() {
       let model: string | undefined;
       let year: number | null = null;
 
-      if (source.label === "bovsoft") {
+      if (source.label === "bovsoft" || source.label === "bovsoft-v2") {
         make = normalizeBrand(r.brand);
         model = r.model || "";
         year = parseYear(r.yearFrom) || parseYear(r.yearTo);
@@ -168,25 +224,49 @@ function main() {
 
       if (!make || !model || !year) continue;
 
-      // Deduplicate on normalized vehicle identity to avoid a handful of models
-      // dominating the suite.
-      const key = `${make}|${model.toUpperCase()}|${year}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-
-      const expected = computeExpected(catalog, make, model, year);
-      if (!expected) continue;
-
-      fixtures.push({
-        regnr: `REAL${String(counter).padStart(3, "0")}`,
+      const ktype = source.useKtypeDedup && r.ktype != null ? String(r.ktype) : "";
+      candidates.push({
         make,
         model,
         year,
-        expected,
+        source: source.label,
+        useKtypeDedup: source.useKtypeDedup,
+        ktype,
       });
-      counter++;
     }
   }
+
+  const collisionKeys = findVariantCollisions(candidates);
+
+  const seen = new Set<string>();
+  const fixtures: Fixture[] = [];
+  let counter = 1;
+
+  for (const c of candidates) {
+    const key = `${c.make}|${c.model.toUpperCase()}|${c.year}|${c.ktype}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    const expected = computeExpected(catalog, c.make, c.model, c.year);
+    if (!expected) continue;
+
+    const collisionKey = `${c.make}|${c.model.toUpperCase()}|${c.year}`;
+    const isCollision = collisionKeys.has(collisionKey);
+
+    fixtures.push({
+      regnr: `REAL${String(counter).padStart(3, "0")}`,
+      make: c.make,
+      model: c.model,
+      year: c.year,
+      expected,
+      hasCollision: isCollision,
+      collisionGroup: isCollision ? collisionKey : undefined,
+    });
+    counter++;
+  }
+
+  const collisionCount = fixtures.filter((f) => f.hasCollision).length;
+  console.log(`  Collisions: ${collisionCount}/${fixtures.length}`);
 
   fs.writeFileSync(OUT_PATH, JSON.stringify(fixtures, null, 2) + "\n");
   console.log(`Wrote ${fixtures.length} real fixtures to ${OUT_PATH}`);
