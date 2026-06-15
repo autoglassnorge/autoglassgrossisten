@@ -310,8 +310,14 @@ function _scoreCandidate(
   // Body / chassis compatibility (VIN + SVV data + Bovsoft body)
   score += scoreBodyCompatibility(c, vehicle, vinInfo, bovsoftInfo?.body);
 
-  // Prefix4 consensus bonus (small)
-  if (dominantPrefix4 && c.prefix4 === dominantPrefix4) {
+  // Prefix4 consensus bonus (small) — only reward records that actually match
+  // the vehicle model, otherwise a pile of wrong-model candidates can form a
+  // false consensus and drown the correct glass.
+  if (
+    dominantPrefix4 &&
+    c.prefix4 === dominantPrefix4 &&
+    _modelMatches(vehicle.model, c.model, vehicle.make)
+  ) {
     score += 3;
   }
 

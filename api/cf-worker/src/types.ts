@@ -70,6 +70,10 @@ export interface GlassRecord {
   properties?: Record<string, unknown>;
   /** JSON array of accessory SKUs linked to this glass product */
   accessory_skus?: string | null;
+  /** Internal flag set by ground-truth loader so scoring can boost verified rows. */
+  _groundTruth?: boolean;
+  /** Internal fuzzy-match score from the last-resort fuzzy brand+year layer. */
+  _fuzzyScore?: number;
 }
 
 export interface VehicleFingerprint {

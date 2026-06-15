@@ -557,7 +557,8 @@ export async function searchByRegnr(
             const brands = getBrandAliases(vehicle.make);
             const brandMatch = brands.some((b) => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
             const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
-            if (brandMatch && yearMatch) {
+            const modelMatch = modelMatches(vehicle.model, mappedRecord.model, vehicle.make);
+            if (brandMatch && yearMatch && modelMatch) {
               candidates.push(mappedRecord);
               candidateCodes.add(mappedRecord.eurocode);
               layer = 0;
@@ -578,7 +579,8 @@ export async function searchByRegnr(
                 const brands = getBrandAliases(vehicle.make);
                 const brandMatch = brands.some((b) => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
                 const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
-                if (brandMatch && yearMatch) {
+                const modelMatch = modelMatches(vehicle.model, mappedRecord.model, vehicle.make);
+                if (brandMatch && yearMatch && modelMatch) {
                   candidates.push(mappedRecord);
                   candidateCodes.add(mappedRecord.eurocode);
                   layer = 0;
@@ -715,12 +717,41 @@ export async function searchByRegnr(
         variants.add(base.replace(/\s+/g, "-"));         // spaces → hyphens
         variants.add(base.replace(/-/g, " "));            // hyphens → spaces
         variants.add(base.replace(/[^a-z0-9]+/g, ""));   // strip all non-alnum
+
+        // Add the model family without chassis/body codes, e.g. "A5 (8T3)" → "a5".
+        // This mirrors how glass_catalog stores models ("A5") while SVV/Bovsoft
+        // often sends body codes in parentheses.
+        const familyBase = base.split(/[(/]/)[0].trim();
+        if (familyBase && familyBase !== base) {
+          variants.add(familyBase);
+          variants.add(familyBase.replace(/\s+/g, ""));
+          variants.add(familyBase.replace(/[^a-z0-9]+/g, ""));
+          // "A5 / S5 Sportback" → "a5", "s5 sportback", "sportback"
+          for (const segment of familyBase.split("/")) {
+            const seg = segment.trim();
+            if (seg.length >= 2) variants.add(seg);
+            const segNoSpace = seg.replace(/\s+/g, "");
+            if (segNoSpace.length >= 2) variants.add(segNoSpace);
+          }
+          // Add individual model tokens so "A3 Sportback" also searches "a3".
+          // These broad tokens are safe because the SQL results are later filtered
+          // through modelMatches.
+          const tokens = familyBase.split(/[^a-z0-9]+/).filter((t) => t.length >= 2);
+          for (const t of tokens) variants.add(t);
+        }
+
         return Array.from(variants).filter((v) => v.length >= 2);
       }
       // Always add generic variants as extraHints (deduplicated)
       if (modelHint) {
         const genericVariants = hintVariants(vehicle.model);
         extraHints = [...new Set([...(extraHints || []), ...genericVariants])];
+        // Use the chassis-code-free family as the primary hint; raw SVV strings
+        // rarely match the catalog model field directly.
+        const familyBase = vehicle.model.toLowerCase().trim().split(/[(/]/)[0].trim();
+        if (familyBase && familyBase !== modelHint) {
+          modelHint = familyBase;
+        }
       }
 
       // Extract body type hint from Bovsoft for better filtering
@@ -850,15 +881,20 @@ export async function searchByRegnr(
     const hasEnoughResults = candidates.length >= 15;
     if (!hasEnoughResults || !hasWindshield) {
       const fuzzyResults = await queryFuzzyBrandYear(db, vehicle.make, vehicle.year, vehicle.model, 50);
-      debugFuzzyCount = fuzzyResults.length;
-      for (const { record, score } of fuzzyResults) {
+      // Filter fuzzy results through the same model-matching gate used elsewhere;
+      // the fuzzy scorer is too permissive (e.g. "A5" vs "A8" can score > 0.15).
+      const fuzzyModelMatches = fuzzyResults.filter(({ record }) =>
+        modelMatches(vehicle.model, record.model, vehicle.make)
+      );
+      debugFuzzyCount = fuzzyModelMatches.length;
+      for (const { record, score } of fuzzyModelMatches) {
         if (record.eurocode && !candidateCodes.has(record.eurocode)) {
           (record as any)._fuzzyScore = score;
           candidates.push(record);
           candidateCodes.add(record.eurocode);
         }
       }
-      if (layer > 3 && fuzzyResults.length > 0) {
+      if (layer > 3 && fuzzyModelMatches.length > 0) {
         layer = 3;
         confidence = "low";
       }
