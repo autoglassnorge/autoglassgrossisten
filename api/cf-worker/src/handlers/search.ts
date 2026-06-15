@@ -994,7 +994,7 @@ export async function searchByRegnr(
     // Fuzzy and family fallbacks can include records whose SQL year filter passed
     // because year_to is NULL, but whose generation is still wrong for the vehicle.
     const beforeYearFilter = candidates.length;
-    candidates = candidates.filter((c) => yearCompatible(c, vehicle.year, vehicle.make, vehicle.model));
+    candidates = candidates.filter((c) => (c as any)._groundTruth || yearCompatible(c, vehicle.year, vehicle.make, vehicle.model));
     if (candidates.length < beforeYearFilter) {
       console.log(`[YearFilter] ${regnr}: removed ${beforeYearFilter - candidates.length} candidates by year/generation gate`);
     }
@@ -1024,8 +1024,16 @@ export async function searchByRegnr(
       const scored = records
         .map((c) => ({
           c,
-          score: scoreCandidate(c, vehicleFlags, vehicle, vinInfo, bovsoftVehicle || undefined, unifiedVin || undefined, dominantPrefix4)
-            + (isUncertain ? -200 : 0), // penalize uncertain candidates
+          score: scoreCandidate(
+              c,
+              vehicleFlags,
+              vehicle,
+              vinInfo,
+              bovsoftVehicle || undefined,
+              unifiedVin || undefined,
+              dominantPrefix4,
+              effectiveEquipment.source === "biluppgifter" || hasUserEquipment
+            ) + (isUncertain ? -200 : 0), // penalize uncertain candidates
         }))
         .sort((a, b) => b.score - a.score);
 

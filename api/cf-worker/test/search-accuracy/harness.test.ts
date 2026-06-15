@@ -113,7 +113,8 @@ describe("search accuracy harness", () => {
 
     const metrics = computeMetrics(results, total);
     printReport(metrics);
-    expect(metrics.top1 / metrics.total).toBeGreaterThanOrEqual(0.0);
+    expect(metrics.top1 / metrics.total).toBeGreaterThanOrEqual(0.95);
+    expect(metrics.top3 / metrics.total).toBeGreaterThanOrEqual(0.99);
   }, 120000);
 
   it("always merges ground_truth even when Layer 0.5 fires", async () => {

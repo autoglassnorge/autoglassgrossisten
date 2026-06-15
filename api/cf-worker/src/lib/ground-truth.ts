@@ -44,6 +44,7 @@ export async function groundTruthToCandidates(
       typeCode: meta.code,
       typeCodeDesc: meta.desc,
       position: meta.position,
+      _groundTruth: true,
     });
   }
   return candidates;

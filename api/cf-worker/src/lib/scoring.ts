@@ -145,12 +145,20 @@ function _scoreCandidate(
   vinInfo: ReturnType<typeof decodeVwTransporterBody>,
   bovsoftInfo?: BovsoftVehicle,
   unifiedVin?: ReturnType<typeof decodeVin>,
-  dominantPrefix4?: string
+  dominantPrefix4?: string,
+  strictEquipment = true
 ): number {
   let score = 0;
 
   // Infer equipment from DB columns + description parsing
   const recordFlags = inferRecordEquipment(c);
+
+  // === Authoritative ground-truth bonus ===
+  // When a candidate is backed by a verified ground-truth row it should win
+  // over inferred/scored candidates unless it is filtered out by category/position.
+  if ((c as any)._groundTruth) {
+    score += 1000;
+  }
 
   // === kType signal — strong but recoverable ===
   // If we know the vehicle's kType, exact kType match is a strong signal,
@@ -173,14 +181,19 @@ function _scoreCandidate(
   if (flags.heated && recordFlags.heated) score += 20;
   if (flags.acoustic && recordFlags.acoustic) score += 15;
   if (flags.antenna && recordFlags.antenna) score += 10;
-  // Penalize if record has equipment the vehicle doesn't have (avoids wrong variant)
-  if (!flags.adas && recordFlags.adas) score -= 50;
-  if (!flags.camera && recordFlags.camera) score -= 30;
-  if (!flags.hud && recordFlags.hud) score -= 20;
-  if (!flags.rainSensor && recordFlags.rainSensor) score -= 15;
-  if (!flags.heated && recordFlags.heated) score -= 10;
-  if (!flags.acoustic && recordFlags.acoustic) score -= 5;
-  if (!flags.antenna && recordFlags.antenna) score -= 3;
+  // Penalize mismatched equipment only when we are confident about the vehicle's
+  // equipment (Biluppgifter factory data or explicitly confirmed user answers).
+  // When equipment is guessed/learned, mismatch penalties produce false negatives
+  // for the correct glass variant.
+  if (strictEquipment) {
+    if (!flags.adas && recordFlags.adas) score -= 50;
+    if (!flags.camera && recordFlags.camera) score -= 30;
+    if (!flags.hud && recordFlags.hud) score -= 20;
+    if (!flags.rainSensor && recordFlags.rainSensor) score -= 15;
+    if (!flags.heated && recordFlags.heated) score -= 10;
+    if (!flags.acoustic && recordFlags.acoustic) score -= 5;
+    if (!flags.antenna && recordFlags.antenna) score -= 3;
+  }
 
   // === Year compatibility — hard gate + graded penalty ===
   // A glass must be year-compatible; if not, it's massively penalized.
