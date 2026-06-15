@@ -231,43 +231,6 @@
   {
     "regnr": "REAL006",
     "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL007",
-    "make": "AUDI",
     "model": "A5 (F53, F5P)",
     "year": 2016,
     "expected": {
@@ -309,7 +272,7 @@
     }
   },
   {
-    "regnr": "REAL008",
+    "regnr": "REAL007",
     "make": "AUDI",
     "model": "A4 Avant (8W5, 8WD, B9)",
     "year": 2015,
@@ -411,124 +374,7 @@
     }
   },
   {
-    "regnr": "REAL009",
-    "make": "AUDI",
-    "model": "A5 (F53, F5P)",
-    "year": 2016,
-    "expected": {
-      "frontrute": [
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM2",
-        "2952GNCM2",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE",
-        "8633BGSCAZ",
-        "8633BYPCAZ"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN",
-        "8633LGSC2RQZ1M",
-        "8633LYPC2RQZ1M",
-        "8633RGSC2RQZ1M",
-        "8633RYPC2RQZ1M",
-        "8639LGST2RQOWZ"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN",
-        "8633LGSC2FD",
-        "8633RGSC2FD",
-        "8639LGST2FD"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL010",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL011",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL012",
+    "regnr": "REAL008",
     "make": "AUDI",
     "model": "A5 (8T3)",
     "year": 2007,
@@ -556,7 +402,7 @@
     }
   },
   {
-    "regnr": "REAL013",
+    "regnr": "REAL009",
     "make": "AUDI",
     "model": "A5 (8T3)",
     "year": 2010,
@@ -591,44 +437,7 @@
     }
   },
   {
-    "regnr": "REAL014",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL015",
+    "regnr": "REAL010",
     "make": "AUDI",
     "model": "A6 Avant (4F5, C6)",
     "year": 2008,
@@ -683,263 +492,7 @@
     }
   },
   {
-    "regnr": "REAL016",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL017",
-    "make": "AUDI",
-    "model": "A5 (F53, F5P)",
-    "year": 2016,
-    "expected": {
-      "frontrute": [
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM2",
-        "2952GNCM2",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE",
-        "8633BGSCAZ",
-        "8633BYPCAZ"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN",
-        "8633LGSC2RQZ1M",
-        "8633LYPC2RQZ1M",
-        "8633RGSC2RQZ1M",
-        "8633RYPC2RQZ1M",
-        "8639LGST2RQOWZ"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN",
-        "8633LGSC2FD",
-        "8633RGSC2FD",
-        "8639LGST2FD"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL018",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL019",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2007,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL020",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL021",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL022",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2013,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL023",
+    "regnr": "REAL011",
     "make": "AUDI",
     "model": "A5 Sportback (F5A, F5F)",
     "year": 2016,
@@ -976,7 +529,7 @@
     }
   },
   {
-    "regnr": "REAL024",
+    "regnr": "REAL012",
     "make": "AUDI",
     "model": "Q7 (4MB, 4MG)",
     "year": 2015,
@@ -1025,125 +578,7 @@
     }
   },
   {
-    "regnr": "REAL025",
-    "make": "AUDI",
-    "model": "A3 Sportback (8VA, 8VF)",
-    "year": 2016,
-    "expected": {
-      "frontrute": [
-        "2524GY",
-        "2524GYM",
-        "2861GYA",
-        "2861GYA2",
-        "2861GYAM",
-        "3179GYCM",
-        "3179GYCM2",
-        "3179GYCM3",
-        "3179GYM",
-        "3179GYM2",
-        "3207GYCM",
-        "3207GYCM2",
-        "3207GYM",
-        "3207GYM2",
-        "3249GYAM",
-        "3249GYCAM",
-        "3249GYCAM2",
-        "3249GYM",
-        "3249GYM2",
-        "8620AGAGYCMVZ95"
-      ],
-      "bakrute": [
-        "26528GN",
-        "28331GN",
-        "29895GN",
-        "29895YP",
-        "29961GN",
-        "29961YP",
-        "30095GN",
-        "30095YP",
-        "8616GZPR3SREF",
-        "8616GZPR5SREF",
-        "8620BYPSABIJ"
-      ],
-      "sideglass": [
-        "26525GN",
-        "26525GP",
-        "26526GN",
-        "26526GP",
-        "27031GN",
-        "27031YP",
-        "27032GN",
-        "27032YP",
-        "29893GN",
-        "29893YP",
-        "29894GN",
-        "29894YP",
-        "29959GN",
-        "29959YP",
-        "29960GN",
-        "29960YP",
-        "30093GN",
-        "30093YP",
-        "30094GN",
-        "30094YP"
-      ],
-      "dørglass": [
-        "26523GN",
-        "26524GN",
-        "27027GN",
-        "27028GN",
-        "27029GN",
-        "27029YP",
-        "27030GN",
-        "27030YP",
-        "29891GN",
-        "29892GN",
-        "29956GN",
-        "29957GN",
-        "29957YP",
-        "29958GN",
-        "29958YP",
-        "30089GN",
-        "30090GN",
-        "30091GN",
-        "30091YP",
-        "30092GN",
-        "30092YP",
-        "8620LGSS4FD",
-        "8620RGSS4FD"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL026",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2007,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL027",
+    "regnr": "REAL013",
     "make": "AUDI",
     "model": "A6 Avant (4G5, 4GD, C7)",
     "year": 2014,
@@ -1240,7 +675,7 @@
     }
   },
   {
-    "regnr": "REAL028",
+    "regnr": "REAL014",
     "make": "AUDI",
     "model": "A5 / S5 Sportback (8TA)",
     "year": 2010,
@@ -1277,165 +712,7 @@
     }
   },
   {
-    "regnr": "REAL029",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2007,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL030",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL031",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2007,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL032",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL033",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL034",
+    "regnr": "REAL015",
     "make": "AUDI",
     "model": "A6 Avant (4G5, 4GD, C7)",
     "year": 2011,
@@ -1538,7 +815,7 @@
     }
   },
   {
-    "regnr": "REAL035",
+    "regnr": "REAL016",
     "make": "AUDI",
     "model": "A6 e-tron Avant (GH5)",
     "year": 2024,
@@ -1720,128 +997,7 @@
     }
   },
   {
-    "regnr": "REAL036",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2007,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL037",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL038",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL039",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2007,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL040",
+    "regnr": "REAL017",
     "make": "AUDI",
     "model": "A3 Sportback (8PA)",
     "year": 2007,
@@ -1881,7 +1037,7 @@
     }
   },
   {
-    "regnr": "REAL041",
+    "regnr": "REAL018",
     "make": "AUDI",
     "model": "A5 Kabriolet (F57, F5E)",
     "year": 2016,
@@ -1918,7 +1074,7 @@
     }
   },
   {
-    "regnr": "REAL042",
+    "regnr": "REAL019",
     "make": "AUDI",
     "model": "E-TRON Sportback (GEA)",
     "year": 2019,
@@ -1975,146 +1131,7 @@
     }
   },
   {
-    "regnr": "REAL043",
-    "make": "AUDI",
-    "model": "A5 Sportback (F5A, F5F)",
-    "year": 2016,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL044",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL045",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2007,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL046",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2013,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL047",
+    "regnr": "REAL020",
     "make": "AUDI",
     "model": "A4 Allroad (8KH, B8)",
     "year": 2009,
@@ -2182,7 +1199,7 @@
     }
   },
   {
-    "regnr": "REAL048",
+    "regnr": "REAL021",
     "make": "AUDI",
     "model": "A7 / S7 Sportback (4GA, 4GF)",
     "year": 2014,
@@ -2229,44 +1246,7 @@
     }
   },
   {
-    "regnr": "REAL049",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL050",
+    "regnr": "REAL022",
     "make": "AUDI",
     "model": "A5 / S5 Kabriolet (8F7)",
     "year": 2009,
@@ -2303,211 +1283,7 @@
     }
   },
   {
-    "regnr": "REAL051",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL052",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL053",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL054",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL055",
-    "make": "AUDI",
-    "model": "A5 / S5 Kabriolet (8F7)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL056",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL057",
+    "regnr": "REAL023",
     "make": "AUDI",
     "model": "A1 (8X1, 8XK)",
     "year": 2010,
@@ -2549,81 +1325,7 @@
     }
   },
   {
-    "regnr": "REAL058",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL059",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL060",
+    "regnr": "REAL024",
     "make": "AUDI",
     "model": "A5 (8T3)",
     "year": 2011,
@@ -2660,164 +1362,7 @@
     }
   },
   {
-    "regnr": "REAL061",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2007,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL062",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2009,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL063",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
-      ],
-      "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL064",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL065",
+    "regnr": "REAL025",
     "make": "AUDI",
     "model": "A6 / S6 Avant (4B5, C5)",
     "year": 1997,
@@ -2860,7 +1405,7 @@
     }
   },
   {
-    "regnr": "REAL066",
+    "regnr": "REAL026",
     "make": "AUDI",
     "model": "A6 Avant (4A5, C8)",
     "year": 2019,
@@ -3031,7 +1576,7 @@
     }
   },
   {
-    "regnr": "REAL067",
+    "regnr": "REAL027",
     "make": "AUDI",
     "model": "A6 Avant (4F5, C6)",
     "year": 2004,
@@ -3090,7 +1635,7 @@
     }
   },
   {
-    "regnr": "REAL068",
+    "regnr": "REAL028",
     "make": "AUDI",
     "model": "A6 Avant (4F5, C6)",
     "year": 2005,
@@ -3145,7 +1690,7 @@
     }
   },
   {
-    "regnr": "REAL069",
+    "regnr": "REAL029",
     "make": "AUDI",
     "model": "A6 Allroad (4FH, C6)",
     "year": 2006,
@@ -3197,317 +1742,7 @@
     }
   },
   {
-    "regnr": "REAL070",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2014,
-    "expected": {
-      "frontrute": [
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL071",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL072",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2005,
-    "expected": {
-      "frontrute": [
-        "2168CSGY",
-        "2168GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "24114GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL073",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2005,
-    "expected": {
-      "frontrute": [
-        "2168CSGY",
-        "2168GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "24114GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL074",
+    "regnr": "REAL030",
     "make": "AUDI",
     "model": "A6 (4F2, C6)",
     "year": 2004,
@@ -3566,248 +1801,7 @@
     }
   },
   {
-    "regnr": "REAL075",
-    "make": "AUDI",
-    "model": "A6 e-tron Avant (GH5)",
-    "year": 2024,
-    "expected": {
-      "frontrute": [
-        "2580GYM",
-        "8644ACKCKMUVZ",
-        "8644ACKCKMVZ",
-        "8644AGACMUVZ",
-        "8644AGACMVZ",
-        "8646ACKCKMUVZ",
-        "8646AGACIMUVZ",
-        "8646AGACIMVZ",
-        "8646AGACMUVZ",
-        "8646AGACMVZ",
-        "8660AGACMUVZ",
-        "8660AGACMVZ"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS",
-        "8644BGSEAIX",
-        "8644BGSSABZ",
-        "8644BYPEAIX",
-        "8644BYPSABZ",
-        "8646BGSRAIX",
-        "8646BGSRAX1J",
-        "8646BYPRAIX",
-        "8646BYPRAX1J",
-        "8660BGACABKZ",
-        "8660BGSCABZ",
-        "8660BYPCABZ",
-        "8660BYPCZ1J",
-        "8660BYQCABKZ"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP",
-        "8644LGSE5RQKX1Z",
-        "8644LGSE5RQXZ1L",
-        "8644LGSE5RQXZ1M",
-        "8644LYPE5RQKX1Z",
-        "8644LYPE5RQKX2Z",
-        "8644LYPE5RQXZ1L",
-        "8644LYPE5RQXZ1M",
-        "8644RGSE5RQAX2Z",
-        "8644RGSE5RQKX1Z",
-        "8644RGSE5RQKX2Z",
-        "8644RGSE5RQXZ1M",
-        "8644RYPE5RQKX1Z",
-        "8644RYPE5RQKX2Z",
-        "8644RYPE5RQXZ1L",
-        "8644RYPE5RQXZ1M",
-        "8646LGRR5RQKZ1M",
-        "8646LGSR5RQZ1M",
-        "8646LYPR5RQZ1L",
-        "8646LYPR5RQZ1M",
-        "8646LYQR5RDKW1J",
-        "8646LYQR5RQKZ1M",
-        "8646RGRR5RQKZ1M",
-        "8646RGSR5RQAZ1M",
-        "8646RGSR5RQZ1M",
-        "8646RYPR5RQAZ1M",
-        "8646RYPR5RQZ1L",
-        "8646RYPR5RQZ1M",
-        "8646RYQR5RDKW1J",
-        "8646RYQR5RQAK1Z",
-        "8660LGSC4RQWZ",
-        "8660RGSC4RQWZ",
-        "8660RYPC4RQWZ"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP",
-        "8644LGRE5RDKW",
-        "8644LGRS4FDKW",
-        "8644LGRS4RDKW",
-        "8644LGSE5RD",
-        "8644LGSE5RQKX2Z",
-        "8644LGSS4RD",
-        "8644LYPE5RD",
-        "8644LYPS4RD",
-        "8644RGRE5RDKW",
-        "8644RGRS4FDKW",
-        "8644RGRS4RDKW",
-        "8644RGSE5RD",
-        "8644RGSS4RD",
-        "8644RYPE5RD",
-        "8644RYPS4RD",
-        "8646LGRR5FDKW",
-        "8646LGRR5RDKW",
-        "8646LGSR5FD",
-        "8646LGSR5RD",
-        "8646LGSR5RD1J",
-        "8646LYPR5RD",
-        "8646LYPR5RD1J",
-        "8646LYQR5RDKW",
-        "8646RGRR5FDKW",
-        "8646RGRR5RDKW",
-        "8646RGSR5FD",
-        "8646RGSR5RD",
-        "8646RGSR5RD1J",
-        "8646RYPR5RD",
-        "8646RYPR5RD1J",
-        "8646RYQR5RDKW",
-        "8660LGRC4FDKW",
-        "8660LGSC4FD",
-        "8660LGSC4RDW",
-        "8660LYPC4RDW",
-        "8660RGRC4FDKW",
-        "8660RGSC4FD",
-        "8660RGSC4RDW",
-        "8660RYPC4RDW"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL076",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2004,
-    "expected": {
-      "frontrute": [
-        "2117CSGY",
-        "2117GY",
-        "2168CSGY",
-        "2168GY",
-        "2259CSGY",
-        "2259GY",
-        "2260CSGY",
-        "2260GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "24117GN",
-        "24117YP",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "8557GZPS4SRW",
-        "8565GZPE5SR"
-      ],
-      "sideglass": [
-        "23803GN",
-        "23804GN",
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN"
-      ],
-      "dørglass": [
-        "23801GN",
-        "23802GN",
-        "24113GN",
-        "24114GN",
-        "26143GN",
-        "26144GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL077",
+    "regnr": "REAL031",
     "make": "AUDI",
     "model": "A8 (4N2, 4N8)",
     "year": 2017,
@@ -3910,62 +1904,7 @@
     }
   },
   {
-    "regnr": "REAL078",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL079",
+    "regnr": "REAL032",
     "make": "AUDI",
     "model": "A6 C8 Avant (4A5)",
     "year": 2023,
@@ -4136,114 +2075,7 @@
     }
   },
   {
-    "regnr": "REAL080",
-    "make": "AUDI",
-    "model": "A6 Allroad (4FH, C6)",
-    "year": 2006,
-    "expected": {
-      "frontrute": [
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL081",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2005,
-    "expected": {
-      "frontrute": [
-        "2168CSGY",
-        "2168GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "24114GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL082",
+    "regnr": "REAL033",
     "make": "AUDI",
     "model": "A6 Allroad (4FH, C6)",
     "year": 2008,
@@ -4298,268 +2130,7 @@
     }
   },
   {
-    "regnr": "REAL083",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL084",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL085",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2005,
-    "expected": {
-      "frontrute": [
-        "2168CSGY",
-        "2168GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "24114GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL086",
+    "regnr": "REAL034",
     "make": "AUDI",
     "model": "A6 Avant (4A5, C8)",
     "year": 2020,
@@ -4730,7 +2301,7 @@
     }
   },
   {
-    "regnr": "REAL087",
+    "regnr": "REAL035",
     "make": "AUDI",
     "model": "A6 Allroad (4GH, 4GJ, C7)",
     "year": 2014,
@@ -4827,178 +2398,7 @@
     }
   },
   {
-    "regnr": "REAL088",
-    "make": "AUDI",
-    "model": "A6 Avant (4A5, C8)",
-    "year": 2019,
-    "expected": {
-      "frontrute": [
-        "2580GYM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM2",
-        "2952GNCM2",
-        "2952GYM2",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2",
-        "8633AGACHMVZ",
-        "8633AGACMUVZ",
-        "8633AGACMUVZ10",
-        "8633AGACMVZ",
-        "8633AGACMVZ10",
-        "8639AGACMUVZ",
-        "8639AGACMVZ",
-        "8644ACKCKMUVZ",
-        "8644ACKCKMVZ",
-        "8644AGACMUVZ",
-        "8644AGACMVZ"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "28012GN",
-        "28012YP",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8592GZPC2SRE",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS",
-        "8633BGSCAZ",
-        "8633BYPCAZ",
-        "8644BGSEAIX",
-        "8644BGSSABZ",
-        "8644BYPEAIX",
-        "8644BYPSABZ"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP",
-        "8633LGSC2RQZ1M",
-        "8633LYPC2RQZ1M",
-        "8633RGSC2RQZ1M",
-        "8633RYPC2RQZ1M",
-        "8639LGST2RQOWZ",
-        "8639RGST2RQOWZ",
-        "8644LGSE5RQKX1Z",
-        "8644LGSE5RQXZ1L",
-        "8644LGSE5RQXZ1M",
-        "8644LYPE5RQKX1Z",
-        "8644LYPE5RQKX2Z",
-        "8644LYPE5RQXZ1L",
-        "8644LYPE5RQXZ1M",
-        "8644RGSE5RQAX2Z",
-        "8644RGSE5RQKX1Z",
-        "8644RGSE5RQKX2Z",
-        "8644RGSE5RQXZ1M",
-        "8644RYPE5RQKX1Z",
-        "8644RYPE5RQKX2Z",
-        "8644RYPE5RQXZ1L",
-        "8644RYPE5RQXZ1M"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP",
-        "8633LGSC2FD",
-        "8633RGSC2FD",
-        "8639LGST2FD",
-        "8639RGST2FD",
-        "8644LGRE5RDKW",
-        "8644LGRS4FDKW",
-        "8644LGRS4RDKW",
-        "8644LGSE5RD",
-        "8644LGSE5RQKX2Z",
-        "8644LGSS4RD",
-        "8644LYPE5RD",
-        "8644LYPS4RD",
-        "8644RGRE5RDKW",
-        "8644RGRS4FDKW",
-        "8644RGRS4RDKW",
-        "8644RGSE5RD",
-        "8644RGSS4RD",
-        "8644RYPE5RD",
-        "8644RYPS4RD"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL089",
+    "regnr": "REAL036",
     "make": "AUDI",
     "model": "A6 Allroad (4GH, 4GJ, C7)",
     "year": 2012,
@@ -5095,382 +2495,7 @@
     }
   },
   {
-    "regnr": "REAL090",
-    "make": "AUDI",
-    "model": "A6 Allroad (4FH, C6)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL091",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL092",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2005,
-    "expected": {
-      "frontrute": [
-        "2168CSGY",
-        "2168GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "24114GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL093",
-    "make": "AUDI",
-    "model": "A6 (4F2, C6)",
-    "year": 2004,
-    "expected": {
-      "frontrute": [
-        "2117CSGY",
-        "2117GY",
-        "2168CSGY",
-        "2168GY",
-        "2259CSGY",
-        "2259GY",
-        "2260CSGY",
-        "2260GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "24117GN",
-        "24117YP",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "8557GZPS4SRW",
-        "8565GZPE5SR"
-      ],
-      "sideglass": [
-        "23803GN",
-        "23804GN",
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN"
-      ],
-      "dørglass": [
-        "23801GN",
-        "23802GN",
-        "24113GN",
-        "24114GN",
-        "26143GN",
-        "26144GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL094",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL095",
+    "regnr": "REAL037",
     "make": "AUDI",
     "model": "A6 / S6 Avant (4B5, C5)",
     "year": 1999,
@@ -5514,218 +2539,7 @@
     }
   },
   {
-    "regnr": "REAL096",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL097",
-    "make": "AUDI",
-    "model": "A6 (4F2, C6)",
-    "year": 2004,
-    "expected": {
-      "frontrute": [
-        "2117CSGY",
-        "2117GY",
-        "2168CSGY",
-        "2168GY",
-        "2259CSGY",
-        "2259GY",
-        "2260CSGY",
-        "2260GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "24117GN",
-        "24117YP",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "8557GZPS4SRW",
-        "8565GZPE5SR"
-      ],
-      "sideglass": [
-        "23803GN",
-        "23804GN",
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN"
-      ],
-      "dørglass": [
-        "23801GN",
-        "23802GN",
-        "24113GN",
-        "24114GN",
-        "26143GN",
-        "26144GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL098",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2014,
-    "expected": {
-      "frontrute": [
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL099",
+    "regnr": "REAL038",
     "make": "AUDI",
     "model": "A6 Allroad (4GH, 4GJ, C7)",
     "year": 2015,
@@ -5822,7 +2636,7 @@
     }
   },
   {
-    "regnr": "REAL100",
+    "regnr": "REAL039",
     "make": "AUDI",
     "model": "A6 (4G2, 4GC, C7)",
     "year": 2014,
@@ -5919,207 +2733,7 @@
     }
   },
   {
-    "regnr": "REAL101",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL102",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2014,
-    "expected": {
-      "frontrute": [
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL103",
+    "regnr": "REAL040",
     "make": "AUDI",
     "model": "A6 Avant (4F5, C6)",
     "year": 2006,
@@ -6171,7 +2785,7 @@
     }
   },
   {
-    "regnr": "REAL104",
+    "regnr": "REAL041",
     "make": "AUDI",
     "model": "A6 Avant (4G5, 4GD, C7)",
     "year": 2012,
@@ -6268,213 +2882,7 @@
     }
   },
   {
-    "regnr": "REAL105",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2004,
-    "expected": {
-      "frontrute": [
-        "2117CSGY",
-        "2117GY",
-        "2168CSGY",
-        "2168GY",
-        "2259CSGY",
-        "2259GY",
-        "2260CSGY",
-        "2260GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "24117GN",
-        "24117YP",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "8557GZPS4SRW",
-        "8565GZPE5SR"
-      ],
-      "sideglass": [
-        "23803GN",
-        "23804GN",
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN"
-      ],
-      "dørglass": [
-        "23801GN",
-        "23802GN",
-        "24113GN",
-        "24114GN",
-        "26143GN",
-        "26144GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL106",
-    "make": "AUDI",
-    "model": "A6 Avant (4G5, 4GD, C7)",
-    "year": 2011,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL107",
-    "make": "AUDI",
-    "model": "A6 / S6 Avant (4B5, C5)",
-    "year": 1999,
-    "expected": {
-      "frontrute": [
-        "2117CSGY",
-        "2117GY",
-        "2168CSGY",
-        "2168GY",
-        "2259CSGY",
-        "2259GY",
-        "2260CSGY",
-        "2260GY"
-      ],
-      "bakrute": [
-        "23189CL",
-        "23189GN",
-        "23805GN",
-        "23806GN",
-        "24117GN",
-        "24117YP",
-        "8557GZPS4SRW",
-        "8565GZPE5SR"
-      ],
-      "sideglass": [
-        "23803GN",
-        "23804GN",
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN"
-      ],
-      "dørglass": [
-        "23799GN",
-        "23800GN",
-        "23801GN",
-        "23802GN",
-        "24113GN",
-        "24114GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL108",
+    "regnr": "REAL042",
     "make": "AUDI",
     "model": "A6 Avant (4G5, 4GD, C7)",
     "year": 2015,
@@ -6571,104 +2979,7 @@
     }
   },
   {
-    "regnr": "REAL109",
-    "make": "AUDI",
-    "model": "A6 Allroad (4GH, 4GJ, C7)",
-    "year": 2014,
-    "expected": {
-      "frontrute": [
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL110",
+    "regnr": "REAL043",
     "make": "AUDI",
     "model": "A6 (4B2, C5)",
     "year": 1997,
@@ -6711,325 +3022,7 @@
     }
   },
   {
-    "regnr": "REAL111",
-    "make": "AUDI",
-    "model": "A6 Allroad (4FH, C6)",
-    "year": 2006,
-    "expected": {
-      "frontrute": [
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL112",
-    "make": "AUDI",
-    "model": "A6 Allroad (4GH, 4GJ, C7)",
-    "year": 2012,
-    "expected": {
-      "frontrute": [
-        "2580GYM",
-        "3095CSCM",
-        "3095CSCM2",
-        "3095GNCM",
-        "3095GNCM2",
-        "3095GNM",
-        "3095GNM2",
-        "3096CSCMU",
-        "3096CSCMU2",
-        "3096GNCMU",
-        "3096GNCMU2"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "29435CSL",
-        "29435GN",
-        "29435YPL",
-        "29518GN",
-        "29518YP",
-        "8611GZPE5PRE",
-        "8611GZPE5PREB",
-        "8611GZPS5PRS"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP",
-        "29433CSL",
-        "29433GN",
-        "29433YP",
-        "29434CSL",
-        "29434GN",
-        "29434YP",
-        "29521CSL",
-        "29521GN",
-        "29521YP",
-        "29522CSL",
-        "29522GN",
-        "29522YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP",
-        "29429CSL",
-        "29429GN",
-        "29429GNL",
-        "29430CSL",
-        "29430GN",
-        "29430GNL",
-        "29431CSL",
-        "29431GN",
-        "29431YP",
-        "29432CSL",
-        "29432GN",
-        "29432YP",
-        "29519CSL",
-        "29519GN",
-        "29519YP",
-        "29520CSL",
-        "29520GN",
-        "29520YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL113",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2008,
-    "expected": {
-      "frontrute": [
-        "2580CSCM",
-        "2580CSCM2",
-        "2580CSGYM2",
-        "2580GNCM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL114",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2005,
-    "expected": {
-      "frontrute": [
-        "2168CSGY",
-        "2168GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "27137GN",
-        "27137YP"
-      ],
-      "sideglass": [
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN",
-        "27135GN",
-        "27135YP",
-        "27136GN",
-        "27136YP"
-      ],
-      "dørglass": [
-        "24113GN",
-        "24114GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN",
-        "27133CS",
-        "27133GN",
-        "27133YP",
-        "27134CS",
-        "27134GN",
-        "27134YP"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL115",
-    "make": "AUDI",
-    "model": "A6 Avant (4F5, C6)",
-    "year": 2004,
-    "expected": {
-      "frontrute": [
-        "2117CSGY",
-        "2117GY",
-        "2168CSGY",
-        "2168GY",
-        "2259CSGY",
-        "2259GY",
-        "2260CSGY",
-        "2260GY",
-        "2580CSGYM",
-        "2580GYM"
-      ],
-      "bakrute": [
-        "23805GN",
-        "23806GN",
-        "24117GN",
-        "24117YP",
-        "26839CS",
-        "26839GN",
-        "26839YPL",
-        "8557GZPS4SRW",
-        "8565GZPE5SR"
-      ],
-      "sideglass": [
-        "23803GN",
-        "23804GN",
-        "24115GN",
-        "24116GN",
-        "24687GN",
-        "24688GN",
-        "26837CS",
-        "26837GN",
-        "26838CSL",
-        "26838GN"
-      ],
-      "dørglass": [
-        "23801GN",
-        "23802GN",
-        "24113GN",
-        "24114GN",
-        "26143GN",
-        "26144GN",
-        "26833CS",
-        "26833GN",
-        "26834CS",
-        "26834GN",
-        "26835CS",
-        "26835GN",
-        "26836CS",
-        "26836GN"
-      ]
-    }
-  },
-  {
-    "regnr": "REAL116",
+    "regnr": "REAL044",
     "make": "AUDI",
     "model": "A6 (4G2, 4GC, C7)",
     "year": 2011,
@@ -7132,7 +3125,7 @@
     }
   },
   {
-    "regnr": "REAL117",
+    "regnr": "REAL045",
     "make": "AUDI",
     "model": "A6 (4G2, 4GC, C7)",
     "year": 2010,
@@ -7190,132 +3183,3310 @@
     }
   },
   {
-    "regnr": "REAL118",
-    "make": "AUDI",
-    "model": "A5 (8T3)",
-    "year": 2008,
+    "regnr": "REAL046",
+    "make": "PEUGEOT",
+    "model": "ION",
+    "year": 2012,
     "expected": {
       "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
-      ],
-      "bakrute": [
-        "28012GN",
-        "28012YP"
-      ],
-      "sideglass": [
-        "28015GN",
-        "28016GN"
+        "3091GN"
       ],
       "dørglass": [
-        "28013GN",
-        "28014GN"
+        "29425YP"
       ]
     }
   },
   {
-    "regnr": "REAL119",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
+    "regnr": "REAL047",
+    "make": "PORSCHE",
+    "model": "PANAMERA 4S",
+    "year": 2017,
+    "expected": {
+      "frontrute": [
+        "6741ACDGYCMUV1Z",
+        "6741ACDGYCMUVZ",
+        "6741ACDGYCMVZ",
+        "6741AGAGYCMUV1Z",
+        "6741AGAGYCMUVZ",
+        "6741AGAGYCMVZ",
+        "6741AGAGYCMVZ1L"
+      ],
+      "bakrute": [
+        "55044YPR5RQZ",
+        "6741BYPEAIXZ",
+        "6741BYPHABX",
+        "6741BYQEAIKXZ",
+        "6741BYQHABKX"
+      ],
+      "sideglass": [
+        "6741LCDH5FVKWZ",
+        "6741LCDH5RQKZ",
+        "6741LGSH5FVWZ",
+        "6741LYQE5RQKZ",
+        "6741LYQH5RQKZ",
+        "6741LYQH5RVKW1Z",
+        "6741LYQH5RVKWZ",
+        "6741RCDH5FVKWZ",
+        "6741RCDH5RQKZ",
+        "6741RGSH5FVWZ",
+        "6741RYQE5RVKWZ",
+        "6741RYQH5RQKZ",
+        "6741RYQH5RVKW1Z",
+        "6741RYQH5RVKWZ"
+      ],
+      "dørglass": [
+        "6741LCDH5FDKW",
+        "6741LGSH5FDW",
+        "6741LGSH5RDW",
+        "6741LYQH5RDKW",
+        "6741LYQH5RDKW1J",
+        "6741RCDH5FDKW",
+        "6741RGSH5FDW",
+        "6741RGSH5RDW",
+        "6741RYQH5RDKW",
+        "6741RYQH5RDKW1J"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL048",
+    "make": "PEUGEOT",
+    "model": "3008",
+    "year": 2018,
+    "expected": {
+      "frontrute": [
+        "2976GN",
+        "2976GNM",
+        "6571AGRCHIMVZ",
+        "6571AGRCIMVZ"
+      ],
+      "bakrute": [
+        "28865GN",
+        "28865GP",
+        "31108GP",
+        "6560GZPM5PR",
+        "6571BGSRA",
+        "6571BYPRA"
+      ],
+      "sideglass": [
+        "28857GN",
+        "28863GD",
+        "28863GN",
+        "28864GD",
+        "28864GN",
+        "31113GP",
+        "31114GP",
+        "6571LYPR5RQZ",
+        "6571LYPR5RQZ1D",
+        "6571RYPR5RQZ",
+        "6571RYPR5RQZ1D"
+      ],
+      "dørglass": [
+        "28859GN",
+        "28859GNL",
+        "28860GN",
+        "28860GNL",
+        "28861GD",
+        "28861GDL",
+        "28862GD",
+        "28862GDL",
+        "28862GN",
+        "31109GN",
+        "31110GN",
+        "31111GP",
+        "31112GP",
+        "6571LGSR5FDKW1J",
+        "6571LGSR5RD",
+        "6571LYPR5RD",
+        "6571LYQR5RDKW",
+        "6571RGSR5FD",
+        "6571RGSR5FDKW1J",
+        "6571RGSR5RD",
+        "6571RYPR5RD",
+        "6571RYQR5RDKW"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL049",
+    "make": "KIA",
+    "model": "VENGA",
     "year": 2011,
     "expected": {
       "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
+        "2997GN",
+        "2997GNEL",
+        "2997GNEL2",
+        "2997GNELM",
+        "2997PY",
+        "2998GN",
+        "2998GNEL",
+        "2998GNELM"
       ],
       "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
+        "28963GN",
+        "28963YD"
       ],
       "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
+        "28955GN",
+        "28956GN",
+        "28961GN",
+        "28961YD",
+        "28962GN",
+        "28962YD"
       ],
       "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
+        "28957GN",
+        "28958GN",
+        "28959GN",
+        "28959YD",
+        "28960GN",
+        "28960YD"
       ]
     }
   },
   {
-    "regnr": "REAL120",
+    "regnr": "REAL050",
+    "make": "PEUGEOT",
+    "model": "3008",
+    "year": 2020,
+    "expected": {
+      "frontrute": [
+        "2976GN",
+        "2976GNM",
+        "6571AGRCHIMVZ",
+        "6571AGRCIMVZ"
+      ],
+      "bakrute": [
+        "28865GN",
+        "28865GP",
+        "31108GP",
+        "6560GZPM5PR",
+        "6571BGSRA",
+        "6571BYPRA"
+      ],
+      "sideglass": [
+        "28857GN",
+        "28863GD",
+        "28863GN",
+        "28864GD",
+        "28864GN",
+        "31113GP",
+        "31114GP",
+        "6571LYPR5RQZ",
+        "6571LYPR5RQZ1D",
+        "6571RYPR5RQZ",
+        "6571RYPR5RQZ1D"
+      ],
+      "dørglass": [
+        "28859GN",
+        "28859GNL",
+        "28860GN",
+        "28860GNL",
+        "28861GD",
+        "28861GDL",
+        "28862GD",
+        "28862GDL",
+        "28862GN",
+        "31109GN",
+        "31110GN",
+        "31111GP",
+        "31112GP",
+        "6571LGSR5FDKW1J",
+        "6571LGSR5RD",
+        "6571LYPR5RD",
+        "6571LYQR5RDKW",
+        "6571RGSR5FD",
+        "6571RGSR5FDKW1J",
+        "6571RGSR5RD",
+        "6571RYPR5RD",
+        "6571RYQR5RDKW"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL051",
+    "make": "VOLVO",
+    "model": "V60",
+    "year": 2022,
+    "expected": {
+      "frontrute": [
+        "3000CSBLMP",
+        "3000GNCMP",
+        "3000GNMP",
+        "3000GNP",
+        "3185CSBLMP",
+        "3185GNCELMP",
+        "3185GNCMP",
+        "3185GNELMP",
+        "3185GNMP",
+        "8848AGCCGHMVZ",
+        "8848AGCCGMUVZ",
+        "8848AGCCGMVZ"
+      ],
+      "bakrute": [
+        "29283GN",
+        "29283GNL",
+        "29283YP",
+        "8848BGSEAIJ",
+        "8848BGSEAIJK",
+        "8848BYPEAIJ",
+        "8848BYPEAIJK"
+      ],
+      "sideglass": [
+        "29279GN",
+        "29279GNL",
+        "29279YP",
+        "29280GN",
+        "29280GNL",
+        "29280YP",
+        "29281GN",
+        "29281YP",
+        "29282GN",
+        "29282YP",
+        "8848LGAE5RQKZ1D",
+        "8848LGAE5RVKWZ",
+        "8848LGSE5RQAZ1D",
+        "8848LGSE5RVWZ",
+        "8848LYPE5RQAZ1D",
+        "8848LYPE5RQZ1D",
+        "8848LYPE5RVWZ",
+        "8848LYQE5RQKZ1D",
+        "8848LYQE5RVKWZ",
+        "8848RGAE5RVKWZ",
+        "8848RGSE5RQAZ1D",
+        "8848RGSE5RQZ",
+        "8848RGSE5RVWZ",
+        "8848RYPE5RQAZ1D",
+        "8848RYPE5RQZ1D",
+        "8848RYPE5RVWZ",
+        "8848RYQE5RDKW",
+        "8848RYQE5RQKZ1D",
+        "8848RYQE5RVKWZ"
+      ],
+      "dørglass": [
+        "29031GN",
+        "29031GNA",
+        "29031GNLA",
+        "29032GN",
+        "29032GNA",
+        "29032GNLA",
+        "29277GN",
+        "29277GNL",
+        "29277GP",
+        "29277YP",
+        "29278GN",
+        "29278GNL",
+        "29278GP",
+        "29278YP",
+        "8848LGAE5FDKW",
+        "8848LGAE5RDKW",
+        "8848LGSE5FD",
+        "8848LGSE5RD",
+        "8848LYPE5RD",
+        "8848LYQE5RDKW",
+        "8848RGAE5FDKW",
+        "8848RGAE5RDKW",
+        "8848RGAE5RQKZ1D",
+        "8848RGSE5FD",
+        "8848RGSE5RD",
+        "8848RYPE5RD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL052",
+    "make": "BMW",
+    "model": "X3 XDRIVE30E",
+    "year": 2020,
+    "expected": {
+      "frontrute": [
+        "2540CSGM",
+        "2540GGM",
+        "3077CSGYM2",
+        "3077GNCM",
+        "3077GY2",
+        "3077GYM2",
+        "3078CSMU2",
+        "3078GNCMU",
+        "3078GNMU2"
+      ],
+      "bakrute": [
+        "26627GN",
+        "26627GP",
+        "29320GN",
+        "29320YP"
+      ],
+      "sideglass": [
+        "26623GN",
+        "26623YP",
+        "26624GN",
+        "26624YP",
+        "26625GN",
+        "26625YP",
+        "26626GN",
+        "26626YP",
+        "29325GN",
+        "29325YP",
+        "29326GN",
+        "29326YP",
+        "29327GN",
+        "29327GN2",
+        "29327YP",
+        "29327YP2",
+        "29328GN",
+        "29328GN2",
+        "29328YP",
+        "29328YP2"
+      ],
+      "dørglass": [
+        "26619GN",
+        "26620GN",
+        "26621GN",
+        "26621YP",
+        "26622GN",
+        "26622YP",
+        "29321GN",
+        "29321GN2",
+        "29322GN",
+        "29322GN2",
+        "29323GN",
+        "29323GN2",
+        "29323YP",
+        "29323YP2",
+        "29324GN",
+        "29324GN2",
+        "29324YP",
+        "29324YP2"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL053",
+    "make": "TOYOTA",
+    "model": "TOYOTA RAV4",
+    "year": 2019,
+    "expected": {
+      "frontrute": [
+        "3202CAMCOV",
+        "3202GNCELM",
+        "3202GNCELM2",
+        "3202GNCELM2B",
+        "3202GNCELM3",
+        "3202GNCELM4",
+        "3202GNCELM5",
+        "3202GNEL",
+        "3202GNELM",
+        "3202GNM",
+        "8432AGACHM",
+        "8432AGACHMU",
+        "8432AGACHMUV1E",
+        "8432AGACHMV1E",
+        "8432AGACHMV1L",
+        "8432AGACHMV30",
+        "8432AGACMV"
+      ],
+      "bakrute": [
+        "30054GN",
+        "30054YD",
+        "8410GZPR5SR",
+        "8432BGSRAIZ",
+        "8432BYPRAIXZ"
+      ],
+      "sideglass": [
+        "30059GN",
+        "30059YP",
+        "30060GN",
+        "30060YP",
+        "30061GN",
+        "30061YP",
+        "30062GN",
+        "30062YP",
+        "8410LYPR5RV",
+        "8432LYPR5RQZ",
+        "8432LYPR5RV",
+        "8432RYPR5RQZ",
+        "8432RYPR5RV"
+      ],
+      "dørglass": [
+        "30055GN",
+        "30056GN",
+        "30057GN",
+        "30057YP",
+        "30058GN",
+        "30058YP",
+        "8410LGSR5FDW",
+        "8410LYPR5RD",
+        "8410RGSR5FDW",
+        "8410RYPR5RD",
+        "8432LGSR5FDW",
+        "8432LYPR5RDW",
+        "8432RGSR5FDW",
+        "8432RYPR5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL054",
+    "make": "FORD",
+    "model": "KUGA",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "2873BLELM",
+        "2873CSELM",
+        "2873GNEL",
+        "2873GNELM",
+        "3194GN",
+        "3194GNCELM",
+        "3194GNEL",
+        "3194GNM"
+      ],
+      "bakrute": [
+        "28391BL",
+        "28391GN",
+        "28391YP",
+        "29989GN",
+        "29989YD"
+      ],
+      "sideglass": [
+        "28389BL",
+        "28389YP",
+        "28390BL",
+        "28390YP",
+        "28390YP2",
+        "29987YD",
+        "29988YD",
+        "3581LGSR5RQZ",
+        "3581LGSR5RQZ1D",
+        "3581RGSR5RQZ",
+        "3581RGSR5RQZ1D"
+      ],
+      "dørglass": [
+        "28385BL",
+        "28385GN",
+        "28386BL",
+        "28386GN",
+        "28387BL",
+        "28387YP",
+        "28388BL",
+        "28388YP",
+        "29983GN",
+        "29983GNL",
+        "29984GN",
+        "29984GNL",
+        "29985GN",
+        "29985YD",
+        "29986GN",
+        "29986YD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL055",
+    "make": "VOLVO",
+    "model": "XC60",
+    "year": 2012,
+    "expected": {
+      "frontrute": [
+        "2900CSBLMS2",
+        "2900GNCMS",
+        "2900GNCMS2",
+        "2900GNMS",
+        "2900GNMS2",
+        "3175CSBLMS",
+        "3175GNCELM",
+        "3175GNCMS",
+        "3175GNMS"
+      ],
+      "bakrute": [
+        "28525GN",
+        "28525GNL",
+        "28525YP",
+        "28525YPL"
+      ],
+      "sideglass": [
+        "28523GN",
+        "28523YP",
+        "28523YPL",
+        "28524GN",
+        "28524YP",
+        "28524YPL"
+      ],
+      "dørglass": [
+        "28519GNA",
+        "28519GNLAQ",
+        "28520GNA",
+        "28520GNLAQ",
+        "28521GN",
+        "28521GNL",
+        "28521YP",
+        "28521YPL",
+        "28522GN",
+        "28522GNL",
+        "28522YP",
+        "28522YPL"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL056",
+    "make": "VW",
+    "model": "PASSAT",
+    "year": 2018,
+    "expected": {
+      "frontrute": [
+        "1570GY",
+        "1570GY2",
+        "2875CSCELM2",
+        "2875CSM2",
+        "2875GNCM2",
+        "2875GNELM2",
+        "2875GNM2",
+        "3300CSCELM",
+        "3300CSCELM2",
+        "3300CSELM",
+        "3300GN",
+        "3300GNCM",
+        "3300GNCM2",
+        "3300GNELM",
+        "3300GNM"
+      ],
+      "bakrute": [
+        "20992GN",
+        "21080GN",
+        "21651GN",
+        "23058GN",
+        "28405GD",
+        "28405GN",
+        "28421GP",
+        "30464GN",
+        "30464GNL",
+        "30464GP",
+        "30464GPL",
+        "30479GN",
+        "30479GP"
+      ],
+      "sideglass": [
+        "20997GN",
+        "20998GN",
+        "21083GN",
+        "21084GN",
+        "28403GD",
+        "28404GD",
+        "30465GN",
+        "30466GN",
+        "30471GP",
+        "30472GP",
+        "30475GN",
+        "30475GP",
+        "30475GPL",
+        "30476GN",
+        "30476GP",
+        "30476GPL",
+        "30477GN",
+        "30477GP",
+        "30477GPL",
+        "30478GN",
+        "30478GP",
+        "30478GPL",
+        "8626LGQS4RVKW1Z",
+        "8626RGQS4RVKW1Z"
+      ],
+      "dørglass": [
+        "20993GN",
+        "20994GN",
+        "20995GN",
+        "20996GN",
+        "21081GN",
+        "21082GN",
+        "28400GN",
+        "28401GD",
+        "28402GD",
+        "30467GN",
+        "30467GNL",
+        "30468GNL",
+        "30469GP",
+        "30469GPL",
+        "30470GP",
+        "30473GN",
+        "30473GP",
+        "30473GPL",
+        "30474GN",
+        "30474GP",
+        "30474GPL"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL057",
+    "make": "VW",
+    "model": "TOURAN",
+    "year": 2012,
+    "expected": {
+      "frontrute": [
+        "3068GN",
+        "3068GNCM",
+        "3068GNM"
+      ],
+      "bakrute": [
+        "29319GN",
+        "29319YP"
+      ],
+      "sideglass": [
+        "29317GN",
+        "29317YP",
+        "29318GN",
+        "29318YP"
+      ],
+      "dørglass": [
+        "26345GD2",
+        "26345GN2",
+        "26346GD2",
+        "26346GN2"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL058",
+    "make": "PEUGEOT",
+    "model": "208",
+    "year": 2022,
+    "expected": {
+      "frontrute": [
+        "3153GN",
+        "3153GNCM",
+        "3153GNM",
+        "3153GY",
+        "6574AGACHIMOVZ",
+        "6574AGACHIMVZ",
+        "6574AGACIMVZ"
+      ],
+      "bakrute": [
+        "29757GN",
+        "29757GN2",
+        "29757YP",
+        "29757YP2",
+        "6574BGSHA",
+        "6574BYPHA"
+      ],
+      "sideglass": [
+        "29751GN",
+        "29752GN",
+        "29755GN",
+        "29755YP",
+        "29756GN",
+        "29756YP",
+        "6574LGSH5RVWZ",
+        "6574LYPH5RVWZ",
+        "6574RGSH5RVWZ",
+        "6574RYPH5RVWZ"
+      ],
+      "dørglass": [
+        "29753GN",
+        "29754GN",
+        "29759GN",
+        "29760GN",
+        "29761GN",
+        "29761YP",
+        "29762GN",
+        "29762YP",
+        "6574LGSH5FD1A",
+        "6574LGSH5RD",
+        "6574LYPH5RD",
+        "6574RGSH5FD1A",
+        "6574RGSH5RD",
+        "6574RYPH5RD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL059",
+    "make": "HONDA",
+    "model": "CR-V",
+    "year": 2004,
+    "expected": {
+      "frontrute": [
+        "2454GN",
+        "2454GY2",
+        "2637GY"
+      ],
+      "bakrute": [
+        "25997GN",
+        "25997YP"
+      ],
+      "sideglass": [
+        "25993GN",
+        "25993YP",
+        "25994GN",
+        "25994YP",
+        "25995GN",
+        "25995YP",
+        "25996GN",
+        "25996YP"
+      ],
+      "dørglass": [
+        "25989GN",
+        "25990GN",
+        "25991GN",
+        "25991YP",
+        "25992GN",
+        "25992YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL060",
     "make": "AUDI",
-    "model": "A5 (8T3)",
+    "model": "AUDI A4",
     "year": 2008,
     "expected": {
       "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2"
+        "2324CSGY",
+        "2324CSGYEL",
+        "2324GY",
+        "2324GYM",
+        "2420CSGY",
+        "2420GY",
+        "2835GNCM",
+        "2835GNCM2",
+        "2835GY",
+        "2835GYM",
+        "2835GYM2"
       ],
       "bakrute": [
-        "28012GN",
-        "28012YP"
+        "25387GN",
+        "28171GN",
+        "28171YP",
+        "28322GN",
+        "28322YP",
+        "8589GZPE5PRS",
+        "8589GZPE5PRSB",
+        "8589GZPS5PRS"
       ],
       "sideglass": [
-        "28015GN",
-        "28016GN"
+        "25384GN",
+        "25385GN",
+        "25386GN",
+        "25635YP",
+        "25635YP2",
+        "25636YP",
+        "25636YP2",
+        "25728GN",
+        "25937GN",
+        "25938GN",
+        "27017GN",
+        "27017YP",
+        "27018GN",
+        "27018YP",
+        "28169GN",
+        "28169GN2",
+        "28170GN",
+        "28325GN",
+        "28325GN2",
+        "28325YP",
+        "28326GN",
+        "28326YP",
+        "8572LGSE5RQAZ6F",
+        "8572RGSE5RQAZ6F"
       ],
       "dørglass": [
-        "28013GN",
-        "28014GN"
+        "25633GN",
+        "25633YP",
+        "25634GN",
+        "25634YP",
+        "25935GN",
+        "25936GN",
+        "28165GN",
+        "28166GN",
+        "28167GN",
+        "28168GN",
+        "28323GN",
+        "28323YP",
+        "28324GN",
+        "28324YP"
       ]
     }
   },
   {
-    "regnr": "REAL121",
-    "make": "AUDI",
-    "model": "A5 / S5 Sportback (8TA)",
+    "regnr": "REAL061",
+    "make": "SKODA",
+    "model": "OCTAVIA",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "2075GY",
+        "2583CSGYM",
+        "2583GY",
+        "2986GNM",
+        "2986GYM",
+        "3205GN",
+        "3205GNCELM",
+        "3205GNCELM2",
+        "3205GNCM",
+        "3205GNCM2",
+        "3205GNELM",
+        "3205GNELM2",
+        "3205GNM",
+        "3205GNM2",
+        "3205GYCM"
+      ],
+      "bakrute": [
+        "26885GN",
+        "27125GD",
+        "27125GN",
+        "30070GN",
+        "30070GN2",
+        "30070GP",
+        "30070GP2",
+        "30083GN",
+        "30083GP"
+      ],
+      "sideglass": [
+        "24407GN",
+        "24408GN",
+        "24409GN",
+        "24410GN",
+        "27123GD",
+        "27123GN",
+        "27124GD",
+        "27124GN",
+        "30075GN",
+        "30076GN",
+        "30079GN",
+        "30079GP",
+        "30080GN",
+        "30080GP",
+        "30081GN",
+        "30081GN2",
+        "30081GP",
+        "30081GP2",
+        "30082GN",
+        "30082GN2",
+        "30082GP",
+        "30082GP2",
+        "7816LGPH5RVWZ",
+        "7816LGPH5RVWZ1D",
+        "7816LGSH5RVWZ",
+        "7816RGPH5RVWZ",
+        "7816RGPH5RVWZ1D",
+        "7816RGSH5RVWZ"
+      ],
+      "dørglass": [
+        "23485GN",
+        "23487GN",
+        "23488GN",
+        "26879GN",
+        "30071GN",
+        "30072GN",
+        "30073GN",
+        "30073GP",
+        "30074GN",
+        "30074GP",
+        "30077GN",
+        "30077GP",
+        "30078GN",
+        "30078GP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL062",
+    "make": "MITSUBISHI",
+    "model": "MITSUBISHI OUTLANDER",
     "year": 2011,
     "expected": {
       "frontrute": [
-        "2800GNCM",
-        "2800GNCM2",
-        "2800GNCMELA",
-        "2800GYAM",
-        "2800GYM",
-        "2800GYM2",
-        "2952GNCM",
-        "2952GNCM2",
-        "2952GYM",
-        "2952GYM2"
+        "2508GN",
+        "2508GY",
+        "2508GYEL",
+        "2776GN",
+        "2776GNEL",
+        "2776GY",
+        "2776GYEL",
+        "2776GYELM"
       ],
       "bakrute": [
-        "28012GN",
-        "28012YP",
-        "8592GZPC2SRE"
+        "26401GN",
+        "26401GN2",
+        "26401YP",
+        "26402YP",
+        "27899GN",
+        "27899YP",
+        "5668GZPR5SR",
+        "5680GZPR5SR"
       ],
       "sideglass": [
-        "28015GN",
-        "28016GN",
-        "28729GN",
-        "28730GN"
+        "26399GN",
+        "26399YP",
+        "26400GN",
+        "26400YP",
+        "27897GN",
+        "27897GN2",
+        "27897YP",
+        "27897YP2",
+        "27898GN",
+        "27898GN2",
+        "27898YP",
+        "27898YP2"
       ],
       "dørglass": [
-        "28013GN",
-        "28014GN",
-        "28727GN",
-        "28728GN"
+        "26395GN",
+        "26396GN",
+        "26397GN",
+        "26397YP",
+        "26398GN",
+        "26398YP",
+        "27893GN",
+        "27894GN",
+        "27895GN",
+        "27895YP",
+        "27896GN",
+        "27896YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL063",
+    "make": "SKODA",
+    "model": "SUPERB",
+    "year": 2011,
+    "expected": {
+      "frontrute": [
+        "2081GNELM",
+        "2081GY",
+        "2081GYM",
+        "2866GNELM",
+        "2866GYM"
+      ],
+      "bakrute": [
+        "28352GD",
+        "28352GN",
+        "28978GD",
+        "28978GN"
+      ],
+      "sideglass": [
+        "28357GD",
+        "28357GN",
+        "28358GD",
+        "28358GN",
+        "28981GD",
+        "28981GD2",
+        "28981GN",
+        "28982GD",
+        "28982GD2",
+        "28982GN",
+        "28983GD",
+        "28983GD2",
+        "28983GN",
+        "28984GD",
+        "28984GD2",
+        "28984GN"
+      ],
+      "dørglass": [
+        "28353GN",
+        "28354GN",
+        "28355GD",
+        "28355GN",
+        "28356GD",
+        "28356GN",
+        "28979GD",
+        "28979GN",
+        "28980GD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL064",
+    "make": "VW",
+    "model": "UP!",
+    "year": 2012,
+    "expected": {
+      "frontrute": [
+        "3148GN",
+        "3148GNC",
+        "3148GNCELM",
+        "3148GNCELM2",
+        "3148GNCM",
+        "3148GNCM2"
+      ],
+      "bakrute": [
+        "29693GN",
+        "29693YP",
+        "8613GZPH5PRS"
+      ],
+      "sideglass": [
+        "29691GN",
+        "29691YP",
+        "29692GN",
+        "29692YP"
+      ],
+      "dørglass": [
+        "29689GN",
+        "29690GN",
+        "29747GN",
+        "29748GN",
+        "29749GN",
+        "29749YP",
+        "29750GN",
+        "29750YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL065",
+    "make": "VW",
+    "model": "TOUAREG",
+    "year": 2007,
+    "expected": {
+      "frontrute": [
+        "2458CSGYM",
+        "2458GY",
+        "2458GYELM",
+        "2458GYM"
+      ],
+      "bakrute": [
+        "26019GN",
+        "26019GP",
+        "8576GZPV5SRW"
+      ],
+      "sideglass": [
+        "26017GD",
+        "26017GN",
+        "26018GD",
+        "26018GN",
+        "26319CSL",
+        "26319GN",
+        "26320CSL",
+        "26320GN",
+        "8576LGSR5RQAK1Z",
+        "8576RGSR5RQAK1Z"
+      ],
+      "dørglass": [
+        "26013GN",
+        "26013GNL",
+        "26014CSL",
+        "26014GN",
+        "26014GNL",
+        "26015GD",
+        "26015GN",
+        "26015GNL",
+        "26016GD",
+        "26016GN",
+        "26016GNL"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL066",
+    "make": "MAZDA",
+    "model": "MAZDA6",
+    "year": 2017,
+    "expected": {
+      "frontrute": [
+        "2842GN",
+        "2842GY",
+        "2842GYM",
+        "3195GNCPM",
+        "3195GNCPM2",
+        "3195GNPM",
+        "5180AGACHMUVZ95"
+      ],
+      "bakrute": [
+        "26065GN",
+        "28450GN",
+        "28450GP"
+      ],
+      "sideglass": [
+        "26063GN",
+        "26064GN",
+        "28453GN",
+        "28454GN",
+        "28455GN",
+        "28455GP",
+        "28456GN",
+        "28456GP"
+      ],
+      "dørglass": [
+        "26059GN",
+        "26060GN",
+        "26061GN",
+        "26062GN",
+        "28207GN",
+        "28208GN",
+        "28451GN",
+        "28452GN",
+        "29970GN"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL067",
+    "make": "BMW",
+    "model": "IX1 XDRIVE30",
+    "year": 2022,
+    "expected": {
+      "frontrute": [
+        "2303AGACMUVZ",
+        "2303AGACMUVZ1L",
+        "2303AGACMUVZ2L",
+        "2303AGACMVZ",
+        "2982GY",
+        "2982GYM",
+        "3355GNCM",
+        "3355GNCMU",
+        "3355GYM",
+        "3355PYKIT"
+      ],
+      "bakrute": [
+        "2303BGSRAZ",
+        "2303BYPRAZ",
+        "28883GN",
+        "28883YP",
+        "30828GN",
+        "30828YP"
+      ],
+      "sideglass": [
+        "28879GN",
+        "28879YP",
+        "28880GN",
+        "28880YP",
+        "28881GN",
+        "28881YP",
+        "28882GN",
+        "28882YP",
+        "30835GN",
+        "30835GN2",
+        "30835GNC",
+        "30835YP2",
+        "30835YPC",
+        "30836GN",
+        "30836GN2",
+        "30836GNC",
+        "30836YP2",
+        "30836YPC"
+      ],
+      "dørglass": [
+        "2303LGSR5FD",
+        "2303LGSR5RD",
+        "2303LYPR5RD",
+        "2303RGSR5FD",
+        "2303RGSR5RD",
+        "2303RYPR5RD",
+        "28875GN",
+        "28876GN",
+        "28877GN",
+        "28877YP",
+        "28878GN",
+        "28878YP",
+        "30829GN",
+        "30830GN",
+        "30831GN",
+        "30831YP",
+        "30832GN",
+        "30832YP",
+        "30833GN",
+        "30833YP",
+        "30834GN",
+        "30834YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL068",
+    "make": "VOLVO",
+    "model": "V70",
+    "year": 2007,
+    "expected": {
+      "frontrute": [
+        "2270CSBL",
+        "2270GB",
+        "2270GBM",
+        "2700CSBLM",
+        "2700CSBLMP",
+        "2700GN",
+        "2700GNCM",
+        "2700GNCMP",
+        "2700GNM",
+        "2700GNMP"
+      ],
+      "bakrute": [
+        "25033GN",
+        "25033GP",
+        "28049GN",
+        "28049GNL",
+        "28049YP",
+        "28049YPL"
+      ],
+      "sideglass": [
+        "25031GD",
+        "25031GN",
+        "25032GD",
+        "25032GN",
+        "25032PY",
+        "28047GN",
+        "28047GN2",
+        "28047YP",
+        "28047YP2",
+        "28047YPL",
+        "28048GN",
+        "28048GN2",
+        "28048YP",
+        "28048YP2",
+        "28048YPL"
+      ],
+      "dørglass": [
+        "25027GNL",
+        "25028GNL",
+        "25029GNL",
+        "25029GPL",
+        "25030GNL",
+        "25030GPL",
+        "25073GN",
+        "25074GN",
+        "25075GN",
+        "25076GN",
+        "27475GN",
+        "27475GNAQ",
+        "27475GNL",
+        "27475GNLAQ",
+        "27476GN",
+        "27476GNAQ",
+        "27476GNL",
+        "27476GNLAQ",
+        "28045GN",
+        "28045GNL",
+        "28045YD",
+        "28045YPL",
+        "28046GN",
+        "28046GNL",
+        "28046YD",
+        "28046YPL"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL069",
+    "make": "RENAULT",
+    "model": "ZOE",
+    "year": 2016,
+    "expected": {
+      "frontrute": [
+        "3215BL",
+        "3215BLM",
+        "3215GNM"
+      ],
+      "bakrute": [
+        "30147BP",
+        "30147GN"
+      ],
+      "dørglass": [
+        "30143BL",
+        "30144BL"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL070",
+    "make": "VOLVO",
+    "model": "C40",
+    "year": 2022,
+    "expected": {
+      "frontrute": [
+        "8850AGACMVZ1M"
+      ],
+      "bakrute": [
+        "8850BGSRA",
+        "8850BYPRA"
+      ],
+      "sideglass": [
+        "8850LGSR5RVWZ",
+        "8850LYPR5RVWZ",
+        "8850RGSR5RVWZ",
+        "8850RYPR5RVWZ"
+      ],
+      "dørglass": [
+        "8850LGSR5FD",
+        "8850LGSR5RD",
+        "8850LYPR5RD",
+        "8850RGSR5FD",
+        "8850RGSR5RD",
+        "8850RYPR5RD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL071",
+    "make": "NISSAN",
+    "model": "NISSAN LEAF",
+    "year": 2013,
+    "expected": {
+      "frontrute": [
+        "3111GN",
+        "3111GN2",
+        "3111GNM"
+      ],
+      "bakrute": [
+        "29708GN",
+        "29708YP"
+      ],
+      "sideglass": [
+        "29709GN",
+        "29710GN",
+        "29715GN",
+        "29715YP",
+        "29715YP2",
+        "29716GN",
+        "29716YP",
+        "29716YP2"
+      ],
+      "dørglass": [
+        "29711GN",
+        "29711GN2",
+        "29712GN",
+        "29712GN2",
+        "29713GN",
+        "29713YP",
+        "29714GN",
+        "29714YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL072",
+    "make": "KIA",
+    "model": "NIRO",
+    "year": 2022,
+    "expected": {
+      "frontrute": [
+        "4466AGRCIMOUV",
+        "4466AGRCIMOV",
+        "4466AGRCMOVZ"
+      ],
+      "bakrute": [
+        "4466BGSRI",
+        "4466BYPRI"
+      ],
+      "sideglass": [
+        "4466LYPR5RV",
+        "4466RYPR5RV"
+      ],
+      "dørglass": [
+        "4466LGNR5RDW",
+        "4466LGSR5FDKW1M",
+        "4466LGSR5FDW",
+        "4466LYPR5RDW",
+        "4466RGNR5RDW",
+        "4466RGSR5FDKW1M",
+        "4466RGSR5FDW",
+        "4466RYPR5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL073",
+    "make": "FORD",
+    "model": "FOCUS",
+    "year": 2009,
+    "expected": {
+      "frontrute": [
+        "2640BLELM",
+        "2640CS",
+        "2640CSELM",
+        "2640GN",
+        "2640GNEL",
+        "2640GNELM",
+        "2640GNM",
+        "2640GYM"
+      ],
+      "bakrute": [
+        "24311GN",
+        "27164GN",
+        "27164YP",
+        "27201GN",
+        "27202GN",
+        "27202GP",
+        "27202YP",
+        "28307GN"
+      ],
+      "sideglass": [
+        "27117GN",
+        "27117YP",
+        "27118GN",
+        "27118YP",
+        "27197GD",
+        "27197GN",
+        "27197YP",
+        "27198GD",
+        "27198GN",
+        "27198YP",
+        "27199GN",
+        "27200GN",
+        "27205GN",
+        "27206GN",
+        "28305GN",
+        "28306GN"
+      ],
+      "dørglass": [
+        "27113BL",
+        "27113GN",
+        "27114BL",
+        "27114GN",
+        "27115GN",
+        "27115YP",
+        "27116GD",
+        "27116GN",
+        "27116YP",
+        "27195GN",
+        "27195YP",
+        "27196GD",
+        "27196GN",
+        "27196YP",
+        "27203BL",
+        "27203GN",
+        "27204BL",
+        "27204GN",
+        "28303GN",
+        "28304GN"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL074",
+    "make": "AUDI",
+    "model": "Q7 E-TRON",
+    "year": 2017,
+    "expected": {
+      "frontrute": [
+        "3326CKCSCM",
+        "3326CKCSCMU",
+        "3326CKCSCMU2",
+        "3326CSCM",
+        "3326GNCM",
+        "3326GNCMU"
+      ],
+      "bakrute": [
+        "30625YP"
+      ],
+      "sideglass": [
+        "30617GN",
+        "30618GN",
+        "30623YP",
+        "30624YP"
+      ],
+      "dørglass": [
+        "30619CSL",
+        "30619GN",
+        "30620CSL",
+        "30620GN",
+        "30621YP",
+        "30622YP",
+        "8660LGRC4FDKW",
+        "8660RGRC4FDKW"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL075",
+    "make": "AUDI",
+    "model": "AUDI A4 ALLROAD QUATTRO",
+    "year": 2010,
+    "expected": {
+      "frontrute": [
+        "2324CSGY",
+        "2324CSGYEL",
+        "2324GY",
+        "2324GYM",
+        "2420CSGY",
+        "2420GY",
+        "2746GY",
+        "2746GYM",
+        "2794GY",
+        "2794GYAM",
+        "2794GYM",
+        "2835GNCM",
+        "2835GNCM2",
+        "2835GY",
+        "2835GYM",
+        "2835GYM2"
+      ],
+      "bakrute": [
+        "24419GN",
+        "25387GN",
+        "25559GN",
+        "25559GN2",
+        "27753GN",
+        "28171GN",
+        "28171YP",
+        "28322GN",
+        "28322YP",
+        "8589GZPE5PRS",
+        "8589GZPE5PRSB",
+        "8589GZPS5PRS"
+      ],
+      "sideglass": [
+        "24413GN",
+        "24414GN",
+        "25384GN",
+        "25385GN",
+        "25386GN",
+        "25555GN",
+        "25556GN",
+        "25937GN",
+        "25938GN",
+        "27017GN",
+        "27017YP",
+        "27018GN",
+        "27018YP",
+        "27751GN",
+        "27752GN",
+        "28169GN",
+        "28169GN2",
+        "28170GN",
+        "28325GN",
+        "28325GN2",
+        "28325YP",
+        "28326GN",
+        "28326YP",
+        "8572LGSE5RQAZ6F",
+        "8572RGSE5RQAZ6F",
+        "8591LYPC2RQZ",
+        "8591RYPC2RQZ"
+      ],
+      "dørglass": [
+        "24415GN",
+        "24416GN",
+        "25557GN",
+        "25558GN",
+        "25633GN",
+        "25633YP",
+        "25634GN",
+        "25634YP",
+        "25935GN",
+        "25936GN",
+        "27749GN",
+        "27750GN",
+        "28165GN",
+        "28166GN",
+        "28167GN",
+        "28168GN",
+        "28323GN",
+        "28323YP",
+        "28324GN",
+        "28324YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL076",
+    "make": "SKODA",
+    "model": "OCTAVIA",
+    "year": 2005,
+    "expected": {
+      "frontrute": [
+        "2075GY",
+        "2075GYM",
+        "2583CSGYM",
+        "2583GY",
+        "2583GYM"
+      ],
+      "bakrute": [
+        "24411GN",
+        "24411GP",
+        "26885GN",
+        "27125GD",
+        "27125GN"
+      ],
+      "sideglass": [
+        "24407GN",
+        "24408GN",
+        "24409GN",
+        "24410GN",
+        "26883GN",
+        "26884GN",
+        "27121GD",
+        "27121GN",
+        "27122GD",
+        "27122GN",
+        "27123GD",
+        "27123GN",
+        "27124GD",
+        "27124GN"
+      ],
+      "dørglass": [
+        "23485GN",
+        "23486GN",
+        "23487GN",
+        "23488GN",
+        "24405GN",
+        "24405GP",
+        "24406GN",
+        "24406GP",
+        "26879GN",
+        "26880GN",
+        "26881GN",
+        "26882GN",
+        "27119GD",
+        "27119GN",
+        "27120GN"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL077",
+    "make": "TOYOTA",
+    "model": "PRIUS",
+    "year": 2012,
+    "expected": {
+      "frontrute": [
+        "2958GN",
+        "2958GNM",
+        "2999GNMU",
+        "2999GNMU2",
+        "3170GNCM",
+        "3170GNMU",
+        "3170GNMU2",
+        "3170GYM"
+      ],
+      "bakrute": [
+        "28773GN",
+        "28774YP",
+        "29863GN",
+        "29863YP"
+      ],
+      "sideglass": [
+        "28765GN",
+        "28766GN",
+        "28771GN",
+        "28772GN",
+        "29855GN",
+        "29856GN"
+      ],
+      "dørglass": [
+        "28767GN",
+        "28768GN",
+        "28769GN",
+        "29857GN",
+        "29858GN",
+        "29859GN",
+        "29859YP",
+        "29860GN",
+        "29860YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL078",
+    "make": "AUDI",
+    "model": "E-TRON",
+    "year": 2019,
+    "expected": {
+      "frontrute": [
+        "8646ACKCKMUVZ",
+        "8646AGACIMUVZ",
+        "8646AGACIMVZ",
+        "8646AGACMUVZ",
+        "8646AGACMVZ"
+      ],
+      "bakrute": [
+        "8646BGSRAIX",
+        "8646BGSRAX1J",
+        "8646BYPRAIX",
+        "8646BYPRAX1J"
+      ],
+      "sideglass": [
+        "8646LGRR5RQKZ1M",
+        "8646LGSR5RQZ1M",
+        "8646LYPR5RQZ1L",
+        "8646LYPR5RQZ1M",
+        "8646LYQR5RDKW1J",
+        "8646LYQR5RQKZ1M",
+        "8646RGRR5RQKZ1M",
+        "8646RGSR5RQAZ1M",
+        "8646RGSR5RQZ1M",
+        "8646RYPR5RQAZ1M",
+        "8646RYPR5RQZ1L",
+        "8646RYPR5RQZ1M",
+        "8646RYQR5RDKW1J",
+        "8646RYQR5RQAK1Z"
+      ],
+      "dørglass": [
+        "8646LGRR5FDKW",
+        "8646LGRR5RDKW",
+        "8646LGSR5FD",
+        "8646LGSR5RD",
+        "8646LGSR5RD1J",
+        "8646LYPR5RD",
+        "8646LYPR5RD1J",
+        "8646LYQR5RDKW",
+        "8646RGRR5FDKW",
+        "8646RGRR5RDKW",
+        "8646RGSR5FD",
+        "8646RGSR5RD",
+        "8646RGSR5RD1J",
+        "8646RYPR5RD",
+        "8646RYPR5RD1J",
+        "8646RYQR5RDKW",
+        "8660LGRC4FDKW",
+        "8660RGRC4FDKW"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL079",
+    "make": "TOYOTA",
+    "model": "TOYOTA YARIS HYBRID",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "2185GN2",
+        "2250GY2",
+        "2699GN",
+        "3124GN",
+        "3124GNCMP",
+        "3124GNCMP2",
+        "3124GNM"
+      ],
+      "bakrute": [
+        "24901GNV",
+        "24901YP",
+        "27473GN",
+        "29575GN",
+        "29575YP"
+      ],
+      "sideglass": [
+        "24495GN",
+        "24496GN",
+        "24727GN",
+        "24728GN",
+        "24729GN",
+        "24730GN",
+        "24899GN",
+        "24899YP",
+        "24900GN",
+        "24900YP",
+        "27465GN",
+        "27466GN",
+        "27471GN",
+        "27472GN",
+        "27831GN",
+        "27832GN",
+        "29569GN",
+        "29570GN",
+        "29573GN",
+        "29573YP",
+        "29574GN",
+        "29574YP"
+      ],
+      "dørglass": [
+        "24493GN",
+        "24494GN",
+        "24725GN",
+        "24726GN",
+        "24895GN",
+        "24896GN",
+        "24897GN",
+        "24897YP",
+        "24898GN",
+        "24898YP",
+        "27467GN",
+        "27468GN",
+        "27469GN",
+        "27470GN",
+        "27829GN",
+        "27830GN",
+        "29571GN",
+        "29572GN",
+        "29577GN",
+        "29578GN",
+        "29579GN",
+        "29579YP",
+        "29580GN"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL080",
+    "make": "MITSUBISHI",
+    "model": "MITSUBISHI OUTLANDER",
+    "year": 2017,
+    "expected": {
+      "frontrute": [
+        "2776GN",
+        "2776GNEL",
+        "2776GY",
+        "2776GYEL",
+        "2776GYELM",
+        "3186GNCELM",
+        "3186GNCELM2",
+        "3186GNCELM3",
+        "3186GNCELM4",
+        "3186GNCELM5",
+        "3186GNCELM6",
+        "3186GNELM",
+        "3186GNELM2",
+        "3186GYM"
+      ],
+      "bakrute": [
+        "27899GN",
+        "27899YP",
+        "29911GN",
+        "29911YP",
+        "5680GZPR5SR"
+      ],
+      "sideglass": [
+        "27897GN",
+        "27897GN2",
+        "27897YP",
+        "27897YP2",
+        "27898GN",
+        "27898GN2",
+        "27898YP",
+        "27898YP2",
+        "29909YP",
+        "29910YP"
+      ],
+      "dørglass": [
+        "27893GN",
+        "27894GN",
+        "27895GN",
+        "27895YP",
+        "27896GN",
+        "27896YP",
+        "29905GN",
+        "29906GN",
+        "29907GN",
+        "29907YP",
+        "29908GN",
+        "29908YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL081",
+    "make": "MAZDA",
+    "model": "3",
+    "year": 2007,
+    "expected": {
+      "frontrute": [
+        "2557GNM",
+        "2557GYM",
+        "2763GY"
+      ],
+      "bakrute": [
+        "26681GN"
+      ],
+      "sideglass": [
+        "26679GN",
+        "26680GN"
+      ],
+      "dørglass": [
+        "26675GN",
+        "26676GN",
+        "26677GN",
+        "26678GN"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL082",
+    "make": "FORD",
+    "model": "MONDEO",
+    "year": 2015,
+    "expected": {
+      "frontrute": [
+        "2308GNEL",
+        "2308GY",
+        "2308GYEL",
+        "2812BLEL",
+        "2812GNM",
+        "2957BLELM",
+        "2957CSCELM",
+        "2957CSELM",
+        "2957GNCELM",
+        "2957GNELM",
+        "3210CSELM",
+        "3210CSM",
+        "3210GNELM",
+        "3304GNCELM",
+        "3304GNELM"
+      ],
+      "bakrute": [
+        "25320YP",
+        "25329GN",
+        "28037BL",
+        "28037GN",
+        "28037GP",
+        "28038BL",
+        "28038GN",
+        "28038GP",
+        "28038YP2",
+        "28043BL",
+        "28043GN",
+        "28043YP",
+        "30543GN",
+        "30543YP",
+        "30544GN",
+        "30544YP",
+        "30598GN",
+        "30598YP"
+      ],
+      "sideglass": [
+        "25317GN",
+        "25318GN",
+        "25323GN",
+        "25324GN",
+        "25325GN",
+        "25325GP",
+        "25326GP",
+        "25328GN",
+        "25328GP",
+        "28035BL",
+        "28035GN",
+        "28035GN2",
+        "28035YP",
+        "28035YPC",
+        "28036BL",
+        "28036GN",
+        "28036GN2",
+        "28036YP",
+        "28036YPC",
+        "28041BL",
+        "28041GN",
+        "28041GN2",
+        "28041YP",
+        "28041YP2",
+        "28042BL",
+        "28042GN",
+        "28042GN2",
+        "28042YP",
+        "28042YP2",
+        "30535GN",
+        "30536GN",
+        "30541GN2",
+        "30541YP",
+        "30542YP",
+        "30547GN",
+        "30547YP",
+        "30548GN",
+        "30548YP"
+      ],
+      "dørglass": [
+        "25313GN",
+        "25314GN",
+        "25315GN",
+        "25316GN",
+        "25321GN",
+        "25322GN",
+        "25322GP",
+        "28031BL",
+        "28031GN",
+        "28032BL",
+        "28032GN",
+        "28033BL",
+        "28033GN",
+        "28033YP",
+        "28034BL",
+        "28034GN",
+        "28034YP",
+        "28039BL",
+        "28039GN",
+        "28039GP",
+        "28040BL",
+        "28040GN",
+        "28040GP",
+        "28040YP",
+        "30537GN",
+        "30537GNL",
+        "30538GN",
+        "30538GNL",
+        "30539YP",
+        "30540YP",
+        "30545GN",
+        "30545YP",
+        "30546GN",
+        "30546YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL083",
+    "make": "PORSCHE",
+    "model": "MACAN TURBO",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "3298CSGYM",
+        "3298GNCM",
+        "3298GNCM2",
+        "3298GYM"
+      ],
+      "bakrute": [
+        "30504GN",
+        "30504YPL"
+      ],
+      "sideglass": [
+        "6736LCCR5FVK",
+        "6736LGNR5FVW",
+        "6736LGSR5RQZ1D",
+        "6736LYDR5RQAZ1D",
+        "6736LYDR5RQAZ1F",
+        "6736LYPR5RQAK4Z",
+        "6736RCCR5FVK",
+        "6736RGNR5FVW",
+        "6736RGSR5RQZ2D",
+        "6736RYDR5RQAZ1D",
+        "6736RYDR5RQAZ1F",
+        "6736RYPR5RQAK4Z"
+      ],
+      "dørglass": [
+        "6736LCCR5FDKW",
+        "6736LGSR5FD",
+        "6736LGSR5RD",
+        "6736LYPR5RD",
+        "6736LYRR5RDKW",
+        "6736RCCR5FDKW",
+        "6736RGSR5FD",
+        "6736RGSR5RD",
+        "6736RYRR5RDKW"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL084",
+    "make": "KIA",
+    "model": "SPORTAGE",
+    "year": 2016,
+    "expected": {
+      "frontrute": [
+        "3055GB",
+        "3055GBELM",
+        "3055GBM",
+        "3372GBCELM"
+      ],
+      "bakrute": [
+        "29245GN",
+        "29245YP",
+        "29245YP2",
+        "30949GN",
+        "4447BGPRI",
+        "4447BGSRI"
+      ],
+      "sideglass": [
+        "29243YP",
+        "29244YP",
+        "30947GP",
+        "30948GP"
+      ],
+      "dørglass": [
+        "29239GN",
+        "29240GN",
+        "29241YP",
+        "29242YP",
+        "30943GN",
+        "30944GN",
+        "30945GP",
+        "30946GP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL085",
+    "make": "VW",
+    "model": "GOLF",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "3109GNAG",
+        "3109GNAM",
+        "3109GNMAG",
+        "3190CSCELM",
+        "3190CSCELM2",
+        "3190CSELM",
+        "3190CSELM2",
+        "3190GN",
+        "3190GNCELM",
+        "3190GNCELM2",
+        "3190GNCM",
+        "3190GNCM2",
+        "3190GNELM",
+        "3190GNELM2",
+        "3190GNM",
+        "3190GNM2",
+        "3190GYELM",
+        "3252CSCELM",
+        "3252CSCELM2",
+        "3252CSELM",
+        "3252CSELM2",
+        "3252GN",
+        "3252GNCM",
+        "3252GNCM2",
+        "3252GNM",
+        "3252GNM2",
+        "3252GYM"
+      ],
+      "bakrute": [
+        "29506GN",
+        "29878GN",
+        "29878GP",
+        "30302GN",
+        "30302GP",
+        "30333GD",
+        "30333GN",
+        "8586GZPE4SREB",
+        "8586GZPE4SREF",
+        "8618GZPR5EREB",
+        "8618GZPR5EREF",
+        "8618GZPR5SREF"
+      ],
+      "sideglass": [
+        "29509GN",
+        "29510GN",
+        "29879GN",
+        "29880GN",
+        "29885GN",
+        "29885GP",
+        "29886GN",
+        "29886GP",
+        "30305GN",
+        "30305GP",
+        "30306GN",
+        "30306GP",
+        "30307GNC",
+        "30307GNS",
+        "30307GPC",
+        "30307GPS",
+        "30308GNC",
+        "30308GNS",
+        "30308GPC",
+        "30308GPS",
+        "30323GN",
+        "30323GNC",
+        "30324GN",
+        "30324GNC",
+        "30329GD",
+        "30329GN",
+        "30330GD",
+        "30330GN",
+        "30331GDC",
+        "30331GN",
+        "30331GNC",
+        "30332GDC",
+        "30332GN",
+        "30332GNC"
+      ],
+      "dørglass": [
+        "29507GN",
+        "29508GN",
+        "29879",
+        "29881GN",
+        "29882GN",
+        "29883GN",
+        "29883GP",
+        "29884GN",
+        "29884GP",
+        "30303GN",
+        "30303GP",
+        "30304GN",
+        "30304GP",
+        "30325GN",
+        "30326GN",
+        "30327GN",
+        "30327GP",
+        "30328GN",
+        "30328GP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL086",
+    "make": "NISSAN",
+    "model": "NISSAN JUKE",
+    "year": 2016,
+    "expected": {
+      "frontrute": [
+        "3040GN",
+        "3040GNM",
+        "3040GNMJ",
+        "3040GYM"
+      ],
+      "bakrute": [
+        "29170GN",
+        "29170YD"
+      ],
+      "dørglass": [
+        "29171GN",
+        "29172GN",
+        "29173GN",
+        "29173YD",
+        "29174GN",
+        "29174YD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL087",
+    "make": "HYUNDAI",
+    "model": "IONIQ5",
+    "year": 2021,
+    "expected": {
+      "frontrute": [
+        "4163AGRBLCMOV"
+      ],
+      "bakrute": [
+        "4163BGNH",
+        "4163BGNH1J",
+        "4163BYPH",
+        "4163BYPH1J"
+      ],
+      "sideglass": [
+        "4163LGNH5RV",
+        "4163LYPH5RV",
+        "4163RGNH5RV",
+        "4163RYPH5RV"
+      ],
+      "dørglass": [
+        "4163LGNH5FDW1M",
+        "4163LGNH5RDW",
+        "4163LYPH5RDW",
+        "4163RGNH5FDW1M",
+        "4163RGNH5RDW",
+        "4163RYPH5RDW"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL088",
+    "make": "SKODA",
+    "model": "ENYAQ 60",
+    "year": 2021,
+    "expected": {
+      "frontrute": [
+        "7825ACKCKMUVZ",
+        "7825ACKCKMVZ",
+        "7825AGACMUVZ",
+        "7825AGACMVZ"
+      ],
+      "bakrute": [
+        "7825BGSRAIX",
+        "7825BYPCABIXZ1H",
+        "7825BYPRAIX"
+      ],
+      "sideglass": [
+        "7825LGSR5FVWZ",
+        "7825LYPC5RVWZ",
+        "7825LYPR5RQWZ",
+        "7825LYPR5RVWZ",
+        "7825RGSR5FVWZ",
+        "7825RYPR5RQWZ",
+        "7825RYPR5RVWZ"
+      ],
+      "dørglass": [
+        "7825LGAR5FDKW",
+        "7825LGSR5FD",
+        "7825LYPC5RD",
+        "7825LYPR5RD",
+        "7825RGAR5FDKW",
+        "7825RGSR5FD",
+        "7825RYPR5RD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL089",
+    "make": "FORD",
+    "model": "MONDEO",
+    "year": 2013,
+    "expected": {
+      "frontrute": [
+        "2308GNEL",
+        "2308GY",
+        "2308GYEL",
+        "2812BLEL",
+        "2812GNM",
+        "2957BLELM",
+        "2957CSCELM",
+        "2957CSELM",
+        "2957GNCELM",
+        "2957GNELM",
+        "3210CSELM",
+        "3210CSM",
+        "3210GNELM"
+      ],
+      "bakrute": [
+        "25320YP",
+        "25329GN",
+        "28037BL",
+        "28037GN",
+        "28037GP",
+        "28038BL",
+        "28038GN",
+        "28038GP",
+        "28038YP2",
+        "28043BL",
+        "28043GN",
+        "28043YP"
+      ],
+      "sideglass": [
+        "25317GN",
+        "25318GN",
+        "25323GN",
+        "25324GN",
+        "25325GN",
+        "25325GP",
+        "25326GP",
+        "25328GN",
+        "25328GP",
+        "28035BL",
+        "28035GN",
+        "28035GN2",
+        "28035YP",
+        "28035YPC",
+        "28036BL",
+        "28036GN",
+        "28036GN2",
+        "28036YP",
+        "28036YPC",
+        "28041BL",
+        "28041GN",
+        "28041GN2",
+        "28041YP",
+        "28041YP2",
+        "28042BL",
+        "28042GN",
+        "28042GN2",
+        "28042YP",
+        "28042YP2"
+      ],
+      "dørglass": [
+        "25313GN",
+        "25314GN",
+        "25315GN",
+        "25316GN",
+        "25321GN",
+        "25322GN",
+        "25322GP",
+        "28031BL",
+        "28031GN",
+        "28032BL",
+        "28032GN",
+        "28033BL",
+        "28033GN",
+        "28033YP",
+        "28034BL",
+        "28034GN",
+        "28034YP",
+        "28039BL",
+        "28039GN",
+        "28039GP",
+        "28040BL",
+        "28040GN",
+        "28040GP",
+        "28040YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL090",
+    "make": "PEUGEOT",
+    "model": "508",
+    "year": 2017,
+    "expected": {
+      "frontrute": [
+        "3086GNG",
+        "3086GNGM"
+      ],
+      "bakrute": [
+        "29371GN",
+        "29372GN",
+        "29372GP"
+      ],
+      "sideglass": [
+        "29365GN",
+        "29366GN",
+        "29375GN",
+        "29375GP",
+        "29376GN",
+        "29376GP"
+      ],
+      "dørglass": [
+        "29367GN",
+        "29367GNL",
+        "29368GN",
+        "29368GNL",
+        "29369GN",
+        "29369GP",
+        "29370GN",
+        "29370GP",
+        "29373GP",
+        "29373GPL",
+        "29374GP",
+        "29374GPL"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL091",
+    "make": "AUDI",
+    "model": "AUDI 100 LS",
+    "year": 1975,
+    "expected": {
+      "frontrute": [
+        "216C"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL092",
+    "make": "SKODA",
+    "model": "YETI",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "2971GNEL",
+        "2971GNELM",
+        "2971GNELM2",
+        "2971GNM",
+        "2971GY",
+        "2971GYM2"
+      ],
+      "bakrute": [
+        "28839GD",
+        "28839GN"
+      ],
+      "sideglass": [
+        "28837GD",
+        "28837GN",
+        "28838GD",
+        "28838GN"
+      ],
+      "dørglass": [
+        "28833GN",
+        "28834GN",
+        "28835GD",
+        "28835GN",
+        "28836GD",
+        "28836GN"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL093",
+    "make": "VW",
+    "model": "TOURAN",
+    "year": 2007,
+    "expected": {
+      "frontrute": [
+        "2504GY",
+        "2504GYM",
+        "2821GYM"
+      ],
+      "bakrute": [
+        "26351GD",
+        "26351GN",
+        "26351YP",
+        "8577GZPV5SRE",
+        "8577GZPV5SREB",
+        "8577GZPV5SREF"
+      ],
+      "sideglass": [
+        "26341GN",
+        "26342GN",
+        "26347GD",
+        "26347GN",
+        "26347YP",
+        "26348GD",
+        "26348GN",
+        "26348YP",
+        "26349GD",
+        "26349GN",
+        "26349YP"
+      ],
+      "dørglass": [
+        "26343GN",
+        "26344GN",
+        "26345GD",
+        "26345GN",
+        "26345YP",
+        "26346GD",
+        "26346GN",
+        "26346YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL094",
+    "make": "MITSUBISHI",
+    "model": "MITSUBISHI OUTLANDER",
+    "year": 2019,
+    "expected": {
+      "frontrute": [
+        "3186GNCELM",
+        "3186GNCELM2",
+        "3186GNCELM3",
+        "3186GNCELM4",
+        "3186GNCELM5",
+        "3186GNCELM6",
+        "3186GNELM",
+        "3186GNELM2",
+        "3186GYM"
+      ],
+      "bakrute": [
+        "29911GN",
+        "29911YP",
+        "5680GZPR5SR"
+      ],
+      "sideglass": [
+        "29909YP",
+        "29910YP"
+      ],
+      "dørglass": [
+        "29905GN",
+        "29906GN",
+        "29907GN",
+        "29907YP",
+        "29908GN",
+        "29908YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL095",
+    "make": "AUDI",
+    "model": "A3 SPORTBACK",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "2524GY",
+        "2524GYM",
+        "2861GYA",
+        "2861GYA2",
+        "2861GYAM",
+        "3179GYCM",
+        "3179GYCM2",
+        "3179GYM",
+        "3207GYCM",
+        "3207GYCM2",
+        "3207GYM",
+        "3207GYM2",
+        "3249GYAM",
+        "3249GYCAM",
+        "3249GYM",
+        "8620AGAGYCMVZ95"
+      ],
+      "bakrute": [
+        "26528GN",
+        "28331GN",
+        "29895GN",
+        "29895YP",
+        "29961GN",
+        "29961YP",
+        "30095GN",
+        "30095YP",
+        "8616GZPR3SREF",
+        "8616GZPR5SREF",
+        "8620BYPSABIJ"
+      ],
+      "sideglass": [
+        "26525GN",
+        "26525GP",
+        "26526GN",
+        "26526GP",
+        "27031GN",
+        "27031YP",
+        "27032GN",
+        "27032YP",
+        "29893GN",
+        "29893YP",
+        "29894GN",
+        "29894YP",
+        "29959GN",
+        "29959YP",
+        "29960GN",
+        "29960YP",
+        "30093GN",
+        "30093YP",
+        "30094GN",
+        "30094YP"
+      ],
+      "dørglass": [
+        "26523GN",
+        "26524GN",
+        "27027GN",
+        "27028GN",
+        "27029GN",
+        "27029YP",
+        "27030GN",
+        "27030YP",
+        "29891GN",
+        "29892GN",
+        "29956GN",
+        "29957GN",
+        "29957YP",
+        "29958GN",
+        "29958YP",
+        "30089GN",
+        "30090GN",
+        "30091GN",
+        "30091YP",
+        "30092GN",
+        "30092YP",
+        "8620LGSS4FD",
+        "8620RGSS4FD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL096",
+    "make": "NISSAN",
+    "model": "LEAF",
+    "year": 2017,
+    "expected": {
+      "frontrute": [
+        "3111GN",
+        "3111GN2",
+        "3111GNM"
+      ],
+      "bakrute": [
+        "29708GN",
+        "29708YP"
+      ],
+      "sideglass": [
+        "29709GN",
+        "29710GN",
+        "29715GN",
+        "29715YP",
+        "29715YP2",
+        "29716GN",
+        "29716YP",
+        "29716YP2"
+      ],
+      "dørglass": [
+        "29711GN",
+        "29711GN2",
+        "29712GN",
+        "29712GN2",
+        "29713GN",
+        "29713YP",
+        "29714GN",
+        "29714YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL097",
+    "make": "FORD",
+    "model": "FIESTA",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "2001GNEL",
+        "2910GN",
+        "2910GNCELM",
+        "2910GNEL",
+        "2910GNEL2",
+        "2910GNELM",
+        "2910GNELM2",
+        "2910GNM",
+        "2910GNM2",
+        "2910GY",
+        "2910GY2"
+      ],
+      "bakrute": [
+        "26308GN",
+        "26308YP",
+        "28577GN",
+        "28577YP"
+      ],
+      "sideglass": [
+        "21177CL",
+        "26312GN",
+        "28571GN",
+        "28571GN2",
+        "28572GN",
+        "28572GN2",
+        "28575YP",
+        "28576YP",
+        "28585GN",
+        "28585GN2",
+        "28585YP",
+        "28586GN",
+        "28586GN2",
+        "28586YP",
+        "3572LGSH3RQZ",
+        "3572LGSH3RQZ1D",
+        "3572LYPH3RQZ1D",
+        "3572RGSH3RQZ",
+        "3572RGSH3RQZ1D",
+        "3572RYPH3RQZ1D"
+      ],
+      "dørglass": [
+        "21177GN",
+        "21178CL",
+        "21178GN",
+        "26309GN",
+        "26310GN",
+        "26311GN",
+        "28573GN",
+        "28574GN",
+        "28581GN",
+        "28582GN",
+        "28583GN",
+        "28583YP",
+        "28584GN",
+        "28584YP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL098",
+    "make": "RENAULT",
+    "model": "CAPTUR",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "3208GN",
+        "3208GNM",
+        "3208GNM2"
+      ],
+      "bakrute": [
+        "30096GN",
+        "30096YP"
+      ],
+      "sideglass": [
+        "30097GN",
+        "30098GN",
+        "30103GN",
+        "30103YD",
+        "30104GN",
+        "30104YD"
+      ],
+      "dørglass": [
+        "30099GN",
+        "30100GN",
+        "30101GN",
+        "30101YD",
+        "30102GN",
+        "30102YD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL099",
+    "make": "VOLVO",
+    "model": "XC60",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "2900GNCMS",
+        "2900GNCMS2",
+        "2900GNMS",
+        "2900GNMS2",
+        "3175CSBLMS",
+        "3175GNCELM",
+        "3175GNCMS",
+        "3175GNELMS",
+        "3175GNMS"
+      ],
+      "bakrute": [
+        "28525GN",
+        "28525GNL",
+        "28525YP",
+        "28525YPL"
+      ],
+      "sideglass": [
+        "28523GN",
+        "28523YP",
+        "28523YPL",
+        "28524GN",
+        "28524YP",
+        "28524YPL"
+      ],
+      "dørglass": [
+        "28519GNA",
+        "28519GNLAQ",
+        "28520GNA",
+        "28520GNLAQ",
+        "28521GN",
+        "28521GNL",
+        "28521YP",
+        "28521YPL",
+        "28522GN",
+        "28522GNL",
+        "28522YP",
+        "28522YPL"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL100",
+    "make": "VW",
+    "model": "PASSAT",
+    "year": 2014,
+    "expected": {
+      "frontrute": [
+        "1570GY",
+        "1570GY2",
+        "2645CSELM",
+        "2645CSM",
+        "2645GNCM",
+        "2645GNEL",
+        "2645GNELM",
+        "2645GY",
+        "2645GYM",
+        "2766GNEL",
+        "2766GY",
+        "2875CSCELM2",
+        "2875CSM2",
+        "2875GNCM2",
+        "2875GNELM2",
+        "2875GNM2",
+        "3070CSCELM",
+        "3070CSELM",
+        "3070CSM",
+        "3070GNCM",
+        "3070GNELM",
+        "3070GNM"
+      ],
+      "bakrute": [
+        "20992GN",
+        "21080GN",
+        "21651GN",
+        "23058GN",
+        "27161GD",
+        "27161GN",
+        "27283GD",
+        "27283GN",
+        "28405GD",
+        "28405GN",
+        "28421GP",
+        "29256GD",
+        "29256GN",
+        "8584GZPE4SREB",
+        "8584GZPE4SREF",
+        "8584GZPS4SRE"
+      ],
+      "sideglass": [
+        "20997GN",
+        "20998GN",
+        "21083GN",
+        "21084GN",
+        "27159GD",
+        "27159GN",
+        "27160GD",
+        "27160GN",
+        "27281GD",
+        "27281GD3",
+        "27281GN",
+        "27281GN2",
+        "27281GN3",
+        "27281GN4",
+        "27282GD",
+        "27282GD3",
+        "27282GN",
+        "27282GN2",
+        "28403GD",
+        "28404GD",
+        "8584LGDE5RQAZ1J",
+        "8584RGDE5RQAZ1S"
+      ],
+      "dørglass": [
+        "20993GN",
+        "20994GN",
+        "20995GN",
+        "20996GN",
+        "21081GN",
+        "21082GN",
+        "27155GN",
+        "27156GN",
+        "27156GNL",
+        "27157GD",
+        "27157GN",
+        "27158GD",
+        "27158GN",
+        "27279GD",
+        "27279GN",
+        "27280GD",
+        "27280GN",
+        "28400GN",
+        "28401GD",
+        "28402GD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL101",
+    "make": "SKODA",
+    "model": "SUPERB",
+    "year": 2010,
+    "expected": {
+      "frontrute": [
+        "2081GNELM",
+        "2081GY",
+        "2081GYM",
+        "2866GNELM",
+        "2866GYM"
+      ],
+      "bakrute": [
+        "28352GD",
+        "28352GN",
+        "28978GD",
+        "28978GN"
+      ],
+      "sideglass": [
+        "28357GD",
+        "28357GN",
+        "28358GD",
+        "28358GN",
+        "28981GD",
+        "28981GD2",
+        "28981GN",
+        "28982GD",
+        "28982GD2",
+        "28982GN",
+        "28983GD",
+        "28983GD2",
+        "28983GN",
+        "28984GD",
+        "28984GD2",
+        "28984GN"
+      ],
+      "dørglass": [
+        "28353GN",
+        "28354GN",
+        "28355GD",
+        "28355GN",
+        "28356GD",
+        "28356GN",
+        "28979GD",
+        "28979GN",
+        "28980GD"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL102",
+    "make": "CITROEN",
+    "model": "C4",
+    "year": 2007,
+    "expected": {
+      "frontrute": [
+        "2630CSM",
+        "2630GN",
+        "2630GNM",
+        "2630GY",
+        "2753CSM"
+      ],
+      "bakrute": [
+        "27093GD",
+        "27093GN",
+        "27094GD",
+        "27094GN",
+        "27101GDA",
+        "27101GN",
+        "27101GNA",
+        "27799GN",
+        "27799GP",
+        "27800GP",
+        "28024GD",
+        "28024GN",
+        "28024GP2"
+      ],
+      "sideglass": [
+        "27087GN",
+        "27088GN",
+        "27091GN",
+        "27092GN",
+        "27099GN",
+        "27100GN",
+        "27791GN",
+        "27791GNL",
+        "27792GN",
+        "27792GNL",
+        "27797GN",
+        "27797GP",
+        "27798GN",
+        "27798GP",
+        "28027GD",
+        "28027GN",
+        "28028GD",
+        "28028GN",
+        "28029GDL",
+        "28029GN",
+        "28029GN2",
+        "28030GDL",
+        "28030GN",
+        "28030GN2"
+      ],
+      "dørglass": [
+        "27089GN",
+        "27089GNL",
+        "27090GN",
+        "27090GNL",
+        "27095GN",
+        "27095GNL",
+        "27096GN",
+        "27096GNL",
+        "27097GN",
+        "27097GNL",
+        "27098GN",
+        "27098GNL",
+        "27793GN",
+        "27793GNL",
+        "27794GN",
+        "27794GNL",
+        "27795GN",
+        "27795GP",
+        "27796GN",
+        "27796GP",
+        "28025GDL",
+        "28025GN",
+        "28026GDL",
+        "28026GN"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL103",
+    "make": "VW",
+    "model": "GOLF",
+    "year": 2015,
+    "expected": {
+      "frontrute": [
+        "3109GNAG",
+        "3109GNAM",
+        "3109GNMAG",
+        "3190CSCELM",
+        "3190CSCELM2",
+        "3190CSELM",
+        "3190CSELM2",
+        "3190GN",
+        "3190GNCELM",
+        "3190GNCELM2",
+        "3190GNCM",
+        "3190GNCM2",
+        "3190GNELM",
+        "3190GNELM2",
+        "3190GNM",
+        "3190GNM2",
+        "3190GYELM",
+        "3252CSCELM",
+        "3252CSCELM2",
+        "3252CSELM",
+        "3252CSELM2",
+        "3252GN",
+        "3252GNCM",
+        "3252GNCM2",
+        "3252GNM",
+        "3252GNM2",
+        "3252GYM"
+      ],
+      "bakrute": [
+        "29506GN",
+        "29878GN",
+        "29878GP",
+        "30302GN",
+        "30302GP",
+        "30333GD",
+        "30333GN",
+        "8586GZPE4SREB",
+        "8586GZPE4SREF",
+        "8618GZPR5EREB",
+        "8618GZPR5EREF",
+        "8618GZPR5SREF"
+      ],
+      "sideglass": [
+        "29509GN",
+        "29510GN",
+        "29879GN",
+        "29880GN",
+        "29885GN",
+        "29885GP",
+        "29886GN",
+        "29886GP",
+        "30305GN",
+        "30305GP",
+        "30306GN",
+        "30306GP",
+        "30307GNC",
+        "30307GNS",
+        "30307GPC",
+        "30307GPS",
+        "30308GNC",
+        "30308GNS",
+        "30308GPC",
+        "30308GPS",
+        "30323GN",
+        "30323GNC",
+        "30324GN",
+        "30324GNC",
+        "30329GD",
+        "30329GN",
+        "30330GD",
+        "30330GN",
+        "30331GDC",
+        "30331GN",
+        "30331GNC",
+        "30332GDC",
+        "30332GN",
+        "30332GNC"
+      ],
+      "dørglass": [
+        "29507GN",
+        "29508GN",
+        "29879",
+        "29881GN",
+        "29882GN",
+        "29883GN",
+        "29883GP",
+        "29884GN",
+        "29884GP",
+        "30303GN",
+        "30303GP",
+        "30304GN",
+        "30304GP",
+        "30325GN",
+        "30326GN",
+        "30327GN",
+        "30327GP",
+        "30328GN",
+        "30328GP"
+      ]
+    }
+  },
+  {
+    "regnr": "REAL104",
+    "make": "AUDI",
+    "model": "A4 ALLROAD QUATTRO",
+    "year": 2016,
+    "expected": {
+      "frontrute": [
+        "2324CSGY",
+        "2324CSGYEL",
+        "2324GY",
+        "2324GYM",
+        "2420CSGY",
+        "2420GY",
+        "2746GY",
+        "2746GYM",
+        "2794GY",
+        "2794GYAM",
+        "2794GYM",
+        "2835GNCM",
+        "2835GNCM2",
+        "2835GY",
+        "2835GYM",
+        "2835GYM2",
+        "3330CSCELM",
+        "3330CSCELMU",
+        "3330GNCELM",
+        "3330GNCM",
+        "3330GNCM2",
+        "3330GNCMU",
+        "3330GNCMU2",
+        "3330GNM",
+        "3330GNMU",
+        "3369GYCM",
+        "3369GYM",
+        "8625AGSGYACMVZ",
+        "8625AGSGYAMVZ",
+        "8631AGACHMVZ"
+      ],
+      "bakrute": [
+        "24419GN",
+        "25387GN",
+        "25559GN",
+        "25559GN2",
+        "27753GN",
+        "28171GN",
+        "28171YP",
+        "28322GN",
+        "28322YP",
+        "30874GN",
+        "30874YP",
+        "30885GN",
+        "30885YP",
+        "8589GZPE5PRS",
+        "8589GZPE5PRSB",
+        "8589GZPS5PRS",
+        "8624BGSCAJX1F",
+        "8624BYPCAJX1F"
+      ],
+      "sideglass": [
+        "24413GN",
+        "24414GN",
+        "25384GN",
+        "25385GN",
+        "25386GN",
+        "25555GN",
+        "25556GN",
+        "25937GN",
+        "25938GN",
+        "27017GN",
+        "27017YP",
+        "27018GN",
+        "27018YP",
+        "27751GN",
+        "27752GN",
+        "28169GN",
+        "28169GN2",
+        "28170GN",
+        "28325GN",
+        "28325GN2",
+        "28325YP",
+        "28326GN",
+        "28326YP",
+        "30879GN",
+        "30879YP",
+        "30880GN",
+        "30880YP",
+        "30883GN",
+        "30883YP",
+        "30884GN",
+        "30884YP",
+        "8572LGSE5RQAZ6F",
+        "8572RGSE5RQAZ6F",
+        "8591LYPC2RQZ",
+        "8591RYPC2RQZ",
+        "8624RGSC2RQWZ1M"
+      ],
+      "dørglass": [
+        "24415GN",
+        "24416GN",
+        "25557GN",
+        "25558GN",
+        "25633GN",
+        "25633YP",
+        "25634GN",
+        "25634YP",
+        "25935GN",
+        "25936GN",
+        "27749GN",
+        "27750GN",
+        "28165GN",
+        "28166GN",
+        "28167GN",
+        "28168GN",
+        "28323GN",
+        "28323YP",
+        "28324GN",
+        "28324YP",
+        "30875GN",
+        "30875GNL",
+        "30876GN",
+        "30876GNL",
+        "30877GN",
+        "30877YP",
+        "30878GN",
+        "30878YP",
+        "30881GN",
+        "30881YP",
+        "30882GN",
+        "30882YP",
+        "8624LGSC2FD",
+        "8624LGSC2RQWZ1M",
+        "8624LYPC2RQWZ1M",
+        "8624RGSC2FD"
       ]
     }
   }

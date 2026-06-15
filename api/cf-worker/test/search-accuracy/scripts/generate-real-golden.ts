@@ -1,8 +1,9 @@
 /**
- * Generate real-vehicle golden fixtures from verified Bovsoft data.
+ * Generate real-vehicle golden fixtures from verified Norwegian regnr data.
  *
  * Input (outside the committed worktree):
  *   - /Users/taj/bilglass/data/finn-no-regnr/verified-bovsoft.ndjson
+ *   - /Users/taj/bilglass/data/finn-no-regnr/verified-regnr.ndjson
  *   - data/catalog-prod.json
  *
  * Output:
@@ -25,8 +26,9 @@ const OUT_PATH = path.resolve(
   "api/cf-worker/test/search-accuracy/fixtures/golden-real.json"
 );
 
-// Verified Bovsoft data lives in the main bilglass repo (gitignored there).
+// Verified data lives in the main bilglass repo (gitignored there).
 const BOVSOFT_PATH = path.resolve(ROOT, "../../data/finn-no-regnr/verified-bovsoft.ndjson");
+const VERIFIED_REGNR_PATH = path.resolve(ROOT, "../../data/finn-no-regnr/verified-regnr.ndjson");
 const CATALOG_PATH = path.resolve(ROOT, "data/catalog-prod.json");
 
 const CATEGORY_ORDER = ["frontrute", "bakrute", "sideglass", "dørglass"] as const;
@@ -101,60 +103,94 @@ function loadNdjson<T>(p: string): T[] {
     .map((l) => JSON.parse(l) as T);
 }
 
+function computeExpected(
+  catalog: any[],
+  make: string,
+  model: string,
+  year: number
+): Record<string, string[]> | null {
+  const expected: Record<string, string[]> = {};
+  for (const rec of catalog) {
+    if (!rec.eurocode || !categoryOf(rec) || isCrossReference(rec)) continue;
+    const recBrand = normalizeBrand(rec.brand || "");
+    if (recBrand !== make) continue;
+    if (!modelMatches(model, rec.model, make)) continue;
+    if (!yearCompatible(rec, year, make, model)) continue;
+
+    const cat = categoryOf(rec);
+    if (!cat) continue;
+    if (!expected[cat]) expected[cat] = [];
+    expected[cat].push(rec.eurocode);
+  }
+
+  const cleaned: Record<string, string[]> = {};
+  for (const cat of CATEGORY_ORDER) {
+    const list = expected[cat] || [];
+    if (list.length) cleaned[cat] = Array.from(new Set(list)).sort();
+  }
+  return Object.keys(cleaned).length > 0 ? cleaned : null;
+}
+
 function main() {
   const catalogRaw = loadJson<any>(CATALOG_PATH);
   const catalog: any[] = Array.isArray(catalogRaw)
     ? catalogRaw
     : catalogRaw.records || [];
 
-  if (!fs.existsSync(BOVSOFT_PATH)) {
-    console.error(`Missing input: ${BOVSOFT_PATH}`);
+  const sources: { path: string; label: string }[] = [];
+  if (fs.existsSync(BOVSOFT_PATH)) sources.push({ path: BOVSOFT_PATH, label: "bovsoft" });
+  if (fs.existsSync(VERIFIED_REGNR_PATH)) sources.push({ path: VERIFIED_REGNR_PATH, label: "verified-regnr" });
+  if (sources.length === 0) {
+    console.error("No input data found");
     process.exit(1);
   }
-  const bovsoft = loadNdjson<any>(BOVSOFT_PATH);
 
+  const seen = new Set<string>();
   const fixtures: Fixture[] = [];
   let counter = 1;
 
-  for (const r of bovsoft) {
-    const make = normalizeBrand(r.brand);
-    const model = r.model || "";
-    const year = parseYear(r.yearFrom) || parseYear(r.yearTo);
-    if (!make || !model || !year) continue;
+  for (const source of sources) {
+    const rows = loadNdjson<any>(source.path);
+    for (const r of rows) {
+      let make: string | undefined;
+      let model: string | undefined;
+      let year: number | null = null;
 
-    const expected: Record<string, string[]> = {};
-    for (const rec of catalog) {
-      if (!rec.eurocode || !categoryOf(rec) || isCrossReference(rec)) continue;
-      const recBrand = normalizeBrand(rec.brand || "");
-      if (recBrand !== make) continue;
-      if (!modelMatches(model, rec.model, make)) continue;
-      if (!yearCompatible(rec, year, make, model)) continue;
+      if (source.label === "bovsoft") {
+        make = normalizeBrand(r.brand);
+        model = r.model || "";
+        year = parseYear(r.yearFrom) || parseYear(r.yearTo);
+      } else {
+        make = normalizeBrand(r.svvBrand || r.brand);
+        model = r.svvModel || r.model || "";
+        year = typeof r.svvYear === "number" ? r.svvYear : null;
+      }
 
-      const cat = categoryOf(rec);
-      if (!cat) continue;
-      if (!expected[cat]) expected[cat] = [];
-      expected[cat].push(rec.eurocode);
+      if (!make || !model || !year) continue;
+
+      // Deduplicate on normalized vehicle identity to avoid a handful of models
+      // dominating the suite.
+      const key = `${make}|${model.toUpperCase()}|${year}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+
+      const expected = computeExpected(catalog, make, model, year);
+      if (!expected) continue;
+
+      fixtures.push({
+        regnr: `REAL${String(counter).padStart(3, "0")}`,
+        make,
+        model,
+        year,
+        expected,
+      });
+      counter++;
     }
-
-    const cleaned: Record<string, string[]> = {};
-    for (const cat of CATEGORY_ORDER) {
-      const list = expected[cat] || [];
-      if (list.length) cleaned[cat] = Array.from(new Set(list)).sort();
-    }
-    if (Object.keys(cleaned).length === 0) continue;
-
-    fixtures.push({
-      regnr: `REAL${String(counter).padStart(3, "0")}`,
-      make,
-      model,
-      year,
-      expected: cleaned,
-    });
-    counter++;
   }
 
   fs.writeFileSync(OUT_PATH, JSON.stringify(fixtures, null, 2) + "\n");
   console.log(`Wrote ${fixtures.length} real fixtures to ${OUT_PATH}`);
+  console.log(`  Sources: ${sources.map((s) => s.label).join(", ")}`);
 }
 
 main();
