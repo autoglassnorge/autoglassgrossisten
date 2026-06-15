@@ -1,0 +1,171 @@
+[
+  {
+    "regnr": "SU18019",
+    "make": "MERCEDES",
+    "model": "EQE (V295-X294)",
+    "year": 2022,
+    "vin": "WDD1K5DB7MA000001",
+    "expected": {
+      "frontrute": ["5521AGAGYCHMU1Z"],
+      "bakrute": ["5521BYPRJX"],
+      "sideglass": ["5521LYPR5RVZ1M", "5521RYPR5RVZ1M", "5521LYPR5RQZ1D", "5521RYPR5RQZ1D"],
+      "dørglass": ["5521LGAR5FDKW", "5521RGAR5FDKW", "5521LYPR5RDW", "5521RYPR5RDW"]
+    }
+  },
+  {
+    "regnr": "EB21571",
+    "make": "MERCEDES",
+    "model": "CITAN (W415/420)",
+    "year": 2022,
+    "vin": "WDF4156031V000001",
+    "expected": {
+      "frontrute": ["7312AGSIMVZ"],
+      "bakrute": ["7312BYPV"],
+      "sideglass": ["7312LYPV4RV", "7312RYPV4RV", "7312LYPV4RQZ", "7312RYPV4RQZ"],
+      "dørglass": ["7312LGSV4FD", "7312RGSV4FD", "7312LYPV4RD", "7312RYPV4RD"]
+    }
+  },
+  {
+    "regnr": "DH98766",
+    "make": "VW",
+    "model": "ID.4 (EL)",
+    "year": 2021,
+    "vin": "WVWZZZ1Z2MP000001",
+    "expected": {
+      "frontrute": ["8658AGACMVZ"],
+      "bakrute": ["8658BYPRAIX"],
+      "sideglass": ["8658LGSR5FVWZ", "8658RYPR5RVWZ", "8658LYPR5RQZ", "8658RYPR5RQZ"],
+      "dørglass": ["8658LGSR5FD", "8658RGSR5FD", "8658LYPR5RDW", "8658RYPR5RDW"]
+    }
+  },
+  {
+    "regnr": "EK11112",
+    "make": "AUDI",
+    "model": "Q4",
+    "year": 2021,
+    "vin": "WAUZZZFY1N1000001",
+    "expected": {
+      "frontrute": ["8661AGACMVZ"],
+      "bakrute": ["8661BYPRX2J"],
+      "sideglass": ["8660LGSR5FVWZ", "8660RGSR5FVWZ", "8661LYPR5RQZ6J", "8661RYPR5RQZ6J"],
+      "dørglass": ["8660LGSR5FD", "8660RGSR5FD", "8661LYPR5RDW1J", "8661RYPR5RDW1J"]
+    }
+  },
+  {
+    "regnr": "ST00005",
+    "make": "SKODA",
+    "model": "KAMIQ",
+    "year": 2019,
+    "vin": "TMBNB6NH0LZ000001",
+    "expected": {
+      "frontrute": ["7823AGACMVZ1L"],
+      "bakrute": ["7823BGSRAI"],
+      "sideglass": ["7823LGPR5RVWZ", "7823RGPR5RVWZ", "7823LGDR5RQZ1D", "7823RGDR5RQZ1D"],
+      "dørglass": ["7823LGSR5FD", "7823RGSR5FD", "7823LGPR5RD", "7823RGPR5RD"]
+    }
+  },
+  {
+    "regnr": "NV00000",
+    "make": "BMW",
+    "model": "3 SERIE",
+    "year": 2019,
+    "vin": "WBA8E1C00LAK00001",
+    "expected": {
+      "frontrute": ["2490AGAMVZ"],
+      "bakrute": ["2490BYPSAZ"],
+      "sideglass": ["2490LYPS4RVWZ", "2490RYPS4RVWZ", "2490LGSE5RQAZ", "2490RYPE5RQAZ"],
+      "dørglass": ["2490LGSS4FD", "2490RGSS4FD", "2490LYPS4RD", "2490RYPS4RD"]
+    }
+  },
+  {
+    "regnr": "SD98766",
+    "make": "OPEL",
+    "model": "GRANDLAND X",
+    "year": 2020,
+    "vin": "W0VZ45GB7MS073061",
+    "expected": {
+      "frontrute": ["6356AGRCHMOUVZ"],
+      "bakrute": ["6346BYPRA"],
+      "sideglass": ["6346LGSR5RQZ", "6346RGSR5RQZ", "6346LYPR5RQZ", "6346RYPR5RQZ"],
+      "dørglass": ["6346LGSR5FD", "6346RGSR5FD", "6346LGSR5RD", "6346RGSR5RD"]
+    }
+  },
+  {
+    "regnr": "BS12346",
+    "make": "SKODA",
+    "model": "SUPERB II STASJONSVOGN (3T5)",
+    "year": 2012,
+    "vin": "TMBJE73T7B9015132",
+    "expected": {
+      "frontrute": ["2081GNELM"],
+      "bakrute": ["28352GD"],
+      "sideglass": ["28357GD"],
+      "dørglass": ["28353GN"]
+    }
+  },
+  {
+    "regnr": "UX71700",
+    "make": "PEUGEOT",
+    "model": "307 CC (3B)",
+    "year": 2006,
+    "vin": "VF33BNFUC83502900",
+    "expected": {
+      "frontrute": ["2352CS"],
+      "bakrute": ["25519GN"],
+      "sideglass": ["25513GN"],
+      "dørglass": ["25515GN"]
+    }
+  },
+  {
+    "regnr": "PA12346",
+    "make": "VOLVO",
+    "model": "240 (P242, P244)",
+    "year": 1975,
+    "vin": "YV1AX8843A1000001",
+    "expected": {
+      "frontrute": ["1041GB"],
+      "bakrute": ["20596GN"],
+      "sideglass": ["5966CL"],
+      "dørglass": ["6499CL"]
+    }
+  },
+  {
+    "regnr": "BD54322",
+    "make": "BMW",
+    "model": "3 SERIE",
+    "year": 2012,
+    "vin": "WBA3B1C50CA000001",
+    "expected": {
+      "frontrute": ["3160GN2"],
+      "bakrute": ["29796GN"],
+      "sideglass": ["29801GN"],
+      "dørglass": ["29797GN"]
+    }
+  },
+  {
+    "regnr": "BT12347",
+    "make": "MERCEDES",
+    "model": "SERIE W206 (C-KLASS)",
+    "year": 2024,
+    "vin": "WDB2065001A000001",
+    "expected": {
+      "frontrute": ["5509AGRCMVZ"],
+      "bakrute": ["5509BYPSA1F"],
+      "sideglass": ["5509LYPS4RVWZ1M", "5509RYPS4RVWZ1M", "5509LYPE5RQXZ1D", "5509RYPE5RQXZ1D"],
+      "dørglass": ["5509LGSS4FD", "5509RGSS4FD", "5509LYPS4RD", "5509RYPS4RD"]
+    }
+  },
+  {
+    "regnr": "AX12346",
+    "make": "MERCEDES",
+    "model": "C-CLASS",
+    "year": 2021,
+    "vin": "WDB2055001A000001",
+    "expected": {
+      "frontrute": ["5509AGRCMVZ"],
+      "bakrute": ["5509BYPSA1F"],
+      "sideglass": ["5509LYPS4RVWZ1M", "5509RYPS4RVWZ1M", "5509LYPE5RQXZ1D", "5509RYPE5RQXZ1D"],
+      "dørglass": ["5509LGSS4FD", "5509RGSS4FD", "5509LYPS4RD", "5509RYPS4RD"]
+    }
+  }
+]

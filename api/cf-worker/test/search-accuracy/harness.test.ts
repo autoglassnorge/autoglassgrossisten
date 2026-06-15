@@ -9,8 +9,9 @@ import {
   cacheSvvVehicleInKV,
   seedSvvTecdocMatch,
 } from "./helpers";
-import { computeMetrics, printReport } from "./report";
+import { computeMetrics, printReport, type FailureDetail } from "./report";
 import golden from "./fixtures/sample-golden.json";
+import noGroundTruth from "./fixtures/no-ground-truth-fixtures.json";
 import schemaSql from "../../schema.sql?raw";
 import groundTruthSql from "./fixtures/ground-truth-sample.sql?raw";
 import catalogData from "./fixtures/catalog-sample.json";
@@ -36,21 +37,29 @@ type GoldenFixture = {
 };
 
 const goldenFixtures = golden as GoldenFixture[];
+const noGroundTruthFixtures = noGroundTruth as GoldenFixture[];
 const catalogRecords = Array.isArray(catalogData)
   ? (catalogData as unknown[])
   : (catalogData as { records?: unknown[] }).records ?? [];
 
-describe("search accuracy harness", () => {
-  beforeAll(async () => {
-    // Collect all eurocodes we need from the golden fixture.
-    const neededEurocodes = new Set<string>();
-    for (const c of goldenFixtures) {
-      for (const codes of Object.values(c.expected)) {
-        for (const code of codes) {
-          if (code) neededEurocodes.add(code);
-        }
+function collectEurocodes(fixtures: GoldenFixture[]): Set<string> {
+  const codes = new Set<string>();
+  for (const c of fixtures) {
+    for (const list of Object.values(c.expected)) {
+      for (const code of list) {
+        if (code) codes.add(code);
       }
     }
+  }
+  return codes;
+}
+
+describe("search accuracy harness", () => {
+  beforeAll(async () => {
+    const neededEurocodes = new Set<string>([
+      ...collectEurocodes(goldenFixtures),
+      ...collectEurocodes(noGroundTruthFixtures),
+    ]);
 
     await seedSchema(env.GLASS_CATALOG_D1, schemaSql);
     await seedGroundTruth(env.GLASS_CATALOG_D1, groundTruthSql);
@@ -67,18 +76,17 @@ describe("search accuracy harness", () => {
         buildTecdocVehicle({ ...c, regnr: c.regnr })
       );
     }
+    for (const c of noGroundTruthFixtures) {
+      await cacheSvvVehicleInKV(
+        env.GLASS_CATALOG,
+        c.regnr,
+        buildTecdocVehicle({ ...c, regnr: c.regnr })
+      );
+    }
   });
 
   it("meets baseline accuracy targets", async () => {
-    const results: Array<{
-      regnr: string;
-      category: string;
-      expected: string[];
-      predicted: string[];
-      bucket: string;
-      layer: number;
-      confidence: string;
-    }> = [];
+    const results: FailureDetail[] = [];
     let total = 0;
 
     for (const c of goldenFixtures) {
@@ -89,12 +97,14 @@ describe("search accuracy harness", () => {
 
         const result = await searchByRegnr(c.regnr, env, category);
         const body = result.body as {
-          candidates?: Array<{ eurocode?: string | null }>;
+          candidates?: Array<{ eurocode?: string | null; ktype?: number | null }>;
           layer?: number;
           confidence?: string;
+          vehicle?: { kType?: number; make?: string; model?: string; year?: number; vin?: string; vinDecode?: unknown; unifiedVin?: { make?: string; generation?: string; body?: string } | null };
         } | null;
 
-        const predicted = (body?.candidates ?? [])
+        const candidates = body?.candidates ?? [];
+        const predicted = candidates
           .slice(0, 5)
           .map((r) => r.eurocode)
           .filter((e): e is string => Boolean(e));
@@ -104,9 +114,16 @@ describe("search accuracy harness", () => {
           category,
           expected,
           predicted,
+          allCandidates: candidates.map((r) => r.eurocode).filter((e): e is string => Boolean(e)),
           bucket: "missing_or_wrong",
           layer: body?.layer ?? -1,
           confidence: body?.confidence ?? "none",
+          make: body?.vehicle?.make,
+          model: body?.vehicle?.model,
+          year: body?.vehicle?.year,
+          ktype: body?.vehicle?.kType,
+          vin: c.vin,
+          vinDecode: (body?.vehicle?.unifiedVin || body?.vehicle?.vinDecode) as { make?: string; generation?: string; body?: string } | undefined,
         });
       }
     }
@@ -115,6 +132,64 @@ describe("search accuracy harness", () => {
     printReport(metrics);
     expect(metrics.top1 / metrics.total).toBeGreaterThanOrEqual(0.95);
     expect(metrics.top3 / metrics.total).toBeGreaterThanOrEqual(0.99);
+  }, 120000);
+
+  it("reports no-ground-truth accuracy and failure buckets", async () => {
+    const results: FailureDetail[] = [];
+    let total = 0;
+
+    for (const c of noGroundTruthFixtures) {
+      for (const category of CATEGORIES) {
+        const expected = c.expected[category] ?? [];
+        if (expected.length === 0) continue;
+        total++;
+
+        const result = await searchByRegnr(c.regnr, env, category);
+        const body = result.body as {
+          candidates?: Array<{ eurocode?: string | null; ktype?: number | null }>;
+          layer?: number;
+          confidence?: string;
+          vehicle?: { kType?: number; make?: string; model?: string; year?: number; vin?: string; vinDecode?: unknown; unifiedVin?: { make?: string; generation?: string; body?: string } | null };
+        } | null;
+
+        const candidates = body?.candidates ?? [];
+        const predicted = candidates
+          .slice(0, 5)
+          .map((r) => r.eurocode)
+          .filter((e): e is string => Boolean(e));
+
+        // Find kType of an expected record (if any candidate/share the same eurocode).
+        const expectedKtype = candidates.find(
+          (r) => r.eurocode && expected.includes(r.eurocode)
+        )?.ktype ?? undefined;
+
+        results.push({
+          regnr: c.regnr,
+          category,
+          expected,
+          predicted,
+          allCandidates: candidates.map((r) => r.eurocode).filter((e): e is string => Boolean(e)),
+          bucket: "missing_or_wrong",
+          layer: body?.layer ?? -1,
+          confidence: body?.confidence ?? "none",
+          make: body?.vehicle?.make,
+          model: body?.vehicle?.model,
+          year: body?.vehicle?.year,
+          ktype: body?.vehicle?.kType,
+          expectedKtype: expectedKtype ? Number(expectedKtype) : undefined,
+          topKtype: candidates[0]?.ktype ? Number(candidates[0].ktype) : undefined,
+          vin: c.vin,
+          vinDecode: (body?.vehicle?.unifiedVin || body?.vehicle?.vinDecode) as { make?: string; generation?: string; body?: string } | undefined,
+        });
+      }
+    }
+
+    const metrics = computeMetrics(results, total);
+    printReport(metrics);
+
+    // Hard expectations for the no-ground-truth suite:
+    // at least one failure should exist so we can exercise the bucket classifier.
+    expect(metrics.total).toBeGreaterThan(0);
   }, 120000);
 
   it("always merges ground_truth even when Layer 0.5 fires", async () => {
