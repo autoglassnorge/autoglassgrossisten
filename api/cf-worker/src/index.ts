@@ -127,7 +127,22 @@ export default {
     if (path === "/api/health") {
       return handleHealth(request, env);
     }
-    
+
+    // Root — friendly API landing page
+    if (path === "/") {
+      return jsonResponse({
+        service: "autoglass-glass-sok",
+        status: "ok",
+        version: "2.3-enterprise",
+        endpoints: {
+          health: "/api/health",
+          glass: "/api/glass?regnr=<REGNR>&category=frontrute",
+          search: "POST /api/search",
+        },
+        timestamp: new Date().toISOString(),
+      });
+    }
+
     // SVV Status monitor (detaljert historikk)
     if (path === "/api/svv-status") {
       const history = await env.GLASS_CATALOG.get("svv:status:history", "json") as {
