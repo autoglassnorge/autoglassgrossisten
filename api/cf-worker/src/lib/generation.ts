@@ -196,8 +196,15 @@ export function expectedGeneration(brand: string, model: string, year: number): 
     if (year <= 2016) return "F10";
     return "G30";
   }
-  // Mercedes C-Class
-  if (key.includes("mercedes") && (key.includes("c") || key.includes("190"))) {
+  // Mercedes class detection. The previous substring checks on single letters
+  // matched every "Class"/"Klasse" string (e.g. "E-Class" contains "c"), so we
+  // require the class token to appear as a word.
+  const mercModel = model.toLowerCase();
+  const mercClass = (cls: string) =>
+    new RegExp(`\\b${cls}[- ]?(class|klasse)\\b`, "i").test(mercModel) ||
+    new RegExp(`\\b(class|klasse)[- ]?${cls}\\b`, "i").test(mercModel);
+
+  if (key.includes("mercedes") && (mercClass("c") || mercModel.includes("190"))) {
     if (year <= 1993) return "W201";
     if (year <= 2000) return "W202";
     if (year <= 2007) return "W203";
@@ -205,13 +212,31 @@ export function expectedGeneration(brand: string, model: string, year: number): 
     if (year <= 2020) return "W205";
     return "W206";
   }
-  // Mercedes E-Class
-  if (key.includes("mercedes") && (key.includes("e") || key.includes("klasse"))) {
+  if (key.includes("mercedes") && mercClass("e")) {
     if (year <= 1995) return "W124";
     if (year <= 2002) return "W210";
     if (year <= 2009) return "W211";
     if (year <= 2016) return "W212";
     return "W213";
+  }
+  if (key.includes("mercedes") && mercClass("a")) {
+    if (year <= 2004) return "W168";
+    if (year <= 2012) return "W169";
+    if (year <= 2018) return "W176";
+    return "W177";
+  }
+  if (key.includes("mercedes") && mercClass("b")) {
+    if (year <= 2005) return "W245";
+    if (year <= 2011) return "W246";
+    return "W247";
+  }
+  if (key.includes("mercedes") && mercClass("s")) {
+    if (year <= 1991) return "W126";
+    if (year <= 1998) return "W140";
+    if (year <= 2005) return "W220";
+    if (year <= 2013) return "W221";
+    if (year <= 2020) return "W222";
+    return "W223";
   }
   // Audi A3
   if (key.includes("audi") && key.includes("3")) {

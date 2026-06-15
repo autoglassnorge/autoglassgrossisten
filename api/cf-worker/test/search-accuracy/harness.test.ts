@@ -12,6 +12,7 @@ import {
 import { computeMetrics, printReport, type FailureDetail } from "./report";
 import golden from "./fixtures/sample-golden.json";
 import noGroundTruth from "./fixtures/no-ground-truth-fixtures.json";
+import generatedGolden from "./fixtures/golden-generated.json";
 import schemaSql from "../../schema.sql?raw";
 import groundTruthSql from "./fixtures/ground-truth-sample.sql?raw";
 import catalogData from "./fixtures/catalog-sample.json";
@@ -38,6 +39,7 @@ type GoldenFixture = {
 
 const goldenFixtures = golden as GoldenFixture[];
 const noGroundTruthFixtures = noGroundTruth as GoldenFixture[];
+const generatedFixtures = generatedGolden as GoldenFixture[];
 const catalogRecords = Array.isArray(catalogData)
   ? (catalogData as unknown[])
   : (catalogData as { records?: unknown[] }).records ?? [];
@@ -59,6 +61,7 @@ describe("search accuracy harness", () => {
     const neededEurocodes = new Set<string>([
       ...collectEurocodes(goldenFixtures),
       ...collectEurocodes(noGroundTruthFixtures),
+      ...collectEurocodes(generatedFixtures),
     ]);
 
     await seedSchema(env.GLASS_CATALOG_D1, schemaSql);
@@ -77,6 +80,13 @@ describe("search accuracy harness", () => {
       );
     }
     for (const c of noGroundTruthFixtures) {
+      await cacheSvvVehicleInKV(
+        env.GLASS_CATALOG,
+        c.regnr,
+        buildTecdocVehicle({ ...c, regnr: c.regnr })
+      );
+    }
+    for (const c of generatedFixtures) {
       await cacheSvvVehicleInKV(
         env.GLASS_CATALOG,
         c.regnr,
@@ -190,6 +200,63 @@ describe("search accuracy harness", () => {
     // Hard expectations for the no-ground-truth suite:
     // at least one failure should exist so we can exercise the bucket classifier.
     expect(metrics.total).toBeGreaterThan(0);
+  }, 120000);
+
+  it("reports generated fixture accuracy and failure buckets", async () => {
+    const results: FailureDetail[] = [];
+    let total = 0;
+
+    for (const c of generatedFixtures) {
+      for (const category of CATEGORIES) {
+        const expected = c.expected[category] ?? [];
+        if (expected.length === 0) continue;
+        total++;
+
+        const result = await searchByRegnr(c.regnr, env, category);
+        const body = result.body as {
+          candidates?: Array<{ eurocode?: string | null; ktype?: number | null }>;
+          layer?: number;
+          confidence?: string;
+          vehicle?: { kType?: number; make?: string; model?: string; year?: number; vin?: string; vinDecode?: unknown; unifiedVin?: { make?: string; generation?: string; body?: string } | null };
+        } | null;
+
+        const candidates = body?.candidates ?? [];
+        const predicted = candidates
+          .slice(0, 5)
+          .map((r) => r.eurocode)
+          .filter((e): e is string => Boolean(e));
+
+        const expectedKtype = candidates.find(
+          (r) => r.eurocode && expected.includes(r.eurocode)
+        )?.ktype ?? undefined;
+
+        results.push({
+          regnr: c.regnr,
+          category,
+          expected,
+          predicted,
+          allCandidates: candidates.map((r) => r.eurocode).filter((e): e is string => Boolean(e)),
+          bucket: "missing_or_wrong",
+          layer: body?.layer ?? -1,
+          confidence: body?.confidence ?? "none",
+          make: body?.vehicle?.make,
+          model: body?.vehicle?.model,
+          year: body?.vehicle?.year,
+          ktype: body?.vehicle?.kType,
+          expectedKtype: expectedKtype ? Number(expectedKtype) : undefined,
+          topKtype: candidates[0]?.ktype ? Number(candidates[0].ktype) : undefined,
+          vin: c.vin,
+          vinDecode: (body?.vehicle?.unifiedVin || body?.vehicle?.vinDecode) as { make?: string; generation?: string; body?: string } | undefined,
+        });
+      }
+    }
+
+    const metrics = computeMetrics(results, total);
+    printReport(metrics);
+
+    expect(metrics.total).toBeGreaterThan(0);
+    expect(metrics.top1 / metrics.total).toBeGreaterThanOrEqual(0.95);
+    expect(metrics.top3 / metrics.total).toBeGreaterThanOrEqual(0.99);
   }, 120000);
 
   it("always merges ground_truth even when Layer 0.5 fires", async () => {
