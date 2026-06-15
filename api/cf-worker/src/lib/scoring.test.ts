@@ -61,6 +61,25 @@ describe("modelMatches", () => {
     });
   });
 
+  // ── Jaguar Pace models ─────────────────────────────────────────────────
+  describe("Jaguar", () => {
+    it("I-PACE ↔ I-PACE", () => {
+      expect(modelMatches("I-PACE", "I-PACE", "jaguar")).toBe(true);
+    });
+    it("I-PACE ≠ E-PACE", () => {
+      expect(modelMatches("I-PACE", "E-PACE", "jaguar")).toBe(false);
+    });
+    it("I-PACE ≠ F-PACE", () => {
+      expect(modelMatches("I-PACE", "F-PACE", "jaguar")).toBe(false);
+    });
+    it("E-PACE ≠ F-PACE", () => {
+      expect(modelMatches("E-PACE", "F-PACE", "jaguar")).toBe(false);
+    });
+    it("JAGUAR I-PACE ↔ I-PACE", () => {
+      expect(modelMatches("JAGUAR I-PACE", "I-PACE", "jaguar")).toBe(true);
+    });
+  });
+
   // ── Mercedes W-series ───────────────────────────────────────────────────
   describe("Mercedes", () => {
     it("C-Klasse ↔ W203", () => {

@@ -397,6 +397,17 @@ function _modelMatches(vehicleModel: string, recordModel: string | null, vehicle
     }
   }
 
+  // ── Jaguar I-PACE / E-PACE / F-PACE: "pace" alone is a generic suffix,
+  // so we require the leading letter (I/E/F) to match.
+  if (make === "jaguar") {
+    const pacePattern = /^([a-zA-Z])\s*-?\s*pace$/;
+    const vmMatch = vm.match(pacePattern);
+    const rmMatch = rm.match(pacePattern);
+    if (vmMatch && rmMatch) {
+      return vmMatch[1].toLowerCase() === rmMatch[1].toLowerCase();
+    }
+  }
+
   // ── Mercedes W-series vs class name (e.g. "C-Klasse" vs "SERIE W203/W204/W205/W206")
   if (make === "mercedes" || make.includes("mercedes")) {
     const mercedesSeries: Record<string, string[]> = {
