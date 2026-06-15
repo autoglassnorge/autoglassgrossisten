@@ -665,14 +665,23 @@ export async function searchByRegnr(
       // Generate extra hints with known W-codes for better SQL matching
       if (makeLower === "mercedes" || makeLower.includes("mercedes")) {
         const mercedesClassMap: Record<string, string[]> = {
+          // Norwegian and English class names are both sent by SVV depending on source.
           "c-klasse": ["w203", "w204", "w205", "w206"],
+          "c-class": ["w203", "w204", "w205", "w206"],
           "e-klasse": ["w210", "w211", "w212", "w213", "w214"],
+          "e-class": ["w210", "w211", "w212", "w213", "w214"],
           "s-klasse": ["w220", "w221", "w222", "w223"],
+          "s-class": ["w220", "w221", "w222", "w223"],
           "a-klasse": ["w168", "w169", "w176", "w177"],
+          "a-class": ["w168", "w169", "w176", "w177"],
           "b-klasse": ["w245", "w246", "w247"],
+          "b-class": ["w245", "w246", "w247"],
           "m-klasse": ["w163", "w164", "w166"],
+          "m-class": ["w163", "w164", "w166"],
           "gle-klasse": ["w166", "w167"],
+          "gle-class": ["w166", "w167"],
           "g-klasse": ["w463", "w464"],
+          "g-class": ["w463", "w464"],
           "glc": ["x253", "c253", "x254", "c254"],
           "glb": ["x247"],
           "gla": ["x156", "h247"],

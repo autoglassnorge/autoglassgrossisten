@@ -202,7 +202,7 @@ export function expectedGeneration(brand: string, model: string, year: number): 
     if (year <= 2000) return "W202";
     if (year <= 2007) return "W203";
     if (year <= 2014) return "W204";
-    if (year <= 2021) return "W205";
+    if (year <= 2020) return "W205";
     return "W206";
   }
   // Mercedes E-Class

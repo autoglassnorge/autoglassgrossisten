@@ -394,13 +394,21 @@ function _modelMatches(vehicleModel: string, recordModel: string | null, vehicle
   // ── Mercedes W-series vs class name (e.g. "C-Klasse" vs "SERIE W203/W204/W205/W206")
   if (make === "mercedes" || make.includes("mercedes")) {
     const mercedesSeries: Record<string, string[]> = {
+      // Norwegian + English class names; SVV may send either depending on source.
       "a-klasse": ["w168", "w169", "w176", "w177"],
+      "a-class": ["w168", "w169", "w176", "w177"],
       "b-klasse": ["w245", "w246", "w247"],
+      "b-class": ["w245", "w246", "w247"],
       "c-klasse": ["w203", "w204", "w205", "w206"],
+      "c-class": ["w203", "w204", "w205", "w206"],
       "e-klasse": ["w210", "w211", "w212", "w213", "w214"],
+      "e-class": ["w210", "w211", "w212", "w213", "w214"],
       "s-klasse": ["w220", "w221", "w222", "w223"],
+      "s-class": ["w220", "w221", "w222", "w223"],
       "m-klasse": ["w163", "w164", "w166"],
+      "m-class": ["w163", "w164", "w166"],
       "gle-klasse": ["w166", "w167"],
+      "gle-class": ["w166", "w167"],
       "gle": ["w166", "w167"],
       "glc": ["x253", "c253", "x254", "c254"],
       "glb": ["x247"],
@@ -411,6 +419,7 @@ function _modelMatches(vehicleModel: string, recordModel: string | null, vehicle
       "clk": ["c208", "c209", "w208", "w209"],
       "cls": ["c218", "c219", "c257", "w219"],
       "g-klasse": ["w463", "w464"],
+      "g-class": ["w463", "w464"],
     };
     // Extract class name from vehicle model
     const vmClass = Object.keys(mercedesSeries).find((cls) => vm.includes(cls));
