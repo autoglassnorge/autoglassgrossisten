@@ -59,6 +59,8 @@ class GlassSearch {
 
     this._abortController = null;
     this._debounceMs = this.mode === 'inline' ? 300 : 400;
+    this.activeFilters = [];
+    this._lastData = null;
 
     this.init();
   }
@@ -102,6 +104,7 @@ class GlassSearch {
     }
 
     const type = this.getSelectedType();
+    this.activeFilters = [];
     const key = _cacheKey(query, type);
 
     // 1. Check localStorage cache (TTL 1h)
@@ -204,6 +207,9 @@ class GlassSearch {
       return;
     }
 
+    // Keep full response so filter changes can re-render without a new API call
+    this._lastData = data;
+
     const v = data.vehicle || {};
     const flags = data.flags || {};
 
@@ -224,18 +230,85 @@ class GlassSearch {
       html += this.renderVehicleBanner(v, flags);
     }
 
+    // Equipment filter bar
+    if (typeof EquipmentFilters !== 'undefined') {
+      html += this.renderFilterBar();
+    }
+
     html += `<div class="results-list">`;
 
-    const candidates = data.candidates.slice(0, this.limit);
-    candidates.forEach((c, idx) => {
-      html += this.renderCard(c, idx, data.confidence, data.layer);
-    });
+    const allCandidates = data.candidates || [];
+    const filtered = typeof EquipmentFilters !== 'undefined'
+      ? allCandidates.filter((c) => EquipmentFilters.matchesAll(c, this.activeFilters))
+      : allCandidates;
+    const candidates = filtered.slice(0, this.limit);
+
+    if (candidates.length === 0) {
+      html += tplError('Ingen treff matcher valgt filter. Fjern et filter for å se flere resultater.');
+    } else {
+      candidates.forEach((c, idx) => {
+        html += this.renderCard(c, idx, data.confidence, data.layer);
+      });
+    }
 
     html += '</div>';
     this.resultsEl.innerHTML = html;
 
+    this._attachFilterListeners();
+
     // Lazy-load images via IntersectionObserver
     this._initLazyImages();
+  }
+
+  renderFilterBar() {
+    const all = (this._lastData?.candidates || []).length;
+    const filtered = (this._lastData?.candidates || []).filter((c) =>
+      EquipmentFilters.matchesAll(c, this.activeFilters)
+    ).length;
+    const countText = this.activeFilters.length > 0
+      ? `Viser ${filtered} av ${all} treff`
+      : `${all} treff`;
+
+    const filterHtml = EquipmentFilters.renderControls(this.activeFilters, {
+      idPrefix: 'gsf-',
+      onchange: 'this.closest(\'[data-glass-search]\')._glassSearch._onFilterChange()',
+      wrapperClass: '',
+    });
+
+    const resetHtml = this.activeFilters.length > 0
+      ? `<button type="button" class="btn-secondary btn-sm" style="margin-left:auto;padding:6px 12px;font-size:12px" onclick="this.closest('[data-glass-search]')._glassSearch._resetFilters()">Nullstill filter</button>`
+      : '';
+
+    return `
+      <div class="glass-filter-bar" style="margin:16px 0;padding:14px;background:var(--color-surface-alt);border:1px solid var(--color-border);border-radius:var(--radius-md)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+          <p style="font-size:13px;font-weight:600;margin:0;color:var(--color-text-primary)">🎛️ Filtrer på utstyr</p>
+          ${resetHtml}
+        </div>
+        <div class="filter-pills" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">${filterHtml}</div>
+        <p class="filter-count" style="font-size:12px;color:var(--color-text-secondary);margin:0">${countText}</p>
+      </div>
+    `;
+  }
+
+  _onFilterChange() {
+    if (!this._lastData) return;
+    const container = this.container.querySelector('.filter-pills');
+    if (container) {
+      this.activeFilters = Array.from(container.querySelectorAll('input[type="checkbox"]:checked')).map(
+        (cb) => cb.value
+      );
+    }
+    this.render(this._lastData);
+  }
+
+  _resetFilters() {
+    this.activeFilters = [];
+    if (this._lastData) this.render(this._lastData);
+  }
+
+  _attachFilterListeners() {
+    // Inline onchange handles the main interaction; this is a hook for future use.
   }
 
   _initLazyImages() {
@@ -304,6 +377,8 @@ class GlassSearch {
       c.shade && 'Solstripe',
       c.camera && 'Kamera',
       c.laneAssist && 'Filskifteass.',
+      c.solar && 'Coated / IR-glass / Solfilm',
+      c.tinted && 'Tonet',
     ].filter(Boolean);
   }
 

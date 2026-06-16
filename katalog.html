@@ -237,12 +237,7 @@
       <select id="catFilter" onchange="filter()"><option value="">Alle kategorier</option></select>
       <select id="yearFilter" onchange="filter()"><option value="">Alle år</option><option value="2020-2024">2020–2024</option><option value="2015-2019">2015–2019</option><option value="2010-2014">2010–2014</option><option value="2005-2009">2005–2009</option><option value="2000-2004">2000–2004</option><option value="1980-1999">1980–1999</option></select>
     </div>
-    <div class="flag-filters">
-      <label><input type="checkbox" id="chkAdas" onchange="filter()"> ADAS</label>
-      <label><input type="checkbox" id="chkRain" onchange="filter()"> Regnsensor</label>
-      <label><input type="checkbox" id="chkHeat" onchange="filter()"> Oppvarmet</label>
-      <label><input type="checkbox" id="chkAcoustic" onchange="filter()"> Akustisk</label>
-    </div>
+    <div class="flag-filters" id="catalogFlagFilters"></div>
   </div>
   
   <div class="count-bar" id="countBar">Skriv noe i søkefeltet for å finne produkter</div>
@@ -285,6 +280,22 @@ const CAT_ORDER = ['frontrute','bakrute','sideglass','dorglass','annet','unknown
 
 // === INIT ===
 loadStats();
+
+function initCatalogFilters() {
+  const container = document.getElementById('catalogFlagFilters');
+  if (!container || typeof EquipmentFilters === 'undefined') return;
+  container.innerHTML = EquipmentFilters.renderControls([], {
+    idPrefix: 'chk',
+    onchange: 'filter()',
+    wrapperClass: '',
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initCatalogFilters);
+} else {
+  initCatalogFilters();
+}
 
 async function loadStats() {
   try {
@@ -404,17 +415,10 @@ function renderVehicleCard(data) {
 
 /** Utstyr-filterboksen */
 function renderEquipmentFilters() {
-  let html = '<div class="equipment-filter-box">';
-  html += '<h4>🎛️ Filtrer på utstyr (kryss av hvis usikker)</h4>';
-  html += '<div class="equipment-filters">';
-  html += '<label><input type="checkbox" id="ef-adas" onchange="onEquipmentFilterChange()"> ADAS / LDW</label>';
-  html += '<label><input type="checkbox" id="ef-hud" onchange="onEquipmentFilterChange()"> HUD</label>';
-  html += '<label><input type="checkbox" id="ef-camera" onchange="onEquipmentFilterChange()"> Kamera</label>';
-  html += '<label><input type="checkbox" id="ef-rain" onchange="onEquipmentFilterChange()"> Regnsensor</label>';
-  html += '<label><input type="checkbox" id="ef-heated" onchange="onEquipmentFilterChange()"> Oppvarmet</label>';
-  html += '<label><input type="checkbox" id="ef-acoustic" onchange="onEquipmentFilterChange()"> Akustisk</label>';
-  html += '</div></div>';
-  return html;
+  const filterHtml = typeof EquipmentFilters !== 'undefined'
+    ? EquipmentFilters.renderControls([], { idPrefix: 'ef-', onchange: 'onEquipmentFilterChange()', wrapperClass: 'equipment-filters' })
+    : '<p>Kunne ikke laste filter.</p>';
+  return '<div class="equipment-filter-box"><h4>🎛️ Filtrer på utstyr (kryss av hvis usikker)</h4>' + filterHtml + '</div>';
 }
 
 /** Kategori-faner */
@@ -497,29 +501,14 @@ function renderStepwiseResults() {
   }
 
   // Les aktive utstyr-filtre
-  const ef = {
-    adas: document.getElementById('ef-adas')?.checked,
-    hud: document.getElementById('ef-hud')?.checked,
-    camera: document.getElementById('ef-camera')?.checked,
-    rainSensor: document.getElementById('ef-rain')?.checked,
-    heated: document.getElementById('ef-heated')?.checked,
-    acoustic: document.getElementById('ef-acoustic')?.checked,
-  };
-  const anyFilter = Object.values(ef).some(Boolean);
+  const selectedFlags = typeof EquipmentFilters !== 'undefined'
+    ? EquipmentFilters.collectChecked('ef-')
+    : [];
 
   // Filtrer kandidater
   let filtered = candidates;
-  if (anyFilter) {
-    filtered = candidates.filter(c => {
-      const eq = c._equipment || {};
-      if (ef.adas && !eq.adas && !c.adas) return false;
-      if (ef.hud && !eq.hud && !c.hud) return false;
-      if (ef.camera && !eq.camera && !c.camera) return false;
-      if (ef.rainSensor && !eq.rainSensor && !c.rain_sensor) return false;
-      if (ef.heated && !eq.heated && !c.heated) return false;
-      if (ef.acoustic && !eq.acoustic && !c.acoustic) return false;
-      return true;
-    });
+  if (selectedFlags.length > 0) {
+    filtered = candidates.filter(c => EquipmentFilters.matchesAll(c, selectedFlags));
   }
 
   // Grupper etter kategori
@@ -547,16 +536,6 @@ function renderStepwiseResults() {
   html += '</div>';
 
   result.innerHTML = html;
-
-  // Gjenopprett checkbox-tilstand
-  if (anyFilter) {
-    if (ef.adas) document.getElementById('ef-adas').checked = true;
-    if (ef.hud) document.getElementById('ef-hud').checked = true;
-    if (ef.camera) document.getElementById('ef-camera').checked = true;
-    if (ef.rainSensor) document.getElementById('ef-rain').checked = true;
-    if (ef.heated) document.getElementById('ef-heated').checked = true;
-    if (ef.acoustic) document.getElementById('ef-acoustic').checked = true;
-  }
 }
 
 /** Bytt aktiv glass-kategori */
@@ -586,23 +565,22 @@ async function filter() {
   const brand = document.getElementById('brandFilter').value;
   const category = document.getElementById('catFilter').value;
   const yearRange = document.getElementById('yearFilter').value;
-  const adas = document.getElementById('chkAdas').checked;
-  const rain = document.getElementById('chkRain').checked;
-  const heat = document.getElementById('chkHeat').checked;
-  const acoustic = document.getElementById('chkAcoustic').checked;
-  
+  const selectedFlags = typeof EquipmentFilters !== 'undefined'
+    ? EquipmentFilters.collectChecked('chk')
+    : [];
+
   const content = document.getElementById('catalogContent');
-  
+
   // If no filters applied, show empty state
-  if (!q && !brand && !category && !yearRange && !adas && !rain && !heat && !acoustic) {
+  if (!q && !brand && !category && !yearRange && selectedFlags.length === 0) {
     document.getElementById('countBar').textContent = 'Skriv noe i søkefeltet for å finne produkter';
     content.innerHTML = '<div class="empty-state"><h3>🔍 Start søk</h3><p>Skriv i søkefeltet over, velg et merke, eller bruk filtre for å finne glass.</p></div>';
     document.getElementById('pagination').innerHTML = '';
     return;
   }
-  
+
   content.innerHTML = '<div class="loading">Laster produkter...</div>';
-  
+
   try {
     const params = new URLSearchParams();
     if (q) params.set('q', q);
@@ -613,24 +591,18 @@ async function filter() {
       params.set('yearMin', min);
       params.set('yearMax', max);
     }
-    
+
     const res = await fetch(API_BASE + '/api/catalog/search?' + params.toString());
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    
+
     allProducts = data.results || [];
-    
-    // Client-side flag filtering (not in API yet)
-    if (adas || rain || heat || acoustic) {
-      allProducts = allProducts.filter(p => {
-        if (adas && !p.adas) return false;
-        if (rain && !p.rain_sensor) return false;
-        if (heat && !p.heated) return false;
-        if (acoustic && !p.acoustic) return false;
-        return true;
-      });
+
+    // Client-side equipment filtering
+    if (selectedFlags.length > 0) {
+      allProducts = allProducts.filter(p => EquipmentFilters.matchesAll(p, selectedFlags));
     }
-    
+
     filtered = [...allProducts];
     currentPage = 1;
     sortData();
@@ -665,6 +637,13 @@ function render() {
     if (p.rain_sensor) flags.push('<span class="flag flag-rain">Regn</span>');
     if (p.heated) flags.push('<span class="flag flag-heat">Varme</span>');
     if (p.acoustic) flags.push('<span class="flag">Akustisk</span>');
+    if (p.antenna) flags.push('<span class="flag">Antenne</span>');
+    if (p.hud) flags.push('<span class="flag">HUD</span>');
+    if (p.camera) flags.push('<span class="flag">Kamera</span>');
+    if (p.shade) flags.push('<span class="flag">Solskjerm</span>');
+    if (p.lane_assist) flags.push('<span class="flag">Filass.</span>');
+    if (p.solar) flags.push('<span class="flag">Coated / IR-glass / Solfilm</span>');
+    if (p.tinted) flags.push('<span class="flag">Tonet</span>');
     const img = p.image_url ? '<img src="' + p.image_url + '" class="image-thumb" loading="lazy" onerror="this.style.display=\'none\'">' : '<div class="no-image">Ingen</div>';
     const year = p.year_from ? (p.year_to ? p.year_from + '–' + p.year_to : p.year_from + '–') : 'Ukjent';
     return '<tr>' +
@@ -751,6 +730,7 @@ function goPage(p) { currentPage = p; render(); }
 
 <script src="js/i18n.js"></script>
 <script src="js/utils.js"></script>
+<script src="js/equipment-filters.js?v=1"></script>
 <script src="js/main.js"></script>
 <script>if('serviceWorker'in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
 </body>
