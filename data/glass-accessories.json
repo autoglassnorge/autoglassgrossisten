@@ -1,0 +1,679 @@
+{
+  "1526BZ": [
+    "1526PY"
+  ],
+  "1526PY": [
+    "1526PY"
+  ],
+  "1831GB": [
+    "1831PY"
+  ],
+  "1831PY": [
+    "1831PY"
+  ],
+  "1896GG": [
+    "1896GN",
+    "1896GG"
+  ],
+  "1896GN": [
+    "1896GN",
+    "1896GG"
+  ],
+  "2126GY": [
+    "2126S"
+  ],
+  "2126GYM": [
+    "2126S"
+  ],
+  "2126S": [
+    "2126S"
+  ],
+  "21806GN": [
+    "21806PY"
+  ],
+  "2183GY": [
+    "2183S"
+  ],
+  "2183GYM": [
+    "2183S"
+  ],
+  "2183S": [
+    "2183S"
+  ],
+  "22030GN": [
+    "22030GN"
+  ],
+  "22165GN": [
+    "22165GN",
+    "22165GN2"
+  ],
+  "22165GN2": [
+    "22165GN",
+    "22165GN2"
+  ],
+  "2304ACDCMUVZ2L": [
+    "2304ACDCMUVZ2L",
+    "2304ACDCMUVZ95",
+    "2304BYQSABKWZ",
+    "2304LGCS4FDKZ",
+    "2304LYQS4RDKZ",
+    "2304RGCS4FDKZ",
+    "2304RYQS4RDKZ"
+  ],
+  "2304ACDCMUVZ95": [
+    "2304ACDCMUVZ2L",
+    "2304ACDCMUVZ95",
+    "2304BYQSABKWZ",
+    "2304LGCS4FDKZ",
+    "2304LYQS4RDKZ",
+    "2304RGCS4FDKZ",
+    "2304RYQS4RDKZ"
+  ],
+  "2304BYQSABKWZ": [
+    "2304ACDCMUVZ2L",
+    "2304ACDCMUVZ95",
+    "2304BYQSABKWZ",
+    "2304LGCS4FDKZ",
+    "2304LYQS4RDKZ",
+    "2304RGCS4FDKZ",
+    "2304RYQS4RDKZ"
+  ],
+  "2304GB": [
+    "2304ACDCMUVZ2L",
+    "2304ACDCMUVZ95",
+    "2304BYQSABKWZ",
+    "2304LGCS4FDKZ",
+    "2304LYQS4RDKZ",
+    "2304RGCS4FDKZ",
+    "2304RYQS4RDKZ"
+  ],
+  "2306AGACMUVZ1L": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306AGACMUVZ2L": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306AGACMVZ": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306BGNEAZ": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306BGSSAB": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306BYPEAZ": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306BYPSAB": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306CS": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306CSELM": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306CSM": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306CSM2": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306GNELM": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306GNKLIMA": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306GNM": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306GY": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "2306GYKLIMA": [
+    "2306GNKLIMA",
+    "2306GYKLIMA"
+  ],
+  "24139GN": [
+    "24139PY"
+  ],
+  "24139PY": [
+    "24139PY"
+  ],
+  "24265GN": [
+    "24265PY"
+  ],
+  "24265PY": [
+    "24265PY"
+  ],
+  "24311GN": [
+    "24311GN"
+  ],
+  "2488AGACMUVZ": [
+    "2488ASGRT"
+  ],
+  "2488AGACMUVZ2L": [
+    "2488ASGRT"
+  ],
+  "2488AGACMVZ": [
+    "2488ASGRT"
+  ],
+  "2488ASGRT": [
+    "2488ASGRT"
+  ],
+  "2488BGSRABZ": [
+    "2488ASGRT"
+  ],
+  "2488BYPRABZ": [
+    "2488ASGRT"
+  ],
+  "2492AGACMUVZ1L": [
+    "2492ASGRT"
+  ],
+  "2492AGACMVZ1L": [
+    "2492ASGRT"
+  ],
+  "2492ASGRT": [
+    "2492ASGRT"
+  ],
+  "2492BGSRAZ": [
+    "2492ASGRT"
+  ],
+  "2492BYPRAZ": [
+    "2492ASGRT"
+  ],
+  "2496AGACMUVZ": [
+    "2496ASGHT"
+  ],
+  "2496AGACMVZ": [
+    "2496ASGHT"
+  ],
+  "2496ASGHT": [
+    "2496ASGHT"
+  ],
+  "2496BGSHA": [
+    "2496ASGHT"
+  ],
+  "2496BYPHA": [
+    "2496ASGHT"
+  ],
+  "2520GN": [
+    "2520PY"
+  ],
+  "2520GNM": [
+    "2520PY"
+  ],
+  "2520GYM": [
+    "2520PY"
+  ],
+  "2520PY": [
+    "2520PY"
+  ],
+  "2587GNM": [
+    "2587PY"
+  ],
+  "2587PY": [
+    "2587PY"
+  ],
+  "28125GN": [
+    "28125GN",
+    "28125GP"
+  ],
+  "28125GP": [
+    "28125GN",
+    "28125GP"
+  ],
+  "28231GN": [
+    "28231GN",
+    "28231GP"
+  ],
+  "28231GP": [
+    "28231GN",
+    "28231GP"
+  ],
+  "2981GB": [
+    "2981PY"
+  ],
+  "2981GBM": [
+    "2981PY"
+  ],
+  "2981PY": [
+    "2981PY"
+  ],
+  "2985GBEL": [
+    "2985PY"
+  ],
+  "2985GBELM": [
+    "2985PY"
+  ],
+  "2985GBELM2": [
+    "2985PY"
+  ],
+  "2985PY": [
+    "2985PY"
+  ],
+  "2987CSCM": [
+    "2987PY"
+  ],
+  "2987CSGYCM": [
+    "2987PY"
+  ],
+  "2987GNCM": [
+    "2987PY"
+  ],
+  "2987GYCM": [
+    "2987PY"
+  ],
+  "2987GYM": [
+    "2987PY"
+  ],
+  "2987GYM2": [
+    "2987PY"
+  ],
+  "2987PY": [
+    "2987PY"
+  ],
+  "2997GN": [
+    "2997PY"
+  ],
+  "2997GNEL": [
+    "2997PY"
+  ],
+  "2997GNEL2": [
+    "2997PY"
+  ],
+  "2997GNELM": [
+    "2997PY"
+  ],
+  "2997PY": [
+    "2997PY"
+  ],
+  "30095GN": [
+    "30095GN",
+    "30095YP"
+  ],
+  "30095YP": [
+    "30095GN",
+    "30095YP"
+  ],
+  "3045AGABLCHMV": [
+    "3045ASGRT"
+  ],
+  "3045AGRBLCHMV1L": [
+    "3045ASGRT"
+  ],
+  "3045ASGRT": [
+    "3045ASGRT"
+  ],
+  "3045BYPRI": [
+    "3045ASGRT"
+  ],
+  "3045CSGYHM": [
+    "3045ASGRT"
+  ],
+  "3045CSGYHM2": [
+    "3045ASGRT"
+  ],
+  "3045CSGYM": [
+    "3045ASGRT"
+  ],
+  "3045CSGYM2": [
+    "3045ASGRT"
+  ],
+  "3045GNCM": [
+    "3045ASGRT"
+  ],
+  "3045GNCM2": [
+    "3045ASGRT"
+  ],
+  "3045GNEL": [
+    "3045ASGRT"
+  ],
+  "3045GNELM": [
+    "3045ASGRT"
+  ],
+  "3045GNELM2": [
+    "3045ASGRT"
+  ],
+  "3045GNM": [
+    "3045ASGRT"
+  ],
+  "3045GYM": [
+    "3045ASGRT"
+  ],
+  "3045GYM2": [
+    "3045ASGRT"
+  ],
+  "3207GYCM": [
+    "3207GYCM",
+    "3207GYCM2",
+    "3207GYM",
+    "3207GYM2"
+  ],
+  "3207GYCM2": [
+    "3207GYCM",
+    "3207GYCM2",
+    "3207GYM",
+    "3207GYM2"
+  ],
+  "3207GYM": [
+    "3207GYCM",
+    "3207GYCM2",
+    "3207GYM",
+    "3207GYM2"
+  ],
+  "3207GYM2": [
+    "3207GYCM",
+    "3207GYCM2",
+    "3207GYM",
+    "3207GYM2"
+  ],
+  "3230GBCELM": [
+    "3230PY"
+  ],
+  "3230GBELM": [
+    "3230PY"
+  ],
+  "3230PY": [
+    "3230PY"
+  ],
+  "3355GNCM": [
+    "3355PYKIT"
+  ],
+  "3355GNCMU": [
+    "3355PYKIT"
+  ],
+  "3355GYM": [
+    "3355PYKIT"
+  ],
+  "3355PYKIT": [
+    "3355PYKIT"
+  ],
+  "4167AGABLCIMO2Z": [
+    "4167AKKR",
+    "4167ASMR"
+  ],
+  "4167AGNBLCIMO1Z": [
+    "4167AKKR",
+    "4167ASMR"
+  ],
+  "4167AGRBLCIMO3Z": [
+    "4167AKKR",
+    "4167ASMR"
+  ],
+  "4167AGSBLCIMOV": [
+    "4167AKKR",
+    "4167ASMR"
+  ],
+  "4167AKKR": [
+    "4167AKKR",
+    "4167ASMR"
+  ],
+  "4167ASMR": [
+    "4167AKKR",
+    "4167ASMR"
+  ],
+  "4167BGNR": [
+    "4167AKKR",
+    "4167ASMR"
+  ],
+  "4167BYPR": [
+    "4167AKKR",
+    "4167ASMR"
+  ],
+  "4167LGNR5FDW1M": [
+    "4167AKKR"
+  ],
+  "4167LYPR5RDW": [
+    "4167AKKR"
+  ],
+  "4167LYPR5RQZ": [
+    "4167AKKR"
+  ],
+  "4167RGNR5FDW1M": [
+    "4167AKKR"
+  ],
+  "4167RYPR5RDW": [
+    "4167AKKR"
+  ],
+  "4167RYPR5RQZ": [
+    "4167AKKR"
+  ],
+  "4174AGRBLCIOV": [
+    "4174ASMR"
+  ],
+  "4194AGRCIMOUV": [
+    "4194ASGR"
+  ],
+  "4194AGRCIMOV": [
+    "4194ASGR"
+  ],
+  "4194AGRCIMOV1T": [
+    "4194ASGR"
+  ],
+  "4194BGNRI": [
+    "4194ASGR"
+  ],
+  "4194BYPRI": [
+    "4194ASGR"
+  ],
+  "540C": [
+    "540GU"
+  ],
+  "540GG": [
+    "540GU"
+  ],
+  "540GU": [
+    "540GU"
+  ],
+  "6053AGNMVZ1B": [
+    "6053ASMCT"
+  ],
+  "6053ASMCT": [
+    "6053ASMCT"
+  ],
+  "6053BGNCA": [
+    "6053ASMCT"
+  ],
+  "664BB": [
+    "664GU"
+  ],
+  "664BL": [
+    "664GU"
+  ],
+  "685C": [
+    "685GU"
+  ],
+  "685GG": [
+    "685GU"
+  ],
+  "685GN": [
+    "685GU"
+  ],
+  "7944AGNCHMV1P": [
+    "7944ASMR"
+  ],
+  "7944AGNHMPV": [
+    "7944ASMR"
+  ],
+  "7944ASMR": [
+    "7944ASMR"
+  ],
+  "7944BYPR": [
+    "7944ASMR"
+  ],
+  "7945AGACHM": [
+    "7945ASME"
+  ],
+  "7945BYPEA": [
+    "7945ASME"
+  ],
+  "8422AGAACMUVZ": [
+    "8422ASCHS"
+  ],
+  "8422AGAACMUVZ1L": [
+    "8422ASCHS"
+  ],
+  "8422AGAACMUVZ2L": [
+    "8422ASCHS"
+  ],
+  "8422ASCHS": [
+    "8422ASCHS"
+  ],
+  "8422BGSHAIZ1F": [
+    "8422ASCHS"
+  ],
+  "8422BYDHIXZ1J": [
+    "8422ASCHS"
+  ],
+  "8422BYPHAIZ1F": [
+    "8422ASCHS"
+  ],
+  "8422LGAH5FDKNW": [
+    "8422ASCHS"
+  ],
+  "8422LGSH5FDW": [
+    "8422ASCHS"
+  ],
+  "8422LGSH5FV": [
+    "8422ASCHS"
+  ],
+  "8422LGSH5RD": [
+    "8422ASCHS"
+  ],
+  "8422LGSH5RV": [
+    "8422ASCHS"
+  ],
+  "8422RGAH5FDKNW": [
+    "8422ASCHS"
+  ],
+  "8422RGSH5FDW": [
+    "8422ASCHS"
+  ],
+  "8422RGSH5FV": [
+    "8422ASCHS"
+  ],
+  "8422RGSH5RD": [
+    "8422ASCHS"
+  ],
+  "8422RGSH5RV": [
+    "8422ASCHS"
+  ],
+  "8432AGACHM": [
+    "8432ASMR",
+    "8432ASMRB"
+  ],
+  "8432AGACHMU": [
+    "8432ASMR",
+    "8432ASMRB"
+  ],
+  "8432AGACHMUV1E": [
+    "8432ASMR",
+    "8432ASMRB"
+  ],
+  "8432AGACHMV1E": [
+    "8432ASMR",
+    "8432ASMRB"
+  ],
+  "8432AGACHMV1L": [
+    "8432ASMR",
+    "8432ASMRB"
+  ],
+  "8432AGACHMV30": [
+    "8432ASMR",
+    "8432ASMRB"
+  ],
+  "8432AGACMV": [
+    "8432ASMR",
+    "8432ASMRB"
+  ],
+  "8432BGSRAIZ": [
+    "8432ASMR"
+  ],
+  "8432BYPRAIXZ": [
+    "8432ASMR"
+  ],
+  "8450AGACHM": [
+    "8450ASMR"
+  ],
+  "8450AGACHM1E": [
+    "8450ASMR"
+  ],
+  "8450AGACM": [
+    "8450ASMR"
+  ],
+  "8450AGACMV": [
+    "8450ASMR"
+  ],
+  "8450ASMR": [
+    "8450ASMR"
+  ],
+  "8450ASMVB": [
+    "8450ASMR"
+  ],
+  "8450BYPRACX": [
+    "8450ASMR"
+  ],
+  "8620AGAGYCMVZ95": [
+    "8620AGAGYCMVZ95",
+    "8620BYPSABIJ",
+    "8620LGSS4FD",
+    "8620RGSS4FD"
+  ],
+  "8620BYPSABIJ": [
+    "8620AGAGYCMVZ95",
+    "8620BYPSABIJ",
+    "8620LGSS4FD",
+    "8620RGSS4FD"
+  ],
+  "8620BZ": [
+    "8620AGAGYCMVZ95",
+    "8620BYPSABIJ",
+    "8620LGSS4FD",
+    "8620RGSS4FD"
+  ],
+  "8620CL": [
+    "8620AGAGYCMVZ95",
+    "8620BYPSABIJ",
+    "8620LGSS4FD",
+    "8620RGSS4FD"
+  ],
+  "8620GN": [
+    "8620AGAGYCMVZ95",
+    "8620BYPSABIJ",
+    "8620LGSS4FD",
+    "8620RGSS4FD"
+  ],
+  "8641AGACMVZ": [
+    "8641ASGRT"
+  ],
+  "8641AGACMVZ1L": [
+    "8641ASGRT"
+  ],
+  "8641ASGRT": [
+    "8641ASGRT"
+  ],
+  "8641BGSRAI": [
+    "8641ASGRT"
+  ],
+  "8641BYPRAI": [
+    "8641ASGRT"
+  ]
+}

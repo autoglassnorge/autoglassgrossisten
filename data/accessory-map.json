@@ -1,0 +1,796 @@
+{
+  "2304": [
+    {
+      "sku": "2304ACDCMUVZ2L",
+      "name": "BMW i7 4D LIM 23-  WS SENSOR LDW HUD COATED GN",
+      "price": 0,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2304ACDCMUVZ95",
+      "name": "BMW i7 4D LIM 23-  WS SENSOR LDW HUD COATED GN TYP2",
+      "price": 0,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2304BYQSABKWZ",
+      "name": "BMW i7 4D LIM 23-  REAR DOORGLASS RIGHT LAM PRIVACY",
+      "price": 0,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2304LGCS4FDKZ",
+      "name": "BMW i7 4D LIM 23-  FRONT DOORGLASS LEFT LAM GN",
+      "price": 0,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2304LYQS4RDKZ",
+      "name": "BMW i7 4D LIM 23-  REAR DOORGLASS LEFT LAM PRIVACY",
+      "price": 0,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2304RGCS4FDKZ",
+      "name": "BMW i7 4D LIM 23-  FRONT DOORGLASS RIGHT LAM GN",
+      "price": 0,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2304RYQS4RDKZ",
+      "name": "BMW i7 4D LIM 23-  REAR DOORGLASS RIGHT LAM PRIVACY",
+      "price": 0,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "3355": [
+    {
+      "sku": "3355PYKIT",
+      "name": "BMW X1 5D SUV  15-     PYNTELIST KIT V+H FRONTRUTE ##@",
+      "price": 2140,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "2488": [
+    {
+      "sku": "2488ASGRT",
+      "name": "BMW X4 5D SUV (G02) 18-  PYNTELIST TOPP FRONTRUTE",
+      "price": 455,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "2492": [
+    {
+      "sku": "2492ASGRT",
+      "name": "BMW X5 5D SUV G05 19-  PYNTELIST TOPP",
+      "price": 490,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "24311": [
+    {
+      "sku": "24311GN",
+      "name": "FORD FOCUS SED  99- BAKRUTE GN NB! HUSK PYNTELIST",
+      "price": 6160,
+      "type": "pyntelist",
+      "required": true,
+      "source_url": ""
+    }
+  ],
+  "24139": [
+    {
+      "sku": "24139PY",
+      "name": "HONDA ACCORD 2D COUPE 98-  PYNTELIST BAKRUTE @",
+      "price": 2200,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "7945": [
+    {
+      "sku": "7945ASME",
+      "name": "SUBARU OUTBACK 5D WAGON 21-   PYNTELIST FRONTRUTE",
+      "price": 1350,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "8450": [
+    {
+      "sku": "8450ASMR",
+      "name": "TOYOTA BZ4X/SUBARU SOLT 21-  FRONTRUTE PYNTELIST",
+      "price": 4420,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "8422": [
+    {
+      "sku": "8422ASCHS",
+      "name": "TOYOTA PRIUS 5D CC   16- FRONTRUTE KLIPS KIT SIDERUTER",
+      "price": 700,
+      "type": "klips",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "8432": [
+    {
+      "sku": "8432ASMR",
+      "name": "TOYOTA RAV 4 2019- PYNTELIST FRONTRUTE MÅ VÆRE MED",
+      "price": 3440,
+      "type": "pyntelist",
+      "required": true,
+      "source_url": ""
+    },
+    {
+      "sku": "8432ASMRB",
+      "name": "TOYOTA RAV 4 2019-   BUNNLIST FRONTRUTE -MÅ FØLGE MED",
+      "price": 2325,
+      "type": "bunnlist",
+      "required": true,
+      "source_url": ""
+    }
+  ],
+  "2981": [
+    {
+      "sku": "2981PY",
+      "name": "CHEVROLET CRUZE 4D SEDAN  09–   PYNTELIST FRONTRUTE",
+      "price": 1255,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "22030": [
+    {
+      "sku": "22030GN",
+      "name": "VOLVO 850 5D STVOGN 93-96 BAKRUTE EL  NB! HUSK PYNTELISTER",
+      "price": 11250,
+      "type": "pyntelist",
+      "required": true,
+      "source_url": ""
+    }
+  ],
+  "2126": [
+    {
+      "sku": "2126S",
+      "name": "BRUK S1 SENSORTAPE",
+      "price": 0,
+      "type": "sensortape",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "8641": [
+    {
+      "sku": "8641ASGRT",
+      "name": "VW T-ROC 5D SUV  17- PYNTELIST TOPP",
+      "price": 605,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "3207": [
+    {
+      "sku": "3207GYCM",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 13-APR16  FR+AKU+SEN+LDW+GY",
+      "price": 7805,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYCM2",
+      "name": "AUDI A3 LIMOUSINE 4D SAL MAI16-  FR+AKU+INNK+SEN+LDW+GY",
+      "price": 9635,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYM",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 13-APR16  FR+AKU+INNK+SENS+GY",
+      "price": 9765,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYM2",
+      "name": "AUDI A3 LIMOUSINE 4D SAL  APR16 –   FR+AKU+INNK+SENS+GY",
+      "price": 10290,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYCM",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 13-APR16  FR+AKU+SEN+LDW+GY",
+      "price": 7805,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYCM2",
+      "name": "AUDI A3 LIMOUSINE 4D SAL MAI16-  FR+AKU+INNK+SEN+LDW+GY",
+      "price": 9635,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYM",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 13-APR16  FR+AKU+INNK+SENS+GY",
+      "price": 9765,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYM2",
+      "name": "AUDI A3 LIMOUSINE 4D SAL  APR16 –   FR+AKU+INNK+SENS+GY",
+      "price": 10290,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYCM",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 13-APR16  FR+AKU+SEN+LDW+GY",
+      "price": 7805,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYM",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 13-APR16  FR+AKU+INNK+SENS+GY",
+      "price": 9765,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYM2",
+      "name": "AUDI A3 LIMOUSINE 4D SAL  APR16 –   FR+AKU+INNK+SENS+GY",
+      "price": 10290,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYCM",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 13-APR16  FR+AKU+SEN+LDW+GY",
+      "price": 7805,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYCM2",
+      "name": "AUDI A3 LIMOUSINE 4D SAL MAI16-  FR+AKU+INNK+SEN+LDW+GY",
+      "price": 9635,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYM",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 13-APR16  FR+AKU+INNK+SENS+GY",
+      "price": 9765,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "3207GYM2",
+      "name": "AUDI A3 LIMOUSINE 4D SAL  APR16 –   FR+AKU+INNK+SENS+GY",
+      "price": 10290,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "30089": [
+    {
+      "sku": "30089GN",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   DØRRUTE FREMME +GN",
+      "price": 1565,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "30090": [
+    {
+      "sku": "30090GN",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   DØRRUTE FREMME +GN",
+      "price": 1565,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "30091": [
+    {
+      "sku": "30091GN",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   DØRRUTE BAK+GN @",
+      "price": 1620,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "30091YP",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   DØRRUTE BAK+SOTET",
+      "price": 2595,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "30092": [
+    {
+      "sku": "30092GN",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   DØRRUTE BAK+GN",
+      "price": 1620,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "30092YP",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   DØRRUTE BAK+SOTET",
+      "price": 2595,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "30093": [
+    {
+      "sku": "30093GN",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   SIDERUTE+INNK+CROM+GN @",
+      "price": 2470,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "30093YP",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   SIDERUTE+INNK+CROM+SOTET @",
+      "price": 2740,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "30094": [
+    {
+      "sku": "30094GN",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   SIDERUTE+INNK+CROM+GN ##@",
+      "price": 2470,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "30094YP",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   SIDERUTE+INNK+CROM+SOTET ##@",
+      "price": 2740,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "30095": [
+    {
+      "sku": "30095GN",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-   BAKRUTE EL+ANT+TV ANT +GN @",
+      "price": 6690,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "30095YP",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13- BAKRUTE EL+ANT+TV ANT+SOTET @",
+      "price": 9060,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "8620": [
+    {
+      "sku": "8620AGAGYCMVZ95",
+      "name": "AUDI A3 LIMOUSINE 4D SAL MAI16-  FR+AKU+INNK+SEN+LDW+ADAS+GY",
+      "price": 9495,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "8620BYPSABIJ",
+      "name": "AUDI A3 LIMOUSINE 4D SAL 2013-  BAKRUTE EL+BRLYS+ANT+SOTET @",
+      "price": 10545,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "8620LGSS4FD",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-    FREMRE DØRRUTE+GRØNN ##@",
+      "price": 2270,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "8620RGSS4FD",
+      "name": "AUDI A3 4D SPORTLIMOSIN 13-    FREMRE DØRRUTE+GRØNN ##@",
+      "price": 2270,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "2496": [
+    {
+      "sku": "2496ASGHT",
+      "name": "BMW 1 5D HBK (F40)  19- PYNTELIST TOPP",
+      "price": 1415,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "2987": [
+    {
+      "sku": "2987PY",
+      "name": "BMW 5 SERIEN GT 5D CC 09-  PYNTELIST TOPP FRONTRUTE",
+      "price": 485,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "21806": [
+    {
+      "sku": "21806PY",
+      "name": "HONDA PRELUDE 2D COUPE   92-   PYNTELIST BAKRUTE @",
+      "price": 3290,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "24265": [
+    {
+      "sku": "24265PY",
+      "name": "HYUNDAI H-1 VAN 98- PYNTELIST BAKRUTE",
+      "price": 895,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "4167": [
+    {
+      "sku": "4167AKKR",
+      "name": "HYUNDAI KONA  5D SUV 18- KLIPS KIT",
+      "price": 160,
+      "type": "klips",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "4167ASMR",
+      "name": "HYUNDAI KONA  5D SUV 18- PYNTELIST FRONTRUTE",
+      "price": 1675,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "4194": [
+    {
+      "sku": "4194ASGR",
+      "name": "HYUNDAI KONA  5D SUV 23-  PYNTELIST",
+      "price": 1025,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "4174": [
+    {
+      "sku": "4174ASMR",
+      "name": "HYUNDAI NEXO 5D SUV 18- PYNTELIST",
+      "price": 0,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "3230": [
+    {
+      "sku": "3230PY",
+      "name": "KIA CARENS 5D MPV 13-   PYNTELIST FRONTRUTE",
+      "price": 2175,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "2985": [
+    {
+      "sku": "2985PY",
+      "name": "KIA SORENTO 5D SUV 10-   PYNTELIST TOPP FRONTRUTE",
+      "price": 1540,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "2997": [
+    {
+      "sku": "2997PY",
+      "name": "KIA VENGA 10- PYNTELIST  VENSTRE+HØYRE , NB MÅ BYTTES",
+      "price": 2450,
+      "type": "pyntelist",
+      "required": true,
+      "source_url": ""
+    }
+  ],
+  "2587": [
+    {
+      "sku": "2587PY",
+      "name": "MERCEDES R171 SLK CAB/ROADSTER 04- PYNTELIST FRONTRUTE @",
+      "price": 1290,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "540": [
+    {
+      "sku": "540GU",
+      "name": "MERCEDES 250-300S-SE-SEL SERIE W108 63-72 GUMMILIST FRONTRUT",
+      "price": 1590,
+      "type": "gummilist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "685": [
+    {
+      "sku": "685GU",
+      "name": "MERCEDES W116 4D SED S+SEL 72-79 GUMMILIST FRONTRUTE",
+      "price": 2955,
+      "type": "gummilist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "1831": [
+    {
+      "sku": "1831PY",
+      "name": "MITSUBISHI 3000 GT CPE 94-   PYNTELIST FRONTRUTE",
+      "price": 935,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "664": [
+    {
+      "sku": "664GU",
+      "name": "DATSUN 240Z + 260Z+280Z  COUPE 71-79 GUMMILIST FRONTRUTE",
+      "price": 3090,
+      "type": "gummilist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "6053": [
+    {
+      "sku": "6053ASMCT",
+      "name": "NISSAN SKYLINE GT-R 2D CPE R35  08- PYNTELIST",
+      "price": 25880,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "22165": [
+    {
+      "sku": "22165GN",
+      "name": "NISSAN SERENA BAKRUTE EL NB NB FOR GUMMILIST",
+      "price": 9520,
+      "type": "gummilist",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "22165GN2",
+      "name": "NISSAN SERENA 94-    BAKRUTE EL+GN NB NB LIMT RUTE",
+      "price": 9490,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "28125": [
+    {
+      "sku": "28125GN",
+      "name": "PEUGEOT 207 5D STV SW   07-    BAKRUTE+EL+GN NB LIMT",
+      "price": 6395,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "28125GP",
+      "name": "PEUGEOT 207 5D STV SW   07-    BAKRUTE+EL+GN NB LIMT",
+      "price": 11960,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "28231": [
+    {
+      "sku": "28231GN",
+      "name": "PEUGEOT 308 5D STV SW   08-   BAKRUTE+ANT.+LIMT+GN",
+      "price": 8880,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "28231GP",
+      "name": "PEUGEOT 308 5D STV SW   08-  BAKRUTE+MØRK GN+ANT+LIMT",
+      "price": 10345,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "2306": [
+    {
+      "sku": "2306GNKLIMA",
+      "name": "RENAULT LAGUNA 5D CC+STV  01- FRONTR GN-SOLAR+KLIMA",
+      "price": 5325,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2306GYKLIMA",
+      "name": "RENAULT LAGUNA 5D CC+STV  01- FRONTR GY-SOLAR+KLIMA",
+      "price": 5365,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2306GNKLIMA",
+      "name": "RENAULT LAGUNA 5D CC+STV  01- FRONTR GN-SOLAR+KLIMA",
+      "price": 5325,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    },
+    {
+      "sku": "2306GYKLIMA",
+      "name": "RENAULT LAGUNA 5D CC+STV  01- FRONTR GY-SOLAR+KLIMA",
+      "price": 5365,
+      "type": "lim",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "1526": [
+    {
+      "sku": "1526PY",
+      "name": "ROVER 800+820 4D SEDAN 87-91 PYNTELIST FRONTRUTE",
+      "price": 1360,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "1896": [
+    {
+      "sku": "1896GN",
+      "name": "SAAB 900 + 9-3 CABRIOLET 94- FRONTRUTE KUN MED/BUNNLIST",
+      "price": 4825,
+      "type": "bunnlist",
+      "required": true,
+      "source_url": ""
+    },
+    {
+      "sku": "1896GG",
+      "name": "SAAB 900 + 9-3 CABRIOLET 94- FRONTRUTE KUN MED/BUNNLIST",
+      "price": 7190,
+      "type": "bunnlist",
+      "required": true,
+      "source_url": ""
+    },
+    {
+      "sku": "1896GN",
+      "name": "SAAB 900 + 9-3 CABRIOLET 94- FRONTRUTE KUN MED/BUNNLIST",
+      "price": 4825,
+      "type": "bunnlist",
+      "required": true,
+      "source_url": ""
+    }
+  ],
+  "2183": [
+    {
+      "sku": "2183S",
+      "name": "BRUK S1 SENSORTAPE",
+      "price": 0,
+      "type": "sensortape",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "2520": [
+    {
+      "sku": "2520PY",
+      "name": "SMART FORTWO 2D CAB+COUPE 03- PYNTELIST FRONTRUTE",
+      "price": 1010,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "3045": [
+    {
+      "sku": "3045ASGRT",
+      "name": "SSANG YONG REXTON 5D SUV 17- PYNTELIST FRONTRUTE",
+      "price": 610,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ],
+  "7944": [
+    {
+      "sku": "7944ASMR",
+      "name": "SUBARU FORESTER 5D 19-  PYNTELIST FRONTRUTE",
+      "price": 2150,
+      "type": "pyntelist",
+      "required": false,
+      "source_url": ""
+    }
+  ]
+}
