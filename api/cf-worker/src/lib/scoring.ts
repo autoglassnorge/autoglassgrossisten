@@ -327,8 +327,24 @@ export const scoreCandidate = memoizeSync(_scoreCandidate, 1000);
 
 function _modelMatches(vehicleModel: string, recordModel: string | null, vehicleMake?: string): boolean {
   if (!recordModel || recordModel.trim() === "") return false;
-  const vm = vehicleModel.toLowerCase().trim();
-  const rm = recordModel.toLowerCase().trim();
+
+  const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const stripMakePrefix = (model: string, make?: string): string => {
+    if (!make) return model;
+    const normalizedMake = make.toLowerCase().trim();
+    if (!normalizedMake) return model;
+    const prefixPattern = new RegExp(`^${escapeRegExp(normalizedMake)}\\b[^a-z0-9]*`, "i");
+    return model.replace(prefixPattern, "").trim();
+  };
+
+  let vm = vehicleModel.toLowerCase().trim();
+  let rm = recordModel.toLowerCase().trim();
+
+  // SVV sometimes returns the make as part of the model string (e.g. "JAGUAR I-PACE").
+  // Strip it so brand-specific rules (Jaguar *PACE, Volvo XC##, etc.) work on the model only.
+  const normalizedMake = (vehicleMake || "").toLowerCase().trim();
+  vm = stripMakePrefix(vm, normalizedMake);
+  rm = stripMakePrefix(rm, normalizedMake);
 
   // Top-level substring match with guard against short-code traps (A3 inside A30)
   if (vm.includes(rm) || rm.includes(vm)) {
@@ -337,12 +353,13 @@ function _modelMatches(vehicleModel: string, recordModel: string | null, vehicle
     // If one is contained in the other, require good length ratio or safe boundary
     if (longer.includes(shorter)) {
       const ratio = shorter.length / longer.length;
-      if (ratio >= 0.8 || shorter.length >= 4) return true;
       // Reject if shorter ends with a digit and longer continues with a digit
       // (e.g. "A3" inside "A30", "CX5" inside "CX50") — different models
       const idx = longer.indexOf(shorter);
       const after = longer.slice(idx + shorter.length);
-      if (/\d$/.test(shorter) && /^\d/.test(after)) {
+      const hasDigitBoundary = /\d$/.test(shorter) && /^\d/.test(after);
+      if ((ratio >= 0.8 || shorter.length >= 4) && !hasDigitBoundary) return true;
+      if (hasDigitBoundary) {
         // Fall through to brand-specific / token logic below
       } else {
         return true;
@@ -468,6 +485,52 @@ function _modelMatches(vehicleModel: string, recordModel: string | null, vehicle
     }
   }
 
+  // ── Mazda CX / MX series (CX-5 vs CX-50 are different models)
+  if (make === "mazda") {
+    const mazdaSeriesPattern = /^(cx|mx)\s*-?\s*(\d+)$/;
+    const vmMatch = vm.match(mazdaSeriesPattern);
+    const rmMatch = rm.match(mazdaSeriesPattern);
+    if (vmMatch && rmMatch) {
+      return vmMatch[1] === rmMatch[1] && vmMatch[2] === rmMatch[2];
+    }
+  }
+
+  // ── BMW X / M series and numeric series (X3 vs X30, M3 vs M4, 3 SERIE vs 5 SERIE)
+  if (make === "bmw") {
+    const bmwSeriesPattern = /^(x|m|z)\s*(\d+)$/;
+    const vmMatch = vm.match(bmwSeriesPattern);
+    const rmMatch = rm.match(bmwSeriesPattern);
+    if (vmMatch && rmMatch) {
+      return vmMatch[1] === rmMatch[1] && vmMatch[2] === rmMatch[2];
+    }
+    const bmwNumericSeries = /^(\d+)\s*-?\s*serie$/;
+    const vmNumMatch = vm.match(bmwNumericSeries);
+    const rmNumMatch = rm.match(bmwNumericSeries);
+    if (vmNumMatch && rmNumMatch) {
+      return vmNumMatch[1] === rmNumMatch[1];
+    }
+  }
+
+  // ── Audi A / Q / TT numeric series (A3 vs A30, Q3 vs Q30 are different)
+  if (make === "audi") {
+    const audiSeriesPattern = /^(a|q|tt)\s*(\d+)$/;
+    const vmMatch = vm.match(audiSeriesPattern);
+    const rmMatch = rm.match(audiSeriesPattern);
+    if (vmMatch && rmMatch) {
+      return vmMatch[1] === rmMatch[1] && vmMatch[2] === rmMatch[2];
+    }
+  }
+
+  // ── Mercedes A/B/C/E/S/GLA/GLC/GLE/GLS class names
+  if (make === "mercedes" || make.includes("mercedes")) {
+    const mercedesClassPattern = /^([a-e])\s*-?\s*klasse$/;
+    const vmClassMatch = vm.match(mercedesClassPattern);
+    const rmClassMatch = rm.match(mercedesClassPattern);
+    if (vmClassMatch && rmClassMatch) {
+      return vmClassMatch[1] === rmClassMatch[1];
+    }
+  }
+
   // ── General fuzzy match: ignore spaces and hyphens for alphanumeric model codes
   // This catches: "XC 60" vs "XC60", "3 SERIE" vs "3-SERIE", "F-150" vs "F150"
   const normalizeModelCode = (s: string) => s.replace(/[^a-z0-9]+/g, "").toLowerCase();
@@ -482,9 +545,9 @@ function _modelMatches(vehicleModel: string, recordModel: string | null, vehicle
     const isContained = longer.includes(shorter);
     if (isContained) {
       const ratio = shorter.length / longer.length;
-      // Allow if ratio is good, or shorter is long enough, or there's a clear digit boundary
-      const hasDigitBoundary = /\d/.test(shorter) && longer.replace(shorter, "").match(/^\d/);
-      if (ratio >= 0.8 || shorter.length >= 4 || hasDigitBoundary) return true;
+      // Allow if ratio is good or the shorter string is long enough.
+      // NOTE: a digit boundary alone is NOT safe — e.g. CX5 vs CX50 are different models.
+      if (ratio >= 0.8 || shorter.length >= 4) return true;
     } else {
       return true; // overlapping but not contained (e.g. "transporter" vs "caravelle")
     }
@@ -495,7 +558,44 @@ function _modelMatches(vehicleModel: string, recordModel: string | null, vehicle
   const rTokens = tokenize(rm);
   const common = rTokens.filter((t) => vTokens.includes(t));
   if (common.length >= 2) return true;
-  if (common.length === 1 && common[0].length >= 4) return true;
+  if (common.length === 1 && common[0].length >= 4) {
+    const suffix = common[0];
+    // Generic body-style / series / class tokens shared across different models
+    // must not be enough on their own (e.g. "3-SERIE" vs "5-SERIE", "I-PACE" vs "E-PACE").
+    // If one side is *only* that suffix (e.g. "COUNTRYMAN" vs "MINI COUNTRYMAN"), it is a true match.
+    const GENERIC_SUFFIXES = new Set([
+      "serie", "series",
+      "klasse", "class",
+      "pace",
+      "cross",
+      "sport", "sports", "sportback",
+      "coupe", "cabriolet", "convertible", "roadster",
+      "sedan", "saloon",
+      "hatchback",
+      "wagon", "estate", "touring",
+      "mpv",
+      "suv",
+      "van",
+      "pickup",
+      "backlite",
+      "frontrute", "bakrute", "dorrute", "siderute", "dørrute",
+    ]);
+    if (GENERIC_SUFFIXES.has(suffix)) {
+      // Determine whether the model is *only* the generic suffix (after stripping make prefix).
+      // A single-character prefix like "3" is still distinctive, even though tokenize drops it.
+      const prefixBeforeSuffix = (s: string) => {
+        const idx = s.lastIndexOf(suffix);
+        if (idx < 0) return s;
+        return (s.slice(0, idx) + s.slice(idx + suffix.length)).replace(/[^a-z0-9]+/g, "");
+      };
+      const vmOnlySuffix = prefixBeforeSuffix(vm).length === 0;
+      const rmOnlySuffix = prefixBeforeSuffix(rm).length === 0;
+      if (!vmOnlySuffix && !rmOnlySuffix) {
+        return false;
+      }
+    }
+    return true;
+  }
   if (rTokens.length === 1 && vTokens.includes(rTokens[0]) && rTokens[0].length >= 3) return true;
   return false;
 }

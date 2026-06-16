@@ -78,6 +78,44 @@ describe("modelMatches", () => {
     it("JAGUAR I-PACE ↔ I-PACE", () => {
       expect(modelMatches("JAGUAR I-PACE", "I-PACE", "jaguar")).toBe(true);
     });
+    it("JAGUAR I-PACE ≠ E-PACE (SVV make prefix must not match generic PACE token)", () => {
+      expect(modelMatches("JAGUAR I-PACE", "E-PACE", "jaguar")).toBe(false);
+    });
+    it("JAGUAR I-PACE ≠ F-PACE", () => {
+      expect(modelMatches("JAGUAR I-PACE", "F-PACE", "jaguar")).toBe(false);
+    });
+  });
+
+  // ── BMW Series models ───────────────────────────────────────────────────
+  describe("BMW", () => {
+    it("3 SERIE ↔ 3 SERIE", () => {
+      expect(modelMatches("BMW 3 SERIE", "3 SERIE", "bmw")).toBe(true);
+    });
+    it("3-SERIE ↔ 3 SERIE", () => {
+      expect(modelMatches("BMW 3-SERIE", "3 SERIE", "bmw")).toBe(true);
+    });
+    it("3 SERIE ≠ 5 SERIE", () => {
+      expect(modelMatches("BMW 3 SERIE", "5 SERIE", "bmw")).toBe(false);
+    });
+    it("3-SERIE ≠ 8-SERIE", () => {
+      expect(modelMatches("BMW 3-SERIE", "8-SERIE", "bmw")).toBe(false);
+    });
+    it("3 SERIE ≠ 5 SERIE 2D COUPE", () => {
+      expect(modelMatches("BMW 3 SERIE", "5 SERIE 2D COUPE 14- BAKRUTE", "bmw")).toBe(false);
+    });
+  });
+
+  // ── Generic suffix guard ────────────────────────────────────────────────
+  describe("Generic suffix guard", () => {
+    it("A3 SPORTBACK ≠ A5 SPORTBACK", () => {
+      expect(modelMatches("AUDI A3 SPORTBACK", "A5 SPORTBACK", "audi")).toBe(false);
+    });
+    it("C-KLASSE ≠ E-KLASSE", () => {
+      expect(modelMatches("MERCEDES C-KLASSE", "E-KLASSE", "mercedes")).toBe(false);
+    });
+    it("YARIS CROSS ≠ COROLLA CROSS", () => {
+      expect(modelMatches("TOYOTA YARIS CROSS", "COROLLA CROSS", "toyota")).toBe(false);
+    });
   });
 
   // ── Mercedes W-series ───────────────────────────────────────────────────
@@ -177,6 +215,33 @@ describe("modelMatches", () => {
     });
     it("C-Klasse ≠ A-Klasse", () => {
       expect(modelMatches("C-Klasse", "SERIE W177", "mercedes")).toBe(false);
+    });
+    it("CX-5 ≠ CX-50 (digit boundary is not enough)", () => {
+      expect(modelMatches("CX-5", "CX-50", "mazda")).toBe(false);
+    });
+    it("CX5 ≠ CX50", () => {
+      expect(modelMatches("CX5", "CX50", "mazda")).toBe(false);
+    });
+    it("MX-5 ≠ MX-50", () => {
+      expect(modelMatches("MX-5", "MX-50", "mazda")).toBe(false);
+    });
+    it("BMW X3 ≠ X30", () => {
+      expect(modelMatches("BMW X3", "X30", "bmw")).toBe(false);
+    });
+    it("BMW M3 ≠ M4", () => {
+      expect(modelMatches("BMW M3", "M4", "bmw")).toBe(false);
+    });
+    it("BMW 3 SERIE ≠ 5 SERIE (explicit guard)", () => {
+      expect(modelMatches("BMW 3 SERIE", "5 SERIE", "bmw")).toBe(false);
+    });
+    it("Audi A3 ≠ A30", () => {
+      expect(modelMatches("Audi A3", "A30", "audi")).toBe(false);
+    });
+    it("Audi Q3 ≠ Q5", () => {
+      expect(modelMatches("Audi Q3", "Q5", "audi")).toBe(false);
+    });
+    it("Mercedes C-Klasse ≠ E-Klasse", () => {
+      expect(modelMatches("Mercedes C-Klasse", "E-Klasse", "mercedes")).toBe(false);
     });
   });
 
