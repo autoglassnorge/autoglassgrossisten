@@ -53,6 +53,7 @@
 
 | Dato | Hva | Filer | Status |
 |------|-----|-------|--------|
+| 2026-06-16 | Repo-opprydding: committet model-matching forbedringer, squashet 1 300+ Pilkington-migrasjoner, fjernet midlertidige scripts, ignorert generert MemPalace-data | `scoring.ts`, `migrations/`, `scripts/`, `.gitignore`, `.kimi/` | ✅ Committet på main |
 | 2026-06-12 | Frontend TypeScript-feil fikset — bygg grønt | `SupportSection.tsx`, `SearchPage.tsx`, `glass.ts` | ✅ Pushet, venter PR/merge |
 | 2026-06-09 | Normaliserings-audit v2 — 14 feil funnet og fikset | `scoring.ts`, `search.ts`, `brand.ts`, `ktype-family-lookup.ts` | ✅ Deployet |
 | 2026-06-08 | kType Family matching — Jaccard + equipment-first | `ktype-family-lookup.ts`, D1 schema | ✅ Deployet |
@@ -100,6 +101,6 @@ Når du oppdaterer denne filen, behold strukturen:
 
 ---
 
-**Sist oppdatert:** 2026-06-12  
-**Oppdatert av:** Kimi Work (skill `autoglass-kimi-work` aktivert)  
-**Neste review:** 2026-06-16
+**Sist oppdatert:** 2026-06-16  
+**Oppdatert av:** Kimi Work  
+**Neste review:** 2026-06-19
