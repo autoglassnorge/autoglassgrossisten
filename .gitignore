@@ -57,7 +57,19 @@ data/finn-no-regnr/
 
 # MemPalace generated data
 .kimi/diary.jsonl
+.kimi/handoffs/
 .kimi/mempalace/data/
+.kimi/mempalace/kg.json
+.kimi/mempalace/rooms/Knowledge/
+
+# Ad-hoc test scripts
+api/cf-worker/test-*.js
+api/cf-worker/test-focus-debug*.js
+api/cf-worker/verify_ktypes.py
+api/cf-worker/pilkington_import.py
+api/cf-worker/pilkington_import.stderr
+api/cf-worker/pilkington_import.stdout
+api/cf-worker/pilkington_import_state.json
 
 # Autodoc probe output (screenshots, HTML, captures)
 data/autodoc-probe/
@@ -87,6 +99,18 @@ data/tecdoc-import/d1-chunks-gr/
 # Worker test data
 data/tecdoc-import/.last-sync
 api/cf-worker/data/
+
+# Workspace / temporary import batches
+workspace/
+
+# Local SQLite databases
+data/glassdb.sqlite3
+
+# Scraper checkpoints (regenerated)
+data/autoglass-scrape/accessory-checkpoint*.json
+
+# Catalog backups (generated)
+data/.catalog-backups/
 
 # TecDoc source CSVs (additional/linkage tables — keep manufacturers.csv, models.csv, passengercars.csv)
 data/tecdoc-import/article_accessory_list_parents.csv
