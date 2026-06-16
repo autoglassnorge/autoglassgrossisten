@@ -18,7 +18,11 @@ import {
   type GlassCategory,
   type GlassPosition,
 } from '@/utils/glass-selection';
+import {
+  productMatchesEquipmentFilters,
+} from '@/utils/equipment-filters';
 import type { Product, UserEquipmentAnswers } from '@/types/api';
+import { EquipmentFilterPanel } from '@/components/search/EquipmentFilterPanel';
 
 import { VehicleCard } from '@/components/search/VehicleCard';
 import { StickyVehicleHeader } from '@/components/search/StickyVehicleHeader';
@@ -84,6 +88,7 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
   const [selectedDoorPlacement, setSelectedDoorPlacement] = useState<DoorPlacement | null>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [equipmentFiltered, setEquipmentFiltered] = useState<Product[] | null>(null);
+  const [selectedEquipmentFilters, setSelectedEquipmentFilters] = useState<string[]>([]);
 
   /* ---- sorted + filtered products ---- */
   const sortedCandidates = useMemo(() => {
@@ -111,8 +116,11 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
     if (selectedType) {
       result = result.filter((p) => (p.typeCode || 'Ukjent') === selectedType);
     }
+    if (selectedEquipmentFilters.length > 0) {
+      result = result.filter((p) => productMatchesEquipmentFilters(p, selectedEquipmentFilters));
+    }
     return result;
-  }, [selectedType, selectionFilteredProducts]);
+  }, [selectedType, selectionFilteredProducts, selectedEquipmentFilters]);
 
   const deferredProducts = useDeferredValue(filteredProducts);
 
@@ -122,6 +130,7 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
     setSelectedPosition(null);
     setSelectedDoorPlacement(null);
     setSelectedType(null);
+    setSelectedEquipmentFilters([]);
   }, []);
 
   const handlePositionChange = useCallback((position: GlassPosition | null) => {
@@ -283,9 +292,16 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
       {candidates.length > 0 && (
         <TypeCodeTabs products={selectionFilteredProducts} activeType={selectedType} onSelect={setSelectedType} />
       )}
+      {candidates.length > 0 && (
+        <EquipmentFilterPanel
+          products={selectionFilteredProducts}
+          selectedKeys={selectedEquipmentFilters}
+          onChange={setSelectedEquipmentFilters}
+        />
+      )}
 
       {/* Active filter badges */}
-      {(selectedCategory || selectedPosition || selectedDoorPlacement || selectedType || equipmentFiltered) && (
+      {(selectedCategory || selectedPosition || selectedDoorPlacement || selectedType || equipmentFiltered || selectedEquipmentFilters.length > 0) && (
         <div className="flex flex-wrap gap-2">
           {selectedCategory && (
             <span className="inline-flex items-center gap-1 rounded-full bg-autoglass-blue/10 border border-autoglass-blue/20 px-3 py-1 text-xs font-medium text-autoglass-blue">
@@ -311,19 +327,35 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
               <button type="button" onClick={() => setSelectedType(null)} className="hover:text-gray-500"><X className="h-3 w-3" /></button>
             </span>
           )}
+          {selectedEquipmentFilters.map((key) => {
+            const label = key === 'solar' ? 'Coated / IR-glass / Solfilm' : key;
+            return (
+              <span key={key} className="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200 px-3 py-1 text-xs font-medium text-amber-700">
+                {label}
+                <button
+                  type="button"
+                  onClick={() => setSelectedEquipmentFilters((prev) => prev.filter((k) => k !== key))}
+                  className="hover:text-amber-500"
+                >
+                  <X className="h-3 w-3" />
+                </button>
+              </span>
+            );
+          })}
           {equipmentFiltered && (
             <span className="inline-flex items-center gap-1 rounded-full bg-green-50 border border-green-200 px-3 py-1 text-xs font-medium text-green-700">
               Utstyr: {equipmentFiltered.length} treff
               <button type="button" onClick={() => setEquipmentFiltered(null)} className="hover:text-green-500"><X className="h-3 w-3" /></button>
             </span>
           )}
-          {(selectedCategory || selectedPosition || selectedDoorPlacement || selectedType || equipmentFiltered) && (
+          {(selectedCategory || selectedPosition || selectedDoorPlacement || selectedType || equipmentFiltered || selectedEquipmentFilters.length > 0) && (
             <button
               type="button"
               onClick={() => {
                 handleCategoryChange(null);
                 setSelectedType(null);
                 setEquipmentFiltered(null);
+                setSelectedEquipmentFilters([]);
               }}
               className="text-xs text-gray-500 hover:text-gray-700 underline"
             >
@@ -369,6 +401,7 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
               handleCategoryChange(null);
               setSelectedType(null);
               setEquipmentFiltered(null);
+              setSelectedEquipmentFilters([]);
             }}
           >
             Vis alle

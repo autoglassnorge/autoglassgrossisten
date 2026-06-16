@@ -14,6 +14,8 @@ import {
   Eye,
   Car,
   Shield,
+  Palette,
+  Navigation,
 } from 'lucide-react';
 import type { Product } from '@/types/api';
 
@@ -21,6 +23,7 @@ interface FeatureDef {
   key: keyof Product['properties'];
   icon: React.ReactNode;
   label: string;
+  shortLabel?: string;
   color: string;
 }
 
@@ -70,8 +73,21 @@ const FEATURES: FeatureDef[] = [
   {
     key: 'solar',
     icon: <Sun className="h-3 w-3" />,
-    label: 'Solar',
+    label: 'Coated / IR-glass / Solfilm',
+    shortLabel: 'Coated',
     color: 'bg-amber-50 text-amber-700 border-amber-200',
+  },
+  {
+    key: 'tinted',
+    icon: <Palette className="h-3 w-3" />,
+    label: 'Tonet',
+    color: 'bg-violet-50 text-violet-700 border-violet-200',
+  },
+  {
+    key: 'laneAssist',
+    icon: <Navigation className="h-3 w-3" />,
+    label: 'Filskifteass.',
+    color: 'bg-lime-50 text-lime-700 border-lime-200',
   },
   {
     key: 'encapsulated',
@@ -110,6 +126,7 @@ export function FeatureBadges({ product, maxVisible = 4 }: FeatureBadgesProps) {
         >
           {f.icon}
           <span className="hidden sm:inline">{f.label}</span>
+          {f.shortLabel && <span className="inline sm:hidden">{f.shortLabel}</span>}
         </span>
       ))}
       {remaining > 0 && (
