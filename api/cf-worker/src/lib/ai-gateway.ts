@@ -11,7 +11,7 @@ interface LlmMessage {
   content: string;
 }
 
-interface JsonSchema {
+export interface JsonSchema {
   type: string;
   properties: Record<string, unknown>;
   required?: string[];
