@@ -1156,9 +1156,10 @@ async function main() {
   fs.writeFileSync(path.join(OUTPUT_DIR, "ktype-registry-inserts-v16.sql"), "-- ktype_registry inserts v16\n" + krStatements.join("\n"));
   console.log(`  ✓ ktype_registry: ${krStatements.length}`);
 
-  const cuStatements = matched.map(m => `UPDATE glass_catalog SET ktype = ${m.ktype} WHERE eurocode = '${m.eurocode.replace(/'/g, "''")}';`);
+  const matchedWithEurocode = matched.filter(m => m.eurocode);
+  const cuStatements = matchedWithEurocode.map(m => `UPDATE glass_catalog SET ktype = ${m.ktype} WHERE eurocode = '${m.eurocode.replace(/'/g, "''")}';`);
   fs.writeFileSync(path.join(OUTPUT_DIR, "glass-catalog-updates-v16.sql"), "-- glass_catalog updates v16\n" + cuStatements.join("\n"));
-  console.log(`  ✓ glass_catalog updates: ${cuStatements.length}`);
+  console.log(`  ✓ glass_catalog updates: ${cuStatements.length} (skipped ${matched.length - matchedWithEurocode.length} without eurocode)`);
 
   fs.writeFileSync(path.join(OUTPUT_DIR, "matching-report-v16.json"), JSON.stringify({
     total_catalog: records.length,
@@ -1167,6 +1168,7 @@ async function main() {
     coverage: matched.length / records.length,
     glass_coverage: glassMatched / glassTotal,
     score_distribution: { high: highScore, medium: medScore, low: lowScore },
+    mappings: matchedWithEurocode.map(m => ({ eurocode: m.eurocode, ktype: m.ktype, score: m.score })),
     sample_unmatched: unmatched.slice(0, 30).map(r => ({ eurocode: r.eurocode, brand: r.brand, model: r.model, yearFrom: r.yearFrom, yearTo: r.yearTo, desc: r.description?.substring(0, 60), reason: r.reason })),
   }, null, 2));
 

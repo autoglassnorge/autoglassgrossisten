@@ -194,6 +194,20 @@ export interface KtypeRegistryInfo {
   source: string;
 }
 
+export interface VinKtypeMapEntry {
+  vin: string;
+  ktype: number;
+  make: string | null;
+  model: string | null;
+  year: number | null;
+  confidence: number;
+  source: string;
+  regnrHash: string | null;
+  createdAt: string;
+  updatedAt: string;
+  expiresAt: string | null;
+}
+
 export interface AutoGlassMapping {
   make: string;
   model: string;

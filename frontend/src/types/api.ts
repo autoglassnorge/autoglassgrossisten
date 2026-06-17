@@ -52,6 +52,9 @@ export interface Product {
   _score?: number; // Matching score from backend (0-100+)
   equipmentMatch?: 'perfect' | 'good' | 'check' | 'mismatch';
   equipmentDiff?: string[];
+  /** Learned equipment-profile match confidence (0-100), computed in the frontend. */
+  _equipmentMatchConfidence?: number;
+  _equipmentMatchExact?: boolean;
 }
 
 export interface CatalogFilters {

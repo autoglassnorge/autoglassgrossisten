@@ -1,15 +1,23 @@
-api/
-data/
+# Build / dependencies
 node_modules/
 .git/
 .github/
-docs/
-*.log
-*.md
-supabase/
-scripts/
+
+# Source / docs
+api/
 src/
+scripts/
+docs/
+supabase/
 e2e/
+
+# Generated data
+data/
 .wrangler-tmp/
 .wrangler/
+
+# Logs / meta
+*.log
+*.md
+test-results/
 

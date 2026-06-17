@@ -14,6 +14,37 @@ export async function sha256(text: string): Promise<string> {
 }
 
 /**
+ * Log a single feedback/event for a search. GDPR-safe: only regnr_hash is stored.
+ */
+export async function upsertSearchFeedback(
+  db: D1Database,
+  record: {
+    regnr_hash: string;
+    ktype?: number;
+    eurocode: string;
+    layer: number;
+    score?: number;
+    action: string;
+  }
+): Promise<void> {
+  try {
+    await db.prepare(
+      `INSERT INTO search_feedback (regnr_hash, ktype, eurocode, layer, score, action, created_at)
+       VALUES (?, ?, ?, ?, ?, ?, datetime('now'))`
+    ).bind(
+      record.regnr_hash,
+      record.ktype ?? null,
+      record.eurocode,
+      record.layer,
+      record.score ?? null,
+      record.action
+    ).run();
+  } catch {
+    // Silently fail if table does not exist yet
+  }
+}
+
+/**
  * Save search result to D1 for learning.
  * GDPR-safe: only SHA-256 hash of regnr is stored.
  */

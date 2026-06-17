@@ -14,24 +14,31 @@ import { FeatureBadges } from './FeatureBadges';
 /**
  * Badge component displaying product match score
  */
-function MatchScoreBadge({ score }: { score: number }) {
+function MatchScoreBadge({ score, label: labelProp }: { score: number; label?: string }) {
   // Normalize score to 0-100%
   const pct = Math.min(100, Math.max(0, Math.round(score)));
   let colorClass = '';
-  let label = '';
+  let label = labelProp ?? '';
 
-  if (pct >= 80) {
-    colorClass = 'bg-emerald-500 text-white';
-    label = 'Eksakt';
-  } else if (pct >= 50) {
-    colorClass = 'bg-green-500 text-white';
-    label = 'God';
-  } else if (pct >= 25) {
-    colorClass = 'bg-amber-500 text-white';
-    label = 'Middels';
+  if (!labelProp) {
+    if (pct >= 80) {
+      colorClass = 'bg-emerald-500 text-white';
+      label = 'Eksakt';
+    } else if (pct >= 50) {
+      colorClass = 'bg-green-500 text-white';
+      label = 'God';
+    } else if (pct >= 25) {
+      colorClass = 'bg-amber-500 text-white';
+      label = 'Middels';
+    } else {
+      colorClass = 'bg-red-500 text-white';
+      label = 'Lav';
+    }
   } else {
-    colorClass = 'bg-red-500 text-white';
-    label = 'Lav';
+    if (pct >= 80) colorClass = 'bg-emerald-500 text-white';
+    else if (pct >= 50) colorClass = 'bg-green-500 text-white';
+    else if (pct >= 25) colorClass = 'bg-amber-500 text-white';
+    else colorClass = 'bg-red-500 text-white';
   }
 
   return (
@@ -147,6 +154,9 @@ function ProductCardInner({
 
         {/* Type code badge + match score */}
         <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
+          {product._equipmentMatchConfidence !== undefined && (
+            <MatchScoreBadge score={product._equipmentMatchConfidence} label="Match" />
+          )}
           {product._score !== undefined && (
             <MatchScoreBadge score={product._score} />
           )}

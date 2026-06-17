@@ -11,7 +11,7 @@ import { memoizeSync } from "./memo";
  * Looks for negation words within ±3 tokens of the target.
  */
 function isNegated(tokens: string[], targetIndex: number): boolean {
-  const negationWords = new Set(["IKKE", "NOT", "NO", "NB", "WITHOUT", "UTEN", "INGEN", "NEI"]);
+  const negationWords = new Set(["IKKE", "NOT", "NO", "WITHOUT", "UTEN", "INGEN", "NEI"]);
   const window = 3;
   for (let i = Math.max(0, targetIndex - window); i <= Math.min(tokens.length - 1, targetIndex + window); i++) {
     if (i === targetIndex) continue;
@@ -35,7 +35,7 @@ function isRegexMatchNegated(d: string, regex: RegExp, tokens: string[]): boolea
   // Find which token contains the matched text
   const matchedText = match[0];
   const beforeMatch = d.slice(0, match.index);
-  const wordsBefore = beforeMatch.split(/[\s;,.\[\]()+-]+/).filter(t => t.length >= 1);
+  const wordsBefore = beforeMatch.split(/[\s;,.\/\[\]()+-]+/).filter(t => t.length >= 1);
   const matchTokenIndex = wordsBefore.length;
   return isNegated(tokens, matchTokenIndex);
 }
@@ -54,13 +54,14 @@ export interface DescriptionEquipmentFlags {
   hud?: boolean;
 }
 
-function _detectFlagsFromDescription(description: string | null): DescriptionEquipmentFlags | null {
+function _detectFlagsFromDescription(description: string | null, category?: string): DescriptionEquipmentFlags | null {
   if (!description) {
     return null;
   }
   const d = description.toUpperCase();
+  const cat = (category || "").toLowerCase();
 
-  const tokens = d.split(/[\s;,.\[\]()+-]+/).filter((t) => t.length >= 1);
+  const tokens = d.split(/[\s;,.\/\[\]()+-]+/).filter((t) => t.length >= 1);
   const s = new Set(tokens);
 
   // Helper: check if a token exists AND is not negated
@@ -75,11 +76,18 @@ function _detectFlagsFromDescription(description: string | null): DescriptionEqu
     const m = pattern.exec(d);
     if (!m) return false;
     const before = d.slice(0, m.index);
-    const wordsBefore = before.split(/[\s;,.\[\]()+-]+/).filter((t) => t.length >= 1);
+    const wordsBefore = before.split(/[\s;,.\/\[\]()+-]+/).filter((t) => t.length >= 1);
     return !isNegated(tokens, wordsBefore.length);
   };
 
+  // "SENSOR" alone in a windshield/front context usually means rain sensor.
+  const isFrontContext =
+    cat === "frontrute" ||
+    /\bFRONTR\b|\bFRONTRUTE\b|\bFR\b/.test(d);
+  const hasPlainSensor = isFrontContext && s.has("SENSOR") && !isNegated(tokens, tokens.indexOf("SENSOR"));
+
   const rainSensor =
+    hasPlainSensor ||
     (s.has("RSN") && !isNegated(tokens, tokens.indexOf("RSN"))) ||
     (s.has("RSNL") && !isNegated(tokens, tokens.indexOf("RSNL"))) ||
     (s.has("RSNLSN") && !isNegated(tokens, tokens.indexOf("RSNLSN"))) ||
@@ -95,6 +103,7 @@ function _detectFlagsFromDescription(description: string | null): DescriptionEqu
     (s.has("UHTD") && !isNegated(tokens, tokens.indexOf("UHTD"))) ||
     (s.has("ELEK") && !isNegated(tokens, tokens.indexOf("ELEK"))) ||
     (s.has("VARM") && !isNegated(tokens, tokens.indexOf("VARM"))) ||
+    (s.has("EL") && !isNegated(tokens, tokens.indexOf("EL"))) ||
     rx(/\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b/) ||
     rx(/(?:^|[\s+])(EL)(?:[\s+.]|[+-]|$)/);
 
@@ -135,7 +144,7 @@ function _detectFlagsFromDescription(description: string | null): DescriptionEqu
   // A field is "mentioned" if we saw a token/regex for it (even if negated).
   const detected: Record<keyof DescriptionEquipmentFlags, boolean> = {
     adas: s.has("ADAS") || s.has("FILSKIFTE") || s.has("SENS") || s.has("SENSOR") || s.has("LDW") || /\bLANE\s+ASSIST\b|\bLANE\s+DEPARTURE\b|\bCOLLISION\b|\bAUTO\s+BRAKE\b|\bEMERGENCY\s+BRAKE\b|\bDRIVE\s+ASSIST\b|\bPRO\s+PILOT\b|\bAUTOPILOT\b|\bTRAFFIC\s+ASSIST\b|\bCITY\s+SAFETY\b/.test(d),
-    rainSensor: s.has("RSN") || s.has("RSNL") || s.has("RSNLSN") || s.has("REGN") || s.has("REGNS") || s.has("REGNSEN") || s.has("REGNSENSOR") || /\bRAIN\b|\bAUTOMATIC\s+WIPER\b|\bVINDRUTETORKARE\b|\bLYS\/REGN\b|\bLYS\/REGNS\b/.test(d),
+    rainSensor: s.has("RSN") || s.has("RSNL") || s.has("RSNLSN") || s.has("REGN") || s.has("REGNS") || s.has("REGNSEN") || s.has("REGNSENSOR") || hasPlainSensor || /\bRAIN\b|\bAUTOMATIC\s+WIPER\b|\bVINDRUTETORKARE\b|\bLYS\/REGN\b|\bLYS\/REGNS\b/.test(d),
     heated: s.has("HTD") || s.has("HT") || s.has("UHTD") || s.has("ELEK") || s.has("VARM") || /\bHEATED\b|\bOPPVARM\b|\bVARME\b|\bDEFROST\b|\bDEFOG\b|\bEL[\s-]?VARME\b|\bHEATING\b|(?:^|[\s+])(EL)(?:[\s+.]|[+-]|$)/.test(d),
     acoustic: s.has("ACO") || s.has("AKU") || /\bACOUSTIC\b|\bAKUSTIK\b|\bQUIET\b|\bST[\u00d8O]YDEMP\b|\bSILENT\b/.test(d),
     antenna: s.has("ANT") || s.has("ANTENNE") || s.has("GNAG") || /\+ANT\b|\bANTENNA\b|\bANTENNE\b|\bGPS\b|\bRADIO\b|\bFM\b|\bDAB\b|\bAERIAL\b/.test(d),
@@ -160,6 +169,20 @@ function _detectFlagsFromDescription(description: string | null): DescriptionEqu
   return result;
 }
 export const detectFlagsFromDescription = memoizeSync(_detectFlagsFromDescription, 2000);
+
+/**
+ * Detect rain sensor from product code suffix.
+ * In the Autoglass/Eurocode convention, an M suffix on a windshield code
+ * means rain sensor (regnsensor). We only trust this for frontrute, because
+ * M can mean other modifications on side/rear glass.
+ */
+function hasRainSensorSuffix(code: string | null, category?: string): boolean {
+  if (!code) return false;
+  if ((category || "").toLowerCase() !== "frontrute") return false;
+  const upper = code.toUpperCase();
+  // M at end, optionally followed by a single variant digit (e.g. CM2).
+  return /M\d?$/.test(upper);
+}
 
 /** Legacy OEM-based detection */
 export function detectFlagsFromOem(oemDescriptions: string[]) {
@@ -196,7 +219,7 @@ function _inferRecordEquipment(record: GlassRecord): {
   // Description is the ground truth — it reflects the supplier's own labeling.
   // DB columns may be stale or incorrect (e.g. "IKKE ANT" in description
   // but antenna=1 in DB due to upstream data errors).
-  const descFlags = detectFlagsFromDescription(record.description);
+  const descFlags = detectFlagsFromDescription(record.description, record.category);
 
   // For list/klips/shade, we still rely on description parsing since
   // these are not stored in DB equipment columns.
@@ -229,11 +252,21 @@ function _inferRecordEquipment(record: GlassRecord): {
   let klipsType: string | null = null;
   if (hasKlips) klipsType = "klips";
 
+  // M-suffix on a windshield code means rain sensor per Autoglass/Eurocode
+  // convention, unless the description explicitly negates it.
+  const rainSensorFromSuffix =
+    hasRainSensorSuffix(record.article_number, record.category) ||
+    hasRainSensorSuffix(record.eurocode, record.category);
+  const rainSensor =
+    typeof descFlags?.rainSensor === "boolean"
+      ? descFlags.rainSensor
+      : rainSensorFromSuffix || !!record.rain_sensor;
+
   // Description is ground truth when it mentions a field; otherwise fall back
   // to structured DB columns so callers always get a complete equipment object.
   return {
     adas: descFlags?.adas ?? !!record.adas,
-    rainSensor: descFlags?.rainSensor ?? !!record.rain_sensor,
+    rainSensor,
     heated: descFlags?.heated ?? !!record.heated,
     acoustic: descFlags?.acoustic ?? !!record.acoustic,
     antenna: descFlags?.antenna ?? !!record.antenna,
@@ -390,6 +423,235 @@ export function applyEquipmentFilter<
   }
 
   return { exact, uncertain };
+}
+
+// ---------------------------------------------------------------------------
+// Equipment profile scoring (learned from catalog data)
+// ---------------------------------------------------------------------------
+
+export interface CompactEquipmentProfile {
+  n: number;
+  pos: string[];
+  neg: string[];
+  p: Record<string, number>;
+  comb: Array<{ f: string[]; c: number; p: number }>;
+}
+
+export interface VehicleEquipmentProfiles {
+  meta: {
+    generatedAt: string;
+    records: number;
+    features: string[];
+    categories: string[];
+  };
+  profiles: Record<string, { n: number; cat: Record<string, CompactEquipmentProfile> }>;
+  brandModel: Record<string, { n: number; cat: Record<string, CompactEquipmentProfile> }>;
+  brand: Record<string, { n: number; cat: Record<string, CompactEquipmentProfile> }>;
+}
+
+export const PROFILE_FEATURES = [
+  "adas",
+  "rainSensor",
+  "heated",
+  "acoustic",
+  "antenna",
+  "camera",
+  "hud",
+  "solar",
+  "tinted",
+  "coated",
+  "laneAssist",
+  "shade",
+];
+
+export interface ProductFeatures {
+  adas?: boolean | number;
+  rainSensor?: boolean | number;
+  heated?: boolean | number;
+  acoustic?: boolean | number;
+  antenna?: boolean | number;
+  camera?: boolean | number;
+  hud?: boolean | number;
+  solar?: boolean | number;
+  tinted?: boolean | number;
+  coated?: boolean | number;
+  laneAssist?: boolean | number;
+  shade?: boolean | number;
+}
+
+function hasFeature(features: ProductFeatures, key: string): boolean {
+  const val = (features as Record<string, unknown>)?.[key];
+  return val === true || val === 1 || val === "1";
+}
+
+/**
+ * Compute the probability (0-100) that a product's equipment combination
+ * matches the vehicle's learned equipment profile.
+ *
+ * Returns null when no profile data exists for the category.
+ */
+export function computeProfileMatchConfidence(
+  productFeatures: ProductFeatures,
+  profile: CompactEquipmentProfile | null | undefined,
+  opts: { includeExplanation?: boolean } = {}
+): { confidence: number; explanation?: string[] } | null {
+  if (!profile || profile.n === 0) return null;
+
+  const explanation: string[] = [];
+
+  // 1. Hard mismatch: product has a feature the profile says is impossible
+  for (const f of profile.neg) {
+    if (hasFeature(productFeatures, f)) {
+      if (opts.includeExplanation) {
+        explanation.push(`${f}: impossible for this vehicle`);
+      }
+      return { confidence: 0, explanation };
+    }
+  }
+
+  // 2. Exact combination match in learned catalog distribution
+  const productFeatureKeys = PROFILE_FEATURES.filter((f) =>
+    hasFeature(productFeatures, f)
+  ).sort();
+
+  const exactCombo = profile.comb.find(
+    (c) =>
+      c.f.length === productFeatureKeys.length &&
+      c.f.every((feature, i) => feature === productFeatureKeys[i])
+  );
+
+  if (exactCombo) {
+    const confidence = Math.round(exactCombo.p * 100);
+    if (opts.includeExplanation) {
+      explanation.push(
+        `exact combination match: ${productFeatureKeys.join("+") || "base"} (${exactCombo.c}/${profile.n})`
+      );
+    }
+    return { confidence, explanation };
+  }
+
+  // 3. Fallback: per-feature likelihood average
+  let score = 0;
+  let counted = 0;
+  for (const f of PROFILE_FEATURES) {
+    const productHas = hasFeature(productFeatures, f);
+    const probability = profile.p[f] ?? 0;
+    score += productHas ? probability : 1 - probability;
+    counted++;
+  }
+
+  if (counted === 0) return null;
+
+  const confidence = Math.round((score / counted) * 100);
+
+  if (opts.includeExplanation) {
+    const topMissing = PROFILE_FEATURES.filter(
+      (f) => !hasFeature(productFeatures, f) && (profile.p[f] ?? 0) > 0.3
+    );
+    const topUnexpected = PROFILE_FEATURES.filter(
+      (f) => hasFeature(productFeatures, f) && (profile.p[f] ?? 0) < 0.2
+    );
+    if (topMissing.length) explanation.push(`missing likely: ${topMissing.join(", ")}`);
+    if (topUnexpected.length) explanation.push(`unexpected: ${topUnexpected.join(", ")}`);
+  }
+
+  return { confidence, explanation };
+}
+
+function normalizeModelForProfile(model: string): string {
+  return model
+    .toUpperCase()
+    .replace(/\s+/g, ' ')
+    .replace(/\s*\(.*\)\s*/g, ' ')
+    .replace(/\bBUSS\b|\bVAN\b|\bKOMBI\b|\bSTATION\b|\bWAGON\b|\bHBK\b|\bSAL\b|\bEST\b|\bMPV\b|\bSUV\b|\bCAB\b|\b4D\b|\b5D\b|\b3D\b|\b2D\b/g, '')
+    .trim();
+}
+
+function modelVariants(model: string): string[] {
+  const normalized = normalizeModelForProfile(model);
+  const firstWord = normalized.split(' ')[0];
+  const variants = new Set([model.toUpperCase().trim(), normalized]);
+  if (firstWord && firstWord !== normalized) {
+    variants.add(firstWord);
+  }
+  // Common VW Transporter mappings
+  if (/^TRANSPORTER|^CARAVELLE|^MULTIVAN/.test(normalized)) {
+    variants.add('TRANSPORTER');
+    variants.add('CARAVELLE');
+    variants.add('MULTIVAN');
+  }
+  return Array.from(variants).filter((v) => v.length > 0);
+}
+
+function brandVariants(brand: string): string[] {
+  const b = brand.toUpperCase().trim();
+  const variants = new Set([b]);
+  const aliases: Record<string, string[]> = {
+    VW: ['VOLKSWAGEN'],
+    VOLKSWAGEN: ['VW'],
+    MERCEDES: ['MERCEDES-BENZ'],
+    'MERCEDES-BENZ': ['MERCEDES'],
+  };
+  for (const alias of aliases[b] || []) {
+    variants.add(alias);
+  }
+  return Array.from(variants);
+}
+
+/**
+ * Select the most specific profile available for a vehicle.
+ * Preference order: brand:model:year > brand:model > brand.
+ */
+export function selectVehicleProfile(
+  profiles: VehicleEquipmentProfiles,
+  brand: string,
+  model: string,
+  year?: number | string | null
+): { key: string; level: "exact" | "brandModel" | "brand"; profile: { n: number; cat: Record<string, CompactEquipmentProfile> } } | null {
+  const y = year ? String(year) : null;
+  const brands = brandVariants(brand);
+  const models = modelVariants(model);
+
+  for (const b of brands) {
+    for (const m of models) {
+      if (y && profiles.profiles[`${b}:${m}:${y}`]) {
+        return { key: `${b}:${m}:${y}`, level: "exact", profile: profiles.profiles[`${b}:${m}:${y}`] };
+      }
+    }
+  }
+  for (const b of brands) {
+    for (const m of models) {
+      if (profiles.profiles[`${b}:${m}`]) {
+        return { key: `${b}:${m}`, level: "brandModel", profile: profiles.profiles[`${b}:${m}`] };
+      }
+    }
+  }
+  for (const b of brands) {
+    for (const m of models) {
+      if (profiles.brandModel[`${b}:${m}`]) {
+        return { key: `${b}:${m}`, level: "brandModel", profile: profiles.brandModel[`${b}:${m}`] };
+      }
+    }
+  }
+  for (const b of brands) {
+    if (profiles.brand[b]) {
+      return { key: b, level: "brand", profile: profiles.brand[b] };
+    }
+  }
+  return null;
+}
+
+/**
+ * Pick the best matching category profile for a product.
+ * Falls back to 'all' if the product category is not present.
+ */
+export function selectCategoryProfile(
+  vehicleProfile: { cat: Record<string, CompactEquipmentProfile> },
+  category?: string | null
+): CompactEquipmentProfile | null {
+  if (!category) return vehicleProfile.cat.all || null;
+  const cat = category.toLowerCase();
+  return vehicleProfile.cat[cat] || vehicleProfile.cat.all || null;
 }
 
 /** Compute equipment match quality between a record and factory data */

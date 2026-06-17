@@ -37,10 +37,12 @@ const DEFAULT_CANDIDATE_FIELDS = [
 /** Default vehicle fields when using field selection */
 const DEFAULT_VEHICLE_FIELDS = [
   "regnr",
+  "vin",
   "make",
   "model",
   "year",
   "kType",
+  "ktypeSource",
   "typeCode",
 ];
 
@@ -265,14 +267,17 @@ export function compressSearchResponse(
     );
   }
 
-  // Handle calibrationRequirements - keep minimal
+  // Handle calibrationRequirements - keep fields the UI actually uses.
   if ("calibrationRequirements" in fullResponse) {
     const reqs = fullResponse.calibrationRequirements;
     if (Array.isArray(reqs)) {
-      // Keep only essential fields for each requirement
       compressed.calibrationRequirements = reqs.map((req: Record<string, unknown>) => ({
         sensorType: req.sensorType,
-        calibrationRequired: req.calibrationTriggers && (req.calibrationTriggers as string[]).length > 0,
+        sensorLabel: req.sensorLabel,
+        calibrationType: req.calibrationType || "unknown",
+        calibrationTriggers: req.calibrationTriggers ?? [],
+        targetPlate: req.targetPlate,
+        notes: req.notes,
       }));
     } else {
       compressed.calibrationRequirements = reqs;

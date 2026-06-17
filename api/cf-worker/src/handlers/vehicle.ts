@@ -8,6 +8,8 @@ import { jsonResponse, errorResponse } from "../lib/cors";
 import { fetchBovsoftVehicle, getCachedBovsoftVehicle, cacheBovsoftVehicle } from "../lib/bovsoft";
 import { resolveKtype } from "../lib/ktype-resolver";
 import { guessEquipment } from "../lib/scoring";
+import { getEquipmentProfileForVehicle } from "../lib/equipment-profiles";
+import { computeProfileMatchConfidence, selectCategoryProfile } from "../lib/equipment";
 
 // ---------------------------------------------------------------------------
 // GET /api/vehicle/ktype/:regnr
@@ -587,4 +589,124 @@ export async function handleVehicleProducts(request: Request, env: Env): Promise
       ktypeVehicle: ktypeVehicle || null
     }, 500);
   }
+}
+
+// ---------------------------------------------------------------------------
+// GET /api/vehicle/equipment-profile?regnr=<REGNR>
+// Returns learned equipment profile for the vehicle + optional product scores
+// ---------------------------------------------------------------------------
+
+export async function handleVehicleEquipmentProfile(request: Request, env: Env): Promise<Response> {
+  const url = new URL(request.url);
+  const regnr = url.searchParams.get("regnr")?.toUpperCase().replace(/\s/g, "");
+  const brand = url.searchParams.get("brand")?.toUpperCase();
+  const model = url.searchParams.get("model")?.toUpperCase();
+  const yearParam = url.searchParams.get("year");
+  const year = yearParam ? parseInt(yearParam, 10) : null;
+  const category = url.searchParams.get("category");
+
+  // Optional: score a list of products passed in body
+  let productsToScore: Array<{ id: number; properties: Record<string, unknown>; category?: string }> | null = null;
+  if (request.method === "POST") {
+    try {
+      const body = await request.json() as { products?: Array<{ id: number; properties: Record<string, unknown>; category?: string }> };
+      productsToScore = body.products || null;
+    } catch {
+      productsToScore = null;
+    }
+  }
+
+  let vehicleBrand = brand || "";
+  let vehicleModel = model || "";
+  let vehicleYear = year;
+
+  // If regnr provided, look up vehicle from Bovsoft cache / API
+  if (regnr) {
+    if (!/^[A-Z]{2}\d{4,5}$/.test(regnr)) {
+      return errorResponse("Ugyldig registreringsnummer. Format: AB12345", 400);
+    }
+
+    try {
+      const cached = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
+      if (cached) {
+        vehicleBrand = cached.brand;
+        vehicleModel = cached.model;
+        vehicleYear = cached.yearFrom || cached.yearTo || null;
+      } else if (env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE) {
+        const vehicle = await fetchBovsoftVehicle(regnr, env.BOVSOFT_CLIENT_ID, env.BOVSOFT_SECCODE);
+        if (vehicle) {
+          vehicleBrand = vehicle.brand;
+          vehicleModel = vehicle.model;
+          vehicleYear = vehicle.yearFrom || vehicle.yearTo || null;
+          await cacheBovsoftVehicle(env.GLASS_CATALOG, regnr, vehicle);
+        }
+      }
+    } catch (e) {
+      console.error(`[EquipmentProfile] Vehicle lookup failed for ${regnr}:`, e);
+    }
+  }
+
+  if (!vehicleBrand || !vehicleModel) {
+    return errorResponse("Mangler kjøretøyinfo (regnr eller brand+model)", 400);
+  }
+
+  const profile = await getEquipmentProfileForVehicle(env, vehicleBrand, vehicleModel, vehicleYear);
+  if (!profile) {
+    return jsonResponse({
+      found: false,
+      vehicle: { brand: vehicleBrand, model: vehicleModel, year: vehicleYear },
+      profile: null,
+    });
+  }
+
+  const categoryProfile = category ? selectCategoryProfile(profile, category) : null;
+
+  const response: Record<string, unknown> = {
+    found: true,
+    vehicle: { brand: vehicleBrand, model: vehicleModel, year: vehicleYear },
+    profileKey: profile.key,
+    profileLevel: profile.level,
+    totalProducts: profile.totalProducts,
+    categories: Object.keys(profile.cat),
+    categoryProfiles: Object.fromEntries(
+      Object.entries(profile.cat).map(([cat, p]) => [
+        cat,
+        {
+          n: p.n,
+          pos: p.pos,
+          neg: p.neg,
+          p: p.p,
+          comb: p.comb,
+        },
+      ])
+    ),
+    categoryProfile: categoryProfile
+      ? {
+          category,
+          total: categoryProfile.n,
+          possible: categoryProfile.pos,
+          impossible: categoryProfile.neg,
+          likely: categoryProfile.p,
+          combinations: categoryProfile.comb,
+        }
+      : null,
+  };
+
+  if (productsToScore && productsToScore.length > 0) {
+    response.scores = productsToScore.map((product) => {
+      const cat = product.category || category;
+      const catProfile = cat ? selectCategoryProfile(profile, cat) : null;
+      const fallbackProfile = catProfile || profile.cat.all || null;
+      const match = fallbackProfile
+        ? computeProfileMatchConfidence(product.properties as any, fallbackProfile, { includeExplanation: true })
+        : null;
+      return {
+        id: product.id,
+        confidence: match?.confidence ?? null,
+        explanation: match?.explanation ?? null,
+      };
+    });
+  }
+
+  return jsonResponse(response);
 }

@@ -395,4 +395,65 @@ describe("search accuracy harness", () => {
     expect(body?.layer).toBe(-1);
     expect(body?.confidence).toBe("exact");
   }, 30000);
+
+  it("uses ktype_crosswalk when resolved kType is from another kType-space", async () => {
+    const regnr = "CW99999";
+    const make = "VW";
+    const model = "GOLF VII";
+    const year = 2016;
+    const bovsoftKtype = 88881;
+    const tecdocKtype = 99991;
+    const eurocode = "CWTEST";
+
+    // Cache SVV vehicle.
+    await cacheSvvVehicleInKV(
+      env.GLASS_CATALOG,
+      regnr,
+      buildTecdocVehicle({ regnr, make, model, year })
+    );
+
+    // Catalog row is keyed by TecDoc kType.
+    await env.GLASS_CATALOG_D1.prepare(`
+      INSERT INTO glass_catalog
+        (eurocode, category, brand, model, year_from, year_to, ktype, supplier)
+      VALUES (?, 'frontrute', ?, ?, ?, ?, ?, 'test-crosswalk')
+    `).bind(eurocode, make, model, 2013, 2020, tecdocKtype).run();
+
+    // Glass rule points to Bovsoft kType (different kType-space).
+    await env.GLASS_CATALOG_D1.prepare(`
+      INSERT INTO glass_rules
+        (normalized_key, market, opening, feature_signature, ktype, confidence, evidence_count, active)
+      VALUES (?, 'EU', 'windshield', 'default', ?, 0.9, 1, 1)
+    `).bind(
+      [make, model, String(year)].join(":").toLowerCase().replace(/\s+/g, "_"),
+      bovsoftKtype
+    ).run();
+
+    // Crosswalk bridges Bovsoft → TecDoc.
+    await env.GLASS_CATALOG_D1.prepare(`
+      INSERT INTO ktype_crosswalk
+        (bovsoft_ktype, tecdoc_ktype, vehicle_signature, match_evidence, confidence, verified, source)
+      VALUES (?, ?, ?, ?, 0.95, 1, 'bovsoft')
+    `).bind(
+      bovsoftKtype,
+      tecdocKtype,
+      "vw:golf vii:2016-2016",
+      JSON.stringify({ test: true })
+    ).run();
+
+    const result = await searchByRegnr(regnr, env, "frontrute");
+    const body = result.body as {
+      candidates?: Array<{ eurocode?: string | null }>;
+      layer?: number;
+      confidence?: string;
+    } | null;
+
+    const allEurocodes = (body?.candidates ?? [])
+      .map((r) => r.eurocode)
+      .filter((e): e is string => Boolean(e));
+
+    expect(allEurocodes).toContain(eurocode);
+    expect(body?.layer).toBe(0);
+    expect(body?.confidence).toBe("exact");
+  }, 30000);
 });

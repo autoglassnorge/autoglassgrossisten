@@ -12,11 +12,11 @@ import { handleGlass } from "./handlers/glass";
 import { handleCatalogBrands, handleCatalogCategories, handleCatalogSearch, handleCatalogBulkLookup } from "./handlers/catalog";
 import { handleBrowseBrands, handleBrowseBrand } from "./handlers/browse";
 import { handleQuote } from "./handlers/quote";
-import { handleFeedback } from "./handlers/feedback";
+import { handleFeedback, handleWrongMatchFeedback } from "./handlers/feedback";
 import { handleAdminQuotes } from "./handlers/admin";
 import { handleVinLookup, handleVinLookupStatus } from "./handlers/vin";
 import { handleHealth } from "./handlers/health";
-import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, handleVehicleYears, handleVehicleProducts, handleVehicleDebug } from "./handlers/vehicle";
+import { handleVehicleKtypeLookup, handleVehicleBrands, handleVehicleModels, handleVehicleYears, handleVehicleProducts, handleVehicleDebug, handleVehicleEquipmentProfile } from "./handlers/vehicle";
 import { handleGlassGuide } from "./handlers/glass-guide";
 import { handleOrdremottaker, handleFeedback as handleOrdremottakerFeedback } from "./handlers/ordremottaker";
 import { handleUnifiedSearch } from "./handlers/unified-search";
@@ -279,6 +279,9 @@ export default {
     if (path === "/api/feedback" && request.method === "POST") {
       return handleFeedback(request, env);
     }
+    if (path === "/api/feedback/wrong-match" && request.method === "POST") {
+      return handleWrongMatchFeedback(request, env);
+    }
 
     // Admin
     if (path === "/api/admin/quotes" && request.method === "GET") {
@@ -348,6 +351,9 @@ export default {
     }
     if (path === "/api/vehicle/products") {
       return handleVehicleProducts(request, env);
+    }
+    if (path === "/api/vehicle/equipment-profile") {
+      return handleVehicleEquipmentProfile(request, env);
     }
 
     // AI Ordremottaker

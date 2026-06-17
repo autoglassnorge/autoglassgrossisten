@@ -62,11 +62,20 @@ function ensureInitialized() {
       entriesByCanonicalBrand.set(cb, [entry]);
     }
   }
+  // Map each modelId to its canonical brand (from the first entry using that model)
+  const modelBrandId = new Map<number, number>();
+  for (const entry of entries) {
+    if (!modelBrandId.has(entry.modelId)) {
+      modelBrandId.set(entry.modelId, entry.brandId);
+    }
+  }
   // Pre-compute model metadata
   modelMeta = new Array(modelNames.length);
   for (let i = 0; i < modelNames.length; i++) {
-    const normText = normalizeModelText(modelNames[i]);
-    const tokens = extractTokens(modelNames[i]);
+    const brandId = modelBrandId.get(i);
+    const brand = brandId !== undefined ? canonicalBrands[brandId] : undefined;
+    const normText = normalizeModelText(modelNames[i], brand);
+    const tokens = extractTokens(modelNames[i], brand);
     const chassis = extractChassisCodes(modelNames[i]);
     modelMeta[i] = {
       normText,
@@ -318,7 +327,34 @@ function applyAliases(text: string): string {
   return text;
 }
 
-function normalizeModelText(raw: string): string {
+/**
+ * Collapse Mercedes class names to a single token so they survive the
+ * CLASS noise-word removal and short-token filter.
+ *   C 200 CDI → CCLASS 200 CDI
+ *   E-CLASS → ECLASS
+ *   A 180 → ACLASS 180
+ */
+function preserveMercedesClassNames(text: string): string {
+  const cls = "C|E|S|A|B|G|M|R|CLA|CLK|CLS|SL|SLK|GLA|GLB|GLC|GLE|GLS|GL";
+  // "C-CLASS" / "E CLASS" → "CCLASS" / "ECLASS"
+  text = text.replace(
+    new RegExp(`\\b(${cls})\\s*-?\\s*CLASS\\b`, "gi"),
+    "$1CLASS"
+  );
+  // "C 200 CDI" / "E 220 CDI" / "S 350" → "CCLASS 200 CDI" etc.
+  text = text.replace(
+    new RegExp(`\\b(${cls})\\s+(\\d{1,3}\\s*(?:CDI|D|E|AMG|KOMPRESSOR|BLUE|BLUETEC|4MATIC|CDI\\s+4MATIC)?)\\b`, "gi"),
+    "$1CLASS $2"
+  );
+  // "S 350" also needs the numeric-only form
+  text = text.replace(
+    new RegExp(`\\b(${cls})\\s+(\\d{1,3})\\b`, "gi"),
+    "$1CLASS $2"
+  );
+  return text;
+}
+
+function normalizeModelText(raw: string, brand?: string): string {
   let text = raw.toUpperCase().trim();
 
   // Apply aliases first (before stripping punctuation so hyphenated aliases match)
@@ -335,11 +371,19 @@ function normalizeModelText(raw: string): string {
     text = text.replace(re, " ");
   }
 
+  text = text.replace(/\s+/g, " ").trim();
+
+  // Mercedes-specific class preservation so "C 200 CDI" matches C-CLASS.
+  // Run after noise-word removal so CLASS is gone but CDI/D/E/AMG are kept.
+  if (brand === "MERCEDES") {
+    text = preserveMercedesClassNames(text);
+  }
+
   return text.replace(/\s+/g, " ").trim();
 }
 
-function extractTokens(text: string): string[] {
-  const norm = normalizeModelText(text);
+function extractTokens(text: string, brand?: string): string[] {
+  const norm = normalizeModelText(text, brand);
   return norm
     .split(/\s+/)
     .filter((t) => t.length >= 2 || /^\d$/.test(t));
@@ -485,6 +529,35 @@ function scoreEntry(
 }
 
 /* ── Public resolver ──────────────────────────────────────── */
+/**
+ * Strip BMW model down to series number (520d → 5, 116d → 1, X1 xDrive → X1)
+ * so it matches TecDoc's "5", "1", "X1" model names.
+ */
+function normalizeBmwModel(model: string): string {
+  const m = model.toUpperCase().trim();
+  // X1, X2, X3, X4, X5, X6, X7
+  const xMatch = m.match(/\b(X[1-9][0-9]?)\b/);
+  if (xMatch) return xMatch[1];
+  // 1-8 series with optional digits/suffixes: 520d, 116d, 840i
+  const seriesMatch = m.match(/\b([1-9][0-9]?)\s*\d*[A-Z]*\b/);
+  if (seriesMatch) return seriesMatch[1];
+  return model;
+}
+
+/**
+ * Strip Mercedes model down to class (E 220 CDI → E CLASS).
+ */
+function normalizeMercedesModel(model: string): string {
+  const m = model.toUpperCase().trim();
+  const cls = m.match(/\b([A-Z])\s*\d{0,3}\s+(CDI|CDI\s*4MATIC|BLUETEC|D|E|AMG|4MATIC)\b/)
+    || m.match(/\b([A-Z])\s*\d{0,3}\b/);
+  if (cls) {
+    const c = cls[1];
+    if (/^[A-Z]$/.test(c)) return `${c} CLASS`;
+  }
+  return model;
+}
+
 export function resolveTecDocKType(
   make: string,
   model: string,
@@ -492,8 +565,12 @@ export function resolveTecDocKType(
 ): TecDocResult {
   ensureInitialized();
   const normBrand = normalizeBrand(make);
-  const inputNorm = normalizeModelText(model);
-  const inputTokens = new Set(extractTokens(model));
+
+  // For BMW, collapse specific trims to series number to match TecDoc index names.
+  const normalizedModel = normBrand === "BMW" ? normalizeBmwModel(model) : model;
+
+  const inputNorm = normalizeModelText(normalizedModel, normBrand);
+  const inputTokens = new Set(extractTokens(normalizedModel, normBrand));
   const inputChassis = new Set(extractChassisCodes(model));
 
   // Gather candidate pools: exact brand first, then aliases

@@ -6,6 +6,7 @@ interface Props {
   products: Product[];
   onFilter: (filtered: Product[]) => void;
   onAnswersChange?: (answers: Record<string, boolean | undefined>) => void;
+  initialAnswers?: Record<string, boolean | null>;
 }
 
 const FEATURES = [
@@ -29,7 +30,7 @@ function productHasFeature(product: Product, key: string): boolean {
   }
 
   const d = (product.description || '').toUpperCase();
-  const tokens = d.split(/[\s;,.\[\]()+-]+/).filter(t => t.length >= 1);
+  const tokens = d.split(/[\s;,.\/\[\]()+-]+/).filter(t => t.length >= 1);
   const s = new Set(tokens);
 
   switch (key) {
@@ -64,8 +65,8 @@ function productHasFeature(product: Product, key: string): boolean {
   }
 }
 
-export function EquipmentVerifier({ products, onFilter, onAnswersChange }: Props) {
-  const [answers, setAnswers] = useState<Record<string, boolean | null>>({});
+export function EquipmentVerifier({ products, onFilter, onAnswersChange, initialAnswers }: Props) {
+  const [answers, setAnswers] = useState<Record<string, boolean | null>>(initialAnswers || {});
   const [showAll, setShowAll] = useState(false);
 
   // Only show features that actually differ between products

@@ -1,19 +1,28 @@
 import { describe, it, expect } from "vitest";
-import { applyEquipmentFilter, inferRecordEquipment, computeEquipmentMatch, detectFlagsFromDescription } from "./equipment.ts";
+import {
+  applyEquipmentFilter,
+  inferRecordEquipment,
+  computeEquipmentMatch,
+  detectFlagsFromDescription,
+  computeProfileMatchConfidence,
+  selectVehicleProfile,
+  selectCategoryProfile,
+} from "./equipment.ts";
 import type { GlassRecord } from "../types";
+import type { VehicleEquipmentProfiles } from "./equipment";
 
 function makeRecord(
   equipment: Partial<{
     adas: number; rain_sensor: number; heated: number;
     acoustic: number; antenna: number; camera: number; hud: number;
-    description: string;
+    description: string; article_number: string;
   }> & { eurocode?: string } = {}
 ): GlassRecord {
   return {
     id: 1,
     supplier_sku: "TEST",
     eurocode: equipment.eurocode ?? "TEST",
-    article_number: "TEST",
+    article_number: equipment.article_number ?? "TEST",
     scan_number: null,
     category: "frontrute",
     supplier: "test",
@@ -234,6 +243,11 @@ describe("detectFlagsFromDescription — negation handling", () => {
     expect(flags.adas).toBe(false);
   });
 
+  it('"COAT/HUD/LDW" → hud: true', () => {
+    const flags = detectFlagsFromDescription("JAGUAR I-PACE 5D SUV 18-20 COAT/HUD/LDW/EL/SENS");
+    expect(flags.hud).toBe(true);
+  });
+
   it('"WITHOUT HUD" → hud: false', () => {
     const flags = detectFlagsFromDescription("BMW 5 SERIES 2015- FRONTRUTE WITHOUT HUD");
     expect(flags.hud).toBe(false);
@@ -283,5 +297,197 @@ describe("inferRecordEquipment — description fallback with negation", () => {
     expect(eq).toHaveProperty("camera");
     expect(eq).toHaveProperty("hud");
     expect(eq).toHaveProperty("shade");
+  });
+});
+
+describe("inferRecordEquipment — rain sensor from M suffix", () => {
+  it("frontrute with eurocode ending in M → rainSensor: true", () => {
+    const record = makeRecord({
+      eurocode: "1646GYM",
+      description: "MERCEDES W129 300-600 2D SL 89-01 FR+GY",
+      rain_sensor: 0,
+    });
+    const eq = inferRecordEquipment(record);
+    expect(eq.rainSensor).toBe(true);
+  });
+
+  it("frontrute with article_number ending in M → rainSensor: true", () => {
+    const record = makeRecord({
+      article_number: "1846CSM",
+      eurocode: "TEST",
+      description: "TEST FRONTRUTE",
+      rain_sensor: 0,
+    });
+    const eq = inferRecordEquipment(record);
+    expect(eq.rainSensor).toBe(true);
+  });
+
+  it("non-frontrute with M suffix → rainSensor stays false", () => {
+    const record = makeRecord({
+      eurocode: "4153ASMRL",
+      description: "SIDEGLASS LEFT",
+      rain_sensor: 0,
+    });
+    (record as any).category = "sideglass";
+    const eq = inferRecordEquipment(record);
+    expect(eq.rainSensor).toBe(false);
+  });
+
+  it("description negating rain sensor overrides M suffix", () => {
+    const record = makeRecord({
+      eurocode: "1646GYM",
+      description: "MERCEDES W129 FR+GY UTEN REGNSENSOR",
+      rain_sensor: 0,
+    });
+    const eq = inferRecordEquipment(record);
+    expect(eq.rainSensor).toBe(false);
+  });
+});
+
+describe("computeProfileMatchConfidence", () => {
+  const baseProfile = {
+    n: 100,
+    pos: ["adas", "rainSensor"],
+    neg: ["hud"],
+    p: {
+      adas: 0.3,
+      rainSensor: 0.7,
+      heated: 0.0,
+      acoustic: 0.0,
+      antenna: 0.0,
+      camera: 0.0,
+      hud: 0.0,
+      solar: 0.0,
+      tinted: 0.0,
+      coated: 0.0,
+      laneAssist: 0.0,
+      shade: 0.0,
+    },
+    comb: [
+      { f: ["rainSensor"], c: 60, p: 0.6 },
+      { f: ["adas", "rainSensor"], c: 25, p: 0.25 },
+      { f: [], c: 15, p: 0.15 },
+    ],
+  };
+
+  it("returns null for empty profile", () => {
+    expect(computeProfileMatchConfidence({}, null)).toBeNull();
+    expect(computeProfileMatchConfidence({}, { n: 0, pos: [], neg: [], p: {}, comb: [] })).toBeNull();
+  });
+
+  it("returns 0% when product has an impossible feature", () => {
+    const result = computeProfileMatchConfidence({ hud: true }, baseProfile);
+    expect(result?.confidence).toBe(0);
+  });
+
+  it("returns exact combo confidence for matching combination", () => {
+    const result = computeProfileMatchConfidence({ rainSensor: true }, baseProfile);
+    expect(result?.confidence).toBe(60);
+  });
+
+  it("returns exact combo confidence for multi-feature match", () => {
+    const result = computeProfileMatchConfidence({ adas: true, rainSensor: true }, baseProfile);
+    expect(result?.confidence).toBe(25);
+  });
+
+  it("falls back to per-feature average for unseen combination", () => {
+    const result = computeProfileMatchConfidence({ adas: true }, baseProfile);
+    expect(result).not.toBeNull();
+    expect(result!.confidence).toBeGreaterThan(0);
+    expect(result!.confidence).toBeLessThan(100);
+  });
+
+  it("handles numeric 1 as true", () => {
+    const result = computeProfileMatchConfidence({ rainSensor: 1 }, baseProfile);
+    expect(result?.confidence).toBe(60);
+  });
+});
+
+describe("selectVehicleProfile", () => {
+  const profiles = {
+    meta: { generatedAt: "", records: 0, features: [], categories: [] },
+    profiles: {
+      "VOLKSWAGEN:GOLF:2020": { n: 10, cat: {} as any },
+      "VOLKSWAGEN:GOLF": { n: 20, cat: {} as any },
+    },
+    brandModel: {
+      "VOLKSWAGEN:POLO": { n: 30, cat: {} as any },
+    },
+    brand: {
+      VOLKSWAGEN: { n: 100, cat: {} as any },
+    },
+  } satisfies VehicleEquipmentProfiles;
+
+  it("prefers exact brand:model:year match", () => {
+    const selected = selectVehicleProfile(profiles, "volkswagen", "golf", 2020);
+    expect(selected?.level).toBe("exact");
+    expect(selected?.key).toBe("VOLKSWAGEN:GOLF:2020");
+  });
+
+  it("falls back to brand:model when year missing", () => {
+    const selected = selectVehicleProfile(profiles, "volkswagen", "golf");
+    expect(selected?.level).toBe("brandModel");
+    expect(selected?.key).toBe("VOLKSWAGEN:GOLF");
+  });
+
+  it("falls back to brand-level profile", () => {
+    const selected = selectVehicleProfile(profiles, "volkswagen", "unknown");
+    expect(selected?.level).toBe("brand");
+    expect(selected?.key).toBe("VOLKSWAGEN");
+  });
+
+  it("returns null when no match", () => {
+    const selected = selectVehicleProfile(profiles, "toyota", "corolla");
+    expect(selected).toBeNull();
+  });
+});
+
+describe("selectCategoryProfile", () => {
+  const vehicleProfile = {
+    n: 10,
+    cat: {
+      frontrute: { n: 5, pos: [], neg: [], p: {}, comb: [] } as any,
+      all: { n: 10, pos: [], neg: [], p: {}, comb: [] } as any,
+    },
+  };
+
+  it("selects requested category", () => {
+    expect(selectCategoryProfile(vehicleProfile, "frontrute")?.n).toBe(5);
+  });
+
+  it("falls back to all category", () => {
+    expect(selectCategoryProfile(vehicleProfile, "bakrute")?.n).toBe(10);
+  });
+});
+
+describe("selectVehicleProfile — model normalization", () => {
+  const profiles = {
+    meta: { generatedAt: "", records: 0, features: [], categories: [] },
+    profiles: {
+      "VW:CARAVELLE:2005": { n: 10, cat: {} as any },
+      "VW:TRANSPORTER": { n: 20, cat: {} as any },
+    },
+    brandModel: {},
+    brand: {
+      VW: { n: 100, cat: {} as any },
+    },
+  } satisfies VehicleEquipmentProfiles;
+
+  it("matches Caravelle model variant from Bovsoft", () => {
+    const selected = selectVehicleProfile(profiles, "vw", "CARAVELLE V BUSS (7HB, 7HJ)", 2005);
+    expect(selected?.level).toBe("exact");
+    expect(selected?.key).toBe("VW:CARAVELLE:2005");
+  });
+
+  it("falls back to first model word", () => {
+    const selected = selectVehicleProfile(profiles, "vw", "TRANSPORTER T5 4MOTION");
+    expect(selected?.level).toBe("brandModel");
+    expect(selected?.key).toBe("VW:TRANSPORTER");
+  });
+
+  it("matches Volkswagen brand alias", () => {
+    const selected = selectVehicleProfile(profiles, "VOLKSWAGEN", "CARAVELLE V BUSS", 2005);
+    expect(selected?.level).toBe("exact");
+    expect(selected?.key).toBe("VW:CARAVELLE:2005");
   });
 });

@@ -8,9 +8,13 @@ import type {
   CalibrationRequirement,
   KtypeRegistryInfo,
   VehicleFingerprint,
+  VinKtypeMapEntry,
 } from "../types";
 import { normalizeBrand, getBrandAliases } from "./brand";
 import { memoizeAsync } from "./memo";
+import type { TecdocVehicle } from "../providers/svv";
+import { inferRecordEquipment, computeEquipmentMatch } from "./equipment";
+import { isBodyCompatible } from "./body-mapping";
 
 // ---------------------------------------------------------------------------
 // Environment-configurable constants
@@ -303,6 +307,70 @@ export async function queryAccessories(
 }
 
 // ---------------------------------------------------------------------------
+// Layer 1.5: equipment + body driven fallback
+// ---------------------------------------------------------------------------
+
+export interface VehicleEquipmentFlags {
+  adas: boolean;
+  rainSensor: boolean;
+  heated: boolean;
+  acoustic: boolean;
+  antenna: boolean;
+  camera: boolean;
+  hud: boolean;
+}
+
+/**
+ * Fallback query used when no exact kType match exists.
+ * Returns brand/year candidates filtered by category, body compatibility and
+ * equipment overlap.  Mismatches are dropped; the rest are ordered by
+ * equipment match quality (perfect > good > check).
+ */
+export async function queryByVehicleEquipment(
+  db: D1Database,
+  vehicle: TecdocVehicle,
+  vehicleFlags: VehicleEquipmentFlags,
+  category?: string,
+  bodyHint?: string
+): Promise<GlassRecord[]> {
+  try {
+    // Start from the same pool as the regular brand/year fallback.
+    const records = await queryByBrandAndYear(db, vehicle.make, vehicle.year, vehicle.model);
+
+    let candidates = records;
+
+    // Optional category filter
+    if (category) {
+      const cat = category.toLowerCase();
+      candidates = candidates.filter((r) => (r.category || "").toLowerCase() === cat);
+    }
+
+    // Optional body filter (only when we have a hint for both sides)
+    if (bodyHint) {
+      candidates = candidates.filter((r) =>
+        isBodyCompatible(bodyHint, `${r.description || ""} ${r.model || ""}`)
+      );
+    }
+
+    // Score equipment overlap and drop clear mismatches.
+    const order = { perfect: 3, good: 2, check: 1, mismatch: 0 };
+    const scored = candidates
+      .map((r) => {
+        const recordEquipment = inferRecordEquipment(r);
+        const { match } = computeEquipmentMatch(recordEquipment, vehicleFlags);
+        return { record: r, match };
+      })
+      .filter((s) => order[s.match] >= 1) // drop mismatch
+      .sort((a, b) => order[b.match] - order[a.match]);
+
+    return scored.map((s) => s.record);
+  } catch (e) {
+    console.error(`queryByVehicleEquipment failed: ${e instanceof Error ? e.message : String(e)}`);
+    return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Catalog metadata
 // ---------------------------------------------------------------------------
 
@@ -529,6 +597,98 @@ export async function queryGroundTruthByVehicle(
   }
 }
 
+/** Map search category to ground_truth column name. */
+function groundTruthColumnForCategory(category: string): string | null {
+  const c = category.toLowerCase().trim();
+  if (c === "frontrute") return "frontrute_eurocode";
+  if (c === "bakrute") return "bakrute_eurocode";
+  if (c === "sideglass-fv" || c === "siderute-fv") return "sideglass_fv_eurocode";
+  if (c === "sideglass-fh" || c === "siderute-fh") return "sideglass_fh_eurocode";
+  if (c === "sideglass-bv" || c === "siderute-bv") return "sideglass_bv_eurocode";
+  if (c === "sideglass-bh" || c === "siderute-bh") return "sideglass_bh_eurocode";
+  if (c === "dørrute-fv" || c === "dør-fv") return "dor_fv_eurocode";
+  if (c === "dørrute-fh" || c === "dør-fh") return "dor_fh_eurocode";
+  if (c === "dørrute-bv" || c === "dør-bv") return "dor_bv_eurocode";
+  if (c === "dørrute-bh" || c === "dør-bh") return "dor_bh_eurocode";
+  if (c === "sideglass" || c === "siderute" || c === "ventilrute") return "sideglass_fv_eurocode";
+  if (c === "dørrute" || c === "dør") return "dor_fv_eurocode";
+  return null;
+}
+
+/**
+ * Promote an auto-suggested match to ground_truth once it has been seen
+ * enough times.  Requires at least AUTO_GT_HIT_THRESHOLD independent
+ * auto_suggestions for the same regnr_hash + eurocode.
+ */
+export async function promoteAutoGroundTruth(
+  db: D1Database,
+  regnrHash: string,
+  vehicle: TecdocVehicle,
+  category: string,
+  eurocode: string,
+  ktype: number,
+  confidence = 0.85
+): Promise<void> {
+  const col = groundTruthColumnForCategory(category);
+  if (!col) return;
+
+  try {
+    // Count auto-suggestions for this exact mapping.
+    const countRow = await db
+      .prepare(
+        `SELECT COUNT(*) as cnt FROM search_feedback
+         WHERE regnr_hash = ? AND eurocode = ? AND action = 'auto_suggested'`
+      )
+      .bind(regnrHash, eurocode)
+      .first();
+    const count = (countRow as any)?.cnt || 0;
+    if (count < 3) return;
+
+    // Do not overwrite a human-verified ground-truth row.
+    const existing = await db
+      .prepare("SELECT verified_by FROM ground_truth WHERE regnr_hash = ?")
+      .bind(regnrHash)
+      .first();
+    if (existing && (existing as any).verified_by !== "auto_high_confidence") {
+      return;
+    }
+
+    await db
+      .prepare(
+        `INSERT INTO ground_truth (
+          regnr_hash, vin, vin_prefix, k_type, make, model, year, ${col},
+          verified_by, confidence, verified_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+        ON CONFLICT(regnr_hash) DO UPDATE SET
+          vin = excluded.vin,
+          vin_prefix = excluded.vin_prefix,
+          k_type = excluded.k_type,
+          make = excluded.make,
+          model = excluded.model,
+          year = excluded.year,
+          ${col} = excluded.${col},
+          verified_by = excluded.verified_by,
+          confidence = excluded.confidence,
+          verified_at = excluded.verified_at`
+      )
+      .bind(
+        regnrHash,
+        vehicle.vin || null,
+        vehicle.vin ? vehicle.vin.slice(0, 6).toUpperCase() : null,
+        ktype || null,
+        vehicle.make,
+        vehicle.model,
+        vehicle.year,
+        eurocode,
+        "auto_high_confidence",
+        confidence
+      )
+      .run();
+  } catch (e) {
+    console.error(`promoteAutoGroundTruth failed: ${e instanceof Error ? e.message : String(e)}`);
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Vehicle fingerprint
 // ---------------------------------------------------------------------------
@@ -594,6 +754,101 @@ export async function queryCalibrationRequirements(
   } catch (e) {
     console.error(`queryCalibrationRequirements failed: ${e instanceof Error ? e.message : String(e)}`);
     return [];
+  }
+}
+
+// ---------------------------------------------------------------------------
+// VIN → kType cache
+// ---------------------------------------------------------------------------
+
+const VIN_KTYPE_CONFIDENCE_THRESHOLD = 0.85;
+
+export async function lookupVinKtype(
+  db: D1Database,
+  vin: string
+): Promise<VinKtypeMapEntry | null> {
+  try {
+    const row = await db
+      .prepare(
+        `SELECT vin, ktype, make, model, year, confidence, source, regnr_hash,
+                created_at, updated_at, expires_at
+         FROM vin_ktype_map
+         WHERE vin = ?
+           AND (expires_at IS NULL OR expires_at > datetime('now'))`
+      )
+      .bind(vin)
+      .first<Record<string, unknown>>();
+
+    if (!row) return null;
+    if (typeof row.confidence === "number" && row.confidence < VIN_KTYPE_CONFIDENCE_THRESHOLD) {
+      return null;
+    }
+
+    return {
+      vin: String(row.vin),
+      ktype: Number(row.ktype),
+      make: row.make ? String(row.make) : null,
+      model: row.model ? String(row.model) : null,
+      year: row.year ? Number(row.year) : null,
+      confidence: Number(row.confidence),
+      source: String(row.source),
+      regnrHash: row.regnr_hash ? String(row.regnr_hash) : null,
+      createdAt: String(row.created_at),
+      updatedAt: String(row.updated_at),
+      expiresAt: row.expires_at ? String(row.expires_at) : null,
+    };
+  } catch (e) {
+    console.error(`lookupVinKtype failed: ${e instanceof Error ? e.message : String(e)}`);
+    return null;
+  }
+}
+
+export async function upsertVinKtype(
+  db: D1Database,
+  entry: Omit<VinKtypeMapEntry, "createdAt" | "updatedAt"> & { expiresInDays?: number }
+): Promise<void> {
+  try {
+    const expiresAt =
+      entry.expiresInDays && entry.expiresInDays > 0
+        ? new Date(Date.now() + entry.expiresInDays * 24 * 60 * 60 * 1000).toISOString()
+        : null;
+
+    await db
+      .prepare(
+        `INSERT INTO vin_ktype_map
+          (vin, ktype, make, model, year, confidence, source, regnr_hash, expires_at, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'), datetime('now'))
+         ON CONFLICT(vin) DO UPDATE SET
+           ktype = COALESCE(excluded.ktype, vin_ktype_map.ktype),
+           make = COALESCE(excluded.make, vin_ktype_map.make),
+           model = COALESCE(excluded.model, vin_ktype_map.model),
+           year = COALESCE(excluded.year, vin_ktype_map.year),
+           confidence = CASE
+             WHEN excluded.confidence > vin_ktype_map.confidence THEN excluded.confidence
+             ELSE vin_ktype_map.confidence
+           END,
+           source = CASE
+             WHEN excluded.confidence > vin_ktype_map.confidence THEN excluded.source
+             ELSE vin_ktype_map.source
+           END,
+           regnr_hash = COALESCE(excluded.regnr_hash, vin_ktype_map.regnr_hash),
+           expires_at = COALESCE(excluded.expires_at, vin_ktype_map.expires_at),
+           updated_at = datetime('now')`
+      )
+      .bind(
+        entry.vin,
+        entry.ktype,
+        entry.make ?? null,
+        entry.model ?? null,
+        entry.year ?? null,
+        entry.confidence,
+        entry.source,
+        entry.regnrHash ?? null,
+        expiresAt
+      )
+      .run();
+  } catch (e) {
+    console.error(`upsertVinKtype failed: ${e instanceof Error ? e.message : String(e)}`);
   }
 }
 
@@ -778,6 +1033,47 @@ export interface TecdocKtypeRegistryEntry {
   collisionGroupSize: number;
   collisionRank: number;
   confidenceTag: string;
+}
+
+export interface KtypeCrosswalkEntry {
+  bovsoft_ktype: number;
+  tecdoc_ktype: number;
+  confidence: number;
+  verified: boolean;
+  source: string;
+}
+
+/**
+ * Look up a Bovsoft kType in the ktype_crosswalk table and return the mapped
+ * TecDoc kType(s). Verified mappings are returned first, then by confidence.
+ * Safe to call even when the table does not exist yet.
+ */
+export async function queryKtypeCrosswalk(
+  db: D1Database,
+  bovsoftKtype: number
+): Promise<KtypeCrosswalkEntry[]> {
+  try {
+    const { results } = await db
+      .prepare(`
+        SELECT bovsoft_ktype, tecdoc_ktype, confidence, verified, source
+        FROM ktype_crosswalk
+        WHERE bovsoft_ktype = ?
+        ORDER BY verified DESC, confidence DESC, tecdoc_ktype ASC
+        LIMIT 5
+      `)
+      .bind(bovsoftKtype)
+      .all();
+    return ((results || []) as any[]).map((r) => ({
+      bovsoft_ktype: r.bovsoft_ktype,
+      tecdoc_ktype: r.tecdoc_ktype,
+      confidence: r.confidence,
+      verified: r.verified === 1,
+      source: r.source,
+    }));
+  } catch (e) {
+    // Table may not be migrated yet; treat as empty.
+    return [];
+  }
 }
 
 /**

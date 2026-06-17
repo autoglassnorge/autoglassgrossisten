@@ -21,6 +21,12 @@ import {
 import {
   productMatchesEquipmentFilters,
 } from '@/utils/equipment-filters';
+import {
+  scoreProductAgainstProfile,
+  selectProfileForProduct,
+  getLikelyEquipmentAnswers,
+} from '@/utils/equipment-profile';
+import { useEquipmentProfile } from '@/hooks/useEquipmentProfile';
 import type { Product, UserEquipmentAnswers } from '@/types/api';
 import { EquipmentFilterPanel } from '@/components/search/EquipmentFilterPanel';
 
@@ -83,6 +89,18 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
   const candidates = result?.candidates ?? [];
   const conf = result?.confidence ? formatConfidence(result.confidence) : null;
 
+  /* ---- learned equipment profile ---- */
+  const profileQuery = useEquipmentProfile({
+    regnr: result?.regnr || activeQuery,
+    brand: vehicle?.make,
+    model: vehicle?.model,
+    year: vehicle?.year,
+    enabled: !!vehicle,
+  });
+  const profileCategories = profileQuery.data?.found
+    ? profileQuery.data.categoryProfiles
+    : null;
+
   /* ---- filter state ---- */
   const [selectedCategory, setSelectedCategory] = useState<GlassCategory | null>(null);
   const [selectedDoorPlacement, setSelectedDoorPlacement] = useState<DoorPlacement | null>(null);
@@ -91,14 +109,30 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
   const [selectedEquipmentFilters, setSelectedEquipmentFilters] = useState<string[]>([]);
 
   /* ---- sorted + filtered products ---- */
+  const scoredCandidates = useMemo(() => {
+    if (!profileQuery.data?.found || !profileCategories) return candidates;
+    return candidates.map((p) => {
+      const profile = selectProfileForProduct(profileCategories, p.category);
+      const match = scoreProductAgainstProfile(p, profile);
+      return {
+        ...p,
+        _equipmentMatchConfidence: match.confidence,
+        _equipmentMatchExact: match.exactMatch,
+      };
+    });
+  }, [candidates, profileCategories, profileQuery.data?.found]);
+
   const sortedCandidates = useMemo(() => {
-    return [...candidates].sort((a, b) => {
+    return [...scoredCandidates].sort((a, b) => {
       const rankA = CATEGORY_RANK[a.category?.toLowerCase() || 'annet'] || 99;
       const rankB = CATEGORY_RANK[b.category?.toLowerCase() || 'annet'] || 99;
       if (rankA !== rankB) return rankA - rankB;
+      const confA = a._equipmentMatchConfidence ?? -1;
+      const confB = b._equipmentMatchConfidence ?? -1;
+      if (confB !== confA) return confB - confA;
       return (b._score || 0) - (a._score || 0);
     });
-  }, [candidates]);
+  }, [scoredCandidates]);
 
   const baseProducts = useMemo(
     () => equipmentFiltered ?? sortedCandidates,
@@ -146,6 +180,12 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
   const handleEquipmentAnswersChange = useCallback((answers: UserEquipmentAnswers) => {
     setEquipmentAnswers(answers);
   }, []);
+
+  // Pre-select likely equipment from learned profile when no user answers yet
+  const likelyAnswers = useMemo(() => {
+    if (!profileCategories || Object.keys(equipmentAnswers).length > 0) return null;
+    return getLikelyEquipmentAnswers(profileCategories, selectedCategory);
+  }, [profileCategories, selectedCategory, equipmentAnswers]);
 
   /* ---- loading / no data guards ---- */
   if (query.isLoading) {
@@ -242,6 +282,7 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
             products={candidates}
             onFilter={setEquipmentFiltered}
             onAnswersChange={handleEquipmentAnswersChange}
+            initialAnswers={likelyAnswers || undefined}
           />
         </Suspense>
       )}

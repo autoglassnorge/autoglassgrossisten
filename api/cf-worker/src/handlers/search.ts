@@ -26,8 +26,14 @@ import {
   queryFuzzyBrandYear,
   queryTecdocByKtype,
   queryTecdocKtypeByVehicle,
+  queryKtypeCrosswalk,
   querySvvTecdocMatch,
   queryAccessories,
+  lookupVinKtype,
+  upsertVinKtype,
+  queryByVehicleEquipment,
+  promoteAutoGroundTruth,
+  type VehicleEquipmentFlags,
   KTYPE_CONFIDENCE_THRESHOLD,
 } from "../lib/db";
 import { fetchBiluppgifterEquipment, inferRecordEquipment, detectFlagsFromOem, computeEquipmentMatch, applyEquipmentFilter } from "../lib/equipment";
@@ -35,7 +41,7 @@ import { decodeVwTransporterBody, decodeVin, inferBodyFromSvvData } from "../lib
 import { parseGenerationFromDescription } from "../lib/generation";
 import { scoreCandidate, modelMatches, yearCompatible, guessEquipment } from "../lib/scoring";
 import { groundTruthToCandidates, inferTypeCodeFromRecord, groupByTypeCode } from "../lib/ground-truth";
-import { sha256, saveSearchResult, getLearnedEquipment, getLearnedByVinPrefix } from "../lib/learning";
+import { sha256, saveSearchResult, getLearnedEquipment, getLearnedByVinPrefix, upsertSearchFeedback } from "../lib/learning";
 import { normalizeRecord } from "../lib/normalize";
 import { lookupNagsByVehicle } from "../nags-by-vehicle";
 import { resolveGlass, upsertGlassRule } from "../vin-glass-resolver";
@@ -341,26 +347,42 @@ export async function searchByRegnr(
     let resolvedKtype: number | null = null;
     let ktypeSource = "none";
 
-    // 3a. Check glass_rules
-    try {
-      const normalizedKey = [
-        vehicle.make.toLowerCase().trim().replace(/\s+/g, "_"),
-        vehicle.model.toLowerCase().trim().replace(/\s+/g, "_"),
-        String(vehicle.year),
-      ].join(":");
-      const ruleResult = await db
-        .prepare("SELECT ktype, confidence FROM glass_rules WHERE normalized_key = ? AND active = 1 ORDER BY confidence DESC, evidence_count DESC LIMIT 1")
-        .bind(normalizedKey).first<{ ktype: number; confidence: number }>();
-      if (ruleResult && ruleResult.ktype && ruleResult.confidence >= 0.75) {
-        resolvedKtype = ruleResult.ktype;
-        ktypeSource = "glass_rules";
-        console.log(`[kType] Glass rule hit for ${regnr}: kType=${resolvedKtype}, conf=${ruleResult.confidence}`);
+    // 3a. Check VIN → kType cache (most specific key we have)
+    if (vehicle.vin && vehicle.vin.length === 17) {
+      try {
+        const vinEntry = await lookupVinKtype(db, vehicle.vin);
+        if (vinEntry) {
+          resolvedKtype = vinEntry.ktype;
+          ktypeSource = `vin_ktype_map:${vinEntry.source}`;
+          console.log(`[kType] VIN cache hit for ${regnr}: kType=${resolvedKtype}, source=${vinEntry.source}, conf=${vinEntry.confidence}`);
+        }
+      } catch {
+        // vin_ktype_map table might not exist yet
       }
-    } catch {
-      // glass_rules table might not exist yet
     }
 
-    // 3b. Bovsoft kType — ALWAYS fetch for body type info even if kType already known
+    // 3b. Check glass_rules
+    if (!resolvedKtype) {
+      try {
+        const normalizedKey = [
+          vehicle.make.toLowerCase().trim().replace(/\s+/g, "_"),
+          vehicle.model.toLowerCase().trim().replace(/\s+/g, "_"),
+          String(vehicle.year),
+        ].join(":");
+        const ruleResult = await db
+          .prepare("SELECT ktype, confidence FROM glass_rules WHERE normalized_key = ? AND active = 1 ORDER BY confidence DESC, evidence_count DESC LIMIT 1")
+          .bind(normalizedKey).first<{ ktype: number; confidence: number }>();
+        if (ruleResult && ruleResult.ktype && ruleResult.confidence >= 0.75) {
+          resolvedKtype = ruleResult.ktype;
+          ktypeSource = "glass_rules";
+          console.log(`[kType] Glass rule hit for ${regnr}: kType=${resolvedKtype}, conf=${ruleResult.confidence}`);
+        }
+      } catch {
+        // glass_rules table might not exist yet
+      }
+    }
+
+    // 3c. Bovsoft kType — ALWAYS fetch for body type info even if kType already known
     let bovsoftVehicle: BovsoftVehicle | null = null;
     bovsoftVehicle = await getCachedBovsoftVehicle(env.GLASS_CATALOG, regnr);
     if (!bovsoftVehicle && env.BOVSOFT_CLIENT_ID && env.BOVSOFT_SECCODE && env.BOVSOFT_CLIENT_ID !== "NOT_SET") {
@@ -380,7 +402,7 @@ export async function searchByRegnr(
       }
     }
 
-    // 3c. Fallback: resolveGlass via vPIC or paid APIs
+    // 3d. Fallback: resolveGlass via vPIC or paid APIs
     if (!resolvedKtype && vehicle.vin) {
       try {
         const glassResult = await resolveGlass({
@@ -401,13 +423,29 @@ export async function searchByRegnr(
         if (glassResult.status === "resolved" && glassResult.match?.ktype) {
           resolvedKtype = glassResult.match.ktype;
           ktypeSource = glassResult.paidLookupUsed ? "paid_api" : "vpic_rules";
+          // Cache the resolved kType by VIN for future lookups
+          try {
+            await upsertVinKtype(db, {
+              vin: vehicle.vin,
+              ktype: resolvedKtype,
+              make: vehicle.make,
+              model: vehicle.model,
+              year: vehicle.year,
+              confidence: glassResult.match.confidence ?? 0.85,
+              source: glassResult.paidLookupUsed ? "paid_api" : "vpic_rules",
+              regnrHash: await sha256(regnr),
+              expiresAt: null,
+            });
+          } catch {
+            // Best-effort cache write
+          }
         }
       } catch (e) {
         console.warn(`[kType] resolveGlass fallback failed for ${regnr}:`, e);
       }
     }
 
-    // 3d. TecDoc in-memory resolver fallback (fast, no external API call)
+    // 3e. TecDoc in-memory resolver fallback (fast, no external API call)
     if (!resolvedKtype && vehicle.make && vehicle.model) {
       try {
         const tecdocResult = resolveTecDocKType(vehicle.make, vehicle.model, vehicle.year);
@@ -417,6 +455,24 @@ export async function searchByRegnr(
             resolvedKtype = best.ktype;
             ktypeSource = 'tecdoc_resolver';
             console.log(`[kType] TecDoc resolver hit for ${regnr}: kType=${resolvedKtype}, brand=${best.brand}, model=${best.model}, score=${best.score.toFixed(2)}`);
+            // Cache the resolved kType by VIN for future lookups
+            if (vehicle.vin && vehicle.vin.length === 17) {
+              try {
+                await upsertVinKtype(db, {
+                  vin: vehicle.vin,
+                  ktype: resolvedKtype,
+                  make: vehicle.make,
+                  model: vehicle.model,
+                  year: vehicle.year,
+                  confidence: best.score,
+                  source: 'tecdoc_resolver',
+                  regnrHash: await sha256(regnr),
+                  expiresAt: null,
+                });
+              } catch {
+                // Best-effort cache write
+              }
+            }
           }
         }
       } catch (e) {
@@ -547,23 +603,45 @@ export async function searchByRegnr(
       }
 
       if (compatibleKtypeDirect.length === 0) {
+        // Crosswalk: if the resolved kType is from another kType-space (e.g. Bovsoft),
+        // try to map it to a TecDoc kType and look up glass_catalog directly.
+        const crosswalkEntries = await queryKtypeCrosswalk(db, vehicle.k_type);
+        for (const cw of crosswalkEntries) {
+          const crosswalkDirect = await queryByKtype(db, cw.tecdoc_ktype);
+          const compatibleCrosswalk = filterKtypeCandidatesForVehicle(crosswalkDirect, vehicle);
+          if (compatibleCrosswalk.length > 0) {
+            for (const c of compatibleCrosswalk) {
+              if (c.eurocode && !candidateCodes.has(c.eurocode)) {
+                candidates.push(c);
+                candidateCodes.add(c.eurocode);
+              }
+            }
+            layer = 0;
+            confidence = cw.confidence >= 0.95 && cw.verified ? "exact" : "high";
+            console.log(`[kType] Crosswalk match for ${regnr}: ${vehicle.k_type} → TecDoc ${cw.tecdoc_ktype} (${compatibleCrosswalk.length} candidates, conf=${cw.confidence}, verified=${cw.verified})`);
+            break;
+          }
+        }
+
         // Try TecDoc direct ktype→eurocode mapping FIRST (before statistical learning)
-        const tecdocEntries = await queryTecdocByKtype(db, vehicle.k_type, 5);
-        if (tecdocEntries.length > 0) {
-          // Prefer unique (no collision), then collision_rank=1
-          const tecdocEntry = tecdocEntries.find((e) => e.confidenceTag === "unique") || tecdocEntries.find((e) => e.collisionRank === 1) || tecdocEntries[0];
-          const mappedRecord = await queryByEurocode(db, tecdocEntry.eurocode);
-          if (mappedRecord && mappedRecord.eurocode && !candidateCodes.has(mappedRecord.eurocode)) {
-            const brands = getBrandAliases(vehicle.make);
-            const brandMatch = brands.some((b) => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
-            const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
-            const modelMatch = modelMatches(vehicle.model, mappedRecord.model, vehicle.make);
-            if (brandMatch && yearMatch && modelMatch) {
-              candidates.push(mappedRecord);
-              candidateCodes.add(mappedRecord.eurocode);
-              layer = 0;
-              confidence = tecdocEntry.confidenceTag === "unique" ? "exact" : "high";
-              console.log(`[kType] TecDoc direct match for ${regnr}: kType=${vehicle.k_type} → eurocode=${tecdocEntry.eurocode}, conf=${tecdocEntry.confidenceTag}, collision=${tecdocEntry.collisionRank}`);
+        if (layer !== 0) {
+          const tecdocEntries = await queryTecdocByKtype(db, vehicle.k_type, 5);
+          if (tecdocEntries.length > 0) {
+            // Prefer unique (no collision), then collision_rank=1
+            const tecdocEntry = tecdocEntries.find((e) => e.confidenceTag === "unique") || tecdocEntries.find((e) => e.collisionRank === 1) || tecdocEntries[0];
+            const mappedRecord = await queryByEurocode(db, tecdocEntry.eurocode);
+            if (mappedRecord && mappedRecord.eurocode && !candidateCodes.has(mappedRecord.eurocode)) {
+              const brands = getBrandAliases(vehicle.make);
+              const brandMatch = brands.some((b) => mappedRecord.brand?.toUpperCase() === b.toUpperCase());
+              const yearMatch = yearCompatible(mappedRecord, vehicle.year, vehicle.make, vehicle.model);
+              const modelMatch = modelMatches(vehicle.model, mappedRecord.model, vehicle.make);
+              if (brandMatch && yearMatch && modelMatch) {
+                candidates.push(mappedRecord);
+                candidateCodes.add(mappedRecord.eurocode);
+                layer = 0;
+                confidence = tecdocEntry.confidenceTag === "unique" ? "exact" : "high";
+                console.log(`[kType] TecDoc direct match for ${regnr}: kType=${vehicle.k_type} → eurocode=${tecdocEntry.eurocode}, conf=${tecdocEntry.confidenceTag}, collision=${tecdocEntry.collisionRank}`);
+              }
             }
           }
         }
@@ -1035,6 +1113,32 @@ export async function searchByRegnr(
       }
     }
 
+    // === Layer 1.5: equipment + body driven refinement ===
+    // When we already have brand/year candidates, refine them with body/equipment
+    // before the final scoring.  Ground-truth candidates are never removed here.
+    if (!layer05Candidates && layer !== -1 && layer > 0) {
+      try {
+        const bodyHint = unifiedVin?.body || svvBody?.bodyType || undefined;
+        const layer15 = await queryByVehicleEquipment(db, vehicle, vehicleFlags, categoryFilter, bodyHint);
+        if (layer15.length > 0) {
+          const layer15Codes = new Set(layer15.map((c) => c.eurocode).filter((e): e is string => !!e));
+          const before = candidates.length;
+          const filtered = candidates.filter(
+            (c) => (c as any)._groundTruth || (c.eurocode && layer15Codes.has(c.eurocode))
+          );
+          // Only apply the refinement if it leaves us with at least one candidate.
+          if (filtered.length > 0 && filtered.length < before) {
+            candidates = filtered;
+            layer = 1.5;
+            confidence = "high";
+            console.log(`[Layer1.5] ${regnr}: refined ${before} → ${candidates.length} candidates (bodyHint=${bodyHint || "none"})`);
+          }
+        }
+      } catch (e) {
+        console.error(`[Layer1.5] ${regnr} failed: ${e instanceof Error ? e.message : String(e)}`);
+      }
+    }
+
     // Final hard year/generation gate before scoring.
     // Fuzzy and family fallbacks can include records whose SQL year filter passed
     // because year_to is NULL, but whose generation is still wrong for the vehicle.
@@ -1158,8 +1262,9 @@ export async function searchByRegnr(
     }
 
     // Learning Engine: save search result
+    let regnrHash: string | null = null;
     if (topCandidate) {
-      const regnrHash = await sha256(regnr);
+      regnrHash = await sha256(regnr);
       await saveSearchResult(db, {
         regnr_hash: regnrHash,
         make: vehicle.make,
@@ -1183,6 +1288,41 @@ export async function searchByRegnr(
         source: equipSource,
         vin_prefix: vehicle.vin ? vehicle.vin.slice(0, 6).toUpperCase() : undefined,
       });
+    }
+
+    // Auto-ground-truth: when factory equipment is known and we have a single,
+    // high-confidence match, log it as an automatic suggestion.  After three
+    // independent suggestions the mapping is promoted to ground_truth.
+    if (
+      regnrHash &&
+      factoryEquipment &&
+      topCandidate &&
+      topCandidate.eurocode &&
+      (confidence === "high" || confidence === "exact") &&
+      layer <= 1.5 &&
+      candidatesWithEquipment.length === 1
+    ) {
+      try {
+        await upsertSearchFeedback(db, {
+          regnr_hash: regnrHash,
+          ktype: vehicle.k_type || undefined,
+          eurocode: topCandidate.eurocode,
+          layer,
+          score: topCandidate._score,
+          action: "auto_suggested",
+        });
+        await promoteAutoGroundTruth(
+          db,
+          regnrHash,
+          vehicle,
+          categoryFilter || topCandidate.category || "frontrute",
+          topCandidate.eurocode,
+          vehicle.k_type,
+          confidence === "exact" ? 0.95 : 0.85
+        );
+      } catch (e) {
+        console.error(`[AutoGT] ${regnr} failed: ${e instanceof Error ? e.message : String(e)}`);
+      }
     }
 
     // Lookup accessories for the top candidate
@@ -1223,7 +1363,9 @@ export async function searchByRegnr(
           model: vehicle.model,
           year: vehicle.year,
           kType: vehicle.k_type,
+          ktypeSource,
           typeCode: vehicle.typeCode,
+          registrationStatus: vehicle.registrationStatus,
           length: vehicle.length,
           fuelCode: vehicle.fuelCode,
           engineCode: vehicle.engineCode,

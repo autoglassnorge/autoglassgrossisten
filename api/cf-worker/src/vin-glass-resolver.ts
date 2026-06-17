@@ -167,15 +167,41 @@ export async function resolveGlass(req: ResolveGlassRequest): Promise<ResolveGla
   try {
     // -----------------------------------------------------------------------
     // LAG 1: Gratis VIN-dekode
-    //   1a. D1 cache
-    //   1b. Autoways VIN Decoder (RapidAPI, bedre enn vPIC for EU)
-    //   1c. NHTSA vPIC (gratis fallback)
+    //   1a. SVV/authoritative source data (already provided) — skip vPIC
+    //   1b. D1 cache
+    //   1c. Autoways VIN Decoder (RapidAPI, bedre enn vPIC for EU)
+    //   1d. NHTSA vPIC (gratis fallback)
     // -----------------------------------------------------------------------
-    const vehicle = await decodeVin(db, resolvedVin, market, rapidApiKey);
-    path.push(vehicle.source);
+    // Prefer SVV/authoritative source data over vPIC for EU vehicles.
+    // vPIC is US-focused and often returns wrong year/model for EU cars.
+    // If the caller already passed make/model/year (e.g. from SVV), use it
+    // directly and avoid the external vPIC call entirely.
+    const hasSvvData = vehicleMake && vehicleModel && vehicleYear;
+    let vehicle: VinDecodeCache | null = null;
 
-    // Prefer SVV/authoritative source data over vPIC for EU vehicles
-    // vPIC is US-focused and often returns wrong year/model for EU cars
+    if (hasSvvData) {
+      path.push('svv');
+      vehicle = {
+        vin: resolvedVin,
+        market,
+        source: 'svv',
+        make: vehicleMake,
+        model: vehicleModel,
+        year: vehicleYear,
+        body_style: null,
+        doors: null,
+        engine_type: null,
+        drive_type: null,
+        raw_payload: '{}',
+        normalized_key: normalizeVehicleKeyFromParts(vehicleMake, vehicleModel, vehicleYear),
+        confidence: 0.95,
+        expires_at: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString(),
+      };
+    } else {
+      vehicle = await decodeVin(db, resolvedVin, market, rapidApiKey);
+      path.push(vehicle.source);
+    }
+
     const trustedMake = vehicleMake ?? vehicle.make ?? null;
     const trustedModel = vehicleModel ?? vehicle.model ?? null;
     const trustedYear = vehicleYear ?? vehicle.year ?? null;
@@ -411,7 +437,8 @@ async function lookupRules(
 ): Promise<GlassRuleRow | null> {
   const { results } = await db.prepare(`
     SELECT * FROM glass_rules
-    WHERE normalized_key = ? AND market = ? AND opening = ?
+    WHERE normalized_key = ? AND market = ?
+      AND opening IN (?, 'default')
       AND feature_signature IN (?, 'default')
       AND active = 1
     ORDER BY confidence DESC, evidence_count DESC

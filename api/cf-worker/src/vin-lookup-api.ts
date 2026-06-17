@@ -22,6 +22,7 @@
 import { resolveGlass, upsertGlassRule, GlassMatch } from "./vin-glass-resolver";
 import { decodeVinVincario, VincarioConfig } from "./providers/vincario";
 import { normalizeRegnr, normalizeVin, REGNR_PATTERN, VIN_PATTERN } from "./lib/input-detector";
+import { lookupVinKtype } from "./lib/db";
 
 export interface VinLookupRequest {
   regnr?: string;
@@ -141,6 +142,34 @@ export async function handleVinLookup(
         vehicleModel = vehicleModel || cachedVin.model || "";
         vehicleYear = vehicleYear || cachedVin.year || 0;
         vehicleSource = cachedVin.make || cachedVin.model || cachedVin.year ? "vin_decode_cache" : vehicleSource;
+      }
+    }
+
+    // ── Step 1b: Check vin_ktype_map for a pre-computed VIN → kType mapping ──
+    // This matches the fast path used by /api/glass?regnr=... and gives
+    // immediate exact kType resolution for the ~99.6 % of VINs we already know.
+    if (resolvedVin) {
+      const vinKtypeEntry = await lookupVinKtype(db, resolvedVin);
+      if (vinKtypeEntry && vinKtypeEntry.confidence >= 0.85) {
+        const match: GlassMatch = {
+          ktype: vinKtypeEntry.ktype,
+          confidence: vinKtypeEntry.confidence,
+          source: vinKtypeEntry.source,
+        };
+        return jsonResponse({
+          status: "resolved",
+          match,
+          vehicle: {
+            make: vinKtypeEntry.make || vehicleMake || "",
+            model: vinKtypeEntry.model || vehicleModel || "",
+            year: vinKtypeEntry.year || vehicleYear || 0,
+            vin: resolvedVin,
+            kType: vinKtypeEntry.ktype,
+            bodyClass: "",
+          },
+          resolutionPath: [vehicleSource, "vin_ktype_map"],
+          paidLookupUsed: false,
+        });
       }
     }
 

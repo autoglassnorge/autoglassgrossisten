@@ -501,6 +501,13 @@ Se `docs/adr/` for alle dokumenterte beslutninger.
 **Resultat:** Worker deployet (v0978a808), røyktest 6/6 OK. Andre tabeller intakte: ktype_registry (80,115), tecdoc_ktype_registry (908), glass_rules (1,667), ktype_matches (815).
 **Lærdom:** Når SQL-generert mapping gir lav dekning, synkroniser master JSON-katalog til D1 direkte. Bruk catalog-prod.json som SSoT. D1 støtter ikke `COMMIT;` i SQL.
 
+### TecDoc vs Bovsoft/SVV kType-space mismatch (2026-06-17)
+**Forsøk:** Beriket `glass_catalog.ktype` fra TecDoc 1Q2019-dump via `scripts/match-v16-final.mjs`. Filtrerte 20 061 mappings med score ≥ 0,7 og deployet til D1. Dekning økte fra 4 % til 76 %.
+**Kritisk funn:** Samme kType-nummer betyr forskjellige kjøretøy i TecDoc 1Q2019 og Bovsoft/SVV-data. Eksempler: kType 17370 = VW Transporter (vår resolver) vs Renault Master (TecDoc); kType 31321 = Audi A5 vs Nissan Armada.
+**Konsekvens:** Produkt-treff via `queryByKtype()` ville fortsatt ikke fungere for 99,6 % av VIN-ene som resolves via `vin_ktype_map`/`glass_rules`.
+**Handling:** Rollback fullført. `glass_catalog` tilbake til 1 099 kType-mappinger. Se `docs/adr/2026-06-17-ktype-space-mismatch.md`.
+**Lærdom:** Ikke bland kType-nummer fra ulike leverandører/data-dumper. Bruk kun mappinger i samme kType-space som kjøretøy-resolveren.
+
 ### loadCatalog-buggen (2026-05-18)
 **Feil:** `loadCatalog()` sjekket `catalog_records` (metadata-objekt) som om det var `GlassRecord[]`.
 **Konsekvens:** Worker krasjet med error 1101 ved hvert katalog-oppslag.

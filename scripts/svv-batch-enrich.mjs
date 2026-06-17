@@ -197,6 +197,24 @@ async function main() {
     }
   }
 
+  // Also add from broad-scrape results (newest file)
+  const broadFiles = fs.readdirSync(DATA_DIR)
+    .filter(f => /^broad-scrape-\d{4}-\d{2}-\d{2}\.ndjson$/.test(f))
+    .sort()
+    .reverse();
+  for (const fn of broadFiles.slice(0, 1)) {
+    const fp = path.join(DATA_DIR, fn);
+    log(`Loading broad-scrape source: ${fn}`);
+    for (const line of fs.readFileSync(fp, "utf-8").trim().split("\n")) {
+      if (!line.trim()) continue;
+      try {
+        const d = JSON.parse(line);
+        const r = (d.regnr || "").toUpperCase().replace(/\s/g, "");
+        if (r && /^[A-Z]{2}\d{4,5}$/.test(r)) regnrSet.add(r);
+      } catch {}
+    }
+  }
+
   // Also add from finnkodes if they have regnr
   const finnkodesPath = path.join(DATA_DIR, "finnkodes.ndjson");
   if (fs.existsSync(finnkodesPath)) {

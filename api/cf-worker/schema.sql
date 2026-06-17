@@ -459,3 +459,22 @@ CREATE INDEX IF NOT EXISTS idx_svv_tecdoc_make_model ON svv_tecdoc_matches(norma
 CREATE INDEX IF NOT EXISTS idx_svv_tecdoc_expires ON svv_tecdoc_matches(expires_at) WHERE expires_at IS NOT NULL;
 CREATE INDEX IF NOT EXISTS idx_svv_tecdoc_created ON svv_tecdoc_matches(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_svv_tecdoc_hash_created ON svv_tecdoc_matches(regnr_hash, created_at DESC);
+
+-- Bovsoft/SVV ↔ TecDoc 1Q2019 kType crosswalk (isolated pilot)
+-- ---------------------------------------------------------------------------
+-- Built offline by scripts/build-ktype-crosswalk.mjs.  Never used in
+-- production search until manually verified (≥ 100 unique mappings, sample
+-- of 50 checked against independent source, ≥ 98 % precision).
+CREATE TABLE IF NOT EXISTS ktype_crosswalk (
+  bovsoft_ktype INTEGER NOT NULL,
+  tecdoc_ktype INTEGER NOT NULL,
+  vehicle_signature TEXT NOT NULL,
+  match_evidence TEXT,
+  confidence REAL NOT NULL,
+  verified INTEGER DEFAULT 0,
+  source TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (bovsoft_ktype, tecdoc_ktype)
+);
+CREATE INDEX IF NOT EXISTS idx_ktype_crosswalk_tecdoc ON ktype_crosswalk(tecdoc_ktype);
+CREATE INDEX IF NOT EXISTS idx_ktype_crosswalk_signature ON ktype_crosswalk(vehicle_signature);

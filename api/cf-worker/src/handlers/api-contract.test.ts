@@ -129,6 +129,53 @@ describe("API contract tests", () => {
     expect(body.categories !== undefined).toBe(true);
   });
 
+  it("GET /api/vehicle/equipment-profile returns learned profile", async () => {
+    // Seed a minimal gzipped profile into KV.
+    const testProfile = {
+      meta: { generatedAt: new Date().toISOString(), records: 1, features: ["adas", "rainSensor"], categories: ["frontrute"] },
+      profiles: {
+        "VOLKSWAGEN:CARAVELLE:2005": {
+          n: 10,
+          cat: {
+            frontrute: {
+              n: 5,
+              pos: ["antenna"],
+              neg: ["adas"],
+              p: { adas: 0, rainSensor: 0, heated: 0, acoustic: 0, antenna: 0.6, camera: 0, hud: 0, solar: 0, tinted: 0, coated: 0, laneAssist: 0, shade: 0 },
+              comb: [{ f: ["antenna"], c: 3, p: 0.6 }, { f: [], c: 2, p: 0.4 }],
+            },
+            all: {
+              n: 10,
+              pos: ["antenna"],
+              neg: ["adas"],
+              p: { adas: 0, rainSensor: 0, heated: 0, acoustic: 0, antenna: 0.6, camera: 0, hud: 0, solar: 0, tinted: 0, coated: 0, laneAssist: 0, shade: 0 },
+              comb: [{ f: ["antenna"], c: 6, p: 0.6 }, { f: [], c: 4, p: 0.4 }],
+            },
+          },
+        },
+      },
+      brandModel: {},
+      brand: {},
+    };
+
+    const { gzipSync } = await import("zlib");
+    const compressed = gzipSync(Buffer.from(JSON.stringify(testProfile)));
+    await env.GLASS_CATALOG.put("equipment:profiles:v1", compressed);
+
+    const response = await callWorker("/api/vehicle/equipment-profile?brand=VOLKSWAGEN&model=CARAVELLE&year=2005&category=frontrute");
+    const body = (await response.json()) as Record<string, unknown>;
+
+    expect(response.status).toBe(200);
+    expect(body.found).toBe(true);
+    expect(body.profileKey).toBe("VOLKSWAGEN:CARAVELLE:2005");
+    expect(body.profileLevel).toBe("exact");
+    expect(body.categoryProfile).toMatchObject({
+      category: "frontrute",
+      possible: ["antenna"],
+      impossible: ["adas"],
+    });
+  });
+
   it("unknown route returns 404", async () => {
     const response = await callWorker("/api/does-not-exist");
     const body = (await response.json()) as Record<string, unknown>;

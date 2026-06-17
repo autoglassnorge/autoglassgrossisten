@@ -27,6 +27,21 @@ function tplLoading() {
   return `<p class="loading">Søker…</p>`;
 }
 
+function tplSkeletonCards(count) {
+  let html = '';
+  for (let i = 0; i < count; i++) {
+    html += `
+      <div class="skeleton-card" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px;animation:pulse 1.5s ease-in-out infinite">
+        <div style="background:var(--color-surface-alt);border-radius:var(--radius-sm);height:22px;width:40%;margin-bottom:12px"></div>
+        <div style="background:var(--color-surface-alt);border-radius:var(--radius-sm);height:16px;width:70%;margin-bottom:12px"></div>
+        <div style="background:var(--color-surface-alt);border-radius:var(--radius-sm);height:16px;width:90%;margin-bottom:12px"></div>
+        <div style="background:var(--color-surface-alt);border-radius:var(--radius-sm);height:20px;width:30%"></div>
+      </div>
+    `;
+  }
+  return html;
+}
+
 function tplNetworkError(err) {
   const isBlocked = err?.message?.includes('blocked') || err?.message?.includes('Failed to fetch');
   if (isBlocked) {
@@ -190,7 +205,7 @@ class GlassSearch {
       btn.textContent = isLoading ? 'Søker…' : 'Søk';
     }
     if (isLoading && this.resultsEl) {
-      this.resultsEl.innerHTML = tplLoading();
+      this.resultsEl.innerHTML = tplSkeletonCards(3);
     }
   }
 
@@ -211,7 +226,9 @@ class GlassSearch {
     this._lastData = data;
 
     const v = data.vehicle || {};
-    const flags = data.flags || {};
+    const flags = v.effectiveEquipment || data.flags || {};
+    const confidenceInfo = data.confidenceInfo || { label: data.confidence || 'medium', score: 0, reasons: [] };
+    const confClass = confidenceInfo.label || data.confidence || 'medium';
 
     // Store last search vehicle for quote modal
     if (v.regnr) {
@@ -228,9 +245,10 @@ class GlassSearch {
 
     if (this.mode === 'full') {
       html += this.renderVehicleBanner(v, flags);
+      html += this.renderConfidenceBanner(confidenceInfo, confClass, v.regnr);
     }
 
-    // Equipment filter bar
+    // Equipment filter bar (only show relevant filters)
     if (typeof EquipmentFilters !== 'undefined') {
       html += this.renderFilterBar();
     }
@@ -247,11 +265,20 @@ class GlassSearch {
       html += tplError('Ingen treff matcher valgt filter. Fjern et filter for å se flere resultater.');
     } else {
       candidates.forEach((c, idx) => {
-        html += this.renderCard(c, idx, data.confidence, data.layer);
+        html += this.renderCard(c, idx, confClass, data.layer);
       });
     }
 
     html += '</div>';
+
+    // Report wrong match footer
+    html += `
+      <div class="report-match" style="margin-top:24px;padding:16px;background:var(--color-surface-alt);border-radius:var(--radius-md);border:1px dashed var(--color-border)">
+        <p style="margin:0 0 10px;font-size:13px;color:var(--color-text-secondary)">Stemmer ikke resultatet? Hjelp oss å bli bedre.</p>
+        <button class="btn-secondary" onclick="reportWrongMatch('${escapeHtml(v.regnr || '')}')">🚩 Rapporter feil match</button>
+      </div>
+    `;
+
     this.resultsEl.innerHTML = html;
 
     this._attachFilterListeners();
@@ -260,29 +287,66 @@ class GlassSearch {
     this._initLazyImages();
   }
 
+  renderConfidenceBanner(confidenceInfo, confClass, regnr) {
+    const confTitle = confClass === 'exact' ? '✅ Bekreftet match'
+      : confClass === 'high' ? '👍 Høy konfidens'
+      : confClass === 'medium' ? '⚠️ Middels konfidens'
+      : '❓ Lav konfidens';
+    const reasonsList = (confidenceInfo.reasons || []).map(r => `<li style="margin-bottom:4px">${escapeHtml(r)}</li>`).join('');
+
+    return `
+      <div class="confidence-banner ${confClass}" style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:24px;border-left:4px solid ${this._confColor(confClass)}">
+        <div style="font-weight:700;font-size:15px;margin-bottom:6px;display:flex;align-items:center;gap:8px">${confTitle} <span style="font-weight:400;color:var(--color-text-secondary)">(${confidenceInfo.score || 0}%)</span></div>
+        ${reasonsList ? `<ul style="font-size:13px;color:var(--color-text-secondary);margin:0;padding-left:18px">${reasonsList}</ul>` : ''}
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-secondary" onclick="reportWrongMatch('${escapeHtml(regnr || '')}')">🚩 Rapporter feil match</button>
+        </div>
+      </div>
+    `;
+  }
+
+  _confColor(confClass) {
+    if (confClass === 'exact') return 'var(--color-success, #22c55e)';
+    if (confClass === 'high') return 'var(--color-primary-500, #3b82f6)';
+    if (confClass === 'medium') return '#f59e0b';
+    return '#ef4444';
+  }
+
   renderFilterBar() {
-    const all = (this._lastData?.candidates || []).length;
-    const filtered = (this._lastData?.candidates || []).filter((c) =>
+    const allCandidates = (this._lastData?.candidates || []);
+    const all = allCandidates.length;
+    if (all === 0) return '';
+
+    // Only show filters for features that actually exist in the result set
+    const defs = EquipmentFilters.FILTER_DEFS || [];
+    const availableDefs = defs.filter(def =>
+      allCandidates.some(c => EquipmentFilters.getValue(c, def.key))
+    );
+
+    if (availableDefs.length === 0) return '';
+
+    const filtered = allCandidates.filter((c) =>
       EquipmentFilters.matchesAll(c, this.activeFilters)
     ).length;
     const countText = this.activeFilters.length > 0
       ? `Viser ${filtered} av ${all} treff`
       : `${all} treff`;
 
-    const filterHtml = EquipmentFilters.renderControls(this.activeFilters, {
-      idPrefix: 'gsf-',
-      onchange: 'this.closest(\'[data-glass-search]\')._glassSearch._onFilterChange()',
-      wrapperClass: '',
-    });
+    const lang = typeof currentLang !== 'undefined' ? currentLang : 'no';
+    const filterHtml = availableDefs.map(def => {
+      const label = def.labels?.[lang] || def.labels?.no || def.key;
+      const checked = this.activeFilters.includes(def.key) ? 'checked' : '';
+      return `<label data-filter="${escapeHtml(def.key)}" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--color-surface-alt);border:1px solid var(--color-border);border-radius:var(--radius-full,999px);font-size:13px;cursor:pointer;user-select:none"><input type="checkbox" value="${escapeHtml(def.key)}" onchange="this.closest('[data-glass-search]')._glassSearch._onFilterChange()" ${checked}> <span>${escapeHtml(label)}</span></label>`;
+    }).join('');
 
     const resetHtml = this.activeFilters.length > 0
       ? `<button type="button" class="btn-secondary btn-sm" style="margin-left:auto;padding:6px 12px;font-size:12px" onclick="this.closest('[data-glass-search]')._glassSearch._resetFilters()">Nullstill filter</button>`
       : '';
 
     return `
-      <div class="glass-filter-bar" style="margin:16px 0;padding:14px;background:var(--color-surface-alt);border:1px solid var(--color-border);border-radius:var(--radius-md)">
+      <div class="glass-filter-bar" style="margin:16px 0;padding:14px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-          <p style="font-size:13px;font-weight:600;margin:0;color:var(--color-text-primary)">🎛️ Filtrer på utstyr</p>
+          <p style="font-size:13px;font-weight:600;margin:0;color:var(--color-text-primary)">🎛️ Velg utstyr som skal være på glasset</p>
           ${resetHtml}
         </div>
         <div class="filter-pills" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">${filterHtml}</div>
@@ -700,6 +764,31 @@ function saveVehicleFromSearch(eurocode, brand, model) {
   }
   saveVehicle(currentUser.email, vehicle);
   alert('🚗 ' + vehicle.make + ' ' + vehicle.model + ' (' + vehicle.regnr + ') lagret!');
+}
+
+async function reportWrongMatch(regnr) {
+  const note = prompt('Hva er feil? (valgfritt)');
+  if (note === null) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/feedback/wrong-match`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        regnr,
+        url: window.location.href,
+        note: note || undefined,
+        userAgent: navigator.userAgent,
+        timestamp: new Date().toISOString(),
+      }),
+    });
+    if (res.ok) {
+      alert('Takk for tilbakemeldingen!');
+    } else {
+      alert('Kunne ikke sende tilbakemelding. Prøv igjen senere.');
+    }
+  } catch (e) {
+    alert('Nettverksfeil. Prøv igjen senere.');
+  }
 }
 
 /* ==========================================================================
