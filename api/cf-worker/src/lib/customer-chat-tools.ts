@@ -9,7 +9,9 @@ import {
   queryByKtype,
 } from './db';
 import { normalizeRecord } from './normalize';
-import { detectInputType, normalizeRegnr, normalizeVin } from './input-detector';
+import { normalizeRegnr, normalizeVin } from './input-detector';
+import type { UserEquipmentAnswers } from './equipment';
+import { createHandoff } from './customer-chat-session';
 import type {
   ChatToolCall,
   SearchGlassParams,
@@ -21,6 +23,7 @@ import type {
 
 export interface ToolContext {
   sessionId: number;
+  context?: ExecutionContext;
   equipmentAnswers?: Record<string, string>;
 }
 
@@ -31,7 +34,7 @@ export async function executeTool(
 ): Promise<unknown> {
   switch (call.tool) {
     case 'searchGlass':
-      return executeSearchGlass(env, call.params);
+      return executeSearchGlass(env, call.params, ctx);
     case 'explainDifferences':
       return executeExplainDifferences(env, call.params);
     case 'askCustomer':
@@ -45,13 +48,29 @@ export async function executeTool(
 
 export async function executeSearchGlass(
   env: Env,
-  params: SearchGlassParams
+  params: SearchGlassParams,
+  ctx?: ToolContext
 ): Promise<GlassSearchToolResult> {
-  const { regnr, vin, eurocode, make, model, year, position } = params;
+  const { regnr, vin, eurocode, make, model, year, position, equipment } = params;
 
   if (regnr) {
     const normalized = normalizeRegnr(regnr);
-    const result = await searchByRegnr(normalized, env, position ?? undefined);
+    const result = await searchByRegnr(
+      normalized,
+      env,
+      position ?? undefined,
+      equipment as UserEquipmentAnswers | undefined
+    );
+    if (result.httpStatus !== 200) {
+      const body = (result.body ?? {}) as { error?: string };
+      return {
+        ok: false,
+        vehicle: null,
+        candidates: [],
+        confidence: 0,
+        reasons: [body.error ?? `lookup failed with status ${result.httpStatus}`],
+      };
+    }
     const body = (result.body ?? {}) as {
       vehicle?: { make: string; model: string; year: number };
       candidates?: GlassRecord[];
@@ -68,14 +87,21 @@ export async function executeSearchGlass(
   }
 
   if (vin) {
+    if (!ctx?.context) {
+      return {
+        ok: false,
+        vehicle: null,
+        candidates: [],
+        confidence: 0,
+        reasons: ['ExecutionContext required for VIN lookup'],
+      };
+    }
     const normalized = normalizeVin(vin);
-    const request = new Request('http://localhost/api/vin-lookup', {
+    const request = new Request('http://example.com/api/vin-lookup', {
       method: 'POST',
       body: JSON.stringify({ vin: normalized }),
     });
-    const response = await handleVinLookup(request, env, {
-      waitUntil: () => {},
-    } as unknown as ExecutionContext);
+    const response = await handleVinLookup(request, env, ctx.context);
     const body = (await response.json()) as {
       status: string;
       vehicle?: { make: string; model: string; year: number };
@@ -183,7 +209,6 @@ export async function executeHandoverToHuman(
   if (!ctx?.sessionId) {
     return { ok: false, reason: params.reason, summary: params.summary };
   }
-  const { createHandoff } = await import('./customer-chat-session');
   const handoffId = await createHandoff(env, ctx.sessionId, params.reason, params.summary, params.preferred_contact);
   return { ok: true, handoffId, reason: params.reason, summary: params.summary };
 }
