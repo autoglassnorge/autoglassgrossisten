@@ -21,6 +21,7 @@ import { handleGlassGuide } from "./handlers/glass-guide";
 import { handleOrdremottaker, handleFeedback as handleOrdremottakerFeedback } from "./handlers/ordremottaker";
 import { handleUnifiedSearch } from "./handlers/unified-search";
 import { handleBuildKtypeMapping } from "./handlers/build-ktype-mapping";
+import { handleCustomerChat } from "./handlers/customer-chat";
 import { getMetricsSummary, flushMetrics, recordRequest, recordTokenSavings } from "./lib/telemetry";
 import { fetchSvvEnkeltoppslag } from "./providers/svv";
 
@@ -361,6 +362,11 @@ export default {
     // Unified search (regnr / VIN / eurocode / OEM / SKU / text)
     if (path === "/api/search" && request.method === "POST") {
       return handleUnifiedSearch(request, env, ctx);
+    }
+
+    // Customer-facing AI assistant
+    if (path === "/api/chat" && request.method === "POST") {
+      return handleCustomerChat(request, env, ctx);
     }
 
     return errorResponse("Ukjent endepunkt", 404);
