@@ -211,6 +211,7 @@ export async function generateDialogue(
     `- Side (i beskrivelsen): VS=venstre, HS=høyre. Delt/todelt bakrute = egen vare per halvdel (venstre/høyre).\n` +
     `- NAGS-prefiks (US-glass): DW/FW=frontrute, DB/FB=bakrute, DD/FD=dørrute, DQ/FQ=ventilrute, DV/FV=vent, DS/FS=siderute. D=domestic, F=foreign.\n` +
     `- Tilbehør: K=klips, PY=pyntelist, PYT=pyntelist topp, PYB=pyntelist bunn, PYS=pyntelist side. Klips/list har OFTEST samme nummer som glasset + suffiks (2525CSGYA→2525CSGYAK) — les beskrivelsen. USA CARS: W-prefiks-SKU-er (W1435GB).\n` +
+    `- NUMMER vs KJENNETEGN: 2 bokstaver + 5 siffer (SU18018, KD54321) = norsk REGNR → slå opp bilen, IKKE varenummer. Scannummer = 4 siffer + bokstaver (2525CSGYA). Eurocode = starter med siffer (8579...). US-code = W-/D-/F-prefiks (W1435GB).\n` +
     `\n` +
     `EKSEMPLER PÅ GODE SVAR (bestilling):\n` +
     `"Forstått — VW Transporter 2019, frontrute. Har bilen ADAS-kamera?"\n` +
