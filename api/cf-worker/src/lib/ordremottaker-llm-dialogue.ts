@@ -137,6 +137,12 @@ GNAQ=Aqua Kontroll`;
 const SIDE_CODES_TEXT = `
 VS=venstre side, HS=høyre side (står i produktbeskrivelsen, ikke i varenummeret)`;
 
+const NAGS_PREFIX_TEXT = `
+NAGS-prefiks (US-glass, foran siffer): DW/FW=frontrute, DB/FB=bakrute, DD/FD=dørrute,
+DQ/FQ=ventilrute (quarter), DV/FV=vent glass, DS/FS=siderute, DR/FR=takrute,
+DL/FL=flat frontrute, DT/FT=flat ikke-frontrute. D=domestic (US-produsert), F=foreign (import).
+F.eks. DB11559YP=bakrute, DD11555YP=dørrute, DQ11557YP=ventilrute, FW2395GB=import-frontrute.`;
+
 const US_CARS_NOTE = `
 USA CARS: varenummer har W-prefiks (f.eks. W1435GB). Farge GB (grønn-blå) er standard.
 Coated heter SOLAR i beskrivelsen (f.eks. "GB-SOLAR") — CS brukes ikke på US-biler.`;
@@ -190,6 +196,7 @@ Farger: ${COLOR_CODES_TEXT}
 Features: ${FEATURE_CODES_TEXT}
 Posisjoner: FV=foran venstre, FH=foran høyre, BV=bak venstre, BH=bak høyre
 Side: ${SIDE_CODES_TEXT}
+${NAGS_PREFIX_TEXT}
 POSISJONSORD: dørrute = glass i dørene (fremre/bakre, venstre/høyre), ventilrute = liten rute ved B-stolpe/bak (foran/bak, v/h), siderute = fast rute bak dørene, bakrute = bakvinduet, frontrute = vindusfronten.
 DELT BAKRUTE: todelt bakrute har EGEN VARE for hver halvdel — høyre (H/HS) og venstre (V/VS). Spør hvilken side kunden trenger (eller begge), og bestill riktig halvdel (f.eks. "BAKRUTE EL TODELT VENSTRE" vs "...HØYRE").
 VENTILRUTE: kommer i varianter foran/bak og venstre/høyre (f.eks. "VENTILRUTE FREMME VS+HS", "VENTILRUTE BAK+INNK+SOTET") — avklar posisjon (foran/bak) og side (v/h) før bestilling.
