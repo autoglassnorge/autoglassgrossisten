@@ -131,7 +131,8 @@ P=Privacy, men P=City Safety på Volvo-koder (f.eks. ELMP), BP=mørk blå / priv
 
 const ACCESSORY_CODES_TEXT = `
 K=klips, PY=pyntelist, PYT=pyntelist TOPP, PYB=pyntelist BUNN, PYS=pyntelist SIDE,
-GNAQ=Aqua Kontroll, DAB=digital antenne, EMS=nødmelding`;
+DAB=DAB+-radioantenne (digital radio i glasset), EMS=eCall/SOS-nødknapp (ringer 112 ved ulykke),
+GNAQ=Aqua Kontroll`;
 
 const SIDE_CODES_TEXT = `
 VS=venstre side, HS=høyre side (står i produktbeskrivelsen, ikke i varenummeret)`;
