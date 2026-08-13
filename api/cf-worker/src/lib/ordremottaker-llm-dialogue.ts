@@ -127,7 +127,7 @@ P=Privacy, H=oppvarmet, Z=z-bøy, UV=UV-beskyttet, A=antenne, C=klar,
 YCL=grå, sotet OG coated (Porsche-kode, f.eks. 26015YCL)`;
 
 const ACCESSORY_CODES_TEXT = `
-K=klips, PY=pyntelist (PYT=list, PYB/PYK=listsett),
+K=klips, PY=pyntelist, PYT=pyntelist TOPP, PYB=pyntelist BUNN,
 GNAQ=Aqua Kontroll, DAB=digital antenne, EMS=nødmelding`;
 
 const SIDE_CODES_TEXT = `

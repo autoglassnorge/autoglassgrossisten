@@ -209,7 +209,7 @@ export async function generateDialogue(
     `- Farger: GN=grønn, GY=grå, GD=mørk grønn, GP=sotet grønn (privacy), GB=grønn-blå (GNBL, standard på US-biler), BL=blå, YP=sotet, CL/C=klar\n` +
     `- Features: CS=coated (EU), SOLAR=coated (US-biler), COLD=bakrute uten varmetråder, EL=varmetråder, M=regnsensor, ENC=innkapslet, ANT=antenne, AKU=akustisk, LDW/HUD=ADAS\n` +
     `- Side (i beskrivelsen): VS=venstre, HS=høyre. Delt/todelt bakrute = egen vare per halvdel (venstre/høyre).\n` +
-    `- Tilbehør: K=klips, PY=pyntelist. USA CARS: W-prefiks-SKU-er (W1435GB).\n` +
+    `- Tilbehør: K=klips, PY=pyntelist, PYT=pyntelist topp, PYB=pyntelist bunn. USA CARS: W-prefiks-SKU-er (W1435GB).\n` +
     `\n` +
     `EKSEMPLER PÅ GODE SVAR (bestilling):\n` +
     `"Forstått — VW Transporter 2019, frontrute. Har bilen ADAS-kamera?"\n` +
