@@ -28,7 +28,7 @@ const FAQ_ARTICLES: FaqArticle[] = [
     id: "hva-kan-du-gjore",
     category: "generelt",
     question: "Hva kan du hjelpe meg med?",
-    answer: "Jeg er Professor Autoglass, din ekspert på bilglass hos Autoglass AS. Jeg kan hjelpe deg med to ting: (1) Finne riktig glass til din kunde — oppgi regnr, så finner jeg eksakt glass med utstyr og eurocode. Alternativt merke, modell, år og posisjon. (2) Svare på spørsmål om produkter, garanti, levering, OEM vs aftermarket, ADAS-kalibrering, priser, lagerstatus, og mer. Hva trenger du hjelp med?",
+    answer: "Hei! Jeg er din AI-ordremottaker hos Autoglass AS. Jeg kan hjelpe deg med to ting: (1) Finne riktig glass til din kunde — oppgi regnr, så finner jeg eksakt glass med utstyr og eurocode. Alternativt merke, modell, år og posisjon. (2) Svare på spørsmål om produkter, garanti, levering, OEM vs aftermarket, ADAS-kalibrering, priser, lagerstatus, og mer. Hva trenger du hjelp med?",
     keywords: ["hjelpe", "hva kan du", "hva gjør du", "funksjon", "muligheter", "capabilit", "hva er du", "hvem er du", "professor", "autoglass", "ekspert"]
   },
   {
@@ -161,7 +161,7 @@ const FAQ_ARTICLES: FaqArticle[] = [
     id: "bestille-regnr",
     category: "bestilling",
     question: "Hvordan bestiller jeg glass fra Autoglass AS?",
-    answer: "Du kan bestille glass fra oss på flere måter: (1) Web-chat med Professor Autoglass — oppgi regnr, posisjon og utstyr, så finner vi riktig glass umiddelbart. (2) E-post til ordre@autoglass.no med regnr, posisjon, og ønsket merke (OEM/aftermarket). (3) Telefon: Vi hjelper deg med å finne riktig glass basert på regnr eller eurocode. (4) Direkte i nettbutikken — søk på regnr eller eurocode. Vi leverer til verksteder over hele Norge. Som B2B-kunde får du avtalepriser og rask levering.",
+    answer: "Du kan bestille glass fra oss på flere måter: (1) Web-chat med AI-ordremottakeren — oppgi regnr, posisjon og utstyr, så finner vi riktig glass umiddelbart. (2) E-post til ordre@autoglass.no med regnr, posisjon, og ønsket merke (OEM/aftermarket). (3) Telefon: Vi hjelper deg med å finne riktig glass basert på regnr eller eurocode. (4) Direkte i nettbutikken — søk på regnr eller eurocode. Vi leverer til verksteder over hele Norge. Som B2B-kunde får du avtalepriser og rask levering.",
     keywords: ["bestille", "ordre", "kjøpe", "bestilling", "web", "chat", "e-post", "telefon", "nettbutikk", "regnr", "eurocode"]
   },
   {
@@ -182,7 +182,7 @@ const FAQ_ARTICLES: FaqArticle[] = [
     id: "lagerstatus-sjekk",
     category: "logistikk",
     question: "Hvordan sjekker jeg lagerstatus på et glass?",
-    answer: "Du kan sjekke lagerstatus på flere måter: (1) Professor Autoglass chat — oppgi regnr, så ser vi umiddelbart om glasset er på lager. (2) Nettbutikken — søk på regnr eller eurocode, lagerstatus vises i sanntid. (3) E-post til lager@autoglass.no — vi svarer innen 1 time i åpningstiden. (4) Telefon — ring oss for umiddelbar status. Vi har 2.500+ artikler på lager i Oslo og kan levere neste virkedag til hele Norge. For bestillingsvarer gir vi deg alltid estimert leveringstid.",
+    answer: "Du kan sjekke lagerstatus på flere måter: (1) AI-ordremottakeren i chat — oppgi regnr, så ser vi umiddelbart om glasset er på lager. (2) Nettbutikken — søk på regnr eller eurocode, lagerstatus vises i sanntid. (3) E-post til lager@autoglass.no — vi svarer innen 1 time i åpningstiden. (4) Telefon — ring oss for umiddelbar status. Vi har 2.500+ artikler på lager i Oslo og kan levere neste virkedag til hele Norge. For bestillingsvarer gir vi deg alltid estimert leveringstid.",
     keywords: ["lager", "status", "tilgjengelig", "på lager", "sanntid", "chat", "nettbutikk", "e-post", "telefon", "oslo", "norge"]
   },
   {
@@ -203,7 +203,7 @@ const FAQ_ARTICLES: FaqArticle[] = [
     id: "kontakt-oss",
     category: "kundeservice",
     question: "Hvordan kontakter jeg Autoglass AS?",
-    answer: "Du kan kontakte oss på følgende måter: (1) Professor Autoglass chat — tilgjengelig 24/7 for bestilling og produktspørsmål. (2) E-post: ordre@autoglass.no for bestillinger, kundeservice@autoglass.no for spørsmål, og reklamasjon@autoglass.no for garantisaker. (3) Telefon: Ring oss i åpningstiden (man-fre 08:00-16:00). (4) Kontaktskjema på nettsiden. Som B2B-kunde har du også tilgang til en dedikert kontaktperson ved større volum. Vi svarer på e-post innen 4 timer i åpningstiden.",
+    answer: "Du kan kontakte oss på følgende måter: (1) AI-ordremottakeren i chat — tilgjengelig 24/7 for bestilling og produktspørsmål. (2) E-post: ordre@autoglass.no for bestillinger, kundeservice@autoglass.no for spørsmål, og reklamasjon@autoglass.no for garantisaker. (3) Telefon: Ring oss i åpningstiden (man-fre 08:00-16:00). (4) Kontaktskjema på nettsiden. Som B2B-kunde har du også tilgang til en dedikert kontaktperson ved større volum. Vi svarer på e-post innen 4 timer i åpningstiden.",
     keywords: ["kontakt", "telefon", "e-post", "chat", "åpningstid", "kundeservice", "reklamasjon", "ordre", "dedikert", "kontaktperson"]
   },
   {
@@ -779,5 +779,5 @@ export function isGreeting(message: string): boolean {
 }
 
 export function buildGreetingResponse(): string {
-  return "Hei! Professor Autoglass her. Jeg er eksperten din på bilglass hos Autoglass AS. Jeg kan hjelpe deg med å finne riktig glass til din kunde (oppgi regnr, så går det raskest) eller svare på spørsmål om produkter, garanti, levering, OEM vs aftermarket, og mer. Hva trenger du hjelp med?";
+  return "Hei! Jeg er din AI-ordremottaker hos Autoglass AS. Jeg kan hjelpe deg med å finne riktig glass til din kunde (oppgi regnr, så går det raskest) eller svare på spørsmål om produkter, garanti, levering, OEM vs aftermarket, og mer. Hva trenger du hjelp med?";
 }

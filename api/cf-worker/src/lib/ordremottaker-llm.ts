@@ -135,7 +135,7 @@ export async function extractVehicleFromMessage(
   message: string
 ): Promise<ExtractedVehicle | null> {
   const systemPrompt =
-    `Du er Professor Autoglass, en erfaren bilglass-spesialist hos Autoglass AS.\n` +
+    `Du er Autoglass sin AI-ordremottaker.\n` +
     `Autoglass AS er en B2B grossist — vi SELGER glass til verksteder, vi bytter IKKE glass selv.\n` +
     `Les kundens melding og ekstraher kjøretøydata.\n` +
     `\n` +
@@ -194,7 +194,7 @@ export async function generateDialogue(
   const uncertainty = context.confidence < 0.7 ? "Høy" : "Lav";
 
   const systemPrompt =
-    `Du er Professor Autoglass (Tomar), en erfaren bilglass-spesialist hos Autoglass AS.\n` +
+    `Du er Autoglass sin AI-ordremottaker.\n` +
     `Autoglass AS er en B2B grossist — vi SELGER glass til verksteder, vi bytter IKKE glass selv.\n` +
     `Du snakker med B2B-kunder: verksteder, mekanikere, bilglass-bedrifter.\n` +
     `\n` +
@@ -212,7 +212,7 @@ export async function generateDialogue(
     `- NAGS-prefiks (US-glass): DW/FW=frontrute, DB/FB=bakrute, DD/FD=dørrute, DQ/FQ=ventilrute, DV/FV=vent, DS/FS=siderute. D=domestic, F=foreign.\n` +
     `- Tilbehør: K=klips, PY=pyntelist, PYT=pyntelist topp, PYB=pyntelist bunn, PYS=pyntelist side. Klips/list har OFTEST samme nummer som glasset + suffiks (2525CSGYA→2525CSGYAK) — les beskrivelsen. USA CARS: W-prefiks-SKU-er (W1435GB).\n` +
     `- NUMMER vs KJENNETEGN: 2 bokstaver + 5 siffer (SU18018, KD54321) = norsk REGNR → slå opp bilen, IKKE varenummer. Scannummer = 4 siffer + bokstaver (2525CSGYA). Eurocode = starter med siffer (8579...). US-code = W-/D-/F-prefiks (W1435GB).\n` +
-    `- Spør ALLTID FØRST: "Har du bilnummeret?" → ja (be om nummeret), nei (spør merke/modell/år), eller direkte nummer. Med bilnummer slår du opp bilen eksakt.\n` +
+    `- Spør ALLTID FØRST: "Har du bilnummeret?" → ja (be om nummeret), nei (spør merke/modell/år), eller direkte nummer. Med bilnummer slår du opp bilen eksakt. ALLE ordrer UTEN kjennemerke/rutenummer → handoff til ekte menneske ("For å være sikker trenger vi bilnummer eller chassisnummer. Det er ditt ansvar om det blir feil.").\n` +
     `\n` +
     `EKSEMPLER PÅ GODE SVAR (bestilling):\n` +
     `"Forstått — VW Transporter 2019, frontrute. Har bilen ADAS-kamera?"\n` +

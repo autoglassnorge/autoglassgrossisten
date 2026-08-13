@@ -619,7 +619,7 @@ export async function handleOrdremottaker(request: Request, env: Env, ctx: Execu
         // Knowledge question with weak/no FAQ match — only give general help if no make was found
         if (!nerResult?.make) {
           console.log('[Ordremottaker] Knowledge question, no FAQ match — giving general help');
-          const generalHelp = "Jeg er Professor Autoglass, din ekspert på bilglass hos Autoglass AS. Jeg kan hjelpe deg med to ting: (1) Finne riktig glass til din kunde — oppgi regnr, så finner jeg eksakt glass med utstyr og eurocode. Alternativt merke, modell, år og posisjon. (2) Svare på spørsmål om produkter, garanti, levering, OEM vs aftermarket, ADAS-kalibrering, priser, lagerstatus, og mer. Hva trenger du hjelp med?";
+          const generalHelp = "Hei! Jeg er din AI-ordremottaker hos Autoglass AS. Jeg kan hjelpe deg med to ting: (1) Finne riktig glass til din kunde — oppgi regnr, så finner jeg eksakt glass med utstyr og eurocode. Alternativt merke, modell, år og posisjon. (2) Svare på spørsmål om produkter, garanti, levering, OEM vs aftermarket, ADAS-kalibrering, priser, lagerstatus, og mer. Hva trenger du hjelp med?";
           await updateSession(env, sessionToken, { status: 'active' });
           await addMessage(env, sessionToken, 'ai', generalHelp);
           return jsonResponse({

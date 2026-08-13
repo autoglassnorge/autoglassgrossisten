@@ -65,7 +65,7 @@ function buildCatalogResponse(
       },
       nextActions: [
         { action: "search_catalog", label: "Søk i katalog" },
-        { action: "ask_professor", label: "Spør Professor Autoglass" },
+        { action: "ask_professor", label: "Spør AI-ordremottakeren" },
       ],
     };
   }
@@ -360,7 +360,7 @@ async function buildVinResponse(
           : [
               {
                 action: "ask_professor",
-                label: "Spør Professor Autoglass",
+                label: "Spør AI-ordremottakeren",
               },
             ],
   };
@@ -503,7 +503,7 @@ export async function handleUnifiedSearch(
             reasons: ["Free-text search requires AI processing (Phase 3)"],
           },
           nextActions: [
-            { action: "ask_professor", label: "Spør Professor Autoglass" },
+            { action: "ask_professor", label: "Spør AI-ordremottakeren" },
           ],
         };
         return jsonResponse(unified);
