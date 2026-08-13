@@ -16,6 +16,10 @@ export interface Env {
   MACS_VIS_API_KEY?: string;
   AGM_API_KEY?: string;
   GROQ_API_KEY?: string;
+  DEEPSEEK_API_KEY?: string;
+  /** auto-glass.no B2B store credentials (WooCommerce min-konto) */
+  AUTOGLASS_LOGIN?: string;
+  AUTOGLASS_PASSWORD?: string;
   ENVIRONMENT?: "development" | "production";
 }
 

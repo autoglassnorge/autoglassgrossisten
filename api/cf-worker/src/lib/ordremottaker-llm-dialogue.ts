@@ -127,12 +127,17 @@ P=Privacy, H=oppvarmet, Z=z-bøy, UV=UV-beskyttet, A=antenne, C=klar,
 YCL=grå, sotet OG coated (Porsche-kode, f.eks. 26015YCL),
 CSL=coated+laminert, U=HUD (nyere koder, f.eks. CSCMU), T=tollvisir (Audi A8),
 LG=venstre / RG=høyre dørglass (BMW), siffer på slutten (2/3)=generasjonsvariant,
-P=Privacy, men P=City Safety på Volvo-koder (f.eks. ELMP), BP=mørk blå / privacy blå`;
+P=Privacy, men P=City Safety på Volvo-koder (f.eks. ELMP), BP=mørk blå / privacy blå,
+GPS=GPS-antenne i glasset, DAB=DAB+-radioantenne (digital radio), EMS=eCall/SOS-nødknapp,
+ESG=Einscheibensicherheitsglas (tysk herdet glass — står i glassMERKINGEN, ikke i varenummeret),
+#-X%#=lystransmisjon/sotet-grad (f.eks. #-5%#=nesten helt mørk privacy/limo, #-10%#=mørk — står i beskrivelsen)`;
 
 const ACCESSORY_CODES_TEXT = `
 K=klips, PY=pyntelist, PYT=pyntelist TOPP, PYB=pyntelist BUNN, PYS=pyntelist SIDE,
 DAB=DAB+-radioantenne (digital radio i glasset), EMS=eCall/SOS-nødknapp (ringer 112 ved ulykke),
-GNAQ=Aqua Kontroll`;
+GNAQ=Aqua Kontroll.
+VIKTIG: klips/pyntelist har OFTEST SAMME varenummer som glasset + tilbehørssuffiks
+(f.eks. glass 2525CSGYA → klips 2525CSGYAK, pyntelist topp 2525CSGYAPYT). LES BESKRIVELSEN for å bekrefte hvilken tilbehørsdel det faktisk er — aldri gjett.`;
 
 const SIDE_CODES_TEXT = `
 VS=venstre side, HS=høyre side (står i produktbeskrivelsen, ikke i varenummeret)`;

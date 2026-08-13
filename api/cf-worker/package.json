@@ -18,5 +18,8 @@
     "typescript": "^5.8.0",
     "vitest": "^4.1.8",
     "wrangler": "^4.98.0"
+  },
+  "dependencies": {
+    "@rolldown/binding-darwin-arm64": "^1.2.4"
   }
 }
