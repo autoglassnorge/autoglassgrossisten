@@ -124,7 +124,9 @@ CS=coated (EU-biler), SOLAR=coated (US-biler), COLD=bakrute uten varmetråder,
 EL=varmetråder, M=regnsensor, ENC=innkapslet (vulkanisert list),
 ANT=antenne, AKU=akustisk, HUD=Head-Up Display (projeksjon i ruten, krever HUD-glass), LDW=filskiftevarsel (Lane Departure Warning, ADAS — krever kalibrering),
 P=Privacy, H=oppvarmet, Z=z-bøy, UV=UV-beskyttet, A=antenne, C=klar,
-YCL=grå, sotet OG coated (Porsche-kode, f.eks. 26015YCL)`;
+YCL=grå, sotet OG coated (Porsche-kode, f.eks. 26015YCL),
+CSL=coated+laminert, U=HUD (nyere koder, f.eks. CSCMU), T=tollvisir (Audi A8),
+LG=venstre / RG=høyre dørglass (BMW), siffer på slutten (2/3)=generasjonsvariant`;
 
 const ACCESSORY_CODES_TEXT = `
 K=klips, PY=pyntelist, PYT=pyntelist TOPP, PYB=pyntelist BUNN,
