@@ -1,0 +1,1142 @@
+[
+  {
+    "n": 1,
+    "cat": "frontrute",
+    "msg": "Hei, jeg trenger ny frontrute til en VW Transporter 2008-modell",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Jeg skal hjelpe deg med frontrute til VW Transporter 2008. Jeg har noen kandidater, men for å finne riktig glass trenger jeg å vite litt mer. Har frontruten regnsensor, oppvarming, eller andre spesialfunksjoner?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 2,
+    "cat": "frontrute",
+    "msg": "God morgen. Frontruta på min VW Transporter 2018 har fått en steinsprut. Hva koster ny rute?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "God morgen! Jeg kan hjelpe deg med ny frontrute til din VW Transporter 2018. Før jeg finner riktig rute, trenger jeg å vite litt mer. Har frontruten regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 3,
+    "cat": "frontrute",
+    "msg": "Hei, jeg skal ha frontrute til en VW Transporter 2008",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg har funnet 5 kandidater til frontruten din. For å finne riktig glass, trenger jeg å vite: Har bilen regnsensor?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 4,
+    "cat": "frontrute",
+    "msg": "Trenger pris på frontrute til VW Transporter 2018 med regnsensor",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg har funnet flere frontruter til VW Transporter 2018. Du nevnte regnsensor, så jeg har filtrert ut de med regnsensor. Her er kandidatene: 8579GNMVZ1B (helfarget grønn, regnsensor, akustisk) og 8579GNELMVZ1B (oppvarmet, regnsensor, akustisk). Trenger du oppvarmet glass?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 5,
+    "cat": "frontrute",
+    "msg": "Hei! Frontrute til VW Transporter 2008, den har antenne",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg har funnet flere frontruter til VW Transporter. Du nevnte antenne, og jeg ser at kandidat 1 og 2 har antenne. Kandidat 1 er coated, mens kandidat 2 ikke er det. Vet du om bilen har regnsensor eller coating?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 6,
+    "cat": "frontrute",
+    "msg": "Jeg trenger en ny frontrute. Bilen er en VW Transporter fra 2018, med kamera og regnsensor",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg ser at du har en VW Transporter fra 2018 med kamera og regnsensor. Basert på dette, er kandidat 4 (8579GNMVZ1B) eller kandidat 5 (8579GNELMVZ1B) aktuelle. Kandidat 4 har regnsensor og akustisk, men ikke oppvarmet. Kandidat 5 har i tillegg oppvarming. Er bilen utstyrt med oppvarmet frontrute?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 7,
+    "cat": "frontrute",
+    "msg": "Hei, hva koster frontrute til VW Transporter 2018?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! For å finne riktig frontrute til VW Transporter 2018, trenger jeg å vite litt mer. Har bilen regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 8,
+    "cat": "frontrute",
+    "msg": "Frontrute til VW Transporter 2008 takk, helst coated",
+    "flags": [],
+    "action": "confirm",
+    "response": "Jeg har funnet 5 kandidater til frontruten din på VW Transporter 2008. Du nevnte at du ønsker coated glass. Kandidat 1 (8579ACSGYAVZ1B) er coated og passer til Transporter T5 2003-, som inkluderer 2008-modellen. De andre kandidatene er ikke coated. Vil du at jeg skal gå videre med denne, eller ønsker du å se nærmere på andre alternativer?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 9,
+    "cat": "frontrute",
+    "msg": "Vi har en VW Transporter 2018 inne hos oss som trenger ny frontrute med regnsensor",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg ser at du har en VW Transporter 2018 som trenger ny frontrute med regnsensor. Jeg har funnet 5 kandidater, men jeg trenger å vite litt mer for å finne riktig glass. Har bilen noen andre spesifikasjoner, for eksempel oppvarmet frontrute, coating, eller akustisk glass?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 10,
+    "cat": "frontrute",
+    "msg": "Hei. Kan du sende meg pris på frontrute til en VW Transporter 2008?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! For en VW Transporter 2008 har jeg flere frontrute-kandidater. For å finne riktig en, trenger jeg å vite: Har bilen regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 11,
+    "cat": "frontrute",
+    "msg": "Hei, frontrute til en 2008 VW Transporter med antenne og coating",
+    "flags": [],
+    "action": "show_results",
+    "response": "Jeg har funnet 5 kandidater til frontruten din. Basert på at du har antenne og coating, er kandidat 1 (8579ACSGYAVZ1B) den eneste som har begge deler. Kandidat 2 har antenne, men ikke coating. De andre har verken antenne eller coating. Vil du at jeg skal gå videre med kandidat 1, eller ønsker du å se nærmere på de andre?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 12,
+    "cat": "frontrute",
+    "msg": "Trenger frontrute til VW Transporter 2018. Har den regnsensor, må jeg ha spesialglass da?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Ja, hvis bilen har regnsensor, må frontruten ha regnsensor-feste. Jeg ser at kandidat 4 og 5 har regnsensor (M i koden). Har bilen din regnsensor?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 13,
+    "cat": "frontrute",
+    "msg": "Hei! Jeg lurer på om dere har frontrute til VW Transporter 2008 på lager?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Ja, vi har flere frontruter til VW Transporter 2008. For å finne riktig rute, trenger jeg å vite litt mer. Har frontruten regnsensor? Er den oppvarmet? Har den antenne?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 14,
+    "cat": "frontrute",
+    "msg": "Hei, jeg skal bestille frontrute til en VW Transporter 2018",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Jeg skal hjelpe deg med frontrute til VW Transporter 2018. Vi har flere kandidater. Kan du fortelle meg om bilen har regnsensor?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 15,
+    "cat": "frontrute",
+    "msg": "Hei, vi trenger frontrute til VW Transporter 2008, er det Oslo-lager?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Ja, vi har frontruter til VW Transporter 2008 på Oslo-lager. For å finne riktig rute, trenger jeg å vite litt mer: Har bilen regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 16,
+    "cat": "frontrute",
+    "msg": "Hei! Jeg har en steinsprut i frontruta på min VW Transporter 2018, kan du hjelpe meg?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Så kjedelig med steinsprut. Jeg skal hjelpe deg med å finne riktig frontrute til din VW Transporter 2018. Jeg har noen kandidater, men for å være sikker på at vi får riktig glass, trenger jeg å vite litt mer. Har frontruten din regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 17,
+    "cat": "frontrute",
+    "msg": "Hei, kan du sjekke pris og lager på frontrute til VW Transporter 2008?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! For å finne riktig frontrute til din VW Transporter 2008, trenger jeg å vite litt mer. Har frontruten regnsensor? Er den oppvarmet? Har den antenne? Er den coated?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 18,
+    "cat": "frontrute",
+    "msg": "God dag, frontrute til VW Transporter 2018 ønskes. Hva finnes?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "God dag! Jeg har funnet flere frontruter til VW Transporter 2018. For å finne riktig rute, trenger jeg å vite: Har bilen regnsensor, oppvarming, eller andre spesialfunksjoner?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 19,
+    "cat": "frontrute",
+    "msg": "Hei, jeg trenger frontrute til en 2008 VW Transporter. Skal bruke den i vinter, trenger noe som tåler litt",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Godt valg å tenke på vinterforhold. For en 2008 VW Transporter T5 har jeg noen kandidater. Før jeg viser deg de riktige, trenger jeg å vite: har frontruten regnsensor? Og trenger du oppvarmet glass?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 20,
+    "cat": "frontrute",
+    "msg": "Hei! Frontrute til VW Transporter 2018 med varme i ruta",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Du har nevnt at du trenger en frontrute til VW Transporter 2018 med varme. Jeg har funnet 5 kandidater, men kun én har varme (kandidat 5). Før jeg går videre, trenger jeg å vite: har ruten regnsensor?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 21,
+    "cat": "frontrute",
+    "msg": "Hei, hvilken frontrute passer til VW Transporter 2008?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! For VW Transporter 2008 har jeg funnet flere frontruter. For å finne riktig en, trenger jeg å vite litt mer. Har bilen regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 22,
+    "cat": "frontrute",
+    "msg": "Hei, jeg skal ha 2525CSGYA",
+    "flags": [
+      "nummer"
+    ],
+    "action": "confirm",
+    "response": "2525CSGYA er frontrute til VW Transporter T5, coated med innkapslet antenne – er det dette du skal ha?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": true,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 23,
+    "cat": "frontrute",
+    "msg": "2525CSGYA takk",
+    "flags": [
+      "nummer"
+    ],
+    "action": "confirm",
+    "response": "2525CSGYA er frontrute til VW Transporter T5, coated med innkapslet antenne – er det dette du skal ha?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": true,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 24,
+    "cat": "frontrute",
+    "msg": "Hei! Vi skal ha 2525GYA til en VW",
+    "flags": [
+      "nummer"
+    ],
+    "action": "ask_question",
+    "response": "Hei! Jeg ser du nevner 2525GYA til en VW. Kan du bekrefte at dette er en frontrute? Og hvilken modell og årstall gjelder det?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": true,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 25,
+    "cat": "frontrute",
+    "msg": "Jeg skal bestille 2525CSGYA. Er den på lager?",
+    "flags": [
+      "nummer"
+    ],
+    "action": "confirm",
+    "response": "2525CSGYA er frontrute til VW Transporter T5, coated med innkapslet antenne. Er det dette du skal ha?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": true,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 26,
+    "cat": "frontrute",
+    "msg": "Har dere 2525GYA? Det er frontrute til Transporter",
+    "flags": [
+      "nummer"
+    ],
+    "action": "ask_question",
+    "response": "2525GYA er ikke et varenummer jeg kjenner igjen. Jeg har funnet noen kandidater for VW Transporter T5/T6. Kan du bekrefte hvilken type frontrute du trenger? Har den regnsensor, coating, eller er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": true,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 27,
+    "cat": "frontrute",
+    "msg": "Hei, jeg trenger ny frontrute. Regnr er KD 54321",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Jeg skal hjelpe deg med å finne riktig frontrute for KD 54321. Kan du bekrefte bilmodellen? Jeg har noen kandidater for VW Transporter/Caravelle T5 og T6. Hvilken modell og årsmodell er det?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 28,
+    "cat": "frontrute",
+    "msg": "Hei, kan du finne riktig frontrute? Regnr AB12345",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Jeg skal hjelpe deg med å finne riktig frontrute. Jeg har noen kandidater, men trenger litt mer informasjon for å finne den riktige. Har frontruten regnsensor?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 29,
+    "cat": "frontrute",
+    "msg": "Frontrute, regnr EL98765 takk",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg fant 5 kandidater for frontruten til din VW Transporter. For å finne riktig glass, trenger jeg å vite litt mer. Har bilen regnsensor? Er den oppvarmet? Har den antenne? Er den coated?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 30,
+    "cat": "frontrute",
+    "msg": "hei trenger frnotute til vw transporter 2008",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Hei! Jeg skal hjelpe deg med frontrute til VW Transporter 2008. Jeg ser flere kandidater, men for å finne riktig rute trenger jeg å vite litt mer. Har frontruten regnsensor?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 31,
+    "cat": "frontrute",
+    "msg": "frontrute vw trasporter 2018 regnsnsor?",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Du har oppgitt frontrute til VW Transporter 2018 med regnsensor. Jeg ser flere kandidater. Kandidat 4 (8579GNMVZ1B) og 5 (8579GNELMVZ1B) har regnsensor, men de er for T6 2016-. Kandidat 1 og 2 er for T5 2003- og har antenne, men ikke regnsensor. Kandidat 3 er for T6 2016- uten regnsensor. Siden du har en 2018-modell, er T6 riktig. Trenger du oppvarmet frontrute? Kandidat 5 er oppvarmet, kandidat 4 er ikke. Hvilken ønsker du?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 32,
+    "cat": "frontrute",
+    "msg": "hei jeg trege ny rute til min transporter 2008 med anteene",
+    "flags": [
+      "feil"
+    ],
+    "action": "clarify",
+    "response": "Jeg ser at du har en VW Transporter fra 2008 og trenger en ny frontrute med antenne. Jeg har funnet noen kandidater. Kandidat 1 og 2 har antenne, men de er for T5 (2003-). Kandidat 3, 4 og 5 er for T6 (2016-), som ikke passer din bil. Så ingen av disse passer direkte. Kan du bekrefte at det er frontruten du trenger? Og har du noen andre spesifikasjoner, som regnsensor eller oppvarming?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 33,
+    "cat": "frontrute",
+    "msg": "e det mulig å få frontrute til t5 2008 model??",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Ja, det er mulig! Jeg har funnet flere frontruter til VW Transporter T5 2008. For å finne riktig rute, trenger jeg å vite litt mer. Har den regnsensor? Er den oppvarmet? Har den antenne?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 34,
+    "cat": "frontrute",
+    "msg": "Hei trenger frontrute vw t6 2018 den har regn sensor og er opvarmet tror jeg",
+    "flags": [
+      "feil"
+    ],
+    "action": "confirm",
+    "response": "Jeg ser at du har en VW Transporter T6 2018 med regnsensor og oppvarmet frontrute. Blant kandidatene er det én som matcher: 8579GNELMVZ1B (grønn elektrisk, regnsensor, z-bøy). Skal jeg gå videre med denne?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 35,
+    "cat": "frontrute",
+    "msg": "hei ka koste frontruta til en transporter 2018?",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Hei! For en VW Transporter 2018 har jeg flere frontrutealternativer. Før jeg viser dem, trenger jeg å vite: Har bilen regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 36,
+    "cat": "frontrute",
+    "msg": "FRONTRUTE VW TRANSPORTER 2008 PÅ LAGER?",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Vi har flere frontruter til VW Transporter 2008. For å finne riktig, trenger jeg å vite: Har bilen regnsensor? Og er den coated?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 37,
+    "cat": "frontrute",
+    "msg": "hei vi må ha ny frontrute på 2008 transporteren vår, den er coated",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Jeg ser at du trenger en frontrute til VW Transporter 2008 med coating. Jeg har funnet 5 kandidater. Kandidat 1 og 2 er for T5 (2003-), og de har coating (kandidat 1) eller ikke (kandidat 2). Kandidat 3-5 er for T6 (2016-), så de passer ikke din 2008-modell. Før jeg går videre, trenger jeg å vite: har frontruten regnsensor?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 38,
+    "cat": "frontrute",
+    "msg": "trenger pris frontrute t6 2018 me sensor",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Jeg ser flere kandidater til VW Transporter T6 2018. Du nevnte regnsensor, så jeg antar at du vil ha glass med regnsensor. Jeg har to kandidater med regnsensor: 8579GNMVZ1B (helfarget grønn, akustisk) og 8579GNELMVZ1B (oppvarmet, akustisk). Er bilen din utstyrt med oppvarmet frontrute?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 39,
+    "cat": "frontrute",
+    "msg": "hei!rute til min bil transporter 2008",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Hei! Jeg ser du har en VW Transporter fra 2008. For å finne riktig rute, trenger jeg å vite hvilken rute du skal ha (frontrute, bakrute, siderute osv.). Kan du fortelle meg det?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 40,
+    "cat": "frontrute",
+    "msg": "Hei, vinduet foran på min transporter 2008 e knust, trenger ny",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Hei! Så kjedelig at frontruten er knust. Jeg skal hjelpe deg med å finne riktig rute til din VW Transporter 2008. Jeg har noen kandidater, men først må jeg vite litt mer. Har frontruten din regnsensor?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 41,
+    "cat": "frontrute",
+    "msg": "hva koster frontrute til vw transporter 2018?? mvh",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Hei! For å finne riktig frontrute til din VW Transporter 2018, trenger jeg litt mer informasjon. Har den regnsensor? Er den oppvarmet? Har den antenne? Eller er det noen andre spesifikasjoner du vet om?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 42,
+    "cat": "frontrute",
+    "msg": "Hei, frontrute til VW Transporter 2008, men jeg vet ikke om den har antenne",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg ser at du har en VW Transporter fra 2008. For å finne riktig frontrute, må jeg vite om den har antenne. Kan du sjekke om det er en antenne i ruten?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 43,
+    "cat": "frontrute",
+    "msg": "Hei, frontrute til VW Transporter 2018. Ingen sensor, ingen varme, bare helt vanlig",
+    "flags": [],
+    "action": "show_results",
+    "response": "Jeg har funnet 5 kandidater til VW Transporter 2018. Siden du sier ingen sensor, ingen varme, og helt vanlig, er kandidat 3 (8579GNVZ1B) mest aktuell – den er helfarget grønn, uten ekstrautstyr. Skal jeg gå videre med den?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 44,
+    "cat": "frontrute",
+    "msg": "Hei, jeg trenger frontrute til en Transporter 2008. Den er innkapslet",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg ser at du trenger en frontrute til VW Transporter 2008, og den skal være innkapslet. Jeg har noen kandidater, men for å finne den helt riktige, trenger jeg å vite litt mer. Har frontruten regnsensor, oppvarming, coating eller antenne?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 45,
+    "cat": "frontrute",
+    "msg": "Vi skal ha frontrute til VW Transporter 2018, men bilen er usikker på utstyr. Kan du hjelpe?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg har funnet 5 kandidater til VW Transporter 2018. For å finne riktig glass, trenger jeg å vite litt mer om bilens utstyr. Har frontruten regnsensor? Er den oppvarmet? Har den antenne? Er den coated?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 46,
+    "cat": "frontrute",
+    "msg": "Hei, trenger frontrute til VW Transporter 2008 — bare den billigste",
+    "flags": [],
+    "action": "confirm",
+    "response": "Jeg har funnet 5 kandidater til frontruten din. Kandidat 1 og 2 er for T5 (2003-), de andre er for T6 (2016-). Siden bilen din er fra 2008, er det kun kandidat 1 og 2 som passer. Kandidat 1 har coating og antenne, kandidat 2 har kun antenne. Den billigste av disse er kandidat 2 (uten coating). Vil du ha den?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 47,
+    "cat": "frontrute",
+    "msg": "Hei, frontrute til VW Transporter 2018, helst original kvalitet",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg har funnet 5 kandidater til VW Transporter 2018. For å finne riktig rute, trenger jeg å vite: har bilen regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 48,
+    "cat": "frontrute",
+    "msg": "Hei, er frontruta til VW Transporter 2008 lik for alle årsmodeller?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Godt spørsmål! Frontruten til VW Transporter kan variere mellom årsmodeller og utstyrsnivåer. Jeg har noen kandidater for deg, men før jeg viser dem, trenger jeg å vite litt mer om hvilken rute du skal ha. Har frontruten regnsensor? Og er den oppvarmet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 49,
+    "cat": "frontrute",
+    "msg": "Hei, vi bytter frontrute på en VW Transporter 2018 neste uke. Hva trenger jeg å vite om kalibrering?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Godt spørsmål. For en VW Transporter 2018 er det viktig å vite om bilen har ADAS-funksjoner (som filskiftevarsel/lane assist) eller regnsensor, fordi det påvirker både hvilket glass du trenger og om kalibrering er nødvendig. Har bilen regnsensor eller ADAS?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 50,
+    "cat": "frontrute",
+    "msg": "Hei, har dere lim til frontrute også? Skal bytte på en VW Transporter 2008",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Ja, vi har lim til frontrute. Før jeg går videre, trenger jeg å vite hvilken frontrute du skal ha. Ser at du har en VW Transporter 2008 – er det T5 (2003-2015) eller T6 (2016-)? Og har den regnsensor, coating, antenne, oppvarming eller andre spesialfunksjoner?",
+    "error": null,
+    "mentions_tilbehor": true,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 51,
+    "cat": "bakrute",
+    "msg": "Hei, jeg trenger bakrute til en Mini Cooper fra 2014",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg har funnet noen kandidater til bakruten på Mini Cooper 2014. To av dem er til MINI Cooper Coupe 11-, men jeg er usikker på om de passer din modell. Kan du bekrefte om bilen din er en vanlig Mini Cooper eller en Coupe?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 52,
+    "cat": "bakrute",
+    "msg": "Bakrute til BMW 3-serie E30, helst med varmetråder",
+    "flags": [],
+    "action": "confirm",
+    "response": "Jeg ser tre kandidater for bakrute til BMW 3-serie E30. Kandidat 8761GN er oppvarmet og helfarget grønn, og passer til BMW 3-serie E30 83-90. De to andre er til MINI Cooper Coupe, så de er ikke aktuelle. Vil du ha denne?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 53,
+    "cat": "bakrute",
+    "msg": "Hei, hva koster bakrute til Mini Cooper 2014?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! For å finne riktig bakrute til Mini Cooper 2014, trenger jeg å vite om den er oppvarmet eller ikke. Har den varmetråder?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 54,
+    "cat": "bakrute",
+    "msg": "Vi trenger bakrute til en BMW 3-serie fra 1989",
+    "flags": [],
+    "action": "confirm",
+    "response": "Vi har tre kandidater til bakruten på BMW 3-serie 1989. Kandidat 1 er 8761GN (helfarget grønn, oppvarmet) for BMW 3-serie E30 83-90. Kandidat 2 og 3 er for MINI Cooper Coupe 11-, så de passer trolig ikke. Skal vi gå for kandidat 1?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 55,
+    "cat": "bakrute",
+    "msg": "Hei! Bakrute med varme til Mini Cooper 2014",
+    "flags": [],
+    "action": "clarify",
+    "response": "Jeg har funnet 3 kandidater til bakrute med varme til Mini Cooper 2014. Kandidat 2 og 3 er for MINI Cooper Coupe 11-, men kandidat 1 er for BMW 3-serie E30, som ikke passer. Kan du bekrefte at det er en vanlig Mini Cooper (ikke Coupe) og at du trenger bakrute med varme?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 56,
+    "cat": "bakrute",
+    "msg": "Hei, trenger bakrute til en Mini Cooper. Den er sotet",
+    "flags": [],
+    "action": "confirm",
+    "response": "Jeg ser at du trenger en bakrute til Mini Cooper (2014) og at den er sotet. Jeg har tre kandidater: 8761GN (BMW 3-serie, ikke sotet), 29588GN (Mini Cooper Coupe, ikke sotet), og 29588YP (Mini Cooper Coupe, sotet). Siden du sier den er sotet, er 29588YP mest aktuell. Kan du bekrefte at dette er riktig?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 57,
+    "cat": "bakrute",
+    "msg": "hei bakrute til bmw 3 serie 89 model",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Vi har tre kandidater for bakrute til BMW 3-serie 1989. Kandidat 8761GN er oppvarmet og helfarget grønn, og passer til BMW 3-serie E30 83-90. De to andre (29588GN og 29588YP) er til MINI Cooper Coupe, så de er nok ikke riktige. Vil du ha oppvarmet bakrute?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 58,
+    "cat": "bakrute",
+    "msg": "trenger nytt bakvindu på mini cooper 2014",
+    "flags": [
+      "feil"
+    ],
+    "action": "clarify",
+    "response": "Jeg ser at du trenger et nytt bakvindu til Mini Cooper 2014. Jeg har tre kandidater, men de er for forskjellige modeller (BMW 3-serie og Mini Cooper Coupe). Kan du bekrefte at det er en vanlig Mini Cooper (ikke Coupe) og at det er bakruten du trenger?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 59,
+    "cat": "bakrute",
+    "msg": "hei ka koste bakruta til en bmw e30?",
+    "flags": [
+      "feil"
+    ],
+    "action": "confirm",
+    "response": "Hei! For en BMW 3-serie E30 (1989) har jeg funnet en bakrute: 8761GN, helfarget grønn og oppvarmet. Er dette riktig?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 60,
+    "cat": "bakrute",
+    "msg": "Bakrute bmw 3-serie e30 med varmetråd",
+    "flags": [
+      "feil"
+    ],
+    "action": "confirm",
+    "response": "Jeg har funnet 3 kandidater for bakrute til BMW 3-serie E30 med varmetråd. Kandidat 1 er 8761GN (helfarget grønn) for BMW 3-serie E30 83-90. Kandidat 2 og 3 er for MINI Cooper Coupe, så de er nok ikke riktige. Vil du ha 8761GN?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 61,
+    "cat": "bakrute",
+    "msg": "Hei, bakrute til Mini Cooper 2014. Er den delt eller i ett stykke?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Bakruten på Mini Cooper 2014 er i ett stykke, ikke delt. Jeg har funnet to aktuelle kandidater: 29588GN (helfarget grønn) og 29588YP (sotet), begge oppvarmet. Vet du om bilen har regnsensor eller andre spesifikasjoner?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 62,
+    "cat": "bakrute",
+    "msg": "Hei, jeg lurer på om dere har bakrute på lager til en 3-serie E30",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Vi har tre kandidater til bakrute på BMW 3-serie E30. Kandidat 1 er 8761GN (helfarget grønn, oppvarmet) og passer til BMW 3-serie E30 83-90. Kandidat 2 og 3 er til MINI Cooper Coupe, så de er nok ikke riktige. Vil du ha den oppvarmede varianten?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 63,
+    "cat": "bakrute",
+    "msg": "Hei, vi har en kunde med Mini Cooper 2014 som trenger bakrute, sotet",
+    "flags": [],
+    "action": "confirm",
+    "response": "Vi har tre kandidater til bakrute på Mini Cooper 2014. To av dem er helfarget grønn, og én er sotet. Kunden ønsker sotet, så kandidat 3 (29588YP) ser ut til å være riktig. Skal jeg bekrefte denne, eller er det noe mer du vil sjekke?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 64,
+    "cat": "bakrute",
+    "msg": "hei, trenger bakrute mini 2014, den er mørk",
+    "flags": [
+      "feil"
+    ],
+    "action": "confirm",
+    "response": "Jeg ser at du trenger en bakrute til Mini Cooper 2014, og den skal være mørk. Jeg har tre kandidater: 8761GN (helfarget grønn, oppvarmet, BMW 3-serie E30 83-90), 29588GN (helfarget grønn, oppvarmet, MINI Cooper Coupe 11-), og 29588YP (sotet, oppvarmet, MINI Cooper Coupe 11-). Siden du sier 'mørk', er 29588YP (sotet) mest sannsynlig riktig. Kan du bekrefte at dette er bakruten du trenger?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 65,
+    "cat": "bakrute",
+    "msg": "Bakrute til BMW 3-serie 89, har den i lager?",
+    "flags": [],
+    "action": "confirm",
+    "response": "Jeg har funnet en kandidat som passer: 8761GN (helfarget grønn, oppvarmet) til BMW 3-serie E30 83-90. Er dette bakruten du trenger?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 66,
+    "cat": "bakrute",
+    "msg": "Hei, hva er prisen på bakrute til Mini Cooper 2014 med og uten sotet?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg fant tre kandidater for bakrute til Mini Cooper 2014. To er helfarget grønne (8761GN og 29588GN) og en er sotet (29588YP). Alle er oppvarmet. Vet du om bilen har regnsensor eller andre spesifikasjoner?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 67,
+    "cat": "bakrute",
+    "msg": "Hei, bakvindu til min bmw 1989 er sprukket, hva har dere?",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Hei! Beklager å høre om bakvinduet. Jeg ser at vi har noen kandidater for BMW 3-serie fra 1989. Før jeg går videre, kan du bekrefte at det er bakruten du trenger? Og vet du om den har regnsensor eller andre spesialfunksjoner?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 68,
+    "cat": "bakrute",
+    "msg": "Hei, vi trenger bakrute til en Mini 2014, men usikker på om den har varme",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Vi har tre kandidater til bakrute på Mini Cooper 2014. To av dem er oppvarmet (8761GN og 29588GN), og en er sotet (29588YP). Vet du om bilen har varme i bakruten?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 69,
+    "cat": "bakrute",
+    "msg": "Hei, bakrute til BMW E30 med varmetråder — kan du bekrefte at den passer?",
+    "flags": [],
+    "action": "confirm",
+    "response": "Jeg ser tre kandidater for bakrute med varmetråder. Kandidat 1 er for BMW 3-serie E30 83-90, som passer din bil. Kandidat 2 og 3 er for MINI Cooper Coupe 11-, som ikke passer. Vil du at jeg skal gå videre med kandidat 1?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 70,
+    "cat": "bakrute",
+    "msg": "hei bakruta på mini cooper er ødelagt trenger ny sotet",
+    "flags": [
+      "feil"
+    ],
+    "action": "confirm",
+    "response": "Hei! Beklager å høre at bakruta er ødelagt. Jeg ser at vi har noen kandidater til Mini Cooper (2014). Du nevnte at du ønsker en sotet rute. Blant kandidatene har vi 29588YP som er sotet og oppvarmet. Er dette riktig? Og vil du ha lim eller tilbehør til glasset?",
+    "error": null,
+    "mentions_tilbehor": true,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 71,
+    "cat": "dorside",
+    "msg": "Hei, jeg trenger dørrute fremme til en Mini Cooper Cabriolet 2014, førersiden",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Vi har tre kandidater for dørrute fremme venstre til Mini Cooper Cabriolet 2014. Kandidat 3 (27063GN) er helfarget grønn og passer til Cabriolet 04-. Kandidat 1 og 2 er for Coupe 11- og passer kanskje ikke. Kan du bekrefte om det er helfarget grønn eller sotet du ønsker?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 72,
+    "cat": "dorside",
+    "msg": "Dørrute bak venstre til Mini Cooper 2014",
+    "flags": [],
+    "action": "confirm",
+    "response": "Jeg har to kandidater for dørrute bak venstre til Mini Cooper 2014. Kandidat 1 er 2466RGST2FD og kandidat 2 er 2466LGST2FD. Forskjellen ligger i koden: RG (høyre) vs LG (venstre). Siden du trenger venstre side, er riktig kandidat 2466LGST2FD. Skal jeg gå videre med denne?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 73,
+    "cat": "dorside",
+    "msg": "Hei, siderute til Mini Cooper Coupe 2014",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg ser tre kandidater for siderute til Mini Cooper Coupe 2014. To av dem er for Coupe (29591GN og 29591YP), og en er for Cabriolet (27063GN). Kan du bekrefte at det er Coupe-modellen? Og vet du om ruten er helfarget grønn eller sotet?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 74,
+    "cat": "dorside",
+    "msg": "Vi trenger dørrute til Mini Cooper Cabriolet, passasjersiden foran",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Vi har tre kandidater for dørrute til Mini Cooper Cabriolet. Kandidat 29591GN er helfarget grønn, 29591YP er sotet, og 27063GN er helfarget grønn. Vet du om bilen har regnsensor eller andre spesifikasjoner?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 75,
+    "cat": "dorside",
+    "msg": "Hei! Dørrute fremme høyre side til Mini Cooper 2014",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Vi har tre kandidater for dørrute fremme høyre til Mini Cooper 2014. Kandidatene er: 29591GN (helfarget grønn), 29591YP (sotet), og 27063GN (helfarget grønn). Vet du om bilen har regnsensor eller andre spesifikasjoner?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 76,
+    "cat": "dorside",
+    "msg": "Hei, hva koster siderute til Mini Cooper Coupe?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! For å finne riktig siderute til Mini Cooper Coupe, trenger jeg å vite hvilken side det gjelder (venstre eller høyre) og om det er foran eller bak. Kan du spesifisere det?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 77,
+    "cat": "dorside",
+    "msg": "trenger dørrute til mini 2014 venstre side",
+    "flags": [
+      "feil"
+    ],
+    "action": "clarify",
+    "response": "Vi har tre kandidater for dørrute til Mini Cooper 2014. Kandidat 1 og 2 er til Coupe 11-, og kandidat 3 er til Cabriolet 04-. Kan du bekrefte hvilken modellvariant det er (Coupe eller Cabriolet)?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": true
+  },
+  {
+    "n": 78,
+    "cat": "dorside",
+    "msg": "hei siderute mini cooper coupe sotet",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Jeg fant tre kandidater for siderute til Mini Cooper. Kandidat 1 og 2 er til Coupe (2011-), og kandidat 3 er til Cabriolet (2004-). Siden du sa 'sotet', er kandidat 2 (29591YP) mest sannsynlig, men jeg må bekrefte posisjonen. Er dette en siderute foran eller bak, og på hvilken side (venstre eller høyre)?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 79,
+    "cat": "dorside",
+    "msg": "Dørrute bak til Mini Cooper 2014, høyre",
+    "flags": [],
+    "action": "confirm",
+    "response": "Jeg har to kandidater for dørrute bak høyre til Mini Cooper 2014. Kandidat 1 er 2466RGST2FD og kandidat 2 er 2466LGST2FD. Forskjellen ligger i prefikset RG (høyre) og LG (venstre). Siden du trenger høyre side, er riktig kandidat 2466RGST2FD. Vil du ha lim eller tilbehør til glasset?",
+    "error": null,
+    "mentions_tilbehor": true,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 80,
+    "cat": "dorside",
+    "msg": "Hei, vi trenger siderute til en Mini Cooper Coupe 2014, den åpne varianten",
+    "flags": [],
+    "action": "clarify",
+    "response": "Vi har tre kandidater for Mini Cooper Coupe 2014. Kandidat 1 og 2 er for Coupe, mens kandidat 3 er for Cabriolet. Siden du nevnte 'den åpne varianten', kan det hende du mener Cabriolet? Eller er det Coupe? Og hvilken side trenger du?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 81,
+    "cat": "dorside",
+    "msg": "hei, dørglasset på førersia e knust på mini cab 2014",
+    "flags": [
+      "feil"
+    ],
+    "action": "confirm",
+    "response": "Hei! Dørglass på førersiden — det er foran venstre (FV). Jeg har to kandidater: 2466RGST2FD og 2466LGST2FD. Forskjellen er side: RG er høyre, LG er venstre. Siden det er førersiden i Norge (venstre), er det LG. Vil du at jeg skal gå videre med 2466LGST2FD?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 82,
+    "cat": "dorside",
+    "msg": "Hei, liten rute bak døra på Mini Cooper 2014, hva koster den?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Det høres ut som du trenger en ventilrute eller siderute bak døra på Mini Cooper 2014. Jeg har to kandidater: 2466RGST2FD (høyre side) og 2466LGST2FD (venstre side). Hvilken side trenger du?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 83,
+    "cat": "dorside",
+    "msg": "Siderute Mini Cooper Coupe 2014, sotet",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Jeg ser to kandidater for Mini Cooper Cabriolet 2011 og nyere. Begge er sideruter, men den ene er for venstre side (LG) og den andre for høyre (RG). Hvilken side trenger du?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 84,
+    "cat": "dorside",
+    "msg": "hei trenger dørrute fremme mini cooper 2014 hs",
+    "flags": [
+      "feil"
+    ],
+    "action": "confirm",
+    "response": "Jeg har to kandidater for dørrute fremme høyre side til Mini Cooper 2014: 2466RGST2FD og 2466LGST2FD. Den ene er for høyre side (RG) og den andre for venstre side (LG). Siden du sa HS (høyre side), er 2466RGST2FD riktig. Skal jeg gå videre med denne?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 85,
+    "cat": "dorside",
+    "msg": "Hei, vi skal ha dørrute foran på venstre side til en Mini Cabriolet",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Vi har tre kandidater for dørrute foran venstre på Mini Cabriolet. Kandidat 1 og 2 er for Mini Cooper Coupe 11-, mens kandidat 3 er for Mini Cooper Cabriolet 04-. Siden du har en Mini Cabriolet, er kandidat 3 mest sannsynlig riktig. Men jeg må spørre: har glasset noen spesielle funksjoner som regnsensor, varme, eller coating?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 86,
+    "cat": "dorside",
+    "msg": "Hei, hva koster dørrute fremme til Mini Cooper 2014?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Hei! Jeg har funnet to kandidater til dørrute fremme på Mini Cooper 2014: 2466RGST2FD (høyre side) og 2466LGST2FD (venstre side). Hvilken side trenger du?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 87,
+    "cat": "dorside",
+    "msg": "hei ka e prisen på sideruta til mini coupe?",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Hei! For å finne riktig siderute til Mini Cooper, trenger jeg å vite hvilken side og posisjon det gjelder. Er det foran eller bak, og på venstre eller høyre side?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 88,
+    "cat": "dorside",
+    "msg": "Hei, dørrute bak venstre til Mini Cooper 2014 — har dere på lager?",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Vi har to kandidater for dørrute bak venstre til Mini Cooper 2014: 2466RGST2FD og 2466LGST2FD. Den ene er for venstre side, den andre for høyre. Kan du bekrefte hvilken side du trenger?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 89,
+    "cat": "dorside",
+    "msg": "Vi trenger ventile/siderute bak til en Mini Cooper 2014",
+    "flags": [],
+    "action": "ask_question",
+    "response": "Vi har tre kandidater for Mini Cooper 2014. Kandidat 1 og 2 er til Coupe (2011-), mens kandidat 3 er til Cabriolet (2004-). Siden du nevnte 'ventile/siderute bak', trenger jeg å vite hvilken side (venstre eller høyre) og om det er en ventilrute eller siderute. Kan du bekrefte posisjonen?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  },
+  {
+    "n": 90,
+    "cat": "dorside",
+    "msg": "hei trenger dørrute til mini cabriolet 2014 passasjersia",
+    "flags": [
+      "feil"
+    ],
+    "action": "ask_question",
+    "response": "Vi har to kandidater for dørrute til Mini Cooper Cabriolet 2014: 2466RGST2FD (høyre side) og 2466LGST2FD (venstre side). Siden du nevnte passasjersiden, er det høyre side i Norge. Er det høyre side du trenger?",
+    "error": null,
+    "mentions_tilbehor": false,
+    "mentions_nummer": false,
+    "asks_bilinfo": false
+  }
+]
