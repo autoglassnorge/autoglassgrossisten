@@ -131,7 +131,8 @@ P=Privacy, men P=City Safety på Volvo-koder (f.eks. ELMP), BP=mørk blå / priv
 GPS=GPS-antenne i glasset, DAB=DAB+-radioantenne (digital radio), EMS=eCall/SOS-nødknapp,
 ESG=Einscheibensicherheitsglas (tysk herdet glass — står i glassMERKINGEN, ikke i varenummeret),
 #-X%#=lystransmisjon/sotet-grad (f.eks. #-5%#=nesten helt mørk privacy/limo, #-10%#=mørk — står i beskrivelsen),
-VIN/CHASSIS=chassisfelt nederst på glasset (åpent felt der chassisnummeret er synlig — heter VIN i katalogen)`;
+VIN/CHASSIS=chassisfelt nederst på glasset (åpent felt der chassisnummeret er synlig — heter VIN i katalogen),
+MED-HULL=med hull til BAKVISKER (f.eks. VW T5-bakrute 26500-serien), UTEN-HULL=ingen bakvisker-hull (26499-serien)`;
 
 const ACCESSORY_CODES_TEXT = `
 K=klips, PY=pyntelist, PYT=pyntelist TOPP, PYB=pyntelist BUNN, PYS=pyntelist SIDE,
