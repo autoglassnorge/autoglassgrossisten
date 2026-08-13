@@ -1,0 +1,55 @@
+name: D1 Autoglass Prisliste Import
+
+# Råimport av Autoglass AS sin komplette prisliste (PROSEKT API 16.05.2026, Eduard Eikeland)
+# inn i autoglass_prisliste-tabellen (D1 glass-catalog-db).
+# 29 627 unike varer fordelt på 6 SQL-batchfiler.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  import-prisliste:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install -g wrangler
+
+      - name: Create autoglass_prisliste table
+        working-directory: api/cf-worker
+        run: |
+          wrangler d1 execute glass-catalog-db --remote --file migrations/0026_autoglass_prisliste.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Import prisliste batches
+        working-directory: api/cf-worker
+        run: |
+          BATCH_COUNT=$(ls scripts/generated-prisliste-sql/prisliste_insert_*.sql | wc -l)
+          echo "Importing $BATCH_COUNT batches..."
+          i=0
+          for f in scripts/generated-prisliste-sql/prisliste_insert_*.sql; do
+            i=$((i + 1))
+            echo "[$i/$BATCH_COUNT] Importing $(basename $f)..."
+            wrangler d1 execute glass-catalog-db --remote --file "$f" > /dev/null 2>&1
+          done
+          echo "Done!"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify
+        working-directory: api/cf-worker
+        run: |
+          echo "=== rad_type-fordeling ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT rad_type, COUNT(*) as n FROM autoglass_prisliste GROUP BY rad_type"
+          echo "=== Total ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT COUNT(*) as total FROM autoglass_prisliste"
+          echo "=== Alias-topp ==="
+          wrangler d1 execute glass-catalog-db --remote --command "SELECT alias_av, COUNT(*) as n FROM autoglass_prisliste WHERE alias_av IS NOT NULL GROUP BY alias_av ORDER BY n DESC LIMIT 5"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

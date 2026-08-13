@@ -139,3 +139,7 @@ data/autoglass-scrape/price-diff.json
 data/autoglass-scrape/price-update-report.md
 .worktrees/
 .dev.vars
+
+# Prisliste-kilde (i arch-platform repoet) — regenererbar
+api/cf-worker/scripts/prisliste.json
+api/cf-worker/scripts/PROSEKT-API-16-MAI26-prisliste.xls
