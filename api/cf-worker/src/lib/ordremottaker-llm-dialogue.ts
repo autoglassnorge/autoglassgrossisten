@@ -130,7 +130,7 @@ LG=venstre / RG=høyre dørglass (BMW), siffer på slutten (2/3)=generasjonsvari
 P=Privacy, men P=City Safety på Volvo-koder (f.eks. ELMP), BP=mørk blå / privacy blå`;
 
 const ACCESSORY_CODES_TEXT = `
-K=klips, PY=pyntelist, PYT=pyntelist TOPP, PYB=pyntelist BUNN,
+K=klips, PY=pyntelist, PYT=pyntelist TOPP, PYB=pyntelist BUNN, PYS=pyntelist SIDE,
 GNAQ=Aqua Kontroll, DAB=digital antenne, EMS=nødmelding`;
 
 const SIDE_CODES_TEXT = `
