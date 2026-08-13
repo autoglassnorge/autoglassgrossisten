@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS autoglass_prisliste (
   eurokode TEXT,
   alias_av TEXT,
   rad_type TEXT NOT NULL DEFAULT 'glass',
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(varenr, varenavn)
 );
 
 CREATE INDEX IF NOT EXISTS idx_ap_varenr ON autoglass_prisliste(varenr);

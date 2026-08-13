@@ -6,6 +6,10 @@ name: D1 Autoglass Prisliste Import
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'api/cf-worker/scripts/generated-prisliste-sql/**'
+      - 'api/cf-worker/migrations/0026_autoglass_prisliste.sql'
 
 jobs:
   import-prisliste:
