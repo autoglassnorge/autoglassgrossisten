@@ -19,7 +19,8 @@
     "vitest": "^4.1.8",
     "wrangler": "^4.98.0"
   },
-  "dependencies": {
+  "dependencies": {},
+  "optionalDependencies": {
     "@rolldown/binding-darwin-arm64": "^1.2.4"
   }
 }
