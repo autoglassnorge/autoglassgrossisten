@@ -126,7 +126,8 @@ ANT=antenne, AKU=akustisk, HUD=Head-Up Display (projeksjon i ruten, krever HUD-g
 P=Privacy, H=oppvarmet, Z=z-bøy, UV=UV-beskyttet, A=antenne, C=klar,
 YCL=grå, sotet OG coated (Porsche-kode, f.eks. 26015YCL),
 CSL=coated+laminert, U=HUD (nyere koder, f.eks. CSCMU), T=tollvisir (Audi A8),
-LG=venstre / RG=høyre dørglass (BMW), siffer på slutten (2/3)=generasjonsvariant`;
+LG=venstre / RG=høyre dørglass (BMW), siffer på slutten (2/3)=generasjonsvariant,
+P=Privacy, men P=City Safety på Volvo-koder (f.eks. ELMP), BP=mørk blå / privacy blå`;
 
 const ACCESSORY_CODES_TEXT = `
 K=klips, PY=pyntelist, PYT=pyntelist TOPP, PYB=pyntelist BUNN,
