@@ -91,6 +91,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@esbuild/darwin-arm64": "^0.25.0",
     "@google/generative-ai": "^0.24.1",
     "node-fetch": "^2.7.0",
     "p-limit": "^7.3.0",
