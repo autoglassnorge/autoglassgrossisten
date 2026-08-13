@@ -1,6 +1,7 @@
 /**
- * SIMULERING: Ny kunde-samtale mot ordremottakeren (generateDialogueTurn)
- * Bruker DeepSeek direkte (samme gateway som prod: DeepSeek → Workers AI → Groq).
+ * SIMULERING 2: Ny kunde-samtale — kunde beskriver bilen (VW Transporter T6)
+ * Tester: AI spør om utstyr ETT om gangen (aldri antar) + kodeordbok (AKU/SENS/ELEK)
+ *         + tilbehør/lim-spørsmål med "nei"-svar.
  *
  * Kjøring:  npx tsx scripts/simulate-dialogue.mts   (fra api/cf-worker/)
  * Nøkkel:   DEEPSEEK_API_KEY leses fra ~/.hermes/.env
@@ -26,24 +27,33 @@ const env = {
   },
 } as any;
 
-// --- Ekte kandidater fra katalogen (VW Transporter/Caravelle T5 2003-) ---
+// --- Ekte kandidater fra katalogen (VW Transporter T6 2016-) ---
 const candidates = [
   {
-    articleNumber: "2525CSGYA",
-    eurocode: "8579ACSGYAVZ1B",
+    articleNumber: "3393GN",
+    eurocode: "8579GNVZ1B",
     brand: "VW",
-    model: "Transporter/Caravelle T5 2003-",
-    properties: { coated: true, antenna: true },
-    price: 14045,
+    model: "Transporter T6 2016-",
+    properties: { acoustic: false, rain_sensor: false, heated: false },
+    price: 9175,
     stock: "Oslo",
   },
   {
-    articleNumber: "2525GYA",
-    eurocode: "8579AGYAVZ1B",
+    articleNumber: "3393GNM",
+    eurocode: "8579GNMVZ1B",
     brand: "VW",
-    model: "Transporter/Caravelle T5 2003-",
-    properties: { antenna: true },
-    price: 9980,
+    model: "Transporter T6 2016-",
+    properties: { acoustic: true, rain_sensor: true, heated: false },
+    price: 9455,
+    stock: "Oslo",
+  },
+  {
+    articleNumber: "3393GNELM",
+    eurocode: "8579GNELMVZ1B",
+    brand: "VW",
+    model: "Transporter T6 2016-",
+    properties: { acoustic: true, rain_sensor: true, heated: true },
+    price: 16720,
     stock: "Oslo",
   },
 ];
@@ -62,7 +72,7 @@ function contextFor(customerMsg: string) {
     candidates: activeCandidates,
     history: [...history, { role: "user" as const, content: customerMsg }],
     extracted,
-    vehicle: { make: "VW", model: "Transporter", year: 2008 },
+    vehicle: { make: "VW", model: "Transporter", year: 2018 },
     ktypeFamily: null,
   };
 }
@@ -80,28 +90,44 @@ async function turn(customerMsg: string) {
   history.push({ role: "user", content: customerMsg });
   history.push({ role: "ai", content: msg });
 
-  // Simuler prod-filtering: kunden bekreftet 2525CSGYA → kun coated-kandidat igjen
-  if (customerMsg.toLowerCase().includes("2525csgya")) {
-    extracted = { ...extracted, coated: "ja", antenna: "ja" };
+  // Simuler prod-filtering basert på kundens utsagn
+  const low = customerMsg.toLowerCase();
+  if (low.includes("regnsensor") || low.includes("viskere")) {
+    extracted = { ...extracted, rain_sensor: "ja" };
     activeCandidates = activeCandidates.filter(
-      (c: any) => c.articleNumber === "2525CSGYA"
+      (c: any) => c.properties.rain_sensor
+    );
+  }
+  if (low.includes("ikke oppvarmet") || low.includes("uten varme")) {
+    extracted = { ...extracted, heated: "nei" };
+    activeCandidates = activeCandidates.filter(
+      (c: any) => !c.properties.heated
+    );
+  }
+  if (low.includes("ikke regnsensor") || low.includes("uten regnsensor")) {
+    extracted = { ...extracted, rain_sensor: "nei" };
+    activeCandidates = activeCandidates.filter(
+      (c: any) => !c.properties.rain_sensor
     );
   }
 }
 
 async function main() {
   console.log("══════════════════════════════════════════════════");
-  console.log("  SIMULERT NY SAMTALE — ordremottaker (DeepSeek)");
+  console.log("  SIMULERT NY SAMTALE #2 — VW Transporter T6");
   console.log("══════════════════════════════════════════════════");
 
-  // Tur 1: Kunden oppgir scannummer DIREKTE (test: punkt 11 — nummer-gjenkjenning)
-  await turn("Hei, jeg skal ha 2525CSGYA");
+  // Tur 1: Kunde beskriver bilen, ingen numre (test: AI spør, antar IKKE utstyr)
+  await turn("Hei, jeg trenger ny frontrute til en VW Transporter 2018");
 
-  // Tur 2: Bekreftelse
-  await turn("Ja, det stemmer. 2525CSGYA er riktig rute");
+  // Tur 2: Kunden svarer på AI-spørsmålet
+  await turn("Den har regnsensor og automatiske viskere, men ikke oppvarmet");
 
-  // Tur 3: Tilbehør/lim-spørsmål (test: punkt 10 — ALLTID spørre)
-  await turn("Ja, ta med lim");
+  // Tur 3: Bekreftelse av glass
+  await turn("Ja, det stemmer");
+
+  // Tur 4: Tilbehør/lim — kunden svarer NEI
+  await turn("Nei, bare glasset");
 
   console.log("\n══════════════════════════════════════════════════");
   console.log("  SIMULERING FERDIG");
