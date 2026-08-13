@@ -114,15 +114,28 @@ const DIALOGUE_SCHEMA = {
 };
 
 const COLOR_CODES_TEXT = `
-GN=helfarget grønn, GY=grønn med grå skyggefelt, GNEL=grønn elektrisk (oppvarmet),
-GB=grønn med blå skygge, BZ=bronse, BZB=bronse med blå skygge,
-GG=grønn med grønn skygge, GD=mørk grønn, YP=sotet,
-BL=blå, BB=blå med blå skygge, CL=klar`;
+GN=helfarget grønn, GY=grå, GD=mørk grønn, GP=sotet grønn (privacy),
+GB=grønn-blå (GNBL — standard på US-biler), BL=blå, BB=blå med blå skygge,
+YP=sotet, CL=klar, C=klar, BZ=bronse, BZB=bronse med blå skygge,
+GG=grønn med grønn skygge, GNEL=grønn elektrisk (oppvarmet)`;
 
 const FEATURE_CODES_TEXT = `
+CS=coated (EU-biler), SOLAR=coated (US-biler), COLD=bakrute uten varmetråder,
 EL=varmetråder, M=regnsensor, ENC=innkapslet (vulkanisert list),
-ANT=antenne, CS=coated, P=Privacy, H=oppvarmet,
-Z=z-bøy, UV=UV-beskyttet, A=antenne, C=klar`;
+ANT=antenne, AKU=akustisk, HUD=Head-Up Display (projeksjon i ruten, krever HUD-glass), LDW=filskiftevarsel (Lane Departure Warning, ADAS — krever kalibrering),
+P=Privacy, H=oppvarmet, Z=z-bøy, UV=UV-beskyttet, A=antenne, C=klar,
+YCL=grå, sotet OG coated (Porsche-kode, f.eks. 26015YCL)`;
+
+const ACCESSORY_CODES_TEXT = `
+K=klips, PY=pyntelist (PYT=list, PYB/PYK=listsett),
+GNAQ=Aqua Kontroll, DAB=digital antenne, EMS=nødmelding`;
+
+const SIDE_CODES_TEXT = `
+VS=venstre side, HS=høyre side (står i produktbeskrivelsen, ikke i varenummeret)`;
+
+const US_CARS_NOTE = `
+USA CARS: varenummer har W-prefiks (f.eks. W1435GB). Farge GB (grønn-blå) er standard.
+Coated heter SOLAR i beskrivelsen (f.eks. "GB-SOLAR") — CS brukes ikke på US-biler.`;
 
 function buildSystemPrompt(): string {
   return `Du er Professor Autoglass, en erfaren bilglass-ekspert med 30 års erfaring hos Autoglass AS.
@@ -172,6 +185,12 @@ EUROCODE-KODER DU KJENNER:
 Farger: ${COLOR_CODES_TEXT}
 Features: ${FEATURE_CODES_TEXT}
 Posisjoner: FV=foran venstre, FH=foran høyre, BV=bak venstre, BH=bak høyre
+Side: ${SIDE_CODES_TEXT}
+POSISJONSORD: dørrute = glass i dørene (fremre/bakre, venstre/høyre), ventilrute = liten rute ved B-stolpe/bak (foran/bak, v/h), siderute = fast rute bak dørene, bakrute = bakvinduet, frontrute = vindusfronten.
+DELT BAKRUTE: todelt bakrute har EGEN VARE for hver halvdel — høyre (H/HS) og venstre (V/VS). Spør hvilken side kunden trenger (eller begge), og bestill riktig halvdel (f.eks. "BAKRUTE EL TODELT VENSTRE" vs "...HØYRE").
+VENTILRUTE: kommer i varianter foran/bak og venstre/høyre (f.eks. "VENTILRUTE FREMME VS+HS", "VENTILRUTE BAK+INNK+SOTET") — avklar posisjon (foran/bak) og side (v/h) før bestilling.
+Tilbehør: ${ACCESSORY_CODES_TEXT}
+${US_CARS_NOTE}
 
 SVAR ALLTID PÅ NORSK.
 Returner ALLTID valid JSON i dette formatet:

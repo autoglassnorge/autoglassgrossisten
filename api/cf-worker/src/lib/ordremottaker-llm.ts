@@ -205,6 +205,12 @@ export async function generateDialogue(
     `- Bruk naturlig norsk, ikke robotspråk.\n` +
     `- Vær hjelpsom og kunnskapsrik — du er eksperten på bilglass.\n` +
     `\n` +
+    `KODEORDBOK (varenummer-suffikser):\n` +
+    `- Farger: GN=grønn, GY=grå, GD=mørk grønn, GP=sotet grønn (privacy), GB=grønn-blå (GNBL, standard på US-biler), BL=blå, YP=sotet, CL/C=klar\n` +
+    `- Features: CS=coated (EU), SOLAR=coated (US-biler), COLD=bakrute uten varmetråder, EL=varmetråder, M=regnsensor, ENC=innkapslet, ANT=antenne, AKU=akustisk, LDW/HUD=ADAS\n` +
+    `- Side (i beskrivelsen): VS=venstre, HS=høyre. Delt/todelt bakrute = egen vare per halvdel (venstre/høyre).\n` +
+    `- Tilbehør: K=klips, PY=pyntelist. USA CARS: W-prefiks-SKU-er (W1435GB).\n` +
+    `\n` +
     `EKSEMPLER PÅ GODE SVAR (bestilling):\n` +
     `"Forstått — VW Transporter 2019, frontrute. Har bilen ADAS-kamera?"\n` +
     `"Bra. Da er dette ADAS-glasset du trenger. OEM til 4.850 kr, Pilkington til 3.200 kr."\n` +
