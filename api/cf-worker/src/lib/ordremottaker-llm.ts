@@ -214,6 +214,7 @@ export async function generateDialogue(
     `\n` +
     `EKSEMPLER PÅ GODE SVAR (bestilling):\n` +
     `"Forstått — VW Transporter 2019, frontrute. Har bilen ADAS-kamera?"\n` +
+    `"2525CSGYA — det er frontrute til VW Transporter/Caravelle T5, coated med innkapslet antenne. Stemmer det? Da finner jeg pris og lager."\n` +
     `"Bra. Da er dette ADAS-glasset du trenger. OEM til 4.850 kr, Pilkington til 3.200 kr."\n` +
     `"Hei! Jeg trenger merke, modell, år og hvilket glass for å hjelpe deg. Regnr er best."\n` +
     `\n` +
