@@ -1,5 +1,5 @@
 /**
- * Professor Autoglass Avatar
+ * AI-ordremottaker Avatar
  * AI-generated professor image with text fallback
  */
 
@@ -22,7 +22,7 @@ export default function ProfessorAvatar({ size = 'md', className = '' }: Profess
     <div className={`relative ${sizeClass} ${className}`}>
       <img
         src="/hero-autoglass.png"
-        alt="Professor Autoglass"
+        alt="AI-ordremottaker"
         className="h-full w-full rounded-full object-cover object-[50%_15%] border-2 border-autoglass-blue shadow-md"
         onError={(e) => {
           const img = e.currentTarget;

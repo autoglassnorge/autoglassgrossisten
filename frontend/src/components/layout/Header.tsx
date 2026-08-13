@@ -7,7 +7,7 @@ import { useChatStore } from '@/stores/chatStore';
 import { useAuthStore } from '@/stores/authStore';
 import { preloadPage, PAGE_IMPORTS } from '@/hooks/useRoutePreload';
 import { COMPANY } from '@/config/company.config';
-import ProfessorAvatar from '@/components/ordremottaker/ProfessorAvatar';
+import OrdremottakerAvatar from '@/components/ordremottaker/OrdremottakerAvatar';
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -40,13 +40,13 @@ export function Header() {
             />
           </Link>
 
-          {/* Desktop: Spør Professor Autoglass */}
+          {/* Desktop: Spør AI-ordremottakeren */}
           <div className="hidden md:block flex-1 max-w-md ml-4">
             <button
               onClick={() => openChat()}
               className="w-full flex items-center gap-2 rounded-md border border-carbon-700 bg-carbon-900 py-2 px-3 text-sm text-carbon-400 hover:border-glass-cyan/40 hover:bg-carbon-800 hover:text-glass-cyan transition-colors"
             >
-              <ProfessorAvatar size="sm" className="!h-6 !w-6" />
+              <OrdremottakerAvatar size="sm" className="!h-6 !w-6" />
               <span>Spør vårt glassteam...</span>
             </button>
           </div>
@@ -124,7 +124,7 @@ export function Header() {
               onClick={() => openChat()}
               aria-label="Spør vårt glassteam"
             >
-              <ProfessorAvatar size="sm" className="!h-6 !w-6" />
+              <OrdremottakerAvatar size="sm" className="!h-6 !w-6" />
             </Button>
             <Link to="/kasse" aria-label="Ordre">
               <Button

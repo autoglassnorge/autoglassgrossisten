@@ -1,5 +1,5 @@
 /**
- * HeroProfessor — Professor Autoglass as the primary entry point
+ * HeroOrdremottaker — AI-ordremottakeren as the primary entry point
  * Hero image on top, CTA section below on blue background
  */
 
@@ -16,7 +16,7 @@ export function HeroProfessor() {
       <div className="relative w-full aspect-[16/9] md:aspect-[21/9] lg:aspect-[3/1] max-h-[520px]">
         <img
           src="/hero-autoglass.png"
-          alt="Professor Autoglass — din bilglass-AI"
+          alt="AI-ordremottaker — din bilglass-AI"
           className="absolute inset-0 w-full h-full object-cover object-top"
           loading="eager"
         />
@@ -31,7 +31,7 @@ export function HeroProfessor() {
             className="group inline-flex items-center gap-3 bg-white text-autoglass-blue px-6 py-3 md:px-8 md:py-4 rounded-2xl text-base md:text-lg font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
           >
             <Sparkles className="h-5 w-5" />
-            Snakk med Professor Autoglass om bilglass
+            Snakk med AI-ordremottakeren om bilglass
             <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </button>
 

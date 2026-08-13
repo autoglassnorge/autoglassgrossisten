@@ -24,7 +24,7 @@ vi.mock('@/i18n/I18nProvider', () => ({
         'vin.unknown.title': 'VIN-et er ikke i katalogen ennå',
         'vin.unknown.description': 'Vi kan ikke vise produktsvar for dette nummeret.',
         'vin.action.quote': 'Be om pristilbud',
-        'vin.action.chat': 'Spør Professor Autoglass',
+        'vin.action.chat': 'Spør AI-ordremottakeren',
         'vin.action.regnr': 'Søk med reg.nr',
         'vin.action.catalog': 'Bla i katalogen',
         'vin.action.showProduct': 'Vis passende glass',
@@ -87,7 +87,7 @@ describe('VinResults', () => {
     renderWithRouter(<VinResults {...defaultProps} />);
 
     expect(screen.getByText('VIN-et krever manuell sjekk')).toBeInTheDocument();
-    expect(screen.getByText('Spør Professor Autoglass')).toBeInTheDocument();
+    expect(screen.getByText('Spør AI-ordremottakeren')).toBeInTheDocument();
     expect(screen.getByText('Be om pristilbud')).toBeInTheDocument();
     expect(screen.getByText('Søk med reg.nr')).toBeInTheDocument();
     expect(screen.getByText('Bla i katalogen')).toBeInTheDocument();
@@ -173,7 +173,7 @@ describe('VinResults', () => {
     mockedUseQuery.mockReturnValue({ isLoading: false, data, error: null } as any);
     renderWithRouter(<VinResults {...defaultProps} />);
 
-    fireEvent.click(screen.getByText('Spør Professor Autoglass'));
+    fireEvent.click(screen.getByText('Spør AI-ordremottakeren'));
     expect(openChat).toHaveBeenCalledWith({ message: 'VIN: YV1MS7659M2436185' });
   });
 

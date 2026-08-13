@@ -77,7 +77,7 @@ export function VehicleWizardIcon({ className = 'h-8 w-8' }: IconProps) {
   );
 }
 
-/** Professor / expert avatar — for Professor Autoglass AI chat */
+/** AI-ordremottaker avatar — for AI-ordremottaker chat */
 export function ProfessorSearchIcon({ className = 'h-8 w-8' }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

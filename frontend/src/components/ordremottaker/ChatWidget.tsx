@@ -6,7 +6,7 @@ import ChatMessage from './ChatMessage';
 import GlassSuggestion from './GlassSuggestion';
 import AccessorySelector from './AccessorySelector';
 import ProactiveSuggestions from './ProactiveSuggestions';
-import ProfessorAvatar from './ProfessorAvatar';
+import OrdremottakerAvatar from './OrdremottakerAvatar';
 import ToolResultsPanel from './ToolResultsPanel';
 
 const EXAMPLE_PROMPTS = [
@@ -303,16 +303,16 @@ export default function ChatWidget() {
           ref={panelRef}
           role="dialog"
           aria-modal="true"
-          aria-label="Chat med Professor Autoglass"
+          aria-label="Chat med AI-ordremottakeren"
           className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-white animate-fade-in md:bottom-8 md:right-8 md:left-auto md:top-auto md:w-[480px] md:rounded-3xl md:border md:border-gray-200 md:shadow-2xl md:h-[700px] md:max-h-[90vh]"
         >
           {/* Header */}
           <div className="flex items-center justify-between bg-autoglass-blue px-4 py-3 text-white shrink-0">
             <div className="flex items-center gap-3">
-              <ProfessorAvatar size="sm" />
+              <OrdremottakerAvatar size="sm" />
               <div>
-                <h3 className="text-base md:text-sm font-semibold">Professor Autoglass</h3>
-                <p className="text-xs text-white/70">Din bilglass-ekspert</p>
+                <h3 className="text-base md:text-sm font-semibold">AI-ordremottaker</h3>
+                <p className="text-xs text-white/70">Din ordremottaker hos Autoglass</p>
               </div>
             </div>
             <div className="flex items-center gap-1">
@@ -340,14 +340,14 @@ export default function ChatWidget() {
             {messages.length === 0 && (
               <div className="space-y-6 md:space-y-4">
                 <div className="flex flex-col items-center gap-3 text-center">
-                  <ProfessorAvatar size="lg" />
+                  <OrdremottakerAvatar size="lg" />
                   <div>
                     <p className="text-lg md:text-base font-semibold text-gray-800">
-                      Hei! Jeg er Professor Autoglass
+                      Hei! Jeg er din AI-ordremottaker hos Autoglass
                     </p>
                     <p className="text-base md:text-sm text-gray-500 mt-1">
-                      Din ekspert på bilglass med 30 års erfaring. <br/>
-                      Fortell meg hva du trenger — regnr, merke/modell, eller eurocode.
+                      Jeg hjelper deg med bilglass — regnr, merke/modell, eller eurocode. <br/>
+                      Fortell meg hva du trenger, så finner jeg riktig glass.
                     </p>
                   </div>
                 </div>
@@ -621,10 +621,10 @@ export default function ChatWidget() {
 
             {isLoading && (
               <div className="flex items-start gap-3 py-3 md:py-2 text-base md:text-sm text-gray-500">
-                <ProfessorAvatar size="sm" className="shrink-0 mt-0.5" />
+                <OrdremottakerAvatar size="sm" className="shrink-0 mt-0.5" />
                 <div className="flex items-center gap-2 bg-gray-50 rounded-2xl rounded-tl-sm px-4 py-3">
                   <Loader2 className="h-4 w-4 animate-spin text-autoglass-blue" />
-                  <span>Professor Autoglass tenker...</span>
+                  <span>AI-ordremottakeren tenker...</span>
                 </div>
               </div>
             )}

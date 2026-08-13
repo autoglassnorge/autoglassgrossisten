@@ -59,7 +59,7 @@ function CatalogResultsInner({ activeQuery, onDetail }: CatalogResultsProps) {
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 text-center">
           <AlertTriangle className="mx-auto h-8 w-8 text-amber-600 mb-2" />
           <p className="font-medium text-amber-800">Ingen treff</p>
-          <p className="text-sm text-amber-700 mt-1">Prøv et annet søkeord, eller spør Professor Autoglass.</p>
+          <p className="text-sm text-amber-700 mt-1">Prøv et annet søkeord, eller spør AI-ordremottakeren.</p>
         </div>
       ) : (
         <>

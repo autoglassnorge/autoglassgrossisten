@@ -148,7 +148,7 @@ export function HeroWithSearch() {
           )}
         </div>
 
-        {/* Desktop: Spør Professor Autoglass button */}
+        {/* Desktop: Spør AI-ordremottakeren button */}
         <div className="hidden sm:flex justify-center mt-6">
           <button
             type="button"
@@ -156,7 +156,7 @@ export function HeroWithSearch() {
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-carbon-800/80 border border-carbon-700 text-white text-sm font-medium hover:bg-carbon-700 transition-colors min-h-[44px]"
           >
             <MessageCircle className="h-4 w-4" />
-            Spør Professor Autoglass
+            Spør AI-ordremottakeren
           </button>
         </div>
 

@@ -294,7 +294,7 @@ export default function SearchPage() {
                        hover:border-gray-400 hover:bg-gray-50 transition text-center"
           >
             <ProfessorSearchIcon className="h-7 w-7 text-gray-600 group-hover:text-gray-800 transition" />
-            <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900">Professor</span>
+            <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900">AI-ordremottaker</span>
           </button>
         </div>
 

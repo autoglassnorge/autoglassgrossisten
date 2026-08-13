@@ -10,7 +10,7 @@ import { useI18n } from '@/i18n/I18nProvider';
 import { useChatStore } from '@/stores/chatStore';
 import { BUSINESS_METRICS, formatCompact } from '@/constants/businessMetrics';
 import { COMPANY } from '@/config/company.config';
-import ProfessorAvatar from '@/components/ordremottaker/ProfessorAvatar';
+import OrdremottakerAvatar from '@/components/ordremottaker/OrdremottakerAvatar';
 
 export function HeroB2B() {
   const [regnr, setRegnr] = useState('');
@@ -81,7 +81,7 @@ export function HeroB2B() {
           onClick={() => openChat()}
           className="mt-5 inline-flex items-center gap-2 text-sm text-carbon-400 hover:text-glass-cyan transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-glass-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-carbon-950 rounded-md px-1"
         >
-          <ProfessorAvatar size="sm" className="!h-5 !w-5" />
+          <OrdremottakerAvatar size="sm" className="!h-5 !w-5" />
           <span>{t('hero.b2b.chatCta')}</span>
           <Sparkles className="h-3.5 w-3.5" />
         </button>

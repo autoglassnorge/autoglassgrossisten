@@ -4,7 +4,7 @@
  * Features:
  *   - Tabbed input: Reg.nr, VIN, OEM, Fritekst
  *   - Visual-only unified search (no backend changes)
- *   - Professor Autoglass as secondary copilot
+ *   - AI-ordremottakeren as secondary copilot
  *   - Quick stats from businessMetrics constants
  *   - Quick category chips
  */
@@ -236,7 +236,7 @@ export function HeroAiFirst() {
                 className="flex items-center justify-center gap-2 px-6 py-4 bg-carbon-800/80 border border-carbon-700 text-white font-medium rounded-xl hover:bg-carbon-700 transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
-                Spør Professor Autoglass
+                Spør AI-ordremottakeren
               </button>
             </div>
           </form>

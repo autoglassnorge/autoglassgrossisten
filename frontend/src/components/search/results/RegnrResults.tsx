@@ -207,7 +207,7 @@ function RegnrResultsInner({ activeQuery, onClear, onDetail }: RegnrResultsProps
           className="w-full flex items-center justify-center gap-2 bg-autoglass-blue px-4 py-4 text-base font-semibold text-white shadow-lg hover:bg-autoglass-dark transition-colors sm:rounded-xl sm:px-5 sm:py-3 min-h-[48px]"
         >
           <MessageCircle className="h-5 w-5" />
-          Spør Professor Autoglass
+          Spør AI-ordremottakeren
         </button>
       </div>
 
